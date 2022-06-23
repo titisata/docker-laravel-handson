@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\GoodsOrder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PartnerSeeder extends Seeder
+class GoodsOrderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,14 +15,15 @@ class PartnerSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Partner::create([
+        GoodsOrder::create([
+            'goods_id' => 1,
             'user_id' => 1,
-            'name' => 'aaaa',
-            'main_image' => 'aaaa',
-            'background_color' => 'aaa',
-            'catch_copy' => 'aaa',
-            'address' => 'aaa',
-            'phone' => 'aaa',
+            'quantity' => 1,
+        ]);
+        GoodsOrder::create([
+            'goods_id' => 2,
+            'user_id' => 1,
+            'quantity' => 2,
         ]);
     }
 }

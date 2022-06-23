@@ -12,10 +12,9 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('experiences', function (Blueprint $table) {
+        Schema::create('goods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('experience_folder_id')->constrained('experience_folders');
-            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('partner_id')->constrained('partners');
             $table->string('name', 50);
             $table->string('description', 1000);
             $table->string('category1', 50)->nullable();
@@ -34,6 +33,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('experiences');
+        Schema::dropIfExists('goods');
     }
 };
