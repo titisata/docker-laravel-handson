@@ -21,6 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/partner/{id}', [App\Http\Controllers\PartnerController::class, 'show']);
+Route::get('/search/goods', [App\Http\Controllers\GoodsController::class, 'index']);
+Route::get('/goods/{id}', [App\Http\Controllers\GoodsController::class, 'show']);
+Route::redirect('/search', '/search/experience');
 
 // この中に書かれたルートはログインしてないとアクセス出来ないようになる（ログインページにリダイレクトされる）
 Route::middleware(['auth'])->group(function () {

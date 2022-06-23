@@ -36,8 +36,8 @@
                 </div>
             @endif
             <div>
-                <h1>URATABIへようこそ！</h1>
-                <a href=""></a>
+                <h1>WELCOME TO URATABI !</h1>
+                <a href="/search">検索画面へ</a>
             </div>
         </div>
     </body>
