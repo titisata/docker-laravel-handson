@@ -13,6 +13,6 @@ php artisan db:seed
 ## 初期ユーザー
 
 ```txt
-mail: 
+mail: test@gmail.com
 pass: pass1234
 ```

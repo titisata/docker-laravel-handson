@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         \App\Models\User::create([
             'name' => 'kobayashi',
-            'email' => 'datesaver1234@gmail.com',
+            'email' => 'test@gmail.com',
             'email_verified_at' => null,
             'password' => '$2y$10$I9.eq2UsGT5mS5ZDBoJBBeIiCj6oQKNM7BH6Q/TIyBIl5Qb1fMW6a',
         ]);

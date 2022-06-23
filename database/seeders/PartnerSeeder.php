@@ -16,12 +16,12 @@ class PartnerSeeder extends Seeder
     {
         \App\Models\Partner::create([
             'user_id' => 1,
-            'name' => 'aaaa',
+            'name' => 'ホテル三日月',
             'main_image' => 'aaaa',
-            'background_color' => 'aaa',
-            'catch_copy' => 'aaa',
-            'address' => 'aaa',
-            'phone' => 'aaa',
+            'background_color' => 'FFFFFF',
+            'catch_copy' => '天然水が導く魅惑の都市。',
+            'address' => '長野県大和市斎川町200-5',
+            'phone' => '042-xxxx-xxxx',
         ]);
     }
 }

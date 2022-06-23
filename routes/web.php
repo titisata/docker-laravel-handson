@@ -20,4 +20,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/partner/{id}', [App\Http\Controllers\PartnerController::class, 'show']);
+
+// この中に書かれたルートはログインしてないとアクセス出来ないようになる（ログインページにリダイレクトされる）
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+});
