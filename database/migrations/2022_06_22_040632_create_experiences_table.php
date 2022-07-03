@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->integer('quantity');
             $table->integer('price_child');
             $table->integer('price_adult');
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->timestamps();
         });
     }
