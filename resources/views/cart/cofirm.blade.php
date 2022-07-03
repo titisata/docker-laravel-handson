@@ -17,8 +17,9 @@
                                 <p>{{ $experienceCartItem->experience->name }}</p>
                                 <p>予約日: {{ $experienceCartItem->experience->start_date }}</p>
                                 <p>大人: {{ $experienceCartItem->quantity_adult }}人 子ども: {{ $experienceCartItem->quantity_child }}人</p>
+                                <p>宿泊: {{ $experienceCartItem->hotelGroup?->name ?? 'なし' }}</p>
+                                <p>食事: {{ $experienceCartItem->foodGroup?->name ?? 'なし' }}</p>
                                 <p>金額: {{ $experienceCartItem->sum_price() }}円</p>
-
                             </div>
                         </div>
                     @empty

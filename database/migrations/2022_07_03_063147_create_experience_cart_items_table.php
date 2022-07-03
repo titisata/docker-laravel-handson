@@ -16,8 +16,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('experience_id')->constrained('experiences');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('hotel_group_id')->constrained('hotel_groups')->nullable();
-            $table->foreignId('food_group_id')->constrained('food_groups')->nullable();
+            $table->foreignId('hotel_group_id')->nullable()->constrained('hotel_groups');
+            $table->foreignId('food_group_id')->nullable()->constrained('food_groups');
             $table->integer('quantity_child');
             $table->integer('quantity_adult');
             $table->timestamps();

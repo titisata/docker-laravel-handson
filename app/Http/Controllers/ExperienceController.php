@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experience;
+use App\Models\ExperienceCartItem;
 use App\Models\ExperienceFolder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExperienceController extends Controller
 {
@@ -38,5 +40,27 @@ class ExperienceController extends Controller
             return abort(404);
         }
         return view('experience.reserve', compact('experienceFolder', 'experience'));
+    }
+
+    public function post(Request $request)
+    {
+        $id = $request->id;
+        $uid = Auth::user()->id;
+        $quantity_child = $request->quantity_child;
+        $quantity_adult = $request->quantity_adult;
+        $hotel_group_id = $request->hotel_group_id;
+        $food_group_id = $request->food_group_id == 'food_group_null' ? null : $request->food_group_id;
+
+        // TODO: 不正な IDの場合の処理
+        ExperienceCartItem::create([
+            'experience_id' => $id,
+            'user_id' => $uid,
+            'hotel_group_id' => $hotel_group_id,
+            'food_group_id' => $food_group_id,
+            'quantity_child' => $quantity_child,
+            'quantity_adult' => $quantity_adult,
+        ]);
+
+        return view('experience.cart_success');
     }
 }

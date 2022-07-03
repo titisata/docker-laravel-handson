@@ -22,6 +22,28 @@ class ExperienceFolder extends Model
     {
         return $this->hasMany('App\Models\Experience');
     }
+
+    /**
+     * FoodGroupを取得
+     *
+     * @return Collection<FoodGroup>
+     */
+
+    public function foodGroup()
+    {
+        return $this->hasMany(FoodGroup::class);
+    }
+
+    /**
+     * HotelGroupを取得
+     *
+     * @return Collection<HotelGroup>
+     */
+
+    public function hotelGroup()
+    {
+        return $this->hasMany(HotelGroup::class);
+    }
     /**
      * 検索を行う
      *

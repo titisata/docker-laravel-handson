@@ -18,6 +18,7 @@
                 <div class="card-body">
                     <h4 class="card-title">{{ $experinceFolder->name }}</h4>
                     <p class="card-text">{{ $experinceFolder->description }}</p>
+                    <p class="card-text">￥{{ $experinceFolder->price }}～</p>
                 </div>
             </div>
         </a>
