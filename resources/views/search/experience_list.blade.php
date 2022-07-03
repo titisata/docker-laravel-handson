@@ -7,8 +7,6 @@
 
             <h3 class="mb-3">体験検索結果</h3>
 
-            <a href="/search/goods">土産検索へ</a>
-
             <form class="mb-3 mt-3" action="/search/experience" method="get">
                 <label for="keyword">検索ワード</label><input name="keyword" type="text">
             </form>
@@ -18,6 +16,7 @@
             @empty
                 <p>検索結果がありません。</p>
             @endforelse
+            <a href="/search/goods">土産検索へ</a>
         </div>
     </div>
     <div class="d-flex justify-content-center mt-3">

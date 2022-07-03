@@ -5,15 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            <div class="card">
-                <div class="card-header">土産検索</div>
-                <div class="card-body">
-                    <form action="/search/goods" method="get">
-                        <label for="keyword">ワード</label><input name="keyword" type="text">
-                    </form>
-                </div>
+            <h3 class="mb-3">土産検索</h3>
+            <form action="/search/goods" method="get">
+                <label for="keyword">検索ワード</label><input name="keyword" type="text">
+                <input type="submit" value="検索">
+            </form>
+            <div class="mt-5">
+                <a href="/search/experience">体験検索へ</a>
             </div>
-            <a href="/search/experience">体験検索へ</a>
         </div>
     </div>
 </div>

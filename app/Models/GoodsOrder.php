@@ -13,4 +13,10 @@ class GoodsOrder extends Model
         'user_id' ,
         'quantity',
     ];
+
+
+    public function goods()
+    {
+        return $this->belongsTo(Goods::class);
+    }
 }

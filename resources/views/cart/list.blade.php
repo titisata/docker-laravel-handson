@@ -18,7 +18,6 @@
                                     <p>予約日: {{ $experienceCartItem->experience->start_date }}</p>
                                     <p>大人: {{ $experienceCartItem->quantity_adult }}人 子ども: {{ $experienceCartItem->quantity_child }}人</p>
                                     <p>金額: {{ $experienceCartItem->sum_price() }}円</p>
-
                                 </div>
                             </div>
                         </a>
@@ -38,7 +37,7 @@
                                 <div>
                                     <p>名前: {{ $goodCartItem->goods->name }}</p>
                                     <p>個数: {{ $goodCartItem->quantity }}</p>
-                                    <p>金額: {{ $goodCartItem->sum_price() }}円</p>
+                                    <p>合計: {{ $goodCartItem->sum_price() }}円</p>
                                 </div>
                             </div>
                         </a>
@@ -47,6 +46,15 @@
                     @endforelse
                 </div>
             </div>
+
+            <div class="mt-2 mb-2 card">
+                <div class="card-header">合計金額</div>
+                <div class="card-body">
+                    <p>{{ $price }}円</p>
+                </div>
+            </div>
+
+            <a class="btn btn-primary {{ $price == 0 ? 'disabled' : '' }} " href="/cart/confirm" style="{{ $price == 0 ? 'pointer-events:none;' : '' }} ">購入ページへ</a>
         </div>
     </div>
 </div>

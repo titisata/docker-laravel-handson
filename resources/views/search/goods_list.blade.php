@@ -7,7 +7,6 @@
 
             <h3 class="mb-3">{{ app('request')->input('keyword') }}の土産検索結果</h3>
 
-            <a href="/search/experience">体験検索へ</a>
 
             <form class="mb-3 mt-3" action="/search/goods" method="get">
                 <label for="keyword">ワード</label><input name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
@@ -18,6 +17,7 @@
             @empty
                 <p>検索結果がありません。</p>
             @endforelse
+            <a href="/search/experience">体験検索へ</a>
         </div>
     </div>
     <div class="d-flex justify-content-center mt-3">
