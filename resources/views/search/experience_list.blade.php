@@ -7,19 +7,19 @@
 
             <h3 class="mb-3">検索結果</h3>
 
-            <form action="/search/goods" method="get">
+            <form action="/search/experience" method="get">
                 <label for="keyword">ワード</label><input name="keyword" type="text">
             </form>
 
-            @forelse($goods as $goods_one)
-                @include('components.goods_cell', ['goods'=>$goods_one])
+            @forelse($experinceFolders as $experinceFolder)
+                @include('components.experience_cell', ['experinceFolder'=>$experinceFolder])
             @empty
                 <p>検索結果がありません。</p>
             @endforelse
         </div>
     </div>
     <div class="d-flex justify-content-center mt-3">
-        <div>{{ $goods->appends(request()->query())->links('pagination::bootstrap-4') }}</div>
+        <div>{{ $experinceFolders->appends(request()->query())->links('pagination::bootstrap-4') }}</div>
     </div>
 </div>
 

@@ -39,8 +39,8 @@ class ExperienceFolder extends Model
         //     $where[] = ['end_date', '<', $date];
         // }
 
-        $places = Experience::orderBy("created_at", "desc")->paginate($per_page);
+        $experinceFolders = ExperienceFolder::orderBy("created_at", "desc")->paginate($per_page);
 
-        return $places;
+        return $experinceFolders;
     }
 }

@@ -6,9 +6,9 @@
         <div class="col-md-8">
 
             <div class="card">
-                <div class="card-header">土産検索</div>
+                <div class="card-header">体験検索</div>
                 <div class="card-body">
-                    <form action="/search/goods" method="get">
+                    <form action="/search/experience" method="get">
                         <label for="keyword">ワード</label><input name="keyword" type="text">
                     </form>
                 </div>

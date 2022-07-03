@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('/partner/{id}', [App\Http\Controllers\PartnerController::class, 'show']);
 Route::get('/search/goods', [App\Http\Controllers\GoodsController::class, 'index']);
+Route::get('/search/experience', [App\Http\Controllers\ExperienceController::class, 'index']);
 Route::get('/goods/{id}', [App\Http\Controllers\GoodsController::class, 'show']);
 Route::redirect('/search', '/search/experience');
 

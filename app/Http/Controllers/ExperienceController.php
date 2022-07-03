@@ -12,10 +12,10 @@ class ExperienceController extends Controller
     {
         $keyword = $request->keyword;
         if ($keyword == '') {
-            return view('search.goods');
+            return view('search.experience');
         }
 
-        $goods = ExperienceFolder::search($keyword, per_page: 10);
-        return view('search.goods_list', compact('goods'));
+        $experinceFolders = ExperienceFolder::search($keyword, per_page: 10);
+        return view('search.experience_list', compact('experinceFolders'));
     }
 }
