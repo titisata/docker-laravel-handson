@@ -16,14 +16,14 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('partner_id')->constrained('partners');
             $table->foreignId('company_id')->constrained('companies');
-            $table->string('name', 50);
+            $table->string('name', 50)->index();
             $table->string('description', 1000);
-            $table->string('category1', 50)->nullable();
-            $table->string('category2', 50)->nullable();
-            $table->string('category3', 50)->nullable();
+            $table->string('category1', 50)->nullable()->index();
+            $table->string('category2', 50)->nullable()->index();
+            $table->string('category3', 50)->nullable()->index();
             $table->boolean('is_lodging'); // 泊りか？
             $table->boolean('is_before_lodging'); // 前泊か？
-            $table->integer('price');
+            $table->integer('price')->index();
             $table->timestamps();
         });
     }

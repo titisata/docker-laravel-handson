@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('company_images', function (Blueprint $table) {
             $table->id();
             $table->string('image_path', 511);
-            $table->unsignedBigInteger('company_id');
+            $table->foreignId('company_id')->constrained('companies');
             $table->timestamps();
         });
     }

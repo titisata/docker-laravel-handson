@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('experience_folder_id')->constrained('experience_folders');
             $table->string('name', 50);
-            $table->integer('sort_no');
+            $table->integer('sort_no')->index();
             $table->integer('quantity');
             $table->integer('price_child');
             $table->integer('price_adult');
