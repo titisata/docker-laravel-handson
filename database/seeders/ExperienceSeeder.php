@@ -16,25 +16,19 @@ class ExperienceSeeder extends Seeder
     {
         \App\Models\Experience::create([
             'experience_folder_id' => 1,
-            'company_id' => 1,
-            'name' => 'test_ex1',
-            'description' => 'hoge',
-            'category1' => 'aa',
-            'category2' => 'aa',
-            'category3' => null,
+            'name' => '13:00からの部',
+            'sort_no' => 1,
             'quantity' => 5,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
         ]);
         \App\Models\Experience::create([
             'experience_folder_id' => 1,
-            'company_id' => 1,
-            'name' => 'test_ex2',
-            'description' => 'hoge',
-            'category1' => 'aa',
-            'category2' => 'aa',
-            'category3' => null,
+            'name' => '15:00からの部',
+            'sort_no' => 1,
             'quantity' => 5,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
         ]);
     }
 }

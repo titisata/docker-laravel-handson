@@ -16,10 +16,10 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('experience_id')->constrained('experiences');
-            $table->foreignId('hotel_group_id')->constrained('hotel_groups')->nullable();
-            $table->foreignId('food_group_id')->constrained('food_groups')->nullable();
-            $table->foreignId('hotel_id')->constrained('hotels')->nullable();
-            $table->foreignId('food_id')->constrained('foods')->nullable();
+            $table->foreignId('hotel_group_id')->nullable()->constrained('hotel_groups');
+            $table->foreignId('food_group_id')->nullable()->constrained('food_groups');
+            $table->foreignId('hotel_id')->nullable()->constrained('hotels');
+            $table->foreignId('food_id')->nullable()->constrained('foods');
             $table->string('comment');
             $table->string('status');
             $table->integer('quantity_child');

@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('hotel_group_id')->constrained('hotel_groups');
+            $table->foreignId('food_group_id')->constrained('food_groups');
             $table->string('name', 50);
             $table->string('description', 1000);
             $table->timestamps();

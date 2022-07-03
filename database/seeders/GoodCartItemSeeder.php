@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\CartItem;
+use App\Models\GoodCartItem;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CartItemSeeder extends Seeder
+class GoodCartItemSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,12 +15,12 @@ class CartItemSeeder extends Seeder
      */
     public function run()
     {
-        CartItem::create([
+        GoodCartItem::create([
             'goods_id' => 1,
             'user_id' => 1,
             'quantity' => 1,
         ]);
-        CartItem::create([
+        GoodCartItem::create([
             'goods_id' => 2,
             'user_id' => 1,
             'quantity' => 3,

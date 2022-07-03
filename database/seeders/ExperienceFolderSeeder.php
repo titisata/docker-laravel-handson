@@ -16,7 +16,15 @@ class ExperienceFolderSeeder extends Seeder
     {
         \App\Models\ExperienceFolder::create([
             'partner_id' => 1,
-            'name' => 'test_folder',
+            'company_id' => 1,
+            'name' => 'test_ex2',
+            'description' => 'hoge',
+            'category1' => 'aa',
+            'category2' => 'aa',
+            'category3' => null,
+            'is_lodging' => '',
+            'is_before_lodging' => '',
+            'price' => 5000,
         ]);
     }
 }
