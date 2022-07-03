@@ -24,9 +24,14 @@ Route::get('/partner/{id}', [App\Http\Controllers\PartnerController::class, 'sho
 Route::get('/search/goods', [App\Http\Controllers\GoodsController::class, 'index']);
 Route::get('/search/experience', [App\Http\Controllers\ExperienceController::class, 'index']);
 Route::get('/goods/{id}', [App\Http\Controllers\GoodsController::class, 'show']);
+Route::post('/goods/{id}', [App\Http\Controllers\GoodsController::class, 'post']);
+Route::get('/experience/{id}', [App\Http\Controllers\ExperienceController::class, 'show']);
+Route::get('/experience/{folder_id}/{id}', [App\Http\Controllers\ExperienceController::class, 'reserve_detail']);
+Route::post('/experience/{folder_id}/{id}', [App\Http\Controllers\ExperienceController::class, 'post']);
 Route::redirect('/search', '/search/experience');
 
 // この中に書かれたルートはログインしてないとアクセス出来ないようになる（ログインページにリダイレクトされる）
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/cart', [App\Http\Controllers\CartController::class, 'index']);
 });

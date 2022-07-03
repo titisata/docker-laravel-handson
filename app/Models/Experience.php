@@ -11,6 +11,6 @@ class Experience extends Model
 
     public function folder()
     {
-        return $this->belongsTo('App\Models\ExperienceFolder');
+        return $this->belongsTo(ExperienceFolder::class);
     }
 }
