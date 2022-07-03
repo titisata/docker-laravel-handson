@@ -12,6 +12,12 @@ class ExperienceFolder extends Model
 
     public $experinces = [];
 
+    /**
+     * 体験を取得
+     *
+     * @return Collection<Experience>
+     */
+
     public function experiences()
     {
         return $this->hasMany('App\Models\Experience');

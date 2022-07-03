@@ -12,14 +12,11 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('experiences', function (Blueprint $table) {
+        Schema::create('foods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('experience_folder_id')->constrained('experience_folders');
+            $table->foreignId('hotel_group_id')->constrained('hotel_groups');
             $table->string('name', 50);
-            $table->integer('sort_no');
-            $table->integer('quantity');
-            $table->integer('price_child');
-            $table->integer('price_adult');
+            $table->string('description', 1000);
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('experiences');
+        Schema::dropIfExists('foods');
     }
 };
