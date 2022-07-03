@@ -22,8 +22,8 @@ class ExperienceFolderSeeder extends Seeder
             'category1' => 'aa',
             'category2' => 'aa',
             'category3' => null,
-            'is_lodging' => '',
-            'is_before_lodging' => '',
+            'is_lodging' => true,
+            'is_before_lodging' => true,
             'price' => 5000,
         ]);
         \App\Models\ExperienceFolder::create([
@@ -34,8 +34,8 @@ class ExperienceFolderSeeder extends Seeder
             'category1' => 'aa',
             'category2' => 'aa',
             'category3' => null,
-            'is_lodging' => '',
-            'is_before_lodging' => '',
+            'is_lodging' => true,
+            'is_before_lodging' => true,
             'price' => 5000,
         ]);
         \App\Models\ExperienceFolder::create([
@@ -46,8 +46,8 @@ class ExperienceFolderSeeder extends Seeder
             'category1' => 'aa',
             'category2' => 'aa',
             'category3' => null,
-            'is_lodging' => '',
-            'is_before_lodging' => '',
+            'is_lodging' => true,
+            'is_before_lodging' => true,
             'price' => 5000,
         ]);
     }
