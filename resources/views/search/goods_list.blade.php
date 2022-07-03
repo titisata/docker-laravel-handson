@@ -5,10 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            <h3 class="mb-3">{{ app('request')->input('keyword') }}の検索結果</h3>
+            <h3 class="mb-3">{{ app('request')->input('keyword') }}の土産検索結果</h3>
 
-            <form action="/search/goods" method="get">
-                <label for="keyword">ワード</label><input name="keyword" type="text">
+            <a href="/search/experience">体験検索へ</a>
+
+            <form class="mb-3 mt-3" action="/search/goods" method="get">
+                <label for="keyword">ワード</label><input name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
             </form>
 
             @forelse($goods as $goods_one)

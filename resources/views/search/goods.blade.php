@@ -13,6 +13,7 @@
                     </form>
                 </div>
             </div>
+            <a href="/search/experience">体験検索へ</a>
         </div>
     </div>
 </div>
