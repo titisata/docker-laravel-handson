@@ -12,20 +12,14 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('experience_reserves', function (Blueprint $table) {
+        Schema::create('experience_cart_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('experience_id')->constrained('experiences');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('hotel_group_id')->constrained('hotel_groups')->nullable();
             $table->foreignId('food_group_id')->constrained('food_groups')->nullable();
-            $table->foreignId('hotel_id')->constrained('hotels')->nullable();
-            $table->foreignId('food_id')->constrained('foods')->nullable();
-            $table->string('comment');
-            $table->string('status');
             $table->integer('quantity_child');
             $table->integer('quantity_adult');
-            $table->timestamp('start_date')->nullable();
-            $table->timestamp('end_date')->nullable();
             $table->timestamps();
         });
     }
@@ -37,6 +31,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('experience_reserves');
+        Schema::dropIfExists('experience_cart_items');
     }
 };
