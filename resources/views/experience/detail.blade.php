@@ -12,6 +12,9 @@
                     <p>名前: {{ $experienceFolder->name }}</p>
                     <p>値段: {{ $experienceFolder->price }}円</p>
                     <p>説明: {{ $experienceFolder->description }}</p>
+                    <p>宿泊日: {{ app('request')->input('keyword') }}</p>
+                    <p>{{ $experienceFolder->is_lodging ? ('宿泊あり ' . ($experienceFolder->is_before_lodging ? '前泊' : '後泊') ) : '宿泊なし' }}</p>
+                    <p></p>
                 </div>
             </div>
 
@@ -23,7 +26,7 @@
                             <div>
                                 <p>{{ $experience->name }}</p>
                                 <p>大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
-                                <a class="btn btn-primary" href="{{ $experienceFolder->id }}/{{ $experience->id }}">予約する</a>
+                                <a class="btn btn-primary" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">予約する</a>
                             </div>
                         </div>
                     @empty

@@ -9,17 +9,13 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div class="card mb-3">
-    <div style="display: flex; flex: 1 1 auto; height: 150px;">
-        <a href="/experience/{{ $experinceFolder->id }}" style="text-decoration: none; color: inherit;">
-            <div style="display: flex; flex: 1 1 auto;  height: 100%;">
-                {{-- <div class="img-square-wrapper">
-                    <img style="object-fit: cover; height: 100%;" class="" src="{{ $place->images[0]->image_path ?? "/images/placeholder1.png" }}" alt="Card image cap" width="200">
-                </div> --}}
-                <div class="card-body">
-                    <h4 class="card-title">{{ $experinceFolder->name }}</h4>
-                    <p class="card-text">{{ $experinceFolder->description }}</p>
-                    <p class="card-text">￥{{ $experinceFolder->price }}～</p>
-                </div>
+    <div style="display: flex; flex: 1 1 auto;">
+        <a href="/experience/{{ $experinceFolder->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}" style="text-decoration: none; color: inherit;">
+            <div class="card-body">
+                <h4 class="card-title">{{ $experinceFolder->name }}</h4>
+                <p class="card-text">{{ $experinceFolder->description }}</p>
+                <p class="card-text">￥{{ $experinceFolder->price }}～</p>
+                <p class="card-text">{{ $experinceFolder->is_lodging ? '宿泊あり ' . '宿泊日: ' . app('request')->input('keyword') : '宿泊なし' }}</p>
             </div>
         </a>
     </div>

@@ -12,7 +12,8 @@
                     <div class="card-header">予約内容</div>
                     <div class="card-body">
                         <p>{{ $experience->name }}</p>
-                        <p>日程: {{ $experience->start_date }}</p>
+                        {{-- <p>日程: {{ $experience->start_date }}</p> --}}
+                        <p>宿泊日: {{ app('request')->input('keyword') }}</p>
                         <p>大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
                     </div>
                 </div>
