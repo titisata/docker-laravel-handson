@@ -20,7 +20,7 @@ class ExperienceFolder extends Model
 
     public function experiences()
     {
-        return $this->hasMany('App\Models\Experience');
+        return $this->hasMany(Experience::class);
     }
 
     /**
@@ -36,6 +36,20 @@ class ExperienceFolder extends Model
             ['table_id', '=', $this->id],
         ])->get();
         return $imgaes;
+    }
+
+    /**
+     * コメントを取得
+     *
+     * @return Collection<ExperienceComment>
+     */
+
+    public function comments()
+    {
+        $comments = ExperienceComment::where([
+            ['experience_folder_id', '=', $this->id],
+        ])->orderBy('created_at', 'desc')->get();
+        return $comments;
     }
 
     /**

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/comment/experience', [App\Http\Controllers\CommentsController::class, 'experience_post']);
+    Route::post('/comment/goods', [App\Http\Controllers\CommentsController::class, 'goods_post']);
 });

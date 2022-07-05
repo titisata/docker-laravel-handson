@@ -41,6 +41,7 @@ class GoodsController extends Controller
         if ($goods == null) {
             return abort(404);
         }
-        return view('goods.detail', compact('goods'));
+        $comments = $goods->comments();
+        return view('goods.detail', compact('goods', 'comments'));
     }
 }

@@ -9,6 +9,36 @@ use Illuminate\Http\Request;
 class Goods extends Model
 {
     use HasFactory;
+
+    /**
+     * 画像を取得
+     *
+     * @return Collection<Image>
+     */
+
+    public function images()
+    {
+        $imgaes = Image::where([
+            ['table_name', '=', 'goods'],
+            ['table_id', '=', $this->id],
+        ])->get();
+        return $imgaes;
+    }
+
+    /**
+     * コメントを取得
+     *
+     * @return Collection<ExperienceComment>
+     */
+
+    public function comments()
+    {
+        $comments = GoodsComment::where([
+            ['goods_id', '=', $this->id],
+        ])->orderBy('created_at', 'desc')->get();
+        return $comments;
+    }
+
     /**
      * 検索を行う
      *

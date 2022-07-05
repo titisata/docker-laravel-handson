@@ -30,5 +30,15 @@ class ImageSeeder extends Seeder
             'table_name' => 'experience_folders',
             'table_id' => 3,
         ]);
+        Image::create([
+            'image_path' => '/images/4.jpg',
+            'table_name' => 'goods',
+            'table_id' => 1,
+        ]);
+        Image::create([
+            'image_path' => '/images/5.jpg',
+            'table_name' => 'goods',
+            'table_id' => 2,
+        ]);
     }
 }

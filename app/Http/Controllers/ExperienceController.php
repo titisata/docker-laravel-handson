@@ -29,7 +29,8 @@ class ExperienceController extends Controller
             return abort(404);
         }
         $experiences = $experienceFolder->experiences;
-        return view('experience.detail', compact('experienceFolder', 'experiences'));
+        $comments = $experienceFolder->comments();
+        return view('experience.detail', compact('experienceFolder', 'experiences', 'comments'));
     }
 
     public function reserve_detail(string $folder_id, string $id)

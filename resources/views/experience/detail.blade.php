@@ -10,6 +10,30 @@
 }
 </style>
 
+<script>
+async function commentCreate(ex_id) {
+    const content = document.getElementById('comment');
+    const rate = document.getElementById('rate_input');
+    const obj = {
+        experienceFolderId: ex_id,
+        rate: Number(rate.value),
+        content: content.value,
+    };
+    content.value = "";
+    const method = "POST";
+    const body = JSON.stringify(obj);
+    const headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+    };
+    fetch("/api/comment/experience", {method, headers, body})
+        .then(_ => location.reload());
+}
+</script>
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -45,6 +69,34 @@
                     @empty
                         <p>この体験はご利用できません</p>
                     @endforelse
+                </div>
+            </div>
+
+            <div class="mt-2 card">
+                <div class="card-header">口コミ</div>
+
+                <div class="d-flex flex-column">
+                    <div class="m-2">
+                        <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment" style="font-size:0.24rem;"></textarea>
+                        <div class="d-flex  justify-content-between">
+                            <select id="rate_input" style="height:20px;width:50px">
+                                <option value="1">☆1</option>
+                                <option value="2">☆2</option>
+                                <option value="3">☆3</option>
+                                <option value="4">☆4</option>
+                                <option value="5" selected="selected">☆5</option>
+                            </select>
+                            <button class="btn btn-outline-primary btn-sm" style="font-size:0.32rem; " onclick="commentCreate({{ $experienceFolder->id }})">投稿</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    @foreach ($comments as $comment)
+                        <div class="mt-2">
+                            @include('components.comment_cell', ['comment'=>$comment])
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
