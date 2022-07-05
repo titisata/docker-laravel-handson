@@ -13,7 +13,8 @@
                     <div class="card-body">
                         <p>{{ $experience->name }}</p>
                         {{-- <p>日程: {{ $experience->start_date }}</p> --}}
-                        <p>宿泊日: {{ app('request')->input('keyword') }}</p>
+                        <p>開催日: {{ app('request')->input('keyword') }}</p>
+                        <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p>
                         <p>大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
                     </div>
                 </div>

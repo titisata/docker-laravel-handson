@@ -1,20 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+.card-img-overlay{
+    padding: 0;
+    top: calc(90% - 0.5rem);
+    text-align: center;
+    font-weight: bold;
+}
+</style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h3 class="mb-3">{{ $experienceFolder->name }}</h3>
+            <div class="card" style="height: 200px;">
+                <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
+                <div class="card-img-overlay">
+                    <h3 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h3>
+                </div>
+            </div>
 
-            <div class="card">
+            <div class="card mt-3">
                 <div class="card-header">詳細</div>
                 <div class="card-body">
                     <p>名前: {{ $experienceFolder->name }}</p>
                     <p>値段: {{ $experienceFolder->price }}円</p>
                     <p>説明: {{ $experienceFolder->description }}</p>
-                    <p>宿泊日: {{ app('request')->input('keyword') }}</p>
-                    <p>{{ $experienceFolder->is_lodging ? ('宿泊あり ' . ($experienceFolder->is_before_lodging ? '前泊' : '後泊') ) : '宿泊なし' }}</p>
-                    <p></p>
+                    <p>開催日: {{ app('request')->input('keyword') }}</p>
+                    <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p>
                 </div>
             </div>
 
