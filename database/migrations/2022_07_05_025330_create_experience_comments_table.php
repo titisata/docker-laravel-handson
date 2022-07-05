@@ -12,10 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('company_images', function (Blueprint $table) {
+        Schema::create('experience_comments', function (Blueprint $table) {
             $table->id();
-            $table->string('image_path', 511);
-            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('experience_folder_id')->constrained('experience_folders');
+            $table->string('content', 500);
+            $table->integer('rate');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('company_images');
+        Schema::dropIfExists('experience_comments');
     }
 };

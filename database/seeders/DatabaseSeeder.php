@@ -43,5 +43,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GoodCartItemSeeder::class);
         $this->call(ExperienceCartItemSeeder::class);
         $this->call(ExpreienceReserveSeeder::class);
+        $this->call(ImageSeeder::class);
+        $this->call(ExperienceCommentSeeder::class);
     }
 }

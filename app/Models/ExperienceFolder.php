@@ -24,6 +24,21 @@ class ExperienceFolder extends Model
     }
 
     /**
+     * 画像を取得
+     *
+     * @return Collection<Image>
+     */
+
+    public function images()
+    {
+        $imgaes = Image::where([
+            ['table_name', '=', 'experience_folders'],
+            ['table_id', '=', $this->id],
+        ])->get();
+        return $imgaes;
+    }
+
+    /**
      * FoodGroupを取得
      *
      * @return Collection<FoodGroup>
