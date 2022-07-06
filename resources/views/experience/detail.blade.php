@@ -8,6 +8,10 @@
     text-align: center;
     font-weight: bold;
 }
+.btn-pink{
+    background-color:rgb(239, 112, 167);
+    border-color:rgb(239, 112, 167);
+}
 </style>
 
 <script>
@@ -72,7 +76,7 @@ async function commentCreate(ex_id) {
                         量、字間、行間等を確認するために入れています。
                     </p>
                     <p></p>
-                    <p class="fw-bold">{{ $experienceFolder->price }}円~</p>
+                    <p class="fw-bold text-end h4">{{ $experienceFolder->price }}円~</p>
                     <!-- <p>開催日: {{ app('request')->input('keyword') }}</p>
                     <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p> -->
                 </div>
@@ -96,7 +100,7 @@ async function commentCreate(ex_id) {
                 <div class="card-body">
                     @forelse($experiences as $experience)
                         
-                     <a class="btn btn-primary  my-1" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                     <a class="btn btn-pink my-1" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                                                             
                     @empty
                         <p>この体験はご利用できません</p>
