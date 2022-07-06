@@ -88,7 +88,7 @@ a{
                             </select>
                         </div>
                         <p class="fw-bold">大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
-                        <p class="mb-0">宿泊プラン</p>
+                        <p class="mb-0 fw-bold">宿泊プラン</p>
                         @forelse ($experienceFolder->hotelGroup as $hotelGroup)
                             <div class="fw-bold">              
                                 　<input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
@@ -97,7 +97,7 @@ a{
                         @empty
                             <p class="fw-bold">この体験は宿泊がありません</p>
                         @endforelse
-                        <p class="mb-0">食事プラン</p>
+                        <p class="mb-0 fw-bold">食事プラン</p>
                         @forelse ($experienceFolder->foodGroup as $foodGroup)
                             <div>
                                 　<input type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
