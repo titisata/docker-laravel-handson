@@ -91,10 +91,10 @@ async function commentCreate(ex_id) {
                         <p>この体験はご利用できません</p>
                     @endforelse
                 </div> -->
-                <div class="card-body d-flex flex-column">
+                <div class="card-body">
                     @forelse($experiences as $experience)
                         
-                     <a class="btn btn-primary w-50 my-1" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                     <a class="btn btn-primary  my-1" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                                                             
                     @empty
                         <p>この体験はご利用できません</p>
