@@ -52,10 +52,10 @@
                         <p>{{ $experience->name }}</p>
                         {{-- <p>日程: {{ $experience->start_date }}</p> --}}      
                         <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p>
-                        <div class="d-flex">
+                        <div class="d-flex align-items-center">
                             体験人数：
-                            <label for="quantity_adult">大人</label><input name="quantity_adult" type="number">
-                            <label for="quantity_child">子ども</label><input name="quantity_child" type="number">
+                            <label for="quantity_adult">大人</label><input class="form-control form-control-sm" style="width:64px" name="quantity_adult" type="number">
+                            <label for="quantity_child">子ども</label><input class="form-control form-control-sm"style="width:64px"  name="quantity_child" type="number">
                         </div>
                         <p>大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
                         @forelse ($experienceFolder->hotelGroup as $hotelGroup)
