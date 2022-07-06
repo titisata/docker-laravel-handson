@@ -21,28 +21,22 @@
                 <div class="card-img-overlay">
                     <h4 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h4>
                 </div>
-                <div class="mt-4">
-                <!-- <div class="card-header">詳細</div> -->
-                <div class="card-body">
-                    <!-- <p>名前: {{ $experienceFolder->name }}</p>
-                    <p>値段: {{ $experienceFolder->price }}円</p> -->
-                    <!-- <p class="fw-bold h4">{{ $experienceFolder->description }}</p> -->
-                    <p>
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                    </p>
-                    <p class="pt-3 h5">体験料金の目安は{{ $experienceFolder->price }}円~</p>
-                    <!-- <p>開催日: {{ app('request')->input('keyword') }}</p>
-                    <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p> -->
+                <div class="mt-4">              
+                    <div class="card-body">
+                        <p>
+                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                        </p>
+                        <p class="pt-3 h5">体験料金の目安は{{ $experienceFolder->price }}円~</p>
+                    </div>
                 </div>
-            </div>
                 
             </div>
         </div>
         <div class="col-md-9">
-        <form class="mb-3" action="{{ Request::url() }}" method="POST">
+            <form class="mb-3" action="{{ Request::url() }}" method="POST">
             @csrf
 
                 <div class="mt-2 card bg-f-part text-white">
@@ -81,7 +75,7 @@
                             </div>
                         @endempty
                     </div>
-                    <input class="btn btn-outline-light mt-2 text-end"type="submit" value="カートに入れる">
+                    <input class="btn btn-outline-light mt-2 text-end" style="width:100px" type="submit" value="カートに入れる">
                 </div>
 
                 <!-- <div class="mt-2 card">
@@ -131,7 +125,8 @@
 
 
         </div>
-        <div class="card col-mb-9 mt-4">
+        <div class=" col-mb-9">
+             <div class="card mt-4">
                 <!-- <div class="card-header">詳細</div> -->
                 <div class="card-body">
                     <!-- <p>名前: {{ $experienceFolder->name }}</p>
@@ -144,12 +139,15 @@
                         この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
                     </p>
                     <p></p>
-                    <p>宿泊場所は観光協会お任せとなります。</p>
+                    <p class="mb-0">宿泊場所は観光協会お任せとなります。</p>
                     <p>決まり次第後ほど観光協会よりご連絡いたします。</p>
                     <!-- <p>開催日: {{ app('request')->input('keyword') }}</p>
                     <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p> -->
                 </div>
-            </div>    
+            </div> 
+
+        </div>
+           
         
     </div>
 </div>
