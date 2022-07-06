@@ -60,7 +60,7 @@ async function commentCreate(ex_id) {
             <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <div class="card-img-overlay">
-                    <h3 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h3>
+                    <h4 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h4>
                 </div>
             </div>
 
@@ -114,7 +114,7 @@ async function commentCreate(ex_id) {
                 <div class="card-body">
                     @forelse($experiences as $experience)
                         
-                     <a class="btn btn-pink rounded-pill text-white my-2 w-100 btn-shadow" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                     <a class="btn btn-pink py-1 rounded-pill text-white my-2 w-100 btn-shadow" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                                                             
                     @empty
                         <p>この体験はご利用できません</p>
