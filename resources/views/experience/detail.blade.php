@@ -147,11 +147,11 @@ async function commentCreate(ex_id) {
 </div>
 
 <footer class="mt-4">
-        <div class="bg-secondary py-5">
+        <div class="bg-secondary py-3">
             <h2 class="text-center text-white mb-0">観光協会</h2>
         </div>
         <div class = "pink">
-            <div class="d-flex pt-2">
+            <div class="d-flex py-4">
                 <div class="d-flex flex-column ms-4">
                     <ul>
                         <li><a href="#" class="text-white">プログラム一覧</a></li>
