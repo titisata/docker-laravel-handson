@@ -30,8 +30,8 @@
         border:2px solid rgba(255,255,255,1) !important;
         }
         .pink{
-            background-color:rgb(242, 118, 105);
-            border-color:rgb(242, 118, 105);
+            background-color:#F54361;
+            border-color:#F54361;
         }
     </style>
 </head>

@@ -9,14 +9,18 @@
     font-weight: bold;
 }
 .btn-pink{
-    background-color:rgb(242, 118, 105);
-    border-color:rgb(242, 118, 105);
+    background-color:#F54361;
+    border-color:#F54361;
 }
 ul{
     list-style-type: none
 }
 a{
     text-decoration:none;
+}
+.f-pink{
+    background-color:#CC334D;
+    
 }
 </style>
 
@@ -150,7 +154,7 @@ async function commentCreate(ex_id) {
         <div class="bg-secondary py-3">
             <h2 class="text-center text-white mb-0">観光協会</h2>
         </div>
-        <div class = "pink">
+        <div class = "f-pink">
             <div class="d-flex py-4">
                 <div class="d-flex flex-column ms-4">
                     <ul>
