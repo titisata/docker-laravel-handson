@@ -19,7 +19,7 @@ a{
     text-decoration:none;
 }
 .f-pink{
-    background-color:#CC334D;
+    background-color:#BB4156;
     
 }
 </style>
