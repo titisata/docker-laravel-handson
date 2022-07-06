@@ -13,8 +13,8 @@
     <div class="row justify-content-center">
         
         <div class="col-md-9">
-            <div class="card" style="height: 300px;">
-                <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
+            <div class="card">
+                <img class="card-img" style="height: 300px; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <div class="card-img-overlay">
                     <h4 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h4>
                 </div>
