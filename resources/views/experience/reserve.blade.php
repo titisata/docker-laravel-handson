@@ -57,7 +57,7 @@
                             <label for="quantity_adult">大人</label><input class="form-control form-control-sm" style="width:64px" name="quantity_adult" type="number">
                             <label for="quantity_child">子ども</label><input class="form-control form-control-sm"style="width:64px"  name="quantity_child" type="number">
                         </div>
-                        <p>大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
+                        <p class="fw-bold">大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
                         @forelse ($experienceFolder->hotelGroup as $hotelGroup)
                             <div class="fw-bold">
                                 <input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
