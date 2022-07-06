@@ -45,7 +45,7 @@
         <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
             @csrf
 
-                <div class="mt-2 card bg-f-part">
+                <div class="mt-2 card bg-f-part text-white">
                     
                     <div class="card-body">
                         <p>体験日: {{ app('request')->input('keyword') }}</p>
