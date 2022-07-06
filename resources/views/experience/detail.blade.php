@@ -40,7 +40,7 @@ async function commentCreate(ex_id) {
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <div class="card-img-overlay">
@@ -66,7 +66,7 @@ async function commentCreate(ex_id) {
                 <div class="card-body">
                     <!-- <p>名前: {{ $experienceFolder->name }}</p>
                     <p>値段: {{ $experienceFolder->price }}円</p> -->
-                    <p class="fw-bold">{{ $experienceFolder->description }}</p>
+                    <p class="fw-bold h3">{{ $experienceFolder->description }}</p>
                     <p>
                         この文章はダミーです。文字の大きさ、量、字間、行間等を確認す
                         るために入れています。この文章はダミーです。文字の大きさ、
@@ -100,7 +100,7 @@ async function commentCreate(ex_id) {
                 <div class="card-body">
                     @forelse($experiences as $experience)
                         
-                     <a class="btn btn-pink my-1" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                     <a class="btn btn-pink text-white my-1" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                                                             
                     @empty
                         <p>この体験はご利用できません</p>

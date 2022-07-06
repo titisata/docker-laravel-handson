@@ -59,10 +59,10 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                    <a class="nav-link text-white" href="/cart">カート</a>
+                                    <a class="nav-link text-white fw-bold" href="/cart">カート</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
