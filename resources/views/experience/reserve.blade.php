@@ -81,6 +81,7 @@
                             </div>
                         @endempty
                     </div>
+                    <input class="btn btn-outline-light mt-2 text-end"type="submit" value="カートに入れる">
                 </div>
 
                 <!-- <div class="mt-2 card">
@@ -124,13 +125,13 @@
                         @endempty
                     </div>
                 </div> -->
-                <input type="submit" value="カートに入れる">
+                
             </form>
 
 
 
         </div>
-        <div class="card mt-4">
+        <div class="card col-mb-9 mt-4">
                 <!-- <div class="card-header">詳細</div> -->
                 <div class="card-body">
                     <!-- <p>名前: {{ $experienceFolder->name }}</p>
