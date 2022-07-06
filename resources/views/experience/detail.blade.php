@@ -42,20 +42,21 @@ async function commentCreate(ex_id) {
                 <div class="card-img-overlay">
                     <h3 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h3>
                 </div>
+                <div class="d-flex flex-wrap justify-content-evenly">
+                    <img class="card-img col-3 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
+                    <img class="card-img col-3 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
+                    <img class="card-img col-3 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
+                    <img class="card-img col-3 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
+                    <img class="card-img col-3 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
+                    <img class="card-img col-3 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
+                </div>
             </div>
 
-            <div class="card" >
-            <div class="d-flex flex-wrap justify-content-evenly">
-                <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
-                <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
-                <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
-                <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
-                <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
-                <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
-            </div>
+
+        
+           
                 
-                
-            </div>
+
 
             <div class="card mt-3">
                 <!-- <div class="card-header">詳細</div> -->
