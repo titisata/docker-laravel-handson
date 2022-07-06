@@ -38,7 +38,8 @@
                 
             </div>
         </div>
-            <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
+        <div class="col-md-9">
+        <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
             @csrf
 
                 <div class="mt-2 card">
@@ -95,6 +96,9 @@
                 </div>
                 <input type="submit" value="カートに入れる">
             </form>
+
+        </div>
+           
         
     </div>
 </div>
