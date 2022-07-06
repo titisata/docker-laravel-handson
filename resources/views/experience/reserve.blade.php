@@ -15,6 +15,12 @@
     background-color:#BB4156;
     
 }
+ul{
+    list-style-type: none
+}
+a{
+    text-decoration:none;
+}
 </style>
 <div class="container">
     <div class="row justify-content-center">
@@ -58,6 +64,7 @@
                         <p class="fw-bold">大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
                         @forelse ($experienceFolder->hotelGroup as $hotelGroup)
                             <div class="fw-bold">
+                                <p class="mb-0">宿泊プラン</p>
                                 <input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
                                 <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人{{ $hotelGroup->price_adult }}円 子ども{{ $hotelGroup->price_child }}円</label>
                             </div>
@@ -66,6 +73,7 @@
                         @endforelse
                         @forelse ($experienceFolder->foodGroup as $foodGroup)
                             <div>
+                                <p class="mb-0">食事プラン</p>
                                 <input type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
                                 <label class="fw-bold" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人{{ $foodGroup->price_adult }}円 子ども{{ $foodGroup->price_child }}円</label>
                             </div>
