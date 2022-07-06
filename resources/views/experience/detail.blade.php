@@ -25,6 +25,9 @@ a{
 .btn-shadow{
     box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 65%);
 }
+.bg-f-part{
+    background-color:#343a40;
+}
 </style>
 
 <script>
@@ -152,7 +155,7 @@ async function commentCreate(ex_id) {
 </div>
 
 <footer class="mt-4">
-        <div class="bg-secondary py-3">
+        <div class="bg-f-part py-3">
             <h2 class="text-center text-white mb-0">観光協会</h2>
         </div>
         <div class = "f-pink">
