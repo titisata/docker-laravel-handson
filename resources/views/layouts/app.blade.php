@@ -27,7 +27,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm pink">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm pink">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
                     URATABI
