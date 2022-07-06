@@ -5,27 +5,12 @@
     <div class="row justify-content-center">
         
         <div class="col-md-9">
-            <div class="card" style="height: 800px;">
+            <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <div class="card-img-overlay">
                     <h4 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h4>
                 </div>
-                <div class="card-body">
-                    <!-- <p>名前: {{ $experienceFolder->name }}</p>
-                    <p>値段: {{ $experienceFolder->price }}円</p> -->
-                    <p class="fw-bold h4">{{ $experienceFolder->description }}</p>
-                    <p>
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                    </p>
-                    <p></p>
-                    <p class="fw-bold text-end h3 border-top pt-3">{{ $experienceFolder->price }}円~</p>
-                    <!-- <p>開催日: {{ app('request')->input('keyword') }}</p>
-                    <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p> -->
-                </div>
-            </div>
+                
             </div>
             <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
             @csrf
