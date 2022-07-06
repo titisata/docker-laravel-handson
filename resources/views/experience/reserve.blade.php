@@ -69,7 +69,7 @@
                         @forelse ($experienceFolder->foodGroup as $foodGroup)
                             <div>
                                 <input type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
-                                <label for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人{{ $foodGroup->price_adult }}円 子ども{{ $foodGroup->price_child }}円</label>
+                                <label class="fw-bold" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人{{ $foodGroup->price_adult }}円 子ども{{ $foodGroup->price_child }}円</label>
                             </div>
                         @empty
                             <p class="fw-bold">この体験は食事がつきません</p>
