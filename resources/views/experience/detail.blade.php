@@ -122,7 +122,7 @@ async function commentCreate(ex_id) {
                 </div>
             <!-- </div> -->
 
-            <!-- <div class="mt-2 card">
+            <div class="mt-2 card">
                 <div class="card-header">口コミ</div>
 
                 <div class="d-flex flex-column">
@@ -148,7 +148,7 @@ async function commentCreate(ex_id) {
                         </div>
                     @endforeach
                 </div>
-            </div> -->
+            </div>
 
         </div>
     </div>

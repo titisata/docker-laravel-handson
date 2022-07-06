@@ -26,9 +26,7 @@
     </style>
 </head>
 <body>
-    <main class="py-4">
-        @yield('content')
-    </main>
+@extends('layouts.app')
     <footer>
         <div class = "bg-secondary">
             <h4>観光協会</h4>
