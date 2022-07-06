@@ -23,15 +23,15 @@
          background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
         }
         .navbar-toggler{
-            background-color:rgb(242, 118, 105);
+            background-color:#FB6E86;
         }
         .navbar-toggler{
         color:white !important; 
-        border:2px solid rgba(255,255,255,1) !important;
+        border:2px solid #FB6E86 !important;
         }
         .pink{
-            background-color:#F54361;
-            border-color:#F54361;
+            background-color:#FB6E86;
+            border-color:#FB6E86;
         }
     </style>
 </head>

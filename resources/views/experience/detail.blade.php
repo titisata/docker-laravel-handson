@@ -9,8 +9,8 @@
     font-weight: bold;
 }
 .btn-pink{
-    background-color:#F54361;
-    border-color:#F54361;
+    background-color:#FB6E86;
+    border-color:#FB6E86;
 }
 ul{
     list-style-type: none
