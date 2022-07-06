@@ -45,7 +45,7 @@ async function commentCreate(ex_id) {
             </div>
 
             <div class="card mt-3">
-                <div class="card-header">詳細</div>
+                <div class="card-header">詳細ffffffffffff</div>
                 <div class="card-body">
                     <p>名前: {{ $experienceFolder->name }}</p>
                     <p>値段: {{ $experienceFolder->price }}円</p>
