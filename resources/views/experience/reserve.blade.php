@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .card-img-overlay{
+    padding: 0;
+    top: calc(90% - 0.5rem);
+    text-align: center;
+    font-weight: bold;
+}
+</style>
 <div class="container">
     <div class="row justify-content-center">
         
