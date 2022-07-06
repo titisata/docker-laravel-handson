@@ -94,10 +94,10 @@ async function commentCreate(ex_id) {
                 <div class="card-body">
                     @forelse($experiences as $experience)
                         <div class="mt-1 p-3 card">
-                            <div>
+                            
                             <a class="btn btn-primary" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
-                                <p>大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>                      
-                            </div>
+                            <p>大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>                      
+                            
                         </div>
                     @empty
                         <p>この体験はご利用できません</p>
