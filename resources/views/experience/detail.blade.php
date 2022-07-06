@@ -71,6 +71,8 @@ async function commentCreate(ex_id) {
                         るために入れています。この文章はダミーです。文字の大きさ、
                         量、字間、行間等を確認するために入れています。
                     </p>
+                    <p></p>
+                    <p class="fw-bold">{{ $experienceFolder->price }}円~</p>
                     <!-- <p>開催日: {{ app('request')->input('keyword') }}</p>
                     <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p> -->
                 </div>
