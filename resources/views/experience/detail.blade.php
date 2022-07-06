@@ -152,14 +152,14 @@ async function commentCreate(ex_id) {
         </div>
         <div class = "pink">
             <div class="d-flex pt-2">
-                <div class="d-flex flex-column ms-2">
+                <div class="d-flex flex-column ms-4">
                     <ul>
                         <li><a href="#" class="text-white">プログラム一覧</a></li>
                         <li><a href="#" class="text-white">商品一覧</a></li>
                         <li><a href="#" class="text-white">支払い方法</a></li>
                     </ul>
                 </div>
-                <div class="d-flex flex-column ms-2">
+                <div class="d-flex flex-column ms-4">
                     <ul>
                         <li><a href="#" class="text-white">キャンセル・返品について</a></li>
                         <li><a href="#" class="text-white">特定商取引に基づく表記</a></li>
