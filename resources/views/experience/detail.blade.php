@@ -37,7 +37,7 @@ async function commentCreate(ex_id) {
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="height: 200px;">
+            <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <div class="card-img-overlay">
                     <h3 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h3>
@@ -45,7 +45,7 @@ async function commentCreate(ex_id) {
             </div>
 
             <div class="card mt-3">
-                <div class="card-header">詳細ffffffffffff</div>
+                <div class="card-header">詳細</div>
                 <div class="card-body">
                     <p>名前: {{ $experienceFolder->name }}</p>
                     <p>値段: {{ $experienceFolder->price }}円</p>
