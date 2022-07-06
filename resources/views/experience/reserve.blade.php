@@ -11,6 +11,10 @@
 .bg-f-part{
     background-color:#343a40;
 }
+.f-pink{
+    background-color:#BB4156;
+    
+}
 </style>
 <div class="container">
     <div class="row justify-content-center">

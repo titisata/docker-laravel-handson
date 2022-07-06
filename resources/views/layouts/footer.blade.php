@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-@extends('layouts.app')
+
     <footer>
         <div class = "bg-secondary">
             <h4>観光協会</h4>
