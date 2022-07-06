@@ -147,8 +147,8 @@ async function commentCreate(ex_id) {
 </div>
 
 <footer class="mt-4">
-        <div class="bg-secondary" style="height:100px;">
-            <h4 class="text-center text-white mb-0">観光協会</h4>
+        <div class="bg-secondary" style="height:50px;">
+            <h2 class="text-center text-white mb-0">観光協会</h2>
         </div>
         <div class = "pink">
             <div class="d-flex">
