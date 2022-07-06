@@ -46,7 +46,7 @@ a{
             </div>
         </div>
         <div class="col-md-9">
-            <form class="mb-3" action="{{ Request::url() }}" method="POST">
+            <form  action="{{ Request::url() }}" method="POST">
             @csrf
 
                 <div class="mt-2 card bg-f-part text-white">
@@ -167,7 +167,7 @@ a{
 
         </div>
         <div class= "col-md-9">
-             <div class="card mt-4">
+             <div class="card mt-2">
                 <!-- <div class="card-header">詳細</div> -->
                 <div class="card-body">
                     <!-- <p>名前: {{ $experienceFolder->name }}</p>
