@@ -8,6 +8,9 @@
     text-align: center;
     font-weight: bold;
 }
+.bg-f-part{
+    background-color:#343a40;
+}
 </style>
 <div class="container">
     <div class="row justify-content-center">
@@ -42,14 +45,41 @@
         <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
             @csrf
 
-                <div class="mt-2 card">
-                    <div class="card-header">予約内容</div>
+                <div class="mt-2 card bg-f-part">
+                    
                     <div class="card-body">
+                        <p>体験日: {{ app('request')->input('keyword') }}</p>
                         <p>{{ $experience->name }}</p>
-                        {{-- <p>日程: {{ $experience->start_date }}</p> --}}
-                        <p>開催日: {{ app('request')->input('keyword') }}</p>
+                        {{-- <p>日程: {{ $experience->start_date }}</p> --}}      
                         <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p>
+                        <div class="d-flex">
+                            体験人数：
+                            <label for="quantity_adult">大人</label><input name="quantity_adult" type="number">
+                            <label for="quantity_child">子ども</label><input name="quantity_child" type="number">
+                        </div>
                         <p>大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
+                        @forelse ($experienceFolder->hotelGroup as $hotelGroup)
+                            <div>
+                                <input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
+                                <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人{{ $hotelGroup->price_adult }}円 子ども{{ $hotelGroup->price_child }}円</label>
+                            </div>
+                        @empty
+                            <p>この体験は宿泊がありません</p>
+                        @endforelse
+                        @forelse ($experienceFolder->foodGroup as $foodGroup)
+                            <div>
+                                <input type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
+                                <label for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人{{ $foodGroup->price_adult }}円 子ども{{ $foodGroup->price_child }}円</label>
+                            </div>
+                        @empty
+                            <p>この体験は食事がつきません</p>
+                        @endforelse
+                        @if(!$experienceFolder->foodGroup->isEmpty())
+                            <div>
+                                <input type="radio" id="food_group_null" name="food_group_id" value="food_group_null">
+                                <label for="food_group_null">食事なし</label>
+                            </div>
+                        @endempty
                     </div>
                 </div>
 
