@@ -186,6 +186,5 @@ async function commentCreate(ex_id) {
         
     <footer>
 
-    @extends('layouts.footer')
-
+  
 @endsection
