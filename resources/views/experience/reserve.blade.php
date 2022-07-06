@@ -75,7 +75,10 @@
                             </div>
                         @endempty
                     </div>
-                    <input class="btn btn-outline-light mt-2 text-end" style="width:100px" type="submit" value="カートに入れる">
+                    <div class="ms-auto">
+                    <input class="btn btn-light mt-2 text-end" style="width:120px" type="submit" value="カートに入れる">
+                    </div>
+                    
                 </div>
 
                 <!-- <div class="mt-2 card">
@@ -125,7 +128,7 @@
 
 
         </div>
-        <div class=" col-mb-9">
+        <div class= "col-md-9">
              <div class="card mt-4">
                 <!-- <div class="card-header">詳細</div> -->
                 <div class="card-body">
