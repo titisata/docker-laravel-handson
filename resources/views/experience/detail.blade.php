@@ -58,18 +58,26 @@ async function commentCreate(ex_id) {
             </div>
 
             <div class="card mt-3">
-                <div class="card-header">詳細</div>
+                <!-- <div class="card-header">詳細</div> -->
                 <div class="card-body">
                     <!-- <p>名前: {{ $experienceFolder->name }}</p>
                     <p>値段: {{ $experienceFolder->price }}円</p> -->
-                    <p>説明: {{ $experienceFolder->description }}</p>
+                    <p class="fw-bold">{{ $experienceFolder->description }}</p>
+                    <p>
+                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認す
+                        るために入れています。この文章はダミーです。文字の大きさ、
+                        量、字間、行間等を確認するために入れています。
+                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認す
+                        るために入れています。この文章はダミーです。文字の大きさ、
+                        量、字間、行間等を確認するために入れています。
+                    </p>
                     <!-- <p>開催日: {{ app('request')->input('keyword') }}</p>
                     <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p> -->
                 </div>
             </div>
 
             <div class="mt-2 card">
-                <div class="card-header">予約</div>
+                <!-- <div class="card-header">予約</div> -->
                 <div class="card-body">
                     @forelse($experiences as $experience)
                         <div class="mt-1 p-3 card">
