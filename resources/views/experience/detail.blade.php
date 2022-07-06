@@ -12,6 +12,12 @@
     background-color:rgb(242, 118, 105);
     border-color:rgb(242, 118, 105);
 }
+ul{
+    list-style-type: none
+}
+a{
+    text-decoration:none;
+}
 </style>
 
 <script>
@@ -140,24 +146,24 @@ async function commentCreate(ex_id) {
     </div>
 </div>
 
-<footer>
-        <div class = "bg-secondary">
-            <h4>観光協会</h4>
+<footer class="mt-4">
+        <div class="bg-secondary" style="height:100px;">
+            <h4 class="text-center text-white mb-0">観光協会</h4>
         </div>
         <div class = "pink">
             <div class="d-flex">
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column ms-2">
                     <ul>
                         <li><a href="#" class="text-white">プログラム一覧</a></li>
                         <li><a href="#" class="text-white">商品一覧</a></li>
                         <li><a href="#" class="text-white">支払い方法</a></li>
                     </ul>
                 </div>
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column ms-2">
                     <ul>
                         <li><a href="#" class="text-white">キャンセル・返品について</a></li>
                         <li><a href="#" class="text-white">特定商取引に基づく表記</a></li>
-                        <li><a href="#" class="text-white"></a>プライバシーポリシー</li>
+                        <li><a href="#" class="text-white">プライバシーポリシー</a></li>
                     </ul>
                 </div>
             </div>
