@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="col-md-9">
-        <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
+        <form class="mb-3" action="{{ Request::url() }}" method="POST">
             @csrf
 
                 <div class="mt-2 card bg-f-part text-white">
@@ -53,7 +53,7 @@
                         {{-- <p class="fw-bold">日程: {{ $experience->start_date }}</p> --}}      
                         <p class="fw-bold">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p>
                         <div class="d-flex align-items-center fw-bold mb-2">
-                            体験人数：
+                            宿泊/体験人数：
                             <label for="quantity_adult">大人</label><input class="form-control form-control-sm" style="width:64px" name="quantity_adult" type="number">
                             <label for="quantity_child">子ども</label><input class="form-control form-control-sm"style="width:64px"  name="quantity_child" type="number">
                         </div>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <div class="mt-2 card">
+                <!-- <div class="mt-2 card">
                     <div class="card-header">人数</div>
                     <div class="card-body">
                         <label for="quantity_adult">大人</label><input name="quantity_adult" type="number">
@@ -123,12 +123,32 @@
                             </div>
                         @endempty
                     </div>
-                </div>
+                </div> -->
                 <input type="submit" value="カートに入れる">
             </form>
 
+
+
         </div>
-           
+        <div class="card mt-4">
+                <!-- <div class="card-header">詳細</div> -->
+                <div class="card-body">
+                    <!-- <p>名前: {{ $experienceFolder->name }}</p>
+                    <p>値段: {{ $experienceFolder->price }}円</p> -->
+                    <p class="fw-bold h4">注意事項など</p>
+                    <p>
+                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                    </p>
+                    <p></p>
+                    <p>宿泊場所は観光協会お任せとなります。</p>
+                    <p>決まり次第後ほど観光協会よりご連絡いたします。</p>
+                    <!-- <p>開催日: {{ app('request')->input('keyword') }}</p>
+                    <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p> -->
+                </div>
+            </div>    
         
     </div>
 </div>
