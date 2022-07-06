@@ -71,7 +71,7 @@ async function commentCreate(ex_id) {
                 
 
 
-            <div class="card mt-3">
+            <div class="card mt-4">
                 <!-- <div class="card-header">詳細</div> -->
                 <div class="card-body">
                     <!-- <p>名前: {{ $experienceFolder->name }}</p>
@@ -86,7 +86,7 @@ async function commentCreate(ex_id) {
                         量、字間、行間等を確認するために入れています。
                     </p>
                     <p></p>
-                    <p class="fw-bold text-end h3">{{ $experienceFolder->price }}円~</p>
+                    <p class="fw-bold text-end h3 border-top ">{{ $experienceFolder->price }}円~</p>
                     <!-- <p>開催日: {{ app('request')->input('keyword') }}</p>
                     <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p> -->
                 </div>
