@@ -147,11 +147,11 @@ async function commentCreate(ex_id) {
 </div>
 
 <footer class="mt-4">
-        <div class="bg-secondary" style="height:50px;">
+        <div class="bg-secondary py-4">
             <h2 class="text-center text-white mb-0">観光協会</h2>
         </div>
         <div class = "pink">
-            <div class="d-flex">
+            <div class="d-flex pt-2">
                 <div class="d-flex flex-column ms-2">
                     <ul>
                         <li><a href="#" class="text-white">プログラム一覧</a></li>
@@ -168,8 +168,8 @@ async function commentCreate(ex_id) {
                 </div>
             </div>
             <div class="d-flex justify-content-between">
-                <p class="text-white">Copyright© 観光協会 All rights reserved.</p>
-                <p class="text-white"><small>Powered by URATABI</small></p>
+                <p class="text-white ps-3">Copyright© 観光協会 All rights reserved.</p>
+                <p class="text-white pe-3"><small>Powered by URATABI</small></p>
             </div>
         </div>
         
