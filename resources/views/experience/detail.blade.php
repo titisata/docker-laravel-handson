@@ -88,7 +88,7 @@ async function commentCreate(ex_id) {
                 </div>
             </div>
 
-            <div class="mt-2 card">
+            <!-- <div class="mt-2 card"> -->
                 <!-- <div class="card-header">予約</div> -->
                 <!-- <div class="card-body">
                     @forelse($experiences as $experience)
@@ -106,13 +106,13 @@ async function commentCreate(ex_id) {
                 <div class="card-body">
                     @forelse($experiences as $experience)
                         
-                     <a class="btn btn-pink rounded-pill text-white my-1" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                     <a class="btn btn-pink rounded-pill text-white my-1 w-100" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                                                             
                     @empty
                         <p>この体験はご利用できません</p>
                     @endforelse
                 </div>
-            </div>
+            <!-- </div> -->
 
             <!-- <div class="mt-2 card">
                 <div class="card-header">口コミ</div>
