@@ -58,8 +58,34 @@ a{
                         <p class="fw-bold">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p>
                         <div class="d-flex align-items-center fw-bold mb-2">
                             宿泊/体験人数：
-                            <label for="quantity_adult">大人</label><input class="form-control form-control-sm" style="width:64px" name="quantity_adult" type="number">
-                            <label for="quantity_child">子ども</label><input class="form-control form-control-sm"style="width:64px"  name="quantity_child" type="number">
+                            <label for="quantity_adult">大人</label>
+                            <select class="form-select form-select-sm me-1" style="width:64px" name="quantity_adult" type="number">
+                                <option selected=""></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>                       
+                            </select>
+                            <label for="quantity_child">子ども</label>
+                            <select class="form-select form-select-sm"style="width:64px"  name="quantity_child" type="number">
+                                <option selected=""></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>  
+                            </select>
                         </div>
                         <p class="fw-bold">大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
                         <p class="mb-0">宿泊プラン</p>
@@ -82,7 +108,7 @@ a{
                         @endforelse
                         @if(!$experienceFolder->foodGroup->isEmpty())
                             <div class="fw-bold">
-                                <input type="radio" id="food_group_null" name="food_group_id" value="food_group_null">
+                                　<input type="radio" id="food_group_null" name="food_group_id" value="food_group_null">
                                 <label for="food_group_null">食事なし</label>
                             </div>
                         @endempty
