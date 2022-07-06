@@ -26,7 +26,7 @@
             background-color:rgb(242, 118, 105);
         }
         .navbar-toggler{
-        
+        color:white !important; 
         border:2px solid rgba(255,255,255,1) !important;
         }
         .pink{
