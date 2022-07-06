@@ -12,6 +12,7 @@
                 </div>
                 
             </div>
+        </div>
             <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
             @csrf
 
@@ -69,7 +70,7 @@
                 </div>
                 <input type="submit" value="カートに入れる">
             </form>
-        </div>
+        
     </div>
 </div>
 
