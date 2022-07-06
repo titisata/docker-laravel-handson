@@ -9,8 +9,8 @@
     font-weight: bold;
 }
 .btn-pink{
-    background-color:rgb(239, 112, 167);
-    border-color:rgb(239, 112, 167);
+    background-color:rgb(242, 118, 105);
+    border-color:rgb(242, 118, 105);
 }
 </style>
 
