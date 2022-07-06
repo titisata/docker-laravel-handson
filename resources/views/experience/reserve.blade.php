@@ -18,7 +18,7 @@
                 <div class="card-img-overlay">
                     <h4 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h4>
                 </div>
-                <div class="card mt-4">
+                <div class="mt-4">
                 <!-- <div class="card-header">詳細</div> -->
                 <div class="card-body">
                     <!-- <p>名前: {{ $experienceFolder->name }}</p>
@@ -30,7 +30,7 @@
                         この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
                         この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
                     </p>
-                    <p class="fw-bold text-end h3 border-top pt-3">体験料金の目安は{{ $experienceFolder->price }}円~</p>
+                    <p class="pt-3">体験料金の目安は{{ $experienceFolder->price }}円~</p>
                     <!-- <p>開催日: {{ app('request')->input('keyword') }}</p>
                     <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p> -->
                 </div>
