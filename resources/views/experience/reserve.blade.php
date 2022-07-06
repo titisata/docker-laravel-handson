@@ -76,7 +76,7 @@
                         @endempty
                     </div>
                     <div class="ms-auto">
-                    <input class="btn btn-light mt-2 text-end" style="width:120px" type="submit" value="カートに入れる">
+                        <input class="btn btn-light m-2 text-end" style="width:120px" type="submit" value="カートに入れる">
                     </div>
                     
                 </div>
@@ -134,7 +134,7 @@
                 <div class="card-body">
                     <!-- <p>名前: {{ $experienceFolder->name }}</p>
                     <p>値段: {{ $experienceFolder->price }}円</p> -->
-                    <p class="fw-bold h4">注意事項など</p>
+                    <p class="fw-bold h5">注意事項など</p>
                     <p>
                         この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
                         この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
@@ -154,5 +154,36 @@
         
     </div>
 </div>
+<footer class="mt-4">
+        <div class="bg-f-part py-3">
+            <h2 class="text-center text-white mb-0">観光協会</h2>
+        </div>
+        <div class = "f-pink">
+            <div class="d-flex py-4">
+                <div class="d-flex flex-column ms-4">
+                    <ul>
+                        <li><a href="#" class="text-white">プログラム一覧</a></li>
+                        <li><a href="#" class="text-white">商品一覧</a></li>
+                        <li><a href="#" class="text-white">支払い方法</a></li>
+                    </ul>
+                </div>
+                <div class="d-flex flex-column ms-4">
+                    <ul>
+                        <li><a href="#" class="text-white">キャンセル・返品について</a></li>
+                        <li><a href="#" class="text-white">特定商取引に基づく表記</a></li>
+                        <li><a href="#" class="text-white">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <p class="text-white ps-4">Copyright© 観光協会 All rights reserved.</p>
+                <p class="text-white pe-4"><small>Powered by URATABI</small></p>
+            </div>
+        </div>
+        
+        
+
+        
+    <footer>
 
 @endsection
