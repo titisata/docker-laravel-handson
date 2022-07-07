@@ -21,19 +21,7 @@
     text-align: center;
     font-weight: bold;
 }
-.bg-f-part{
-    background-color:#343a40;
-}
-.f-pink{
-    background-color:#BB4156;
-    
-}
-ul{
-    list-style-type: none
-}
-a{
-    text-decoration:none;
-}
+
 </style>
 <div class="container">
     <div class="row justify-content-center">
@@ -206,7 +194,7 @@ a{
         
     </div>
 </div>
-<footer class="mt-4">
+<!-- <footer class="mt-4">
         <div class="bg-f-part py-3">
             <h2 class="text-center text-white mb-0">観光協会</h2>
         </div>
@@ -236,6 +224,6 @@ a{
         
 
         
-    <footer>
+    <footer> -->
 
 @endsection

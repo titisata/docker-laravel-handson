@@ -27,36 +27,6 @@
 </head>
 <body>
 
-    <footer>
-        <div class = "bg-secondary">
-            <h4>観光協会</h4>
-        </div>
-        <div class = "pink">
-            <div class="d-flex">
-                <div class="d-flex flex-column">
-                    <ul>
-                        <li><a href="#" class="text-white">プログラム一覧</a></li>
-                        <li><a href="#" class="text-white">商品一覧</a></li>
-                        <li><a href="#" class="text-white">支払い方法</a></li>
-                    </ul>
-                </div>
-                <div class="d-flex flex-column">
-                    <ul>
-                        <li><a href="#" class="text-white">キャンセル・返品について</a></li>
-                        <li><a href="#" class="text-white">特定商取引に基づく表記</a></li>
-                        <li><a href="#" class="text-white"></a>プライバシーポリシー</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="text-white">Copyright© 観光協会 All rights reserved.</p>
-                <p class="text-white"><small>Powered by URATABI</small></p>
-            </div>
-        </div>
-        
-        
-
-        
-    <footer>
+    
 </body>
 </html>

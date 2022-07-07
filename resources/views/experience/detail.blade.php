@@ -154,7 +154,7 @@ async function commentCreate(ex_id) {
     </div>
 </div>
 
-<footer class="mt-4">
+<!-- <footer class="mt-4">
         <div class="bg-f-part py-3">
             <h2 class="text-center text-white mb-0">観光協会</h2>
         </div>
@@ -184,7 +184,7 @@ async function commentCreate(ex_id) {
         
 
         
-    <footer>
+    <footer> -->
 
   
 @endsection
