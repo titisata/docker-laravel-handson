@@ -1,6 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+<script>
+    var adult = document.getElementById('adult').value;
+    var child = document.getElementById('child').value;
+
+    function formSwitch(){
+
+        alert (adult);
+        alert (child);
+
+    }
+
+
+</script>
 <style>
     .card-img-overlay{
     padding: 0;
@@ -59,7 +72,7 @@ a{
                         <div class="d-flex align-items-center fw-bold mb-2">
                             宿泊/体験人数：
                             <label for="quantity_adult">大人</label>
-                            <select class="form-select form-select-sm me-1" style="width:64px" name="quantity_adult" type="number">
+                            <select class="form-select form-select-sm me-1" style="width:64px" id="adult" name="quantity_adult" type="number" onclick="formSwitch()">
                                 <option selected=""></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -73,7 +86,7 @@ a{
                                 <option value="10">10</option>                       
                             </select>
                             <label for="quantity_child">子ども</label>
-                            <select class="form-select form-select-sm"style="width:64px"  name="quantity_child" type="number">
+                            <select class="form-select form-select-sm"style="width:64px" id="child" name="quantity_child" type="number" onclick="formSwitch()">
                                 <option selected=""></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -112,6 +125,7 @@ a{
                                 <label for="food_group_null">食事なし</label>
                             </div>
                         @endempty
+                        <p>合計金額：<span id="price"></span></p>
                     </div>
                     <div class="ms-auto">
                         <input class="btn btn-light m-2 text-end" style="width:120px" type="submit" value="カートに入れる">
