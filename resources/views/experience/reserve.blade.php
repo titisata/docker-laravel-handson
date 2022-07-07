@@ -2,15 +2,36 @@
 
 @section('content')
 <script>
-    var adult = document.getElementById('adult').value;
-    var child = document.getElementById('child').value;
+    // var adult = document.getElementById('adult').value;
+    // var child = document.getElementById('child').value;
 
-    function formSwitch(){
+    // function formSwitch(){
+    //     var adult = document.getElementById('adult').value;
+    //     var child = document.getElementById('child').value;
+    //     var adult_price = document.getElementById('adult_price');
+    //     var child_price = document.getElementById('child_price');
+    //     var hotel_adult_price = document.getElementsByName('hotel_adult_price');
+    //     var hotel_child_price = document.getElementsByName('hotel_child_price');
+    //     var food_adult_price = document.getElementsByName('food_adult_price');
+    //     var food_child_price = document.getElementsByName('food_child_price');
 
-        alert (adult);
-        alert (child);
+    //     alert (adult);
+    //     alert (child);
+    //     alert (adult_price.innerHTML);
+    //     alert (child_price.innerHTML);
+    //     alert (hotel_adult_price.innerHTML);
+    //     alert (hotel_child_price.innerHTML);
+    //     alert (food_adult_price.innerHTML);
+    //     alert (food_child_price.innerHTML);
 
-    }
+    //     var result;
+    //     result = adult_price*adult;
+
+    //     alert(result);
+
+
+
+    // }
 
 
 </script>
@@ -60,7 +81,7 @@
                         <div class="d-flex align-items-center fw-bold mb-2">
                             宿泊/体験人数：
                             <label for="quantity_adult">大人</label>
-                            <select class="form-select form-select-sm me-1" style="width:64px" id="adult" name="quantity_adult" type="number" onclick="formSwitch()">
+                            <select class="form-select form-select-sm me-1" style="width:64px" id="adult" name="quantity_adult" type="number" onchange="formSwitch()">
                                 <option selected=""></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -74,7 +95,7 @@
                                 <option value="10">10</option>                       
                             </select>
                             <label for="quantity_child">子ども</label>
-                            <select class="form-select form-select-sm"style="width:64px" id="child" name="quantity_child" type="number" onclick="formSwitch()">
+                            <select class="form-select form-select-sm"style="width:64px" id="child" name="quantity_child" type="number" onchange="formSwitch()">
                                 <option selected=""></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -88,12 +109,12 @@
                                 <option value="10">10</option>  
                             </select>
                         </div>
-                        <p class="fw-bold">大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
+                        <p class="fw-bold">大人:<span id="adult_price" value=""> {{ $experience->price_adult }}</span>円 子ども:<span id="child_price" value="">{{ $experience->price_child }}</span> 円</p>
                         <p class="mb-0 fw-bold">宿泊プラン</p>
                         @forelse ($experienceFolder->hotelGroup as $hotelGroup)
                             <div class="fw-bold">              
                                 　<input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
-                                <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人{{ $hotelGroup->price_adult }}円 子ども{{ $hotelGroup->price_child }}円</label>
+                                <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span name='hotel_adult_price'>{{ $hotelGroup->price_adult }}</span>円 子ども<span  name='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
                             </div>
                         @empty
                             <p class="fw-bold">この体験は宿泊がありません</p>
@@ -102,7 +123,7 @@
                         @forelse ($experienceFolder->foodGroup as $foodGroup)
                             <div>
                                 　<input type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
-                                <label class="fw-bold" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人{{ $foodGroup->price_adult }}円 子ども{{ $foodGroup->price_child }}円</label>
+                                <label class="fw-bold" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人<span  name='food_adult_price'>{{ $foodGroup->price_adult }}</span>円 子ども<span name='food_child_price'>{{ $foodGroup->price_child }}</span>円</label>
                             </div>
                         @empty
                             <p class="fw-bold">この体験は食事がつきません</p>
