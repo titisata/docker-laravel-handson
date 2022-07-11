@@ -35,6 +35,7 @@
 
 
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style>
     .card-img-overlay{
     padding: 0;
@@ -42,6 +43,14 @@
     text-align: center;
     font-weight: bold;
 }
+.btn-pink{
+    background-color:#FB6E86;
+    border-color:#FB6E86;
+    color:white;
+}
+.btn-pink:hover{
+    color:#FB6E86;
+} 
 
 </style>
 <div class="container">
@@ -136,10 +145,12 @@
                         @endempty
                         <p>合計金額：<span id="price"></span></p>
                     </div>
-                    <div class="ms-auto">
-                        <input class="btn btn-light m-2 text-end" style="width:120px" type="submit" value="カートに入れる">
-                    </div>
                     
+                </div>
+                <div class="text-center text-md-end">
+                        <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4" style="width:240px" type="submit" value="">
+                            <i class="bi bi-cart"></i>カートに入れる
+                        </button>
                 </div>
 
                 <!-- <div class="mt-2 card">

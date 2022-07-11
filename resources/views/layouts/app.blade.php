@@ -117,15 +117,15 @@
             <h2 class="text-center text-white mb-0">観光協会</h2>
         </div>
         <div class = "f-pink">
-            <div class="d-flex py-4">
-                <div class="d-flex flex-column ms-4">
+            <div class="d-flex py-4 justify-content-start">
+                <div class="d-flex flex-column">
                     <ul>
                         <li><a href="#" class="text-white">プログラム一覧</a></li>
                         <li><a href="#" class="text-white">商品一覧</a></li>
                         <li><a href="#" class="text-white">支払い方法</a></li>
                     </ul>
                 </div>
-                <div class="d-flex flex-column ms-4">
+                <div class="d-flex flex-column ">
                     <ul>
                         <li><a href="#" class="text-white">キャンセル・返品について</a></li>
                         <li><a href="#" class="text-white">特定商取引に基づく表記</a></li>

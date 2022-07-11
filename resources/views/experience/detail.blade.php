@@ -114,7 +114,7 @@ async function commentCreate(ex_id) {
                 <div class="card-body">
                     @forelse($experiences as $experience)
                         
-                     <a class="btn btn-lg btn-pink py-4 rounded-pill text-white my-2 w-100 btn-shadow" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                     <a class="btn btn-lg btn-pink py-4 rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                                                             
                     @empty
                         <p>この体験はご利用できません</p>
@@ -123,7 +123,9 @@ async function commentCreate(ex_id) {
             <!-- </div> -->
 
             <div class="mt-2 card">
-                <div class="card-header">口コミ</div>
+                <div class="card-header h4">
+                    クチコミ
+                </div>
 
                 <div class="d-flex flex-column">
                     <div class="m-2">
