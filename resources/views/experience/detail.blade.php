@@ -128,17 +128,17 @@ async function commentCreate(ex_id) {
                 </div>
 
                 <div class="d-flex flex-column">
-                    <div class="m-2">
-                        <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment" style="font-size:0.24rem;"></textarea>
-                        <div class="d-flex  justify-content-between">
-                            <select id="rate_input" style="height:20px;width:50px">
+                    <div class="m-3">
+                        <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <select class="form-select" id="rate_input" style="width:80px;" >
                                 <option value="1">☆1</option>
                                 <option value="2">☆2</option>
                                 <option value="3">☆3</option>
                                 <option value="4">☆4</option>
                                 <option value="5" selected="selected">☆5</option>
                             </select>
-                            <button class="btn btn-outline-primary btn-sm" style="font-size:0.32rem; " onclick="commentCreate({{ $experienceFolder->id }})">投稿</button>
+                            <button class="btn btn-outline-primary"  onclick="commentCreate({{ $experienceFolder->id }})">投稿</button>
                         </div>
                     </div>
                 </div>

@@ -5,33 +5,43 @@
     // var adult = document.getElementById('adult').value;
     // var child = document.getElementById('child').value;
 
-    // function formSwitch(){
-    //     var adult = document.getElementById('adult').value;
-    //     var child = document.getElementById('child').value;
-    //     var adult_price = document.getElementById('adult_price');
-    //     var child_price = document.getElementById('child_price');
-    //     var hotel_adult_price = document.getElementsByName('hotel_adult_price');
-    //     var hotel_child_price = document.getElementsByName('hotel_child_price');
-    //     var food_adult_price = document.getElementsByName('food_adult_price');
-    //     var food_child_price = document.getElementsByName('food_child_price');
+    function formSwitch(){
+        var price = document.getElementById('price');
+        var adult = document.getElementById('adult').value;
+        var child = document.getElementById('child').value;
+        var adult_price = document.getElementById('adult_price');
+        var child_price = document.getElementById('child_price');
+        // var hotel_adult_price = document.getElementsByName('hotel_adult_price');
+        // var hotel_child_price = document.getElementsByName('hotel_child_price');
+        // var food_adult_price = document.getElementsByName('food_adult_price');
+        // var food_child_price = document.getElementsByName('food_child_price');
 
-    //     alert (adult);
-    //     alert (child);
-    //     alert (adult_price.innerHTML);
-    //     alert (child_price.innerHTML);
-    //     alert (hotel_adult_price.innerHTML);
-    //     alert (hotel_child_price.innerHTML);
-    //     alert (food_adult_price.innerHTML);
-    //     alert (food_child_price.innerHTML);
+        alert (adult);
+        alert (child);
+        alert (adult_price.innerHTML);
+        alert (child_price.innerHTML);
+        // alert (hotel_adult_price.innerHTML);
+        // alert (hotel_child_price.innerHTML);
+        // alert (food_adult_price.innerHTML);
+        // alert (food_child_price.innerHTML);
 
-    //     var result;
-    //     result = adult_price*adult;
+        var adult_result;
+        adult_result = (adult_price.innerHTML*adult);
 
-    //     alert(result);
+        alert(adult_result);
+
+        var child_result;
+        child_result = (child_price.innerHTML*child);
+
+        alert(child_result);
+
+        price.innerHTML = (adult_result + child_result);
 
 
 
-    // }
+
+
+    }
 
 
 </script>
@@ -143,7 +153,7 @@
                                 <label for="food_group_null">食事なし</label>
                             </div>
                         @endempty
-                        <p>合計金額：<span id="price"></span></p>
+                        <p class="text-end">合計金額：<span id="price"></span></p>
                     </div>
                     
                 </div>
