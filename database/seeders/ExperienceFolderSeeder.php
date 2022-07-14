@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use DateTime;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +24,8 @@ class ExperienceFolderSeeder extends Seeder
             'category2' => 'aa',
             'category3' => null,
             'is_lodging' => true,
+            'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
+            'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
             'price' => 5000,
         ]);
@@ -35,6 +38,8 @@ class ExperienceFolderSeeder extends Seeder
             'category2' => 'aa',
             'category3' => null,
             'is_lodging' => false,
+            'start_date' => (new DateTime(date('Y-m-d')))->modify('-10day'),
+            'end_date' => (new DateTime(date('Y-m-d')))->modify('+10day'),
             'is_before_lodging' => false,
             'price' => 5000,
         ]);
@@ -47,6 +52,8 @@ class ExperienceFolderSeeder extends Seeder
             'category2' => 'aa',
             'category3' => null,
             'is_lodging' => false,
+            'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
+            'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
             'price' => 5000,
         ]);

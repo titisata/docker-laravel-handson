@@ -45,5 +45,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ExpreienceReserveSeeder::class);
         $this->call(ImageSeeder::class);
         $this->call(ExperienceCommentSeeder::class);
+        $this->call(ScheduleSeeder::class);
     }
 }
