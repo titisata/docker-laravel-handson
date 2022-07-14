@@ -41,7 +41,7 @@
                 <h2>おすすめの体験</h2>
                 <div>
                     @foreach ($experiences_folders as $experiences_folder)
-                    @include('components.experience_small_cell', ['experinceFolder'=>$experiences_folder])
+                        @include('components.experience_small_cell', ['experinceFolder'=>$experiences_folder])
                     @endforeach
                 </div>
                 <h2>おすすめのお土産</h2>

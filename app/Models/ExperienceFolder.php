@@ -95,6 +95,29 @@ class ExperienceFolder extends Model
     {
         return $this->hasMany(HotelGroup::class);
     }
+
+    /**
+     * その日が休みかどうか
+     *
+     * @return bool
+     */
+
+    public function is_holiday(string $date)
+    {
+        $date = new DateTime($date);
+        $where = [];
+
+        if ($date != '') {
+            $where[] = ['date', '=', $date];
+            $where[] = ['is_holiday', '=', 1];
+            $where[] = ['experience_folder_id', '=', $this->id];
+        }
+
+        $schedule = Schedule::where($where)->get();
+
+        return count($schedule) > 0;
+    }
+
     /**
      * 検索を行う
      *
@@ -104,15 +127,16 @@ class ExperienceFolder extends Model
      */
     public static function search(string $date, int $per_page)
     {
-        // $where = [];
+        $date = new DateTime($date);
+        $where = [];
 
-        // // フリーワードでの検索条件
-        // if ($date != '') {
-        //     $where[] = ['start_date', '>', $date];
-        //     $where[] = ['end_date', '<', $date];
-        // }
+        // フリーワードでの検索条件
+        if ($date != '') {
+            $where[] = ['start_date', '<', $date];
+            $where[] = ['end_date', '>', $date];
+        }
 
-        $experinceFolders = ExperienceFolder::orderBy("created_at", "desc")->paginate($per_page);
+        $experinceFolders = ExperienceFolder::where($where)->orderBy("created_at", "desc")->paginate($per_page);
 
         return $experinceFolders;
     }

@@ -7,12 +7,15 @@
 
             <h3 class="mb-3">体験検索結果</h3>
 
-            <form class="mb-3 mt-3" action="/search/experience" method="get">
-                <label for="keyword">検索ワード</label><input name="keyword" type="text">
+            <form action="/search/experience" method="get">
+                <label for="keyword">日付</label><input name="keyword" type="date">
+                <input type="submit" value="検索">
             </form>
 
             @forelse($experinceFolders as $experinceFolder)
-                @include('components.experience_cell', ['experinceFolder'=>$experinceFolder])
+                @if (!$experinceFolder->is_holiday(app('request')->input('keyword')))
+                    @include('components.experience_cell', ['experinceFolder'=>$experinceFolder])
+                @endif
             @empty
                 <p>検索結果がありません。</p>
             @endforelse
