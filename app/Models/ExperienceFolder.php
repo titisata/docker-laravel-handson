@@ -64,6 +64,17 @@ class ExperienceFolder extends Model
     }
 
     /**
+     * 日程を取得
+     *
+     * @return Collection<Schedule>
+     */
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
+
+    /**
      * FoodGroupを取得
      *
      * @return Collection<FoodGroup>

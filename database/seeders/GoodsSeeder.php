@@ -24,10 +24,36 @@ class GoodsSeeder extends Seeder
             'category3' => null,
             'quantity' => 5,
             'price' => 100,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 10,
         ]);
         Goods::create([
             'partner_id' => 1,
             'name' => '信州そば 4人前(test)',
+            'description' => '信州と言ったらこれ！',
+            'category1' => 'aaaa',
+            'category2' => null,
+            'category3' => null,
+            'quantity' => 5,
+            'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 9,
+        ]);
+        Goods::create([
+            'partner_id' => 1,
+            'name' => '信州そば 2人前(test)',
+            'description' => '信州と言ったらこれ！',
+            'category1' => 'aaaa',
+            'category2' => null,
+            'category3' => null,
+            'quantity' => 5,
+            'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 8,
+        ]);
+        Goods::create([
+            'partner_id' => 1,
+            'name' => '信州そば 1人前(test)',
             'description' => '信州と言ったらこれ！',
             'category1' => 'aaaa',
             'category2' => null,

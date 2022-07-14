@@ -40,5 +40,15 @@ class ImageSeeder extends Seeder
             'table_name' => 'goods',
             'table_id' => 2,
         ]);
+        Image::create([
+            'image_path' => '/images/5.jpg',
+            'table_name' => 'goods',
+            'table_id' => 3,
+        ]);
+        Image::create([
+            'image_path' => '/images/5.jpg',
+            'table_name' => 'goods',
+            'table_id' => 4,
+        ]);
     }
 }

@@ -38,6 +38,16 @@
             <div>
                 <h1>WELCOME TO URATABI !</h1>
                 <a href="/search">検索画面へ</a>
+                <div>
+                    @foreach ($experiences_folders as $experiences_folder)
+                        @include('components.experience_small_cell', ['experinceFolder'=>$experiences_folder])
+                    @endforeach
+                </div>
+                <div>
+                    @foreach ($goods as $goods_item)
+                        @include('components.goods_small_cell', ['goods'=>$goods_item])
+                    @endforeach
+                </div>
             </div>
         </div>
     </body>

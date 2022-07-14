@@ -6,15 +6,33 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
 <script>
     const events_data = @json($events);
+    const holiday_events_date = @json($holiday_events);
+    const work_events_date = @json($work_events);
     const experienceFolder = @json($experienceFolder);
 
-    const events =  Object.entries(events_data).map(([key, value]) =>  {
+    const events = Object.entries(events_data).map(([key, value]) =>  {
         return {
             title: `${value.name}: ${value.count}件`,
             start: value.start,
             color: value.count < value.quantity ? '#5DC075' : '#F56E6E'
         };
     });
+
+    const holiday_events = Object.entries(holiday_events_date).map(([key, value]) =>  {
+        return {
+            title: `${value.title}`,
+            start: value.date,
+            color: '#F56E6E'
+        };
+    });
+    // const work_events = Object.entries(work_events_date).map(([key, value]) =>  {
+    //     return {
+    //         title: `${value.title}: ${value.quantity}件`,
+    //         start: value.date,
+    //         color: value.count < value.quantity ? '#5DC075' : '#F56E6E'
+    //     };
+    // });
+
     console.log(events);
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -31,8 +49,12 @@
                 day:      '日',
                 list:     '一覧'
             },
-            events: events,
+            events: [...events, ...holiday_events],
             dateClick: function(info) {
+                if (Object.entries(holiday_events_date).some(([key, value]) => value.date == info.dateStr)) {
+                    alert('お休みです');
+                    return;
+                }
                 window.location.href = experienceFolder.id + '?keyword=' + info.dateStr;
             }
         });

@@ -28,6 +28,8 @@ class ExperienceFolderSeeder extends Seeder
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
             'price' => 5000,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 10,
         ]);
         \App\Models\ExperienceFolder::create([
             'partner_id' => 1,
@@ -42,6 +44,8 @@ class ExperienceFolderSeeder extends Seeder
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+10day'),
             'is_before_lodging' => false,
             'price' => 5000,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 9,
         ]);
         \App\Models\ExperienceFolder::create([
             'partner_id' => 1,
@@ -56,6 +60,8 @@ class ExperienceFolderSeeder extends Seeder
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
             'price' => 5000,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 8,
         ]);
     }
 }

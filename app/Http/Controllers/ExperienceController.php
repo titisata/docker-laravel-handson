@@ -32,6 +32,7 @@ class ExperienceController extends Controller
         $experiences = $experienceFolder->experiences;
         $comments = $experienceFolder->comments();
         $reserves = $experienceFolder->reserves;
+        $schedules = $experienceFolder->schedules;
 
         $events = [];
         foreach ($reserves as $reserve) {
@@ -51,7 +52,30 @@ class ExperienceController extends Controller
             }
         }
 
-        return view('experience.detail', compact('experienceFolder', 'experiences', 'comments', 'events'));
+        $holiday_events = [];
+        $work_events = [];
+        foreach ($schedules as $schedule) {
+            $date = new DateTime($schedule->date);
+            $event_date = $date->format('Y-m-d');
+            $event_id = $start_date->format('Y-m-d') . $schedule->id;
+
+            if ($schedule->is_holiday) {
+                $holiday_events[$event_id] = [
+                    'title' => $schedule->title,
+                    'comment' => $schedule->comment,
+                    'date' => $event_date,
+                ];
+            } else {
+                $work_events[$event_id] = [
+                    'title' => $schedule->title,
+                    'comment' => $schedule->comment,
+                    'quantity' => $schedule->quantity,
+                    'date' => $event_date,
+                ];
+            }
+        }
+
+        return view('experience.detail', compact('experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events'));
     }
 
     public function reserve_detail(string $folder_id, string $id)
