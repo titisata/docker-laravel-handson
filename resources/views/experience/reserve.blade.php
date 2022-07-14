@@ -35,7 +35,7 @@
 
         // alert(child_result);
 
-        price.innerHTML = "合計金額："+(adult_result + child_result);
+        price.innerHTML = "合計金額："+(adult_result + child_result)+"円";
 
 
 
