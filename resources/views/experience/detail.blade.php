@@ -1,6 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
+<script>
+    const events_data = @json($events);
+    const experienceFolder = @json($experienceFolder);
+
+    const events =  Object.entries(events_data).map(([key, value]) =>  {
+        return {
+            title: `${value.name}: ${value.count}件`,
+            start: value.start,
+            color: value.count < value.quantity ? '#5DC075' : '#F56E6E'
+        };
+    });
+    console.log(events);
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl,  {
+            locale: 'ja',
+            buttonText: {
+                prev:     '<',
+                next:     '>',
+                prevYear: '<<',
+                nextYear: '>>',
+                today:    '今日',
+                month:    '月',
+                week:     '週',
+                day:      '日',
+                list:     '一覧'
+            },
+            events: events,
+            dateClick: function(info) {
+                window.location.href = experienceFolder.id + '?keyword=' + info.dateStr;
+            }
+        });
+        calendar.render();
+    });
+</script>
+
 <style>
 .card-img-overlay{
     padding: 0;
@@ -20,7 +59,7 @@ a{
 }
 .f-pink{
     background-color:#BB4156;
-    
+
 }
 .btn-shadow{
     box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 65%);
@@ -65,7 +104,7 @@ async function commentCreate(ex_id) {
             </div>
 
 
-        
+
             <div class="d-flex flex-wrap justify-content-evenly">
                 <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
@@ -74,7 +113,7 @@ async function commentCreate(ex_id) {
                 <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
             </div>
-                
+
 
 
             <div class="card mt-4">
@@ -104,22 +143,26 @@ async function commentCreate(ex_id) {
                             <div>
                                 <p>{{ $experience->name }}</p>
                                 <p>大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
-                                <a class="btn btn-primary" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">予約する</a>
                             </div>
                         </div>
                     @empty
                         <p>この体験はご利用できません</p>
                     @endforelse
                 </div> -->
-                <div class="card-body">
-                    @forelse($experiences as $experience)
-                        
-                     <a class="btn btn-lg btn-pink py-4 rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
-                                                            
-                    @empty
-                        <p>この体験はご利用できません</p>
-                    @endforelse
-                </div>
+
+                @if (app('request')->input('keyword') == "")
+                    <div class="card-body">
+                        <div id='calendar'></div>
+                    </div>
+                @else
+                    <div class="card-body">
+                        @forelse($experiences as $experience)
+                            <a class="btn btn-lg btn-pink py-4 rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                        @empty
+                            <p>この体験はご利用できません</p>
+                        @endforelse
+                    </div>
+                @endif
             <!-- </div> -->
 
             <div class="mt-2 card">
@@ -182,11 +225,11 @@ async function commentCreate(ex_id) {
                 <p class="text-white pe-4"><small>Powered by URATABI</small></p>
             </div>
         </div>
-        
-        
 
-        
+
+
+
     <footer> -->
 
-  
+
 @endsection

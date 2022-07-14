@@ -53,6 +53,17 @@ class ExperienceFolder extends Model
     }
 
     /**
+     * 全予約を取得
+     *
+     * @return Collection<ExperienceReserve>
+     */
+
+    public function reserves()
+    {
+        return $this->hasManyThrough(ExperienceReserve::class, Experience::class);
+    }
+
+    /**
      * FoodGroupを取得
      *
      * @return Collection<FoodGroup>

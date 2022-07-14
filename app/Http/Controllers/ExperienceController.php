@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Experience;
 use App\Models\ExperienceCartItem;
 use App\Models\ExperienceFolder;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,27 @@ class ExperienceController extends Controller
         }
         $experiences = $experienceFolder->experiences;
         $comments = $experienceFolder->comments();
-        return view('experience.detail', compact('experienceFolder', 'experiences', 'comments'));
+        $reserves = $experienceFolder->reserves;
+
+        $events = [];
+        foreach ($reserves as $reserve) {
+            $start_date = new DateTime($reserve->start_date);
+            $event_date = $start_date->format('Y-m-d');
+            $event_id = $start_date->format('Y-m-d') . $reserve->experience_id;
+            if (array_key_exists($event_id, $events)) {
+                $events[$event_id]['count']++;
+            } else {
+                $experience = $reserve->experience;
+                $events[$event_id] = [
+                    'count' => 1,
+                    'name' => $experience->name,
+                    'quantity' => $experience->quantity,
+                    'start' => $event_date,
+                ];
+            }
+        }
+
+        return view('experience.detail', compact('experienceFolder', 'experiences', 'comments', 'events'));
     }
 
     public function reserve_detail(string $folder_id, string $id)
@@ -48,6 +69,7 @@ class ExperienceController extends Controller
         $id = $request->id;
         $uid = Auth::user()->id;
         $quantity_child = $request->quantity_child;
+        $date = $request->date;
         $quantity_adult = $request->quantity_adult;
         $hotel_group_id = $request->hotel_group_id;
         $food_group_id = $request->food_group_id == 'food_group_null' ? null : $request->food_group_id;
@@ -60,6 +82,8 @@ class ExperienceController extends Controller
             'food_group_id' => $food_group_id,
             'quantity_child' => $quantity_child,
             'quantity_adult' => $quantity_adult,
+            'start_date' => $date,
+            'end_date' => $date,
         ]);
 
         return view('experience.cart_success');

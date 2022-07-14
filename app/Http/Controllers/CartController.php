@@ -74,8 +74,8 @@ class CartController extends Controller
                 'status' => '対応待ち',
                 'quantity_child' => $experienceCartItem->quantity_child,
                 'quantity_adult' => $experienceCartItem->quantity_adult,
-                'start_date' =>  date('Y-m-d'),
-                'end_date' =>  date('Y-m-d'),
+                'start_date' =>  $experienceCartItem->start_date,
+                'end_date' =>  $experienceCartItem->end_date,
             ]);
         }
         foreach ($goodCartItems as $goodCartItem) {

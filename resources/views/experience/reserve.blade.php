@@ -60,19 +60,19 @@
 }
 .btn-pink:hover{
     color:#FB6E86;
-} 
+}
 
 </style>
 <div class="container">
     <div class="row justify-content-center">
-        
+
         <div class="col-md-9">
             <div class="card">
                 <img class="card-img" style="height: 300px; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <div class="card-img-overlay">
                     <h4 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h4>
                 </div>
-                <div class="mt-4">              
+                <div class="mt-4">
                     <div class="card-body">
                         <p>
                             この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
@@ -83,20 +83,22 @@
                         <p class="pt-3 h5">体験料金の目安は{{ $experienceFolder->price }}円~</p>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <div class="col-md-9">
             <form  action="{{ Request::url() }}" method="POST">
             @csrf
+            <input hidden name="date" type="text" value="{{ $experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : app('request')->input('keyword') }}">
 
                 <div class="mt-2 card bg-f-part text-white">
-                    
+
                     <div class="card-body">
                         <p class="fw-bold">体験日: {{ app('request')->input('keyword') }}</p>
                         <p class="fw-bold">{{ $experience->name }}</p>
-                        {{-- <p class="fw-bold">日程: {{ $experience->start_date }}</p> --}}      
-                        <p class="fw-bold">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p>
+                        {{-- <p class="fw-bold">日程: {{ $experience->start_date }}</p> --}}
+                        <p> </p>
+                        <p class="fw-bold">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
                         <div class="d-flex align-items-center fw-bold mb-2">
                             宿泊/体験人数：
                             <label for="quantity_adult">大人</label>
@@ -111,7 +113,7 @@
                                 <option value="7">7</option>
                                 <option value="8">8</option>
                                 <option value="9">9</option>
-                                <option value="10">10</option>                       
+                                <option value="10">10</option>
                             </select>
                             <label for="quantity_child">子ども</label>
                             <select class="form-select form-select-sm"style="width:64px" id="child" name="quantity_child" type="number" onchange="formSwitch()">
@@ -125,13 +127,13 @@
                                 <option value="7">7</option>
                                 <option value="8">8</option>
                                 <option value="9">9</option>
-                                <option value="10">10</option>  
+                                <option value="10">10</option>
                             </select>
                         </div>
                         <p class="fw-bold">大人:<span id="adult_price" value=""> {{ $experience->price_adult }}</span>円 子ども:<span id="child_price" value="">{{ $experience->price_child }}</span> 円</p>
                         <p class="mb-0 fw-bold">宿泊プラン</p>
                         @forelse ($experienceFolder->hotelGroup as $hotelGroup)
-                            <div class="fw-bold">              
+                            <div class="fw-bold">
                                 　<input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
                                 <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span name='hotel_adult_price'>{{ $hotelGroup->price_adult }}</span>円 子ども<span  name='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
                             </div>
@@ -155,7 +157,7 @@
                         @endempty
                         <p class="text-end"><span id="price"></span></p>
                     </div>
-                    
+
                 </div>
                 <div class="text-center text-md-end">
                         <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4" style="width:240px" type="submit" value="">
@@ -204,7 +206,7 @@
                         @endempty
                     </div>
                 </div> -->
-                
+
             </form>
 
 
@@ -229,11 +231,11 @@
                     <!-- <p>開催日: {{ app('request')->input('keyword') }}</p>
                     <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . app('request')->input('keyword'). ($experienceFolder->is_before_lodging ? ' (前泊)' : ' (後泊)') ) : '宿泊なし' }}</p> -->
                 </div>
-            </div> 
+            </div>
 
         </div>
-           
-        
+
+
     </div>
 </div>
 <!-- <footer class="mt-4">
@@ -262,10 +264,10 @@
                 <p class="text-white pe-4"><small>Powered by URATABI</small></p>
             </div>
         </div>
-        
-        
 
-        
+
+
+
     <footer> -->
 
 @endsection
