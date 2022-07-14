@@ -16,10 +16,10 @@
         // var food_adult_price = document.getElementsByName('food_adult_price');
         // var food_child_price = document.getElementsByName('food_child_price');
 
-        alert (adult);
-        alert (child);
-        alert (adult_price.innerHTML);
-        alert (child_price.innerHTML);
+        // alert (adult);
+        // alert (child);
+        // alert (adult_price.innerHTML);
+        // alert (child_price.innerHTML);
         // alert (hotel_adult_price.innerHTML);
         // alert (hotel_child_price.innerHTML);
         // alert (food_adult_price.innerHTML);
@@ -28,14 +28,14 @@
         var adult_result;
         adult_result = (adult_price.innerHTML*adult);
 
-        alert(adult_result);
+        // alert(adult_result);
 
         var child_result;
         child_result = (child_price.innerHTML*child);
 
-        alert(child_result);
+        // alert(child_result);
 
-        price.innerHTML = (adult_result + child_result);
+        price.innerHTML = "合計金額："+(adult_result + child_result);
 
 
 
@@ -153,7 +153,7 @@
                                 <label for="food_group_null">食事なし</label>
                             </div>
                         @endempty
-                        <p class="text-end">合計金額：<span id="price"></span></p>
+                        <p class="text-end"><span id="price"></span></p>
                     </div>
                     
                 </div>
