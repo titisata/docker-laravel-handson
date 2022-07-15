@@ -13,8 +13,6 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $experiences_folders = ExperienceFolder::where('recommend_flag', 1)->orderBy('recommend_sort_no', 'desc')->get();
-        $goods = Goods::where('recommend_flag', 1)->orderBy('recommend_sort_no', 'desc')->get();
-        return view('welcome', compact('experiences_folders', 'goods'));
+        return view('welcome');
     }
 }

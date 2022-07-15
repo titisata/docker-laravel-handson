@@ -10,6 +10,15 @@
                 <label for="keyword">検索ワード</label><input name="keyword" type="text">
                 <input type="submit" value="検索">
             </form>
+
+
+            <h2>おすすめのお土産</h2>
+            <div>
+                @foreach ($goods as $goods_item)
+                    @include('components.goods_small_cell', ['goods'=>$goods_item])
+                @endforeach
+            </div>
+
             <div class="mt-5">
                 <a href="/search/experience">体験検索へ</a>
             </div>

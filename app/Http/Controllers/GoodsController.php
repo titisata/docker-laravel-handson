@@ -13,7 +13,8 @@ class GoodsController extends Controller
     {
         $keyword = $request->keyword;
         if ($keyword == '') {
-            return view('search.goods');
+            $goods = Goods::where('recommend_flag', 1)->orderBy('recommend_sort_no', 'desc')->get();
+            return view('search.goods', compact('goods'));
         }
 
         $goods = Goods::search($keyword, per_page: 10);

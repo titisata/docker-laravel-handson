@@ -37,19 +37,8 @@
             @endif
             <div>
                 <h1>WELCOME TO URATABI !</h1>
-                <a href="/search">検索画面へ</a>
-                <h2>おすすめの体験</h2>
-                <div>
-                    @foreach ($experiences_folders as $experiences_folder)
-                        @include('components.experience_small_cell', ['experinceFolder'=>$experiences_folder])
-                    @endforeach
-                </div>
-                <h2>おすすめのお土産</h2>
-                <div>
-                    @foreach ($goods as $goods_item)
-                        @include('components.goods_small_cell', ['goods'=>$goods_item])
-                    @endforeach
-                </div>
+                <a class="btn" href="/search/experience">現地で遊ぶ</a>
+                <a class="btn" href="/search/goods">名産品を買う</a>
             </div>
         </div>
     </body>
