@@ -43,42 +43,48 @@ async function commentCreate(goods_id) {
                 </div>
             </div>
 
-            <div class="card mt-4">
             <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
                         @csrf
-                <div class="card-body">
-                    
-                    <p class="fw-bold h4"> {{ $goods->name }}</p>
-                    <p>
-                    {{ $goods->description }}
-                    </p>
-                    <p></p>
-                    <p class="fw-bold text-end h3 border-top pt-3">{{ $goods->price }}円/個</p>
-                    
-                        <label for="quantity">個数</label>
-                        <div class="d-flex">
-                            <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" onchange="formSwitch()">
-                                    <option selected=""></option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                            </select>
-                            
-                        </div>
+                <div class="card mt-4">
+                
+                    <div class="card-body">
+                        
+                        <p class="fw-bold h4"> {{ $goods->name }}</p>
+                        <p>
+                        {{ $goods->description }}
+                        </p>
+                        <p></p>
+                        <p class="fw-bold text-end h3 border-top pt-3">{{ $goods->price }}円/個</p>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <label for="quantity">数量</label>
+                            <div class="d-flex">
+                                <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" onchange="formSwitch()">
+                                        <option selected=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                </select>
+                                
+                            </div>
 
+                        </div>
+                            
+
+                    </div>
+                    
+                </div> 
+                <div class="text-end mt-2">
                         <input type="submit" class="btn btn-primary" href="" value="カートに入れる">
-                       
-                    </form>
-        
                 </div>
-            </div>
+            </form>
+            
 
             <!-- <div class="card mt-3">
                 <div class="card-header">詳細</div>

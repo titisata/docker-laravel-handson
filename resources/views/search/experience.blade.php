@@ -12,14 +12,14 @@
             </form>
 
             <h2>おすすめの宿泊体験</h2>
-            <div>
+            <div class="d-flex justify-content-evenly flex-wrap">
                 @foreach ($experiences_folders_is_lodging as $experiences_folder)
                     @include('components.experience_small_cell', ['experinceFolder'=>$experiences_folder])
                 @endforeach
             </div>
 
             <h2>おすすめの体験</h2>
-            <div>
+            <div class="d-flex justify-content-evenly flex-wrap">
                 @foreach ($experiences_folders_not_is_lodging as $experiences_folder)
                     @include('components.experience_small_cell', ['experinceFolder'=>$experiences_folder])
                 @endforeach

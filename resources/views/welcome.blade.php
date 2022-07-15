@@ -18,10 +18,19 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            .btn-pink{
+                background-color:#FB6E86;
+                border-color:#FB6E86;
+                color:white;
+            }
+            .btn-pink:hover{
+                background-color:gray;
+                color:#FB6E86;
+            }
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <div>
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
@@ -35,11 +44,37 @@
                     @endauth
                 </div>
             @endif
-            <div>
-                <h1>WELCOME TO URATABI !</h1>
-                <a class="btn" href="/search/experience">現地で遊ぶ</a>
-                <a class="btn" href="/search/goods">名産品を買う</a>
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="text-center">～町を満喫しよう！</h1>
+
+                        <div class="d-flex row text-center">
+                            <div class="">
+                                <button class="btn btn-pink btn-lg  m-2 text-center fw-bold rounded-pill shadow-sm fs-4" style="width:300px">
+                                  <a role="botton" href="/search/experience" class="btn btn-lg  m-2 text-center fw-bold rounded-pill shadow-sm fs-4" style="font-size:40px;width:400px;">
+                                    現地で遊ぶ
+                                  </a>
+                                </button>       
+                            </div>
+                            <div class="" style="margin-top:2rem">
+                                <button class="btn btn-pink  btn-lg m-2 text-center fw-bold rounded-pill shadow-sm fs-4" style="width:300px">
+                                    <a role="botton" class="" href="/search/goods" style="font-size:40px;">名産品を買う</a>
+                                </button>    
+                            </div>        
+
+                        </div>
+                       
+
+                        <h3 class="text-center">このサイトでできること</h3>
+                        <p class="text-center" style="max-width:800px;margin:0 auto;">
+                            この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
+                            この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
+                        </p>
+                    </div>     
+                </div>
             </div>
+            
         </div>
     </body>
 </html>

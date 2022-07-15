@@ -13,21 +13,21 @@
 
 
             <h2>おすすめのお土産 (食べ物)</h2>
-            <div>
+            <div class="d-flex justify-content-evenly flex-wrap">
                 @foreach ($food_goods as $goods_item)
                     @include('components.goods_small_cell', ['goods'=>$goods_item])
                 @endforeach
             </div>
 
             <h2>おすすめのお土産 (飲み物)</h2>
-            <div>
+            <div class="d-flex justify-content-evenly flex-wrap">
                 @foreach ($drink_goods as $goods_item)
                     @include('components.goods_small_cell', ['goods'=>$goods_item])
                 @endforeach
             </div>
 
             <h2>おすすめのお土産 (雑貨)</h2>
-            <div>
+            <div class="d-flex justify-content-evenly flex-wrap">
                 @foreach ($goods_goods as $goods_item)
                     @include('components.goods_small_cell', ['goods'=>$goods_item])
                 @endforeach
