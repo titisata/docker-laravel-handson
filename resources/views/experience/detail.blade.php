@@ -139,10 +139,15 @@ async function commentCreate(ex_id) {
 
 
             <div class="card mt-4">
-                
+
                 <div class="card-body">
-                    
                     <p class="fw-bold h4">{{ $experienceFolder->description }}</p>
+                    @if (app('request')->input('keyword') == "")
+                        <p>{{ $experienceFolder->is_lodging ? ($experienceFolder->is_before_lodging ?  '宿泊あり (前泊)' : '宿泊あり (後泊)') : '宿泊なし' }}</p>
+                    @else
+                        <p>開催日: {{ app('request')->input('keyword') }}</p>
+                        <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
+                    @endif
                     <p>
                         この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
                         この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
@@ -151,24 +156,9 @@ async function commentCreate(ex_id) {
                     </p>
                     <p></p>
                     <p class="fw-bold text-end h3 border-top pt-3">{{ $experienceFolder->price }}円~</p>
-        
+
                 </div>
             </div>
-
-            <!-- <div class="mt-2 card"> -->
-                <!-- <div class="card-header">予約</div> -->
-                <!-- <div class="card-body">
-                    @forelse($experiences as $experience)
-                        <div class="mt-1 p-3 card">
-                            <div>
-                                <p>{{ $experience->name }}</p>
-                                <p>大人: {{ $experience->price_adult }}円 子ども: {{ $experience->price_child }}円</p>
-                            </div>
-                        </div>
-                    @empty
-                        <p>この体験はご利用できません</p>
-                    @endforelse
-                </div> -->
 
                 @if (app('request')->input('keyword') == "")
                     <div class="card-body">

@@ -16,8 +16,8 @@
                     <h4 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 60%;">{{ $experinceFolder->name }}</h4>
                     <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 60%;">{{ $experinceFolder->description }}</p>
                     <p class="card-text">￥{{ $experinceFolder->price }}～</p>
-                    <p class="card-text">{{ $experinceFolder->is_lodging ? '宿泊あり ' . '宿泊日: ' . app('request')->input('keyword') : '宿泊なし' }}</p>
                     <p>開催日: {{ app('request')->input('keyword') }}</p>
+                    <p class="card-text">{{ $experinceFolder->is_lodging ? ('宿泊日: ' . ($experinceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
                 </div>
             </div>
         </a>
