@@ -12,9 +12,23 @@
             </form>
 
 
-            <h2>おすすめのお土産</h2>
+            <h2>おすすめのお土産 (食べ物)</h2>
             <div>
-                @foreach ($goods as $goods_item)
+                @foreach ($food_goods as $goods_item)
+                    @include('components.goods_small_cell', ['goods'=>$goods_item])
+                @endforeach
+            </div>
+
+            <h2>おすすめのお土産 (飲み物)</h2>
+            <div>
+                @foreach ($drink_goods as $goods_item)
+                    @include('components.goods_small_cell', ['goods'=>$goods_item])
+                @endforeach
+            </div>
+
+            <h2>おすすめのお土産 (雑貨)</h2>
+            <div>
+                @foreach ($goods_goods as $goods_item)
                     @include('components.goods_small_cell', ['goods'=>$goods_item])
                 @endforeach
             </div>
