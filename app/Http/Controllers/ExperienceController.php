@@ -20,8 +20,8 @@ class ExperienceController extends Controller
             return view('search.experience', compact('experiences_folders_is_lodging','experiences_folders_not_is_lodging'));
         }
 
-        $experinceFolders = ExperienceFolder::search($keyword, per_page: 10);
-        return view('search.experience_list', compact('experinceFolders'));
+        $experienceFolders = ExperienceFolder::search($keyword, per_page: 10);
+        return view('search.experience_list', compact('experienceFolders'));
     }
 
 

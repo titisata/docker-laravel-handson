@@ -12,9 +12,9 @@
                 <input type="submit" value="検索">
             </form>
 
-            @forelse($experinceFolders as $experinceFolder)
-                @if (!$experinceFolder->is_holiday(app('request')->input('keyword')))
-                    @include('components.experience_cell', ['experinceFolder'=>$experinceFolder])
+            @forelse($experienceFolders as $experienceFolder)
+                @if (!$experienceFolder->is_holiday(app('request')->input('keyword')))
+                    @include('components.experience_cell', ['experienceFolder'=>$experienceFolder])
                 @endif
             @empty
                 <p>検索結果がありません。</p>
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center mt-3">
-        <div>{{ $experinceFolders->appends(request()->query())->links('pagination::bootstrap-4') }}</div>
+        <div>{{ $experienceFolders->appends(request()->query())->links('pagination::bootstrap-4') }}</div>
     </div>
 </div>
 
