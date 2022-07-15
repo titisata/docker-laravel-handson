@@ -11,12 +11,20 @@
                 <input type="submit" value="検索">
             </form>
 
-            <h2>おすすめの体験</h2>
+            <h2>おすすめの宿泊体験</h2>
             <div>
-                @foreach ($experiences_folders as $experiences_folder)
-                    @include('components.experience_small_cell', ['experienceFolder'=>$experiences_folder])
+                @foreach ($experiences_folders_is_lodging as $experiences_folder)
+                    @include('components.experience_small_cell', ['experinceFolder'=>$experiences_folder])
                 @endforeach
             </div>
+
+            <h2>おすすめの体験</h2>
+            <div>
+                @foreach ($experiences_folders_not_is_lodging as $experiences_folder)
+                    @include('components.experience_small_cell', ['experinceFolder'=>$experiences_folder])
+                @endforeach
+            </div>
+
 
             <div class="mt-5">
                 <a href="/search/goods">土産検索へ</a>

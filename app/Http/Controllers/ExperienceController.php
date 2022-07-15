@@ -15,8 +15,9 @@ class ExperienceController extends Controller
     {
         $keyword = $request->keyword;
         if ($keyword == '') {
-            $experiences_folders = ExperienceFolder::where('recommend_flag', 1)->orderBy('recommend_sort_no', 'desc')->get();
-            return view('search.experience', compact('experiences_folders'));
+            $experiences_folders_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 1)->orderBy('recommend_sort_no', 'desc')->get();
+            $experiences_folders_not_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 0)->orderBy('recommend_sort_no', 'desc')->get();
+            return view('search.experience', compact('experiences_folders_is_lodging','experiences_folders_not_is_lodging'));
         }
 
         $experienceFolders = ExperienceFolder::search($keyword, per_page: 10);
