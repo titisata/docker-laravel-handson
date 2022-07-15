@@ -44,46 +44,59 @@ async function commentCreate(goods_id) {
             </div>
 
             <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
-                        @csrf
-                <div class="card mt-4">
+                @csrf
+        
                 
-                    <div class="card-body">
+                <p class="fw-bold h4"> {{ $goods->name }}</p>
+                <p>{{ $goods->description }}</p>
+                <p></p>
+                <p class="fw-bold text-end h3 border-top pt-3">{{ $goods->price }}円/個</p>
+                <div class="d-flex align-items-center justify-content-end">
+                    <label for="quantity">数量</label>
+                    <div class="d-flex">
+                        <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" onchange="formSwitch()">
+                                <option selected=""></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                        </select>
                         
-                        <p class="fw-bold h4"> {{ $goods->name }}</p>
-                        <p>
-                        {{ $goods->description }}
-                        </p>
-                        <p></p>
-                        <p class="fw-bold text-end h3 border-top pt-3">{{ $goods->price }}円/個</p>
-                        <div class="d-flex align-items-center justify-content-end">
-                            <label for="quantity">数量</label>
-                            <div class="d-flex">
-                                <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" onchange="formSwitch()">
-                                        <option selected=""></option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                </select>
-                                
-                            </div>
-
-                        </div>
-                            
-
-                    </div>
-                    
+                    </div>    
                 </div> 
-                <div class="text-end mt-2">
-                        <input type="submit" class="btn btn-primary" href="" value="カートに入れる">
+                <div class="text-end my-3 ">
+                        <input type="submit" class="btn btn-primary w-100 rounded-pill" href="" value="カートに入れる">
                 </div>
             </form>
+            <div class="my-3">
+                <h5 class="mb-0">注意事項など</h5>
+                
+                <p>このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。
+                このテキストはサンプルです。このテキストはサンプルですこのテキストはサンプルです。このテキストはサンプルです。
+                </p>
+
+            </div>
+            
+
+            
+            <!-- <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">注意事項など</h5>
+                </div>
+                <div class="card-body">
+                    <p>このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。
+                    このテキストはサンプルです。このテキストはサンプルですこのテキストはサンプルです。このテキストはサンプルです。
+                    </p>
+
+                </div>
+
+            </div> -->
             
 
             <!-- <div class="card mt-3">
@@ -117,7 +130,9 @@ async function commentCreate(goods_id) {
             </div> -->
 
             <div class="mt-2 card">
-                <div class="card-header">口コミ</div>
+                <div class="card-header">
+                    <h5 class="mb-0">口コミ</h5>
+                </div>
 
                 <div class="d-flex flex-column">
                     <div class="m-2">
