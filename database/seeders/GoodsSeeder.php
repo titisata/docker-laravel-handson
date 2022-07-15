@@ -19,7 +19,7 @@ class GoodsSeeder extends Seeder
             'partner_id' => 1,
             'name' => '白い恋人 12個入り(test)',
             'description' => '北海道のおいしいお土産',
-            'category1' => 'aa',
+            'category1' => 'food',
             'category2' => 'aa',
             'category3' => null,
             'quantity' => 5,
@@ -31,7 +31,7 @@ class GoodsSeeder extends Seeder
             'partner_id' => 1,
             'name' => '信州そば 4人前(test)',
             'description' => '信州と言ったらこれ！',
-            'category1' => 'aaaa',
+            'category1' => 'food',
             'category2' => null,
             'category3' => null,
             'quantity' => 5,
@@ -41,9 +41,9 @@ class GoodsSeeder extends Seeder
         ]);
         Goods::create([
             'partner_id' => 1,
-            'name' => '信州そば 2人前(test)',
+            'name' => 'カルピス (test)',
             'description' => '信州と言ったらこれ！',
-            'category1' => 'aaaa',
+            'category1' => 'drink',
             'category2' => null,
             'category3' => null,
             'quantity' => 5,
@@ -53,13 +53,15 @@ class GoodsSeeder extends Seeder
         ]);
         Goods::create([
             'partner_id' => 1,
-            'name' => '信州そば 1人前(test)',
+            'name' => 'こけし(test)',
             'description' => '信州と言ったらこれ！',
-            'category1' => 'aaaa',
+            'category1' => 'goods',
             'category2' => null,
             'category3' => null,
             'quantity' => 5,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 7,
         ]);
     }
 }

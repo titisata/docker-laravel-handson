@@ -43,7 +43,44 @@ async function commentCreate(goods_id) {
                 </div>
             </div>
 
-            <div class="card mt-3">
+            <div class="card mt-4">
+            <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
+                        @csrf
+                <div class="card-body">
+                    
+                    <p class="fw-bold h4"> {{ $goods->name }}</p>
+                    <p>
+                    {{ $goods->description }}
+                    </p>
+                    <p></p>
+                    <p class="fw-bold text-end h3 border-top pt-3">{{ $goods->price }}円/個</p>
+                    
+                        <label for="quantity">個数</label>
+                        <div class="d-flex">
+                            <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" onchange="formSwitch()">
+                                    <option selected=""></option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                            </select>
+                            
+                        </div>
+
+                        <input type="submit" class="btn btn-primary" href="" value="カートに入れる">
+                       
+                    </form>
+        
+                </div>
+            </div>
+
+            <!-- <div class="card mt-3">
                 <div class="card-header">詳細</div>
                 <div class="card-body">
                     <p>名前: {{ $goods->name }}</p>
@@ -51,20 +88,36 @@ async function commentCreate(goods_id) {
                     <p>説明: {{ $goods->description }}</p>
                     <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
                         @csrf
-                        <label for="quantity">個数</label><input name="quantity" type="number">
-                        <input type="submit" class="btn btn-primary" href="" value="カートに入れる">
+                        <label for="quantity">個数</label>
+                        <div class="d-flex">
+                            <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" onchange="formSwitch()">
+                                    <option selected=""></option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                            </select>
+                            <input type="submit" class="btn btn-primary" href="" value="カートに入れる">
+                        </div>
+                       
                     </form>
                 </div>
-            </div>
+            </div> -->
 
             <div class="mt-2 card">
                 <div class="card-header">口コミ</div>
 
                 <div class="d-flex flex-column">
                     <div class="m-2">
-                        <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment" style="font-size:0.24rem;"></textarea>
-                        <div class="d-flex  justify-content-between">
-                            <select id="rate_input" style="height:20px;width:50px">
+                    <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <select class="form-select" id="rate_input" style="width:80px;" >
                                 <option value="1">☆1</option>
                                 <option value="2">☆2</option>
                                 <option value="3">☆3</option>
