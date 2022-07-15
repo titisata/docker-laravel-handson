@@ -13,8 +13,10 @@ class GoodsController extends Controller
     {
         $keyword = $request->keyword;
         if ($keyword == '') {
-            $goods = Goods::where('recommend_flag', 1)->orderBy('recommend_sort_no', 'desc')->get();
-            return view('search.goods', compact('goods'));
+            $food_goods = Goods::where('recommend_flag', 1)->where('category1', 'food')->orderBy('recommend_sort_no', 'desc')->get();
+            $drink_goods = Goods::where('recommend_flag', 1)->where('category1', 'drink')->orderBy('recommend_sort_no', 'desc')->get();
+            $goods_goods = Goods::where('recommend_flag', 1)->where('category1', 'goods')->orderBy('recommend_sort_no', 'desc')->get();
+            return view('search.goods', compact('food_goods', 'drink_goods', 'goods_goods'));
         }
 
         $goods = Goods::search($keyword, per_page: 10);
