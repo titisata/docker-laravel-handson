@@ -45,7 +45,7 @@ async function commentCreate(goods_id) {
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="height: 200px;">
+            <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $goods->images()[0]->image_path }}" alt="">
                 <div class="card-img-overlay"  style=" background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));">
                     <h3 class="text-white fw-bold" style="--bs-bg-opacity: .5;" >{{ $goods->name }}</h3>
@@ -59,9 +59,9 @@ async function commentCreate(goods_id) {
                 <p class="fw-bold h4"> {{ $goods->name }}</p>
                 <p>{{ $goods->description }}</p>
                 <p></p>
-                <p class="fw-bold text-end h3 border-top pt-3">{{ $goods->price }}円/個</p>
-                <div class="d-flex align-items-center justify-content-end">
-                    <label for="quantity">数量</label>
+                <p class="fw-bold text-end h3 pt-3">{{ $goods->price }}円/個</p>
+                <div class="d-flex align-items-center justify-content-end pb-4">
+                    <label class="fs-5 me-1" for="quantity">数量</label>
                     <div class="d-flex">
                         <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" onchange="formSwitch()">
                                 <option selected=""></option>
@@ -82,7 +82,7 @@ async function commentCreate(goods_id) {
                 <!-- <div class="text-end my-3 ">
                         <input type="submit" class="btn btn-primary w-100 rounded-pill" href="" value="カートに入れる">
                 </div> -->
-                <div class="text-center text-md-end">
+                <div class="text-center text-md-end border-top pt-3">
                         <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4" style="width:240px" type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
                         </button>
@@ -144,12 +144,9 @@ async function commentCreate(goods_id) {
             </div> -->
 
             <div class="mt-2 card">
-                <div class="card-header">
-                    <h5 class="mb-0">口コミ</h5>
-                </div>
-
                 <div class="d-flex flex-column">
-                    <div class="m-2">
+                    <h4 class="m-3 fw-bold">クチコミ</h4>
+                    <div class="m-3">
                     <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                         <div class="d-flex justify-content-between align-items-center mt-2">
                             <select class="form-select" id="rate_input" style="width:80px;" >
@@ -159,7 +156,7 @@ async function commentCreate(goods_id) {
                                 <option value="4">☆4</option>
                                 <option value="5" selected="selected">☆5</option>
                             </select>
-                            <button class="btn btn-outline-primary btn-sm" style="font-size:0.32rem; " onclick="commentCreate({{ $goods->id }})">投稿</button>
+                            <button class="btn btn-outline-primary" onclick="commentCreate({{ $goods->id }})">投稿</button>
                         </div>
                     </div>
                 </div>
