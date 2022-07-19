@@ -134,9 +134,9 @@ async function commentCreate(ex_id) {
                 <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
             </div>
 
-            <div class="card my-4 shadow-sm">
+            <div class="my-4">
 
-                <div class="card-body">
+                <div class="">
                     <p class="fw-bold h4">{{ $experienceFolder->description }}</p>
                     <!-- @if (app('request')->input('keyword') == "")
                         <p>{{ $experienceFolder->is_lodging ? ($experienceFolder->is_before_lodging ?  '宿泊あり (前泊)' : '宿泊あり (後泊)') : '宿泊なし' }}</p>
