@@ -7,7 +7,7 @@
 }
 </style>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
+<li class="item mx-3">
     <div class="card shadow mb-3 rounded-3" style="max-width:300px;" >
         <!-- <div style="display: flex; flex: 1 1 auto; height: 200px; width: 100%; flex-direction:column;"> -->
         <div style="display: flex;max-width:270px; ">
@@ -28,6 +28,7 @@
             </a>
         </div>
     </div>
+</li>
 
 
 

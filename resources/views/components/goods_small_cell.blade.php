@@ -28,7 +28,7 @@
             <a href="/goods/{{ $goods->id }}" style="text-decoration: none; color: inherit;">
                 <div style="display: flex; flex: 1 1 auto; height: 100%;max-width:300px; flex-direction:column;">
                     <div class="img-square-wrapper">
-                        <img style="object-fit: cover; width: 100%;height: 200px;" class="rounded-top" src="{{ $goods->images()[0]->image_path }}" alt="Card image cap" width="200">
+                        <img style="object-fit: cover; width: 270px;height: 200px;" class="rounded-top" src="{{ $goods->images()[0]->image_path }}" alt="Card image cap" width="200">
                     </div>
                     <div class="card-header border-none" style="background:white;border-bottom:none">
                         <h5 class="card-title text-center mb-0 text-truncate" >{{ $goods->name }}</h5>

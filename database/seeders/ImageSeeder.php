@@ -52,15 +52,56 @@ class ImageSeeder extends Seeder
             'table_id' => 2,
         ]);
         Image::create([
-            'image_path' => '/images/5.jpg',
+            'image_path' => '/images/calpis.jpg',
             'table_name' => 'goods',
             'table_id' => 3,
         ]);
         Image::create([
-            'image_path' => '/images/5.jpg',
+            'image_path' => '/images/kokeshi.jpg',
             'table_name' => 'goods',
             'table_id' => 4,
         ]);
+        Image::create([
+            'image_path' => '/images/4.jpg',
+            'table_name' => 'goods',
+            'table_id' => 5,
+        ]);
+        Image::create([
+            'image_path' => '/images/5.jpg',
+            'table_name' => 'goods',
+            'table_id' => 6,
+        ]);
+        Image::create([
+            'image_path' => '/images/calpis.jpg',
+            'table_name' => 'goods',
+            'table_id' => 7,
+        ]);
+        Image::create([
+            'image_path' => '/images/calpis.jpg',
+            'table_name' => 'goods',
+            'table_id' => 8,
+        ]);
+        Image::create([
+            'image_path' => '/images/calpis.jpg',
+            'table_name' => 'goods',
+            'table_id' => 9,
+        ]);
+        Image::create([
+            'image_path' => '/images/kokeshi.jpg',
+            'table_name' => 'goods',
+            'table_id' => 10,
+        ]);
+        Image::create([
+            'image_path' => '/images/kokeshi.jpg',
+            'table_name' => 'goods',
+            'table_id' => 11,
+        ]);
+        Image::create([
+            'image_path' => '/images/kokeshi.jpg',
+            'table_name' => 'goods',
+            'table_id' => 12,
+        ]);
+        
         Image::create([
             'image_path' => '/images/2.jpg',
             'table_name' => 'experience_folders',
