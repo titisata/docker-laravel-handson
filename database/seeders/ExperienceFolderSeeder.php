@@ -50,6 +50,22 @@ class ExperienceFolderSeeder extends Seeder
         \App\Models\ExperienceFolder::create([
             'partner_id' => 1,
             'company_id' => 1,
+            'name' => '桃食べ放題と畑で桃20個狩り付き',
+            'description' => '日本一の桃の里、御坂町で新鮮な桃を食べ放題♪',
+            'category1' => 'aa',
+            'category2' => 'aa',
+            'category3' => null,
+            'is_lodging' => false,
+            'start_date' => (new DateTime(date('Y-m-d')))->modify('-10day'),
+            'end_date' => (new DateTime(date('Y-m-d')))->modify('+10day'),
+            'is_before_lodging' => false,
+            'price' => 5000,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 3,
+        ]);
+        \App\Models\ExperienceFolder::create([
+            'partner_id' => 1,
+            'company_id' => 1,
             'name' => '日本一の水質！仁淀ブルーの真ん中でクリスタルカヤック（クリアカヤック）体験＆ドローン撮影！',
             'description' => '透明クリスタルカヤック（クリアカヤック）で水と一体化ガイドと一緒に”奇跡の透明度”広大な仁淀ブルーを水上散歩♪',
             'category1' => 'aa',
@@ -62,6 +78,22 @@ class ExperienceFolderSeeder extends Seeder
             'price' => 5000,
             'recommend_flag' => 1,
             'recommend_sort_no' => 8,
+        ]);
+        \App\Models\ExperienceFolder::create([
+            'partner_id' => 1,
+            'company_id' => 1,
+            'name' => '日本最高の水質！クリスタルカヤック（クリアカヤック）体験＆ドローン撮影！',
+            'description' => '最高透明クリスタルカヤック（クリアカヤック）で水と一体化ガイドと一緒に”奇跡の透明度”広大な仁淀ブルーを水上散歩♪',
+            'category1' => 'aa',
+            'category2' => 'aa',
+            'category3' => null,
+            'is_lodging' => false,
+            'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
+            'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
+            'is_before_lodging' => false,
+            'price' => 5000,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 2,
         ]);
         \App\Models\ExperienceFolder::create([
             'partner_id' => 1,
