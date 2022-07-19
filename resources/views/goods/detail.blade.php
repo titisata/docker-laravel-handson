@@ -48,7 +48,7 @@ async function commentCreate(goods_id) {
             <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $goods->images()[0]->image_path }}" alt="">
                 <div class="card-img-overlay"  style=" background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));">
-                    <h3 class="text-white fw-bold" style="--bs-bg-opacity: .5;" >{{ $goods->name }}</h3>
+                    <h3 class="text-white fw-bold " style="--bs-bg-opacity: .5;" >{{ $goods->name }}</h3>
                 </div>
             </div>
 

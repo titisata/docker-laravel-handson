@@ -15,6 +15,7 @@ class ImageSeeder extends Seeder
      */
     public function run()
     {
+        
         Image::create([
             'image_path' => '/images/1.jpg',
             'table_name' => 'experience_folders',
@@ -49,6 +50,36 @@ class ImageSeeder extends Seeder
             'image_path' => '/images/5.jpg',
             'table_name' => 'goods',
             'table_id' => 4,
+        ]);
+        Image::create([
+            'image_path' => '/images/2.jpg',
+            'table_name' => 'experience_folders',
+            'table_id' => 1,
+        ]);
+        Image::create([
+            'image_path' => '/images/3.jpg',
+            'table_name' => 'experience_folders',
+            'table_id' => 1,
+        ]);
+        Image::create([
+            'image_path' => '/images/1.jpg',
+            'table_name' => 'experience_folders',
+            'table_id' => 4,
+        ]);
+        Image::create([
+            'image_path' => '/images/1.jpg',
+            'table_name' => 'experience_folders',
+            'table_id' => 5,
+        ]);
+        Image::create([
+            'image_path' => '/images/1.jpg',
+            'table_name' => 'experience_folders',
+            'table_id' => 6,
+        ]);
+        Image::create([
+            'image_path' => '/images/1.jpg',
+            'table_name' => 'experience_folders',
+            'table_id' => 7,
         ]);
     }
 }

@@ -72,26 +72,9 @@
     <div class="row justify-content-center">
 
         <div class="col-md-9">
-            <!-- <div class="card">
-                <img class="card-img" style="height: 300px; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
-                <div class="card-img-overlay">
-                    <h4 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h4>
-                </div>
-                <div class="mt-4">
-                    <div class="card-body">
-                        <p>
-                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        </p>
-                        <p class="pt-3 h5">体験料金の目安は{{ $experienceFolder->price }}円~</p>
-                    </div>
-                </div>
-
-            </div> -->
+          
             <div class="card" style="height: 300px;">
-                <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
+                <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
                 <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));height:68px;">
                     <h3 class="fw-bold text-white py-auto" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
                 </div>
