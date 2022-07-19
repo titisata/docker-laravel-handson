@@ -1,12 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style>
 .card-img-overlay{
     padding: 0;
     top: calc(90% - 0.5rem);
     text-align: center;
     font-weight: bold;
+}
+.btn-pink{
+    background-color:#FB6E86;
+    border-color:#FB6E86;
+    color:white;
+}
+.btn-pink:hover{
+    color:#FB6E86;
 }
 </style>
 
@@ -38,8 +47,8 @@ async function commentCreate(goods_id) {
         <div class="col-md-8">
             <div class="card" style="height: 200px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $goods->images()[0]->image_path }}" alt="">
-                <div class="card-img-overlay">
-                    <h3 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $goods->name }}</h3>
+                <div class="card-img-overlay"  style=" background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));">
+                    <h3 class="text-white fw-bold" style="--bs-bg-opacity: .5;" >{{ $goods->name }}</h3>
                 </div>
             </div>
 
@@ -70,8 +79,13 @@ async function commentCreate(goods_id) {
                         
                     </div>    
                 </div> 
-                <div class="text-end my-3 ">
+                <!-- <div class="text-end my-3 ">
                         <input type="submit" class="btn btn-primary w-100 rounded-pill" href="" value="カートに入れる">
+                </div> -->
+                <div class="text-center text-md-end">
+                        <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4" style="width:240px" type="submit" value="">
+                            <i class="bi bi-cart"></i>カートに入れる
+                        </button>
                 </div>
             </form>
             <div class="my-3">

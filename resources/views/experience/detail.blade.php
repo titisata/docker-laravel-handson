@@ -120,7 +120,7 @@ async function commentCreate(ex_id) {
         <div class="col-md-9">
             <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
-                <div class="card-img-overlay">
+                <div class="card-img-overlay" style=" background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));">
                     <h3 class="fw-bold text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h3>
                 </div>
             </div>
@@ -138,7 +138,7 @@ async function commentCreate(ex_id) {
 
 
 
-            <div class="card mt-4">
+            <div class="card my-4 shadow-sm">
 
                 <div class="card-body">
                     <p class="fw-bold h4">{{ $experienceFolder->description }}</p>
@@ -155,7 +155,7 @@ async function commentCreate(ex_id) {
                         この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
                     </p>
                     <p></p>
-                    <p class="fw-bold text-end h3 border-top pt-3">{{ $experienceFolder->price }}円~</p>
+                    <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>
 
                 </div>
             </div>
