@@ -13,7 +13,6 @@ li.item {
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <!-- <h1 class="mb-3">体験検索</h1> -->
             <div class="text-center">
                 <form action="/search/experience" method="get">
                     <label for="keyword" class="fw-bold fs-5">体験したい日を入力してください</label><br>

@@ -1,11 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    ul.horizontal-list {
+	overflow-x: auto;
+	white-space: nowrap;
+}
+li.item {
+	display: inline-block;
+}	
+</style>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-9">
-
-            <!-- <h3 class="mb-3">土産検索</h3> -->
+        <div class="col-md-10">
             <div class="text-center">
                 <form action="/search/goods" method="get">
                     <label for="keyword" class="fw-bold fs-5">検索するキーワードを入力してください</label>
@@ -17,25 +24,31 @@
             </div>
 
 
-            <h2 class="mt-5">おすすめのお土産 (食べ物)</h2>
-            <div class="d-flex justify-content-evenly flex-wrap">
-                @foreach ($food_goods as $goods_item)
-                    @include('components.goods_small_cell', ['goods'=>$goods_item])
-                @endforeach
+            <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめのお土産 (食べ物)</h2>
+            <div class="d-flex justify-content-evenly">
+                <ul class="horizontal-list">
+                    @foreach ($food_goods as $goods_item)
+                        @include('components.goods_small_cell', ['goods'=>$goods_item])
+                    @endforeach
+                </ul>    
             </div>
 
-            <h2 class="mt-4">おすすめのお土産 (飲み物)</h2>
-            <div class="d-flex justify-content-evenly flex-wrap">
-                @foreach ($drink_goods as $goods_item)
-                    @include('components.goods_small_cell', ['goods'=>$goods_item])
-                @endforeach
+            <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめのお土産 (飲み物)</h2>
+            <div class="d-flex justify-content-evenly">
+                <ul class="horizontal-list">
+                    @foreach ($drink_goods as $goods_item)
+                        @include('components.goods_small_cell', ['goods'=>$goods_item])
+                    @endforeach
+                </ul>
             </div>
 
-            <h2 class="mt-4">おすすめのお土産 (雑貨)</h2>
+            <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめのお土産 (雑貨)</h2>
             <div class="d-flex justify-content-evenly flex-wrap">
-                @foreach ($goods_goods as $goods_item)
-                    @include('components.goods_small_cell', ['goods'=>$goods_item])
-                @endforeach
+                <ul class="horizontal-list">
+                    @foreach ($goods_goods as $goods_item)
+                        @include('components.goods_small_cell', ['goods'=>$goods_item])
+                    @endforeach
+                </ul>
             </div>
 
             <!-- <div class="mt-5">

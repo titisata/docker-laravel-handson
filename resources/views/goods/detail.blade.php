@@ -46,7 +46,7 @@ async function commentCreate(goods_id) {
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card" style="height: 300px;">
-                <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $goods->images()[0]->image_path }}" alt="">
+                <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $goods->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
                 <div class="card-img-overlay"  style=" background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));">
                     <h3 class="text-white fw-bold " style="--bs-bg-opacity: .5;" >{{ $goods->name }}</h3>
                 </div>
@@ -97,51 +97,6 @@ async function commentCreate(goods_id) {
 
             </div>
             
-
-            
-            <!-- <div class="card mt-3">
-                <div class="card-header">
-                    <h5 class="mb-0">注意事項など</h5>
-                </div>
-                <div class="card-body">
-                    <p>このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。
-                    このテキストはサンプルです。このテキストはサンプルですこのテキストはサンプルです。このテキストはサンプルです。
-                    </p>
-
-                </div>
-
-            </div> -->
-            
-
-            <!-- <div class="card mt-3">
-                <div class="card-header">詳細</div>
-                <div class="card-body">
-                    <p>名前: {{ $goods->name }}</p>
-                    <p>値段: {{ $goods->price }}円</p>
-                    <p>説明: {{ $goods->description }}</p>
-                    <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
-                        @csrf
-                        <label for="quantity">個数</label>
-                        <div class="d-flex">
-                            <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" onchange="formSwitch()">
-                                    <option selected=""></option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                            </select>
-                            <input type="submit" class="btn btn-primary" href="" value="カートに入れる">
-                        </div>
-                       
-                    </form>
-                </div>
-            </div> -->
 
             <div class="mt-2 card">
                 <div class="d-flex flex-column">
