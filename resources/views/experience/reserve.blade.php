@@ -11,8 +11,8 @@
         var child = document.getElementById('child').value;
         var adult_price = document.getElementById('adult_price');
         var child_price = document.getElementById('child_price');
-        // var hotel_adult_price = document.getElementsByName('hotel_adult_price');
-        // var hotel_child_price = document.getElementsByName('hotel_child_price');
+        // var hotel_adult_price = document.querySelectorAll('.hotel_adult_price');
+        // var hotel_child_price = document.getElementsByClassName('hotel_child_price');
         // var food_adult_price = document.getElementsByName('food_adult_price');
         // var food_child_price = document.getElementsByName('food_child_price');
 
@@ -20,13 +20,18 @@
         // alert (child);
         // alert (adult_price.innerHTML);
         // alert (child_price.innerHTML);
-        // alert (hotel_adult_price.innerHTML);
+        // alert (hotel_adult_price.value);
         // alert (hotel_child_price.innerHTML);
         // alert (food_adult_price.innerHTML);
         // alert (food_child_price.innerHTML);
 
         var adult_result;
         adult_result = (adult_price.innerHTML*adult);
+
+        // var hotel_adult_result;
+        // hotel_adult_result  = (hotel_adult_price.innerHTML*adult);
+
+        // alert(hotel_adult_result);
 
         // alert(adult_result);
 
@@ -47,9 +52,9 @@
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style>
-    .card-img-overlay{
+.card-img-overlay{
     padding: 0;
-    top: calc(50% - 0.5rem);
+    top: calc(80% - 0.5rem);
     text-align: center;
     font-weight: bold;
 }
@@ -67,7 +72,7 @@
     <div class="row justify-content-center">
 
         <div class="col-md-9">
-            <div class="card">
+            <!-- <div class="card">
                 <img class="card-img" style="height: 300px; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <div class="card-img-overlay">
                     <h4 class="bg-secondary text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h4>
@@ -84,7 +89,26 @@
                     </div>
                 </div>
 
+            </div> -->
+            <div class="card" style="height: 300px;">
+                <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));height:68px;">
+                    <h3 class="fw-bold text-white py-auto" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                </div>
             </div>
+
+            <div class="mt-4">
+                    <div class="card-body">
+                        <p>
+                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                        </p>
+                        <p class="pt-3 h5 text-end">体験料金の目安は{{ $experienceFolder->price }}円~</p>
+                    </div>
+                </div>
+
         </div>
         <div class="col-md-9">
             <form  action="{{ Request::url() }}" method="POST">
@@ -135,7 +159,7 @@
                         @forelse ($experienceFolder->hotelGroup as $hotelGroup)
                             <div class="fw-bold">
                                 　<input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
-                                <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span name='hotel_adult_price'>{{ $hotelGroup->price_adult }}</span>円 子ども<span  name='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
+                                <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span class='hotel_adult_price'>{{ $hotelGroup->price_adult }}</span>円 子ども<span class='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
                             </div>
                         @empty
                             <p class="fw-bold">この体験は宿泊がありません</p>
@@ -213,9 +237,9 @@
 
         </div>
         <div class= "col-md-9">
-             <div class="card mt-2">
+             <div class="mt-2">
                 <!-- <div class="card-header">詳細</div> -->
-                <div class="card-body">
+                <div class="">
                     <!-- <p>名前: {{ $experienceFolder->name }}</p>
                     <p>値段: {{ $experienceFolder->price }}円</p> -->
                     <p class="fw-bold h5">注意事項など</p>

@@ -4,13 +4,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-
-            <h3 class="mb-3">体験検索</h3>
-            <form action="/search/experience" method="get">
-                <label for="keyword">日付</label><input name="keyword" type="date">
-                <input type="submit" value="検索">
-            </form>
-
+            <!-- <h1 class="mb-3">体験検索</h1> -->
+            <div class="text-center">
+                <form action="/search/experience" method="get">
+                    <label for="keyword" class="fw-bold fs-5">体験したい日を入力してください</label><br>
+                    <div class="d-flex justify-content-center mt-2">
+                        <input class="form-control" name="keyword" type="date" style="width:240px">
+                        <input type="submit" value="検索" class="btn btn-sm btn-secondary">
+                    </div>
+                    
+                </form>
+            </div>
+            
             <h2 class="mt-5">おすすめの宿泊体験</h2>
             <div class="d-flex justify-content-evenly flex-wrap">
                 @foreach ($experiences_folders_is_lodging as $experiences_folder)
@@ -26,9 +31,9 @@
             </div>
 
 
-            <div class="mt-5">
+            <!-- <div class="mt-5">
                 <a href="/search/goods">土産検索へ</a>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

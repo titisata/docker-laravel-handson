@@ -19,7 +19,7 @@
             @empty
                 <p>検索結果がありません。</p>
             @endforelse
-            <a href="/search/goods">土産検索へ</a>
+            <!-- <a href="/search/goods">土産検索へ</a> -->
         </div>
     </div>
     <div class="d-flex justify-content-center mt-3">

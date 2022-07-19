@@ -125,8 +125,6 @@ async function commentCreate(ex_id) {
                 </div>
             </div>
 
-
-
             <div class="d-flex flex-wrap justify-content-evenly">
                 <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
@@ -135,8 +133,6 @@ async function commentCreate(ex_id) {
                 <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
                 <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
             </div>
-
-
 
             <div class="card my-4 shadow-sm">
 
