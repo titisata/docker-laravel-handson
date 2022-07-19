@@ -65,7 +65,7 @@
 <style>
 .card-img-overlay{
     padding: 0;
-    top: calc(90% - 0.5rem);
+    top: calc(80% - 0.5rem);
     text-align: center;
     font-weight: bold;
 }
@@ -120,8 +120,8 @@ async function commentCreate(ex_id) {
         <div class="col-md-9">
             <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]->image_path }}" alt="">
-                <div class="card-img-overlay" style=" background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));">
-                    <h3 class="fw-bold text-white" style="--bs-bg-opacity: .5;" >{{ $experienceFolder->name }}</h3>
+                <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));height:68px;">
+                    <h3 class="fw-bold text-white py-auto" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
                 </div>
             </div>
 
@@ -209,37 +209,6 @@ async function commentCreate(ex_id) {
     </div>
 </div>
 
-<!-- <footer class="mt-4">
-        <div class="bg-f-part py-3">
-            <h2 class="text-center text-white mb-0">観光協会</h2>
-        </div>
-        <div class = "f-pink">
-            <div class="d-flex py-4">
-                <div class="d-flex flex-column ms-4">
-                    <ul>
-                        <li><a href="#" class="text-white">プログラム一覧</a></li>
-                        <li><a href="#" class="text-white">商品一覧</a></li>
-                        <li><a href="#" class="text-white">支払い方法</a></li>
-                    </ul>
-                </div>
-                <div class="d-flex flex-column ms-4">
-                    <ul>
-                        <li><a href="#" class="text-white">キャンセル・返品について</a></li>
-                        <li><a href="#" class="text-white">特定商取引に基づく表記</a></li>
-                        <li><a href="#" class="text-white">プライバシーポリシー</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="text-white ps-4">Copyright© 観光協会 All rights reserved.</p>
-                <p class="text-white pe-4"><small>Powered by URATABI</small></p>
-            </div>
-        </div>
-
-
-
-
-    <footer> -->
 
 
 @endsection
