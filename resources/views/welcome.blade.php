@@ -34,6 +34,19 @@
             background-color:#FB6E86;
             border-color:#FB6E86;
         }
+        .bg-f-part{
+            background-color:#343a40;
+        }
+        .f-pink{
+            background-color:#BB4156;
+            
+        }
+        ul{
+            list-style-type: none
+        }
+        a{
+            text-decoration:none;
+        }
         </style>
     </head>
     <body class="antialiased">
@@ -64,14 +77,14 @@
             <div class="mt-3">
                 <h1 class="text-center">～町を満喫しよう！</h1>
 
-                <div class="d-flex row text-center">
-                    <div class="">
-                        <a role="botton" href="/search/experience" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4" style="font-size:40px;width:400px;">
+                <div class="d-flex row justify-content-center">
+                    <div class="col-9 col-md-4">
+                        <a role="botton" href="/search/experience" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4 w-100" style="font-size:40px;">
                         現地で遊ぶ
                         </a>   
                     </div>
-                    <div class="">
-                        <a role="botton" href="/search/goods" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4"  style="font-size:40px;width:400px;">
+                    <div class="col-9 col-md-4">
+                        <a role="botton" href="/search/goods" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4 w-100"  style="font-size:40px;">
                         名産品を買う
                         </a>    
                     </div>        
@@ -80,11 +93,42 @@
                 
 
                 <h3 class="text-center mt-5">このサイトでできること</h3>
-                <p class="text-center" style="max-width:800px;margin:0 auto;">
+                <p class="text-center col-9" style="margin:0 auto;">
                     この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
                     この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
                 </p>
-            </div>     
+            </div> 
+            <footer class="mt-4">
+        <div class="bg-f-part py-3">
+            <h2 class="text-center text-white mb-0">観光協会</h2>
+        </div>
+        <div class = "f-pink">
+            <div class="d-flex py-4 justify-content-start">
+                <div class="d-flex flex-column">
+                    <ul>
+                        <li><a href="#" class="text-white">プログラム一覧</a></li>
+                        <li><a href="#" class="text-white">商品一覧</a></li>
+                        <li><a href="#" class="text-white">支払い方法</a></li>
+                    </ul>
+                </div>
+                <div class="d-flex flex-column ">
+                    <ul>
+                        <li><a href="#" class="text-white">キャンセル・返品について</a></li>
+                        <li><a href="#" class="text-white">特定商取引に基づく表記</a></li>
+                        <li><a href="#" class="text-white">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <p class="text-white ps-4">Copyright© 観光協会 All rights reserved.</p>
+                <p class="text-white pe-4"><small>Powered by URATABI</small></p>
+            </div>
+        </div>
+        
+        
+
+        
+    <footer>    
             
         </div>
     </body>
