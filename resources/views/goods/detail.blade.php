@@ -47,16 +47,20 @@ async function commentCreate(goods_id) {
         <div class="col-md-8">
             <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $goods->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
-                <div class="card-img-overlay"  style=" background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));">
+                <!-- <div class="card-img-overlay"  style=" background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));">
                     <h3 class="text-white fw-bold " style="--bs-bg-opacity: .5;" >{{ $goods->name }}</h3>
-                </div>
+                </div> -->
             </div>
 
             <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
                 @csrf
         
+                <div class="d-flex">
+                    <h4 class="fw-bold">商品名：</h4>
+                    <h4 class="fw-bold"> {{ $goods->name }}</h4>
+                </div>
                 
-                <p class="fw-bold h4"> {{ $goods->name }}</p>
+                <h5 class="fw-bold mt-4">商品説明</h5>
                 <p>{{ $goods->description }}</p>
                 <p></p>
                 <p class="fw-bold text-end h3 pt-3">{{ $goods->price }}円/個</p>
@@ -88,8 +92,8 @@ async function commentCreate(goods_id) {
                         </button>
                 </div>
             </form>
-            <div class="my-3">
-                <h5 class="mb-0">注意事項など</h5>
+            <div class="my-5">
+                <h5 class="mb-0 fw-bold">注意事項など</h5>
                 
                 <p>このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。
                 このテキストはサンプルです。このテキストはサンプルですこのテキストはサンプルです。このテキストはサンプルです。

@@ -2,7 +2,7 @@
 
 @section('content')
 <style>
-    ul.horizontal-list {
+ul.horizontal-list {
 	overflow-x: auto;
 	white-space: nowrap;
 }

@@ -18,7 +18,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => '白い恋人 12個入り(test)',
-            'description' => '北海道のおいしいお土産',
+            'description' => '北海道のおいしいお土産テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'food',
             'category2' => 'aa',
             'category3' => null,
@@ -30,7 +30,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => '信州そば 4人前(test)',
-            'description' => '信州と言ったらこれ！',
+            'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'food',
             'category2' => null,
             'category3' => null,
@@ -42,7 +42,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => 'カルピス (test)',
-            'description' => '乳酸菌飲料と言ったらこれ！',
+            'description' => '乳酸菌飲料と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'drink',
             'category2' => null,
             'category3' => null,
@@ -54,7 +54,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => 'こけし(test)',
-            'description' => '信州と言ったらこれ！',
+            'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'goods',
             'category2' => null,
             'category3' => null,
@@ -66,7 +66,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => '白い恋人 12個入り(test)',
-            'description' => '北海道のおいしいお土産',
+            'description' => '北海道のおいしいお土産テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'food',
             'category2' => 'aa',
             'category3' => null,
@@ -78,7 +78,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => '信州そば 4人前(test)',
-            'description' => '信州と言ったらこれ！',
+            'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'food',
             'category2' => null,
             'category3' => null,
@@ -90,7 +90,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => 'カルピス (test)',
-            'description' => '乳酸菌飲料と言ったらこれ！',
+            'description' => '乳酸菌飲料と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'drink',
             'category2' => null,
             'category3' => null,
@@ -102,7 +102,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => 'カルピス (test)',
-            'description' => '乳酸菌飲料と言ったらこれ！',
+            'description' => '乳酸菌飲料と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'drink',
             'category2' => null,
             'category3' => null,
@@ -114,7 +114,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => 'カルピス (test)',
-            'description' => '乳酸菌飲料と言ったらこれ！',
+            'description' => '乳酸菌飲料と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'drink',
             'category2' => null,
             'category3' => null,
@@ -126,7 +126,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => 'こけし(test)',
-            'description' => '信州と言ったらこれ！',
+            'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'goods',
             'category2' => null,
             'category3' => null,
@@ -138,7 +138,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => 'こけし(test)',
-            'description' => '信州と言ったらこれ！',
+            'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'goods',
             'category2' => null,
             'category3' => null,
@@ -150,7 +150,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => 'こけし(test)',
-            'description' => '信州と言ったらこれ！',
+            'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'goods',
             'category2' => null,
             'category3' => null,
@@ -162,7 +162,7 @@ class GoodsSeeder extends Seeder
         Goods::create([
             'partner_id' => 1,
             'name' => 'こけし(test)',
-            'description' => '信州と言ったらこれ！',
+            'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'category1' => 'goods',
             'category2' => null,
             'category3' => null,
