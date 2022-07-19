@@ -134,19 +134,8 @@ async function commentCreate(ex_id) {
             <div class="my-4">
 
                 <div class="">
-                    <p class="fw-bold h4">{{ $experienceFolder->description }}</p>
-                    <!-- @if (app('request')->input('keyword') == "")
-                        <p>{{ $experienceFolder->is_lodging ? ($experienceFolder->is_before_lodging ?  '宿泊あり (前泊)' : '宿泊あり (後泊)') : '宿泊なし' }}</p>
-                    @else
-                        <p>開催日: {{ app('request')->input('keyword') }}</p>
-                        <p>{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
-                    @endif -->
-                    <p>
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                    </p>
+                    <p class="">{{ $experienceFolder->description }}</p>
+                
                     <p></p>
                     <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>
 
