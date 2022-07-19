@@ -115,7 +115,7 @@
             @csrf
             <input hidden name="date" type="text" value="{{ $experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : app('request')->input('keyword') }}">
 
-                <div class="mt-2 card bg-f-part text-white">
+                <div class="mt-2 card shadow-sm bg-f-part text-white">
 
                     <div class="card-body">
                         <p class="fw-bold">体験日: {{ app('request')->input('keyword') }}</p>
