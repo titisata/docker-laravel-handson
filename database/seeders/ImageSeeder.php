@@ -113,6 +113,21 @@ class ImageSeeder extends Seeder
             'table_id' => 1,
         ]);
         Image::create([
+            'image_path' => '/images/6.jpg',
+            'table_name' => 'experience_folders',
+            'table_id' => 1,
+        ]);
+        Image::create([
+            'image_path' => '/images/7.jpg',
+            'table_name' => 'experience_folders',
+            'table_id' => 1,
+        ]);
+        Image::create([
+            'image_path' => '/images/8.jpg',
+            'table_name' => 'experience_folders',
+            'table_id' => 1,
+        ]);
+        Image::create([
             'image_path' => '/images/1.jpg',
             'table_name' => 'experience_folders',
             'table_id' => 6,
