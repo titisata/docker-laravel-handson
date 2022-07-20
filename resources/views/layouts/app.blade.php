@@ -60,20 +60,19 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link text-white" href="{{ route('login') }}">{{ __('ログイン') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link text-white" href="{{ route('register') }}">{{ __('新規登録') }}</a>
                                 </li>
                             @endif
                         @else
@@ -112,20 +111,20 @@
         <div class="bg-f-part py-3">
             <h2 class="text-center text-white mb-0">観光協会</h2>
         </div>
-        <div class = "f-pink">
-            <div class="d-flex py-4 justify-content-start">
-                <div class="d-flex flex-column">
+        <div class ="f-pink">
+            <div class="d-flex py-4 justify-content-center">
+                <div class="me-4">
                     <ul>
-                        <li><a href="#" class="text-white">プログラム一覧</a></li>
-                        <li><a href="#" class="text-white">商品一覧</a></li>
-                        <li><a href="#" class="text-white">支払い方法</a></li>
+                        <li class="my-2"><a href="#" class="text-white">プログラム一覧</a></li>
+                        <li class="my-2"><a href="#" class="text-white">商品一覧</a></li>
+                        <li class="my-2"><a href="#" class="text-white">支払い方法</a></li>
                     </ul>
                 </div>
-                <div class="d-flex flex-column ">
+                <div class="ms-4">
                     <ul>
-                        <li><a href="#" class="text-white">キャンセル・返品について</a></li>
-                        <li><a href="#" class="text-white">特定商取引に基づく表記</a></li>
-                        <li><a href="#" class="text-white">プライバシーポリシー</a></li>
+                        <li class="my-2"><a href="#" class="text-white">キャンセル・返品について</a></li>
+                        <li class="my-2"><a href="#" class="text-white">特定商取引に基づく表記</a></li>
+                        <li class="my-2"><a href="#" class="text-white">プライバシーポリシー</a></li>
                     </ul>
                 </div>
             </div>

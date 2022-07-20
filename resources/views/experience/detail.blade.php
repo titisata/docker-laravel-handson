@@ -125,21 +125,16 @@ async function commentCreate(ex_id) {
                 </div>
             </div>
 
-            <div class="d-flex flex-wrap justify-content-evenly">
+            <div class="d-flex flex-wrap justify-content-between">
                 @foreach($experienceFolder->images() as $image)
-                    <img class="card-img w-25 m-2" style="height: 100%; object-fit: cover;" src="{{ $image->image_path }}" alt="">
+                    <img class="card-img mt-4" style=" width: 30%; height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
                 @endforeach
             </div>
 
-            <div class="my-4">
-
-                <div class="">
-                    <p class="">{{ $experienceFolder->description }}</p>
-                
-                    <p></p>
-                    <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>
-
-                </div>
+            <div class="my-5">  
+                <p class="mb-4">{{ $experienceFolder->description }}</p>
+        
+                <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>     
             </div>
 
                 @if (app('request')->input('keyword') == "")

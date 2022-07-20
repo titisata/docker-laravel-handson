@@ -20,6 +20,7 @@
 </style>
 
 <script>
+   
 async function commentCreate(goods_id) {
     const content = document.getElementById('comment');
     const rate = document.getElementById('rate_input');
@@ -41,15 +42,25 @@ async function commentCreate(goods_id) {
         .then(_ => location.reload());
 }
 </script>
+<script>
+    
+
+    function goods_formSwitch(){
+        var goods_result = document.getElementById('goods_result');
+        var goods_price = document.getElementById('goods_price');
+        var count = document.getElementById('count').value;
+
+        goods_result.innerHTML = (goods_price.innerHTML*count);
+        
+    }
+</script>
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card" style="height: 300px;">
-                <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $goods->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
-                <!-- <div class="card-img-overlay"  style=" background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));">
-                    <h3 class="text-white fw-bold " style="--bs-bg-opacity: .5;" >{{ $goods->name }}</h3>
-                </div> -->
+                <img class="card-img img-thumbnail" style="height: 100%; object-fit: cover;" src="{{ $goods->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
+               
             </div>
 
             <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
@@ -63,31 +74,29 @@ async function commentCreate(goods_id) {
                 <h5 class="fw-bold mt-4">商品説明</h5>
                 <p>{{ $goods->description }}</p>
                 <p></p>
-                <p class="fw-bold text-end h3 pt-3">{{ $goods->price }}円/個</p>
-                <div class="d-flex align-items-center justify-content-end pb-4">
+                <p class="fw-bold text-end h3 pt-3"><span id="goods_price" value="">{{ $goods->price }}</span>円/個</p>
+                <div class="d-flex align-items-center justify-content-end pb-4 border-bottom">
                     <label class="fs-5 me-1" for="quantity">数量</label>
                     <div class="d-flex">
-                        <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" onchange="formSwitch()">
-                                <option selected=""></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
+                        <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" id="count" onchange="goods_formSwitch()">
+                            <option value="0" selected="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
                         </select>
                         
                     </div>    
                 </div> 
-                <!-- <div class="text-end my-3 ">
-                        <input type="submit" class="btn btn-primary w-100 rounded-pill" href="" value="カートに入れる">
-                </div> -->
-                <div class="text-center text-md-end border-top pt-3">
-                        <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4" style="width:240px" type="submit" value="">
+                <p class="text-end border-top pt-3 fs-4 fw-bold">合計金額：<span id="goods_result" class="fs-4">0</span>円</p>
+                <div class="text-center text-md-end pt-3">
+                        <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4"  type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
                         </button>
                 </div>

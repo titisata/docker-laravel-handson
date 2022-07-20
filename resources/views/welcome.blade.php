@@ -71,7 +71,7 @@
                 <!-- <div class="d-flex align-items-center justify-content-between"> -->
                 <div class="container">
                     <a class="navbar-brand text-white" href="{{ url('/') }}">
-                                    URATABI
+                         URATABI
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
@@ -80,23 +80,23 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto">
                             @if (Route::has('login'))
-                                <div class="hidden sm:block">
-                                    @auth
-                                    <li class="nav-item">
-                                        <a href="{{ url('/home') }}" class="text-sm text-white">ホーム</a>
-                                    </li>    
-                                    @else
-                                    <li class="nav-item">
-                                        <a href="{{ route('login') }}" class="text-sm text-white">ログイン</a>
-                                    </li>
+                                
+                                @auth
+                                <li class="nav-item">
+                                    <a href="{{ url('/home') }}" class="text-sm text-white">ホーム</a>
+                                </li>    
+                                @else
+                                <li class="nav-item">
+                                    <a href="{{ route('login') }}" class="text-sm text-white">ログイン</a>
+                                </li>
 
-                                        @if (Route::has('register'))
-                                            <li class="nav-item">
-                                                <a href="{{ route('register') }}" class="ml-4 text-sm text-white">新規登録</a>
-                                            </li>
-                                        @endif
-                                    @endauth
-                                </div>
+                                    @if (Route::has('register'))
+                                        <li class="nav-item">
+                                            <a href="{{ route('register') }}" class="ml-4 text-sm text-white">新規登録</a>
+                                        </li>
+                                    @endif
+                                @endauth
+                                
                             @endif
                         <ul>    
                     </div>    
@@ -104,13 +104,13 @@
             </nav>        
                 
             <div class="mt-3">
-                <h1 class="text-center">～町を満喫しよう！</h1>
-                <div class="container">
+                <h1 class="text-center my-5 fw-bold">〇〇町を満喫しよう！</h1>
+                <div class="container mb-5">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <!-- スライドさせる画像の設定 -->
                         <div class="carousel-inner">
                             <div class="carousel-item active ">
-                                <img src="/images/1.jpg" class="d-block w-100 mx-auto" alt="Slide 1">
+                                <img src="/images/9.jpg" class="d-block w-100 mx-auto" alt="Slide 1">
                             </div>
                             <div class="carousel-item">
                                 <img src="/images/2.jpg" class="d-block w-100 mx-auto" alt="Slide 2">
@@ -134,12 +134,12 @@
                 </div>
                 
                 <div class="d-flex row justify-content-center">
-                    <div class="col-9 col-md-4">
+                    <div class="col-9 col-md-5">
                         <a role="botton" href="/search/experience" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4 w-100" style="font-size:40px;">
                         現地で遊ぶ
                         </a>   
                     </div>
-                    <div class="col-9 col-md-4">
+                    <div class="col-9 col-md-5">
                         <a role="botton" href="/search/goods" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4 w-100"  style="font-size:40px;">
                         名産品を買う
                         </a>    

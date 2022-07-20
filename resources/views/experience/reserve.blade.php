@@ -40,7 +40,7 @@
 
         // alert(child_result);
 
-        price.innerHTML = "合計金額："+(adult_result + child_result)+"円";
+        price.innerHTML = (adult_result + child_result);
 
 
 
@@ -96,16 +96,19 @@
                 <div class="mt-2 card shadow-sm bg-f-part text-white">
 
                     <div class="card-body">
-                        <p class="fw-bold">体験日: {{ app('request')->input('keyword') }}</p>
-                        <p class="fw-bold">{{ $experience->name }}</p>
-                        {{-- <p class="fw-bold">日程: {{ $experience->start_date }}</p> --}}
-                        <p> </p>
-                        <p class="fw-bold">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
-                        <div class="d-flex align-items-center fw-bold mb-2">
-                            宿泊/体験人数：
+                        <div class="border-bottom">
+                            <p class="">体験日: {{ app('request')->input('keyword') }}</p>
+                            <p class="">{{ $experience->name }}</p>
+                            {{-- <p>日程: {{ $experience->start_date }}</p> --}}
+                            <p> </p>
+                            <p class="">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mb-2 pt-3 pb-2">
+                            宿泊/体験人数　
                             <label for="quantity_adult">大人</label>
-                            <select class="form-select form-select-sm me-1" style="width:64px" id="adult" name="quantity_adult" type="number" onchange="formSwitch()">
-                                <option selected=""></option>
+                            <select class="form-select form-select-sm me-1" style="width:64px" id="adult" name="quantity_adult"  onchange="formSwitch()">
+                                <option selected="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -118,8 +121,8 @@
                                 <option value="10">10</option>
                             </select>
                             <label for="quantity_child">子ども</label>
-                            <select class="form-select form-select-sm"style="width:64px" id="child" name="quantity_child" type="number" onchange="formSwitch()">
-                                <option selected=""></option>
+                            <select class="form-select form-select-sm"style="width:64px" id="child" name="quantity_child" onchange="formSwitch()">
+                                <option selected="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -132,37 +135,51 @@
                                 <option value="10">10</option>
                             </select>
                         </div>
-                        <p class="fw-bold">大人:<span id="adult_price" value=""> {{ $experience->price_adult }}</span>円 子ども:<span id="child_price" value="">{{ $experience->price_child }}</span> 円</p>
-                        <p class="mb-0 fw-bold">宿泊プラン</p>
-                        @forelse ($experienceFolder->hotelGroup as $hotelGroup)
-                            <div class="fw-bold">
-                                　<input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
-                                <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span class='hotel_adult_price'>{{ $hotelGroup->price_adult }}</span>円 子ども<span class='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
-                            </div>
-                        @empty
-                            <p class="fw-bold">この体験は宿泊がありません</p>
-                        @endforelse
-                        <p class="mb-0 fw-bold">食事プラン</p>
-                        @forelse ($experienceFolder->foodGroup as $foodGroup)
-                            <div>
-                                　<input type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
-                                <label class="fw-bold" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人<span  name='food_adult_price'>{{ $foodGroup->price_adult }}</span>円 子ども<span name='food_child_price'>{{ $foodGroup->price_child }}</span>円</label>
-                            </div>
-                        @empty
-                            <p class="fw-bold">この体験は食事がつきません</p>
-                        @endforelse
-                        @if(!$experienceFolder->foodGroup->isEmpty())
-                            <div class="fw-bold">
-                                　<input type="radio" id="food_group_null" name="food_group_id" value="food_group_null">
-                                <label for="food_group_null">食事なし</label>
-                            </div>
-                        @endempty
-                        <p class="text-end"><span id="price"></span></p>
+                        
+                        <div class="d-flex border-bottom">
+                            <p class="me-3">プラン料金</p>
+                            <div class="d-flex flex-column">
+                                <p class="mb-1">大人:　　<span id="adult_price" value="">{{ $experience->price_adult }}</span>円/人</p>
+                                <p class="">子ども:　<span id="child_price" value="">{{ $experience->price_child }}</span>円/人</p>
+                            </div>      
+                        </div>
+                        
+                        <p class="mb-0 pt-3">宿泊プラン</p>
+                        <div class="mb-2">
+                            @forelse ($experienceFolder->hotelGroup as $hotelGroup)
+                                <div class="">
+                                    　<input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
+                                    <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span class='hotel_adult_price'>{{ $hotelGroup->price_adult }}</span>円 子ども<span class='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
+                                </div>
+                            @empty
+                                <p class="">　この体験は宿泊がありません</p>
+                            @endforelse
+                        </div>
+                       
+                        <p class="mb-0">食事プラン</p>
+                        <div class="mb-3">
+                            @forelse ($experienceFolder->foodGroup as $foodGroup)
+                                <div>
+                                    　<input type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
+                                    <label class="" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人<span  name='food_adult_price'>{{ $foodGroup->price_adult }}</span>円 子ども<span name='food_child_price'>{{ $foodGroup->price_child }}</span>円</label>
+                                </div>
+                            @empty
+                                <p class="">　この体験は食事がつきません</p>
+                            @endforelse
+                            @if(!$experienceFolder->foodGroup->isEmpty())
+                                <div class="">
+                                    　<input type="radio" id="food_group_null" name="food_group_id" value="food_group_null">
+                                    <label for="food_group_null">食事なし</label>
+                                </div>
+                            @endempty
+                        </div>
+                       
+                        <p class="text-end border-top pt-3 fs-4">合計金額：<span id="price" class="fs-4">0</span>円</p>
                     </div>
 
                 </div>
                 <div class="text-center text-md-end">
-                        <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4" style="width:240px" type="submit" value="">
+                        <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4"  type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
                         </button>
                 </div>
