@@ -53,6 +53,26 @@ async function commentCreate(goods_id) {
         goods_result.innerHTML = (goods_price.innerHTML*count);
         
     }
+
+    function check(){
+        var flag = 0;
+          var msg = "入力エラー";
+
+        var goods_result = document.getElementById('goods_result');
+        if(goods_result.innerHTML == '0' ){
+            flag = 1;
+            msg = msg + "\nカートの中身がありません";
+        }
+
+        if(flag == 1){
+              alert(msg);
+              return false;
+          }else{
+               return true;
+              }
+        
+
+    }
 </script>
 
 <div class="container">
@@ -63,7 +83,7 @@ async function commentCreate(goods_id) {
                
             </div>
 
-            <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST">
+            <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST" onsubmit='return check();'>
                 @csrf
         
                 <div class="d-flex">
