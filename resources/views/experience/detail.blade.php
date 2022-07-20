@@ -145,54 +145,76 @@ async function commentCreate(ex_id) {
                 @endforeach
             </div>
 
-            <div class="my-5">  
-                <p class="mb-4">{{ $experienceFolder->description }}</p>
-        
-                <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>     
-            </div>
-
-                @if (app('request')->input('keyword') == "")
-                    <div class="card-body">
-                        <div id='calendar'></div>
+            <div class="row">
+                <div class="my-5 col-12 col-lg-6">  
+                    <p class="mb-4">{{ $experienceFolder->description }}</p>
+            
+                    <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>  
+                    
+                    <div class="mt-4 col-12 col-lg-6 d-lg-none">
+                        @if (app('request')->input('keyword') == "")
+                            <div class="card-body">
+                                <div id='calendar'></div>
+                            </div>
+                        @else
+                            <div class="card-body">
+                                @forelse($experiences as $experience)
+                                    <a class="btn btn-lg btn-pink py-4 rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                                @empty
+                                    <p>この体験はご利用できません</p>
+                                @endforelse
+                            </div>
+                        @endif
                     </div>
-                @else
-                    <div class="card-body">
-                        @forelse($experiences as $experience)
-                            <a class="btn btn-lg btn-pink py-4 rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
-                        @empty
-                            <p>この体験はご利用できません</p>
-                        @endforelse
-                    </div>
-                @endif
-            <!-- </div> -->
+                    
+                    <div class="mt-5 card">
 
-            <div class="mt-2 card">
+                        <div class="d-flex flex-column">
+                            <h4 class="m-3 fw-bold">クチコミ</h4>
+                            <div class="m-3">
+                                <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <select class="form-select" id="rate_input" style="width:80px;" >
+                                        <option value="1">☆1</option>
+                                        <option value="2">☆2</option>
+                                        <option value="3">☆3</option>
+                                        <option value="4">☆4</option>
+                                        <option value="5" selected="selected">☆5</option>
+                                    </select>
+                                    <button class="btn btn-outline-primary"  onclick="commentCreate({{ $experienceFolder->id }})">投稿</button>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="d-flex flex-column">
-                    <h4 class="m-3 fw-bold">クチコミ</h4>
-                    <div class="m-3">
-                        <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
-                        <div class="d-flex justify-content-between align-items-center mt-2">
-                            <select class="form-select" id="rate_input" style="width:80px;" >
-                                <option value="1">☆1</option>
-                                <option value="2">☆2</option>
-                                <option value="3">☆3</option>
-                                <option value="4">☆4</option>
-                                <option value="5" selected="selected">☆5</option>
-                            </select>
-                            <button class="btn btn-outline-primary"  onclick="commentCreate({{ $experienceFolder->id }})">投稿</button>
+                        <div class="card-body">
+                            @foreach ($comments as $comment)
+                                <div class="mt-2">
+                                    @include('components.comment_cell', ['comment'=>$comment])
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-
-                <div class="card-body">
-                    @foreach ($comments as $comment)
-                        <div class="mt-2">
-                            @include('components.comment_cell', ['comment'=>$comment])
+                <!-- <div class="mt-4 col-12 col-lg-6">
+                    @if (app('request')->input('keyword') == "")
+                        <div class="card-body">
+                            <div id='calendar'></div>
                         </div>
-                    @endforeach
-                </div>
+                    @else
+                        <div class="card-body">
+                            @forelse($experiences as $experience)
+                                <a class="btn btn-lg btn-pink py-4 rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                            @empty
+                                <p>この体験はご利用できません</p>
+                            @endforelse
+                        </div>
+                    @endif
+                </div> -->
+
             </div>
+            
+
+           
 
         </div>
     </div>

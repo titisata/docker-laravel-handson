@@ -106,17 +106,17 @@
             <div class="mt-3">
                 <h1 class="text-center my-5 fw-bold">〇〇町を満喫しよう！</h1>
                 <div class="container mb-5">
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
                         <!-- スライドさせる画像の設定 -->
                         <div class="carousel-inner rounded-2">
                             <div class="carousel-item active ">
-                                <img src="/images/9.jpg" class="d-block w-100 mx-auto" alt="Slide 1">
+                                <img src="/images/9.jpg" class="d-block w-100 mx-auto" data-bs-interval="500" alt="Slide 1">
                             </div>
                             <div class="carousel-item">
-                                <img src="/images/2.jpg" class="d-block w-100 mx-auto" alt="Slide 2">
+                                <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="500" alt="Slide 2">
                             </div>
                             <div class="carousel-item">
-                                <img src="/images/3.jpg" class="d-block w-100 mx-auto" alt="Slide 3">
+                                <img src="/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="500" alt="Slide 3">
                             </div>      
                         </div><!-- /.carousel-inner -->
                         <!-- スライドコントロールの設定 -->
@@ -130,26 +130,27 @@
                         </button>
                     </div>
     
-                </div>
+               
                 
-                <div class="d-flex row justify-content-center">
-                    <div class="col-9 col-md-5">
-                        <a role="botton" href="/search/experience" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4 w-100" style="font-size:40px;">
-                        現地で遊ぶ
-                        </a>   
+                    <div class="d-flex row justify-content-evenly mt-5">
+                        <div class="col-9 col-md-5" >
+                            <a role="botton" href="/search/experience" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4 w-100" style="font-size:40px;">
+                            現地で遊ぶ
+                            </a>   
+                        </div>
+                        <div class="col-9 col-md-5">
+                            <a role="botton" href="/search/goods" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4 w-100"  style="font-size:40px;">
+                            名産品を買う
+                            </a>    
+                        </div>        
                     </div>
-                    <div class="col-9 col-md-5">
-                        <a role="botton" href="/search/goods" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4 w-100"  style="font-size:40px;">
-                        名産品を買う
-                        </a>    
-                    </div>        
+                    
+                    <h3 class="text-center mt-5">このサイトでできること</h3>
+                    <p class="text-center col-9" style="margin:0 auto;">
+                        この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
+                        この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
+                    </p>
                 </div>
-                
-                <h3 class="text-center mt-5">このサイトでできること</h3>
-                <p class="text-center col-9" style="margin:0 auto;">
-                    この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
-                    この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
-                </p>
             </div> 
             <footer class="mt-4">
                 <div class="bg-f-part py-3">

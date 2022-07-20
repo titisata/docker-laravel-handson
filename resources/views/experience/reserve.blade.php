@@ -96,7 +96,7 @@
                 <div class="mt-2 card shadow-sm bg-f-part text-white">
 
                     <div class="card-body">
-                        <div class="border-bottom">
+                        <div class="border-bottom border-secondary">
                             <p class="">体験日: {{ app('request')->input('keyword') }}</p>
                             <p class="">{{ $experience->name }}</p>
                             {{-- <p>日程: {{ $experience->start_date }}</p> --}}
@@ -136,7 +136,7 @@
                             </select>
                         </div>
                         
-                        <div class="d-flex border-bottom">
+                        <div class="d-flex border-bottom border-secondary">
                             <p class="me-3">プラン料金</p>
                             <div class="d-flex flex-column">
                                 <p class="mb-1">大人:　　<span id="adult_price" value="">{{ $experience->price_adult }}</span>円/人</p>
@@ -174,7 +174,7 @@
                             @endempty
                         </div>
                        
-                        <p class="text-end border-top pt-3 fs-4">合計金額：<span id="price" class="fs-4">0</span>円</p>
+                        <p class="text-end border-top border-secondary pt-3 fs-5 mb-0">合計金額：<span id="price" class="fs-5">0</span>円</p>
                     </div>
 
                 </div>
