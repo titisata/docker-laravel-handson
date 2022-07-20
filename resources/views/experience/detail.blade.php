@@ -151,7 +151,7 @@ async function commentCreate(ex_id) {
             
                     <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>  
                     
-                    <div class="mt-4 col-12 col-lg-6 d-lg-none">
+                    <!-- <div class="mt-4 col-12 col-lg-6 d-lg-none">
                         @if (app('request')->input('keyword') == "")
                             <div class="card-body">
                                 <div id='calendar'></div>
@@ -165,7 +165,7 @@ async function commentCreate(ex_id) {
                                 @endforelse
                             </div>
                         @endif
-                    </div>
+                    </div> -->
                     
                     <div class="mt-5 card">
 
@@ -195,7 +195,7 @@ async function commentCreate(ex_id) {
                         </div>
                     </div>
                 </div>
-                <!-- <div class="mt-4 col-12 col-lg-6">
+                <div class="mt-4 col-12 col-lg-6">
                     @if (app('request')->input('keyword') == "")
                         <div class="card-body">
                             <div id='calendar'></div>
@@ -209,7 +209,7 @@ async function commentCreate(ex_id) {
                             @endforelse
                         </div>
                     @endif
-                </div> -->
+                </div>
 
             </div>
             

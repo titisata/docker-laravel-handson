@@ -43,6 +43,26 @@
 
     }
 
+    function check(){
+        var flag = 0;
+          var msg = "入力エラー";
+
+        var price = document.getElementById('price');
+        if(price.innerHTML == '0' ){
+            flag = 1;
+            msg = msg + "\nカートの中身がありません";
+        }
+
+        if(flag == 1){
+              alert(msg);
+              return false;
+          }else{
+               return true;
+              }
+        
+
+    }
+
 
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -84,7 +104,7 @@
 
         </div>
         <div class="col-md-9">
-            <form  action="{{ Request::url() }}" method="POST">
+            <form  action="{{ Request::url() }}" method="POST" onsubmit='return check();'>
             @csrf
             <input hidden name="date" type="text" value="{{ $experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : app('request')->input('keyword') }}">
 
