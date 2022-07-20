@@ -11,7 +11,7 @@
         var child = document.getElementById('child').value;
         var adult_price = document.getElementById('adult_price');
         var child_price = document.getElementById('child_price');
-        // var hotel_adult_price = document.querySelectorAll('.hotel_adult_price');
+        // var ItemList = document.getElementsByClassName(['item']);
         // var hotel_child_price = document.getElementsByClassName('hotel_child_price');
         // var food_adult_price = document.getElementsByName('food_adult_price');
         // var food_child_price = document.getElementsByName('food_child_price');
@@ -20,20 +20,15 @@
         // alert (child);
         // alert (adult_price.innerHTML);
         // alert (child_price.innerHTML);
-        // alert (hotel_adult_price.value);
+        // for(let i = 0; i < ItemList.length; i++) {
+        //  console.log(ItemList.item(i).value);
+        // }
         // alert (hotel_child_price.innerHTML);
         // alert (food_adult_price.innerHTML);
         // alert (food_child_price.innerHTML);
 
         var adult_result;
         adult_result = (adult_price.innerHTML*adult);
-
-        // var hotel_adult_result;
-        // hotel_adult_result  = (hotel_adult_price.innerHTML*adult);
-
-        // alert(hotel_adult_result);
-
-        // alert(adult_result);
 
         var child_result;
         child_result = (child_price.innerHTML*child);
@@ -149,7 +144,7 @@
                             @forelse ($experienceFolder->hotelGroup as $hotelGroup)
                                 <div class="">
                                     　<input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
-                                    <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span class='hotel_adult_price'>{{ $hotelGroup->price_adult }}</span>円 子ども<span class='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
+                                    <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span class='item' value="{{ $hotelGroup->price_adult }}">{{ $hotelGroup->price_adult }}</span>円 子ども<span class='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
                                 </div>
                             @empty
                                 <p class="">　この体験は宿泊がありません</p>
