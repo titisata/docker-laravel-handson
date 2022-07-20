@@ -10,7 +10,7 @@ li.item {
 	display: inline-block;
 }	
 </style>
-<div class="container">
+<div class="container" >
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="text-center">
@@ -25,7 +25,7 @@ li.item {
             </div>
             
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの宿泊体験</h2>
-            <div class="d-flex justify-content-evenly ">
+            <div class="" >
                 <ul class="horizontal-list">
                     @foreach ($experiences_folders_is_lodging as $experiences_folder)
                         @include('components.experience_small_cell', ['experienceFolder'=>$experiences_folder])
@@ -34,7 +34,7 @@ li.item {
             </div>
 
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの体験</h2>
-            <div class="d-flex justify-content-evenly ">
+            <div class="">
                 <ul class="horizontal-list">
                     @foreach ($experiences_folders_not_is_lodging as $experiences_folder)
                         @include('components.experience_small_cell', ['experienceFolder'=>$experiences_folder])

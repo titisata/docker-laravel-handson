@@ -108,7 +108,7 @@
                 <div class="container mb-5">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <!-- スライドさせる画像の設定 -->
-                        <div class="carousel-inner">
+                        <div class="carousel-inner rounded-2">
                             <div class="carousel-item active ">
                                 <img src="/images/9.jpg" class="d-block w-100 mx-auto" alt="Slide 1">
                             </div>
@@ -129,8 +129,7 @@
                             <span class="visually-hidden">次へ</span>
                         </button>
                     </div>
-
-                    
+    
                 </div>
                 
                 <div class="d-flex row justify-content-center">
@@ -144,10 +143,8 @@
                         名産品を買う
                         </a>    
                     </div>        
-
                 </div>
                 
-
                 <h3 class="text-center mt-5">このサイトでできること</h3>
                 <p class="text-center col-9" style="margin:0 auto;">
                     この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
@@ -155,37 +152,32 @@
                 </p>
             </div> 
             <footer class="mt-4">
-        <div class="bg-f-part py-3">
-            <h2 class="text-center text-white mb-0">観光協会</h2>
-        </div>
-        <div class = "f-pink">
-            <div class="d-flex py-4 justify-content-start">
-                <div class="d-flex flex-column">
-                    <ul>
-                        <li><a href="#" class="text-white">プログラム一覧</a></li>
-                        <li><a href="#" class="text-white">商品一覧</a></li>
-                        <li><a href="#" class="text-white">支払い方法</a></li>
-                    </ul>
+                <div class="bg-f-part py-3">
+                    <h2 class="text-center text-white mb-0">観光協会</h2>
                 </div>
-                <div class="d-flex flex-column ">
-                    <ul>
-                        <li><a href="#" class="text-white">キャンセル・返品について</a></li>
-                        <li><a href="#" class="text-white">特定商取引に基づく表記</a></li>
-                        <li><a href="#" class="text-white">プライバシーポリシー</a></li>
-                    </ul>
+                <div class = "f-pink">
+                    <div class="d-flex py-4 justify-content-start">
+                        <div class="d-flex flex-column">
+                            <ul>
+                                <li><a href="#" class="text-white">プログラム一覧</a></li>
+                                <li><a href="#" class="text-white">商品一覧</a></li>
+                                <li><a href="#" class="text-white">支払い方法</a></li>
+                            </ul>
+                        </div>
+                        <div class="d-flex flex-column ">
+                            <ul>
+                                <li><a href="#" class="text-white">キャンセル・返品について</a></li>
+                                <li><a href="#" class="text-white">特定商取引に基づく表記</a></li>
+                                <li><a href="#" class="text-white">プライバシーポリシー</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="text-white ps-4">Copyright© 観光協会 All rights reserved.</p>
+                        <p class="text-white pe-4"><small>Powered by URATABI</small></p>
+                    </div>
                 </div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="text-white ps-4">Copyright© 観光協会 All rights reserved.</p>
-                <p class="text-white pe-4"><small>Powered by URATABI</small></p>
-            </div>
-        </div>
-        
-        
-
-        
-    <footer>    
-            
+            <footer>     
         </div>
     </body>
 </html>
