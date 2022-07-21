@@ -35,8 +35,9 @@
 
     console.log(events);
     document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl,  {
+        var calendarEls = document.getElementsByClassName('calendar');
+        for (const calendarEl of calendarEls) {
+            var calendar = new FullCalendar.Calendar(calendarEl,  {
             locale: 'ja',
             buttonText: {
                 prev:     '<',
@@ -50,6 +51,7 @@
                 list:     '一覧'
             },
             events: [...events, ...holiday_events],
+            height:'auto',
             dateClick: function(info) {
                 if (Object.entries(holiday_events_date).some(([key, value]) => value.date == info.dateStr)) {
                     alert('お休みです');
@@ -59,6 +61,9 @@
             }
         });
         calendar.render();
+            
+        }
+        
     });
 </script>
 
@@ -127,10 +132,10 @@ async function commentCreate(ex_id) {
 
             <div class="d-flex flex-wrap justify-content-between">
                 @foreach($experienceFolder->images() as $image)
-                    <a role="button" data-bs-toggle="modal" data-bs-target="#Modal" class="mt-5" style="width:30%;">
+                    <a role="button" data-bs-toggle="modal" data-bs-target="#modal{{ $image->id }}" class="mt-5" style="width:30%;">
                         <img class="card-img" style=" height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
                     </a>
-                    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel">
+                    <div class="modal fade" id="modal{{ $image->id }}" tabindex="-1" aria-labelledby="ModalLabel">
                         <div class="modal-dialog">
                             <div class="modal-content ">
                                 <div class="modal-body">
@@ -151,12 +156,16 @@ async function commentCreate(ex_id) {
             
                     <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>  
                     
-                    <!-- <div class="mt-4 col-12 col-lg-6 d-lg-none">
+                    <div class="mt-4 col-12 col-lg-6 d-lg-none">
                         @if (app('request')->input('keyword') == "")
                             <div class="card-body">
-                                <div id='calendar'></div>
+                                <div class='calendar'></div>
                             </div>
-                        @else
+                        
+                           
+                        @endif
+                        @if (app('request')->input('keyword') != "")
+                        
                             <div class="card-body">
                                 @forelse($experiences as $experience)
                                     <a class="btn btn-lg btn-pink py-4 rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
@@ -165,12 +174,18 @@ async function commentCreate(ex_id) {
                                 @endforelse
                             </div>
                         @endif
-                    </div> -->
+                        
+                    </div>
                     
                     <div class="mt-5 card">
 
                         <div class="d-flex flex-column">
                             <h4 class="m-3 fw-bold">クチコミ</h4>
+                                @if($experienceFolder->average_rate < 1)
+                                 0
+                                @elseif($experienceFolder->average_rate < 2)
+                                 1
+                                @endif
                             <div class="m-3">
                                 <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                                 <div class="d-flex justify-content-between align-items-center mt-2">
@@ -197,8 +212,8 @@ async function commentCreate(ex_id) {
                 </div>
                 <div class="mt-4 col-12 col-lg-6">
                     @if (app('request')->input('keyword') == "")
-                        <div class="card-body">
-                            <div id='calendar'></div>
+                        <div class="">
+                            <div class='calendar'></div>
                         </div>
                     @else
                         <div class="card-body">

@@ -83,11 +83,19 @@
 .btn-pink:hover{
     color:#FB6E86;
 }
-input[type="radio"] {
-    
+input[type="radio"] { 
     height:16px;
     width:16px;
 }
+
+@media screen and (max-width: 320px) {
+    input[type="radio"] { 
+    height:24px;
+    width:24px;
+    }
+
+}
+
 
 </style>
 <div class="container">
