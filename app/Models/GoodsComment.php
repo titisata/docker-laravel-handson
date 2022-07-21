@@ -11,7 +11,7 @@ class GoodsComment extends Model
 
     protected $fillable= [
         'user_id',
-        'goods_id',
+        'goods_folder_id',
         'content',
         'rate',
     ];

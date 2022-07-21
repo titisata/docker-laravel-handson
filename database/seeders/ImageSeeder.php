@@ -43,62 +43,62 @@ class ImageSeeder extends Seeder
         ]);
         Image::create([
             'image_path' => '/images/4.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 1,
         ]);
         Image::create([
             'image_path' => '/images/5.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 2,
         ]);
         Image::create([
             'image_path' => '/images/calpis.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 3,
         ]);
         Image::create([
             'image_path' => '/images/kokeshi.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 4,
         ]);
         Image::create([
             'image_path' => '/images/4.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 5,
         ]);
         Image::create([
             'image_path' => '/images/5.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 6,
         ]);
         Image::create([
             'image_path' => '/images/calpis.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 7,
         ]);
         Image::create([
             'image_path' => '/images/calpis.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 8,
         ]);
         Image::create([
             'image_path' => '/images/calpis.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 9,
         ]);
         Image::create([
             'image_path' => '/images/kokeshi.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 10,
         ]);
         Image::create([
             'image_path' => '/images/kokeshi.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 11,
         ]);
         Image::create([
             'image_path' => '/images/kokeshi.jpg',
-            'table_name' => 'goods',
+            'table_name' => 'goods_folders',
             'table_id' => 12,
         ]);
         

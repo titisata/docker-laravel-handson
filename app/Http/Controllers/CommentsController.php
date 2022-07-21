@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExperienceComment;
 use App\Models\GoodsComment;
+use App\Models\GoodsFolder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +38,7 @@ class CommentsController extends Controller
 
         $comment = [
             'user_id' => $uid,
-            'goods_id' => $goods_id,
+            'goods_folder_id' => $goods_id,
             'content' => $content,
             'rate' => $rate,
         ];
