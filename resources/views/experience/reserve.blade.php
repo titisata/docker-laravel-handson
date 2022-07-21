@@ -83,6 +83,11 @@
 .btn-pink:hover{
     color:#FB6E86;
 }
+input[type="radio"] {
+    
+    height:16px;
+    width:16px;
+}
 
 </style>
 <div class="container">
