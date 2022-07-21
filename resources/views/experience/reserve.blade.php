@@ -5,13 +5,15 @@
     // var adult = document.getElementById('adult').value;
     // var child = document.getElementById('child').value;
 
+    
+    
     function formSwitch(){
         var price = document.getElementById('price');
         var adult = document.getElementById('adult').value;
         var child = document.getElementById('child').value;
         var adult_price = document.getElementById('adult_price');
         var child_price = document.getElementById('child_price');
-        // var ItemList = document.getElementsByClassName(['item']);
+        // var hotel_adult_price = document.getElementsByClassName('hotel_adult_price');
         // var hotel_child_price = document.getElementsByClassName('hotel_child_price');
         // var food_adult_price = document.getElementsByName('food_adult_price');
         // var food_child_price = document.getElementsByName('food_child_price');
@@ -20,8 +22,8 @@
         // alert (child);
         // alert (adult_price.innerHTML);
         // alert (child_price.innerHTML);
-        // for(let i = 0; i < ItemList.length; i++) {
-        //  console.log(ItemList.item(i).value);
+        // for(let i = 0; i < hotel_adult_price.length; i++) {
+        // console.log(hotel_adult_price(i));
         // }
         // alert (hotel_child_price.innerHTML);
         // alert (food_adult_price.innerHTML);
@@ -162,29 +164,29 @@
                         <p class="mb-0 pt-3">宿泊プラン</p>
                         <div class="mb-2">
                             @forelse ($experienceFolder->hotelGroup as $hotelGroup)
-                                <div class="">
-                                    　<input type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
-                                    <label for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span class='item' value="{{ $hotelGroup->price_adult }}">{{ $hotelGroup->price_adult }}</span>円 子ども<span class='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
+                                    <label class="form-check-label" for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span id='hotel_adult_price' value="{{ $hotelGroup->price_adult }}">{{ $hotelGroup->price_adult }}</span>円 子ども<span class='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
                                 </div>
                             @empty
-                                <p class="">　この体験は宿泊がありません</p>
+                                <p class="">この体験は宿泊がありません</p>
                             @endforelse
                         </div>
                        
                         <p class="mb-0">食事プラン</p>
                         <div class="mb-3">
                             @forelse ($experienceFolder->foodGroup as $foodGroup)
-                                <div>
-                                    　<input type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
-                                    <label class="" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人<span  name='food_adult_price'>{{ $foodGroup->price_adult }}</span>円 子ども<span name='food_child_price'>{{ $foodGroup->price_child }}</span>円</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
+                                    <label class="form-check-label" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人<span  name='food_adult_price'>{{ $foodGroup->price_adult }}</span>円 子ども<span name='food_child_price'>{{ $foodGroup->price_child }}</span>円</label>
                                 </div>
                             @empty
-                                <p class="">　この体験は食事がつきません</p>
+                                <p class="">この体験は食事がつきません</p>
                             @endforelse
                             @if(!$experienceFolder->foodGroup->isEmpty())
-                                <div class="">
-                                    　<input type="radio" id="food_group_null" name="food_group_id" value="food_group_null">
-                                    <label for="food_group_null">食事なし</label>
+                                <div class="form-check">
+                                    <input class="form-check-input"  type="radio" id="food_group_null" name="food_group_id" value="food_group_null">
+                                    <label class="form-check-label" for="food_group_null">食事なし</label>
                                 </div>
                             @endempty
                         </div>

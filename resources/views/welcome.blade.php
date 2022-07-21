@@ -105,11 +105,11 @@
                 
             <div class="mt-3">
                 <h1 class="text-center my-5 fw-bold">〇〇町を満喫しよう！</h1>
-                <div class="container mb-5">
+               
                     <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
                         <!-- スライドさせる画像の設定 -->
                         <div class="carousel-inner rounded-2">
-                            <div class="carousel-item active ">
+                            <div class="carousel-item active">
                                 <img src="/images/9.jpg" class="d-block w-100 mx-auto" data-bs-interval="500" alt="Slide 1">
                             </div>
                             <div class="carousel-item">
@@ -131,7 +131,7 @@
                     </div>
     
                
-                
+                <div class="container mb-5">
                     <div class="d-flex row justify-content-evenly mt-5">
                         <div class="col-9 col-md-5" >
                             <a role="botton" href="/search/experience" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-pill shadow-sm fs-4 w-100" style="font-size:40px;">
