@@ -83,7 +83,12 @@ async function commentCreate(goods_folder_id) {
                
             </div>
 
+<<<<<<< HEAD
             
+=======
+        
+                <p>会社名: <a href="/partner/{{ $goods_folder->partner->id }}">{{ $goods_folder->partner->name }}</a></p>
+>>>>>>> ad024a6693088d7f075d598b3f108d95b90dbf90
                 <div class="d-flex mt-3">
                     <h4 class="fw-bold">商品名：</h4>
                     <h4 class="fw-bold"> {{ $goods_folder->name }}</h4>

@@ -44,6 +44,17 @@ class ExperienceFolder extends Model
     }
 
     /**
+     * パートナーを取得
+     *
+     * @return Partner
+     */
+
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
+    }
+
+    /**
      * コメントを取得
      *
      * @return Collection<ExperienceComment>

@@ -152,6 +152,7 @@ async function commentCreate(ex_id) {
 
             <div class="row">
                 <div class="my-5 col-12 col-lg-6">  
+                    <p>会社名: <a href="/partner/{{ $experienceFolder->partner->id }}">{{ $experienceFolder->partner->name }}</a></p>
                     @if (app('request')->input('keyword') != "")
                         <h4 class="">体験日: {{ app('request')->input('keyword') }}</h4>
                         <h5 class="">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}</h5>
