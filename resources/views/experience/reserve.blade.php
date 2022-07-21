@@ -133,7 +133,7 @@ input[type="radio"] {
                         
                         <div class="d-flex align-items-center mb-2 pt-3 pb-2 fs-5">
                             宿泊/体験人数　
-                            <label for="quantity_adult">大人</label>
+                            <label for="quantity_adult">大人 </label>
                             <select class="form-select form-select-sm me-1" style="width:64px" id="adult" name="quantity_adult"  onchange="formSwitch()">
                                 <option selected="0">0</option>
                                 <option value="1">1</option>
@@ -147,7 +147,7 @@ input[type="radio"] {
                                 <option value="9">9</option>
                                 <option value="10">10</option>
                             </select>
-                            <label for="quantity_child">子ども</label>
+                            <label for="quantity_child" class="ms-1">子ども </label>
                             <select class="form-select form-select-sm"style="width:64px" id="child" name="quantity_child" onchange="formSwitch()">
                                 <option selected="0">0</option>
                                 <option value="1">1</option>
@@ -166,8 +166,8 @@ input[type="radio"] {
                         <div class="d-flex border-bottom border-secondary fs-5">
                             <p class="me-3">プラン料金</p>
                             <div class="d-flex flex-column">
-                                <p class="mb-1">大人:　　<span id="adult_price" value="">{{ $experience->price_adult }}</span>円/人</p>
-                                <p class="">子ども:　<span id="child_price" value="">{{ $experience->price_child }}</span>円/人</p>
+                                <p class="mb-1">　大人 : <span id="adult_price" value="">{{ $experience->price_adult }}</span>円/人</p>
+                                <p class="">子ども : <span id="child_price" value="">{{ $experience->price_child }}</span>円/人</p>
                             </div>      
                         </div>
                         
@@ -176,7 +176,7 @@ input[type="radio"] {
                             @forelse ($experienceFolder->hotelGroup as $hotelGroup)
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
-                                    <label class="form-check-label" for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span id='hotel_adult_price' value="{{ $hotelGroup->price_adult }}">{{ $hotelGroup->price_adult }}</span>円 子ども<span class='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
+                                    <label class="form-check-label" for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span id='hotel_adult_price' value="{{ $hotelGroup->price_adult }}">{{ $hotelGroup->price_adult }}</span>円　子ども<span class='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
                                 </div>
                             @empty
                                 <p class="">この体験は宿泊がありません</p>
@@ -188,7 +188,7 @@ input[type="radio"] {
                             @forelse ($experienceFolder->foodGroup as $foodGroup)
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
-                                    <label class="form-check-label" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人<span  name='food_adult_price'>{{ $foodGroup->price_adult }}</span>円 子ども<span name='food_child_price'>{{ $foodGroup->price_child }}</span>円</label>
+                                    <label class="form-check-label" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人<span  name='food_adult_price'>{{ $foodGroup->price_adult }}</span>円　子ども<span name='food_child_price'>{{ $foodGroup->price_child }}</span>円</label>
                                 </div>
                             @empty
                                 <p class="">この体験は食事がつきません</p>
