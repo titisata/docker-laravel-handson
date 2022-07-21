@@ -159,7 +159,8 @@ async function commentCreate(ex_id) {
                     
                     <p class="mb-4">{{ $experienceFolder->description }}</p>
             
-                    <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>  
+                    <p class="fw-bold text-end h5 border-top pt-3">　大人：{{ $experienceFolder->price }}円~</p>
+                    <p class="fw-bold text-end h5">子ども：{{ $experienceFolder->price }}円~</p>  
                     
                     <div class="mt-4 col-12 col-lg-6 d-lg-none">
                         @if (app('request')->input('keyword') == "")
@@ -167,11 +168,10 @@ async function commentCreate(ex_id) {
                                 <div class='calendar'></div>
                             </div>
                         
-                           
                         @endif
                         @if (app('request')->input('keyword') != "")
                         
-                            <div class="card-body">
+                            <div class="card-body mt-4 col-12 col-lg-6 d-lg-none">
                                 @forelse($experiences as $experience)
                                     <a class="btn btn-lg btn-pink rounded-pill text-white my-2 w-100 btn-shadow fs-3" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                                 @empty
@@ -258,7 +258,7 @@ async function commentCreate(ex_id) {
                         </div>
                     </div>
                 </div>
-                <div class="mt-4 col-12 col-lg-6">
+                <div class="mt-4 col-12 d-none d-lg-block col-lg-6">
                     @if (app('request')->input('keyword') == "")
                         <div class="">
                             <div class='calendar'></div>
