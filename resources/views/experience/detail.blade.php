@@ -154,12 +154,13 @@ async function commentCreate(ex_id) {
                 <div class="my-5 col-12 col-lg-6">  
                     @if (app('request')->input('keyword') != "")
                         <h4 class="">体験日: {{ app('request')->input('keyword') }}</h4>
-                        <p class="">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
+                        <h5 class="">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}</h5>
                     @endif
                     
                     <p class="mb-4">{{ $experienceFolder->description }}</p>
             
-                    <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>  
+                    <p class="fw-bold text-end h5 border-top pt-3">　大人：{{ $experienceFolder->price }}円~</p>
+                    <p class="fw-bold text-end h5">子ども：{{ $experienceFolder->price }}円~</p>  
                     
                     <div class="mt-4 col-12 col-lg-6 d-lg-none">
                         @if (app('request')->input('keyword') == "")
@@ -167,11 +168,10 @@ async function commentCreate(ex_id) {
                                 <div class='calendar'></div>
                             </div>
                         
-                           
                         @endif
                         @if (app('request')->input('keyword') != "")
                         
-                            <div class="card-body">
+                            <div class="card-body mt-4 col-12 col-lg-6 d-lg-none">
                                 @forelse($experiences as $experience)
                                     <a class="btn btn-lg btn-pink rounded-pill text-white my-2 w-100 btn-shadow fs-3" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                                 @empty
@@ -186,7 +186,9 @@ async function commentCreate(ex_id) {
 
                         <div class="d-flex flex-column">
                             <h4 class="m-3 fw-bold">クチコミ</h4>
+                                
                                 @if($experienceFolder->average_rate < 1.5)
+                                    <p class="mb-0 ms-3">テスト用に表示、0は表示しないようにする</p>
                                     <div class="d-flex align-items-center ms-3">
                                         <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                         <img src="/images/star1.png" style="width:120px;height35px">
@@ -256,7 +258,7 @@ async function commentCreate(ex_id) {
                         </div>
                     </div>
                 </div>
-                <div class="mt-4 col-12 col-lg-6">
+                <div class="mt-4 col-12 d-none d-lg-block col-lg-6">
                     @if (app('request')->input('keyword') == "")
                         <div class="">
                             <div class='calendar'></div>
