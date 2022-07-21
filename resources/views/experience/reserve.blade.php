@@ -133,34 +133,38 @@ input[type="radio"] {
                         
                         <div class="d-flex align-items-center mb-2 pt-3 pb-2 fs-5">
                             宿泊/体験人数　
-                            <label for="quantity_adult">大人 </label>
-                            <select class="form-select form-select-sm me-1" style="width:64px" id="adult" name="quantity_adult"  onchange="formSwitch()">
-                                <option selected="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
-                            <label for="quantity_child" class="ms-1">子ども </label>
-                            <select class="form-select form-select-sm"style="width:64px" id="child" name="quantity_child" onchange="formSwitch()">
-                                <option selected="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
+                            <div class="d-flex flex-wrap">
+                                <label for="quantity_adult">大人 </label>
+                                <select class="form-select form-select-sm me-1" style="width:64px" id="adult" name="quantity_adult"  onchange="formSwitch()">
+                                    <option selected="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <div class="d-flex flex-wrap">
+                                <label for="quantity_child" class="ms-1">子ども </label>
+                                <select class="form-select form-select-sm"style="width:64px" id="child" name="quantity_child" onchange="formSwitch()">
+                                    <option selected="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
                         </div>
                         
                         <div class="d-flex border-bottom border-secondary fs-5">
