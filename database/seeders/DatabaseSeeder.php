@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CompanySeeder::class);
         $this->call(ExperienceFolderSeeder::class);
         $this->call(ExperienceSeeder::class);
+        $this->call(GoodsFolderSeeder::class);
         $this->call(GoodsSeeder::class);
         $this->call(GoodsOrderSeeder::class);
         $this->call(FoodGroupSeeder::class);

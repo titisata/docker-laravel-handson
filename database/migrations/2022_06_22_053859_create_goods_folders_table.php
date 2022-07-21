@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('category3', 50)->nullable()->index();
             $table->integer('recommend_flag')->nullable()->index();
             $table->integer('recommend_sort_no')->nullable();
+            $table->float('average_rate')->default(0);
             $table->integer('price')->index();
             $table->timestamps();
         });

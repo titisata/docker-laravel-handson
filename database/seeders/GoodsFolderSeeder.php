@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Goods;
+use App\Models\GoodsFolder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class GoodsSeeder extends Seeder
+class GoodsFolderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,131 +15,149 @@ class GoodsSeeder extends Seeder
      */
     public function run()
     {
-        Goods::create([
+        
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 1,
             'name' => '白い恋人 12個入り(test)',
             'description' => '北海道のおいしいお土産テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'food',
+            'category2' => 'aa',
+            'category3' => null,
             'price' => 100,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 10,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 2,
             'name' => '信州そば 4人前(test)',
             'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'food',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 9,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 3,
             'name' => 'カルピス (test)',
             'description' => '乳酸菌飲料と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'drink',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 8,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 4,
             'name' => 'こけし(test)',
             'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'goods',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 7,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 5,
             'name' => '白い恋人 12個入り(test)',
             'description' => '北海道のおいしいお土産テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'food',
+            'category2' => 'aa',
+            'category3' => null,
             'price' => 100,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 6,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 6,
             'name' => '信州そば 4人前(test)',
             'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'food',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 5,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 7,
             'name' => 'カルピス (test)',
             'description' => '乳酸菌飲料と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'drink',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 4,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 8,
             'name' => 'カルピス (test)',
             'description' => '乳酸菌飲料と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'drink',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 3,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 9,
             'name' => 'カルピス (test)',
             'description' => '乳酸菌飲料と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'drink',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 2,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 10,
             'name' => 'こけし(test)',
             'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'goods',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 1,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 11,
             'name' => 'こけし(test)',
             'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'goods',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 11,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 12,
             'name' => 'こけし(test)',
             'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'goods',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 12,
         ]);
-        Goods::create([
+        GoodsFolder::create([
             'partner_id' => 1,
-            'goods_folder_id' => 13,
-            'name' => 'こけし1(test)',
+            'name' => 'こけし(test)',
             'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 1,
-            'quantity' => 5,
+            'category1' => 'goods',
+            'category2' => null,
+            'category3' => null,
             'price' => 500,
-        ]);
-        Goods::create([
-            'partner_id' => 1,
-            'goods_folder_id' => 13,
-            'name' => 'こけし2(test)',
-            'description' => '信州と言ったらこれ！テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
-            'sort_no' => 2,
-            'quantity' => 10,
-            'price' => 1000,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 13,
         ]);
     }
 }
