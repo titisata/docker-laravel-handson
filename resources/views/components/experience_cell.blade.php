@@ -20,7 +20,7 @@
                     </div>
                     <div class="card-body">
                         
-                        <p class="card-text text-end fw-bold fs-4">￥{{ $experienceFolder->price }}～</p>
+                        <p class="card-text text-end fw-bold fs-4">￥{{ $experienceFolder->price_child }}～</p>
                         <p class="card-text">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
                     </div>
                 </div>

@@ -159,8 +159,8 @@ async function commentCreate(ex_id) {
                     
                     <p class="mb-4">{{ $experienceFolder->description }}</p>
             
-                    <p class="fw-bold text-end h5 border-top pt-3">　大人：{{ $experienceFolder->price }}円~</p>
-                    <p class="fw-bold text-end h5">子ども：{{ $experienceFolder->price }}円~</p>  
+                    <p class="fw-bold text-end h5 border-top pt-3">　大人：{{ $experienceFolder->price_adult }}円~</p>
+                    <p class="fw-bold text-end h5">子ども：{{ $experienceFolder->price_child }}円~</p>  
                     
                     <div class="mt-4 col-12 col-lg-6 d-lg-none">
                         @if (app('request')->input('keyword') == "")
