@@ -110,13 +110,13 @@
                         <!-- スライドさせる画像の設定 -->
                         <div class="carousel-inner rounded-2">
                             <div class="carousel-item active">
-                                <img src="/images/9.jpg" class="d-block w-100 mx-auto" data-bs-interval="500" alt="Slide 1">
+                                <img src="/images/9.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
                             </div>
                             <div class="carousel-item">
-                                <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="500" alt="Slide 2">
+                                <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
                             </div>
                             <div class="carousel-item">
-                                <img src="/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="500" alt="Slide 3">
+                                <img src="/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
                             </div>      
                         </div><!-- /.carousel-inner -->
                         <!-- スライドコントロールの設定 -->
