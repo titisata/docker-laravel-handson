@@ -182,27 +182,50 @@ async function commentCreate(ex_id) {
                         <div class="d-flex flex-column">
                             <h4 class="m-3 fw-bold">クチコミ</h4>
                                 @if($experienceFolder->average_rate < 1.5)
-                                <div>
-                                 <p>{{ $experienceFolder->average_rate }}</p>
-                                 <img> 
-                                </div>
-                                 
+                                    <div class="d-flex align-items-center ms-3">
+                                        <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
+                                        <img src="/images/star1.png" style="width:120px;height35px">
+                                    </div>
                                 @elseif($experienceFolder->average_rate < 2)
-                                 1.5
+                                    <div class="d-flex align-items-center ms-3">
+                                    <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
+                                    <img src="/images/star1.5.png" style="width:120px;height35px">
+                                    </div>
                                  @elseif($experienceFolder->average_rate < 2.5)
-                                 2
+                                    <div class="d-flex align-items-center ms-3">
+                                    <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
+                                    <img src="/images/star2.png" style="width:120px;height35px">
+                                    </div>
                                  @elseif($experienceFolder->average_rate < 3)
-                                 2.5
+                                    <div class="d-flex align-items-center ms-3">
+                                    <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
+                                    <img src="/images/star2.5.png" style="width:120px;height35px">
+                                    </div>
                                  @elseif($experienceFolder->average_rate < 3.5)
-                                 3
+                                    <div class="d-flex align-items-center ms-3">
+                                    <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
+                                    <img src="/images/star3.png" style="width:120px;height35px">
+                                    </div>
                                  @elseif($experienceFolder->average_rate < 4)
-                                 3.5
+                                    <div class="d-flex align-items-center ms-3">
+                                    <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
+                                    <img src="/images/star3.5.png" style="width:120px;height35px">
+                                    </div>
                                  @elseif($experienceFolder->average_rate < 4.5)
-                                 4
+                                    <div class="d-flex align-items-center ms-3">
+                                    <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
+                                    <img src="/images/star4.png" style="width:120px;height35px">
+                                    </div>
                                  @elseif($experienceFolder->average_rate < 5)
-                                 4.5
+                                    <div class="d-flex align-items-center ms-3">
+                                    <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
+                                    <img src="/images/star4.5.png" style="width:120px;height35px">
+                                    </div>
                                  @elseif($experienceFolder->average_rate = 5)
-                                 5
+                                    <div class="d-flex align-items-center ms-3">
+                                    <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
+                                    <img src="/images/star5.png" style="width:120px;height35px">
+                                    </div>
                                 @endif
                             <div class="m-3">
                                 <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
