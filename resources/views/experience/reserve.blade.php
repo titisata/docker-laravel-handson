@@ -209,6 +209,19 @@ input[type="radio"] {
                     </div>
 
                 </div>
+
+                <div class="mt-2 card shadow-sm bg-f-part text-white">
+
+                    <div class="card-body">
+                        <p class="fs-5">体験施設・宿泊施設等への連絡事項</p>
+                        <div>
+                        <textarea class="form-control" row="10" cols="60" placeholder="サンプルとして配置しましたが設定はできていません" id="comment"></textarea>
+
+                        </div>
+
+                    </div>
+                
+                </div>    
                 <div class="text-center text-md-end mt-3">
                         <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4"  type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
