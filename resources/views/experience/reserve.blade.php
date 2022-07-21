@@ -110,7 +110,7 @@ input[type="radio"] {
             <div class="mt-4">
                     <div class="card-body">
                     <p class="">{{ $experienceFolder->description }}</p>
-                        <p class="pt-3 fs-5 text-end">体験料金の目安は{{ $experienceFolder->price }}円~</p>
+                        <p class="pt-3 fs-5 text-end">体験料金の目安は{{ $experienceFolder->price_child }}円~</p>
                     </div>
                 </div>
 

@@ -23,7 +23,8 @@ return new class extends Migration {
             $table->string('category3', 50)->nullable()->index();
             $table->boolean('is_lodging'); // 泊りか？
             $table->boolean('is_before_lodging'); // 前泊か？
-            $table->integer('price')->index();
+            $table->integer('price_child')->index();
+            $table->integer('price_adult')->index();
             $table->timestamps();
         });
     }
