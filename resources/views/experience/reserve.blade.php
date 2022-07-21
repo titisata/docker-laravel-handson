@@ -13,18 +13,15 @@
         var child = document.getElementById('child').value;
         var adult_price = document.getElementById('adult_price');
         var child_price = document.getElementById('child_price');
-        // var hotel_adult_price = document.getElementsByClassName('hotel_adult_price');
+        var hotel_adult_prices = document.getElementsByClassName('hotel_adult_price');
         // var hotel_child_price = document.getElementsByClassName('hotel_child_price');
         // var food_adult_price = document.getElementsByName('food_adult_price');
         // var food_child_price = document.getElementsByName('food_child_price');
 
-        // alert (adult);
-        // alert (child);
-        // alert (adult_price.innerHTML);
-        // alert (child_price.innerHTML);
-        // for(let i = 0; i < hotel_adult_price.length; i++) {
-        // console.log(hotel_adult_price(i));
-        // }
+        for (const hotel_adult_price of hotel_adult_prices) {
+         alert(hotel_adult_price);
+        }
+        
         // alert (hotel_child_price.innerHTML);
         // alert (food_adult_price.innerHTML);
         // alert (food_child_price.innerHTML);

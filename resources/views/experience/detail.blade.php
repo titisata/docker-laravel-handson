@@ -181,10 +181,28 @@ async function commentCreate(ex_id) {
 
                         <div class="d-flex flex-column">
                             <h4 class="m-3 fw-bold">クチコミ</h4>
-                                @if($experienceFolder->average_rate < 1)
-                                 0
+                                @if($experienceFolder->average_rate < 1.5)
+                                <div>
+                                 <p>{{ $experienceFolder->average_rate }}</p>
+                                 <img> 
+                                </div>
+                                 
                                 @elseif($experienceFolder->average_rate < 2)
-                                 1
+                                 1.5
+                                 @elseif($experienceFolder->average_rate < 2.5)
+                                 2
+                                 @elseif($experienceFolder->average_rate < 3)
+                                 2.5
+                                 @elseif($experienceFolder->average_rate < 3.5)
+                                 3
+                                 @elseif($experienceFolder->average_rate < 4)
+                                 3.5
+                                 @elseif($experienceFolder->average_rate < 4.5)
+                                 4
+                                 @elseif($experienceFolder->average_rate < 5)
+                                 4.5
+                                 @elseif($experienceFolder->average_rate = 5)
+                                 5
                                 @endif
                             <div class="m-3">
                                 <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
