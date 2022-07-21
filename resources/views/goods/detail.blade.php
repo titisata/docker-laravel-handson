@@ -83,7 +83,7 @@ async function commentCreate(goods_folder_id) {
                
             </div>
 
-        
+            
                 <div class="d-flex mt-3">
                     <h4 class="fw-bold">商品名：</h4>
                     <h4 class="fw-bold"> {{ $goods_folder->name }}</h4>
@@ -91,14 +91,16 @@ async function commentCreate(goods_folder_id) {
                 
                 <h5 class="fw-bold mt-4">商品説明</h5>
                 <p>{{ $goods_folder->description }}</p>
+        
 
                 @forelse($goods_folder->goods as $goods)
-                <form class="mb-3 mt-3" action="{{ Request::url() }}" method="POST" onsubmit='return check();'>    
-                    <div class="card">
+                <form class="mb-3 " action="{{ Request::url() }}" method="POST" onsubmit='return check();'>    
+                    <div class="card bg-f-part text-white mt-3 p-3">
                         @csrf
-                        <p>{{ $goods->name }}</p>
-                        
-                        <p class="fw-bold text-end h3 pt-3"><span id="goods_price_{{ $goods->id }}" value="">{{ $goods->price }}</span>円/個</p>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h5 class="fw-bold ">{{ $goods->name }}</h5>   
+                            <p class="fw-bold text-end h3 "><span id="goods_price_{{ $goods->id }}" value="">{{ $goods->price }}</span>円/個</p>
+                        </div>
                         <div class="d-flex align-items-center justify-content-end pb-4 border-bottom">
                             <label class="fs-5 me-1" for="quantity">数量</label>
                             <div class="d-flex">
@@ -118,7 +120,7 @@ async function commentCreate(goods_folder_id) {
                                 
                             </div>    
                         </div> 
-                        <p class="text-end border-top pt-3 fs-4 fw-bold">合計金額：<span id="goods_result_{{ $goods->id }}" class="fs-4">0</span>円</p>
+                        <p class="text-end pt-3 fs-4 fw-bold ">合計金額：<span id="goods_result_{{ $goods->id }}" class="fs-4">0</span>円</p>
 
                     </div>
                     
