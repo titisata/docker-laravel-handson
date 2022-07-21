@@ -125,7 +125,7 @@ async function commentCreate(ex_id) {
         <div class="col-md-9">
             <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
-                <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));height:68px;">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgb(125, 209, 52));height:68px;">
                     <h3 class="fw-bold text-white py-auto" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
                 </div>
             </div>
