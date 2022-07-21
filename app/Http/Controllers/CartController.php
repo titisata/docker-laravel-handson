@@ -56,6 +56,24 @@ class CartController extends Controller
         return view('cart.purchase', compact('price'));
     }
 
+    public function deleteExperience(Request $request)
+    {
+        $uid = Auth::user()->id;
+        $item_id = $request->id;
+        // TODO: UIDの確認を入れる
+        ExperienceCartItem::destroy($item_id);
+        return response()->json(['message'=>'success']);
+    }
+
+    public function deleteGoods(Request $request)
+    {
+        $uid = Auth::user()->id;
+        $item_id = $request->id;
+        // TODO: UIDの確認を入れる
+        GoodCartItem::destroy($item_id);
+        return response()->json(['message'=>'success']);
+    }
+
     public function purchase_post(Request $request)
     {
         $uid = Auth::user()->id;
