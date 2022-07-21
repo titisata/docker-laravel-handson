@@ -49,7 +49,7 @@
         var price = document.getElementById('price');
         if(price.innerHTML == '0' ){
             flag = 1;
-            msg = msg + "\nカートの中身がありません";
+            msg = msg + "\n人数が選択されていません";
         }
 
         if(flag == 1){
@@ -110,7 +110,7 @@ input[type="radio"] {
             <div class="mt-4">
                     <div class="card-body">
                     <p class="">{{ $experienceFolder->description }}</p>
-                        <p class="pt-3 h5 text-end">体験料金の目安は{{ $experienceFolder->price }}円~</p>
+                        <p class="pt-3 fs-5 text-end">体験料金の目安は{{ $experienceFolder->price }}円~</p>
                     </div>
                 </div>
 
@@ -125,13 +125,13 @@ input[type="radio"] {
                     <div class="card-body">
                         <div class="border-bottom border-secondary">
                             <div class="d-flex">
-                                <p class="">体験日: {{ app('request')->input('keyword') }}</p>
-                                <p class="ms-4">{{ $experience->name }}</p>
+                                <p class="fs-5">体験日: {{ app('request')->input('keyword') }}</p>
+                                <p class="ms-4 fs-5">{{ $experience->name }}</p>
                             </div>              
-                            <p class="">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
+                            <p class="fs-5">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
                         </div>
                         
-                        <div class="d-flex align-items-center mb-2 pt-3 pb-2">
+                        <div class="d-flex align-items-center mb-2 pt-3 pb-2 fs-5">
                             宿泊/体験人数　
                             <label for="quantity_adult">大人</label>
                             <select class="form-select form-select-sm me-1" style="width:64px" id="adult" name="quantity_adult"  onchange="formSwitch()">
@@ -163,7 +163,7 @@ input[type="radio"] {
                             </select>
                         </div>
                         
-                        <div class="d-flex border-bottom border-secondary">
+                        <div class="d-flex border-bottom border-secondary fs-5">
                             <p class="me-3">プラン料金</p>
                             <div class="d-flex flex-column">
                                 <p class="mb-1">大人:　　<span id="adult_price" value="">{{ $experience->price_adult }}</span>円/人</p>
@@ -171,8 +171,8 @@ input[type="radio"] {
                             </div>      
                         </div>
                         
-                        <p class="mb-0 pt-3">宿泊プラン</p>
-                        <div class="mb-2">
+                        <p class="mb-0 pt-3 fs-5">宿泊プラン</p>
+                        <div class="mb-2 fs-5">
                             @forelse ($experienceFolder->hotelGroup as $hotelGroup)
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
@@ -183,8 +183,8 @@ input[type="radio"] {
                             @endforelse
                         </div>
                        
-                        <p class="mb-0">食事プラン</p>
-                        <div class="mb-3">
+                        <p class="mb-0 fs-5">食事プラン</p>
+                        <div class="mb-3 fs-5">
                             @forelse ($experienceFolder->foodGroup as $foodGroup)
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
@@ -205,7 +205,7 @@ input[type="radio"] {
                     </div>
 
                 </div>
-                <div class="text-center text-md-end">
+                <div class="text-center text-md-end mt-3">
                         <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4"  type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
                         </button>
@@ -219,22 +219,19 @@ input[type="radio"] {
 
         </div>
         <div class= "col-md-9">
-             <div class="mt-2">
-
-                <div class="">
-                    
-                    <p class="fw-bold h5">注意事項など</p>
-                    <p>
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                        この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                    </p>
-                    <p></p>
-                    <p class="mb-0">宿泊場所は観光協会お任せとなります。</p>
-                    <p>決まり次第後ほど観光協会よりご連絡いたします。</p>
-                    
-                </div>
+            <div class="mt-4">
+     
+                <p class="fw-bold fs-5">注意事項など</p>
+                <p>
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+                </p>
+                <p></p>
+                <p class="mb-0">宿泊場所は観光協会お任せとなります。</p>
+                <p>決まり次第後ほど観光協会よりご連絡いたします。</p>
+                         
             </div>
 
         </div>

@@ -61,7 +61,7 @@ async function commentCreate(goods_id) {
         var goods_result = document.getElementById('goods_result');
         if(goods_result.innerHTML == '0' ){
             flag = 1;
-            msg = msg + "\nカートの中身がありません";
+            msg = msg + "\n個数が選択されていません";
         }
 
         if(flag == 1){
