@@ -124,10 +124,10 @@ input[type="radio"] {
 
                     <div class="card-body">
                         <div class="border-bottom border-secondary">
-                            <p class="">体験日: {{ app('request')->input('keyword') }}</p>
-                            <p class="">{{ $experience->name }}</p>
-                            {{-- <p>日程: {{ $experience->start_date }}</p> --}}
-                            <p> </p>
+                            <div class="d-flex">
+                                <p class="">体験日: {{ app('request')->input('keyword') }}</p>
+                                <p class="ms-4">{{ $experience->name }}</p>
+                            </div>              
                             <p class="">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
                         </div>
                         

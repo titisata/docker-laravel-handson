@@ -152,6 +152,11 @@ async function commentCreate(ex_id) {
 
             <div class="row">
                 <div class="my-5 col-12 col-lg-6">  
+                    @if (app('request')->input('keyword') != "")
+                        <h4 class="">体験日: {{ app('request')->input('keyword') }}</h4>
+                        <p class="">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
+                    @endif
+                    
                     <p class="mb-4">{{ $experienceFolder->description }}</p>
             
                     <p class="fw-bold text-end h3 border-top pt-4">{{ $experienceFolder->price }}円~</p>  
@@ -168,7 +173,7 @@ async function commentCreate(ex_id) {
                         
                             <div class="card-body">
                                 @forelse($experiences as $experience)
-                                    <a class="btn btn-lg btn-pink py-4 rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                                    <a class="btn btn-lg btn-pink rounded-pill text-white my-2 w-100 btn-shadow fs-3" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                                 @empty
                                     <p>この体験はご利用できません</p>
                                 @endforelse
@@ -191,37 +196,37 @@ async function commentCreate(ex_id) {
                                     <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                     <img src="/images/star1.5.png" style="width:120px;height35px">
                                     </div>
-                                 @elseif($experienceFolder->average_rate < 2.5)
+                                @elseif($experienceFolder->average_rate < 2.5)
                                     <div class="d-flex align-items-center ms-3">
                                     <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                     <img src="/images/star2.png" style="width:120px;height35px">
                                     </div>
-                                 @elseif($experienceFolder->average_rate < 3)
+                                @elseif($experienceFolder->average_rate < 3)
                                     <div class="d-flex align-items-center ms-3">
                                     <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                     <img src="/images/star2.5.png" style="width:120px;height35px">
                                     </div>
-                                 @elseif($experienceFolder->average_rate < 3.5)
+                                @elseif($experienceFolder->average_rate < 3.5)
                                     <div class="d-flex align-items-center ms-3">
                                     <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                     <img src="/images/star3.png" style="width:120px;height35px">
                                     </div>
-                                 @elseif($experienceFolder->average_rate < 4)
+                                @elseif($experienceFolder->average_rate < 4)
                                     <div class="d-flex align-items-center ms-3">
                                     <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                     <img src="/images/star3.5.png" style="width:120px;height35px">
                                     </div>
-                                 @elseif($experienceFolder->average_rate < 4.5)
+                                @elseif($experienceFolder->average_rate < 4.5)
                                     <div class="d-flex align-items-center ms-3">
                                     <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                     <img src="/images/star4.png" style="width:120px;height35px">
                                     </div>
-                                 @elseif($experienceFolder->average_rate < 5)
+                                @elseif($experienceFolder->average_rate < 5)
                                     <div class="d-flex align-items-center ms-3">
                                     <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                     <img src="/images/star4.5.png" style="width:120px;height35px">
                                     </div>
-                                 @elseif($experienceFolder->average_rate = 5)
+                                @elseif($experienceFolder->average_rate = 5)
                                     <div class="d-flex align-items-center ms-3">
                                     <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                     <img src="/images/star5.png" style="width:120px;height35px">
@@ -259,7 +264,7 @@ async function commentCreate(ex_id) {
                     @else
                         <div class="card-body">
                             @forelse($experiences as $experience)
-                                <a class="btn btn-lg btn-pink py-4 rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                                <a class="btn btn-lg btn-pink rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                             @empty
                                 <p>この体験はご利用できません</p>
                             @endforelse

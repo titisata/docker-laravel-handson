@@ -134,6 +134,7 @@ async function commentCreate(goods_id) {
             <div class="mt-2 card">
                 <div class="d-flex flex-column">
                     <h4 class="m-3 fw-bold">クチコミ</h4>
+                   
                     <div class="m-3">
                     <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                         <div class="d-flex justify-content-between align-items-center mt-2">
