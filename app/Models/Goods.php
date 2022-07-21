@@ -10,59 +10,8 @@ class Goods extends Model
 {
     use HasFactory;
 
-    /**
-     * 画像を取得
-     *
-     * @return Collection<Image>
-     */
-
-    public function images()
+    public function folder()
     {
-        $imgaes = Image::where([
-            ['table_name', '=', 'goods'],
-            ['table_id', '=', $this->id],
-        ])->get();
-        return $imgaes;
-    }
-
-    /**
-     * コメントを取得
-     *
-     * @return Collection<ExperienceComment>
-     */
-
-    public function comments()
-    {
-        $comments = GoodsComment::where([
-            ['goods_id', '=', $this->id],
-        ])->orderBy('created_at', 'desc')->get();
-        return $comments;
-    }
-
-    /**
-     * 検索を行う
-     *
-     * @param string $keyword 検索ワード
-     * @param integer $per_page 1ページ当たりの表示数
-     * @return Collection<Goods>
-     */
-    public static function search(string $keyword, int $per_page)
-    {
-        $where = [];
-
-        // フリーワードでの検索条件
-        if ($keyword != '') {
-            $where[] = ['name', 'like', "%$keyword%"];
-        }
-
-        // ジャンルでの検索条件
-        // if ($keyword != '') {
-        //     $where[] = ['name', 'like', "%$keyword%"];
-        // }
-
-        $places = Goods::where($where);
-        $places = $places->orderBy("created_at", "desc")->paginate($per_page);
-
-        return $places;
+        return $this->belongsTo(ExperienceFolder::class);
     }
 }

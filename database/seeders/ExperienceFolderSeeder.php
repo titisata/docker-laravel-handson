@@ -27,7 +27,8 @@ class ExperienceFolderSeeder extends Seeder
             'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
             'recommend_flag' => 1,
             'recommend_sort_no' => 10,
         ]);
@@ -43,7 +44,8 @@ class ExperienceFolderSeeder extends Seeder
             'start_date' => (new DateTime(date('Y-m-d')))->modify('-10day'),
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+10day'),
             'is_before_lodging' => false,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
             'recommend_flag' => 1,
             'recommend_sort_no' => 9,
         ]);
@@ -59,7 +61,8 @@ class ExperienceFolderSeeder extends Seeder
             'start_date' => (new DateTime(date('Y-m-d')))->modify('-10day'),
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+10day'),
             'is_before_lodging' => false,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
             'recommend_flag' => 1,
             'recommend_sort_no' => 3,
         ]);
@@ -75,7 +78,8 @@ class ExperienceFolderSeeder extends Seeder
             'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
             'recommend_flag' => 1,
             'recommend_sort_no' => 8,
         ]);
@@ -91,7 +95,8 @@ class ExperienceFolderSeeder extends Seeder
             'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
             'recommend_flag' => 1,
             'recommend_sort_no' => 2,
         ]);
@@ -107,7 +112,8 @@ class ExperienceFolderSeeder extends Seeder
             'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
             'recommend_flag' => 1,
             'recommend_sort_no' => 7,
         ]);
@@ -123,7 +129,8 @@ class ExperienceFolderSeeder extends Seeder
             'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
             'recommend_flag' => 1,
             'recommend_sort_no' => 6,
         ]);
@@ -139,7 +146,8 @@ class ExperienceFolderSeeder extends Seeder
             'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
             'recommend_flag' => 1,
             'recommend_sort_no' => 5,
         ]);
@@ -155,7 +163,8 @@ class ExperienceFolderSeeder extends Seeder
             'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,
-            'price' => 5000,
+            'price_child' => 5000,
+            'price_adult' => 7000,
             'recommend_flag' => 1,
             'recommend_sort_no' => 4,
         ]);

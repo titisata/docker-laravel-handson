@@ -21,8 +21,8 @@
                     </div>
                     <div class="card-body">
                         <!-- <p class="card-text" >{{ $experienceFolder->description }}</p> -->
-                        <p class=" mb-0 card-text text-end fw-bold fs-5">　大人：{{ $experienceFolder->price }}円～</p>
-                        <p class="card-text text-end fw-bold fs-5">子ども：{{ $experienceFolder->price }}円～</p>
+                        <p class=" mb-0 card-text text-end fw-bold fs-5">　大人：{{ $experienceFolder->price_adult }}円～</p>
+                        <p class="card-text text-end fw-bold fs-5">子ども：{{ $experienceFolder->price_child }}円～</p>
                         <!-- <p class="card-text text-end fw-bold fs-6">{{ $experienceFolder->is_lodging ? '宿泊あり ' : '宿泊なし' }}</p> -->
                     </div>
                 </div>

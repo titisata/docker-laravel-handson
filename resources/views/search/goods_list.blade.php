@@ -12,8 +12,8 @@
                 <label for="keyword">ワード</label><input name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
             </form>
 
-            @forelse($goods as $goods_one)
-                @include('components.goods_cell', ['goods'=>$goods_one])
+            @forelse($goods_folders as $goods_folder)
+                @include('components.goods_cell', ['goods_folder'=>$goods_folder])
             @empty
                 <p>検索結果がありません。</p>
             @endforelse
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center mt-3">
-        <div>{{ $goods->appends(request()->query())->links('pagination::bootstrap-4') }}</div>
+        <div>{{ $goods_folders->appends(request()->query())->links('pagination::bootstrap-4') }}</div>
     </div>
 </div>
 

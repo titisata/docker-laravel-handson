@@ -35,14 +35,15 @@
             color:white !important; 
             border:2px solid #FB6E86 !important;
             }
-            .btn-pink{
-                background-color:#FB6E86;
-                border-color:#FB6E86;
-                color:white;
-            }
             .btn-pink:hover{
                 background-color:white;
                 color:#FB6E86;
+            }
+            .btn-yellow{
+                background-color:#E2A704;
+            }
+            .btn-green{
+                background-color:#7DD134;
             }
             .pink{
             background-color:#FB6E86;
@@ -106,48 +107,49 @@
                 </div>     
             </nav>        
                 
-            <div class="">
-                <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                    <!-- スライドさせる画像の設定 -->
-                    <div class="carousel-inner rounded-2">
-                        <div class="carousel-item active">
-                            <img src="/images/9.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
-                        </div>      
-                    </div><!-- /.carousel-inner -->
-                    <!-- スライドコントロールの設定 -->
-                    <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">前へ</span>
-                    </button>
-                    <button type="button" class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">次へ</span>
-                    </button>
-                </div>
-
-                <h1 class="text-center my-5 fw-bold">〇〇町を満喫しよう！</h1>
+            <div class="mt-3">
+                <h1 class="text-center my-5 fw-bold">町を満喫しよう！</h1>
+               
+                    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <!-- スライドさせる画像の設定 -->
+                        <div class="carousel-inner rounded-2">
+                            <div class="carousel-item active">
+                                <img src="/images/9.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
+                            </div>      
+                        </div><!-- /.carousel-inner -->
+                        <!-- スライドコントロールの設定 -->
+                        <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">前へ</span>
+                        </button>
+                        <button type="button" class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">次へ</span>
+                        </button>
+                    </div>
     
                 <div class="container mb-5">
                     <div class="d-flex row justify-content-evenly mt-5">
-                        <div class="col-9 col-md-5" >
-                            <a role="botton" href="/search/experience" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-2 shadow-sm fs-4 w-100 d-flex flex-column" style="font-size:40px;">
-                                <!-- <i class="bi bi-emoji-sunglasses"></i> -->
-                                <p class="mb-0">現地で遊ぶ</p>
-                            </a>   
-                        </div>
-                        <div class="col-9 col-md-5">
-                            <a role="botton" href="/search/goods" class="btn btn-lg btn-pink m-2 text-center fw-bold rounded-2 shadow-sm fs-4 w-100 d-flex flex-column"  style="font-size:40px;">
-                                <!-- <i class="bi bi-handbag"></i> -->
-                                <p class="mb-0">名産品を買う</p>
+                        <div class="col-10 col-md-5">
+                            <a role="botton" href="/search/goods" class="btn btn-lg btn-yellow m-2 text-center fw-bold rounded-3 shadow fs-4 w-100 d-flex flex-column"  style="font-size:40px;">
+                            <img src="/images/bag.png" class="mx-auto" style="width:40px">
+                                <p class="mb-0 text-white">名産品を買う</p>
                             </a>   
                             
-                        </div>        
+                        </div>      
+                        <div class="col-10 col-md-5" >
+                            <a role="botton" href="/search/experience" class="btn btn-lg btn-green m-2 text-center fw-bold rounded-3 shadow fs-4 w-100 d-flex flex-column" style="font-size:40px;">
+                                <img src="/images/active.png" class="mx-auto" style="width:40px">
+                                <p class="mb-0 text-white">現地で遊ぶ</p>
+                            </a>   
+                        </div>
+                          
                     </div>
                     
                     <h3 class="text-center mt-5">このサイトでできること</h3>

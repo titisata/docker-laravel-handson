@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('goods_comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('goods_id')->constrained('goods');
+            $table->foreignId('goods_folder_id')->constrained('goods_folders');
             $table->string('content', 500);
             $table->integer('rate');
             $table->timestamps();

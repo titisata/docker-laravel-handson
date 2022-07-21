@@ -12,9 +12,10 @@
 
     const events = Object.entries(events_data).map(([key, value]) =>  {
         return {
-            title: `${value.name}: ${value.count}件`,
+            // title: `${value.name}: ${value.count}件`,
             start: value.start,
-            color: value.count < value.quantity ? '#5DC075' : '#F56E6E'
+            color: '#00000000',
+            image_url: value.count < value.quantity ? '/images/maru.png' : '/images/batu.png',
         };
     });
 
@@ -53,12 +54,39 @@
             events: [...events, ...holiday_events],
             height:'auto',
             dateClick: function(info) {
+                var newDate = new Date(info.dateStr);
+                if (newDate < Date.now()) {
+                    return;
+                }
+
                 if (Object.entries(holiday_events_date).some(([key, value]) => value.date == info.dateStr)) {
                     alert('お休みです');
                     return;
                 }
                 window.location.href = experienceFolder.id + '?keyword=' + info.dateStr;
-            }
+            },
+            eventContent: function(arg) {
+                let arrayOfDomNodes = []
+                // title event
+                let titleEvent = document.createElement('div')
+                if(arg.event._def.title) {
+                    titleEvent.innerHTML = arg.event._def.title
+                    titleEvent.classList = "fc-event-title fc-sticky"
+                }
+
+                // image event
+                let imgEventWrap = document.createElement('div')
+                imgEventWrap.style.cssText = 'text-align: center';
+                if(arg.event.extendedProps.image_url) {
+                    let imgEvent = '<img src="' + arg.event.extendedProps.image_url + '" height="20px" >'
+                    imgEventWrap.classList = "fc-event-img"
+                    imgEventWrap.innerHTML = imgEvent;
+                }
+
+                arrayOfDomNodes = [ titleEvent,imgEventWrap ]
+
+                return { domNodes: arrayOfDomNodes }
+            },
         });
         calendar.render();
             
@@ -68,6 +96,9 @@
 </script>
 
 <style>
+.fc-day-past {
+    background-color: #969696;
+}
 .card-img-overlay{
     padding: 0;
     top: calc(80% - 0.5rem);
@@ -125,7 +156,7 @@ async function commentCreate(ex_id) {
         <div class="col-md-9">
             <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
-                <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));height:68px;">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgb(125, 209, 52));height:68px;">
                     <h3 class="fw-bold text-white py-auto" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
                 </div>
             </div>
@@ -152,6 +183,7 @@ async function commentCreate(ex_id) {
 
             <div class="row">
                 <div class="my-5 col-12 col-lg-6">  
+                    <p>会社名: <a href="/partner/{{ $experienceFolder->partner->id }}">{{ $experienceFolder->partner->name }}</a></p>
                     @if (app('request')->input('keyword') != "")
                         <h4 class="">体験日: {{ app('request')->input('keyword') }}</h4>
                         <h5 class="">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}</h5>
@@ -159,8 +191,8 @@ async function commentCreate(ex_id) {
                     
                     <p class="mb-4">{{ $experienceFolder->description }}</p>
             
-                    <p class="fw-bold text-end h5 border-top pt-3">　大人：{{ $experienceFolder->price }}円~</p>
-                    <p class="fw-bold text-end h5">子ども：{{ $experienceFolder->price }}円~</p>  
+                    <p class="fw-bold text-end h5 border-top pt-3">　大人：{{ $experienceFolder->price_adult }}円~</p>
+                    <p class="fw-bold text-end h5">子ども：{{ $experienceFolder->price_child }}円~</p>  
                     
                     <div class="mt-4 col-12 col-lg-6 d-lg-none">
                         @if (app('request')->input('keyword') == "")

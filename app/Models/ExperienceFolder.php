@@ -12,6 +12,11 @@ class ExperienceFolder extends Model
 
     public $experinces = [];
 
+
+    protected $fillable= [
+        'average_rate',
+    ];
+
     /**
      * 体験を取得
      *
@@ -36,6 +41,17 @@ class ExperienceFolder extends Model
             ['table_id', '=', $this->id],
         ])->get();
         return $imgaes;
+    }
+
+    /**
+     * パートナーを取得
+     *
+     * @return Partner
+     */
+
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
     }
 
     /**

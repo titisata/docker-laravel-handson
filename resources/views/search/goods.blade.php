@@ -27,8 +27,8 @@ li.item {
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめのお土産 (食べ物)</h2>
             <div class="d-flex justify-content-evenly">
                 <ul class="horizontal-list">
-                    @foreach ($food_goods as $goods_item)
-                        @include('components.goods_small_cell', ['goods'=>$goods_item])
+                    @foreach ($food_goods_folders as $goods_item_folder)
+                        @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
                     @endforeach
                 </ul>    
             </div>
@@ -36,8 +36,8 @@ li.item {
             <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめのお土産 (飲み物)</h2>
             <div class="d-flex justify-content-evenly">
                 <ul class="horizontal-list">
-                    @foreach ($drink_goods as $goods_item)
-                        @include('components.goods_small_cell', ['goods'=>$goods_item])
+                    @foreach ($drink_goods_folders as $goods_item_folder)
+                        @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
                     @endforeach
                 </ul>
             </div>
@@ -45,8 +45,8 @@ li.item {
             <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめのお土産 (雑貨)</h2>
             <div class="d-flex justify-content-evenly flex-wrap">
                 <ul class="horizontal-list">
-                    @foreach ($goods_goods as $goods_item)
-                        @include('components.goods_small_cell', ['goods'=>$goods_item])
+                    @foreach ($goods_goods_folders as $goods_item_folder)
+                        @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
                     @endforeach
                 </ul>
             </div>
