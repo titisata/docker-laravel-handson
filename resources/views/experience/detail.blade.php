@@ -12,9 +12,10 @@
 
     const events = Object.entries(events_data).map(([key, value]) =>  {
         return {
-            title: `${value.name}: ${value.count}件`,
+            // title: `${value.name}: ${value.count}件`,
             start: value.start,
-            color: value.count < value.quantity ? '#5DC075' : '#F56E6E'
+            color: '#00000000',
+            image_url: value.count < value.quantity ? '/images/maru.png' : '/images/batu.png',
         };
     });
 
@@ -53,12 +54,39 @@
             events: [...events, ...holiday_events],
             height:'auto',
             dateClick: function(info) {
+                var newDate = new Date(info.dateStr);
+                if (newDate < Date.now()) {
+                    return;
+                }
+
                 if (Object.entries(holiday_events_date).some(([key, value]) => value.date == info.dateStr)) {
                     alert('お休みです');
                     return;
                 }
                 window.location.href = experienceFolder.id + '?keyword=' + info.dateStr;
-            }
+            },
+            eventContent: function(arg) {
+                let arrayOfDomNodes = []
+                // title event
+                let titleEvent = document.createElement('div')
+                if(arg.event._def.title) {
+                    titleEvent.innerHTML = arg.event._def.title
+                    titleEvent.classList = "fc-event-title fc-sticky"
+                }
+
+                // image event
+                let imgEventWrap = document.createElement('div')
+                imgEventWrap.style.cssText = 'text-align: center';
+                if(arg.event.extendedProps.image_url) {
+                    let imgEvent = '<img src="' + arg.event.extendedProps.image_url + '" height="20px" >'
+                    imgEventWrap.classList = "fc-event-img"
+                    imgEventWrap.innerHTML = imgEvent;
+                }
+
+                arrayOfDomNodes = [ titleEvent,imgEventWrap ]
+
+                return { domNodes: arrayOfDomNodes }
+            },
         });
         calendar.render();
             
@@ -68,6 +96,9 @@
 </script>
 
 <style>
+.fc-day-past {
+    background-color: #969696;
+}
 .card-img-overlay{
     padding: 0;
     top: calc(80% - 0.5rem);
