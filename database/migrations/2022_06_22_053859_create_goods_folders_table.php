@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,14 +13,16 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('goods', function (Blueprint $table) {
+        Schema::create('goods_folders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('partner_id')->constrained('partners');
-            $table->foreignId('goods_folder_id')->constrained('goods_folders');
             $table->string('name', 50)->index();
             $table->string('description', 1000);
-            $table->integer('sort_no')->index();
-            $table->integer('quantity');
+            $table->string('category1', 50)->nullable()->index();
+            $table->string('category2', 50)->nullable()->index();
+            $table->string('category3', 50)->nullable()->index();
+            $table->integer('recommend_flag')->nullable()->index();
+            $table->integer('recommend_sort_no')->nullable();
             $table->integer('price')->index();
             $table->timestamps();
         });
@@ -32,6 +35,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('goods');
+        Schema::dropIfExists('goods_folders');
     }
 };
