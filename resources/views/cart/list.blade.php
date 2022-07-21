@@ -1,5 +1,39 @@
 @extends('layouts.app')
 
+
+<script>
+async function deleteExperience(id) {
+    const obj = {
+        id: id,
+    };
+    const method = "DELETE";
+    const body = JSON.stringify(obj);
+    const headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+    };
+    fetch("/api/cart/experience", {method, headers, body})
+        .then(_ => location.reload());
+}
+async function deleteGoods(id) {
+    const obj = {
+        id: id,
+    };
+    const method = "DELETE";
+    const body = JSON.stringify(obj);
+    const headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+    };
+    fetch("/api/cart/goods", {method, headers, body})
+        .then(_ => location.reload());
+}
+</script>
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -19,6 +53,7 @@
                                 <p>宿泊: {{ $experienceCartItem->hotelGroup?->name ?? 'なし' }}</p>
                                 <p>食事: {{ $experienceCartItem->foodGroup?->name ?? 'なし' }}</p>
                                 <p>金額: {{ $experienceCartItem->sum_price() }}円</p>
+                                <button class="btn btn-outline-primary"  onclick="deleteExperience({{ $experienceCartItem->id }})">削除</button>
                             </div>
                         </div>
                     </a>
@@ -39,6 +74,7 @@
                                 <p>名前: {{ $goodCartItem->goods->name }}</p>
                                 <p>個数: {{ $goodCartItem->quantity }}</p>
                                 <p>合計: {{ $goodCartItem->sum_price() }}円</p>
+                                <button class="btn btn-outline-primary"  onclick="deleteGoods({{ $goodCartItem->id }})">削除</button>
                             </div>
                         </div>
                     </a>
