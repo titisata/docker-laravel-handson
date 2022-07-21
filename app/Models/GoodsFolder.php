@@ -10,6 +10,10 @@ class GoodsFolder extends Model
     use HasFactory;
 
 
+    protected $fillable= [
+        'average_rate',
+    ];
+
     /**
      * グッズを取得
      *

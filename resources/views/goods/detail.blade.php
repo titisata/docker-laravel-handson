@@ -21,11 +21,11 @@
 
 <script>
    
-async function commentCreate(goods_id) {
+async function commentCreate(goods_folder_id) {
     const content = document.getElementById('comment');
     const rate = document.getElementById('rate_input');
     const obj = {
-        goodsId: goods_id,
+        goods_folder_id: goods_folder_id,
         rate: Number(rate.value),
         content: content.value,
     };

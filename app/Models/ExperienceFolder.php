@@ -12,6 +12,11 @@ class ExperienceFolder extends Model
 
     public $experinces = [];
 
+
+    protected $fillable= [
+        'average_rate',
+    ];
+
     /**
      * 体験を取得
      *
