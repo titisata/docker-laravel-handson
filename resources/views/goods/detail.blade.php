@@ -82,13 +82,9 @@ async function commentCreate(goods_folder_id) {
                 <img class="card-img img-thumbnail" style="height: 100%; object-fit: cover;" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
                
             </div>
-
-<<<<<<< HEAD
-            
-=======
         
                 <p>会社名: <a href="/partner/{{ $goods_folder->partner->id }}">{{ $goods_folder->partner->name }}</a></p>
->>>>>>> ad024a6693088d7f075d598b3f108d95b90dbf90
+
                 <div class="d-flex mt-3">
                     <h4 class="fw-bold">商品名：</h4>
                     <h4 class="fw-bold"> {{ $goods_folder->name }}</h4>
@@ -151,7 +147,54 @@ async function commentCreate(goods_folder_id) {
             <div class="mt-2 card">
                 <div class="d-flex flex-column">
                     <h4 class="m-3 fw-bold">クチコミ</h4>
-                   
+                        @if($goods_folder->average_rate < 1.5)
+                            <p class="mb-0 ms-3">テスト用に表示、0は表示しないようにする</p>
+                            <div class="d-flex align-items-center ms-3">
+                                <p class="mb-0 fs-2 fw-bold">{{ $goods_folder->average_rate }}</p>
+                                <img src="/images/star1.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($goods_folder->average_rate < 2)
+                            <div class="d-flex align-items-center ms-3">
+                            <p class="mb-0 fs-2 fw-bold">{{ $goods_folder->average_rate }}</p>
+                            <img src="/images/star1.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($goods_folder->average_rate < 2.5)
+                            <div class="d-flex align-items-center ms-3">
+                            <p class="mb-0 fs-2 fw-bold">{{ $goods_folder->average_rate }}</p>
+                            <img src="/images/star2.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($goods_folder->average_rate < 3)
+                            <div class="d-flex align-items-center ms-3">
+                            <p class="mb-0 fs-2 fw-bold">{{ $goods_folder->average_rate }}</p>
+                            <img src="/images/star2.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($goods_folder->average_rate < 3.5)
+                            <div class="d-flex align-items-center ms-3">
+                            <p class="mb-0 fs-2 fw-bold">{{ $goods_folder->average_rate }}</p>
+                            <img src="/images/star3.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($goods_folder->average_rate < 4)
+                            <div class="d-flex align-items-center ms-3">
+                            <p class="mb-0 fs-2 fw-bold">{{ $goods_folder->average_rate }}</p>
+                            <img src="/images/star3.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($goods_folder->average_rate < 4.5)
+                            <div class="d-flex align-items-center ms-3">
+                            <p class="mb-0 fs-2 fw-bold">{{ $goods_folder->average_rate }}</p>
+                            <img src="/images/star4.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($goods_folder->average_rate < 5)
+                            <div class="d-flex align-items-center ms-3">
+                            <p class="mb-0 fs-2 fw-bold">{{ $goods_folder->average_rate }}</p>
+                            <img src="/images/star4.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($goods_folder->average_rate = 5)
+                            <div class="d-flex align-items-center ms-3">
+                            <p class="mb-0 fs-2 fw-bold">{{ $goods_folder->average_rate }}</p>
+                            <img src="/images/star5.png" style="width:120px;height35px">
+                            </div>
+                        @endif
+            
                     <div class="m-3">
                     <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                         <div class="d-flex justify-content-between align-items-center mt-2">
