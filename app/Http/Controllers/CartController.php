@@ -56,7 +56,7 @@ class CartController extends Controller
         return view('cart.purchase', compact('price'));
     }
 
-    public function deleteExperience(Request $request)
+    public function delete_experience(Request $request)
     {
         $uid = Auth::user()->id;
         $item_id = $request->id;
@@ -65,7 +65,7 @@ class CartController extends Controller
         return response()->json(['message'=>'success']);
     }
 
-    public function deleteGoods(Request $request)
+    public function delete_goods(Request $request)
     {
         $uid = Auth::user()->id;
         $item_id = $request->id;
