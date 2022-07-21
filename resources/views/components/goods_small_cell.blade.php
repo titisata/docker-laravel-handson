@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-body pt-5" >
     
-                        <p class="card-text text-end fw-bold fs-4">￥{{ $goods_folder->price }}</p>
+                        <p class="card-text text-end fw-bold fs-4">￥{{ $goods_folder->price }}~</p>
                     
                     </div>
                 </div>
