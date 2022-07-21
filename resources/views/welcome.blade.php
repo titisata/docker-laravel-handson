@@ -104,7 +104,7 @@
             </nav>        
                 
             <div class="mt-3">
-                <h1 class="text-center my-5 fw-bold">〇〇町を満喫しよう！</h1>
+                <h1 class="text-center my-5 fw-bold">町を満喫しよう！</h1>
                
                     <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
                         <!-- スライドさせる画像の設定 -->
