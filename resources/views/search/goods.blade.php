@@ -47,9 +47,9 @@ li.item {
             <span class="visually-hidden">次へ</span>
         </button>
 </div>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10 mt-4">
+<div class="container px-0">
+    <div class="row justify-content-center px-0"style="--bs-gutter-x: 0;">
+        <div class="col-md-10 mt-4 px-0">
             <div class="text-center">
                 <form action="/search/goods" method="get">
                     <label for="keyword" class="fw-bold fs-5">検索するキーワードを入力してください</label>
@@ -62,31 +62,31 @@ li.item {
 
 
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの食べ物</h2>
-            <div class="d-flex justify-content-evenly">
-                <ul class="horizontal-list">
-                    @foreach ($food_goods_folders as $goods_item_folder)
-                        @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
-                    @endforeach
-                </ul>    
-            </div>
+            
+            <ul class="horizontal-list">
+                @foreach ($food_goods_folders as $goods_item_folder)
+                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                @endforeach
+            </ul>    
+           
 
             <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの飲み物</h2>
-            <div class="d-flex justify-content-evenly">
-                <ul class="horizontal-list">
-                    @foreach ($drink_goods_folders as $goods_item_folder)
-                        @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
-                    @endforeach
-                </ul>
-            </div>
+           
+            <ul class="horizontal-list">
+                @foreach ($drink_goods_folders as $goods_item_folder)
+                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                @endforeach
+            </ul>
+            
 
             <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの雑貨</h2>
-            <div class="d-flex justify-content-evenly flex-wrap">
-                <ul class="horizontal-list">
-                    @foreach ($goods_goods_folders as $goods_item_folder)
-                        @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
-                    @endforeach
-                </ul>
-            </div>
+            
+            <ul class="horizontal-list">
+                @foreach ($goods_goods_folders as $goods_item_folder)
+                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                @endforeach
+            </ul>
+            
 
             <!-- <div class="mt-5">
                 <a href="/search/experience">体験検索へ</a>
