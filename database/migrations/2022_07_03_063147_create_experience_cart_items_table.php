@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('hotel_group_id')->nullable()->constrained('hotel_groups');
             $table->foreignId('food_group_id')->nullable()->constrained('food_groups');
+            $table->string('message');
             $table->integer('quantity_child');
             $table->integer('quantity_adult');
             $table->timestamps();

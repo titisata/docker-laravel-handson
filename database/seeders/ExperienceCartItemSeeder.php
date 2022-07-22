@@ -20,6 +20,7 @@ class ExperienceCartItemSeeder extends Seeder
             'user_id' => 1,
             'hotel_group_id' => 1,
             'food_group_id' => 1,
+            'message' => 'カニアレルギーなので、カニは省いてほしいです。',
             'quantity_child' => 1,
             'quantity_adult' => 1,
         ]);

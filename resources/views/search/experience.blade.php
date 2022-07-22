@@ -8,7 +8,7 @@ ul.horizontal-list {
 }
 li.item {
 	display: inline-block;
-}	
+}
 .d-block{
     height:400px;
     object-fit: cover;
@@ -35,7 +35,7 @@ li.item {
                 <div class="carousel-caption  d-sm-block w-100" style="right: 0;left: 0; bottom: 0; background: linear-gradient(rgba(0,0,0,0),rgb(125, 209, 52));">
                     <h2 class="fw-bold mb-0">町で体験しよう！！</h2>
                 </div>
-            </div>      
+            </div>
         </div><!-- /.carousel-inner -->
         <!-- スライドコントロールの設定 -->
         <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -48,7 +48,7 @@ li.item {
         </button>
 </div>
 <div class="container" >
-   
+
     <div class="row justify-content-center">
         <div class="col-md-10 mt-4">
             <div class="text-center">
@@ -58,10 +58,10 @@ li.item {
                         <input class="form-control" name="keyword" type="date" style="width:240px">
                         <input type="submit" value="検索" class="btn btn-sm btn-secondary">
                     </div>
-                    
+
                 </form>
             </div>
-            
+
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの宿泊体験</h2>
             <div class="" >
                 <ul class="horizontal-list">
@@ -77,7 +77,7 @@ li.item {
                     @foreach ($experiences_folders_not_is_lodging as $experiences_folder)
                         @include('components.experience_small_cell', ['experienceFolder'=>$experiences_folder])
                     @endforeach
-                </ul>    
+                </ul>
             </div>
 
 

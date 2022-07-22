@@ -16,9 +16,10 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
-            $table->string('main_image');
+            $table->string('description', 1000);
             $table->string('background_color');
             $table->string('catch_copy');
+            $table->string('access', 1000);
             $table->string('address');
             $table->string('phone');
             $table->timestamps();
