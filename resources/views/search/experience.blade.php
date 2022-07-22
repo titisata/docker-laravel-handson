@@ -47,10 +47,10 @@ li.item {
             <span class="visually-hidden">次へ</span>
         </button>
 </div>
-<div class="container" >
+<div class="container px-0" >
 
-    <div class="row justify-content-center">
-        <div class="col-md-10 mt-4">
+    <div class="row justify-content-center px-0" style="--bs-gutter-x: 0;">
+        <div class="col-md-10 mt-4 px-0">
             <div class="text-center">
                 <form action="/search/experience" method="get">
                     <label for="keyword" class="fw-bold fs-5">体験したい日を入力してください</label><br>
@@ -63,22 +63,22 @@ li.item {
             </div>
 
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの宿泊体験</h2>
-            <div class="" >
-                <ul class="horizontal-list">
-                    @foreach ($experiences_folders_is_lodging as $experiences_folder)
-                        @include('components.experience_small_cell', ['experienceFolder'=>$experiences_folder])
-                    @endforeach
-                </ul>
-            </div>
+        
+            <ul class="horizontal-list ps-0" >
+                @foreach ($experiences_folders_is_lodging as $experiences_folder)
+                    @include('components.experience_small_cell', ['experienceFolder'=>$experiences_folder])
+                @endforeach
+            </ul>
+
 
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの体験</h2>
-            <div class="">
-                <ul class="horizontal-list">
-                    @foreach ($experiences_folders_not_is_lodging as $experiences_folder)
-                        @include('components.experience_small_cell', ['experienceFolder'=>$experiences_folder])
-                    @endforeach
-                </ul>
-            </div>
+            
+            <ul class="horizontal-list">
+                @foreach ($experiences_folders_not_is_lodging as $experiences_folder)
+                    @include('components.experience_small_cell', ['experienceFolder'=>$experiences_folder])
+                @endforeach
+            </ul>
+          
 
 
             <!-- <div class="mt-5">

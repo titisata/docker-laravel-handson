@@ -102,7 +102,7 @@ input[type="radio"] {
 
             <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
-                <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));height:68px;">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgb(125, 209, 52));height:68px;">
                     <h3 class="fw-bold text-white py-auto" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
                 </div>
             </div>
@@ -111,7 +111,7 @@ input[type="radio"] {
                     <div class="card-body">
                         <p class="">{{ $experienceFolder->description }}</p>
                         <p class="pt-3 fs-5 text-end">体験料金の目安は{{ $experienceFolder->price_child }}円~</p>
-                        <p class="mb-4 text-end"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary btn-sm rounded-pill">会社情報</a></p>
+                        <p class="mb-4 text-end"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
                     </div>
                 </div>
 
