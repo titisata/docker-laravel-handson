@@ -16,6 +16,7 @@ class ExperienceCartItem extends Model
         'food_group_id',
         'quantity_child',
         'quantity_adult',
+        'message',
         'start_date',
         'end_date',
     ];

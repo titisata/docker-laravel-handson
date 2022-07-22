@@ -44,6 +44,7 @@
                                     <p>大人: {{ $reserved_experience->quantity_adult }}人 子ども: {{ $reserved_experience->quantity_child }}人</p>
                                     <p>宿泊: {{ $reserved_experience->hotelGroup?->name ?? 'なし' }}</p>
                                     <p>食事: {{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
+                                    <p>連絡事項: {{ $reserved_experience->message }}</p>
                                 </div>
                             </div>
                         </a>

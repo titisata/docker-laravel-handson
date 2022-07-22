@@ -52,6 +52,7 @@ async function deleteGoods(id) {
                                 <p>大人: {{ $experienceCartItem->quantity_adult }}人 子ども: {{ $experienceCartItem->quantity_child }}人</p>
                                 <p>宿泊: {{ $experienceCartItem->hotelGroup?->name ?? 'なし' }}</p>
                                 <p>食事: {{ $experienceCartItem->foodGroup?->name ?? 'なし' }}</p>
+                                <p>連絡事項: {{ $experienceCartItem->message }}</p>
                                 <p>金額: {{ $experienceCartItem->sum_price() }}円</p>
                                 <button class="btn btn-outline-primary"  onclick="deleteExperience({{ $experienceCartItem->id }})">削除</button>
                             </div>
@@ -60,13 +61,13 @@ async function deleteGoods(id) {
                 @empty
                     <p class="p-3">カートが空です。</p>
                 @endforelse
-               
+
             </div>
 
 
             <div class="mt-4">
                 <h4>お土産</h4>
-               
+
                 @forelse($goodCartItems as $goodCartItem)
                     <a href="/goods/{{ $goodCartItem->goods_id }}">
                         <div class="mt-1 p-3 card">
@@ -81,7 +82,7 @@ async function deleteGoods(id) {
                 @empty
                     <p class="p-3">カートが空です。</p>
                 @endforelse
-                
+
             </div>
 
             <div class="mt-4 mb-2">
@@ -93,7 +94,7 @@ async function deleteGoods(id) {
                 <a class=" btn btn-primary {{ $price == 0 ? 'disabled' : '' }} " href="/cart/confirm" style="{{ $price == 0 ? 'pointer-events:none;' : '' }} ">購入ページへ</a>
             </div>
 
-            
+
         </div>
     </div>
 </div>

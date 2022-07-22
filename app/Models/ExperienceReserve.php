@@ -18,6 +18,7 @@ class ExperienceReserve extends Model
         'food_id',
         'comment',
         'status',
+        'message',
         'quantity_child',
         'quantity_adult',
         'start_date',

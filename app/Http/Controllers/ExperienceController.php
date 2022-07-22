@@ -17,7 +17,7 @@ class ExperienceController extends Controller
         if ($keyword == '') {
             $experiences_folders_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 1)->orderBy('recommend_sort_no', 'desc')->get();
             $experiences_folders_not_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 0)->orderBy('recommend_sort_no', 'desc')->get();
-            return view('search.experience', compact('experiences_folders_is_lodging','experiences_folders_not_is_lodging'));
+            return view('search.experience', compact('experiences_folders_is_lodging', 'experiences_folders_not_is_lodging'));
         }
 
         $experienceFolders = ExperienceFolder::search($keyword, per_page: 10);
@@ -98,12 +98,14 @@ class ExperienceController extends Controller
         $date = $request->date;
         $quantity_adult = $request->quantity_adult;
         $hotel_group_id = $request->hotel_group_id;
+        $message = $request->message;
         $food_group_id = $request->food_group_id == 'food_group_null' ? null : $request->food_group_id;
 
         // TODO: 不正な IDの場合の処理
         ExperienceCartItem::create([
             'experience_id' => $id,
             'user_id' => $uid,
+            'message' => $message,
             'hotel_group_id' => $hotel_group_id,
             'food_group_id' => $food_group_id,
             'quantity_child' => $quantity_child,

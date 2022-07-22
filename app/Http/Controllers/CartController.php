@@ -89,6 +89,7 @@ class CartController extends Controller
                 'hotel_id' => null,
                 'food_id' => null,
                 'comment' => 'コメントはありません',
+                'message' => $experienceCartItem->message,
                 'status' => '対応待ち',
                 'quantity_child' => $experienceCartItem->quantity_child,
                 'quantity_adult' => $experienceCartItem->quantity_adult,

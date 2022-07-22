@@ -5,8 +5,8 @@
     // var adult = document.getElementById('adult').value;
     // var child = document.getElementById('child').value;
 
-    
-    
+
+
     function formSwitch(){
         var price = document.getElementById('price');
         var adult = document.getElementById('adult').value;
@@ -21,7 +21,7 @@
         for (const hotel_adult_price of hotel_adult_prices) {
          alert(hotel_adult_price);
         }
-        
+
         // alert (hotel_child_price.innerHTML);
         // alert (food_adult_price.innerHTML);
         // alert (food_child_price.innerHTML);
@@ -58,7 +58,7 @@
           }else{
                return true;
               }
-        
+
 
     }
 
@@ -80,13 +80,13 @@
 .btn-pink:hover{
     color:#FB6E86;
 }
-input[type="radio"] { 
+input[type="radio"] {
     height:16px;
     width:16px;
 }
 
 @media screen and (max-width: 320px) {
-    input[type="radio"] { 
+    input[type="radio"] {
     height:24px;
     width:24px;
     }
@@ -99,7 +99,7 @@ input[type="radio"] {
     <div class="row justify-content-center">
 
         <div class="col-md-9">
-          
+
             <div class="card" style="height: 300px;">
                 <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
                 <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgba(251, 110, 134));height:68px;">
@@ -128,10 +128,10 @@ input[type="radio"] {
                             <div class="d-flex">
                                 <p class="fs-5">体験日: {{ app('request')->input('keyword') }}</p>
                                 <p class="ms-4 fs-5">{{ $experience->name }}</p>
-                            </div>              
+                            </div>
                             <p class="fs-5">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
                         </div>
-                        
+
                         <div class="d-flex align-items-center mb-2 pt-3 pb-2 fs-5">
                             宿泊/体験人数　
                             <div class="d-flex flex-wrap">
@@ -167,15 +167,15 @@ input[type="radio"] {
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="d-flex border-bottom border-secondary fs-5">
                             <p class="me-3">プラン料金</p>
                             <div class="d-flex flex-column">
                                 <p class="mb-1">　大人 : <span id="adult_price" value="">{{ $experience->price_adult }}</span>円/人</p>
                                 <p class="">子ども : <span id="child_price" value="">{{ $experience->price_child }}</span>円/人</p>
-                            </div>      
+                            </div>
                         </div>
-                        
+
                         <p class="mb-0 pt-3 fs-5">宿泊プラン</p>
                         <div class="mb-2 fs-5">
                             @forelse ($experienceFolder->hotelGroup as $hotelGroup)
@@ -187,7 +187,7 @@ input[type="radio"] {
                                 <p class="">この体験は宿泊がありません</p>
                             @endforelse
                         </div>
-                       
+
                         <p class="mb-0 fs-5">食事プラン</p>
                         <div class="mb-3 fs-5">
                             @forelse ($experienceFolder->foodGroup as $foodGroup)
@@ -205,7 +205,7 @@ input[type="radio"] {
                                 </div>
                             @endempty
                         </div>
-                       
+
                         <p class="text-end border-top border-secondary pt-3 fs-5 mb-0">合計金額：<span id="price" class="fs-5">0</span>円</p>
                     </div>
 
@@ -217,19 +217,19 @@ input[type="radio"] {
                         <p class="fs-5">体験施設・宿泊施設等への連絡事項</p>
                         <p class="mb-0">コメント</p>
                         <div>
-                            <textarea class="form-control" row="10" cols="60" placeholder="アレルギーなど知らせておきたいことや、質問事項等あればご記入ください。" id="comment"></textarea>
+                            <textarea class="form-control" name="message" row="10" cols="60" placeholder="アレルギーなど知らせておきたいことや、質問事項等あればご記入ください。" id="comment"></textarea>
                         </div>
 
                     </div>
-                
-                </div>    
+
+                </div>
                 <div class="text-center text-md-end mt-3">
                         <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4"  type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
                         </button>
                 </div>
 
-                
+
 
             </form>
 
@@ -238,7 +238,7 @@ input[type="radio"] {
         </div>
         <div class= "col-md-9">
             <div class="mt-4">
-     
+
                 <p class="fw-bold fs-5">注意事項など</p>
                 <p>
                     この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
@@ -249,7 +249,7 @@ input[type="radio"] {
                 <p></p>
                 <p class="mb-0">宿泊場所は観光協会お任せとなります。</p>
                 <p>決まり次第後ほど観光協会よりご連絡いたします。</p>
-                         
+
             </div>
 
         </div>
