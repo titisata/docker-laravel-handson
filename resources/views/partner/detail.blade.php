@@ -16,7 +16,7 @@ li.item {
     <div class="row justify-content-center">
         <div class="col-md-10">
 
-            <div class="">
+            <div class="mt-5">
                 <h3 class="border-bottom fw-bold pb-3">{{ $partner->name }}</h3>
                 <div class="">
                     @if (session('status'))
@@ -30,9 +30,9 @@ li.item {
                         サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。
                     </p>
                     <div >
-                        <img class="w-100" src="{{ $partner->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
+                        <img class="w-100" src="{{ $partner->images()[0]?->image_path ?? '/images/empty.png'}}" style="height:400px;object-fit: cover;" alt="">
                     </div>
-                    <h4 class="fw-bold pt-3">アクセス</h4>
+                    <h4 class="fw-bold pt-4">アクセス</h4>
                     <p>
                         サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。
                         サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。サンプルテキスト。項目を作る必要あるあり。

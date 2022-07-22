@@ -215,9 +215,9 @@ input[type="radio"] {
 
                     <div class="card-body">
                         <p class="fs-5">体験施設・宿泊施設等への連絡事項</p>
+                        <p class="mb-0">コメント</p>
                         <div>
-                        <textarea class="form-control" row="10" cols="60" placeholder="サンプルとして配置しましたが設定はできていません" id="comment"></textarea>
-
+                            <textarea class="form-control" row="10" cols="60" placeholder="アレルギーなど知らせておきたいことや、質問事項等あればご記入ください。" id="comment"></textarea>
                         </div>
 
                     </div>

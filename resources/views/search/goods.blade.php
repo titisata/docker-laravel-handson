@@ -9,24 +9,29 @@
 li.item {
 	display: inline-block;
 }	
+.d-block{
+    height:400px;
+    object-fit: cover;
+
+}
 </style>
 <div id="carouselWithCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <!-- スライドさせる画像の設定 -->
         <div class="carousel-inner rounded-2" >
             <div class="carousel-item active">
-                <img src="/images/10.jpg" style="height:300px;object-fit: cover;" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
+                <img src="/images/10.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
                 <div class="carousel-caption d-sm-block w-100" style="right: 0;left: 0; bottom: 0;background: linear-gradient(rgba(0,0,0,0),rgb(226, 167, 4));">
                     <h2 class="fw-bold mb-0">町で買い物しよう！！</h2>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="/images/11.jpg" style="height:300px;object-fit: cover;" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
+                <img src="/images/11.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
                 <div class="carousel-caption  d-sm-block w-100" style="right: 0;left: 0; bottom: 0; background: linear-gradient(rgba(0,0,0,0),rgb(226, 167, 4));">
                     <h2 class="fw-bold mb-0">町で買い物しよう！！</h2>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="/images/12.jpg" style="height:300px;object-fit: cover;"  class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
+                <img src="/images/12.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
                 <div class="carousel-caption  d-sm-block w-100" style="right: 0;left: 0; bottom: 0; background: linear-gradient(rgba(0,0,0,0),rgb(226, 167, 4));">
                     <h2 class="fw-bold mb-0">町で買い物しよう！！</h2>
                 </div>
