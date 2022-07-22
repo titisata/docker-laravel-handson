@@ -151,7 +151,7 @@ async function commentCreate(ex_id) {
 </script>
 
 
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card" style="height: 300px;">
@@ -183,13 +183,14 @@ async function commentCreate(ex_id) {
 
             <div class="row">
                 <div class="my-5 col-12 col-lg-6">  
-                    <p>会社名: <a href="/partner/{{ $experienceFolder->partner->id }}">{{ $experienceFolder->partner->name }}</a></p>
+                    
                     @if (app('request')->input('keyword') != "")
                         <h4 class="">体験日: {{ app('request')->input('keyword') }}</h4>
                         <h5 class="">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}</h5>
                     @endif
                     
-                    <p class="mb-4">{{ $experienceFolder->description }}</p>
+                    <p>{{ $experienceFolder->description }}</p>
+                    <p class="mb-4 text-end"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary btn-sm rounded-pill">会社情報</a></p>
             
                     <p class="fw-bold text-end h5 border-top pt-3">　大人：{{ $experienceFolder->price_adult }}円~</p>
                     <p class="fw-bold text-end h5">子ども：{{ $experienceFolder->price_child }}円~</p>  

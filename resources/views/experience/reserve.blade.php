@@ -95,7 +95,7 @@ input[type="radio"] {
 
 
 </style>
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
 
         <div class="col-md-9">
@@ -109,8 +109,9 @@ input[type="radio"] {
 
             <div class="mt-4">
                     <div class="card-body">
-                    <p class="">{{ $experienceFolder->description }}</p>
+                        <p class="">{{ $experienceFolder->description }}</p>
                         <p class="pt-3 fs-5 text-end">体験料金の目安は{{ $experienceFolder->price_child }}円~</p>
+                        <p class="mb-4 text-end"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary btn-sm rounded-pill">会社情報</a></p>
                     </div>
                 </div>
 

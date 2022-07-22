@@ -75,15 +75,13 @@ async function commentCreate(goods_folder_id) {
     }
 </script>
 
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card" style="height: 300px;">
                 <img class="card-img img-thumbnail" style="height: 100%; object-fit: cover;" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
                
             </div>
-        
-                <p>会社名: <a href="/partner/{{ $goods_folder->partner->id }}">{{ $goods_folder->partner->name }}</a></p>
 
                 <div class="d-flex mt-3">
                     <h4 class="fw-bold">商品名：</h4>
@@ -92,6 +90,7 @@ async function commentCreate(goods_folder_id) {
                 
                 <h5 class="fw-bold mt-4">商品説明</h5>
                 <p>{{ $goods_folder->description }}</p>
+                <p class="mb-4 text-end"><a role="button" href="/partner/{{ $goods_folder->partner->id }}" class="btn btn-outline-secondary btn-sm rounded-pill">会社情報</a></p>
         
 
                 @forelse($goods_folder->goods as $goods)
