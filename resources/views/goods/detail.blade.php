@@ -20,7 +20,7 @@
 </style>
 
 <script>
-   
+
 async function commentCreate(goods_folder_id) {
     const content = document.getElementById('comment');
     const rate = document.getElementById('rate_input');
@@ -43,7 +43,7 @@ async function commentCreate(goods_folder_id) {
 }
 </script>
 <script>
-    
+
 
     function goods_formSwitch(id){
         var goods_result = document.getElementById(`goods_result_${id}`);
@@ -51,7 +51,7 @@ async function commentCreate(goods_folder_id) {
         var count = document.getElementById(`count_${id}`).value;
 
         goods_result.innerHTML = (goods_price.innerHTML*count);
-        
+
     }
 
     function check(){
@@ -70,7 +70,7 @@ async function commentCreate(goods_folder_id) {
           }else{
                return true;
               }
-        
+
 
     }
 </script>
@@ -80,25 +80,25 @@ async function commentCreate(goods_folder_id) {
         <div class="col-md-8">
             <div class="card" style="height: 300px;">
                 <img class="card-img img-thumbnail" style="height: 100%; object-fit: cover;" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
-               
+
             </div>
 
                 <div class="d-flex mt-3">
                     <h4 class="fw-bold">商品名：</h4>
                     <h4 class="fw-bold"> {{ $goods_folder->name }}</h4>
                 </div>
-                
+
                 <h5 class="fw-bold mt-4">商品説明</h5>
                 <p>{{ $goods_folder->description }}</p>
                 <p class="mb-4 text-end"><a role="button" href="/partner/{{ $goods_folder->partner->id }}" class="btn btn-outline-secondary btn-sm rounded-pill">会社情報</a></p>
-        
+
 
                 @forelse($goods_folder->goods as $goods)
-                <form class="mb-3 " action="{{ Request::url() }}" method="POST" onsubmit='return check();'>    
+                <form class="mb-3 " action="{{ Request::url() }}" method="POST" onsubmit='return check();'>
                     <div class="card bg-f-part text-white mt-3 p-3">
                         @csrf
                         <div class="d-flex align-items-center justify-content-between">
-                            <h5 class="fw-bold ">{{ $goods->name }}</h5>   
+                            <h5 class="fw-bold ">{{ $goods->name }}</h5>
                             <p class="fw-bold text-end h3 "><span id="goods_price_{{ $goods->id }}" value="">{{ $goods->price }}</span>円/個</p>
                         </div>
                         <div class="d-flex align-items-center justify-content-end pb-4 border-bottom">
@@ -117,13 +117,13 @@ async function commentCreate(goods_folder_id) {
                                     <option value="9">9</option>
                                     <option value="10">10</option>
                                 </select>
-                                
-                            </div>    
-                        </div> 
+
+                            </div>
+                        </div>
                         <p class="text-end pt-3 fs-4 fw-bold ">合計金額：<span id="goods_result_{{ $goods->id }}" class="fs-4">0</span>円</p>
 
                     </div>
-                    
+
                 @empty
                     <p>商品がありません</p>
                 @endforelse
@@ -133,15 +133,17 @@ async function commentCreate(goods_folder_id) {
                         </button>
                     </div>
                 </form>
+
+            <div class="my-5">
+                <h5 class="mb-0 fw-bold">商品詳細</h5>
+                <p>{{ $goods_folder->detail }}</p>
+            </div>
+
             <div class="my-5">
                 <h5 class="mb-0 fw-bold">注意事項など</h5>
-                
-                <p>このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。
-                このテキストはサンプルです。このテキストはサンプルですこのテキストはサンプルです。このテキストはサンプルです。
-                </p>
-
+                <p>{{ $goods_folder->caution }}</p>
             </div>
-            
+
 
             <div class="mt-2 card">
                 <div class="d-flex flex-column">
@@ -193,7 +195,7 @@ async function commentCreate(goods_folder_id) {
                             <img src="/images/star5.png" style="width:120px;height35px">
                             </div>
                         @endif
-            
+
                     <div class="m-3">
                     <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                         <div class="d-flex justify-content-between align-items-center mt-2">
