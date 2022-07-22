@@ -31,19 +31,14 @@ li.item {
                     </div>
                     <h4 class="fw-bold pt-4">アクセス</h4>
                     <p>{{ $partner->access }}</p>
-
+                    <p>住所: {{ $partner->address }}　電話番号: {{ $partner->phone }}</p>
                     <iframe
-                        width="600"
+                        width="100%"
                         height="300"
                         frameborder="0" style="border:0"
                         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCbEnku7Kl5mCIvWZgKOpgN-2wjmehRvyU&q={{ $partner->address }}"
                         allowfullscreen>
                     </iframe>
-
-
-                    <p>住所: {{ $partner->address }}</p>
-                    <p>電話番号: {{ $partner->phone }}</p>
-                    <p>キャッチコピー: {{ $partner->catch_copy }}</p>
                 </div>
             </div>
 
