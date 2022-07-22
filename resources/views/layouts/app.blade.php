@@ -103,7 +103,7 @@
             </div>
         </nav>
 
-        <main class="pt-4">
+        <main class="">
             @yield('content')
         </main>
 
