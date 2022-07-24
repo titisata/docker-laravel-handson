@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GoodCartItem;
 use App\Models\Goods;
+use App\Models\GoodsCategory;
 use App\Models\GoodsFolder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,15 +14,18 @@ class GoodsController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
+        $category = $request->category;
+        $categories = GoodsCategory::all();
+
         if ($keyword == '') {
-            $food_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', 'food')->orderBy('recommend_sort_no', 'desc')->get();
-            $drink_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', 'drink')->orderBy('recommend_sort_no', 'desc')->get();
-            $goods_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', 'goods')->orderBy('recommend_sort_no', 'desc')->get();
-            return view('search.goods', compact('food_goods_folders', 'drink_goods_folders', 'goods_goods_folders'));
+            $food_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '食べ物')->orderBy('recommend_sort_no', 'desc')->get();
+            $drink_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '飲み物')->orderBy('recommend_sort_no', 'desc')->get();
+            $goods_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '雑貨')->orderBy('recommend_sort_no', 'desc')->get();
+            return view('search.goods', compact('food_goods_folders', 'drink_goods_folders', 'goods_goods_folders', 'categories'));
         }
 
-        $goods = GoodsFolder::search($keyword, per_page: 10);
-        return view('search.goods_list', compact('goods_folders'));
+        $goods_folders = GoodsFolder::search($keyword, $category, per_page: 10);
+        return view('search.goods_list', compact('goods_folders', 'categories'));
     }
 
     public function post(Request $request)

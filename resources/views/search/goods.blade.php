@@ -57,6 +57,12 @@ li.item {
                         <input class="form-control form-control-sm" name="keyword" type="text" style="width:240px">
                         <input type="submit" value="検索" class="btn btn-sm btn-secondary">
                     </div>
+                    <select name="category">
+                        <option value="">カテゴリ選択</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->name }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
                 </form>
             </div>
 
