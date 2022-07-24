@@ -138,11 +138,11 @@ class ExperienceFolder extends Model
      * 検索を行う
      *
      * @param string $date 検索日付
-     * @param string $category カテゴリ
+     * @param ?string $category カテゴリ
      * @param int $per_page 1ページ当たりの表示数
      * @return Collection<ExperienceFolder>
      */
-    public static function search(string $date, string $category, int $per_page)
+    public static function search(string $date, ?string $category, int $per_page)
     {
         $date = new DateTime($date);
         $where = [];

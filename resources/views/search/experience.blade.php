@@ -56,15 +56,14 @@ li.item {
                     <label for="keyword" class="fw-bold fs-5">体験したい日を入力してください</label><br>
                     <div class="d-flex justify-content-center mt-2">
                         <input class="form-control" name="keyword" type="date" style="width:240px">
-                        <select name="category">
-                            <option value="">カテゴリ選択</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category }}">{{ $category }}</option>
-                            @endforeach
-                        </select>
                         <input type="submit" value="検索" class="btn btn-sm btn-secondary">
                     </div>
-
+                    <select name="category">
+                        <option value="">カテゴリ選択</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->name }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
                 </form>
             </div>
 
