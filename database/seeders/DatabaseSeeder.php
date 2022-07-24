@@ -47,5 +47,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ImageSeeder::class);
         $this->call(ExperienceCommentSeeder::class);
         $this->call(ScheduleSeeder::class);
+        $this->call(ExperienceCategorySeeder::class);
     }
 }

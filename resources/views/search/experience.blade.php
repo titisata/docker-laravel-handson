@@ -56,6 +56,12 @@ li.item {
                     <label for="keyword" class="fw-bold fs-5">体験したい日を入力してください</label><br>
                     <div class="d-flex justify-content-center mt-2">
                         <input class="form-control" name="keyword" type="date" style="width:240px">
+                        <select name="category">
+                            <option value="">カテゴリ選択</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category }}">{{ $category }}</option>
+                            @endforeach
+                        </select>
                         <input type="submit" value="検索" class="btn btn-sm btn-secondary">
                     </div>
 
@@ -63,7 +69,7 @@ li.item {
             </div>
 
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの宿泊体験</h2>
-        
+
             <ul class="horizontal-list ps-0" >
                 @foreach ($experiences_folders_is_lodging as $experiences_folder)
                     @include('components.experience_small_cell', ['experienceFolder'=>$experiences_folder])
@@ -72,13 +78,13 @@ li.item {
 
 
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの体験</h2>
-            
+
             <ul class="horizontal-list">
                 @foreach ($experiences_folders_not_is_lodging as $experiences_folder)
                     @include('components.experience_small_cell', ['experienceFolder'=>$experiences_folder])
                 @endforeach
             </ul>
-          
+
 
 
             <!-- <div class="mt-5">

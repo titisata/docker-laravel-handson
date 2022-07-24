@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Experience;
 use App\Models\ExperienceCartItem;
+use App\Models\ExperienceCategory;
 use App\Models\ExperienceFolder;
 use DateTime;
 use Illuminate\Http\Request;
@@ -14,14 +15,18 @@ class ExperienceController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
+        $category = $request->category;
+        $categories = ExperienceCategory::all();
+
         if ($keyword == '') {
             $experiences_folders_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 1)->orderBy('recommend_sort_no', 'desc')->get();
             $experiences_folders_not_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 0)->orderBy('recommend_sort_no', 'desc')->get();
-            return view('search.experience', compact('experiences_folders_is_lodging', 'experiences_folders_not_is_lodging'));
+            return view('search.experience', compact('experiences_folders_is_lodging', 'experiences_folders_not_is_lodging', 'categories'));
         }
 
-        $experienceFolders = ExperienceFolder::search($keyword, per_page: 10);
-        return view('search.experience_list', compact('experienceFolders'));
+
+        $experienceFolders = ExperienceFolder::search($keyword, $category, per_page: 10);
+        return view('search.experience_list', compact('experienceFolders', 'categories'));
     }
 
 

@@ -8,7 +8,7 @@
 }
 li.item {
 	display: inline-block;
-}	
+}
 </style>
 <div class="container">
     <div class="row justify-content-center">

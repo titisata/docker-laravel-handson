@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\ExperienceCategory as ModelsExperienceCategory;
+use App\Models\ExperienceCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ExperienceCategory extends Seeder
+class ExperienceCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,13 +15,13 @@ class ExperienceCategory extends Seeder
      */
     public function run()
     {
-        ModelsExperienceCategory::create([
+        ExperienceCategory::create([
             'name' => '文化'
         ]);
-        ModelsExperienceCategory::create([
+        ExperienceCategory::create([
             'name' => 'アクティビティ'
         ]);
-        ModelsExperienceCategory::create([
+        ExperienceCategory::create([
             'name' => 'その他'
         ]);
     }
