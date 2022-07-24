@@ -48,5 +48,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ExperienceCommentSeeder::class);
         $this->call(ScheduleSeeder::class);
         $this->call(ExperienceCategorySeeder::class);
+        $this->call(GoodsCategorySeeder::class);
     }
 }
