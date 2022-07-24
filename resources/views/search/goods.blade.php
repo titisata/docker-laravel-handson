@@ -8,7 +8,7 @@
 }
 li.item {
 	display: inline-block;
-}	
+}
 .d-block{
     height:400px;
     object-fit: cover;
@@ -35,7 +35,7 @@ li.item {
                 <div class="carousel-caption  d-sm-block w-100" style="right: 0;left: 0; bottom: 0; background: linear-gradient(rgba(0,0,0,0),rgb(226, 167, 4));">
                     <h2 class="fw-bold mb-0">町で買い物しよう！！</h2>
                 </div>
-            </div>      
+            </div>
         </div><!-- /.carousel-inner -->
         <!-- スライドコントロールの設定 -->
         <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -62,31 +62,31 @@ li.item {
 
 
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの食べ物</h2>
-            
+
             <ul class="horizontal-list">
                 @foreach ($food_goods_folders as $goods_item_folder)
                     @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
                 @endforeach
-            </ul>    
-           
+            </ul>
+
 
             <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの飲み物</h2>
-           
+
             <ul class="horizontal-list">
                 @foreach ($drink_goods_folders as $goods_item_folder)
                     @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
                 @endforeach
             </ul>
-            
+
 
             <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの雑貨</h2>
-            
+
             <ul class="horizontal-list">
                 @foreach ($goods_goods_folders as $goods_item_folder)
                     @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
                 @endforeach
             </ul>
-            
+
 
             <!-- <div class="mt-5">
                 <a href="/search/experience">体験検索へ</a>
