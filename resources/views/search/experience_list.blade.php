@@ -18,10 +18,16 @@ li.item {
 
             <form action="/search/experience" method="get">
                 <label for="keyword">日付</label><input name="keyword" type="date">
+                <select name="category">
+                    <option value="">カテゴリ選択</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
                 <input type="submit" value="検索">
             </form>
 
-            <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの体験</h2>
+            <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">検索結果</h2>
             <div class="d-flex justify-content-evenly ">
                 <ul class="horizontal-list">
                 @forelse($experienceFolders as $experienceFolder)
