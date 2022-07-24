@@ -9,6 +9,7 @@
 
 
             <form class="mb-3 mt-3" action="/search/goods" method="get">
+            @csrf
                 <label for="keyword">ワード</label><input name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
                 <select name="category">
                     <option value="">カテゴリ選択</option>

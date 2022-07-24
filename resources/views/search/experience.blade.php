@@ -53,6 +53,7 @@ li.item {
         <div class="col-md-10 mt-4 px-0">
             <div class="text-center">
                 <form action="/search/experience" method="get">
+                @csrf
                     <label for="keyword" class="fw-bold fs-5">体験したい日を入力してください</label><br>
                     <div class="d-flex justify-content-center mt-2">
                         <input class="form-control" name="keyword" type="date" style="width:240px">
