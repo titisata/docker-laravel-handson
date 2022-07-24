@@ -138,18 +138,24 @@ class ExperienceFolder extends Model
      * 検索を行う
      *
      * @param string $date 検索日付
+     * @param string $category カテゴリ
      * @param int $per_page 1ページ当たりの表示数
      * @return Collection<ExperienceFolder>
      */
-    public static function search(string $date, int $per_page)
+    public static function search(string $date, string $category, int $per_page)
     {
         $date = new DateTime($date);
         $where = [];
 
         // フリーワードでの検索条件
-        if ($date != '') {
+        if ($date) {
             $where[] = ['start_date', '<', $date];
             $where[] = ['end_date', '>', $date];
+        }
+
+        // カテゴリによる検索条件
+        if ($category) {
+            $where[] = ['category1', '=', $category];
         }
 
         $experienceFolders = ExperienceFolder::where($where)->orderBy("created_at", "desc")->paginate($per_page);
