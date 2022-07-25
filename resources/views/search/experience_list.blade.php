@@ -14,18 +14,28 @@ li.item {
     <div class="row justify-content-center">
         <div class="col-md-10">
 
-            <h3 class="mb-3">体験検索結果</h3>
-
-            <form action="/search/experience" method="get">
-                <label for="keyword">日付</label><input name="keyword" type="date">
-                <select name="category">
-                    <option value="">カテゴリ選択</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->name }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-                <input type="submit" value="検索">
-            </form>
+            <div class="ms-3 ms-md-0 mt-4">
+                
+                <div class="text-center">
+                    <h3 class="mb-3 fw-bold">体験検索結果</h3>
+                    <form action="/search/experience" method="get">
+                    @csrf
+                        <div class="d-flex flex-column align-items-center">
+                            <input class="form-control" name="keyword" type="date" style="width:240px">     
+                            <select name="category" class="form-select mt-2" style="width:216px">
+                                <option value="">カテゴリ選択</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            <input type="submit" value="検索" class="btn btn btn-secondary mt-3" style="width:180px">
+                        </div>
+                        
+                    </form>
+                </div>
+                
+            </div>   
+            
 
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">検索結果</h2>
             <div class="d-flex justify-content-evenly ">

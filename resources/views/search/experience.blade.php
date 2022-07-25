@@ -54,17 +54,18 @@ li.item {
             <div class="text-center">
                 <form action="/search/experience" method="get">
                 @csrf
-                    <label for="keyword" class="fw-bold fs-5">体験したい日を入力してください</label><br>
-                    <div class="d-flex justify-content-center mt-2">
-                        <input class="form-control" name="keyword" type="date" style="width:240px">
-                        <input type="submit" value="検索" class="btn btn-sm btn-secondary">
+                    <div class="d-flex flex-column align-items-center">
+                        <label for="keyword" class="fw-bold fs-5">体験したい日を入力してください</label>
+                        <input class="form-control" name="keyword" type="date" style="width:240px">     
+                        <select name="category" class="form-select mt-2" style="width:216px">
+                            <option value="">カテゴリ選択</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        <input type="submit" value="検索" class="btn btn btn-secondary mt-3" style="width:180px">
                     </div>
-                    <select name="category">
-                        <option value="">カテゴリ選択</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->name }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
+                    
                 </form>
             </div>
 

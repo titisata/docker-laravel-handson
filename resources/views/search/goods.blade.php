@@ -2,7 +2,7 @@
 
 @section('content')
 <style>
-    ul.horizontal-list {
+ul.horizontal-list {
 	overflow-x: auto;
 	white-space: nowrap;
 }
@@ -51,18 +51,20 @@ li.item {
     <div class="row justify-content-center px-0"style="--bs-gutter-x: 0;">
         <div class="col-md-10 mt-4 px-0">
             <div class="text-center">
-                <form action="/search/goods" method="get">
-                    <label for="keyword" class="fw-bold fs-5">検索するキーワードを入力してください</label>
-                    <div class="d-flex justify-content-center mt-2">
-                        <input class="form-control form-control-sm" name="keyword" type="text" style="width:240px">
-                        <input type="submit" value="検索" class="btn btn-sm btn-secondary">
+
+                <h3 class="mb-3 fw-bold">検索するキーワードを入力してください</h3>
+                <form class="mb-3 mt-3" action="/search/goods" method="get">
+                    @csrf
+                    <div class="d-flex flex-column align-items-center">
+                        <input name="keyword" type="text" class="form-control" style="width:240px" placefolder="検索したいお土産を入力してください">
+                        <select name="category" class="form-select mt-2" style="width:240px;">
+                            <option value="">カテゴリ選択</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        <input class="btn btn-secondary mt-3" style="width:180px" type="submit" value="検索">
                     </div>
-                    <select name="category">
-                        <option value="">カテゴリ選択</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->name }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
                 </form>
             </div>
 
