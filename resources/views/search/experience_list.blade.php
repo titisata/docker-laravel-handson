@@ -2,13 +2,7 @@
 
 @section('content')
 <style>
-    ul.horizontal-list {
-	overflow-x: auto;
-	white-space: nowrap;
-}
-li.item {
-	display: inline-block;
-}
+   
 </style>
 <div class="container">
     <div class="row justify-content-center">
@@ -38,8 +32,8 @@ li.item {
             
 
             <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">検索結果</h2>
-            <div class="d-flex justify-content-evenly ">
-                <ul class="horizontal-list">
+            <div class="d-flex flex-column">
+                
                 @forelse($experienceFolders as $experienceFolder)
                     @if (!$experienceFolder->is_holiday(app('request')->input('keyword')))
                         @include('components.experience_cell', ['experienceFolder'=>$experienceFolder])
@@ -47,7 +41,7 @@ li.item {
                 @empty
                     <p>検索結果がありません。</p>
                 @endforelse
-                </ul>
+                
             </div>
             <!-- <a href="/search/goods">土産検索へ</a> -->
         </div>

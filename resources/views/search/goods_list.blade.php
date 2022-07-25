@@ -11,7 +11,7 @@ li.item {
 }
 </style>
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="--bs-gutter-x: 0;">
         <div class="ms-3 ms-md-0 mt-4">
             <div class="text-center">
 
@@ -33,15 +33,14 @@ li.item {
         </div>
 
         <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">検索結果</h2>
-        <div class="d-flex justify-content-evenly ">
-            <ul class="horizontal-list">
-                @forelse($goods_folders as $goods_folder)
-                    @include('components.goods_cell', ['goods_folder'=>$goods_folder])
-                @empty
-                    <p>検索結果がありません。</p>
-                @endforelse
-            </ul>
-        </div>
+            
+        @forelse($goods_folders as $goods_folder)
+            @include('components.goods_cell', ['goods_folder'=>$goods_folder])
+        @empty
+            <p>検索結果がありません。</p>
+        @endforelse
+        
+        
             
     
         <div class="d-flex justify-content-center mt-3">
