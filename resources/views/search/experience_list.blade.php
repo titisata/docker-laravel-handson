@@ -4,9 +4,9 @@
 <style>
    
 </style>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
+<div class="container p-0">
+    <div class="row justify-content-center"style="--bs-gutter-x: 0;">
+        <div class="col-10 col-md-10">
 
             <div class="ms-3 ms-md-0 mt-4">
                 

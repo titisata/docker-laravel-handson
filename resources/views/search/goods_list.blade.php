@@ -10,8 +10,9 @@ li.item {
 	display: inline-block;
 }
 </style>
-<div class="container">
+<div class="container p-0">
     <div class="row justify-content-center" style="--bs-gutter-x: 0;">
+        <div class="col-10 col-md-10">
         <div class="ms-3 ms-md-0 mt-4">
             <div class="text-center">
 
@@ -46,6 +47,7 @@ li.item {
         <div class="d-flex justify-content-center mt-3">
             <div>{{ $goods_folders->appends(request()->query())->links('pagination::bootstrap-4') }}</div>
         </div>
+</div>
     </div>
 </div>
 
