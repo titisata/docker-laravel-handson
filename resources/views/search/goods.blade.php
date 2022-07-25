@@ -57,7 +57,7 @@ li.item {
                     @csrf
                     <div class="d-flex flex-column align-items-center">
                         <input name="keyword" type="text" class="form-control" style="width:240px" placefolder="検索したいお土産を入力してください">
-                        <select name="category" class="form-select mt-2" style="width:240px;">
+                        <select name="category" class="form-select mt-2" style="width:216px;">
                             <option value="">カテゴリ選択</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->name }}">{{ $category->name }}</option>
