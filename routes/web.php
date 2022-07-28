@@ -43,9 +43,14 @@ Route::prefix('mypage/user')->middleware(['auth'])->group(function () {
     Route::get('/reserve', [App\Http\Controllers\MUserController::class, 'reserve']);
 });
 
-// ユーザーがアクセスできる
+// パートナーがアクセスできる
 Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
     Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
     Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
+});
+
+// 管理者がアクセスできる
+Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
+    Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
 });

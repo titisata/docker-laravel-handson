@@ -13,12 +13,13 @@
                         @forelse ($experiences_folder->reserves as $reserved_experience)
                             <div class="mt-1 p-3 card">
                                 <div>
-                                    <p>{{ $reserved_experience->experience->name }}</p>
+                                    <p>名前: {{ $reserved_experience->user->name }}様</p>
                                     <p>予約日: {{ $reserved_experience->experience->start_date }}</p>
                                     <p>大人: {{ $reserved_experience->quantity_adult }}人 子ども: {{ $reserved_experience->quantity_child }}人</p>
                                     <p>宿泊: {{ $reserved_experience->hotelGroup?->name ?? 'なし' }}</p>
                                     <p>食事: {{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
                                     <p>連絡事項: {{ $reserved_experience->message }}</p>
+                                    <p>ステータス: {{ $reserved_experience->status }}</p>
                                 </div>
                             </div>
                         @empty
