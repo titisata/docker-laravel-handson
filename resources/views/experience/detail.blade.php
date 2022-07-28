@@ -187,6 +187,16 @@ async function commentCreate(ex_id) {
                     <p>{{ $experienceFolder->description }}</p>
                     <p class="mb-4 text-end"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
 
+                    <h4 class="fw-bold pt-4 ps-2">アドレス</h4>
+                    <p class="ps-2">{{ $experienceFolder->address }}</p>
+                    <iframe
+                        width="100%"
+                        height="300"
+                        frameborder="0" style="border:0"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCbEnku7Kl5mCIvWZgKOpgN-2wjmehRvyU&q={{ $experienceFolder->address }}"
+                        allowfullscreen>
+                    </iframe>
+
                     <div class="d-flex justify-content-between align-items-start border-top pt-3 flex-wrap">
                         @if (app('request')->input('keyword') != "")
                             <div class="bg-f-part p-2 rounded-2 d-lg-none">
@@ -203,11 +213,10 @@ async function commentCreate(ex_id) {
                             <div class="p-2 ms-lg-auto">
                                 <p class="fw-bold text-end fs-5">　大人：{{ $experienceFolder->price_adult }}円~</p>
                                 <p class="fw-bold text-end fs-5">子ども：{{ $experienceFolder->price_child }}円~</p>
-
                             </div>
-                    
+
                     </div>
-                    
+
                     <div class="mt-3 col-12 col-lg-6 d-lg-none">
                         @if (app('request')->input('keyword') == "")
                             <div class="card-body">
@@ -226,14 +235,14 @@ async function commentCreate(ex_id) {
                             </div>
 
                         </div>
-                            
+
                         @endif
 
                     </div>
 
-                    
 
-                    
+
+
 
                     <div class="mt-5 card">
 
@@ -321,8 +330,8 @@ async function commentCreate(ex_id) {
                             <div class="bg-f-part p-2 rounded-2 mb-2">
                                 <h5 class="text-white">体験日: {{ app('request')->input('keyword') }}</h5>
                                 <h5 class="text-white mb-0">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}</h5>
-                            </div>    
-                            @forelse($experiences as $experience)    
+                            </div>
+                            @forelse($experiences as $experience)
                                 <a class="btn btn-lg btn-pink rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                             @empty
                                 <p>この体験はご利用できません</p>
