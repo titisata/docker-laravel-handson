@@ -2,15 +2,15 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - bootstrap sidebar</title>
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <title>URATABI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
     <script>
-        (function(){
-        $('#msbo').on('click', function(){
-            $('body').toggleClass('msb-x');
+        $(document).ready(function(){
+            var menu = document.getElementById("@yield('menu')");
+            menu.classList.add("active");
         });
-        }());
     </script>
     <style>
         body {
@@ -124,40 +124,6 @@
         a:focus,
         a:hover {
         text-decoration: none;
-        }
-
-        .inbox .container-fluid {
-        padding-left: 0;
-        padding-right: 0;
-        }
-        .inbox ul, .inbox li {
-        margin: 0;
-        padding: 0;
-        }
-        .inbox ul li {
-        list-style: none;
-        }
-        .inbox ul li a {
-        display: block;
-        padding: 10px 20px;
-        }
-
-        .msb, .mnb {
-        -moz-animation: slidein 300ms forwards;
-        -o-animation: slidein 300ms forwards;
-        -webkit-animation: slidein 300ms forwards;
-        animation: slidein 300ms forwards;
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-        }
-
-        .mcw {
-        -moz-animation: bodyslidein 300ms forwards;
-        -o-animation: bodyslidein 300ms forwards;
-        -webkit-animation: bodyslidein 300ms forwards;
-        animation: bodyslidein 300ms forwards;
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
         }
 
         body.msb-x .mcw, body.msb-x .mnb {
@@ -281,26 +247,19 @@
 <!-- partial:index.partial.html -->
 <nav class="mnb navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <i class="ic fa fa-bars"></i>
-      </button>
-      <div style="padding: 15px 0;">
-         <a href="#" id="msbo"><i class="ic fa fa-bars"></i></a>
-      </div>
-    </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}様</a>
+          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}様</a>
+        </li>
+        <li>
+          <a href="/" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">URATABIへ戻る</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<!--msb: main sidebar-->
-<div class="msb" id="msb">
+<div class="msb">
 		<nav class="navbar navbar-default" role="navigation">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -320,12 +279,16 @@
 			<div class="side-menu-container">
 				<ul class="nav navbar-nav">
 
-					<li><a href="/admin"><i class="fa fa-dashboard"></i>ホーム</a></li>
-					<li class="active"><a href="#"><i class="fa fa-puzzle-piece"></i>イベント</a></li>
-					<li><a href="#"><i class="fa fa-heart"></i>パートナー</a></li>
+					<li id="user_home"><a href="/mypage/partner"><i class="fa fa-dashboard"></i>(ユーザー)ホーム</a></li>
+					<li id="partner_home"><a href="/mypage/user"><i class="fa fa-dashboard"></i>(パートナー)ホーム</a></li>
+					<li id="user_reserve"><a href="/mypage/user/reserve"><i class="fa fa-puzzle-piece"></i>(ユーザー)予約状況</a></li>
+					<li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>(パートナー)予約状況</a></li>
+					<li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>(パートナー)イベント管理</a></li>
+					<li id="owner_partner"><a href="#"><i class="fa fa-heart"></i>(管理者)パートナー管理</a></li>
+					<li id="owner_site"><a href="#"><span class="glyphicon glyphicon-signal"></span>(管理者)サイト管理</a></li>
 
 					<!-- Dropdown-->
-					<li class="panel panel-default" id="dropdown">
+					{{-- <li class="panel panel-default" id="dropdown">
 						<a data-toggle="collapse" href="#dropdown-lvl1">
 							<i class="fa fa-diamond"></i> イベント
 						  <span class="caret"></span>
@@ -358,8 +321,7 @@
 								</ul>
 							</div>
 						</div>
-					</li>
-					<li><a href="#"><span class="glyphicon glyphicon-signal"></span>サイト管理</a></li>
+					</li> --}}
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</nav>
@@ -385,9 +347,5 @@
     </div>
   </div>
 </div>
-<!-- partial -->
-  <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script><script  src="./script.js"></script>
-
 </body>
 </html>

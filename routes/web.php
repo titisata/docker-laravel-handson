@@ -37,8 +37,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/purchase', [App\Http\Controllers\CartController::class, 'purchase_post']);
 });
 
-// システム管理者のみがアクセスできる所
-Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+// ユーザーがアクセスできる
+Route::prefix('mypage/user')->middleware(['auth'])->group(function () {
+    Route::get('/', [App\Http\Controllers\MAdminController::class, 'index']);
+    Route::get('/event', [App\Hbttp\Controllers\MExperienceController::class, 'index']);
+});
+
+// ユーザーがアクセスできる
+Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\MAdminController::class, 'index']);
     Route::get('/event', [App\Http\Controllers\MExperienceController::class, 'index']);
 });

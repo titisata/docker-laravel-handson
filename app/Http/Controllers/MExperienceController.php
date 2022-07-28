@@ -8,6 +8,6 @@ class MExperienceController extends Controller
 {
     public function index()
     {
-        return view('admin.experience');
+        return view('mypage.partner.reserves');
     }
 }
