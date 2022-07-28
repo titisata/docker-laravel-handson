@@ -6,11 +6,11 @@
     <h1>予約状況</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card mt-3">
-                <div class="card-header">{{ $partner->name }}への予約</div>
-                <div class="card-body">
-                    @forelse ($reserved_experiences as $reserved_experience)
-                        <a href="/experience/{{ $reserved_experience->experience->id }}">
+            @forelse ($experiences_folders as $experiences_folder)
+                <div class="card mt-3">
+                    <div class="card-header">{{ $experiences_folder->name }}への予約</div>
+                    <div class="card-body">
+                        @forelse ($experiences_folder->reserves as $reserved_experience)
                             <div class="mt-1 p-3 card">
                                 <div>
                                     <p>{{ $reserved_experience->experience->name }}</p>
@@ -21,14 +21,13 @@
                                     <p>連絡事項: {{ $reserved_experience->message }}</p>
                                 </div>
                             </div>
-                        </a>
-                    @empty
-
-                    @endforelse
+                        @empty
+                            <p>予約はありません</p>
+                        @endforelse
+                    </div>
                 </div>
-            </div>
-
-            </div>
+            @empty
+            @endforelse
         </div>
     </div>
 </div>

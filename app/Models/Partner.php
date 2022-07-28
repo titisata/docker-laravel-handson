@@ -23,4 +23,15 @@ class Partner extends Model
         ])->get();
         return $imgaes;
     }
+
+    /**
+     * 体験を取得
+     *
+     * @return Collection<ExperienceFolder>
+     */
+
+    public function experiences()
+    {
+        return $this->hasMany(ExperienceFolder::class);
+    }
 }
