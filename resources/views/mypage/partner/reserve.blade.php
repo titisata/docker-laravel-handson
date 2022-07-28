@@ -1,6 +1,6 @@
 @extends('mypage.layouts.app')
 
-@section('menu', 'user_reserve')
+@section('menu', 'partner_reserve')
 @section('content')
 <div class="container">
     <h1>予約状況</h1>
