@@ -28,24 +28,6 @@
                 </div>
             </div>
 
-            <div class="card mt-3">
-                <div class="card-header">注文したお土産</div>
-                <div class="card-body">
-                    @forelse ($ordered_goods as $ordered_goods_one)
-                        <a href="/experience/{{ $ordered_goods_one->goods->id }}">
-                            <div class="mt-1 p-3 card">
-                                <div>
-                                    <p>名前: {{ $ordered_goods_one->goods->name }}</p>
-                                    <p>個数: {{ $ordered_goods_one->quantity }}</p>
-                                </div>
-                            </div>
-                        </a>
-                    @empty
-
-                    @endforelse
-                </div>
-            </div>
-
             </div>
         </div>
     </div>
