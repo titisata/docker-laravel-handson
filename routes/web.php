@@ -39,5 +39,6 @@ Route::middleware(['auth'])->group(function () {
 
 // システム管理者のみがアクセスできる所
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/', [App\Http\Controllers\MAdminController::class, 'index']);
     Route::get('/event', [App\Http\Controllers\MExperienceController::class, 'index']);
 });

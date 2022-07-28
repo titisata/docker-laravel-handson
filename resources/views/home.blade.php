@@ -27,6 +27,9 @@
                     <div class="card-body">
                         <p>あなたはパートナーです</p>
                         <a href="/partner/{{ $partner->id }}">パートナー詳細画面へ</a>
+                        <div>
+                            <a href="/admin">管理画面へ</a>
+                        </div>
                     </div>
                 </div>
             @endif
