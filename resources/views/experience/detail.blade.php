@@ -193,6 +193,11 @@ async function commentCreate(ex_id) {
                                 <p class="text-white fs-5">体験日: {{ app('request')->input('keyword') }}</p>
                                 <p class="text-white mb-0 fs-5">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') :  app('request')->input('keyword') ) ) : '宿泊なし' }}</p>
                             </div>
+                            <div>
+                                <a role="button" class="btn btn-dark" href="{{url()->current()}}" >
+                                    ボタン
+                                </a>
+                            </div>
 
                         @endif
                             <div class="p-2 ms-lg-auto">

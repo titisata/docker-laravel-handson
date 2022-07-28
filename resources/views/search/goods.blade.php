@@ -16,36 +16,36 @@ li.item {
 }
 </style>
 <div id="carouselWithCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <!-- スライドさせる画像の設定 -->
-        <div class="carousel-inner rounded-2" >
-            <div class="carousel-item active">
-                <img src="/images/10.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
-                <div class="carousel-caption d-sm-block w-100" style="right: 0;left: 0; bottom: 0;background: linear-gradient(rgba(0,0,0,0),rgb(226, 167, 4));">
-                    <h2 class="fw-bold mb-0">町で買い物しよう！！</h2>
-                </div>
+    <!-- スライドさせる画像の設定 -->
+    <div class="carousel-inner rounded-2" >
+        <div class="carousel-item active">
+            <img src="/images/10.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
+            <div class="carousel-caption d-sm-block w-100" style="right: 0;left: 0; bottom: 0;background: linear-gradient(rgba(0,0,0,0),rgb(226, 167, 4));">
+                <h2 class="fw-bold mb-0">町で買い物しよう！！</h2>
             </div>
-            <div class="carousel-item">
-                <img src="/images/11.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
-                <div class="carousel-caption  d-sm-block w-100" style="right: 0;left: 0; bottom: 0; background: linear-gradient(rgba(0,0,0,0),rgb(226, 167, 4));">
-                    <h2 class="fw-bold mb-0">町で買い物しよう！！</h2>
-                </div>
+        </div>
+        <div class="carousel-item">
+            <img src="/images/11.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
+            <div class="carousel-caption  d-sm-block w-100" style="right: 0;left: 0; bottom: 0; background: linear-gradient(rgba(0,0,0,0),rgb(226, 167, 4));">
+                <h2 class="fw-bold mb-0">町で買い物しよう！！</h2>
             </div>
-            <div class="carousel-item">
-                <img src="/images/12.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
-                <div class="carousel-caption  d-sm-block w-100" style="right: 0;left: 0; bottom: 0; background: linear-gradient(rgba(0,0,0,0),rgb(226, 167, 4));">
-                    <h2 class="fw-bold mb-0">町で買い物しよう！！</h2>
-                </div>
+        </div>
+        <div class="carousel-item">
+            <img src="/images/12.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
+            <div class="carousel-caption  d-sm-block w-100" style="right: 0;left: 0; bottom: 0; background: linear-gradient(rgba(0,0,0,0),rgb(226, 167, 4));">
+                <h2 class="fw-bold mb-0">町で買い物しよう！！</h2>
             </div>
-        </div><!-- /.carousel-inner -->
-        <!-- スライドコントロールの設定 -->
-        <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">前へ</span>
-        </button>
-        <button type="button" class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">次へ</span>
-        </button>
+        </div>
+    </div><!-- /.carousel-inner -->
+    <!-- スライドコントロールの設定 -->
+    <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">前へ</span>
+    </button>
+    <button type="button" class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">次へ</span>
+    </button>
 </div>
 <div class="container px-0">
     <div class="row justify-content-center px-0"style="--bs-gutter-x: 0;">

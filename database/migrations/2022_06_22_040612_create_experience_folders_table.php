@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->foreignId('company_id')->constrained('companies');
             $table->string('name', 50)->index();
             $table->string('description', 1000);
+            $table->string('address', 1000);
             $table->string('caution', 1000);
             $table->string('detail', 1000);
             $table->string('category1', 50)->nullable()->index();
