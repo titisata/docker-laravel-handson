@@ -38,6 +38,9 @@ class MPartnerController extends Controller
         $description = $request->description;
         $caution = $request->caution;
         $category = $request->category;
+        $ex_names = $request->ex_names;
+        $ex_price_adults = $request->ex_price_adults;
+        $ex_price_childs = $request->ex_price_childs;
 
         $experiences_folder = ExperienceFolder::where('id', $id)->update([
             'name' => $name,
@@ -47,6 +50,13 @@ class MPartnerController extends Controller
             'caution' => $caution,
             'category1' => $category,
         ]);
+
+        for ($i=0; $i < count($ex_names); $i++) {
+            $ex_name = $ex_names[$i];
+            $ex_price_adult = $ex_price_adults[$i];
+            $ex_price_child = $ex_price_childs[$i];
+        }
+
         $experiences_folder = ExperienceFolder::find($id);
         $categories = ExperienceCategory::all();
         return view('mypage.partner.experience_edit', compact('experiences_folder', 'categories'));
