@@ -36,3 +36,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart/purchase', [App\Http\Controllers\CartController::class, 'purchase']);
     Route::post('/cart/purchase', [App\Http\Controllers\CartController::class, 'purchase_post']);
 });
+
+// システム管理者のみがアクセスできる所
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+    Route::get('/event', [App\Http\Controllers\MExperienceController::class, 'index']);
+});

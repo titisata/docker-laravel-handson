@@ -47,6 +47,16 @@ class User extends Authenticatable
         return $this->hasMany(ExperienceReserve::class);
     }
 
+    /**
+     * ロールを取得する
+     *
+     * @return Collection<Role>
+     */
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
+    }
+
     public function ordered_goods()
     {
         return $this->hasMany(GoodsOrder::class);

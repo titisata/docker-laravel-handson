@@ -6,8 +6,7 @@ URATABI の Lravel プロジェクトです。
 
 ```shell
 composer install
-php artisan migrate
-php artisan db:seed
+php artisan migrate:refresh --seed
 ```
 
 ## 初期ユーザー
@@ -16,3 +15,11 @@ php artisan db:seed
 mail: test@gmail.com
 pass: pass1234
 ```
+
+## ロールについて
+
+`roles` テーブルで管理されている `role` の対応表
+1 -> システム管理者 (ソールドアウト): admin
+2 -> サイトオーナー (観光協会): owner
+3 -> パートナー: partner
+ユーザーロールはデフォで全員存在すると考える
