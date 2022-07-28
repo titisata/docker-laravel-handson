@@ -39,12 +39,13 @@ Route::middleware(['auth'])->group(function () {
 
 // ユーザーがアクセスできる
 Route::prefix('mypage/user')->middleware(['auth'])->group(function () {
-    Route::get('/', [App\Http\Controllers\MAdminController::class, 'index']);
-    Route::get('/event', [App\Hbttp\Controllers\MExperienceController::class, 'index']);
+    Route::get('/', [App\Http\Controllers\MUserController::class, 'home']);
+    Route::get('/reserve', [App\Http\Controllers\MUserController::class, 'reserve']);
 });
 
 // ユーザーがアクセスできる
 Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
-    Route::get('/', [App\Http\Controllers\MAdminController::class, 'index']);
-    Route::get('/event', [App\Http\Controllers\MExperienceController::class, 'index']);
+    Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
+    Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
+    Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
 });

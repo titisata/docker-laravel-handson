@@ -1,8 +1,8 @@
 @extends('mypage.layouts.app')
 
-@section('menu', 'reseve')
+@section('menu', 'partner_event')
 @section('content')
 <div class="container">
-    <h1>aaaa</h1>
+    <h1>イベント管理</h1>
 </div>
 @endsection

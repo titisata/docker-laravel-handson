@@ -1,6 +1,13 @@
 @extends('mypage.layouts.app')
 
-@section('menu', 'home')
+@section('menu', 'partner_home')
 @section('content')
-<h1>ようこそ {{ Auth::user()->name }} 様</h1>
+    <h1>ようこそ {{ Auth::user()->name }} 様</h1>
+    <h2>あなたはパートナーです</h2>
+    <div class="card">
+        <div class="card-body">
+            <p>名前: {{ Auth::user()->name }}</p>
+            <p>メールアドレス: {{ Auth::user()->email }}</p>
+        </div>
+    </div>
 @endsection
