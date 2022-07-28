@@ -5,9 +5,15 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Consts\RoleConst;
 
 class RoleHandler
 {
+    private const NAME_TO_ROLEID = [
+        'admin' => 1,
+        'owner' => 2,
+        'partner' => 3,
+    ];
 
     /**
      * Handle an incoming request.
@@ -18,12 +24,12 @@ class RoleHandler
      */
     public function handle(Request $request, Closure $next, String $role)
     {
-        $role_id = $this->ROLES[$role];
+        $role_id = $this::NAME_TO_ROLEID[$role];
         $roles = Auth::user()->roles;
 
-        if (!$roles->contains($role_id)) {
-            return view('welcome');
-        }
+        // if (!in_array($role_id, $roles->toArray())) {
+        //     return redirect('/');
+        // }
 
         return $next($request);
     }
