@@ -47,6 +47,8 @@ Route::prefix('mypage/user')->middleware(['auth'])->group(function () {
 Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
     Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
+    Route::get('/profile', [App\Http\Controllers\MPartnerController::class, 'profile']);
+    Route::post('/profile', [App\Http\Controllers\MPartnerController::class, 'profile_post']);
     Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
 });
 

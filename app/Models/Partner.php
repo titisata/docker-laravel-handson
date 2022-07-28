@@ -9,6 +9,15 @@ class Partner extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'catch_copy',
+        'address',
+        'phone',
+        'description',
+        'access',
+    ];
+
     /**
      * 画像を取得
      *
