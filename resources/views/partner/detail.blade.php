@@ -16,19 +16,19 @@ li.item {
         <div class="col-md-10">
 
             <div class="mt-5">
-                <h3 class="border-bottom fw-bold pb-3 ps-2">{{ $partner->name }}</h3>
+                <h3 class="fw-bold pb-3 ps-2">{{ $partner->name }}</h3>
                 <div class="">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h4 class="fw-bold pt-3 ps-2">会社紹介</h4>
-                    <p class="ps-2">{{ $partner->description }}</p>
-
-                    <div>
+                    <div class="mb-3">
                         <img class="w-100" src="{{ $partner->images()[0]?->image_path ?? '/images/empty.png'}}" style="height:400px;object-fit: cover;" alt="">
                     </div>
+                    <p class="ps-2">{{ $partner->description }}</p>
+
+                    
                     <h4 class="fw-bold pt-4 ps-2">アクセス</h4>
                     <p class="ps-2">{{ $partner->access }}</p>
                     <p class="ps-2">住所: {{ $partner->address }}　電話番号: {{ $partner->phone }}</p>
