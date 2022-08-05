@@ -78,7 +78,7 @@
                 <!-- <div class="d-flex align-items-center justify-content-between"> -->
                 <div class="container">
                     <a class="navbar-brand text-white" href="{{ url('/') }}">
-                         URATABI
+                         <img src="/images/rogo.png" alt="" style="width:140px">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
@@ -184,9 +184,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <p class="text-white ps-4">Copyright© 観光協会 All rights reserved.</p>
-                        <p class="text-white pe-4"><small>Powered by URATABI</small></p>
+                    <div class="d-md-flex justify-content-between align-items-center text-center">
+                        <p class="text-white ps-md-4 small">Copyright© 観光協会 All rights reserved.</p>
+                        <p class="text-white pe-md-4 mb-0 pb-3"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
                     </div>
                 </div>
             <footer>     
