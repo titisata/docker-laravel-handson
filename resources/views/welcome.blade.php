@@ -32,7 +32,7 @@
                 background-color:#FB6E86;
             }
             .navbar-toggler{
-            color:white !important; 
+            color:white !important;
             border:2px solid #FB6E86 !important;
             }
             .btn-pink:hover{
@@ -57,7 +57,7 @@
             }
             .f-pink{
                 background-color:#BB4156;
-                
+
             }
             ul{
                 list-style-type: none
@@ -87,11 +87,11 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto">
                             @if (Route::has('login'))
-                                
+
                                 @auth
                                 <li class="nav-item">
                                     <a href="{{ url('/home') }}" class="text-sm text-white">ホーム</a>
-                                </li>    
+                                </li>
                                 @else
                                 <li class="nav-item">
                                     <a href="{{ route('login') }}" class="text-sm text-white">ログイン</a>
@@ -103,15 +103,15 @@
                                         </li>
                                     @endif
                                 @endauth
-                                
+
                             @endif
-                        <ul>    
-                    </div>    
-                </div>     
-            </nav>        
-                
+                        <ul>
+                    </div>
+                </div>
+            </nav>
+
             <div class="">
-               
+
                 <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
                     <!-- スライドさせる画像の設定 -->
                     <div class="carousel-inner rounded-2">
@@ -123,7 +123,7 @@
                         </div>
                         <div class="carousel-item">
                             <img src="/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
-                        </div>      
+                        </div>
                     </div><!-- /.carousel-inner -->
                     <!-- スライドコントロールの設定 -->
                     <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -137,32 +137,32 @@
                 </div>
 
                 <h1 class="text-center my-5 fw-bold font-pink">町を満喫しよう！</h1>
-    
+
                 <div class="container mb-5">
                     <div class="d-flex row justify-content-evenly mt-5">
                         <div class="col-10 col-md-5">
                             <a role="botton" href="/search/goods" class="btn btn-lg btn-yellow m-2 text-center fw-bold rounded-3 shadow fs-4 w-100 d-flex flex-column"  style="font-size:40px;">
                             <img src="/images/bag.png" class="mx-auto" style="width:40px">
                                 <p class="mb-0 text-white">名産品を買う</p>
-                            </a>   
-                            
-                        </div>      
+                            </a>
+
+                        </div>
                         <div class="col-10 col-md-5" >
                             <a role="botton" href="/search/experience" class="btn btn-lg btn-green m-2 text-center fw-bold rounded-3 shadow fs-4 w-100 d-flex flex-column" style="font-size:40px;">
                                 <img src="/images/active.png" class="mx-auto" style="width:40px">
                                 <p class="mb-0 text-white">現地で遊ぶ</p>
-                            </a>   
+                            </a>
                         </div>
-                          
+
                     </div>
-                    
+
                     <h3 class="text-center mt-5">このサイトでできること</h3>
                     <p class="text-center col-9" style="margin:0 auto;">
                         この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
                         この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
                     </p>
                 </div>
-            </div> 
+            </div>
             <footer class="mt-4">
                 <div class="bg-f-part py-3">
                     <h2 class="text-center text-white mb-0">観光協会</h2>
@@ -189,7 +189,7 @@
                         <p class="text-white pe-md-4 mb-0 pb-3"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
                     </div>
                 </div>
-            <footer>     
+            <footer>
         </div>
     </body>
 </html>

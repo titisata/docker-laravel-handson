@@ -26,7 +26,7 @@
             background-color:#FB6E86;
         }
         .navbar-toggler{
-        color:white !important; 
+        color:white !important;
         border:2px solid #FB6E86 !important;
         }
         .pink{
@@ -38,7 +38,7 @@
         }
         .f-pink{
             background-color:#BB4156;
-            
+
         }
         ul{
             list-style-type: none
@@ -109,7 +109,7 @@
 
         <footer class="mt-4">
         <div class="bg-f-part py-3">
-            <h2 class="text-center text-white mb-0">観光協会</h2>
+            <h2 class="text-center text-white mb-0">○○観光協会</h2>
         </div>
         <div class ="f-pink">
             <div class="d-flex py-4 justify-content-center">
@@ -129,14 +129,14 @@
                 </div>
             </div>
             <div class="d-md-flex justify-content-between align-items-center text-center">
-                <p class="text-white ps-md-4 small">Copyright© 観光協会 All rights reserved.</p>
+                <p class="text-white ps-md-4 small">Copyright© ○○観光協会 All rights reserved.</p>
                 <p class="text-white pe-md-4 mb-0 pb-3"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
              </div>
         </div>
-        
-        
 
-        
+
+
+
     <footer>
 
     </div>
