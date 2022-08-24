@@ -24,5 +24,8 @@ class GoodsCategorySeeder extends Seeder
         GoodsCategory::create([
             'name' => '雑貨'
         ]);
+        GoodsCategory::create([
+            'name' => 'test'
+        ]);
     }
 }

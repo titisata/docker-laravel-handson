@@ -50,5 +50,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ExperienceCategorySeeder::class);
         $this->call(GoodsCategorySeeder::class);
         $this->call(RoleSeeder::class);
+        $this->call(SiteMasterSeeder::class);
     }
 }

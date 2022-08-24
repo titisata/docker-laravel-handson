@@ -16,7 +16,7 @@ class GoodsController extends Controller
         $keyword = $request->keyword;
         $category = $request->category;
         $categories = GoodsCategory::all();
-
+        
         if ($keyword == '') {
             $food_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '食べ物')->orderBy('recommend_sort_no', 'desc')->get();
             $drink_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '飲み物')->orderBy('recommend_sort_no', 'desc')->get();
@@ -26,6 +26,8 @@ class GoodsController extends Controller
 
         $goods_folders = GoodsFolder::search($keyword, $category, per_page: 10);
         return view('search.goods_list', compact('goods_folders', 'categories'));
+      
+
     }
 
     public function post(Request $request)

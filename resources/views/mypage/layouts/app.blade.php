@@ -296,7 +296,8 @@
 					<li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>(パートナー)プロフィール管理</a></li>
 					<li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>(パートナー)イベント管理</a></li>
 					<li id="owner_partner"><a href="#"><i class="fa fa-heart"></i>(管理者)パートナー管理</a></li>
-					<li id="owner_site"><a href="#"><span class="glyphicon glyphicon-signal"></span>(管理者)サイト管理</a></li>
+					<li id="owner_site"><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>(管理者)サイト管理</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/experience_category"><span class="glyphicon glyphicon-signal"></span>(管理者)カテゴリー編集</a></li>
 
 					<!-- Dropdown-->
 					{{-- <li class="panel panel-default" id="dropdown">

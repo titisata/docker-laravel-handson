@@ -136,7 +136,7 @@
                     </button>
                 </div>
 
-                <h1 class="text-center my-5 fw-bold font-pink">町を満喫しよう！</h1>
+                <h1 class="text-center my-5 fw-bold font-pink">{{ $site_masters->sales_copy}}</h1>
 
                 <div class="container mb-5">
                     <div class="d-flex row justify-content-evenly mt-5">
@@ -158,14 +158,13 @@
 
                     <h3 class="text-center mt-5">このサイトでできること</h3>
                     <p class="text-center col-9" style="margin:0 auto;">
-                        この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
-                        この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。
+                    {{ $site_masters->comment}}
                     </p>
                 </div>
             </div>
             <footer class="mt-4">
                 <div class="bg-f-part py-3">
-                    <h2 class="text-center text-white mb-0">観光協会</h2>
+                    <h2 class="text-center text-white mb-0">{{ $site_masters->site_name}}</h2>
                 </div>
                 <div class = "f-pink">
                     <div class="d-flex py-4 justify-content-center">
@@ -185,7 +184,7 @@
                         </div>
                     </div>
                     <div class="d-md-flex justify-content-between align-items-center text-center">
-                        <p class="text-white ps-md-4 small">Copyright© 観光協会 All rights reserved.</p>
+                        <p class="text-white ps-md-4 small">Copyright© {{ $site_masters->site_name}} All rights reserved.</p>
                         <p class="text-white pe-md-4 mb-0 pb-3"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
                     </div>
                 </div>

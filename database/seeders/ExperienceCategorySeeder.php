@@ -24,5 +24,8 @@ class ExperienceCategorySeeder extends Seeder
         ExperienceCategory::create([
             'name' => 'その他'
         ]);
+        ExperienceCategory::create([
+            'name' => 'test'
+        ]);
     }
 }
