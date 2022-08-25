@@ -22,7 +22,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">開店状況</label>
-                            <input name="open_flag" type="radio" class="" value="{{ $site_master->open_flag }}">
+                            <input name="open_flag" type="radio" class="" checked value="{{ $site_master->open_flag }}">
                             <label>オープン</label>
                             <input name="open_flag" type="radio" class="" value="{{ $site_master->open_flag }}">
                             <label>閉館</label>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">機能情報</label>
-                            <input name="service" type="radio" class="" value="{{ $site_master->service }}">
+                            <input name="service" type="radio" class="" checked  value="{{ $site_master->service }}">
                             <label>全機能</label>
                             <input name="service" type="radio" class="" value="{{ $site_master->service }}">
                             <label>予約機能のみ</label>
