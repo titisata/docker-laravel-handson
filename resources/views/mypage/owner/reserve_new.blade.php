@@ -3,16 +3,13 @@
 @section('menu', 'owner_reserve')
 @section('content')
 <div class="container">
-    <h1>予約状況</h1>
-    
-        
-    @forelse ($partners as $partner)
+    <h1>新規予約作成</h1>
+       
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card mt-3">
                     <div class="card-header d-flex align-items-center">
-                        <h3 class="mb-0">{{ $partner->name }}様の予約状況</h3>
-                        <button class="btn btn-success ms-3" style="width:120px">新規登録</button>
+                        <h3 class="mb-0">新規予約項目登録</h3>
                     </div>
                         @forelse ($partner->experiences as $experiences_folder)
                             <div class="card mt-3">
