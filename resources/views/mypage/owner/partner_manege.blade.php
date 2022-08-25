@@ -23,14 +23,14 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">稼働日情報</label>
-                            <input name="reserve_flag" type="radio" class="" value="{{ $partners->reserve_flag }}">
+                            <input name="reserve_flag" type="radio" class="" checked value="{{ $partners->reserve_flag }}">
                             <label>稼働日登録なし</label>
                             <input name="reserve_flag" type="radio" class="" value="{{ $partners->reserve_flag }}">
                             <label>稼働日登録あり</label>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">機能情報</label>
-                            <input name="service" type="radio" class="" value="{{ $partners->service }}">
+                            <input name="service" type="radio" class="" checked value="{{ $partners->service }}">
                             <label>全機能</label>
                             <input name="service" type="radio" class="" value="{{ $partners->service }}">
                             <label>予約機能のみ</label>

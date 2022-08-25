@@ -23,14 +23,14 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">稼働日情報</label>
-                            <input name="reserve_flag" type="radio" class="" value="0">
+                            <input name="reserve_flag" type="radio" checked class="" value="0">
                             <label>稼働日登録なし</label>
                             <input name="reserve_flag" type="radio" class="" value="1">
                             <label>稼働日登録あり</label>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">機能情報</label>
-                            <input name="service" type="radio" class="" value="0">
+                            <input name="service" type="radio" checked class="" value="0">
                             <label>全機能</label>
                             <input name="service" type="radio" class="" value="1">
                             <label>予約機能のみ</label>
