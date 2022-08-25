@@ -64,19 +64,20 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
 // 管理者がアクセスできる
 Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
     Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
+    Route::get('/partner_display', [App\Http\Controllers\MOwnerController::class, 'partner_display']);
+    Route::get('/partner_new', [App\Http\Controllers\MOwnerController::class, 'partner_new']);
+    Route::post('/partner_display', [App\Http\Controllers\MOwnerController::class, 'partner_new_make']);
+    Route::get('/partner_manege/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_manege']);
+    Route::post('/partner_manege_update/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_manege_update']);
+    Route::post('/partner_manege_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_manege_delete']);
     Route::get('/site', [App\Http\Controllers\MOwnerController::class, 'site']);
     Route::post('/site', [App\Http\Controllers\MOwnerController::class, 'site_post']);
-    Route::get('/experience_category', [App\Http\Controllers\MOwnerController::class, 'experience_category']);
-    Route::post('/experience_category', [App\Http\Controllers\MOwnerController::class, 'experience_category_post']);
-    Route::get('/experience_update/{id}', [App\Http\Controllers\MOwnerController::class, 'experience_update']);
-    Route::post('/experience_update', [App\Http\Controllers\MOwnerController::class, 'experience_update_post']);
-    Route::get('/experience_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'experience_delete']);
-    Route::post('/experience_delete', [App\Http\Controllers\MOwnerController::class, 'experience_delete_post']);
-    Route::get('/goods_category', [App\Http\Controllers\MOwnerController::class, 'goods_category']);
-    Route::post('/goods_category', [App\Http\Controllers\MOwnerController::class, 'goods_category_post']);
-    Route::get('/goods_update/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_update']);
-    Route::post('/goods_update', [App\Http\Controllers\MOwnerController::class, 'goods_update_post']);
-    Route::get('/goods_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_delete']);
-    Route::post('/goods_delete', [App\Http\Controllers\MOwnerController::class, 'goods_delete_post']);
+    Route::get('/category_display', [App\Http\Controllers\MOwnerController::class, 'category_display']);
+    Route::post('/action_experience_category_display', [App\Http\Controllers\MOwnerController::class, 'action_experience_category_display']);
+    Route::post('/action_experience_category_update', [App\Http\Controllers\MOwnerController::class, 'action_experience_category_update']);
+    Route::post('/action_experience_category_delete', [App\Http\Controllers\MOwnerController::class, 'action_experience_category_delete']);
+    Route::post('/action_goods_category_insert', [App\Http\Controllers\MOwnerController::class, 'action_goods_category_insert']);
+    Route::post('/action_goods_category_update', [App\Http\Controllers\MOwnerController::class, 'action_goods_category_update']);
+    Route::post('/action_goods_category_delete', [App\Http\Controllers\MOwnerController::class, 'action_goods_category_delete']);
     
 });

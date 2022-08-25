@@ -15,7 +15,7 @@
             <div class="card mt-3">
                 <div class="card-header">体験カテゴリー編集</div>
                 <div class="card-body">
-                    <form action="/mypage/owner/experience_category" method="POST">
+                    <form action="/mypage/owner/action_experience_category_display" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">新しい体験カテゴリー名</label>
@@ -29,7 +29,7 @@
                     <p>現在表示されている体験カテゴリ</p>
                     @foreach ($experience_categories as $experience_category)
                     <div class='d-flex my-2'>
-                        <form action="/mypage/owner/experience_update" method="POST">
+                        <form action="/mypage/owner/action_experience_category_update" method="POST">
                             @csrf
                             <div class="d-flex">
                                 <input type="text" name="name" class="form-control form-control-sm" value="{{ $experience_category->name }}">
@@ -39,7 +39,7 @@
                            
                         </form>
                         
-                        <form action="/mypage/owner/experience_delete" method="POST">
+                        <form action="/mypage/owner/action_experience_category_delete" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-danger mx-2" style="height:34px;" name="delete">削除</button>
                             <input type="hidden" name="id" value="{{ $experience_category->id }}">
@@ -51,7 +51,7 @@
             <div class="card mt-3">
                 <div class="card-header">お土産カテゴリー編集</div>
                 <div class="card-body">
-                    <form action="/mypage/owner/goods_category" method="POST">
+                    <form action="/mypage/owner/action_goods_category_insert" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">新しいお土産カテゴリー名</label>
@@ -66,7 +66,7 @@
                     <p>現在表示されているお土産カテゴリ</p>
                     @foreach ($goods_categories as $goods_category)
                     <div class='d-flex my-2'>
-                        <form action="/mypage/owner/goods_update" method="POST">
+                        <form action="/mypage/owner/action_goods_category_update" method="POST">
                             @csrf
                             <div class="d-flex">
                                 <input type="text" name="name" class="form-control form-control-sm" value="{{ $goods_category->name }}">
@@ -76,7 +76,7 @@
                             
                         </form>
                         
-                        <form action="/mypage/owner/goods_delete" method="POST">
+                        <form action="/mypage/owner/action_goods_category_delete" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-danger mx-2" style="height:34px;" name="delete">削除</button>
                             <input type="hidden" name="id" value="{{ $goods_category->id }}">

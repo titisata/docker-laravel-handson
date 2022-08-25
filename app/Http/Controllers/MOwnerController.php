@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExperienceFolder;
 use App\Models\Partner;
+use App\Models\PartnerMaster;
 use App\Models\SiteMaster;
 use App\Models\ExperienceCategory;
 use App\Models\GoodsCategory;
@@ -17,6 +18,115 @@ class MOwnerController extends Controller
         $user = Auth::user();
         $partners = Partner::all();
         return view('mypage.owner.reserve', compact('user', 'partners'));
+    }
+
+    public function partner_display()
+    {
+        $user = Auth::user();
+        $partners = Partner::all();
+        return view('mypage.owner.partner_display', compact('partners'));
+    }
+    
+
+    public function partner_manege(string $id)
+    {
+        $user = Auth::user();
+        $partners = Partner::find($id);
+        return view('mypage.owner.partner_manege', compact('partners'));
+    }
+
+    public function partner_new()
+    {
+        $user = Auth::user();
+        return view('mypage.owner.partner_new', compact('user'));
+    }
+
+    public function partner_new_make(Request $request)
+    {
+        $id = $request->id;
+        $name = $request->name;
+        $uid = Auth::user()->id;
+        $reserve_flag = $request->reserve_flag;
+        $service = $request->service; 
+        $regist_num = $request->regist_num;
+        $main_image = $request->main_image;
+        $description = $request->description;
+        $background_color = $request->background_color;
+        $catch_copy = $request->catch_copy;
+        $address = $request->address;
+        $phone = $request->phone;
+        $access = $request->access;
+        
+        Partner::create([
+            'name'=>$name,
+            'user_id'=>$uid,
+            'reserve_flag'=>$reserve_flag,
+            'service'=>$service,
+            'regist_num'=>$regist_num,
+            'main_image'=>$main_image,
+            'description'=>$description,
+            'background_color'=>$background_color,
+            'catch_copy'=>$catch_copy,
+            'address'=>$address,
+            'phone'=>$phone,
+            'access'=>$access,
+        ]);
+
+        $return_view = $this->partner_display();
+        return $return_view;
+    }
+
+    public function partner_manege_update(Request $request)
+    {
+        $id = $request->id;
+        $name = $request->name;
+        $reserve_flag = $request->reserve_flag;
+        $service = $request->service;
+        $regist_num = $request->regist_num;
+        $main_image = $request->main_image;
+        $background_color = $request->background_color;
+        $catch_copy = $request->catch_copy;
+        $address = $request->address;
+        $phone = $request->phone;
+        $access = $request->access;
+       
+        Partner::where('id',$id)->update([
+            'name'=>$name,
+            'reserve_flag'=>$reserve_flag,
+            'service'=>$service,
+            'regist_num'=>$regist_num,
+            'main_image'=>$main_image,
+            'background_color'=>$background_color,
+            'catch_copy'=>$catch_copy,
+            'address'=>$address,
+            'phone'=>$phone,
+            'access'=>$access,
+        ]);
+
+        $return_view = $this->partner_display();
+        return $return_view;
+
+    }
+
+    public function partner_manege_delete(Request $request)
+    {
+        $id = $request->id;
+        $name = $request->name;
+        $reserve_flag = $request->reserve_flag;
+        $service = $request->service;
+        $regist_num = $request->regist_num;
+        $main_image = $request->main_image;
+        $background_color = $request->background_color;
+        $catch_copy = $request->catch_copy;
+        $address = $request->address;
+        $phone = $request->phone;
+        $access = $request->access;
+       
+        Partner::where('id', $id)->delete();
+
+        $return_view = $this->partner_display();
+        return $return_view;
+
     }
 
     public function site()
@@ -56,37 +166,30 @@ class MOwnerController extends Controller
 
     }
 
-    public function experience_category()
+    public function category_display()
     {
+        //体験・お土産カテゴリー全件取得、カテゴリー編集画面表示
+
         $experience_categories = ExperienceCategory::all();
         $goods_categories = GoodsCategory::all();
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
+        return view('mypage.owner.category_display', compact('goods_categories','experience_categories'));
     }
 
-    public function experience_category_post(Request $request)
+    public function experience_category_insert(Request $request)
     {
+        //nameに入れられた情報受け取りexperiencecategory.tableに追加・作成
+
         $name = $request->name;
 
         ExperienceCategory::create([
             'name'=>$name,
         ]);
-
-        $goods_categories = GoodsCategory::all();
-        $experience_categories = ExperienceCategory::all();
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
-
     }
 
-    public function experience_update(string $id)
-    { 
-        $goods_categories = GoodsCategory::all();
-        $experience_categories = ExperienceCategory::find($id);
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
-        
-    }
-
-    public function experience_update_post(Request $request)
+    public function experience_category_update(Request $request)
     {
+        //nameに入れられた情報受け取りidをもとにexperiencecategory.tableを更新
+
         $id = $request->id;
         $name = $request->name;
 
@@ -94,66 +197,60 @@ class MOwnerController extends Controller
             'id' => $id,
             'name' => $name,
         ]);
-
-        $goods_categories = GoodsCategory::all();
-        $experience_categories = ExperienceCategory::all();
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
-        
     }
 
-
-    public function experience_delete(string $id)
-    { 
-        $goods_categories = GoodsCategory::all();
-        $experience_categories = ExperienceCategory::find($id);
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
-        
-    }
-
-    public function experience_delete_post(Request $request)
+    public function experience_category_delete(Request $request)
     {
+        //idをもとにexperiencecategory.tableから削除
+
         $id = $request->id;
 
         $experience_categories = ExperienceCategory::where('id', $id)->delete();
 
-        $goods_categories = GoodsCategory::all();
-        $experience_categories = ExperienceCategory::all();
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
+    }
+
+    public function action_experience_category_display(Request $request)
+    {
+        $this->experience_category_insert($request);
+
+        $return_view = $this->category_display();
+        return $return_view;
         
     }
 
-    public function goods_category()
+    public function action_experience_category_update(Request $request)
     {
-        $experience_categories = ExperienceCategory::all();
-        $goods_categories = GoodsCategory::all();
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
+        $this->experience_category_update($request);
+
+        $return_view = $this->category_display();
+        return $return_view;
+        
     }
 
-
-    public function goods_category_post(Request $request)
+    public function action_experience_category_delete(Request $request)
     {
+        $this->experience_category_delete($request);
+
+        $return_view = $this->category_display();
+        return $return_view;
+        
+    }
+
+    public function goods_category_insert(Request $request)
+    {
+        //nameに入れられた情報受け取りgoodscategory.tableに追加・作成
+
         $name = $request->name;
         
         GoodsCategory::create([
             'name'=>$name,
         ]);
-
-        $experience_categories = ExperienceCategory::all();
-        $goods_categories = GoodsCategory::all();
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
-
     }
 
-    public function goods_update(string $id)
-    { 
-        $experience_categories = ExperienceCategory::all();
-        $goods_categories = GoodsCategory::find($id);
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
-        
-    }
-
-    public function goods_update_post(Request $request)
+    public function goods_category_update(Request $request)
     {
+        //nameに入れられた情報受け取りidをもとにgoodscategory.tableを更新
+
         $id = $request->id;
         $name = $request->name;
 
@@ -161,31 +258,52 @@ class MOwnerController extends Controller
             'id' => $id,
             'name' => $name,
         ]);
-
-        $experience_categories = ExperienceCategory::all();
-        $goods_categories = GoodsCategory::all();
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
-        
     }
 
-
-    public function goods_delete(string $id)
-    { 
-        $experience_categories = ExperienceCategory::all();
-        $goods_categories = GoodsCategory::find($id);
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
-        
-    }
-
-    public function goods_delete_post(Request $request)
+    public function goods_category_delete(Request $request)
     {
+        //idをもとにgoodscategory.tableから削除
+
         $id = $request->id;
 
         $goods_categories = GoodsCategory::where('id', $id)->delete();
+
+    }
+
+
+
+    public function action_goods_category_insert(Request $request)
+    {
+        $this->goods_category_insert($request);
+
+        $return_view = $this->category_display();
+        return $return_view;
+
+    }
+
+    // public function goods_update(string $id)
+    // { 
+    //     $experience_categories = ExperienceCategory::all();
+    //     $goods_categories = GoodsCategory::find($id);
         
-        $experience_categories = ExperienceCategory::all();
-        $goods_categories = GoodsCategory::all();
-        return view('mypage.owner.category', compact('goods_categories','experience_categories'));
+    // }
+
+    public function action_goods_category_update(Request $request)
+    {
+        $this->goods_category_update($request);
+
+        $return_view = $this->category_display();
+        return $return_view;
+        
+    }
+
+
+    public function action_goods_category_delete(Request $request)
+    {
+        $this->goods_category_delete($request);
+        
+        $return_view = $this->category_display();
+        return $return_view;
         
     }
 

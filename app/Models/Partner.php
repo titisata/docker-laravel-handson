@@ -11,10 +11,16 @@ class Partner extends Model
 
     protected $fillable = [
         'name',
+        'user_id',
+        'reserve_flag',
+        'service',
+        'regist_num',
+        'main_image',
         'catch_copy',
         'address',
         'phone',
         'description',
+        'background_color',
         'access',
     ];
 
