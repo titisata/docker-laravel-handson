@@ -12,7 +12,7 @@
                 <div class="card mt-3">
                     <div class="card-header d-flex align-items-center">
                         <h3 class="mb-0">{{ $partner->name }}様の予約状況</h3>
-                        <button class="btn btn-success ms-3" style="width:120px">新規登録</button>
+                        <!-- <button class="btn btn-success ms-3" style="width:120px">新規登録</button> -->
                     </div>
                         @forelse ($partner->experiences as $experiences_folder)
                             <div class="card mt-3">
