@@ -93,7 +93,7 @@
                             <div class="d-flex flex-wrap justify-content-between">
                             @foreach($goods_folder->images() as $image)
                             <div class="d-flex flex-column col-4 my-3">
-                                <img style="object-fit: cover; height: 160px; width: 160px;" src="/{{ $image->image_path ?? '/images/empty.png'}}" alt="Card image cap"> 
+                                <img style="object-fit: cover; height: 160px; width: 160px;" src="{{ $image->image_path ?? '/images/empty.png'}}" alt="Card image cap"> 
                                 <div class="d-flex">
                                     <a href="/mypage/partner/goods_image_update/{{ $image->id }}">
                                         <div class="btn btn-primary">編集</div>

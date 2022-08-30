@@ -14,7 +14,7 @@
                 <input type="hidden" name="delete_path" value="{{ $images->image_path }}" />
                 <input type="hidden" name="table_name" value="{{ $images->table_name }}" />
                 <p>現在表示されている画像</p>
-                <img src="/{{ $images->image_path }}" alt="" style="width: 200px;height: 140px; object-fit: cover;">
+                <img src="{{ $images->image_path }}" alt="" style="width: 200px;height: 140px; object-fit: cover;">
                 <p></p>
                 <div>更新したい画像: <input name="image_path" type="file" /></div>
                 <input type="submit" value="ファイル更新" />
