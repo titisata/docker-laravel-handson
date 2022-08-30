@@ -12,7 +12,7 @@
                         <a href="/mypage/partner/event/{{ $experienceFolder->id }}" style="text-decoration: none; color: inherit;">
                             <div class="d-lg-flex  justify-content-between"style="height: 100%; ">
                                 <div class="img-square-wrapper img_box">
-                                    <img style="object-fit: cover; height: 240px; width: 300px; " class="rounded-top image" src="/storage/{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap">
+                                    <img style="object-fit: cover; height: 240px; width: 300px; " class="rounded-top image" src="/{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap">
                                 </div>
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title text-start mb-0 text-truncate" >{{ $experienceFolder->name }}</h5>

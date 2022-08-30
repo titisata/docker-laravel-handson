@@ -119,10 +119,10 @@
                             <img src="/images/9.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
                         </div>
                         <div class="carousel-item">
-                            <img src="/storage/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
+                            <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
                         </div>
                         <div class="carousel-item">
-                            <img src="/storage/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
+                            <img src="/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
                         </div>
                     </div><!-- /.carousel-inner -->
                     <!-- スライドコントロールの設定 -->

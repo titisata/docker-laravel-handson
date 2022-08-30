@@ -24,7 +24,7 @@ li.item {
                         </div>
                     @endif
                     <div class="mb-3">
-                        <img class="w-100" src="/storage/{{ $partner->images()[0]?->image_path ?? '/images/empty.png'}}" style="height:400px;object-fit: cover;" alt="">
+                        <img class="w-100" src="/{{ $partner->images()[0]?->image_path ?? '/images/empty.png'}}" style="height:400px;object-fit: cover;" alt="">
                     </div>
                     <p class="ps-2">{{ $partner->description }}</p>
 

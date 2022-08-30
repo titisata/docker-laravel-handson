@@ -79,7 +79,7 @@ async function commentCreate(goods_folder_id) {
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card" style="height: 300px;">
-                <img class="card-img img-thumbnail" style="height: 100%; object-fit: cover;" src="/storage/{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
+                <img class="card-img img-thumbnail" style="height: 100%; object-fit: cover;" src="/{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
                
             </div>
 
