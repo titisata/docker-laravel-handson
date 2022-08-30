@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Link extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'table_name',
-        'table_id',
-        'image_path',
+        'id',
+        'name' ,
+        'content',
     ];
 
 }

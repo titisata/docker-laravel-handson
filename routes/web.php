@@ -27,6 +27,8 @@ Route::get('/experience/{id}', [App\Http\Controllers\ExperienceController::class
 Route::get('/experience/{folder_id}/{id}', [App\Http\Controllers\ExperienceController::class, 'reserve_detail']);
 Route::post('/experience/{folder_id}/{id}', [App\Http\Controllers\ExperienceController::class, 'post']);
 Route::redirect('/search', '/search/experience');
+Route::get('/link/{id}', [App\Http\Controllers\LinkController::class, 'show']);
+
 Route::get('test', [App\Http\Controllers\TestTestController::class, 'edit']);
 Route::post('test', [App\Http\Controllers\TestTestController::class, 'edit_post']);
 Route::get('test/show', [App\Http\Controllers\TestTestController::class, 'show']);
@@ -56,17 +58,40 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
     Route::get('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit']);
     Route::post('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit_update']);
+    Route::get('/event_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'event_image_insert']);
+    Route::post('/action_event_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'action_event_image_insert']);
+    Route::get('/event_image_update/{id}', [App\Http\Controllers\MPartnerController::class, 'event_image_update']);
+    Route::post('/action_event_image_update/{id}', [App\Http\Controllers\MPartnerController::class, 'action_event_image_update']);
+    Route::get('/event_image_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'event_image_delete']);
+    Route::post('/action_event_image_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'action_event_image_delete']);
+    Route::get('/goods', [App\Http\Controllers\MPartnerController::class, 'goods']);
+    Route::get('/goods/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_edit']);
+    Route::post('/goods/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_edit_update']);
+    Route::get('/goods_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_image_insert']);
+    Route::post('/action_goods_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_image_insert']);
+    Route::get('/goods_image_update/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_image_update']);
+    Route::post('/action_goods_image_update/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_image_update']);
+    Route::get('/goods_image_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_image_delete']);
+    Route::post('/action_goods_image_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_image_delete']);
     Route::get('/profile', [App\Http\Controllers\MPartnerController::class, 'profile']);
     Route::post('/profile', [App\Http\Controllers\MPartnerController::class, 'profile_post']);
     Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
+    Route::get('/link_display', [App\Http\Controllers\MPartnerController::class, 'link_display']);
+    Route::get('/link_edit/{id}', [App\Http\Controllers\MPartnerController::class, 'link_edit']);
+    Route::post('/action_link_edit', [App\Http\Controllers\MPartnerController::class, 'action_link_edit']);
+
 });
 
 // 管理者がアクセスできる
 Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
     Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
+    Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
+    Route::post('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_reserve_edit']);
+    // Route::get('/reserve_make/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_make']);
+    // Route::post('/reserve_make/{id}', [App\Http\Controllers\MOwnerController::class, 'action_reserve_make']);
     Route::get('/partner_display', [App\Http\Controllers\MOwnerController::class, 'partner_display']);
-    Route::get('/partner_new', [App\Http\Controllers\MOwnerController::class, 'partner_new']);
-    Route::post('/partner_display', [App\Http\Controllers\MOwnerController::class, 'partner_new_make']);
+    Route::get('/partner_make', [App\Http\Controllers\MOwnerController::class, 'partner_make']);
+    Route::post('/partner_display', [App\Http\Controllers\MOwnerController::class, 'action_partner_make']);
     Route::get('/partner_manege/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_manege']);
     Route::post('/partner_manege_update/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_manege_update']);
     Route::post('/partner_manege_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_manege_delete']);

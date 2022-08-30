@@ -11,7 +11,18 @@ class GoodsFolder extends Model
 
 
     protected $fillable= [
+        'partner_id',
+        'name',
+        'description',
+        'caution',
+        'detail',
+        'category1',
+        'category2',
+        'category3',
+        'reccomend_flag',
+        'reccomend_sort_no',
         'average_rate',
+        'price',
     ];
 
     /**

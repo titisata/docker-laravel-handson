@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\ExperienceCategory;
 use App\Models\ExperienceFolder;
+use App\Models\GoodsFolder;
+use App\Models\GoodsCategory;
 use App\Models\Partner;
+use App\Models\Image;
+use App\Models\Link;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class MPartnerController extends Controller
@@ -15,19 +21,64 @@ class MPartnerController extends Controller
         return view('mypage.partner.home');
     }
 
+    public function goods()
+    {
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        $goods_folders = GoodsFolder::all();
+        return view('mypage.partner.goods', compact('user', 'goods_folders'));
+    }
+
+    public function goods_edit(string $id)
+    {
+        $goods_folder = GoodsFolder::find($id);
+        $categories = GoodsCategory::all();
+        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
+    }
+
+    public function goods_edit_update(string $id, Request $request)
+    {
+        $name = $request->name;
+        $price = $request->price;
+        $description = $request->description;
+        $caution = $request->caution;
+        $detail = $request->detail;
+        $category = $request->category;
+        $ex_names = $request->ex_names;
+        $ex_prices = $request->ex_prices;
+
+        $goods_folder = GoodsFolder::where('id', $id)->update([
+            'name' => $name,
+            'price' => $price,
+            'description' => $description,
+            'caution' => $caution,
+            'detail' => $detail,
+            'category1' => $category,
+        ]);
+
+        for ($i=0; $i < count($ex_names); $i++) {
+            $ex_name = $ex_names[$i];
+            $ex_price = $ex_prices[$i];
+        }
+
+        $goods_folder = GoodsFolder::find($id);
+        $categories = GoodsCategory::all();
+        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
+    }
+
     public function event()
     {
         $user = Auth::user();
         $partner = Partner::where('user_id', $user->id)->first();
         $experiences_folders = $partner->experiences;
-        return view('mypage.partner.experience', compact('user', 'experiences_folders'));
+        return view('mypage.partner.event', compact('user', 'experiences_folders'));
     }
 
     public function event_edit(string $id)
     {
         $experiences_folder = ExperienceFolder::find($id);
         $categories = ExperienceCategory::all();
-        return view('mypage.partner.experience_edit', compact('experiences_folder', 'categories'));
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
     }
 
     public function event_edit_update(string $id, Request $request)
@@ -59,7 +110,174 @@ class MPartnerController extends Controller
 
         $experiences_folder = ExperienceFolder::find($id);
         $categories = ExperienceCategory::all();
-        return view('mypage.partner.experience_edit', compact('experiences_folder', 'categories'));
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
+    }
+
+    public function event_image_insert(string $id)
+    {
+        $experiences_folder = ExperienceFolder::find($id);
+        return view('mypage.partner.event_image_insert', compact('experiences_folder'));
+    }
+
+    public function action_event_image_insert(Request $request, string $id)
+    {
+        $table_name = $request->table_name;
+        $table_id = $request->table_id;
+
+        // storage/imagesディレクトリに画像を保存
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_name' => $table_name,
+            'table_id' => $table_id,
+            'image_path' => $path,
+        ]);
+        
+        $experiences_folder = ExperienceFolder::find($table_id);
+        $categories = ExperienceCategory::all();
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
+    }
+
+    public function event_image_update(string $id)
+    {
+        $images = Image::find($id);
+        $experiences_folder = ExperienceFolder::find($id);
+        $categories = ExperienceCategory::all();
+        return view('mypage.partner.event_image_update', compact('experiences_folder', 'categories', 'images'));
+    }
+
+    public function action_event_image_update(Request $request, string $id)
+    {
+        $table_id = $request->table_id;
+        $table_name = $request->table_name;
+        
+        // imagesディレクトリに画像を保存
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_id'=>$table_id,
+            'image_path'=>$path,
+            'table_name'=>$table_name,
+        ]);
+
+        //削除するファイルのパスを入手
+        $delete_path = $request->delete_path;
+        //storageから画像ファイルを削除
+        Storage::disk('public')->delete($delete_path);
+        Image::where('id', $id)->delete();
+        
+        $experiences_folder = ExperienceFolder::find($table_id);
+        $categories = ExperienceCategory::all();
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
+    }
+
+    
+    public function event_image_delete(string $id)
+    {
+        $images = Image::find($id);
+        $experiences_folder = ExperienceFolder::find($id);
+        $categories = ExperienceCategory::all();
+        return view('mypage.partner.event_image_delete', compact('experiences_folder', 'categories', 'images'));
+    }
+
+    public function action_event_image_delete(Request $request, string $id)
+    {
+        $image_path = $request->image_path;
+        $table_id = $request->table_id;
+
+        Storage::disk('public')->delete($image_path);
+       
+        Image::where('id', $id)->delete();
+
+        $experiences_folder = ExperienceFolder::find($table_id);
+        $categories = ExperienceCategory::all();
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
+    }
+
+    public function goods_image_insert(string $id)
+    {
+        $goods_folder = GoodsFolder::find($id);
+        return view('mypage.partner.goods_image_insert', compact('goods_folder'));
+    }
+
+    public function action_goods_image_insert(Request $request, string $id)
+    {
+        $table_name = $request->table_name;
+        $table_id = $request->table_id;
+
+        // storage/imagesディレクトリに画像を保存
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_name' => $table_name,
+            'table_id' => $table_id,
+            'image_path' => $path,
+        ]);
+        
+        $goods_folder = GoodsFolder::find($table_id);
+        $categories = GoodsCategory::all();
+        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
+    }
+
+    public function goods_image_update(string $id)
+    {
+        $images = Image::find($id);
+        
+        return view('mypage.partner.goods_image_update', compact('images'));
+    }
+
+    public function action_goods_image_update(Request $request)
+    {
+        $id = $request->id;
+        $table_id = $request->table_id;
+        $table_name = $request->table_name;
+        
+        // imagesディレクトリに画像を保存
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_id'=>$table_id,
+            'image_path'=>$path,
+            'table_name'=>$table_name,
+        ]);
+
+        //削除するファイルのパスを入手
+        $delete_path = $request->delete_path;
+
+        //storageから画像ファイルを削除
+        Storage::disk('public')->delete($delete_path);
+        Image::where('id', $id)->delete();
+        
+        $goods_folder = GoodsFolder::find($table_id);
+        $categories = GoodsCategory::all();
+        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
+    }
+
+    
+    public function goods_image_delete(string $id)
+    {
+        $images = Image::find($id);
+        $goods_folder = GoodsFolder::find($id);
+        $categories = GoodsCategory::all();
+        return view('mypage.partner.goods_image_delete', compact('goods_folder', 'categories', 'images'));
+    }
+
+    public function action_goods_image_delete(Request $request, string $id)
+    {
+        $image_path = $request->image_path;
+        $table_id = $request->table_id;
+
+        Storage::disk('public')->delete($image_path);
+       
+        Image::where('id', $id)->delete();
+
+        $goods_folder = GoodsFolder::find($table_id);
+        $categories = GoodsCategory::all();
+        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
     }
 
     public function reserve()
@@ -96,5 +314,69 @@ class MPartnerController extends Controller
         ]);
         $partner = Partner::where('user_id', $user->id)->first();
         return view('mypage.partner.profile', compact('user', 'partner'));
+    }
+
+    public function link_display()
+    {
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        return view('mypage.partner.link_display', compact('user', 'partner'));
+    }
+
+    public function link_edit(string $id)
+    {
+        if($id == 1){
+            $name = '利用規約';
+        }elseif($id == 2){
+            $name = 'プライバシー規約';
+        }elseif($id == 3){
+            $name = '特定証取引に基づく表示';
+        }elseif($id == 4){
+            $name = '店舗情報';
+        }else{
+            $name = 'ヘルプ・マニュアル';
+        }
+
+        if(DB::table('links')->where('id', $id)->exists()){
+
+            $link = Link::where('id', $id)->first();
+            
+        }else{
+            $link = '';
+        }
+
+        // echo $content;
+        // exit;
+
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        return view('mypage.partner.link_edit', compact('user', 'partner','name','id','link'));
+    }
+
+    public function action_link_edit(Request $request)
+    {
+        $id = $request->id;
+        $name = $request->name;
+        $content = $request->content;
+        
+        if(DB::table('links')->where('id', $id)->exists()){
+            
+            Link::where('id', $request->id)->update([
+                'id'=>$id,
+                'name'=>$name,
+                'content'=>$content,
+            ]);
+
+        }else{
+            Link::create([
+                'id'=>$id,
+                'name'=>$name,
+                'content'=>$content,
+            ]);
+        }
+        
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        return view('mypage.partner.link_display', compact('user', 'partner'));
     }
 }

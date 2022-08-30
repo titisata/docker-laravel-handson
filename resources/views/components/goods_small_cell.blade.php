@@ -17,7 +17,7 @@
             <a href="/goods/{{ $goods_folder->id }}" style="text-decoration: none; color: inherit;">
                 <div class="cell" style="display: flex; flex: 1 1 auto; height: 100%; flex-direction:column;">
                     <div class="img-square-wrapper">
-                        <img style="object-fit: cover; height: 160px;border-top-left-radius: 18px;border-top-right-radius: 18px;" class="cell" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap" width="200">
+                        <img style="object-fit: cover; height: 160px;border-top-left-radius: 18px;border-top-right-radius: 18px;" class="cell" src="/storage/{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap" width="200">
                     </div>
                     <div class="card-header border-none" style="background:white;border-bottom:none">
                         <h6 class="card-title text-center mb-0 text-truncate" >{{ $goods_folder->name }}</h6>

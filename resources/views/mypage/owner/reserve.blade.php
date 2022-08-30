@@ -12,13 +12,16 @@
                 <div class="card mt-3">
                     <div class="card-header d-flex align-items-center">
                         <h3 class="mb-0">{{ $partner->name }}様の予約状況</h3>
-                        <!-- <button class="btn btn-success ms-3" style="width:120px">新規登録</button> -->
+                        <!-- <a href="/mypage/owner/reserve_make/{id}" style="text-decoration: none; color: inherit;">
+                            <button class="btn btn-sm btn-success ms-5">新規登録</button>
+                        </a> -->
                     </div>
                         @forelse ($partner->experiences as $experiences_folder)
                             <div class="card mt-3">
                                 <div class="card-header">{{ $experiences_folder->name }}への予約</div>
                                 <div class="card-body">
                                     @forelse ($experiences_folder->reserves as $reserved_experience)
+                                    <a href="/mypage/owner/reserve_edit/{{ $reserved_experience->experience->id }}">
                                         <div class="mt-1 p-3 card">
                                             <div>
                                                 <p>名前: {{ $reserved_experience->user->name }}様</p>
@@ -28,8 +31,10 @@
                                                 <p>食事: {{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
                                                 <p>連絡事項: {{ $reserved_experience->message }}</p>
                                                 <p>ステータス: {{ $reserved_experience->status }}</p>
+                                                <p>選定ホテル: {{ $reserved_experience->hotel->name }}</p>
                                             </div>
                                         </div>
+                                    </a>
                                     @empty
                                         <p>予約はありません</p>
                                     @endforelse

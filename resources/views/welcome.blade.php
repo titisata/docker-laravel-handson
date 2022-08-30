@@ -116,13 +116,13 @@
                     <!-- スライドさせる画像の設定 -->
                     <div class="carousel-inner rounded-2">
                         <div class="carousel-item active">
-                            <img src="/images/9.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
+                            <img src="/storage/images/9.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
                         </div>
                         <div class="carousel-item">
-                            <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
+                            <img src="/storage/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
                         </div>
                         <div class="carousel-item">
-                            <img src="/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
+                            <img src="/storage/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
                         </div>
                     </div><!-- /.carousel-inner -->
                     <!-- スライドコントロールの設定 -->
@@ -168,18 +168,17 @@
                 </div>
                 <div class = "f-pink">
                     <div class="d-flex py-4 justify-content-center">
-                        <div class="d-flex flex-column">
+                        <div class="me-4">
                             <ul>
-                                <li class="my-2"><a href="#" class="text-white">プログラム一覧</a></li>
-                                <li class="my-2"><a href="#" class="text-white">商品一覧</a></li>
-                                <li class="my-2"><a href="#" class="text-white">支払い方法</a></li>
+                                <li class="my-2"><a href="/link/1" class="text-white">利用規約</a></li>
+                                <li class="my-2"><a href="/link/2" class="text-white">プライバシー規約</a></li>
+                                <li class="my-2"><a href="/link/3" class="text-white">特定商取引に基づく表記</a></li>
                             </ul>
                         </div>
-                        <div class="d-flex flex-column ">
+                        <div class="ms-4">
                             <ul>
-                                <li class="my-2"><a href="#" class="text-white">キャンセル・返品について</a></li>
-                                <li class="my-2"><a href="#" class="text-white">特定商取引に基づく表記</a></li>
-                                <li class="my-2"><a href="#" class="text-white">プライバシーポリシー</a></li>
+                                <li class="my-2"><a href="/link/4" class="text-white">店舗情報</a></li>
+                                <li class="my-2"><a href="/link/5" class="text-white">ヘルプ・マニュアル</a></li>
                             </ul>
                         </div>
                     </div>

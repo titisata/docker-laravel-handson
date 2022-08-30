@@ -81,6 +81,34 @@
                                 </option>
                             @endforeach
                         </select>
+                        <div class="mt-3">
+                            <div>
+                                <label>画像設定</label>
+                                <a href="/mypage/partner/event_image_insert/{{ $experiences_folder->id }}">
+                                    <div class="btn btn-success">
+                                        新規登録     
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-between">
+                            @foreach($experiences_folder->images() as $image)
+                            <div class="d-flex flex-column col-4 my-3">
+                                <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="/storage/{{ $image->image_path }}" alt=""> 
+                                <div class="d-flex">
+                                    <a href="/mypage/partner/event_image_update/{{ $image->id }}">
+                                        <div class="btn btn-primary">編集</div>
+                                    </a>    
+                                    <a href="/mypage/partner/event_image_delete/{{ $image->id }}">
+                                        <div class="btn btn-danger">削除</div>
+                                    </a>                             
+                                </div>                         
+                                
+                            </div>                          
+                                
+                            @endforeach
+                        </div>
+                        </div>
+                        
                         </div>
                     </div>
                 </div>

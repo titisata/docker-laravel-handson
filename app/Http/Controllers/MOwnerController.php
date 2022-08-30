@@ -7,6 +7,9 @@ use App\Models\Partner;
 use App\Models\PartnerMaster;
 use App\Models\SiteMaster;
 use App\Models\ExperienceCategory;
+use App\Models\ExperienceReserve;
+use App\Models\HotelGroup;
+use App\Models\Hotel;
 use App\Models\GoodsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +22,80 @@ class MOwnerController extends Controller
         $partners = Partner::all();
         return view('mypage.owner.reserve', compact('user', 'partners'));
     }
+
+    public function reserve_edit(string $id)
+    {
+        $user = Auth::user();
+        $experiencereserve = ExperienceReserve::find($id);
+        $hotel_group_id = $experiencereserve->hotel_group_id;
+        $hotels = Hotel::where('hotel_group_id', 1)->get();
+        return view('mypage.owner.reserve_edit', compact('user', 'experiencereserve','hotels'));
+    }
+
+    public function action_reserve_edit(Request $request)
+    {
+        $id = $request->id;
+        $hotel_id = $request->hotel_id;
+
+        ExperienceReserve::where('id',$id)->update([
+            'hotel_id'=>$hotel_id,
+        ]);
+
+        $user = Auth::user();
+        $partners = Partner::all();
+        return view('mypage.owner.reserve', compact('user', 'partners'));
+    }
+
+    // public function reserve_make(string $id)
+    // {
+    //     $user = Auth::user();
+    //     $partners = Partner::find($id);
+    //     return view('mypage.owner.reserve_make', compact('user', 'partners'));
+    // }
+
+    // public function action_reserve_make(Request $request)
+    // {
+    //     $id = $request->id;
+    //     $pid = Auth::partner()->id;
+    //     $cid = Auth::company()->id;
+    //     $name = $request->name;
+    //     $description = $request->description;
+    //     $address = $request->address;
+    //     $caution = $request->caution;
+    //     $detail = $request->detail; 
+    //     $category1 = $request->category1;
+    //     $category2 = $request->category2;
+    //     $category3 = $request->category3;
+    //     $is_loding = $request->is_loding;
+    //     $is_before_loding = $request->is_before_loding;
+    //     $price_child = $request->price_child;
+    //     $price_adult = $request->price_adult;
+    //     $reccomend_flag = $request->reccomend_flag;
+    //     $reccomend_sort_no = $request->reccomend_sort_no;
+        
+    //     ExperienceFolder::create([
+    //         'id'=>$id,
+    //         'partner_id'=>$pid,
+    //         'company_id'=>$cid,
+    //         'name'=>$name,
+    //         'description'=>$description,
+    //         'address'=>$address,
+    //         'caution'=>$caution,
+    //         'detail'=>$detail,
+    //         'category1'=>$category1,
+    //         'category2'=>$category2,
+    //         'category3'=>$category3,
+    //         'is_loding'=>$is_loding,
+    //         'is_before_loding'=>$is_before_loding,
+    //         'price_child'=>$price_child,
+    //         'price_adult'=>$price_adult,
+    //         'reccomend_flag'=>$reccomend_flag,
+    //         'reccomend_sort_no'=>$reccomend_sort_no ,
+    //     ]);
+
+    //     $user = Auth::user();
+    //     return view('mypage.owner.reserve', compact('user'));
+    // }
 
     public function partner_display()
     {
@@ -35,13 +112,13 @@ class MOwnerController extends Controller
         return view('mypage.owner.partner_manege', compact('partners'));
     }
 
-    public function partner_new()
+    public function partner_make()
     {
         $user = Auth::user();
-        return view('mypage.owner.partner_new', compact('user'));
+        return view('mypage.owner.partner_make', compact('user'));
     }
 
-    public function partner_new_make(Request $request)
+    public function action_partner_make(Request $request)
     {
         $id = $request->id;
         $name = $request->name;
@@ -281,12 +358,6 @@ class MOwnerController extends Controller
 
     }
 
-    // public function goods_update(string $id)
-    // { 
-    //     $experience_categories = ExperienceCategory::all();
-    //     $goods_categories = GoodsCategory::find($id);
-        
-    // }
 
     public function action_goods_category_update(Request $request)
     {
@@ -306,8 +377,6 @@ class MOwnerController extends Controller
         return $return_view;
         
     }
-
-   
 
    
 }

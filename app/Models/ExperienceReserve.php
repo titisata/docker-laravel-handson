@@ -34,4 +34,11 @@ class ExperienceReserve extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    //hotelsテーブルと結合
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
+    
 }

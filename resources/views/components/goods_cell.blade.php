@@ -62,7 +62,7 @@
         <a href="/goods/{{ $goods_folder->id }}" style="text-decoration: none; color: inherit;">
             <div class="d-lg-flex justify-content-between"style="height: 100%; ">
                 <div class="img-square-wrapper img_box">
-                    <img style="object-fit: cover; height: 200px; " class="rounded-top image" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap" width="200">
+                    <img style="object-fit: cover; height: 200px; " class="rounded-top image" src="/storage/{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap" width="200">
                 </div>
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title text-start mb-0 text-truncate">{{ $goods_folder->name }}</h5>

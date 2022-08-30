@@ -5,7 +5,7 @@
 <div class="container">
     <div class="d-flex">
         <h1>パートナー一覧</h1>
-        <a href="/mypage/owner/partner_new" style="text-decoration: none; color: inherit;">
+        <a href="/mypage/owner/partner_make" style="text-decoration: none; color: inherit;">
             <button class="btn btn-sm btn-success ms-5">新規作成</button>
         </a>
     </div>

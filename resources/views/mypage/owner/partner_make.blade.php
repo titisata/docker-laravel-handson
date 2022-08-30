@@ -1,6 +1,6 @@
 @extends('mypage.layouts.app')
 
-@section('menu', 'partner_new')
+@section('menu', 'partner_make')
 @section('content')
 <style>
     .number_form{
