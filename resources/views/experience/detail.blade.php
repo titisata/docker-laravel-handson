@@ -155,7 +155,7 @@ async function commentCreate(ex_id) {
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card" style="height: 300px;">
-                <img class="card-img" style="height: 100%; object-fit: cover;" src="/{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
+                <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
                 <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgb(125, 209, 52));height:68px;">
                     <h3 class="fw-bold text-white py-auto" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
                 </div>
@@ -164,13 +164,13 @@ async function commentCreate(ex_id) {
             <div class="d-flex flex-wrap justify-content-between">
                 @foreach($experienceFolder->images() as $image)
                     <a role="button" data-bs-toggle="modal" data-bs-target="#modal{{ $image->id }}" class="mt-5" style="width:30%;">
-                        <img class="card-img" style=" height: 140px; object-fit: cover;" src="/{{ $image->image_path }}" alt="">
+                        <img class="card-img" style=" height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
                     </a>
                     <div class="modal fade" id="modal{{ $image->id }}" tabindex="-1" aria-labelledby="ModalLabel">
                         <div class="modal-dialog">
                             <div class="modal-content ">
                                 <div class="modal-body">
-                                    <img class="card-img" style="width:100%; object-fit: cover;" src="/{{ $image->image_path }}" alt="">
+                                    <img class="card-img" style="width:100%; object-fit: cover;" src="{{ $image->image_path }}" alt="">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">閉じる</button>
