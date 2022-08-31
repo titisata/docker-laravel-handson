@@ -10,8 +10,10 @@ use App\Models\ExperienceCategory;
 use App\Models\ExperienceReserve;
 use App\Models\HotelGroup;
 use App\Models\Hotel;
+use App\Models\Image;
 use App\Models\GoodsCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class MOwnerController extends Controller
@@ -96,6 +98,60 @@ class MOwnerController extends Controller
     //     $user = Auth::user();
     //     return view('mypage.owner.reserve', compact('user'));
     // }
+
+    public function image_insert(Request $request)
+    {
+        //画像インサート処理
+
+        $table_name = $request->table_name;
+        $table_id = $request->table_id;
+
+        // storage/imagesディレクトリに画像を保存
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_name' => $table_name,
+            'table_id' => $table_id,
+            'image_path' => $path,
+        ]);
+    }
+
+    public function image_delete(Request $request, string $id)
+    {
+        //画像デリート処理
+
+        $image_path = $request->image_path;
+        $table_id = $request->table_id;
+
+        Storage::disk('public')->delete($image_path);
+       
+        Image::where('id', $id)->delete();
+    }
+
+    public function image_update(Request $request, string $id)
+    {
+        //画像アップデート処理
+
+        $table_id = $request->table_id;
+        $table_name = $request->table_name;
+        
+        // imagesディレクトリに画像を保存
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_id'=>$table_id,
+            'image_path'=>$path,
+            'table_name'=>$table_name,
+        ]);
+
+        //削除するファイルのパスを入手
+        $delete_path = $request->delete_path;
+        //storageから画像ファイルを削除
+        Storage::disk('public')->delete($delete_path);
+        Image::where('id', $id)->delete();
+    }
 
     public function partner_display()
     {
@@ -206,6 +262,53 @@ class MOwnerController extends Controller
 
     }
 
+    public function partner_image_insert(string $id)
+    {
+        $partner = Partner::find($id);
+        return view('mypage.owner.partner_image_insert', compact('partner'));
+    }
+
+    public function action_partner_image_insert(Request $request)
+    {
+        $this->image_insert($request);
+
+        $table_id = $request->table_id;
+        $partners = Partner::find($table_id);
+        return view('mypage.owner.partner_manege', compact('partners'));
+    }
+
+    public function partner_image_update(string $id)
+    {
+        $images = Image::find($id);
+        $partner = Partner::find($id);
+        return view('mypage.owner.partner_image_update', compact('partner', 'images'));
+    }
+
+    public function action_partner_image_update(Request $request, string $id)
+    {
+        $this->image_update($request,$id);
+
+        $table_id = $request->table_id;
+        $partners = Partner::find($table_id);
+        return view('mypage.owner.partner_manege', compact('partners'));
+    }
+
+    public function partner_image_delete(string $id)
+    {
+        $images = Image::find($id);
+        $partner = Partner::find($id);
+        return view('mypage.owner.partner_image_delete', compact('partner', 'images'));
+    }
+
+    public function action_partner_image_delete(Request $request, string $id)
+    {
+        $this->image_delete($request,$id);
+
+        $table_id = $request->table_id;
+        $partners = Partner::find($table_id);
+        return view('mypage.owner.partner_manege', compact('partners'));
+    }
+
     public function site()
     {
         $user = Auth::user();
@@ -222,7 +325,6 @@ class MOwnerController extends Controller
         $regist_num = $request->regist_num;
         $recommend_limit = $request->recommend_limit;
         $comment = $request->comment;
-        $main_image = $request->main_image;
         $site_color = $request->site_color;
         $sales_copy = $request->sales_copy;
 
@@ -234,7 +336,6 @@ class MOwnerController extends Controller
             'regist_num'=>$regist_num,
             'recommend_limit'=>$recommend_limit,
             'comment'=>$comment,
-            'main_image'=>$main_image,
             'site_color'=>$site_color,
             'sales_copy'=>$sales_copy,
         ]);
@@ -242,6 +343,55 @@ class MOwnerController extends Controller
         return view('mypage.owner.site', compact('site_master'));
 
     }
+
+    public function site_image_insert(string $id)
+    {
+        $site_master = SiteMaster::find($id);
+        return view('mypage.owner.site_image_insert', compact('site_master'));
+    }
+
+    public function action_site_image_insert(Request $request)
+    {
+        $this->image_insert($request);
+
+        $table_id = $request->table_id;
+        $site_master = SiteMaster::find($table_id);
+        return view('mypage.owner.site', compact('site_master'));
+    }
+
+    public function site_image_update(string $id)
+    {
+        $images = Image::find($id);
+        $site_master = SiteMaster::find($id);
+        return view('mypage.owner.site_image_update', compact('site_master', 'images'));
+    }
+
+    public function action_site_image_update(Request $request, string $id)
+    {
+        $this->image_update($request,$id);
+
+        $table_id = $request->table_id;
+        $site_master = SiteMaster::find($table_id);
+        return view('mypage.owner.site', compact('site_master'));
+    }
+
+    public function site_image_delete(string $id)
+    {
+        $images = Image::find($id);
+        $site_master = SiteMaster::find($id);
+        return view('mypage.owner.site_image_delete', compact('site_master', 'images'));
+    }
+
+    public function action_site_image_delete(Request $request, string $id)
+    {
+        $this->image_delete($request,$id);
+
+        $table_id = $request->table_id;
+        $site_master = SiteMaster::find($table_id);
+        return view('mypage.owner.site', compact('site_master'));
+    }
+
+    
 
     public function category_display()
     {

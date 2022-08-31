@@ -45,9 +45,34 @@
                             <label class="form-label">コメント</label>
                             <textarea name="description" type="text" class="form-control">{{ $partners->description }}</textarea>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">メイン画像</label>
-                            <input name="main_image" type="text" class="form-control" value="{{ $partners->main_image }}">
+                        <div class="mt-3">
+                            <div>
+                                <label>画像設定</label>
+                                
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-between">
+                            @forelse($partners->images() as $image)
+                            <div class="d-flex flex-column col-4 my-3">
+                                <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="{{ $image->image_path ?? '/images/empty.png'}}" alt=""> 
+                                <div class="d-flex">
+                                    <a href="/mypage/owner/partner_image_update/{{ $image->id }}">
+                                        <div class="btn btn-primary">編集</div>
+                                    </a>    
+                                    <a href="/mypage/owner/partner_image_delete/{{ $image->id }}">
+                                        <div class="btn btn-danger">削除</div>
+                                    </a>                             
+                                </div>                         
+                                
+                            </div>        
+                            
+                            @empty
+                                <a href="/mypage/owner/partner_image_insert/{{ $partners->id }}">
+                                    <div class="btn btn-success">
+                                        新規登録     
+                                    </div>
+                                </a>
+                                
+                            @endforelse
                         </div>
                         <div class="mb-3">
                             <label class="form-label">背景色</label>

@@ -1,13 +1,13 @@
 @extends('mypage.layouts.app')
 
-@section('menu', 'partner_event')
+@section('menu', '')
 @section('content')
 
 <div class="container">
     <h1>画像削除</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form enctype="multipart/form-data"  action="/mypage/partner/action_event_image_delete/{{ $images->id }}" method="POST">
+            <form enctype="multipart/form-data"  action="/mypage/owner/action_site_image_delete/{{ $images->id }}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{ $images->id }}" />
                 <input type="hidden" name="table_id" value="{{ $images->table_id }}" />

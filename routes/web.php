@@ -95,8 +95,21 @@ Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
     Route::get('/partner_manege/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_manege']);
     Route::post('/partner_manege_update/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_manege_update']);
     Route::post('/partner_manege_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_manege_delete']);
+    Route::get('/partner_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_image_insert']);
+    Route::post('/action_partner_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'action_partner_image_insert']);
+    Route::get('/partner_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_image_update']);
+    Route::post('/action_partner_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'action_partner_image_update']);
+    Route::get('/partner_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'partner_image_delete']);
+    Route::post('/action_partner_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_partner_image_delete']);
+    
     Route::get('/site', [App\Http\Controllers\MOwnerController::class, 'site']);
     Route::post('/site', [App\Http\Controllers\MOwnerController::class, 'site_post']);
+    Route::get('/site_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'site_image_insert']);
+    Route::post('/action_site_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'action_site_image_insert']);
+    Route::get('/site_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'site_image_update']);
+    Route::post('/action_site_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'action_site_image_update']);
+    Route::get('/site_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'site_image_delete']);
+    Route::post('/action_site_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_site_image_delete']);
     Route::get('/category_display', [App\Http\Controllers\MOwnerController::class, 'category_display']);
     Route::post('/action_experience_category_display', [App\Http\Controllers\MOwnerController::class, 'action_experience_category_display']);
     Route::post('/action_experience_category_update', [App\Http\Controllers\MOwnerController::class, 'action_experience_category_update']);

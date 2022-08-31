@@ -44,6 +44,35 @@
                             <button type="submit" class="btn btn-sm btn-danger mx-2" style="height:34px;" name="delete">削除</button>
                             <input type="hidden" name="id" value="{{ $experience_category->id }}">
                         </form>
+                        <div class="mt-3">
+                            <div>
+                                <label>画像設定</label>
+                                
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-between">
+                            @forelse($experience_category->images() as $image)
+                            <div class="d-flex flex-column col-4 my-3">
+                                <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="{{ $image->image_path ?? '/images/empty.png'}}" alt=""> 
+                                <div class="d-flex">
+                                    <a href="/mypage/owner/partner_image_update/{{ $image->id }}">
+                                        <div class="btn btn-primary">編集</div>
+                                    </a>    
+                                    <a href="/mypage/owner/partner_image_delete/{{ $image->id }}">
+                                        <div class="btn btn-danger">削除</div>
+                                    </a>                             
+                                </div>                         
+                                
+                            </div>        
+                            
+                            @empty
+                                <a href="/mypage/owner/partner_image_insert/{{ $partners->id }}">
+                                    <div class="btn btn-success">
+                                        新規登録     
+                                    </div>
+                                </a>
+                                
+                            @endforelse
+                        </div>
                     </div>
                     @endforeach
                 </div>
@@ -81,6 +110,35 @@
                             <button type="submit" class="btn btn-sm btn-danger mx-2" style="height:34px;" name="delete">削除</button>
                             <input type="hidden" name="id" value="{{ $goods_category->id }}">
                         </form>
+                        <div class="mt-3">
+                            <div>
+                                <label>画像設定</label>
+                                
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-between">
+                            @forelse($goods_category->images() as $image)
+                            <div class="d-flex flex-column col-4 my-3">
+                                <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="{{ $image->image_path ?? '/images/empty.png'}}" alt=""> 
+                                <div class="d-flex">
+                                    <a href="/mypage/owner/partner_image_update/{{ $image->id }}">
+                                        <div class="btn btn-primary">編集</div>
+                                    </a>    
+                                    <a href="/mypage/owner/partner_image_delete/{{ $image->id }}">
+                                        <div class="btn btn-danger">削除</div>
+                                    </a>                             
+                                </div>                         
+                                
+                            </div>        
+                            
+                            @empty
+                                <a href="/mypage/owner/partner_image_insert/{{ $partners->id }}">
+                                    <div class="btn btn-success">
+                                        新規登録     
+                                    </div>
+                                </a>
+                                
+                            @endforelse
+                        </div>
                     </div>
                     @endforeach
                     

@@ -55,8 +55,37 @@
                             <textarea name="comment" type="text" class="form-control">{{ $site_master->comment }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">メイン画像</label>
+                            <label class="form-label">画像設定</label>
                             <input name="main_image" type="text" class="form-control" value="{{ $site_master->main_image }}">
+                        </div>
+                        <div class="mt-3">
+                            <div>
+                                <label>画像設定</label>
+                                <a href="/mypage/owner/site_image_insert/{{ $site_master->id }}">
+                                    <div class="btn btn-success">
+                                        新規登録     
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-between">
+                            @forelse($site_master->images() as $image)
+                            <div class="d-flex flex-column col-4 my-3">
+                                <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="/storage/{{ $image->image_path }}" alt=""> 
+                                <div class="d-flex">
+                                    <a href="/mypage/owner/site_image_update/{{ $image->id }}">
+                                        <div class="btn btn-primary">編集</div>
+                                    </a>    
+                                    <a href="/mypage/owner/site_image_delete/{{ $image->id }}">
+                                        <div class="btn btn-danger">削除</div>
+                                    </a>                             
+                                </div>                         
+                                
+                            </div>        
+                            
+                            @empty
+                                <p>no post data</p>
+                                
+                            @endforelse
                         </div>
                         <div class="mb-3">
                             <label class="form-label">サイトカラー</label>
