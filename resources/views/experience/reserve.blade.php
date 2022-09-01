@@ -22,9 +22,7 @@
         // var food_adult_price = document.getElementsByName('food_adult_price');
         // var food_child_price = document.getElementsByName('food_child_price');
 
-        // for (const hotel_adult_price of hotel_adult_prices) {
-        //  alert(hotel_adult_price);
-        // }
+      
 
         // alert (hotel_child_price.innerHTML);
         // alert (food_adult_price.innerHTML);
@@ -36,10 +34,7 @@
         var child_result;
         child_result = (child_price.innerHTML*child);
 
-        // var adult_hotel_price;
-        // adult_hotel_price = (hotel_adult_prices_{{ $hotelGroup->id }}.innerHTML*child);
-
-        // alert(child_result);
+        
 
         price.innerHTML = (adult_result + child_result);
 
