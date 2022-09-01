@@ -13,14 +13,20 @@
         var child = document.getElementById('child').value;
         var adult_price = document.getElementById('adult_price');
         var child_price = document.getElementById('child_price');
-        var hotel_adult_prices = document.getElementsByClassName('hotel_adult_price');
+
+        // @foreach ($experienceFolder->hotelGroup as $hotelGroup)
+        //     var hotel_adult_prices_{{ $hotelGroup->id }} = document.getElementById('hotel_adult_prices_{{ $hotelGroup->id }}').value;
+        // @endforeach
+
+
+        // var hotel_adult_prices = document.getElementsByClassName('hotel_adult_price');
         // var hotel_child_price = document.getElementsByClassName('hotel_child_price');
         // var food_adult_price = document.getElementsByName('food_adult_price');
         // var food_child_price = document.getElementsByName('food_child_price');
 
-        for (const hotel_adult_price of hotel_adult_prices) {
-         alert(hotel_adult_price);
-        }
+        // for (const hotel_adult_price of hotel_adult_prices) {
+        //  alert(hotel_adult_price);
+        // }
 
         // alert (hotel_child_price.innerHTML);
         // alert (food_adult_price.innerHTML);
@@ -31,6 +37,9 @@
 
         var child_result;
         child_result = (child_price.innerHTML*child);
+
+        // var adult_hotel_price;
+        // adult_hotel_price = (hotel_adult_prices_{{ $hotelGroup->id }}.innerHTML*child);
 
         // alert(child_result);
 
@@ -181,7 +190,11 @@ input[type="radio"] {
                             @forelse ($experienceFolder->hotelGroup as $hotelGroup)
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}">
-                                    <label class="form-check-label" for="{{ $hotelGroup->id }}">{{ $hotelGroup->name }}: 大人<span id='hotel_adult_price' value="{{ $hotelGroup->price_adult }}">{{ $hotelGroup->price_adult }}</span>円　子ども<span class='hotel_child_price'>{{ $hotelGroup->price_child }}</span>円</label>
+                                    <label class="form-check-label" for="hotel_group_{{ $hotelGroup->id }}">
+                                        {{ $hotelGroup->name }}: 
+                                        大人<span id='hotel_adult_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_adult }}">{{ $hotelGroup->price_adult }}</span>円　
+                                        子ども<span class='hotel_child_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_child }}">>{{ $hotelGroup->price_child }}</span>円
+                                    </label>
                                 </div>
                             @empty
                                 <p class="">この体験は宿泊がありません</p>
@@ -193,7 +206,11 @@ input[type="radio"] {
                             @forelse ($experienceFolder->foodGroup as $foodGroup)
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}">
-                                    <label class="form-check-label" for="{{ $foodGroup->id }}">{{ $foodGroup->name }}: 大人<span  name='food_adult_price'>{{ $foodGroup->price_adult }}</span>円　子ども<span name='food_child_price'>{{ $foodGroup->price_child }}</span>円</label>
+                                    <label class="form-check-label" for="food_group_{{ $foodGroup->id }}">
+                                        {{ $foodGroup->name }}: 
+                                        大人<span  name='food_adult_price'>{{ $foodGroup->price_adult }}</span>円　
+                                        子ども<span name='food_child_price'>{{ $foodGroup->price_child }}</span>円
+                                    </label>
                                 </div>
                             @empty
                                 <p class="">この体験は食事がつきません</p>
