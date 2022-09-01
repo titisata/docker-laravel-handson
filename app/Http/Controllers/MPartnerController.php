@@ -333,7 +333,6 @@ class MPartnerController extends Controller
     public function link_insert(string $id)
     {
         
-
         $user = Auth::user();
         $links = Link::where('partner_id', $id)->first();
         
@@ -355,7 +354,7 @@ class MPartnerController extends Controller
         $user = Auth::user();
         $current_user_id = $user->id;
         // $partner = Partner::where('user_id', $current_user_id)->first();
-        $links = Link::where('partner_id', $current_user_id)->first();
+        $links = Link::where('partner_id', $current_user_id)->get();
         
         return view('mypage.partner.link_display', compact('user', 'links'));
     }

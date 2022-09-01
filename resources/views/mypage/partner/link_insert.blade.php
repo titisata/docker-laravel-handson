@@ -10,7 +10,7 @@
             <form action="/mypage/partner/action_link_insert" method="POST">
                 @csrf
                 <div>
-                <input type="hidden" name="partner_id" value="{{ $links->partner_id }}">
+                <input type="hidden" name="partner_id" value="{{ Auth::user()->id }}">
                 <label for="">
                     テキストタイトル
                     <input type="text" class="form-control" name="name" value="">

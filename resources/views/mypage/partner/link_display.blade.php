@@ -21,7 +21,7 @@
             @empty
                 <p class="p-3">作成したドキュメントはありません</p>
             @endforelse
-            <form action="/mypage/partner/link_insert/{{ $link->partner_id }}">
+            <form action="/mypage/partner/link_insert/{{ Auth::user()->id }}">
                 @csrf
                 <button class="btn btn-primary">新規のドキュメントを追加</button>
             </form>
