@@ -7,6 +7,7 @@ use App\Models\Goods;
 use App\Models\GoodsCategory;
 use App\Models\GoodsFolder;
 use Illuminate\Http\Request;
+use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 
 class GoodsController extends Controller
@@ -16,16 +17,18 @@ class GoodsController extends Controller
         $keyword = $request->keyword;
         $category = $request->category;
         $categories = GoodsCategory::all();
+        $images = Image::where('table_name', 'goods_category')->get();
         
         if ($keyword == '') {
             $food_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '食べ物')->orderBy('recommend_sort_no', 'desc')->get();
             $drink_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '飲み物')->orderBy('recommend_sort_no', 'desc')->get();
             $goods_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '雑貨')->orderBy('recommend_sort_no', 'desc')->get();
-            return view('search.goods', compact('food_goods_folders', 'drink_goods_folders', 'goods_goods_folders', 'categories'));
+            $images = Image::where('table_name', 'goods_category')->get();
+            return view('search.goods', compact('food_goods_folders', 'drink_goods_folders', 'goods_goods_folders', 'categories', 'images'));
         }
 
         $goods_folders = GoodsFolder::search($keyword, $category, per_page: 10);
-        return view('search.goods_list', compact('goods_folders', 'categories'));
+        return view('search.goods_list', compact('goods_folders', 'categories', 'images'));
       
 
     }

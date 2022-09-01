@@ -115,15 +115,16 @@
                 <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
                     <!-- スライドさせる画像の設定 -->
                     <div class="carousel-inner rounded-2">
-                        <div class="carousel-item active">
-                            <img src="/images/9.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 2">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/images/3.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 3">
-                        </div>
+                        @forelse($images as $image)
+                            <div class="carousel-item active">
+                                <img src="{{ $image->image_path }}" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide {{ $image->id }}">
+                            </div>
+                        @empty
+                            <div class="carousel-item active">
+                                <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
+                            </div>
+                        @endforelse
+
                     </div><!-- /.carousel-inner -->
                     <!-- スライドコントロールの設定 -->
                     <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
