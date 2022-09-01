@@ -6,7 +6,7 @@ URATABI の Lravel プロジェクトです。
 
 ```shell
 composer install
-php artisan migrate:refresh --seed
+php artisan migrate:fresh --seed
 ```
 
 ## 初期ユーザー

@@ -21,7 +21,6 @@ class PartnerSeeder extends Seeder
             'reserve_flag' => true,
             'service' => '0',
             'regist_num' => '0',
-            'main_image' => '0',
             'background_color' => 'FFFFFF',
             'catch_copy' => '天然水が導く魅惑の都市。',
             'access' => '斎川町駅より徒歩15分です。ご連絡いただければ車でお迎えにまいります。',

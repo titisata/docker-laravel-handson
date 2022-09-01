@@ -23,7 +23,6 @@ class SiteMasterSeeder extends Seeder
             'regist_num' => 0,
             'recommend_limit' => 10,
             'comment' => 'サンプル町が設定できる文章です。この文章はサンプルです。この文章はサンプルです。この文章はサンプルです。',
-            'main_image' => '',
             'site_color' => '',
             'sales_copy' => 'サンプル町で楽しく過ごそう！',
         ]);
