@@ -14,9 +14,7 @@
         var adult_price = document.getElementById('adult_price');
         var child_price = document.getElementById('child_price');
 
-        // @foreach ($experienceFolder->hotelGroup as $hotelGroup)
-        //     var hotel_adult_prices_{{ $hotelGroup->id }} = document.getElementById('hotel_adult_prices_{{ $hotelGroup->id }}').value;
-        // @endforeach
+        
 
 
         // var hotel_adult_prices = document.getElementsByClassName('hotel_adult_price');
