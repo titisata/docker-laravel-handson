@@ -186,7 +186,7 @@ input[type="radio"] {
                                     <label class="form-check-label" for="hotel_group_{{ $hotelGroup->id }}">
                                         {{ $hotelGroup->name }}: 
                                         大人<span id='hotel_adult_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_adult }}">{{ $hotelGroup->price_adult }}</span>円　
-                                        子ども<span class='hotel_child_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_child }}">>{{ $hotelGroup->price_child }}</span>円
+                                        子ども<span class='hotel_child_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_child }}">{{ $hotelGroup->price_child }}</span>円
                                     </label>
                                 </div>
                             @empty

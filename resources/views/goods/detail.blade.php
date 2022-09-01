@@ -82,6 +82,25 @@ async function commentCreate(goods_folder_id) {
                 <img class="card-img img-thumbnail" style="height: 100%; object-fit: cover;" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
                
             </div>
+            <div class="d-flex flex-wrap justify-content-between">
+                @foreach($goods_folder->images() as $image)
+                    <a role="button" data-bs-toggle="modal" data-bs-target="#modal{{ $image->id }}" class="mt-5" style="width:30%;">
+                        <img class="card-img" style=" height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
+                    </a>
+                    <div class="modal fade" id="modal{{ $image->id }}" tabindex="-1" aria-labelledby="ModalLabel">
+                        <div class="modal-dialog">
+                            <div class="modal-content ">
+                                <div class="modal-body">
+                                    <img class="card-img" style="width:100%; object-fit: cover;" src="{{ $image->image_path }}" alt="">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">閉じる</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
                 <div class="d-flex mt-3">
                     <h4 class="fw-bold">商品名：</h4>

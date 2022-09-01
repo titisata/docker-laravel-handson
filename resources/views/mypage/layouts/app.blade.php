@@ -289,16 +289,16 @@
 				<ul class="nav navbar-nav">
                     <li id="owner_site"><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>(管理者)サイト管理</a></li>
 					<li id="owner_partner"><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>(管理者)パートナー管理</a></li>
-                    <li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>(パートナー)プロフィール管理</a></li>
-                    <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>(パートナー)イベント管理</a></li>
-                    <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>(パートナー)お土産管理</a></li>
+                    <li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>(出展者)プロフィール管理</a></li>
+                    <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>(出展者)イベント管理</a></li>
+                    <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>(出展者)お土産管理</a></li>
                     <li id=""><a href=""><i class="fa fa-dashboard"></i>(管理者)顧客管理</a></li>
                     <li id="owner_reserve"><a href="/mypage/owner/reserve"><i class="fa fa-puzzle-piece"></i>(管理者)予約状況</a></li>
-                    <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>(パートナー)予約状況</a></li>
-                    <li id="user_reserve"><a href="/mypage/user/reserve"><i class="fa fa-puzzle-piece"></i>(ユーザー)予約状況</a></li>
+                    <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>(出展者)予約状況</a></li>
+                    <li id="user_reserve"><a href="/mypage/user/reserve"><i class="fa fa-puzzle-piece"></i>(お客様)予約状況</a></li>
                     <li id="owner_site"><a href="/mypage/owner/category_display"><span class="glyphicon glyphicon-signal"></span>(管理者)カテゴリー編集</a></li>       
                     <li id=""><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>(管理者)必須表示ページ管理</a></li>
-                    <li id=""><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>(パートナー)必須表示ページ管理</a></li>
+                    <li id=""><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>(出展者)必須表示ページ管理</a></li>
                     <li id=""><a href=""><i class="fa fa-dashboard"></i>(管理者)お気に入り管理</a></li>
                     <li id=""><a href=""><i class="fa fa-dashboard"></i>(管理者)クチコミ管理</a></li>
                     <!-- <li id="partner_home"><a href="/mypage/partner"><i class="fa fa-dashboard"></i>(パートナー)ホーム</a></li>
