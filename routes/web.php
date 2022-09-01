@@ -19,6 +19,7 @@ Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index']);
 Auth::routes();
 
 Route::get('/partner/{id}', [App\Http\Controllers\PartnerController::class, 'show']);
+Route::get('/partner/partner_link_show/{id}', [App\Http\Controllers\PartnerController::class, 'partner_link_show']);
 Route::get('/search/goods', [App\Http\Controllers\GoodsController::class, 'index']);
 Route::get('/search/experience', [App\Http\Controllers\ExperienceController::class, 'index']);
 Route::get('/goods/{id}', [App\Http\Controllers\GoodsController::class, 'show']);
@@ -77,8 +78,12 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::post('/profile', [App\Http\Controllers\MPartnerController::class, 'profile_post']);
     Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
     Route::get('/link_display', [App\Http\Controllers\MPartnerController::class, 'link_display']);
+    Route::get('/link_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'link_insert']);
+    Route::post('/action_link_insert', [App\Http\Controllers\MPartnerController::class, 'action_link_insert']);
     Route::get('/link_edit/{id}', [App\Http\Controllers\MPartnerController::class, 'link_edit']);
     Route::post('/action_link_edit', [App\Http\Controllers\MPartnerController::class, 'action_link_edit']);
+    Route::post('/action_link_delete', [App\Http\Controllers\MPartnerController::class, 'action_link_delete']);
+    
 
 });
 
@@ -117,5 +122,20 @@ Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
     Route::post('/action_goods_category_insert', [App\Http\Controllers\MOwnerController::class, 'action_goods_category_insert']);
     Route::post('/action_goods_category_update', [App\Http\Controllers\MOwnerController::class, 'action_goods_category_update']);
     Route::post('/action_goods_category_delete', [App\Http\Controllers\MOwnerController::class, 'action_goods_category_delete']);
+    Route::get('/experience_category_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'experience_category_image_insert']);
+    Route::post('/action_experience_category_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'action_experience_category_image_insert']);
+    Route::get('/experience_category_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'experience_category_image_update']);
+    Route::post('/action_experience_category_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'action_experience_category_image_update']);
+    Route::get('/experience_category_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'experience_category_image_delete']);
+    Route::post('/action_experience_category_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_experience_category_image_delete']);
+    Route::get('/goods_category_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_category_image_insert']);
+    Route::post('/action_goods_category_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_category_image_insert']);
+    Route::get('/goods_category_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_category_image_update']);
+    Route::post('/action_goods_category_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_category_image_update']);
+    Route::get('/goods_category_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_category_image_delete']);
+    Route::post('/action_goods_category_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_category_image_delete']);
+    Route::get('/link_display', [App\Http\Controllers\MOwnerController::class, 'link_display']);
+    Route::get('/link_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'link_edit']);
+    Route::post('/action_link_edit', [App\Http\Controllers\MOwnerController::class, 'action_link_edit']);
     
 });

@@ -6,6 +6,7 @@ use App\Models\Partner;
 use Illuminate\Http\Request;
 use App\Models\ExperienceFolder;
 use App\Models\GoodsFolder;
+use App\Models\Link;
 
 class PartnerController extends Controller
 {
@@ -17,6 +18,13 @@ class PartnerController extends Controller
         }
         $experience_folders = ExperienceFolder::where('partner_id', $id)->get();
         $goods_folders = GoodsFolder::where('partner_id', $id)->get();
-        return view('partner.detail', compact('partner', 'experience_folders', 'goods_folders'));
+        $links = Link::where('partner_id', $id)->get();
+        return view('partner.detail', compact('partner', 'experience_folders', 'goods_folders', 'links'));
+    }
+
+    public function partner_link_show(string $id)
+    {
+        $link = Link::where('id', $id)->first();
+        return view('partner.partner_link_show', compact('link'));
     }
 }

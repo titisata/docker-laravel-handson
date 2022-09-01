@@ -51,6 +51,17 @@ li.item {
                 </ul>
             </div>
 
+            <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">会社情報</h2>
+            <div class="d-flex justify-content-evenly flex-wrap px-0">
+                <ul class="horizontal-list ps-0">
+                    @foreach ($links as $link)
+                    <div>
+                        <a class="fs-2" href="/partner/partner_link_show/{{ $link->id }}">{{ $link->name }}</a>
+                    </div>   
+                    @endforeach
+                </ul>
+            </div>
+
         </div>
     </div>
 </div>

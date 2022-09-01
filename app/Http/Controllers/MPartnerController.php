@@ -113,6 +113,63 @@ class MPartnerController extends Controller
         return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
     }
 
+    public function image_insert(Request $request)
+    {
+        //新規画像登録処理
+
+        $table_name = $request->table_name;
+        $table_id = $request->table_id;
+
+        //storage/imagesディレクトリに画像を保存
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_name' => $table_name,
+            'table_id' => $table_id,
+            'image_path' => '/storage/' . $path,
+        ]);
+    }
+
+    public function image_delete(Request $request, string $id)
+    {
+        //画像削除処理
+
+        $image_path = $request->image_path;
+        $table_id = $request->table_id;
+
+        Storage::disk('public')->delete($image_path);
+       
+        Image::where('id', $id)->delete();
+
+    }
+
+    public function image_update(Request $request, string $id)
+    {
+        //画像アップデート処理
+
+        $table_id = $request->table_id;
+        $table_name = $request->table_name;
+        
+        // imagesディレクトリに画像を保存
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_id'=>$table_id,
+            'image_path' => '/storage/' . $path,
+            'table_name'=>$table_name,
+        ]);
+
+        //削除するファイルのパスを入手
+        $delete_path = $request->delete_path;
+        //storageから画像ファイルを削除
+        Storage::disk('public')->delete($delete_path);
+        Image::where('id', $id)->delete();
+    }
+
+
+
     public function event_image_insert(string $id)
     {
         $experiences_folder = ExperienceFolder::find($id);
@@ -121,19 +178,9 @@ class MPartnerController extends Controller
 
     public function action_event_image_insert(Request $request, string $id)
     {
-        $table_name = $request->table_name;
+        $this->image_insert($request);
+
         $table_id = $request->table_id;
-
-        // storage/imagesディレクトリに画像を保存
-        $img = $request->file('image_path');
-        $path = $img->store('images','public');
-
-        Image::create([
-            'table_name' => $table_name,
-            'table_id' => $table_id,
-            'image_path' => $path,
-        ]);
-        
         $experiences_folder = ExperienceFolder::find($table_id);
         $categories = ExperienceCategory::all();
         return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
@@ -149,25 +196,9 @@ class MPartnerController extends Controller
 
     public function action_event_image_update(Request $request, string $id)
     {
+        $this->image_update($request, $id);
+
         $table_id = $request->table_id;
-        $table_name = $request->table_name;
-        
-        // imagesディレクトリに画像を保存
-        $img = $request->file('image_path');
-        $path = $img->store('images','public');
-
-        Image::create([
-            'table_id'=>$table_id,
-            'image_path'=>$path,
-            'table_name'=>$table_name,
-        ]);
-
-        //削除するファイルのパスを入手
-        $delete_path = $request->delete_path;
-        //storageから画像ファイルを削除
-        Storage::disk('public')->delete($delete_path);
-        Image::where('id', $id)->delete();
-        
         $experiences_folder = ExperienceFolder::find($table_id);
         $categories = ExperienceCategory::all();
         return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
@@ -184,13 +215,9 @@ class MPartnerController extends Controller
 
     public function action_event_image_delete(Request $request, string $id)
     {
-        $image_path = $request->image_path;
+        $this->image_delete($request, $id);
+
         $table_id = $request->table_id;
-
-        Storage::disk('public')->delete($image_path);
-       
-        Image::where('id', $id)->delete();
-
         $experiences_folder = ExperienceFolder::find($table_id);
         $categories = ExperienceCategory::all();
         return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
@@ -204,19 +231,9 @@ class MPartnerController extends Controller
 
     public function action_goods_image_insert(Request $request, string $id)
     {
-        $table_name = $request->table_name;
+        $this->image_insert($request);
+
         $table_id = $request->table_id;
-
-        // storage/imagesディレクトリに画像を保存
-        $img = $request->file('image_path');
-        $path = $img->store('images','public');
-
-        Image::create([
-            'table_name' => $table_name,
-            'table_id' => $table_id,
-            'image_path' => $path,
-        ]);
-        
         $goods_folder = GoodsFolder::find($table_id);
         $categories = GoodsCategory::all();
         return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
@@ -231,27 +248,9 @@ class MPartnerController extends Controller
 
     public function action_goods_image_update(Request $request)
     {
-        $id = $request->id;
+        $this->image_update($request, $id);
+        
         $table_id = $request->table_id;
-        $table_name = $request->table_name;
-        
-        // imagesディレクトリに画像を保存
-        $img = $request->file('image_path');
-        $path = $img->store('images','public');
-
-        Image::create([
-            'table_id'=>$table_id,
-            'image_path'=>$path,
-            'table_name'=>$table_name,
-        ]);
-
-        //削除するファイルのパスを入手
-        $delete_path = $request->delete_path;
-
-        //storageから画像ファイルを削除
-        Storage::disk('public')->delete($delete_path);
-        Image::where('id', $id)->delete();
-        
         $goods_folder = GoodsFolder::find($table_id);
         $categories = GoodsCategory::all();
         return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
@@ -268,13 +267,9 @@ class MPartnerController extends Controller
 
     public function action_goods_image_delete(Request $request, string $id)
     {
-        $image_path = $request->image_path;
+        $this->image_delete($request, $id);
+
         $table_id = $request->table_id;
-
-        Storage::disk('public')->delete($image_path);
-       
-        Image::where('id', $id)->delete();
-
         $goods_folder = GoodsFolder::find($table_id);
         $categories = GoodsCategory::all();
         return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
@@ -316,41 +311,68 @@ class MPartnerController extends Controller
         return view('mypage.partner.profile', compact('user', 'partner'));
     }
 
+    public function link_delete(Request $request)
+    {
+        //idをもとにgoodscategory.tableから削除
+
+        $id = $request->id;
+
+        $links = Link::where('id', $id)->delete();
+
+    }
+
     public function link_display()
     {
         $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
-        return view('mypage.partner.link_display', compact('user', 'partner'));
+        $current_user_id = $user->id;
+        // $partner = Partner::where('user_id', $user->id)->first();
+        $links = Link::where('partner_id', $current_user_id)->get();
+        return view('mypage.partner.link_display', compact('user', 'links'));
     }
+
+    public function link_insert(string $id)
+    {
+        
+
+        $user = Auth::user();
+        $links = Link::where('partner_id', $id)->first();
+        
+        return view('mypage.partner.link_insert', compact('user', 'links'));
+    }
+
+    public function action_link_insert(Request $request)
+    {
+        $partner_id = $request->partner_id;
+        $name = $request->name;
+        $content = $request->content;
+        
+        Link::create([
+            'partner_id'=>$partner_id,
+            'name'=>$name,
+            'content'=>$content,
+        ]);
+        
+        $user = Auth::user();
+        $current_user_id = $user->id;
+        // $partner = Partner::where('user_id', $current_user_id)->first();
+        $links = Link::where('partner_id', $current_user_id)->first();
+        
+        return view('mypage.partner.link_display', compact('user', 'links'));
+    }
+
 
     public function link_edit(string $id)
     {
-        if($id == 1){
-            $name = '利用規約';
-        }elseif($id == 2){
-            $name = 'プライバシー規約';
-        }elseif($id == 3){
-            $name = '特定証取引に基づく表示';
-        }elseif($id == 4){
-            $name = '店舗情報';
-        }else{
-            $name = 'ヘルプ・マニュアル';
-        }
-
-        if(DB::table('links')->where('id', $id)->exists()){
-
-            $link = Link::where('id', $id)->first();
-            
-        }else{
-            $link = '';
-        }
-
-        // echo $content;
-        // exit;
 
         $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
-        return view('mypage.partner.link_edit', compact('user', 'partner','name','id','link'));
+        $current_user_id = $user->id;
+        // $partner = Partner::where('user_id', $user->id)->first();
+        $link = Link::where('partner_id', $current_user_id)->where('id', $id)->first();
+
+        // echo $link;
+        // exit;
+        
+        return view('mypage.partner.link_edit', compact('user', 'link'));
     }
 
     public function action_link_edit(Request $request)
@@ -359,24 +381,27 @@ class MPartnerController extends Controller
         $name = $request->name;
         $content = $request->content;
         
-        if(DB::table('links')->where('id', $id)->exists()){
-            
-            Link::where('id', $request->id)->update([
-                'id'=>$id,
-                'name'=>$name,
-                'content'=>$content,
-            ]);
-
-        }else{
-            Link::create([
-                'id'=>$id,
-                'name'=>$name,
-                'content'=>$content,
-            ]);
-        }
+        Link::where('id', $id)->update([
+            'name'=>$name,
+            'content'=>$content,
+        ]);
+        
         
         $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
-        return view('mypage.partner.link_display', compact('user', 'partner'));
+        // $partner = Partner::where('user_id', $user->id)->first();
+        $current_user_id = $user->id;
+        $links = Link::where('partner_id', $current_user_id)->get();
+        return view('mypage.partner.link_display', compact('user', 'links'));
+    }
+
+    public function action_link_delete(Request $request)
+    {
+        $this->link_delete($request);
+        
+        $user = Auth::user();
+        $current_user_id = $user->id;
+        $links = Link::where('partner_id', $current_user_id)->get();
+        return view('mypage.partner.link_display', compact('user', 'links'));
+        
     }
 }

@@ -297,6 +297,7 @@
                     <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>(パートナー)予約状況</a></li>
                     <li id="user_reserve"><a href="/mypage/user/reserve"><i class="fa fa-puzzle-piece"></i>(ユーザー)予約状況</a></li>
                     <li id="owner_site"><a href="/mypage/owner/category_display"><span class="glyphicon glyphicon-signal"></span>(管理者)カテゴリー編集</a></li>       
+                    <li id=""><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>(管理者)必須表示ページ管理</a></li>
                     <li id=""><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>(パートナー)必須表示ページ管理</a></li>
                     <li id=""><a href=""><i class="fa fa-dashboard"></i>(管理者)お気に入り管理</a></li>
                     <li id=""><a href=""><i class="fa fa-dashboard"></i>(管理者)クチコミ管理</a></li>

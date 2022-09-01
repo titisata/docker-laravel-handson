@@ -70,7 +70,7 @@
                             <div class="d-flex flex-wrap justify-content-between">
                             @forelse($site_master->images() as $image)
                             <div class="d-flex flex-column col-4 my-3">
-                                <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="/storage/{{ $image->image_path }}" alt=""> 
+                                <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt=""> 
                                 <div class="d-flex">
                                     <a href="/mypage/owner/site_image_update/{{ $image->id }}">
                                         <div class="btn btn-primary">編集</div>

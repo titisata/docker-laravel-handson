@@ -11,8 +11,10 @@ use App\Models\ExperienceReserve;
 use App\Models\HotelGroup;
 use App\Models\Hotel;
 use App\Models\Image;
+use App\Models\Link;
 use App\Models\GoodsCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -109,11 +111,12 @@ class MOwnerController extends Controller
         // storage/imagesディレクトリに画像を保存
         $img = $request->file('image_path');
         $path = $img->store('images','public');
+        
 
         Image::create([
             'table_name' => $table_name,
             'table_id' => $table_id,
-            'image_path' => $path,
+            'image_path' => '/storage/' . $path,
         ]);
     }
 
@@ -142,7 +145,7 @@ class MOwnerController extends Controller
 
         Image::create([
             'table_id'=>$table_id,
-            'image_path'=>$path,
+            'image_path' => '/storage/' . $path,
             'table_name'=>$table_name,
         ]);
 
@@ -182,7 +185,6 @@ class MOwnerController extends Controller
         $reserve_flag = $request->reserve_flag;
         $service = $request->service; 
         $regist_num = $request->regist_num;
-        $main_image = $request->main_image;
         $description = $request->description;
         $background_color = $request->background_color;
         $catch_copy = $request->catch_copy;
@@ -196,7 +198,6 @@ class MOwnerController extends Controller
             'reserve_flag'=>$reserve_flag,
             'service'=>$service,
             'regist_num'=>$regist_num,
-            'main_image'=>$main_image,
             'description'=>$description,
             'background_color'=>$background_color,
             'catch_copy'=>$catch_copy,
@@ -216,7 +217,6 @@ class MOwnerController extends Controller
         $reserve_flag = $request->reserve_flag;
         $service = $request->service;
         $regist_num = $request->regist_num;
-        $main_image = $request->main_image;
         $background_color = $request->background_color;
         $catch_copy = $request->catch_copy;
         $address = $request->address;
@@ -228,7 +228,6 @@ class MOwnerController extends Controller
             'reserve_flag'=>$reserve_flag,
             'service'=>$service,
             'regist_num'=>$regist_num,
-            'main_image'=>$main_image,
             'background_color'=>$background_color,
             'catch_copy'=>$catch_copy,
             'address'=>$address,
@@ -248,7 +247,6 @@ class MOwnerController extends Controller
         $reserve_flag = $request->reserve_flag;
         $service = $request->service;
         $regist_num = $request->regist_num;
-        $main_image = $request->main_image;
         $background_color = $request->background_color;
         $catch_copy = $request->catch_copy;
         $address = $request->address;
@@ -526,6 +524,158 @@ class MOwnerController extends Controller
         $return_view = $this->category_display();
         return $return_view;
         
+    }
+
+    public function experience_category_image_insert(string $id)
+    {
+        $experience_category = ExperienceCategory::find($id);
+        return view('mypage.owner.experience_category_image_insert', compact('experience_category'));
+    }
+
+    public function action_experience_category_image_insert(Request $request)
+    {
+        $this->image_insert($request);
+
+        $return_view = $this->category_display();
+        return $return_view;
+    }
+
+    public function experience_category_image_update(string $id)
+    {
+        $images = Image::find($id);
+        $experience_category = ExperienceCategory::find($id);
+        return view('mypage.owner.experience_category_image_update', compact('experience_category', 'images'));
+    }
+
+    public function action_experience_category_image_update(Request $request, string $id)
+    {
+        $this->image_update($request,$id);
+
+        $return_view = $this->category_display();
+        return $return_view;
+    }
+
+    public function experience_category_image_delete(string $id)
+    {
+        $images = Image::find($id);
+        $experience_category = ExperienceCategory::find($id);
+        return view('mypage.owner.experience_category_image_delete', compact('experience_category', 'images'));
+    }
+
+    public function action_experience_category_image_delete(Request $request, string $id)
+    {
+        $this->image_delete($request,$id);
+
+        $return_view = $this->category_display();
+        return $return_view;
+    }
+
+    public function goods_category_image_insert(string $id)
+    {
+        $goods_category = GoodsCategory::find($id);
+        return view('mypage.owner.goods_category_image_insert', compact('goods_category'));
+    }
+
+    public function action_goods_category_image_insert(Request $request)
+    {
+        $this->image_insert($request);
+
+        $return_view = $this->category_display();
+        return $return_view;
+    }
+
+    public function goods_category_image_update(string $id)
+    {
+        $images = Image::find($id);
+        $goods_category = GoodsCategory::find($id);
+        return view('mypage.owner.goods_category_image_update', compact('goods_category', 'images'));
+    }
+
+    public function action_goods_category_image_update(Request $request, string $id)
+    {
+        $this->image_update($request,$id);
+
+        $return_view = $this->category_display();
+        return $return_view;
+    }
+
+    public function goods_category_image_delete(string $id)
+    {
+        $images = Image::find($id);
+        $goods_category = GoodsCategory::find($id);
+        return view('mypage.owner.goods_category_image_delete', compact('goods_category', 'images'));
+    }
+
+    public function action_goods_category_image_delete(Request $request, string $id)
+    {
+        $this->image_delete($request,$id);
+
+        $return_view = $this->category_display();
+        return $return_view;
+    }
+
+    public function link_display()
+    {
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        return view('mypage.owner.link_display', compact('user', 'partner'));
+    }
+
+    public function link_edit(string $id)
+    {
+        if($id == 1){
+            $name = '利用規約';
+        }elseif($id == 2){
+            $name = 'プライバシー規約';
+        }elseif($id == 3){
+            $name = '特定証取引に基づく表示';
+        }elseif($id == 4){
+            $name = '店舗情報';
+        }else{
+            $name = 'ヘルプ・マニュアル';
+        }
+
+        if(DB::table('links')->where('id', $id)->exists()){
+
+            $link = Link::where('id', $id)->first();
+            
+        }else{
+            $link = '';
+        }
+
+        // echo $content;
+        // exit;
+
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        return view('mypage.owner.link_edit', compact('user', 'partner','name','id','link'));
+    }
+
+    public function action_link_edit(Request $request)
+    {
+        $id = $request->id;
+        $name = $request->name;
+        $content = $request->content;
+        
+        if(DB::table('links')->where('id', $id)->exists()){
+            
+            Link::where('id', $request->id)->update([
+                'id'=>$id,
+                'name'=>$name,
+                'content'=>$content,
+            ]);
+
+        }else{
+            Link::create([
+                'id'=>$id,
+                'name'=>$name,
+                'content'=>$content,
+            ]);
+        }
+        
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        return view('mypage.owner.link_display', compact('user', 'partner'));
     }
 
    

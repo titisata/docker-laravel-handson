@@ -102,7 +102,6 @@
                         <input type="hidden" name="id" value="{{ $partners->id }}">
                         <input name="name" type="hidden" class="form-control" value="{{ $partners->name }}">
                         <input name="description" type="hidden" class="form-control" value="{{ $partners->description}}">
-                        <input name="main_image" type="hidden" class="form-control" value="{{ $partners->main_image}}">
                         <input name="background_color" type="hidden" class="form-control" value="{{ $partners->background_color }}">
                         <input name="catch_copy" type="hidden" class="form-control" value="{{ $partners->catch_copy }}">
                         <input name="address" type="hidden" class="form-control" value="{{ $partners->address }}">

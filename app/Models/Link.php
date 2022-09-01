@@ -11,6 +11,7 @@ class Link extends Model
 
     protected $fillable = [
         'id',
+        'partner_id',
         'name' ,
         'content',
     ];

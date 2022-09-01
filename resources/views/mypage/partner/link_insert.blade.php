@@ -2,22 +2,27 @@
 
 @section('menu', 'partner_link')
 @section('content')
+    <h1>ようこそ {{ Auth::user()->name }} 様</h1>
     
-    <h2>「{{ $link->name }}」の編集ページです</h2>
     <div class="card">
         <div class="card-body d-flex flex-column">
             
-            <form action="/mypage/partner/action_link_edit" method="POST">
+            <form action="/mypage/partner/action_link_insert" method="POST">
                 @csrf
-                <input type="hidden" name="id" value="{{ $link->id }}">
+                <div>
+                <input type="hidden" name="partner_id" value="{{ $links->partner_id }}">
                 <label for="">
                     テキストタイトル
-                    <input type="text" class="form-control" name="name" value="{{ $link->name }}">
+                    <input type="text" class="form-control" name="name" value="">
                 </label>
+
+                </div>
                 
+                
+                <label>内容</label>
                 
                 <textarea rows="50" cols="50" class="form-control" name="content">
-                    {{ $link->content ?? ''}}
+                   
                 </textarea>
                 
                 <button class="btn btn-primary">編集</button>
