@@ -25,35 +25,35 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
-                .navbar-toggler .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+            .navbar-toggler .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(73, 70, 69, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
             }
-            .navbar-toggler{
-                background-color:#FB6E86;
-            }
+    
             .navbar-toggler{
             color:white !important;
-            border:2px solid #FB6E86 !important;
+            
+            }
+            .text-gray-color{
+                color:#494645;
             }
             .btn-pink:hover{
                 background-color:white;
                 color:#FB6E86;
             }
-            .btn-yellow{
-                background-color:#E2A704;
+            .btn-color{
+                background-color:#f4f4f4;
             }
-            .btn-green{
-                background-color:#7DD134;
+            .btn-text{
+                color:#100f49;
+
             }
-            .pink{
-                background-color:#FB6E86;
-                border-color:#FB6E86;
+          
+            .font-gray{
+                color:#848283;
             }
-            .font-pink{
-                color:#FB6E86;
-            }
+
             .bg-f-part{
-                background-color:#343a40;
+                background-color:#d1d1d1;
             }
             .f-pink{
                 background-color:#BB4156;
@@ -74,14 +74,14 @@
     </head>
     <body class="antialiased">
         <div>
-            <nav class="navbar navbar-expand-md navbar-light shadow-sm pink d-flex align-items-center justify-content-between">
+            <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-white d-flex align-items-center justify-content-between">
                 <!-- <div class="d-flex align-items-center justify-content-between"> -->
                 <div class="container">
-                    <a class="navbar-brand text-white" href="{{ url('/') }}">
+                    <a class="navbar-brand  text-gray-color" href="{{ url('/') }}">
                          <img src="/images/rogo.png" alt="" style="width:140px">
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
+                    <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon text-gray-color"></span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -90,16 +90,16 @@
 
                                 @auth
                                 <li class="nav-item">
-                                    <a href="{{ url('/home') }}" class="text-sm text-white">ホーム</a>
+                                    <a href="{{ url('/home') }}" class="text-sm text-gray-color">ホーム</a>
                                 </li>
                                 @else
                                 <li class="nav-item">
-                                    <a href="{{ route('login') }}" class="text-sm text-white">ログイン</a>
+                                    <a href="{{ route('login') }}" class="text-sm text-gray-color">ログイン</a>
                                 </li>
 
                                     @if (Route::has('register'))
                                         <li class="nav-item">
-                                            <a href="{{ route('register') }}" class="ml-4 text-sm text-white">新規登録</a>
+                                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-color">新規登録</a>
                                         </li>
                                     @endif
                                 @endauth
@@ -137,55 +137,53 @@
                     </button>
                 </div>
 
-                <h1 class="text-center my-5 fw-bold font-pink">{{ $site_masters->sales_copy}}</h1>
+                <h1 class="text-center my-5 fw-bold font-gray">{{ $site_masters->sales_copy}}</h1>
+                <p class="text-center col-9 font-gray" style="margin:0 auto;">
+                    {{ $site_masters->comment}}
+                    </p>
 
                 <div class="container mb-5">
                     <div class="d-flex row justify-content-evenly mt-5">
                         <div class="col-10 col-md-5">
-                            <a role="botton" href="/search/goods" class="btn btn-lg btn-yellow m-2 text-center fw-bold rounded-3 shadow fs-4 w-100 d-flex flex-column"  style="font-size:40px;">
-                            <img src="/images/bag.png" class="mx-auto" style="width:40px">
-                                <p class="mb-0 text-white">名産品を買う</p>
+                            <a role="botton" href="/search/goods" class="border btn btn-lg btn-color ms-2 mb-2 text-center fw-bold rounded-3 shadow-sm fs-4 w-100 d-flex flex-column"  style="font-size:40px;">
+                            <img src="/images/bag.png" class="mx-auto my-3" style="width:60px">
+                                <p class="mb-0 btn-text">名産品を買う</p>
                             </a>
 
                         </div>
-                        <div class="col-10 col-md-5" >
-                            <a role="botton" href="/search/experience" class="btn btn-lg btn-green m-2 text-center fw-bold rounded-3 shadow fs-4 w-100 d-flex flex-column" style="font-size:40px;">
-                                <img src="/images/active.png" class="mx-auto" style="width:40px">
-                                <p class="mb-0 text-white">現地で遊ぶ</p>
+                        <div class="col-10 col-md-5">
+                            <a role="botton" href="/search/experience" class="border btn btn-lg btn-color m-2 mt-4 mt-md-0 text-center fw-bold rounded-3 shadow-sm fs-4 w-100 d-flex flex-column" style="font-size:40px;">
+                                <img src="/images/active.png" class="mx-auto my-3" style="width:60px">
+                                <p class="mb-0 btn-text">現地で遊ぶ</p>
                             </a>
                         </div>
 
                     </div>
 
-                    <h3 class="text-center mt-5">このサイトでできること</h3>
-                    <p class="text-center col-9" style="margin:0 auto;">
-                    {{ $site_masters->comment}}
-                    </p>
                 </div>
             </div>
             <footer class="mt-4">
                 <div class="bg-f-part py-3">
-                    <h2 class="text-center text-white mb-0">{{ $site_masters->site_name}}</h2>
-                </div>
-                <div class = "f-pink">
-                    <div class="d-flex py-4 justify-content-center">
+                    <h4 class="text-gray-color mb-0 ms-4 mt-4 fw-bold" style="padding-left:2rem">{{ $site_masters->site_name}}</h4>
+                
+                    <div class="d-flex py-4 justify-content-start ms-4">
                         <div class="me-4">
                             <ul>
-                                <li class="my-2"><a href="/link/1" class="text-white">利用規約</a></li>
-                                <li class="my-2"><a href="/link/2" class="text-white">プライバシー規約</a></li>
-                                <li class="my-2"><a href="/link/3" class="text-white">特定商取引に基づく表記</a></li>
+                                <li class="my-2"><a href="/link/1" class="text-gray-color">利用規約</a></li>
+                                <li class="my-2"><a href="/link/2" class="text-gray-color">プライバシー規約</a></li>
+                                <li class="my-2"><a href="/link/3" class="text-gray-color">特定商取引に基づく表記</a></li>
                             </ul>
                         </div>
                         <div class="ms-4">
                             <ul>
-                                <li class="my-2"><a href="/link/4" class="text-white">店舗情報</a></li>
-                                <li class="my-2"><a href="/link/5" class="text-white">ヘルプ・マニュアル</a></li>
+                                <li class="my-2"><a href="/link/4" class="text-gray-color">店舗情報</a></li>
+                                <li class="my-2"><a href="/link/5" class="text-gray-color">ヘルプ・マニュアル</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="d-md-flex justify-content-between align-items-center text-center">
-                        <p class="text-white ps-md-4 small">Copyright© {{ $site_masters->site_name}} All rights reserved.</p>
-                        <p class="text-white pe-md-4 mb-0 pb-3"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
+                    <div class="d-flex justify-content-between flex-column flex-md-row">
+                        <p class="text-gray-color ms-4 small" style="padding-left:2rem">Copyright© {{ $site_masters->site_name}} All rights reserved.</p>
+                        <p class="text-gray-color ms-4 ms-md-0 me-md-4 mb-0 pb-3" style="padding-right:2rem;padding-left:2rem;"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
                     </div>
                 </div>
             <footer>

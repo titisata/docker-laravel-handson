@@ -1,73 +1,13 @@
-<style>
-*{
-    box-sizing:content-box;
-}
-.card-text {
-    word-wrap: break-word;
-}
-.cotain{
-    height:200px
-}
 
-.card-title{
-    width:600px;
-
-}
-.card-text{
-    width:600px;
-}
-.image{
-    width:400px;
-}
-@media screen and (max-width:1400px) {
-    .card-title {
-        width:100%;
-
-    }
-
-    .card-text{
-        width:360px;
-    }
-
-    
-
-
-}    
-
-@media screen and (max-width:992px) {
-    .cotain{
-        height:360px;
-        width:100%;
-    } 
-
-    .card-text{
-        width:100%;
-    }
-
-    .img_box{
-        width:100%;
-
-    }
-
-    .image{
-        width:100%;
-    }
-    
-}
-</style>
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
-<div class="card mb-3">
-    <div class="contain">
-        <a href="/goods/{{ $goods_folder->id }}" style="text-decoration: none; color: inherit;">
-            <div class="d-lg-flex justify-content-between"style="height: 100%; ">
-                <div class="img-square-wrapper img_box">
-                    <img style="object-fit: cover; height: 200px; " class="rounded-top image" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap" width="200">
-                </div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title text-start mb-0 text-truncate">{{ $goods_folder->name }}</h5>
-                    <p class="card-text text-end mt-auto text-truncate">{{ $goods_folder->description }}</p>
-                    <p class="card-text fw-bold fs-4 text-nowrap text-end mt-auto">￥{{ $goods_folder->price }}~</p>
+<div class=" mb-3 col-lg-6 mt-4 rounded-4 p-3">
+    <div class="card contain " style="border-radius: 18px;">
+        <a href="/goods/{{ $goods_folder->id }}" style="text-decoration: none; color: inherit; ">
+            <div class="" style="height: 100%;">
+                <div class="card-body p-0">
+                    <img style="object-fit: cover; width:100%; height:320px; border-top-left-radius: 18px;border-top-right-radius: 18px;" class="image" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap">    
+                    <h5 class="card-title text-start fw-bold ms-3 mt-3 text-truncate font-gray" >{{ $goods_folder->name }}</h5> 
+                    <p class="card-text text-wrap mt-3 text-truncate m-3 font-gray">{{ $goods_folder->description }}</p>
+                    <p class="card-text fw-bold fs-4 text-nowrap mt-4 text-end me-2 font-more-gray mb-4">料金目安&nbsp&nbsp<span class="small fw-normal" style="font-size:12px;">税込</span>{{ $goods_folder->price }}<span class="small fw-normal me-2 " style="font-size:12px;">円</span></p>
                 </div>
             </div>
         </a>

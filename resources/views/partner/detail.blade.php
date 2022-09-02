@@ -13,7 +13,7 @@ li.item {
 
 <div class="container px-0">
     <div class="row justify-content-center" style="--bs-gutter-x: 0;">
-        <div class="col-md-10">
+        <div class="col-md-11">
 
             <div class="mt-5">
                 <h3 class="fw-bold pb-3 ps-2">{{ $partner->name }}</h3>
@@ -40,26 +40,22 @@ li.item {
                         allowfullscreen>
                     </iframe>
                 </div>
-            </div>
-
-            <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">提供体験一覧</h2>
-            <div class="d-flex justify-content-evenly flex-wrap px-0">
-                <ul class="horizontal-list ps-0">
-                    @foreach ($experience_folders as $experience_folder)
-                        @include('components.experience_small_cell', ['experienceFolder'=>$experience_folder])
-                    @endforeach
-                </ul>
-            </div>
-
-            <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">会社情報</h2>
-            <div class="d-flex justify-content-evenly flex-wrap px-0">
-                <ul class="horizontal-list ps-0">
+                <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">会社情報</h2>
                     @foreach ($links as $link)
                     <div>
                         <a class="fs-2" href="/partner/partner_link_show/{{ $link->id }}">{{ $link->name }}</a>
                     </div>   
                     @endforeach
-                </ul>
+                
+                </div>
+                <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">提供体験一覧</h2>
+                <div class="d-flex justify-content-evenly flex-wrap px-0">
+                    <ul class="horizontal-list ps-0">
+                        @foreach ($experience_folders as $experience_folder)
+                            @include('components.experience_small_cell', ['experienceFolder'=>$experience_folder])
+                        @endforeach
+                    </ul>
+                </div>
             </div>
 
         </div>

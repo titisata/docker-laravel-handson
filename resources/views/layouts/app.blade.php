@@ -29,16 +29,11 @@
         color:white !important;
         border:2px solid #FB6E86 !important;
         }
-        .pink{
-            background-color:#FB6E86;
-            border-color:#FB6E86;
+        .text-gray-color{
+                color:#494645;
         }
         .bg-f-part{
-            background-color:#343a40;
-        }
-        .f-pink{
-            background-color:#BB4156;
-
+            background-color:#d1d1d1;
         }
         ul{
             list-style-type: none
@@ -50,7 +45,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm pink">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-white">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
                     <img src="/images/rogo.png" alt="" style="width:140px">
@@ -66,21 +61,21 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="{{ route('login') }}">{{ __('ログイン') }}</a>
+                                    <a class="nav-link  text-gray-color" href="{{ route('login') }}">{{ __('ログイン') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="{{ route('register') }}">{{ __('新規登録') }}</a>
+                                    <a class="nav-link  text-gray-color" href="{{ route('register') }}">{{ __('新規登録') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                    <a class="nav-link text-white fw-bold" href="/cart">カート</a>
+                                    <a class="nav-link  text-gray-color fw-bold" href="/cart">カート</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle  text-gray-color fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
@@ -109,27 +104,25 @@
 
         <footer class="mt-4">
         <div class="bg-f-part py-3">
-            <h2 class="text-center text-white mb-0">○○観光協会</h2>
-        </div>
-        <div class ="f-pink">
+            <h2 class="text-center  text-gray-color mb-0">○○観光協会</h2>
             <div class="d-flex py-4 justify-content-center">
                 <div class="me-4">
                     <ul>
-                        <li class="my-2"><a href="/link/1" class="text-white">利用規約</a></li>
-                        <li class="my-2"><a href="/link/2" class="text-white">プライバシー規約</a></li>
-                        <li class="my-2"><a href="/link/3" class="text-white">特定商取引に基づく表記</a></li>
+                        <li class="my-2"><a href="/link/1" class=" text-gray-color">利用規約</a></li>
+                        <li class="my-2"><a href="/link/2" class=" text-gray-color">プライバシー規約</a></li>
+                        <li class="my-2"><a href="/link/3" class=" text-gray-color">特定商取引に基づく表記</a></li>
                     </ul>
                 </div>
                 <div class="ms-4">
                     <ul>
-                        <li class="my-2"><a href="/link/4" class="text-white">店舗情報</a></li>
-                        <li class="my-2"><a href="/link/5" class="text-white">ヘルプ・マニュアル</a></li>
+                        <li class="my-2"><a href="/link/4" class=" text-gray-color">店舗情報</a></li>
+                        <li class="my-2"><a href="/link/5" class=" text-gray-color">ヘルプ・マニュアル</a></li>
                     </ul>
                 </div>
             </div>
             <div class="d-md-flex justify-content-between align-items-center text-center">
-                <p class="text-white ps-md-4 small">Copyright© ○○観光協会 All rights reserved.</p>
-                <p class="text-white pe-md-4 mb-0 pb-3"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
+                <p class="text-gray-color ps-md-4 small">Copyright© ○○観光協会 All rights reserved.</p>
+                <p class="text-gray-color pe-md-4 mb-0 pb-3"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
              </div>
         </div>
 

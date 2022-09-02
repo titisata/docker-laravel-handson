@@ -1,64 +1,14 @@
-<style>
-*{
-    box-sizing:content-box;
-}
-.card-text {
-    word-wrap: break-word;
-}
-.cotain{
-    height:200px
-}
 
-.card-title{
-    width:600px;
-
-}
-.image{
-    width:400px;
-}
-@media screen and (max-width:1400px) {
-    .card-title{
-        width:400px;
-
-    }
-
-
-}    
-
-@media screen and (max-width:992px) {
-    .cotain{
-        height:360px;
-        width:400px;
-    } 
-    .card-title{
-        width:100%;
-
-    }
-
-    .img_box{
-        width:100%;
-
-    }
-
-    .image{
-        width:100%;
-    }
-}
-</style>
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
-
-<div class="card mb-3">
-    <div class="contain">
-        <a href="/experience/{{ $experienceFolder->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}" style="text-decoration: none; color: inherit;">
-            <div class="d-lg-flex  justify-content-between"style="height: 100%; ">
-                <div class="img-square-wrapper img_box">
-                    <img style="object-fit: cover; height: 200px; " class="rounded-top image" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap">
-                </div>
-                <div class="card-body d-flex flex-column">    
-                    <h5 class="card-title text-start mb-0 text-truncate" >{{ $experienceFolder->name }}</h5> 
-                    <p class="card-text fw-bold fs-4 text-nowrap text-end mt-auto">￥{{ $experienceFolder->price_child }}～</p>
-                    <p class="card-text text-end">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
+<div class="mb-3 col-lg-6 mt-4 rounded-4 p-3">
+    <div class="card contain" style="border-radius: 18px;">
+        <a href="/experience/{{ $experienceFolder->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}" style="text-decoration: none; color: inherit; ">
+            <div class="" style="height: 100%;">
+                <div class="card-body p-0">
+                    <img style="object-fit: cover; width:100%; height:320px;  border-top-left-radius: 18px;border-top-right-radius: 18px;" class=" image" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap">    
+                    <h5 class="card-title text-start fw-bold ms-3 mt-3 text-truncate font-gray" >{{ $experienceFolder->name }}</h5> 
+                    <p class="card-text text-wrap mt-3 text-truncate m-3 font-gray">{{ $experienceFolder->description }}</p>
+                    <p class="card-text fw-bold fs-4 text-nowrap mt-4 text-end me-2 font-more-gray mb-0">料金目安&nbsp&nbsp<span class="small fw-normal" style="font-size:12px;">税込</span>{{ $experienceFolder->price_child }}<span class="small fw-normal me-3 " style="font-size:12px;">円/人~</span></p>
+                    <p class="card-text font-gray text-end me-4 mb-3">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
                 </div>
             </div>
         </a>

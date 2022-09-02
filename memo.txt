@@ -1,34 +1,81 @@
-@extends('mypage.layouts.app')
+ function formSwitch(){
+       
+        
+        var adult = document.getElementById('adult').value;
+        var child = document.getElementById('child').value;
+        var adult_price = document.getElementById('adult_price');
+        var child_price = document.getElementById('child_price');
 
-@section('menu', 'partner_link')
-@section('content')
-    <h1>ようこそ {{ Auth::user()->name }} 様</h1>
-    <h2>「{{ $name }}」の編集ページです</h2>
-    <div class="card">
-        <div class="card-body d-flex flex-column">
-            <!-- @if($content == '') -->
-                <form action="/mypage/partner/action_link_edit" method="POST">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $id }}">
-                    <input type="hidden" name="name" value="{{ $name }}">
-                    <label>「{{ $name }}」の内容</label>
-                    <textarea rows="50" cols="50" class="form-control" name="content">
-                        
-                    </textarea>
-                    <button class="btn btn-primary">編集</button>
-                </form> 
-            <!-- @else
-                <form action="/mypage/partner/action_link_edit" method="POST">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $id }}">
-                    <input type="hidden" name="name" value="{{ $name }}">
-                    <label>「{{ $name }}」の内容</label>
-                    <textarea rows="50" cols="50" class="form-control" name="content">
-                        {{ $content->content }}
-                    </textarea>
-                    <button class="btn btn-primary">編集</button>
-                </form>   
-            @endif     -->
-        </div>
-    </div>
-@endsection
+        var adult_result;
+        adult_result = (adult_price.innerHTML*adult);
+
+        var child_result;
+        child_result = (child_price.innerHTML*child);
+
+        
+
+    }
+
+    function radiohotelSwitch(){
+        const formElements = document.forms.reserve_form;
+
+        console.log(formElements);
+
+        let attribute = formElements.hotel_group_id.value;
+
+        let get_hotel_adult = 'hotel_adult_price_' + attribute;
+        let get_hotel_child = 'hotel_child_price_' + attribute;
+ 
+        console.log(get_hotel_adult);
+        console.log(get_hotel_child);
+
+        var hotel_adult_price = document.getElementById(get_hotel_adult).innerHTML;
+        var hotel_child_price = document.getElementById(get_hotel_child).innerHTML;
+       
+        console.log(hotel_adult_price);
+        console.log(hotel_child_price);
+
+        var hotel_adult = document.getElementById('adult').value;
+        var hotel_child = document.getElementById('child').value;
+
+        var hotel_adult_result;
+        hotel_adult_result = (hotel_adult_price*hotel_adult);
+
+        var hotel_child_result;
+        hotel_child_result = (hotel_child_price*hotel_child);
+
+        console.log(hotel_adult_result);
+        console.log(hotel_child_result);
+    }
+
+    function radiofoodSwitch(){
+        const formElements = document.forms.reserve_form;
+
+        console.log(formElements);
+
+        let attribute = formElements.food_group_id.value;
+
+        let get_food_adult = 'food_adult_price_' + attribute;
+        let get_food_child = 'food_child_price_' + attribute;
+ 
+        console.log(get_food_adult);
+        console.log(get_food_child);
+
+        var food_adult_price = document.getElementById(get_food_adult).innerHTML;
+        var food_child_price = document.getElementById(get_food_child).innerHTML;
+       
+        console.log(food_adult_price);
+        console.log(food_child_price);
+
+        var food_adult = document.getElementById('adult').value;
+        var food_child = document.getElementById('child').value;
+
+        var food_adult_result;
+        adult_result = (food_adult_price*food_adult);
+
+        var food_child_result;
+        child_result = (food_child_price*food_child);
+
+        console.log(food_adult_result);
+        console.log(food_child_result);
+    }

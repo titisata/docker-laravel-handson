@@ -3,6 +3,13 @@
 @section('content')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style>
+ul.horizontal-list {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+li.item {
+	display: inline-block;
+}
 .card-img-overlay{
     padding: 0;
     top: calc(90% - 0.5rem);
@@ -16,6 +23,12 @@
 }
 .btn-pink:hover{
     color:#FB6E86;
+}
+.text-gray{
+    color:#6f6e6f;
+}
+.text-more-gray{
+    color:#494645;
 }
 </style>
 
@@ -74,53 +87,57 @@ async function commentCreate(goods_folder_id) {
 
     }
 </script>
-
+<div class="card" style="height: 400px;">
+    <img class="card-img img-thumbnail" style="height: 100%; object-fit: cover;" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
+</div>
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card" style="height: 300px;">
-                <img class="card-img img-thumbnail" style="height: 100%; object-fit: cover;" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
-               
-            </div>
+        <div class="col-md-11">
+            
             <div class="d-flex flex-wrap justify-content-between">
-                @foreach($goods_folder->images() as $image)
-                    <a role="button" data-bs-toggle="modal" data-bs-target="#modal{{ $image->id }}" class="mt-5" style="width:30%;">
-                        <img class="card-img" style=" height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
-                    </a>
-                    <div class="modal fade" id="modal{{ $image->id }}" tabindex="-1" aria-labelledby="ModalLabel">
-                        <div class="modal-dialog">
-                            <div class="modal-content ">
-                                <div class="modal-body">
-                                    <img class="card-img" style="width:100%; object-fit: cover;" src="{{ $image->image_path }}" alt="">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">閉じる</button>
+                <ul class="horizontal-list ps-0" >
+                    @foreach($goods_folder->images() as $image)
+                        <li class="item mx-2">
+                            <a role="button" data-bs-toggle="modal" data-bs-target="#modal{{ $image->id }}" class="mt-5" style="width:30%;">
+                                <img class="card-img" style="width:140px; height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
+                            </a>
+                            <div class="modal fade" id="modal{{ $image->id }}" tabindex="-1" aria-labelledby="ModalLabel">
+                                <div class="modal-dialog">
+                                    <div class="modal-content ">
+                                        <div class="modal-body">
+                                            <img class="card-img" style="width:100%; object-fit: cover;" src="{{ $image->image_path }}" alt="">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">閉じる</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                @endforeach
+                        </li>    
+                    @endforeach
+                </ul>    
             </div>
 
                 <div class="d-flex mt-3">
-                    <h4 class="fw-bold">商品名：</h4>
-                    <h4 class="fw-bold"> {{ $goods_folder->name }}</h4>
+                    <h3 class="fw-bold text-gray">商品名：</h3>
+                    <h3 class="fw-bold text-gray"> {{ $goods_folder->name }}</h3>
                 </div>
                 
-                <h5 class="fw-bold mt-4">商品説明</h5>
-                <p>{{ $goods_folder->description }}</p>
-                <p class="mb-4 text-end"><a role="button" href="/partner/{{ $goods_folder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
+                <h5 class="fw-bold mt-4  text-gray">商品説明</h5>
+                <p class="text-gray">{{ $goods_folder->description }}</p>
+                <p class="mb-4 text-start"><a role="button" href="/partner/{{ $goods_folder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
         
 
+
                 @forelse($goods_folder->goods as $goods)
-                <form class="mb-3 " action="{{ Request::url() }}" method="POST" onsubmit='return check();'>    
-                    <div class="card bg-f-part text-white mt-3 p-3">
+                <form class="mb-3 col-md-6 offset-md-3" action="{{ Request::url() }}" method="POST" onsubmit='return check();'>    
+                    <div class="card bg-f-part text-more-gray mt-3 p-3">
                         @csrf
                         <div class="d-flex align-items-center justify-content-between">
                             <h5 class="fw-bold ">{{ $goods->name }}</h5>   
-                            <p class="fw-bold text-end h3 "><span id="goods_price_{{ $goods->id }}" value="">{{ $goods->price }}</span>円/個</p>
+                            <p class="fw-bold text-end h3"><span id="goods_price_{{ $goods->id }}" value="">{{ $goods->price }}</span>円/個</p>
                         </div>
-                        <div class="d-flex align-items-center justify-content-end pb-4 border-bottom">
+                        <div class="d-flex align-items-center justify-content-end pb-4 border-bottom  border-secondary">
                             <label class="fs-5 me-1" for="quantity">数量</label>
                             <div class="d-flex">
                                 <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}')">
@@ -147,15 +164,15 @@ async function commentCreate(goods_folder_id) {
                     <p>商品がありません</p>
                 @endforelse
                     <div class="text-center text-md-end pt-3">
-                        <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4"  type="submit" value="">
+                        <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-10 col-lg-10"  type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
                         </button>
                     </div>
                 </form>
             <div class="my-5">
-                <h5 class="mb-0 fw-bold">注意事項など</h5>
+                <h5 class="mb-0 fw-bold text-gray">注意事項など</h5>
                 
-                <p>このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。
+                <p class="text-gray">このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。
                 このテキストはサンプルです。このテキストはサンプルですこのテキストはサンプルです。このテキストはサンプルです。
                 </p>
 

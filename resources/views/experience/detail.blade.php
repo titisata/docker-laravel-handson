@@ -96,6 +96,13 @@
 </script>
 
 <style>
+ul.horizontal-list {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+li.item {
+	display: inline-block;
+}
 .fc-day-past {
     background-color: #969696;
 }
@@ -125,6 +132,21 @@ a{
 .bg-f-part{
     background-color:#343a40;
 }
+.text-gray{
+    color:#6f6e6f;
+}
+
+.text-more-gray{
+    color:#494645;
+}
+
+.bg-color{
+    background-color:#f4f4f4;
+}
+
+.small_font{
+    font-size:12px;
+}
 </style>
 
 <script>
@@ -149,53 +171,78 @@ async function commentCreate(ex_id) {
         .then(_ => location.reload());
 }
 </script>
-
+<div class="card" style="height: 400px;">
+    <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
+</div>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-9">
-            <div class="card" style="height: 300px;">
-                <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
-                <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,0),rgb(125, 209, 52));height:68px;">
-                    <h3 class="fw-bold text-white py-auto" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
-                </div>
-            </div>
-
+        <div class="col-md-11">
+            
             <div class="d-flex flex-wrap justify-content-between">
-                @foreach($experienceFolder->images() as $image)
-                    <a role="button" data-bs-toggle="modal" data-bs-target="#modal{{ $image->id }}" class="mt-5" style="width:30%;">
-                        <img class="card-img" style=" height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
-                    </a>
-                    <div class="modal fade" id="modal{{ $image->id }}" tabindex="-1" aria-labelledby="ModalLabel">
-                        <div class="modal-dialog">
-                            <div class="modal-content ">
-                                <div class="modal-body">
-                                    <img class="card-img" style="width:100%; object-fit: cover;" src="{{ $image->image_path }}" alt="">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">閉じる</button>
+                <ul class="horizontal-list ps-0" >
+                    @foreach($experienceFolder->images() as $image)
+                        <li class="item mx-2">
+                            <a role="button" data-bs-toggle="modal" data-bs-target="#modal{{ $image->id }}" class="mt-5" style="width:30%;">
+                                <img class="card-img" style="width:140px; height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
+                            </a>
+                            <div class="modal fade" id="modal{{ $image->id }}" tabindex="-1" aria-labelledby="ModalLabel">
+                                <div class="modal-dialog">
+                                    <div class="modal-content ">
+                                        <div class="modal-body">
+                                            <img class="card-img" style="width:100%; object-fit: cover;" src="{{ $image->image_path }}" alt="">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">閉じる</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                @endforeach
+                        </li>    
+                    @endforeach
+                </ul>    
             </div>
 
             <div class="row">
-                <div class="my-5 col-12 col-lg-6">
+                <div class="my-5 col-12 col-lg-7">
+                    
+                    <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                    <p class="text-gray">{{ $experienceFolder->description }}</p>
+                    <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
 
-                    <p>{{ $experienceFolder->description }}</p>
-                    <p class="mb-4 text-end"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
+                    <h4 class="fw-bold pt-4 ps-2 text-gray">集合場所</h4>
+                    <p class="ps-2 text-gray">{{ $experienceFolder->address }}</p>
 
-                    <h4 class="fw-bold pt-4 ps-2">アドレス</h4>
-                    <p class="ps-2">{{ $experienceFolder->address }}</p>
-                    <iframe
-                        width="100%"
-                        height="300"
-                        frameborder="0" style="border:0"
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCbEnku7Kl5mCIvWZgKOpgN-2wjmehRvyU&q={{ $experienceFolder->address }}"
-                        allowfullscreen>
-                    </iframe>
+                    @if (app('request')->input('keyword') == "")
+                        <div class="">
+                            <div class='calendar'></div>
+                        </div>
+                    @else
+                        <div class="card-body px-0 pt-3 border-top">
+                            <div class="bg-f-part p-2 rounded-2 mb-2 d-lg-flex align-items-center justify-content-center">
+                                <h5 class="text-white mb-lg-0">体験日: {{ app('request')->input('keyword') }}</h5>
+                                <h5 class="text-white mb-0 ms-lg-4">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}</h5>
+                            </div>
+                            <div>
+                                <a  class="text-primary" href="{{url()->current()}}" >
+                                    別の日を選択する
+                                </a>
+                            </div>
+                            <div class="py-2 ms-lg-auto d-lg-flex mt-3">
+                                
+                                <p class="fw-bold text-start fs-4">大人 : <span class="small small_font ">税込</span><span class="fw-bold">{{ $experienceFolder->price_adult }}</span><span class="small small_font">円 / 人</span></p>
+                                
+                                <p class="fw-bold text-start fs-4 ms-lg-4">子ども : <span class="small small_font">税込</span><span class="fw-bold">{{ $experienceFolder->price_child }}</span><span class="small small_font">円 / 人</span></p>
+                            </div>
+                            @forelse($experiences as $experience)
+                                <a class="btn btn-lg btn-pink rounded-pill text-white my-2 py-3 w-100 btn-shadow fs-5" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                            @empty
+                                <p>この体験はご利用できません</p>
+                            @endforelse
+                        </div>
+                    @endif
+                    
+                    
 
                     <div class="d-flex justify-content-between align-items-start border-top pt-3 flex-wrap">
                         @if (app('request')->input('keyword') != "")
@@ -203,30 +250,23 @@ async function commentCreate(ex_id) {
                                 <p class="text-white fs-5">体験日: {{ app('request')->input('keyword') }}</p>
                                 <p class="text-white mb-0 fs-5">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') :  app('request')->input('keyword') ) ) : '宿泊なし' }}</p>
                             </div>
-                            <div>
-                                <a role="button" class="btn btn-dark" href="{{url()->current()}}" >
-                                    ボタン
-                                </a>
-                            </div>
+                            
 
                         @endif
-                            <div class="p-2 ms-lg-auto">
-                                <p class="fw-bold text-end fs-5">　大人：{{ $experienceFolder->price_adult }}円~</p>
-                                <p class="fw-bold text-end fs-5">子ども：{{ $experienceFolder->price_child }}円~</p>
-                            </div>
+                            
 
                     </div>
 
                     <div class="mt-3 col-12 col-lg-6 d-lg-none">
                         @if (app('request')->input('keyword') == "")
-                            <div class="card-body">
+                            <div class="card-body p-0">
                                 <div class='calendar'></div>
                             </div>
 
                         @endif
                         @if (app('request')->input('keyword') != "")
                         <div>
-                            <div class="card-body mt-2 col-12 col-lg-6 d-lg-none">
+                            <div class="card-body mt-2 p-0 col-12 col-lg-6 d-lg-none">
                                 @forelse($experiences as $experience)
                                     <a class="btn btn-lg btn-pink rounded-pill text-white my-2 w-100 btn-shadow fs-3" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                                 @empty
@@ -320,24 +360,15 @@ async function commentCreate(ex_id) {
                         </div>
                     </div>
                 </div>
-                <div class="mt-4 col-12 d-none d-lg-block col-lg-6">
-                    @if (app('request')->input('keyword') == "")
-                        <div class="">
-                            <div class='calendar'></div>
-                        </div>
-                    @else
-                        <div class="card-body">
-                            <div class="bg-f-part p-2 rounded-2 mb-2">
-                                <h5 class="text-white">体験日: {{ app('request')->input('keyword') }}</h5>
-                                <h5 class="text-white mb-0">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}</h5>
-                            </div>
-                            @forelse($experiences as $experience)
-                                <a class="btn btn-lg btn-pink rounded-pill text-white my-2 w-100 btn-shadow fs-2" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
-                            @empty
-                                <p>この体験はご利用できません</p>
-                            @endforelse
-                        </div>
-                    @endif
+                <div class="mt-4 col-12 d-none d-lg-block col-lg-5">
+                    <iframe
+                        width="100%"
+                        height="300"
+                        frameborder="0" style="border:0"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCbEnku7Kl5mCIvWZgKOpgN-2wjmehRvyU&q={{ $experienceFolder->address }}"
+                        allowfullscreen>
+                    </iframe>
+                    
                 </div>
 
             </div>

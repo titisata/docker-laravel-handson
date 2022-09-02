@@ -14,6 +14,21 @@ li.item {
     object-fit: cover;
 
 }
+.box-color{
+    background-color:#f4f4f4;
+}
+.btn-pink{
+    background-color:#FB6E86;
+    border-color:#FB6E86;
+    width:400px;
+    
+}
+.font-gray{
+                color:#848283;
+}
+.font-more-gray{
+    color:#6f6e6f;
+}
 </style>
 <div id="carouselWithCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <!-- スライドさせる画像の設定 -->
@@ -40,21 +55,25 @@ li.item {
 </div>
 <div class="container px-0">
     <div class="row justify-content-center px-0"style="--bs-gutter-x: 0;">
-        <div class="col-md-10 mt-4 px-0">
-            <div class="text-center">
+        <div class="col-md-11 mt-4 px-0">
+            <div class="text-center box-color p-4 rounded-4">
 
-                <h3 class="mb-3 fw-bold">検索するキーワードを入力してください</h3>
                 <form class="mb-3 mt-3" action="/search/goods" method="get">
                     @csrf
-                    <div class="d-flex flex-column align-items-center">
-                        <input name="keyword" type="text" class="form-control" style="width:240px" placefolder="検索したいお土産を入力してください">
-                        <select name="category" class="form-select mt-2" style="width:216px;">
-                            <option value="">カテゴリ選択</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->name }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                        <input class="btn btn-secondary mt-3" style="width:180px" type="submit" value="検索">
+                    <div class="d-flex flex-column align-items-center ">
+                        <label for="keyword" class="fw-bold fs-5 mb-3">検索したいキーワードとカテゴリーを入力してください</label>
+                        <div class="d-lg-flex mb-3">
+                            <input name="keyword" type="text" class="form-control me-lg-1" style="width:240px" placefolder="検索したいお土産を入力してください" value="{{ app('request')->input('keyword') }}">
+                            <select name="category" class="form-select ms-lg-1" style="width:216px">
+                                <option value="">カテゴリ選択</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-sm btn-pink rounded-pill text-white my-2 btn-shadow fs-3"><img src="" alt="">検索</button>
+                        
                     </div>
                 </form>
             </div>
