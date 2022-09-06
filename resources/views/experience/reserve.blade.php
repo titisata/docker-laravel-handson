@@ -3,14 +3,14 @@
 @section('content')
 <script>
 
-   var adult_num = '';
-   var child_num = '';
+   var adult_num = 0;
+   var child_num = 0;
 
-   var hotel_adult_price = '';
-   var hotel_child_price = '';
+   var hotel_adult_price_value = 0;
+   var hotel_child_price_value = 0;
 
-   var food_adult_price = '';
-   var food_child_price = '';
+   var food_adult_price_value = 0;
+   var food_child_price_value = 0;
 
    function radiohotelSwitch(){
     const formElements = document.forms.reserve_form;
@@ -20,9 +20,12 @@
     var get_hotel_adult = 'hotel_adult_price_' + attribute;
     var get_hotel_child = 'hotel_child_price_' + attribute;
 
-    hotel_adult_price = parseInt(document.getElementById(get_hotel_adult).innerHTML);
-    hotel_child_price = parseInt(document.getElementById(get_hotel_child).innerHTML);
+    var hotel_adult_price = document.getElementById(get_hotel_adult);
+    var hotel_child_price = document.getElementById(get_hotel_child);
 
+    hotel_adult_price_value = parseInt(hotel_adult_price.getAttribute('value'));
+    hotel_child_price_value = parseInt(hotel_child_price.getAttribute('value'));
+    
     price_result();
 
    }
@@ -32,25 +35,36 @@
 
     var attribute = formElements.food_group_id.value;
 
-    var get_food_adult = 'food_adult_price_' + attribute;
-    var get_food_child = 'food_child_price_' + attribute;
+    if(attribute != 0){
+        var get_food_adult = 'food_adult_price_' + attribute;
+        var get_food_child = 'food_child_price_' + attribute;
 
-    food_adult_price = parseInt(document.getElementById(get_food_adult).innerHTML);
-    food_child_price = parseInt(document.getElementById(get_food_child).innerHTML);
-    
+        var food_adult_price = document.getElementById(get_food_adult);
+        var food_child_price = document.getElementById(get_food_child);
+
+        food_adult_price_value = parseInt(food_adult_price.getAttribute('value'));
+        food_child_price_value = parseInt(food_child_price.getAttribute('value'));
+    }else{
+        food_adult_price_value = 0;
+        food_child_price_value = 0;
+        
+    }
+
     price_result();
    }
 
    function price_result(){
-      adult_price = parseInt(document.getElementById('adult_price').innerHTML);
-      child_price = parseInt(document.getElementById('child_price').innerHTML);
-      adult_num = document.getElementById('adult').value;
-      child_num = document.getElementById('child').value;
-      var adult_price_result = adult_num*(adult_price + hotel_adult_price + food_adult_price); 
-      var child_price_result = child_num*(child_price + hotel_child_price + food_child_price);
-      var price_result = adult_price_result += child_price_result;
-      document.getElementById('price').innerHTML =  price_result;
-
+      adult_price = document.getElementById('adult_price');
+      var adult_price_value = parseInt(adult_price.getAttribute('value'));
+      child_price = document.getElementById('child_price');
+      var child_price_value = parseInt(child_price.getAttribute('value'));
+      adult_num = parseInt(document.getElementById('adult').value);
+      child_num = parseInt(document.getElementById('child').value);
+      var adult_price_result = adult_num*(adult_price_value + hotel_adult_price_value + food_adult_price_value); 
+      var child_price_result = child_num*(child_price_value + hotel_child_price_value + food_child_price_value);
+      var price_result = adult_price_result + child_price_result;
+      document.getElementById('price').innerHTML = price_result.toLocaleString();
+  
    }
 
 
@@ -167,8 +181,51 @@ input[type="radio"] {
 
             <div class="mt-4">
                     <div class="card-body p-0">
-                        <h3 class="fw-bold text-gray py-auto" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
-                        <p class="text-gray">{{ $experienceFolder->description }}</p>
+                        <h3 class="fw-bold text-gray py-auto mb-0" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                        @if($experienceFolder->average_rate < 1.5)
+                            <p class="mb-0">テスト用に表示、0は表示しないようにする</p>
+                            <div class="d-flex mb-3">
+                                <img src="/images/star1.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 2)
+                            <div class="d-flex mb-3">
+                            <img src="/images/star1.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 2.5)
+                            <div class="d-flex mb-3">
+                            <img src="/images/star2.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 3)
+                            <div class="d-flex mb-3">
+                            <img src="/images/star2.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 3.5)
+                            <div class="d-flex mb-3">
+                            
+                            <img src="/images/star3.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 4)
+                            <div class="d-flex mb-3">
+                            
+                            <img src="/images/star3.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 4.5)
+                            <div class="d-flex mb-3">
+                            
+                            <img src="/images/star4.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 5)
+                            <div class="d-flex mb-3">
+                            
+                            <img src="/images/star4.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate = 5)
+                            <div class="d-flex mb-3">
+                            
+                            <img src="/images/star5.png" style="width:120px;height35px">
+                            </div>
+                        @endif
+                        <p class="text-gray fs-5 mt-4">{{ $experienceFolder->description }}</p>
                         <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
                     </div>
                 </div>
@@ -182,19 +239,25 @@ input[type="radio"] {
                 <div class="mt-2 card shadow-sm bg-color text-more-gray">
 
                     <div class="card-body">
-                        <div class="border-bottom border-secondary pb-3 pt-3">
-                            <div class="d-lg-flex">
+                        <div class="pt-3">
+                            <div class="">
                                 <div class="d-flex">
                                     <p class="fs-4">体験日 : <span class="fw-bold">{{ app('request')->input('keyword') }}</span></p>
                                     <p class="ms-4 fs-4 fw-bold mb-0">{{ $experience->name }}</p>
                                 </div>
-                                <p class="fs-4 mb-0 ms-lg-4">{{ $experienceFolder->is_lodging ? ('宿泊日 : ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊なし' }}</p>
+                                @if( $experienceFolder->is_lodging == 1)
+                                <p class="fs-4 mb-3 ">宿泊日 : <span class="fw-bold"> {{ $experienceFolder->is_lodging ? (($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊はありません' }}</span></p>
+                                @endif
                             </div>
                             
                         </div>
 
-                        <div class="d-flex align-items-center mb-3 pt-4 pb-2 fs-4">
-                            宿泊・体験人数　
+                        <div class="d-flex align-items-center mb-2 pb-2 fs-4">
+                            @if( $experienceFolder->is_lodging == 1)
+                                宿泊・体験人数　
+                            @else
+                                体験人数　
+                            @endif
                             <div class="d-flex flex-wrap align-items-center">
                                 <label for="quantity_adult">大人 </label>
                                 <select class="form-select form-select-sm me-1 ms-2 fs-5" style="width:80px" id="adult" name="quantity_adult"  onchange="price_result()">
@@ -230,10 +293,10 @@ input[type="radio"] {
                         </div>
 
                         <div class="d-flex border-bottom border-secondary fs-4 pb-4">
-                            <p class="me-3 mb-0">体験料金</p>
+                            <p class="mb-0">体験料金　</p>
                             <div class="d-flex flex-column flex-lg-row">
-                                <p class="mb-1 mb-lg-0">大人 : <span class="small small_font ">税込</span><span id="adult_price" value="{{ $experience->price_adult }}" class="fw-bold">{{ $experience->price_adult }}</span><span class="small small_font">円 / 人</span></p>
-                                <p class="ms-lg-3  mb-0">子ども : <span class="small small_font">税込</span><span id="child_price" value="{{ $experience->price_child }}" class="fw-bold">{{ $experience->price_child }}</span><span class="small small_font">円 / 人</span></p>
+                                <p class="mb-1 mb-lg-0">大人 : <span class="small small_font ">税込</span><span id="adult_price" value="{{ $experience->price_adult }}" class="fw-bold">{{  number_format($experience->price_adult) }}</span><span class="small small_font">円 / 人</span></p>
+                                <p class="ms-lg-3  mb-0">子ども : <span class="small small_font">税込</span><span id="child_price" value="{{ $experience->price_child }}" class="fw-bold">{{  number_format($experience->price_child) }}</span><span class="small small_font">円 / 人</span></p>
                             </div>
                         </div>
 
@@ -244,8 +307,8 @@ input[type="radio"] {
                                     <input class="form-check-input" type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}" onchange="radiohotelSwitch()">
                                     <label class="form-check-label" for="hotel_group_{{ $hotelGroup->id }}">
                                         {{ $hotelGroup->name }} : 
-                                        大人<span class="small small_font ms-1">税込</span><span id='hotel_adult_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_adult }}" class="fw-bold">{{ $hotelGroup->price_adult }}</span><span class="small small_font">円</span>　
-                                        子ども<span class="small small_font ms-1">税込</span><span id='hotel_child_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_child }}" class="fw-bold">{{ $hotelGroup->price_child }}</span><span class="small small_font">円</span>
+                                        大人<span class="small small_font ms-1">税込</span><span id='hotel_adult_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_adult }}" class="fw-bold">{{ number_format($hotelGroup->price_adult) }}</span><span class="small small_font">円 / 人</span>　
+                                        子ども<span class="small small_font ms-1">税込</span><span id='hotel_child_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_child }}" class="fw-bold">{{ number_format($hotelGroup->price_child) }}</span><span class="small small_font">円 / 人</span>
                                     </label>
                                 </div>
                             @empty
@@ -260,8 +323,8 @@ input[type="radio"] {
                                     <input class="form-check-input" type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}" onchange="radiofoodSwitch()">
                                     <label class="form-check-label" for="food_group_{{ $foodGroup->id }}">
                                         {{ $foodGroup->name }} :  
-                                        大人<span class="small small_font ms-1">税込</span><span id='food_adult_price_{{ $foodGroup->id }}' class="fw-bold">{{ $foodGroup->price_adult }}</span><span class="small small_font">円</span>　
-                                        子ども<span class="small small_font ms-1">税込</span><span id='food_child_price_{{ $foodGroup->id }}' class="fw-bold">{{ $foodGroup->price_child }}</span><span class="small small_font">円</span>
+                                        大人<span class="small small_font ms-1">税込</span><span id='food_adult_price_{{ $foodGroup->id }}' value='{{ $foodGroup->price_adult }}' class="fw-bold">{{ number_format($foodGroup->price_adult) }}</span><span class="small small_font">円 / 人</span>　
+                                        子ども<span class="small small_font ms-1">税込</span><span id='food_child_price_{{ $foodGroup->id }}' class="fw-bold" value='{{ $foodGroup->price_child }}'>{{ number_format($foodGroup->price_child) }}</span><span class="small small_font">円 / 人</span>
                                     </label>
                                 </div>
                             @empty
@@ -269,7 +332,7 @@ input[type="radio"] {
                             @endforelse
                             @if(!$experienceFolder->foodGroup->isEmpty())
                                 <div class="form-check">
-                                    <input class="form-check-input"  type="radio" id="food_group_null" name="food_group_id" value="food_group_null">
+                                    <input class="form-check-input" type="radio" id="food_group_0" name="food_group_id" value="0" onchange="radiofoodSwitch()">
                                     <label class="form-check-label" for="food_group_null">食事なし</label>
                                 </div>
                             @endempty

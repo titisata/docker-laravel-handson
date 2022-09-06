@@ -23,6 +23,7 @@ class LinkController extends Controller
 
         $link = Link::where('id', $id)->first();
         
+        
         return view('link.detail', compact('id', 'name', 'link'));
     }
 }

@@ -15,7 +15,7 @@ li.item {
     <div class="row justify-content-center" style="--bs-gutter-x: 0;">
         <div class="col-md-11">
 
-            <div class="mt-5">
+            <div class="mt-5 col-">
                 <h3 class="fw-bold pb-3 ps-2">{{ $partner->name }}</h3>
                 <div class="">
                     @if (session('status'))

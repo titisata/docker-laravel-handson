@@ -204,14 +204,57 @@ async function commentCreate(ex_id) {
             </div>
 
             <div class="row">
-                <div class="my-5 col-12 col-lg-7">
+                <div class="my-4 col-12 col-lg-7">
                     
                     <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
-                    <p class="text-gray">{{ $experienceFolder->description }}</p>
+                    @if($experienceFolder->average_rate < 1.5)
+                            <p class="mb-0">テスト用に表示、0は表示しないようにする</p>
+                            <div class="d-flex mb-3">
+                                <img src="/images/star1.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 2)
+                            <div class="d-flex mb-3">
+                            <img src="/images/star1.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 2.5)
+                            <div class="d-flex mb-3">
+                            <img src="/images/star2.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 3)
+                            <div class="d-flex mb-3">
+                            <img src="/images/star2.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 3.5)
+                            <div class="d-flex mb-3">
+                            
+                            <img src="/images/star3.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 4)
+                            <div class="d-flex mb-3">
+                            
+                            <img src="/images/star3.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 4.5)
+                            <div class="d-flex mb-3">
+                            
+                            <img src="/images/star4.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate < 5)
+                            <div class="d-flex mb-3">
+                            
+                            <img src="/images/star4.5.png" style="width:120px;height35px">
+                            </div>
+                        @elseif($experienceFolder->average_rate = 5)
+                            <div class="d-flex mb-3">
+                            
+                            <img src="/images/star5.png" style="width:120px;height35px">
+                            </div>
+                        @endif
+                    <p class="text-gray fs-5">{{ $experienceFolder->description }}</p>
                     <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
 
-                    <h4 class="fw-bold pt-4 ps-2 text-gray">集合場所</h4>
-                    <p class="ps-2 text-gray">{{ $experienceFolder->address }}</p>
+                    <h4 class="fw-bold pt-4  text-gray">集合場所</h4>
+                    <p class=" text-gray fs-5">{{ $experienceFolder->address }}</p>
 
                     @if (app('request')->input('keyword') == "")
                         <div class="">
@@ -230,9 +273,9 @@ async function commentCreate(ex_id) {
                             </div>
                             <div class="py-2 ms-lg-auto d-lg-flex mt-3">
                                 
-                                <p class="fw-bold text-start fs-4">大人 : <span class="small small_font ">税込</span><span class="fw-bold">{{ $experienceFolder->price_adult }}</span><span class="small small_font">円 / 人</span></p>
+                                <p class="fw-bold text-start fs-4">大人 : <span class="small small_font ">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_adult) }}</span><span class="small small_font">円 / 人</span></p>
                                 
-                                <p class="fw-bold text-start fs-4 ms-lg-4">子ども : <span class="small small_font">税込</span><span class="fw-bold">{{ $experienceFolder->price_child }}</span><span class="small small_font">円 / 人</span></p>
+                                <p class="fw-bold text-start fs-4 ms-lg-4">子ども : <span class="small small_font">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_child) }}</span><span class="small small_font">円 / 人</span></p>
                             </div>
                             @forelse($experiences as $experience)
                                 <a class="btn btn-lg btn-pink rounded-pill text-white my-2 py-3 w-100 btn-shadow fs-5" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>

@@ -2,5 +2,6 @@
 
 @section('content')
 <h1>{{ $name }}</h1>
-<p>{{ $link->content }}</p>
+<p>{!!nl2br(e($link->content))!!}</p>
+
 @endsection

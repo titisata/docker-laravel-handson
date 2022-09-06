@@ -30,6 +30,9 @@ li.item {
 .text-more-gray{
     color:#494645;
 }
+.bg-color{
+    background-color:#f4f4f4;
+}
 </style>
 
 <script>
@@ -118,20 +121,19 @@ async function commentCreate(goods_folder_id) {
                 </ul>    
             </div>
 
-                <div class="d-flex mt-3">
+                <div class="d-flex my-3">
                     <h3 class="fw-bold text-gray">商品名：</h3>
                     <h3 class="fw-bold text-gray"> {{ $goods_folder->name }}</h3>
                 </div>
                 
-                <h5 class="fw-bold mt-4  text-gray">商品説明</h5>
-                <p class="text-gray">{{ $goods_folder->description }}</p>
+                <p class="text-gray fs-5">{!!nl2br(e($goods_folder->description))!!}</p>
                 <p class="mb-4 text-start"><a role="button" href="/partner/{{ $goods_folder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
         
 
 
                 @forelse($goods_folder->goods as $goods)
                 <form class="mb-3 col-md-6 offset-md-3" action="{{ Request::url() }}" method="POST" onsubmit='return check();'>    
-                    <div class="card bg-f-part text-more-gray mt-3 p-3">
+                    <div class="card bg-color text-more-gray mt-3 p-3">
                         @csrf
                         <div class="d-flex align-items-center justify-content-between">
                             <h5 class="fw-bold ">{{ $goods->name }}</h5>   
@@ -163,18 +165,22 @@ async function commentCreate(goods_folder_id) {
                 @empty
                     <p>商品がありません</p>
                 @endforelse
-                    <div class="text-center text-md-end pt-3">
+                    <div class="text-center pt-3">
                         <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-10 col-lg-10"  type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
                         </button>
                     </div>
                 </form>
             <div class="my-5">
+                <h5 class="mb-0 fw-bold text-gray">商品説明</h5>
+                
+                <p class="text-gray fs-5">{!!nl2br(e($goods_folder->detail))!!}</p>
+
+            </div>
+            <div class="my-5">
                 <h5 class="mb-0 fw-bold text-gray">注意事項など</h5>
                 
-                <p class="text-gray">このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。このテキストはサンプルです。
-                このテキストはサンプルです。このテキストはサンプルですこのテキストはサンプルです。このテキストはサンプルです。
-                </p>
+                <p class="text-gray fs-5">{!!nl2br(e($goods_folder->caution))!!}</p>
 
             </div>
             
