@@ -673,9 +673,8 @@ class MOwnerController extends Controller
             ]);
         }
         
-        $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
-        return view('mypage.owner.link_display', compact('user', 'partner'));
+        $return_view = $this->link_display();
+        return $return_view;
     }
 
    

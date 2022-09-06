@@ -61,9 +61,9 @@ class MPartnerController extends Controller
             $ex_price = $ex_prices[$i];
         }
 
-        $goods_folder = GoodsFolder::find($id);
-        $categories = GoodsCategory::all();
-        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
+        
+        $return_view = $this->goods_edit();
+        return $return_view;
     }
 
     public function event()
@@ -108,9 +108,9 @@ class MPartnerController extends Controller
             $ex_price_child = $ex_price_childs[$i];
         }
 
-        $experiences_folder = ExperienceFolder::find($id);
-        $categories = ExperienceCategory::all();
-        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
+        $return_view = $this->event_edit();
+        return $return_view;
+        
     }
 
     public function image_insert(Request $request)
@@ -307,8 +307,9 @@ class MPartnerController extends Controller
             'description'=>$description,
             'access'=>$access,
         ]);
-        $partner = Partner::where('user_id', $user->id)->first();
-        return view('mypage.partner.profile', compact('user', 'partner'));
+        
+        $return_view = $this->profile();
+        return $return_view;
     }
 
     public function link_delete(Request $request)
