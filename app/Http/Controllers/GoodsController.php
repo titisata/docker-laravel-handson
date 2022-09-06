@@ -25,10 +25,16 @@ class GoodsController extends Controller
             $goods_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '雑貨')->orderBy('recommend_sort_no', 'desc')->get();
             $images = Image::where('table_name', 'goods_category')->get();
             return view('search.goods', compact('food_goods_folders', 'drink_goods_folders', 'goods_goods_folders', 'categories', 'images'));
+        }else{
+            $categories = GoodsCategory::all();
+            $img_category = GoodsCategory::where('name', $category)->first();
+            $images = Image::where('table_name', 'goods_category')->where('table_id', $img_category->id)->first();
+            $goods_folders = GoodsFolder::search($keyword, $category, per_page: 10);
+            return view('search.goods_list', compact('goods_folders', 'categories', 'images'));
+
         }
 
-        $goods_folders = GoodsFolder::search($keyword, $category, per_page: 10);
-        return view('search.goods_list', compact('goods_folders', 'categories', 'images'));
+        
       
 
     }

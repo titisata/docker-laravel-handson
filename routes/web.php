@@ -18,7 +18,7 @@ Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/layout',[App\Http\Controllers\LayoutController::class, 'index'])->name('layouts.app');
+// Route::get('/layout',[App\Http\Controllers\LayoutController::class, 'index'])->name('layouts.app');
 
 Route::get('/partner/{id}', [App\Http\Controllers\PartnerController::class, 'show']);
 Route::get('/partner/partner_link_show/{id}', [App\Http\Controllers\PartnerController::class, 'partner_link_show']);

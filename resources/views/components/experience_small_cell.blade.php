@@ -19,11 +19,11 @@
                         <img style="object-fit: cover; height: 160px;border-top-left-radius: 18px;border-top-right-radius: 18px;" class="cell" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap" width="200">
                     </div>
                     <div class="card-header border-none" style="background:white;border-bottom:none">
-                        <h6 class="card-title text-center mb-0 text-truncate" >{{ $experienceFolder->name }}</h6>
+                        <h5 class="card-title text-center mb-0 text-truncate" >{{ $experienceFolder->name }}</h5>
                     </div>
                     <div class="card-body">
-                        <p class="mb-0 card-text text-end fw-bold fs-5">　大人：{{ $experienceFolder->price_adult }}円～</p>
-                        <p class="card-text text-end fw-bold fs-5">子ども：{{ $experienceFolder->price_child }}円～</p>
+                        <p class="mb-0 card-text text-end">　大人：<span class="small fw-normal" style="font-size:10px;">税込</span>{{ number_format($experienceFolder->price_adult) }}<span class="small fw-normal" style="font-size:10px;">円～</span></p>
+                        <p class="card-text text-end">子ども：<span class="small fw-normal" style="font-size:10px;">税込</span>{{ number_format($experienceFolder->price_child) }}<span class="small fw-normal" style="font-size:10px;">円～</span></p>
                     </div>
                 </div>
             </a>

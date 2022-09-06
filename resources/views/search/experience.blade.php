@@ -27,29 +27,36 @@ li.item {
     color:#6f6e6f;
 }
 </style>
-<div id="carouselWithCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <!-- スライドさせる画像の設定 -->
-        <div class="carousel-inner rounded-2" >
-            @forelse($images as $image)
-                <div class="carousel-item active">
-                    <img src="{{ $image->image_path }}" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide {{ $image->id }}">
+<div id="carouselWithControls" class="carousel slide" data-bs-ride="carousel">
+                    <!-- スライドさせる画像の設定 -->
+                    <div class="carousel-inner rounded-2">
+                        @forelse($images as $key=>$image)
+                            @if( $key == '1' )
+                                <div class="carousel-item active">
+                                    <img src="{{ $image->image_path }}" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide {{$key+1}}">
+                                </div>
+                            @else
+                                <div class="carousel-item">
+                                    <img src="{{ $image->image_path }}" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide {{$key+1}}">
+                                </div>
+                            @endif
+                        @empty
+                            <div class="carousel-item active">
+                                <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide">
+                            </div>
+                        @endforelse
+
+                    </div><!-- /.carousel-inner -->
+                    <!-- スライドコントロールの設定 -->
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carouselWithControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">前へ</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carouselWithControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">次へ</span>
+                    </button>
                 </div>
-            @empty
-                <div class="carousel-item active">
-                    <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide 1">
-                </div>
-            @endforelse
-        </div><!-- /.carousel-inner -->
-        <!-- スライドコントロールの設定 -->
-        <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">前へ</span>
-        </button>
-        <button type="button" class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">次へ</span>
-        </button>
-</div>
 <div class="container px-0" >
     <div class="row justify-content-center px-0" style="--bs-gutter-x: 0;">
         <div class="col-md-11 mt-4 px-0">
