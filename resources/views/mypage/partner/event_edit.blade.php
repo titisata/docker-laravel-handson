@@ -21,17 +21,26 @@
         const element = document.querySelector('#add_target');
         const createElement = `
             <div class="card mt-3 p-3 ex_data">
+            <input hidden name="ex_ids[]" type="text" value="">
                 <div class="mb-3">
                     <label class="form-label">名前</label>
-                    <input name="ex_name[]" type="text" class="form-control" value="">
+                    <input name="ex_names[]" type="text" class="form-control" value="">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">大人料金</label>
-                    <input name="ex_price_adult[]" type="number" class="form-control" value="{{ $experiences_folder->price_adult }}">
+                    <input name="ex_price_adults[]" type="number" class="form-control" value="{{ $experiences_folder->price_adult }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">子供料金</label>
-                    <input name="ex_price_child[]" type="number" class="form-control" value="{{ $experiences_folder->price_child }}">
+                    <input name="ex_price_childs[]" type="number" class="form-control" value="{{ $experiences_folder->price_child }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">ソートナンバー</label>
+                    <input name="ex_sort_nos[]" type="number" class="form-control" value="">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">上限人数</label>
+                    <input name="ex_quantities[]" type="number" class="form-control" value="">
                 </div>
                 <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex(${index})">削除</button>
             </div>
@@ -47,11 +56,12 @@
     <h1>イベント編集</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form action="{{ request()->fullUrl() }}" method="POST">
+            <form action="/mypage/partner/event_edit_update" method="POST">
                 @csrf
                 <div class="card mt-3">
                     <div class="card-header">基本情報</div>
                     <div class="card-body">
+                        <input name="id" type="text" class="form-control" value="{{ $experiences_folder->id }}">
                         <div class="mb-3">
                             <label class="form-label">名前</label>
                             <input name="name" type="text" class="form-control" value="{{ $experiences_folder->name }}">
@@ -65,8 +75,16 @@
                             <input name="price_child" type="number" class="form-control" value="{{ $experiences_folder->price_child }}">
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">住所</label>
+                            <textarea name="address" type="text" class="form-control">{{ $experiences_folder->address }}</textarea>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">説明</label>
                             <textarea name="description" type="text" class="form-control">{{ $experiences_folder->description }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">イベント詳細</label>
+                            <textarea name="detail" type="text" class="form-control">{{ $experiences_folder->detail }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">注意事項</label>
@@ -81,6 +99,50 @@
                                 </option>
                             @endforeach
                         </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">宿泊の有無</label>
+                            @if( $experiences_folder->is_lodging  == 1 )
+                                <input name="is_lodging" type="radio" class="" checked value="1">
+                                <label>宿泊あり</label>
+                                <input name="is_lodging" type="radio" class="" value="0">
+                                <label>宿泊なし</label>
+                            @else
+                                <input name="is_lodging" type="radio" class="" value="1">
+                                <label>宿泊あり</label>
+                                <input name="is_lodging" type="radio" class="" checked value="0">
+                                <label>宿泊なし</label>
+                            @endif
+                            
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">宿泊の場合の前泊・後泊</label>
+                            @if( $experiences_folder->is_before_lodging  == 0 )
+                                <input name="is_before_lodging" type="radio" class="" checked value="0">
+                                <label>後泊</label>
+                                <input name="is_before_lodging" type="radio" class="" value="1">
+                                <label>前泊</label>
+                            @else
+                                <input name="is_before_lodging" type="radio" class="" value="0">
+                                <label>後泊</label>
+                                <input name="is_before_lodging" type="radio" class="" checked value="1">
+                                <label>前泊</label>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">おすすめフラグ</label>
+                            @if( $experiences_folder->recommend_flag  == 1)
+                                <input name="recommend_flag" type="radio" class="" checked value="1">
+                                <label>おすすめする</label>
+                                <input name="recommend_flag" type="radio" class="" value="0">
+                                <label>おすすめしない</label>
+                            @else
+                                <input name="recommend_flag" type="radio" class="" value="1">
+                                <label>おすすめする</label>
+                                <input name="recommend_flag" type="radio" class="" checked value="0">
+                                <label>おすすめしない</label>
+                            @endif
+                        </div>
                         <div class="mt-3">
                             <div>
                                 <label>画像設定</label>
@@ -111,7 +173,7 @@
                         
                         </div>
                     </div>
-                </div>
+                
 
                 <div class="card mt-3">
                     <div class="card-header">時間帯設定</div>
@@ -131,7 +193,18 @@
                                     <label class="form-label">子供料金</label>
                                     <input name="ex_price_childs[]" type="number" class="form-control" value="{{ $experience->price_child }}">
                                 </div>
-                                <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex({{ $loop->index }})">削除</button>
+                                <div class="mb-3">
+                                    <label class="form-label">ソートナンバー</label>
+                                    <input name="ex_sort_nos[]" type="number" class="form-control" value="{{ $experience->sort_no}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">上限人数</label>
+                                    <input name="ex_quantities[]" type="number" class="form-control" value="{{ $experience->quantity }}">
+                                </div>
+                                <a href="/mypage/partner/experience_delete/{{ $experience->id }}">
+                                    <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex({{ $loop->index }})">削除</button>
+                                </a>
+                                
                             </div>
                         @endforeach
                         <div id="add_target"></div>

@@ -62,7 +62,10 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::get('/event_add/{id}', [App\Http\Controllers\MPartnerController::class, 'event_add']);
     Route::post('/action_event_add', [App\Http\Controllers\MPartnerController::class, 'action_event_add']);
     Route::get('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit']);
-    Route::post('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit_update']);
+    Route::post('event_edit_update', [App\Http\Controllers\MPartnerController::class, 'event_edit_update']);
+    Route::post('/action_event_delete', [App\Http\Controllers\MPartnerController::class, 'action_event_delete']);
+    Route::get('/experience_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'experience_delete']);
+    Route::post('/action_experience_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'action_experience_delete']);
     Route::get('/event_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'event_image_insert']);
     Route::post('/action_event_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'action_event_image_insert']);
     Route::get('/event_image_update/{id}', [App\Http\Controllers\MPartnerController::class, 'event_image_update']);

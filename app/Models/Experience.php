@@ -9,6 +9,16 @@ class Experience extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'experience_folder_id',
+        'name',
+        'price_child',
+        'price_adult',
+        'sort_no',
+        'quantity',
+        
+    ];
+
     public function folder()
     {
         return $this->belongsTo(ExperienceFolder::class);

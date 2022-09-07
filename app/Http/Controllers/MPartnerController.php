@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExperienceCategory;
 use App\Models\ExperienceFolder;
+use App\Models\Experience;
 use App\Models\GoodsFolder;
 use App\Models\GoodsCategory;
 use App\Models\Partner;
@@ -115,12 +116,6 @@ class MPartnerController extends Controller
             'category1' => $category,
         ]);     
 
-        for ($i=0; $i < count($ex_names); $i++) {
-            $ex_name = $ex_names[$i];
-            $ex_price_adult = $ex_price_adults[$i];
-            $ex_price_child = $ex_price_childs[$i];
-        }
-
         $return_view = $this->event();
         return $return_view;
         
@@ -133,36 +128,108 @@ class MPartnerController extends Controller
         return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
     }
 
-    public function event_edit_update(string $id, Request $request)
+    public function event_edit_update(Request $request)
     {
+        $id = $request->id;
+        $partner_id = $request->partner_id;
         $name = $request->name;
         $price_adult = $request->price_adult;
         $price_child = $request->price_child;
+        $address = $request->address;
         $description = $request->description;
+        $detail = $request->detail;
         $caution = $request->caution;
         $category = $request->category;
+        $is_lodging = $request->is_lodging;
+        $is_before_lodging = $request->is_before_lodging;
+        $recommend_flag = $request->recommend_flag;
+        $ex_ids = $request->ex_ids;
         $ex_names = $request->ex_names;
         $ex_price_adults = $request->ex_price_adults;
         $ex_price_childs = $request->ex_price_childs;
+        $ex_sort_nos = $request->ex_sort_nos;
+        $ex_quantities = $request->ex_quantities;
+
 
         $experiences_folder = ExperienceFolder::where('id', $id)->update([
             'name' => $name,
             'price_adult' => $price_adult,
             'price_child' => $price_child,
+            'address' => $address,
             'description' => $description,
+            'detail' => $detail,
             'caution' => $caution,
+            'is_lodging' => $is_lodging,
+            'is_before_lodging' => $is_before_lodging,
+            'recommend_flag' => $recommend_flag,
             'category1' => $category,
         ]);
 
         for ($i=0; $i < count($ex_names); $i++) {
+            $ex_id = $ex_ids[$i];
             $ex_name = $ex_names[$i];
             $ex_price_adult = $ex_price_adults[$i];
             $ex_price_child = $ex_price_childs[$i];
+            $ex_sort_no = $ex_sort_nos[$i];
+            $ex_quantity = $ex_quantities[$i];
+
+            if( $ex_id == ''){
+                Experience::create([
+                    'experience_folder_id' => $id,
+                    'name' => $ex_name,
+                    'price_adult' => $ex_price_adult,
+                    'price_child' => $ex_price_child,
+                    'sort_no' => $ex_sort_no,
+                    'quantity' => $ex_quantity,
+                ]);
+
+            }else{
+                Experience::where('id', $ex_id)->update([
+                    'experience_folder_id' => $id,
+                    'name' => $ex_name,
+                    'price_adult' => $ex_price_adult,
+                    'price_child' => $ex_price_child,
+                    'sort_no' => $ex_sort_no,
+                    'quantity' => $ex_quantity,
+                ]);
+            }
+           
         }
 
-        $return_view = $this->event_edit();
+        $return_view = $this->event();
         return $return_view;
         
+    }
+
+    public function action_event_delete(Request $request)
+    {
+        //idをもとにexperiencecategory.tableから削除
+
+        $id = $request->id;
+
+        $experience_folder = ExperienceFolder::where('id', $id)->delete();
+
+        $return_view = $this->event();
+        return $return_view;
+
+    }
+
+    public function experience_delete(string $id)
+    {
+        //deleteページへ
+        $experience = Experience::where('id', $id)->first();
+        return view('mypage.partner.experience_delete', compact('experience'));
+    }
+
+    public function action_experience_delete(Request $request)
+    {
+        $id = $request->ex_ids;
+        $experience_folder_id = $request->ex_folder_ids;
+        //idをもとにexperience.tableから削除
+        $experience = Experience::where('id', $id)->delete();
+
+        $return_view = $this->event_edit($experience_folder_id);
+        return $return_view;
     }
 
     public function image_insert(Request $request)
@@ -228,7 +295,6 @@ class MPartnerController extends Controller
         $categories = ExperienceCategory::all();
         return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
     }
-
 
 
     public function event_image_insert(string $id)

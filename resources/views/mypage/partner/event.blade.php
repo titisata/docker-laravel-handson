@@ -29,7 +29,13 @@
                             </div>
                         </a>
                     </div>
+                    <form action="/mypage/partner/action_event_delete" method="POST">
+                        @csrf
+                        <button class="btn btn-danger">イベント削除</button>
+                        <input type="hidden" name="id" value="{{ $experienceFolder->id }}">
+                    </form>
                 </div>
+                
             @empty
                 <p>イベントがありません</p>
             @endforelse

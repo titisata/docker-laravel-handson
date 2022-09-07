@@ -73,7 +73,7 @@
                             <textarea name="description" type="text" class="form-control"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">詳細</label>
+                            <label class="form-label">イベント詳細</label>
                             <textarea name="detail" type="text" class="form-control"></textarea>
                         </div>
                         <div class="mb-3">
@@ -110,46 +110,12 @@
                                 </option>
                             @endforeach
                         </select>
-                        <div class="mt-3">
-                            <div>
-                                <label>画像設定</label>
-                                <a href="/mypage/partner/event_image_insert">
-                                    <div class="btn btn-success">
-                                        新規登録     
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="d-flex flex-wrap justify-content-between">
-                        </div>
-                        </div>
                         
                         </div>
                     </div>
                 </div>
 
-                <div class="card mt-3">
-                    <div class="card-header">時間帯設定</div>
-                    <div class="card-body">
-                        <div class="card mt-3 p-3 ex_data">
-                            <input hidden name="ex_ids[]" type="text" >
-                            <div class="mb-3">
-                                <label class="form-label">名前</label>
-                                <input name="ex_names[]" type="text" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">大人料金</label>
-                                <input name="ex_price_adults[]" type="number" class="form-control" >
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">子供料金</label>
-                                <input name="ex_price_childs[]" type="number" class="form-control">
-                            </div>
-                        </div>
-                    
-                    <div id="add_target"></div>
-                    <button type="button" class="mt-2 btn btn-primary" onclick="add_ex({{ $experiences_folder->experiences->count() }})">追加</button>
-                    </div>
-                </div>   
+                
                 <button type="submit" class="mt-2 btn btn-primary">作成</button>
             </form>
         </div>
