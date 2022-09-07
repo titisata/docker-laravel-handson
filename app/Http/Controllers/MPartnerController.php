@@ -41,8 +41,9 @@ class MPartnerController extends Controller
         return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories'));
     }
 
-    public function action_event_add(Request $request)
-    {
+    public function event_post_date(Request $request)
+    {   
+        
         $partner_id = $request->partner_id;
         $name = $request->name;
         $price_adult = $request->price_adult;
@@ -59,6 +60,14 @@ class MPartnerController extends Controller
         $ex_price_adults = $request->ex_price_adults;
         $ex_price_childs = $request->ex_price_childs;  
 
+        
+    }
+
+
+    public function action_event_add(Request $request)
+    {
+        $this->event_post_date($request);
+        
         ExperienceFolder::create([
             'partner_id' => $partner_id,
             'name' => $name,
@@ -88,23 +97,11 @@ class MPartnerController extends Controller
 
     public function event_edit_update(Request $request)
     {
+
+        $this->event_post_date($request);
+
         $id = $request->id;
-        $partner_id = $request->partner_id;
-        $name = $request->name;
-        $price_adult = $request->price_adult;
-        $price_child = $request->price_child;
-        $address = $request->address;
-        $description = $request->description;
-        $detail = $request->detail;
-        $caution = $request->caution;
-        $category = $request->category;
-        $is_lodging = $request->is_lodging;
-        $is_before_lodging = $request->is_before_lodging;
-        $recommend_flag = $request->recommend_flag;
         $ex_ids = $request->ex_ids;
-        $ex_names = $request->ex_names;
-        $ex_price_adults = $request->ex_price_adults;
-        $ex_price_childs = $request->ex_price_childs;
         $ex_sort_nos = $request->ex_sort_nos;
         $ex_quantities = $request->ex_quantities;
 
@@ -199,6 +196,20 @@ class MPartnerController extends Controller
         return view('mypage.partner.goods', compact('user', 'goods_folders'));
     }
 
+    public function goods_post_date(Request $request)
+    {   
+        $partner_id = $request->partner_id;
+        $name = $request->name;
+        $price = $request->price;
+        $description = $request->description;
+        $detail = $request->detail;
+        $caution = $request->caution;
+        $category = $request->category;
+        $recommend_flag = $request->recommend_flag; 
+
+        
+    }
+
     public function goods_add(string $id)
     {
         $user = Auth::user();
@@ -209,14 +220,7 @@ class MPartnerController extends Controller
 
     public function action_goods_add(Request $request)
     {
-        $partner_id = $request->partner_id;
-        $name = $request->name;
-        $price = $request->price;
-        $description = $request->description;
-        $detail = $request->detail;
-        $caution = $request->caution;
-        $category = $request->category;
-        $recommend_flag = $request->recommend_flag;  
+        $this->goods_post_date($request);
 
         GoodsFolder::create([
             'partner_id' => $partner_id,
@@ -244,15 +248,11 @@ class MPartnerController extends Controller
 
     public function goods_edit_update( Request $request)
     {
+
+        $this->goods_post_date($request);
+
         $id = $request->id;
-        $partner_id = $request->partner_id;
-        $name = $request->name;
-        $price = $request->price;
-        $description = $request->description;
-        $caution = $request->caution;
-        $detail = $request->detail;
         $category1 = $request->category1;
-        $recommend_flag = $request->recommend_flag;
         $goods_ids = $request->goods_ids;
         $goods_names = $request->goods_names;
         $goods_pricies = $request->goods_pricies;
@@ -316,11 +316,12 @@ class MPartnerController extends Controller
         $id = $request->goods_ids;
         $goods_folder_id = $request->goods_folder_ids;
 
-        //idをもとにexperience.tableから削除
+        //idをもとにgoods.tableから削除
         $goods = Goods::where('id', $id)->delete();
 
         $return_view = $this->goods_edit($goods_folder_id);
         return $return_view;
+
     }
 
     public function action_goods_display_delete(Request $request)
@@ -480,10 +481,8 @@ class MPartnerController extends Controller
     {
         $this->image_update($request, $id);
         
-        $table_id = $request->table_id;
-        $goods_folder = GoodsFolder::find($table_id);
-        $categories = GoodsCategory::all();
-        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
+        $return_view = $this->goods_image_edit($request);
+        return $return_view;
     }
 
     
@@ -499,10 +498,8 @@ class MPartnerController extends Controller
     {
         $this->image_delete($request, $id);
 
-        $table_id = $request->table_id;
-        $goods_folder = GoodsFolder::find($table_id);
-        $categories = GoodsCategory::all();
-        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
+        $return_view = $this->goods_image_edit($request);
+        return $return_view;
     }
 
     public function reserve()
@@ -556,7 +553,6 @@ class MPartnerController extends Controller
     {
         $user = Auth::user();
         $current_user_id = $user->id;
-        // $partner = Partner::where('user_id', $user->id)->first();
         $links = Link::where('partner_id', $current_user_id)->get();
         return view('mypage.partner.link_display', compact('user', 'links'));
     }
@@ -582,12 +578,8 @@ class MPartnerController extends Controller
             'content'=>$content,
         ]);
         
-        $user = Auth::user();
-        $current_user_id = $user->id;
-        // $partner = Partner::where('user_id', $current_user_id)->first();
-        $links = Link::where('partner_id', $current_user_id)->get();
-        
-        return view('mypage.partner.link_display', compact('user', 'links'));
+        $return_view = $this->link_display();
+        return $return_view;
     }
 
 
@@ -596,11 +588,7 @@ class MPartnerController extends Controller
 
         $user = Auth::user();
         $current_user_id = $user->id;
-        // $partner = Partner::where('user_id', $user->id)->first();
         $link = Link::where('partner_id', $current_user_id)->where('id', $id)->first();
-
-        // echo $link;
-        // exit;
         
         return view('mypage.partner.link_edit', compact('user', 'link'));
     }
@@ -617,21 +605,16 @@ class MPartnerController extends Controller
         ]);
         
         
-        $user = Auth::user();
-        // $partner = Partner::where('user_id', $user->id)->first();
-        $current_user_id = $user->id;
-        $links = Link::where('partner_id', $current_user_id)->get();
-        return view('mypage.partner.link_display', compact('user', 'links'));
+        $return_view = $this->link_display();
+        return $return_view;
     }
 
     public function action_link_delete(Request $request)
     {
         $this->link_delete($request);
         
-        $user = Auth::user();
-        $current_user_id = $user->id;
-        $links = Link::where('partner_id', $current_user_id)->get();
-        return view('mypage.partner.link_display', compact('user', 'links'));
+        $return_view = $this->link_display();
+        return $return_view;
         
     }
 }

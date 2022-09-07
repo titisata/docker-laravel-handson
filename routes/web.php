@@ -76,9 +76,9 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::get('/goods_add/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_add']);
     Route::post('/action_goods_add', [App\Http\Controllers\MPartnerController::class, 'action_goods_add']);
     Route::get('/goods/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_edit']);
-    Route::post('/goods_edit_update', [App\Http\Controllers\MPartnerController::class, 'goods_edit_update']);
-    Route::post('/action_goods_delete', [App\Http\Controllers\MPartnerController::class, 'action_goods_delete']);
+    Route::post('/goods_edit_update', [App\Http\Controllers\MPartnerController::class, 'goods_edit_update']);    
     Route::get('/goods_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_delete']);
+    Route::post('/action_goods_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_delete']);
     Route::post('/action_goods_display_delete', [App\Http\Controllers\MPartnerController::class, 'action_goods_display_delete']);
     Route::get('/goods_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_image_insert']);
     Route::post('/action_goods_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_image_insert']);

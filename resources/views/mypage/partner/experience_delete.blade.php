@@ -13,8 +13,8 @@
                     <div class="card-header">時間帯設定</div>
                     <div class="card-body">
                         <div class="card mt-3 p-3 ex_data">
-                            <input hidden name="ex_ids" type="text" value="{{ $experience->id }}">
-                            <input hidden name="ex_folder_ids" type="text" value="{{ $experience->experience_folder_id }}">
+                            <input hidden name="ex_ids" type="hidden" value="{{ $experience->id }}">
+                            <input hidden name="ex_folder_ids" type="hidden" value="{{ $experience->experience_folder_id }}">
                             <div class="mb-3">
                                 <label class="form-label">名前</label>
                                 <input name="ex_names[]" type="text" class="form-control" value="{{ $experience->name }}">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="mt-2 btn btn-primary">更新</button>
+                <button type="submit" class="mt-2 btn btn-danger">削除</button>
             </form>
         </div>
     </div>

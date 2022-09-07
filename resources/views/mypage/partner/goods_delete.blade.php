@@ -12,8 +12,8 @@
                     <div class="card-header">商品設定</div>
                     <div class="card-body">
                     <div class="card mt-3 p-3 goods_data">
-                        <input hidden name="goods_ids" type="text" value="{{ $goods->id }}">
-                        <input hidden name="goods_folder_ids" type="text" value="{{ $goods->goods_folder_id }}">
+                        <input hidden name="goods_ids" type="hidden" value="{{ $goods->id }}">
+                        <input hidden name="goods_folder_ids" type="hidden" value="{{ $goods->goods_folder_id }}">
                         <div class="mb-3">
                             <label class="form-label">商品種別</label>
                             <input name="goods_names" type="text" class="form-control" value="{{ $goods->name }}">
