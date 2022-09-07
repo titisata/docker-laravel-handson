@@ -21,14 +21,26 @@
         const element = document.querySelector('#add_target');
         const createElement = `
             <div class="card mt-3 p-3 ex_data">
-                <input hidden name="ex_ids[]" type="text" value="{{ $goods_folder->id }}">
+            <input hidden name="goods_ids[]" type="text" value="">
                 <div class="mb-3">
                     <label class="form-label">商品種別</label>
-                    <input name="ex_names[]" type="text" class="form-control" value="">
+                    <input name="goods_names[]" type="text" class="form-control" value="">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">料金</label>
-                    <input name="ex_price[]" type="number" class="form-control" value="">
+                    <input name="goods_pricies[]" type="number" class="form-control" value="">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">コメント</label>
+                    <textarea name="goods_descriptions[]" type="text" class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">ソートナンバー</label>
+                    <input name="goods_sort_nos[]" type="number" class="form-control" value="">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">個数</label>
+                    <input name="goods_quantities[]" type="number" class="form-control" value="">
                 </div>
                 <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex(${index})">削除</button>
             </div>
@@ -42,11 +54,13 @@
 
 </script>
 <div class="container">
-    <h1>イベント編集</h1>
+    <h1>お土産編集</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form  method="POST">
+            <form action="/mypage/partner/goods_edit_update" method="POST">
                 @csrf
+                <input name="id" type="hidden" class="form-control" value="{{ $goods_folder->id }}">
+                <input name="partner_id" type="hidden" class="form-control" value="{{ $goods_folder->partner_id }}">
                 <div class="card mt-3">
                     <div class="card-header">基本情報</div>
                     <div class="card-body">
@@ -81,6 +95,20 @@
 
                         </select>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">おすすめフラグ</label>
+                            @if( $goods_folder->recommend_flag  == 1)
+                                <input name="recommend_flag" type="radio" class="" checked value="1">
+                                <label>おすすめする</label>
+                                <input name="recommend_flag" type="radio" class="" value="0">
+                                <label>おすすめしない</label>
+                            @else
+                                <input name="recommend_flag" type="radio" class="" value="1">
+                                <label>おすすめする</label>
+                                <input name="recommend_flag" type="radio" class="" checked value="0">
+                                <label>おすすめしない</label>
+                            @endif
+                        </div>
                         <div class="mt-3">
                             <div>
                                 <label>画像設定</label>
@@ -114,16 +142,30 @@
                     <div class="card-body">
                         @foreach ($goods_folder->goods as $one_goods)
                             <div class="card mt-3 p-3 ex_data">
-                                <input hidden name="ex_ids[]" type="text" value="{{ $one_goods->id }}">
+                                <input hidden name="goods_ids[]" type="text" value="{{ $one_goods->id }}">
                                 <div class="mb-3">
                                     <label class="form-label">商品種別</label>
-                                    <input name="ex_names[]" type="text" class="form-control" value="{{ $one_goods->name }}">
+                                    <input name="goods_names[]" type="text" class="form-control" value="{{ $one_goods->name }}">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">料金</label>
-                                    <input name="ex_price[]" type="number" class="form-control" value="{{ $one_goods->price }}">
+                                    <input name="goods_pricies[]" type="number" class="form-control" value="{{ $one_goods->price }}">
                                 </div>
-                                <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex({{ $loop->index }})">削除</button>
+                                <div class="mb-3">
+                                    <label class="form-label">コメント</label>
+                                    <textarea name="goods_descriptions[]" type="text" class="form-control">{{ $one_goods->description }}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">ソートナンバー</label>
+                                    <input name="goods_sort_nos[]" type="number" class="form-control" value="{{ $one_goods->sort_no}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">個数</label>
+                                    <input name="goods_quantities[]" type="number" class="form-control" value="{{ $one_goods->quantity }}">
+                                </div>
+                                <a href="/mypage/partner/goods_delete/{{ $one_goods->id }}">
+                                    <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex({{ $loop->index }})">削除</button>
+                                </a>
                             </div>
                         @endforeach
                         <div id="add_target"></div>

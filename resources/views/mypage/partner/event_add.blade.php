@@ -14,33 +14,7 @@
                 }
             });
     });
-    let add_count = 0;
-    function add_ex(init_index) {
-        let index = init_index + add_count;
-        add_count++;
-        const element = document.querySelector('#add_target');
-        const createElement = `
-            <div class="card mt-3 p-3 ex_data">
-                <div class="mb-3">
-                    <label class="form-label">名前</label>
-                    <input name="ex_name[]" type="text" class="form-control" >
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">大人料金</label>
-                    <input name="ex_price_adult[]" type="number" class="form-control" >
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">子供料金</label>
-                    <input name="ex_price_child[]" type="number" class="form-control" >
-                </div>
-            </div>
-        `;
-        element.insertAdjacentHTML('afterend', createElement);
-    }
-    function remove_ex(index) {
-        const elements = document.querySelectorAll('.ex_data');
-        elements[index].remove();
-    }
+    
 </script>
 <div class="container">
     <h1>イベント編集</h1>

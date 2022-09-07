@@ -7,6 +7,7 @@ use App\Models\ExperienceFolder;
 use App\Models\Experience;
 use App\Models\GoodsFolder;
 use App\Models\GoodsCategory;
+use App\Models\Goods;
 use App\Models\Partner;
 use App\Models\Image;
 use App\Models\Link;
@@ -22,50 +23,7 @@ class MPartnerController extends Controller
         return view('mypage.partner.home');
     }
 
-    public function goods()
-    {
-        $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
-        $goods_folders = GoodsFolder::all();
-        return view('mypage.partner.goods', compact('user', 'goods_folders'));
-    }
-
-    public function goods_edit(string $id)
-    {
-        $goods_folder = GoodsFolder::find($id);
-        $categories = GoodsCategory::all();
-        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
-    }
-
-    public function goods_edit_update(string $id, Request $request)
-    {
-        $name = $request->name;
-        $price = $request->price;
-        $description = $request->description;
-        $caution = $request->caution;
-        $detail = $request->detail;
-        $category = $request->category;
-        $ex_names = $request->ex_names;
-        $ex_prices = $request->ex_prices;
-
-        $goods_folder = GoodsFolder::where('id', $id)->update([
-            'name' => $name,
-            'price' => $price,
-            'description' => $description,
-            'caution' => $caution,
-            'detail' => $detail,
-            'category1' => $category,
-        ]);
-
-        for ($i=0; $i < count($ex_names); $i++) {
-            $ex_name = $ex_names[$i];
-            $ex_price = $ex_prices[$i];
-        }
-
-        
-        $return_view = $this->goods_edit();
-        return $return_view;
-    }
+   
 
     public function event()
     {
@@ -216,7 +174,7 @@ class MPartnerController extends Controller
 
     public function experience_delete(string $id)
     {
-        //deleteページへ
+        //experience_deleteページへ
         $experience = Experience::where('id', $id)->first();
         return view('mypage.partner.experience_delete', compact('experience'));
     }
@@ -225,11 +183,157 @@ class MPartnerController extends Controller
     {
         $id = $request->ex_ids;
         $experience_folder_id = $request->ex_folder_ids;
+
         //idをもとにexperience.tableから削除
         $experience = Experience::where('id', $id)->delete();
 
         $return_view = $this->event_edit($experience_folder_id);
         return $return_view;
+    }
+
+    public function goods()
+    {
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        $goods_folders = GoodsFolder::all();
+        return view('mypage.partner.goods', compact('user', 'goods_folders'));
+    }
+
+    public function goods_add(string $id)
+    {
+        $user = Auth::user();
+        $goods_folder = GoodsFolder::find($id);
+        $categories = GoodsCategory::all();
+        return view('mypage.partner.goods_add', compact('user', 'goods_folder', 'categories'));
+    }
+
+    public function action_goods_add(Request $request)
+    {
+        $partner_id = $request->partner_id;
+        $name = $request->name;
+        $price = $request->price;
+        $description = $request->description;
+        $detail = $request->detail;
+        $caution = $request->caution;
+        $category = $request->category;
+        $recommend_flag = $request->recommend_flag;  
+
+        GoodsFolder::create([
+            'partner_id' => $partner_id,
+            'name' => $name,
+            'price' => $price,
+            'description' => $description,
+            'detail' => $detail,
+            'caution' => $caution,
+            'recommend_flag' => $recommend_flag,
+            'category1' => $category,
+        ]);     
+
+        $return_view = $this->goods();
+        return $return_view;
+        
+    }
+
+
+    public function goods_edit(string $id)
+    {
+        $goods_folder = GoodsFolder::find($id);
+        $categories = GoodsCategory::all();
+        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
+    }
+
+    public function goods_edit_update( Request $request)
+    {
+        $id = $request->id;
+        $partner_id = $request->partner_id;
+        $name = $request->name;
+        $price = $request->price;
+        $description = $request->description;
+        $caution = $request->caution;
+        $detail = $request->detail;
+        $category1 = $request->category1;
+        $recommend_flag = $request->recommend_flag;
+        $goods_ids = $request->goods_ids;
+        $goods_names = $request->goods_names;
+        $goods_pricies = $request->goods_pricies;
+        $goods_descriptions = $request->goods_descriptions;
+        $goods_sort_nos = $request->goods_sort_nos;
+        $goods_quantities = $request->goods_quantities;
+
+        $goods_folder = GoodsFolder::where('id', $id)->update([
+            'name' => $name,
+            'partner_id' => $partner_id,
+            'price' => $price,
+            'description' => $description,
+            'caution' => $caution,
+            'detail' => $detail,
+            'category1' => $category1,
+            'recommend_flag' => $recommend_flag,
+        ]);
+
+        for ($i=0; $i < count($goods_names); $i++) {
+            $goods_id = $goods_ids[$i];
+            $goods_name = $goods_names[$i];
+            $goods_price = $goods_pricies[$i];
+            $goods_description = $goods_descriptions[$i];
+            $goods_sort_no = $goods_sort_nos[$i];
+            $goods_quantity = $goods_quantities[$i];
+
+            if( $goods_id == ''){
+                Goods::create([
+                    'goods_folder_id' => $id,
+                    'name' => $goods_name,
+                    'price' => $goods_price,
+                    'description' => $goods_description,
+                    'sort_no' => $goods_sort_no,
+                    'quantity' => $goods_quantity,
+                ]);
+
+            }else{
+                Goods::where('id', $goods_id)->update([
+                    'goods_folder_id' => $id,
+                    'name' => $goods_name,
+                    'price' => $goods_price,
+                    'description' => $goods_description,
+                    'quantity' => $goods_quantity,
+                ]);
+            }
+        }
+  
+        $return_view = $this->goods();
+        return $return_view;
+    }
+
+    public function goods_delete(string $id)
+    {
+        //goods_deleteページへ
+        $goods = Goods::where('id', $id)->first();
+        return view('mypage.partner.goods_delete', compact('goods'));
+    }
+
+    public function action_goods_delete(Request $request)
+    {
+        $id = $request->goods_ids;
+        $goods_folder_id = $request->goods_folder_ids;
+
+        //idをもとにexperience.tableから削除
+        $goods = Goods::where('id', $id)->delete();
+
+        $return_view = $this->goods_edit($goods_folder_id);
+        return $return_view;
+    }
+
+    public function action_goods_display_delete(Request $request)
+    {
+        //idをもとにgoodsfolders.tableから削除
+
+        $id = $request->id;
+
+        $goods_folder = GoodsFolder::where('id', $id)->delete();
+
+        $return_view = $this->goods();
+        return $return_view;
+
     }
 
     public function image_insert(Request $request)

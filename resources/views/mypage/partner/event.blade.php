@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title text-start mb-0 text-truncate" >{{ $experienceFolder->name }}</h5>
-                                    <p class="card-text fw-bold fs-4 text-nowrap text-end mt-auto">￥{{ $experienceFolder->price_child }}～</p>
+                                    <p class="card-text fw-bold fs-4 text-nowrap text-end mt-auto">￥{{ number_format($experienceFolder->price_child) }}～</p>
                                 </div>
                             </div>
                         </a>

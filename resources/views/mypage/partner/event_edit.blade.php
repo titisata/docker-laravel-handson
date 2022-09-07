@@ -61,7 +61,8 @@
                 <div class="card mt-3">
                     <div class="card-header">基本情報</div>
                     <div class="card-body">
-                        <input name="id" type="text" class="form-control" value="{{ $experiences_folder->id }}">
+                        <input name="id" type="hidden" class="form-control" value="{{ $experiences_folder->id }}">
+                        <input name="partner_id" type="hidden" class="form-control" value="{{ $experiences_folder->partner_id }}">
                         <div class="mb-3">
                             <label class="form-label">名前</label>
                             <input name="name" type="text" class="form-control" value="{{ $experiences_folder->name }}">
