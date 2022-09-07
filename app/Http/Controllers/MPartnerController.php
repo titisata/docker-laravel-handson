@@ -74,6 +74,58 @@ class MPartnerController extends Controller
         return view('mypage.partner.event', compact('user', 'experiences_folders'));
     }
 
+    public function event_add(string $id)
+    {
+        $user = Auth::user();
+        $experiences_folder = ExperienceFolder::find($id);
+        $categories = ExperienceCategory::all();
+        return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories'));
+    }
+
+    public function action_event_add(Request $request)
+    {
+        $partner_id = $request->partner_id;
+        $name = $request->name;
+        $price_adult = $request->price_adult;
+        $price_child = $request->price_child;
+        $address = $request->address;
+        $description = $request->description;
+        $detail = $request->detail;
+        $caution = $request->caution;
+        $category = $request->category;
+        $is_lodging = $request->is_lodging;
+        $is_before_lodging = $request->is_before_lodging;
+        $recommend_flag = $request->recommend_flag;
+        $ex_names = $request->ex_names;
+        $ex_price_adults = $request->ex_price_adults;
+        $ex_price_childs = $request->ex_price_childs;  
+
+        ExperienceFolder::create([
+            'partner_id' => $partner_id,
+            'name' => $name,
+            'price_adult' => $price_adult,
+            'price_child' => $price_child,
+            'address' => $address,
+            'description' => $description,
+            'detail' => $detail,
+            'caution' => $caution,
+            'is_lodging' => $is_lodging,
+            'is_before_lodging' => $is_before_lodging,
+            'recommend_flag' => $recommend_flag,
+            'category1' => $category,
+        ]);     
+
+        for ($i=0; $i < count($ex_names); $i++) {
+            $ex_name = $ex_names[$i];
+            $ex_price_adult = $ex_price_adults[$i];
+            $ex_price_child = $ex_price_childs[$i];
+        }
+
+        $return_view = $this->event();
+        return $return_view;
+        
+    }
+
     public function event_edit(string $id)
     {
         $experiences_folder = ExperienceFolder::find($id);
@@ -168,6 +220,15 @@ class MPartnerController extends Controller
         Image::where('id', $id)->delete();
     }
 
+    public function event_image_edit($request)
+    {
+        //編集ページ表示
+        $table_id = $request->table_id;
+        $experiences_folder = ExperienceFolder::find($table_id);
+        $categories = ExperienceCategory::all();
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
+    }
+
 
 
     public function event_image_insert(string $id)
@@ -176,14 +237,12 @@ class MPartnerController extends Controller
         return view('mypage.partner.event_image_insert', compact('experiences_folder'));
     }
 
-    public function action_event_image_insert(Request $request, string $id)
+    public function action_event_image_insert(Request $request)
     {
         $this->image_insert($request);
 
-        $table_id = $request->table_id;
-        $experiences_folder = ExperienceFolder::find($table_id);
-        $categories = ExperienceCategory::all();
-        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
+        $return_view = $this->event_image_edit($request);
+        return $return_view;
     }
 
     public function event_image_update(string $id)
@@ -198,13 +257,10 @@ class MPartnerController extends Controller
     {
         $this->image_update($request, $id);
 
-        $table_id = $request->table_id;
-        $experiences_folder = ExperienceFolder::find($table_id);
-        $categories = ExperienceCategory::all();
-        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
+        $return_view = $this->event_image_edit($request);
+        return $return_view;
     }
 
-    
     public function event_image_delete(string $id)
     {
         $images = Image::find($id);
@@ -217,10 +273,16 @@ class MPartnerController extends Controller
     {
         $this->image_delete($request, $id);
 
+        $return_view = $this->event_image_edit($request);
+        return $return_view;
+    }
+
+    public function goods_image_edit(Request $request)
+    {
         $table_id = $request->table_id;
-        $experiences_folder = ExperienceFolder::find($table_id);
-        $categories = ExperienceCategory::all();
-        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
+        $goods_folder = GoodsFolder::find($table_id);
+        $categories = GoodsCategory::all();
+        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
     }
 
     public function goods_image_insert(string $id)
@@ -233,10 +295,8 @@ class MPartnerController extends Controller
     {
         $this->image_insert($request);
 
-        $table_id = $request->table_id;
-        $goods_folder = GoodsFolder::find($table_id);
-        $categories = GoodsCategory::all();
-        return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
+        $return_view = $this->goods_image_edit($request);
+        return $return_view;
     }
 
     public function goods_image_update(string $id)

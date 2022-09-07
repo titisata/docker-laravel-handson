@@ -59,6 +59,8 @@ Route::prefix('mypage/user')->middleware(['auth'])->group(function () {
 Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
     Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
+    Route::get('/event_add/{id}', [App\Http\Controllers\MPartnerController::class, 'event_add']);
+    Route::post('/action_event_add', [App\Http\Controllers\MPartnerController::class, 'action_event_add']);
     Route::get('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit']);
     Route::post('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit_update']);
     Route::get('/event_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'event_image_insert']);

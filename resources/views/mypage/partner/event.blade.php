@@ -5,7 +5,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>イベント一覧</h1>
+            <div class="d-flex">
+                <h1>イベント一覧</h1>
+                <a href="/mypage/partner/event_add/{{ $user->id }}">
+                    <div class="btn btn-success">
+                        新規登録     
+                    </div>
+                </a>
+            </div>
+            
             @forelse($experiences_folders as $experienceFolder)
                 <div class="card mb-3 ">
                     <div class="contain">
