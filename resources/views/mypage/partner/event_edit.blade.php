@@ -92,6 +92,14 @@
                             <textarea name="caution" type="text" class="form-control">{{ $experiences_folder->caution }}</textarea>
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">受付開始日</label>
+                            <select name="start_date" type="select" class="form-select" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">受付終了日</label>
+                            <input name="end_date" type="date" class="form-control" value="{{ $experiences_folder->end_date }}">
+                        </div>
+                        <div class="mb-3">
                         <label class="form-label">カテゴリ</label>
                         <select name="category" class="form-select mt-2" style="width:216px">
                             @foreach ($categories as $category)
@@ -100,6 +108,21 @@
                                 </option>
                             @endforeach
                         </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">体験の表示・非表示</label>
+                            @if( $experiences_folder->status  == 1 )
+                                <input name="is_lodging" type="radio" class="" checked value="1">
+                                <label>表示</label>
+                                <input name="is_lodging" type="radio" class="" value="0">
+                                <label>非表示</label>
+                            @else
+                                <input name="is_lodging" type="radio" class="" value="1">
+                                <label>表示</label>
+                                <input name="is_lodging" type="radio" class="" checked value="0">
+                                <label>非表示</label>
+                            @endif
+                            
                         </div>
                         <div class="mb-3">
                             <label class="form-label">宿泊の有無</label>

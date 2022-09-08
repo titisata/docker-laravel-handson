@@ -56,6 +56,7 @@ class MPartnerController extends Controller
         $is_lodging = $request->is_lodging;
         $is_before_lodging = $request->is_before_lodging;
         $recommend_flag = $request->recommend_flag;
+        $status = $request->status;
         $ex_names = $request->ex_names;
         $ex_price_adults = $request->ex_price_adults;
         $ex_price_childs = $request->ex_price_childs;  
@@ -79,6 +80,7 @@ class MPartnerController extends Controller
             'caution' => $caution,
             'is_lodging' => $is_lodging,
             'is_before_lodging' => $is_before_lodging,
+            'status' => $status,
             'recommend_flag' => $recommend_flag,
             'category1' => $category,
         ]);     
@@ -116,6 +118,7 @@ class MPartnerController extends Controller
             'caution' => $caution,
             'is_lodging' => $is_lodging,
             'is_before_lodging' => $is_before_lodging,
+            'status' => $status,
             'recommend_flag' => $recommend_flag,
             'category1' => $category,
         ]);

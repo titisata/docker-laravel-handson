@@ -26,6 +26,7 @@ class ExperienceFolder extends Model
         'caution',
         'is_lodging',
         'is_before_lodging',
+        'status',
         'recommend_flag',
         'category1',
     ];
