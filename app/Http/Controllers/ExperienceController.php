@@ -30,7 +30,7 @@ class ExperienceController extends Controller
             $categories = ExperienceCategory::all();
             $img_category = ExperienceCategory::where('name', $category)->first();
             $images = Image::where('table_name', 'experience_category')->where('table_id', $img_category->id)->first();
-            $experienceFolders = ExperienceFolder::where('status', 1)->search($keyword, $category, per_page: 10);
+            $experienceFolders = ExperienceFolder::search($keyword, $category, per_page: 10);
             return view('search.experience_list', compact('experienceFolders', 'categories', 'images'));
         }
 

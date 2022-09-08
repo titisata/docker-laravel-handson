@@ -18,6 +18,7 @@
     function add_ex(init_index) {
         let index = init_index + add_count;
         add_count++;
+        let key = parseInt(document.getElementById('key').value); 
         const element = document.querySelector('#add_target');
         const createElement = `
             <div class="card mt-3 p-3 ex_data">
@@ -52,6 +53,8 @@
                 <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex(${index})">削除</button>
             </div>
         `;
+        key = key + add_count;
+        console.log(key);
         element.insertAdjacentHTML('afterend', createElement);
     }
     function remove_ex(index) {
@@ -201,6 +204,7 @@
                 <div class="card mt-3">
                     <div class="card-header">時間帯設定</div>
                     <div class="card-body">
+                        
                         @foreach ($experiences_folder->experiences as $key=>$experience)
                             <div class="card mt-3 p-3 ex_data">
                                 <input hidden name="ex_ids_{{$key+1}}" type="text" value="{{ $experience->id }}">
@@ -246,6 +250,7 @@
                                 
                             </div>
                         @endforeach
+                        <input type="hidden" id="key" value="{{$key+1}}">
                         <div id="add_target"></div>
                         <button type="button" class="mt-2 btn btn-primary" onclick="add_ex({{ $experiences_folder->experiences->count() }})">追加</button>
                     </div>

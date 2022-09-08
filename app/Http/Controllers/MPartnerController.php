@@ -127,16 +127,9 @@ class MPartnerController extends Controller
         $is_lodging = $request->is_lodging;
         $is_before_lodging = $request->is_before_lodging;
         $recommend_flag = $request->recommend_flag;
-        $status = $request->status;
-        $ex_names = $request->ex_names; 
+        $status = $request->status; 
         $id = $request->id;
-        $ex_ids = $request->ex_ids;
-        $ex_sort_nos = $request->ex_sort_nos;
-        $ex_quantities = $request->ex_quantities;
-        $ex_price_adults = $request->ex_price_adults;
-        $ex_price_childs = $request->ex_price_childs;
         $key = $request->key;
-        
 
         $experiences_folder = ExperienceFolder::where('id', $id)->update([
             'name' => $name,
@@ -153,21 +146,27 @@ class MPartnerController extends Controller
             'category1' => $category,
         ]);
 
-        echo '<pre>';
-        print_r ($_POST);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r ($_POST);
+        // echo '</pre>';
         // echo 'a';
-        exit;
+        // echo $key;
+        // exit;
 
-        for ($i=1; $i < count($ex_names); $i++) {
-            $ex_id = $ex_ids[$i];
-            $ex_name = $ex_names[$i];
-            $ex_price_adult = $ex_price_adults[$i];
-            $ex_price_child = $ex_price_childs[$i];
-            $ex_sort_no = $ex_sort_nos[$i];
-            $ex_quantity = $ex_quantities[$i];
-            $ex_statuses = $request->ex_statuses_.$ex_id;
-            $ex_status = 0;
+        for ($i=1; $i < $key + 1; $i++) {
+            $ex_names = $request['ex_names_'.$i];
+            $ex_ids = $request['ex_ids_'.$i];
+            $ex_sort_nos = $request['ex_sort_nos_'.$i];
+            $ex_quantities = $request['ex_quantities_'.$i];
+            $ex_price_adults = $request['ex_price_adults_'.$i];
+            $ex_price_childs = $request['ex_price_childs_'.$i];
+            $ex_statuses = $request['ex_statuses_'.$i];
+            $ex_id = $ex_ids;
+            $ex_name = $ex_names;
+            $ex_price_adult = $ex_price_adults;
+            $ex_price_child = $ex_price_childs;
+            $ex_sort_no = $ex_sort_nos;
+            $ex_quantity = $ex_quantities;
             $ex_status = $ex_statuses;
 
 
