@@ -300,28 +300,7 @@ async function commentCreate(ex_id) {
 
                     </div>
 
-                    <div class="mt-3 col-12 col-lg-6 d-lg-none">
-                        @if (app('request')->input('keyword') == "")
-                            <div class="card-body p-0">
-                                <div class='calendar'></div>
-                            </div>
-
-                        @endif
-                        @if (app('request')->input('keyword') != "")
-                        <div>
-                            <div class="card-body mt-2 p-0 col-12 col-lg-6 d-lg-none">
-                                @forelse($experiences as $experience)
-                                    <a class="btn btn-lg btn-pink rounded-pill text-white my-2 w-100 btn-shadow fs-3" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
-                                @empty
-                                    <p>この体験はご利用できません</p>
-                                @endforelse
-                            </div>
-
-                        </div>
-
-                        @endif
-
-                    </div>
+                    
 
 
 

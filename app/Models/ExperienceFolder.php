@@ -42,6 +42,16 @@ class ExperienceFolder extends Model
         return $this->hasMany(Experience::class);
     }
 
+    public function active_experiences()
+    {
+        // while(){
+        //     $sql = $sql ."->where('".$jouken(0) ."','".$jouken(1)."')";
+        //     $sql = $sql ."->where('status', '1')";
+        // }
+        // return $this->hasMany(Experience::class).$sql;
+        return $this->hasMany(Experience::class)->where('status', '1');
+    }
+
     /**
      * 画像を取得
      *

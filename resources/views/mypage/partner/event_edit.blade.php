@@ -21,26 +21,33 @@
         const element = document.querySelector('#add_target');
         const createElement = `
             <div class="card mt-3 p-3 ex_data">
-            <input hidden name="ex_ids[]" type="text" value="">
+            <input hidden name="ex_ids" type="text" value="">
                 <div class="mb-3">
                     <label class="form-label">名前</label>
-                    <input name="ex_names[]" type="text" class="form-control" value="">
+                    <input name="ex_names" type="text" class="form-control" value="">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">大人料金</label>
-                    <input name="ex_price_adults[]" type="number" class="form-control" value="{{ $experiences_folder->price_adult }}">
+                    <input name="ex_price_adults" type="number" class="form-control" value="{{ $experiences_folder->price_adult }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">子供料金</label>
-                    <input name="ex_price_childs[]" type="number" class="form-control" value="{{ $experiences_folder->price_child }}">
+                    <input name="ex_price_childs" type="number" class="form-control" value="{{ $experiences_folder->price_child }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">ソートナンバー</label>
-                    <input name="ex_sort_nos[]" type="number" class="form-control" value="">
+                    <input name="ex_sort_nos" type="number" class="form-control" value="">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">上限人数</label>
-                    <input name="ex_quantities[]" type="number" class="form-control" value="">
+                    <input name="ex_quantities" type="number" class="form-control" value="">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">体験の表示・非表示</label>
+                    <input name="ex_statuses" type="radio" class="" checked value="1">
+                    <label>表示</label>
+                    <input name="ex_statuses" type="radio" class="" value="0">
+                    <label>非表示</label>       
                 </div>
                 <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex(${index})">削除</button>
             </div>
@@ -92,14 +99,6 @@
                             <textarea name="caution" type="text" class="form-control">{{ $experiences_folder->caution }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">受付開始日</label>
-                            <select name="start_date" type="select" class="form-select" value="">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">受付終了日</label>
-                            <input name="end_date" type="date" class="form-control" value="{{ $experiences_folder->end_date }}">
-                        </div>
-                        <div class="mb-3">
                         <label class="form-label">カテゴリ</label>
                         <select name="category" class="form-select mt-2" style="width:216px">
                             @foreach ($categories as $category)
@@ -112,14 +111,14 @@
                         <div class="mb-3">
                             <label class="form-label">体験の表示・非表示</label>
                             @if( $experiences_folder->status  == 1 )
-                                <input name="is_lodging" type="radio" class="" checked value="1">
+                                <input name="status" type="radio" class="" checked value="1">
                                 <label>表示</label>
-                                <input name="is_lodging" type="radio" class="" value="0">
+                                <input name="status" type="radio" class="" value="0">
                                 <label>非表示</label>
                             @else
-                                <input name="is_lodging" type="radio" class="" value="1">
+                                <input name="status" type="radio" class="" value="1">
                                 <label>表示</label>
-                                <input name="is_lodging" type="radio" class="" checked value="0">
+                                <input name="status" type="radio" class="" checked value="0">
                                 <label>非表示</label>
                             @endif
                             
@@ -202,28 +201,44 @@
                 <div class="card mt-3">
                     <div class="card-header">時間帯設定</div>
                     <div class="card-body">
-                        @foreach ($experiences_folder->experiences as $experience)
+                        @foreach ($experiences_folder->experiences as $key=>$experience)
                             <div class="card mt-3 p-3 ex_data">
-                                <input hidden name="ex_ids[]" type="text" value="{{ $experience->id }}">
+                                <input hidden name="ex_ids_{{$key+1}}" type="text" value="{{ $experience->id }}">
+                                <input hidden name="key" type="text" value="{{$key+1}}">
                                 <div class="mb-3">
                                     <label class="form-label">名前</label>
-                                    <input name="ex_names[]" type="text" class="form-control" value="{{ $experience->name }}">
+                                    <input name="ex_names_{{$key+1}}" type="text" class="form-control" value="{{ $experience->name }}">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">大人料金</label>
-                                    <input name="ex_price_adults[]" type="number" class="form-control" value="{{ $experience->price_adult }}">
+                                    <input name="ex_price_adults_{{$key+1}}" type="number" class="form-control" value="{{ $experience->price_adult }}">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">子供料金</label>
-                                    <input name="ex_price_childs[]" type="number" class="form-control" value="{{ $experience->price_child }}">
+                                    <input name="ex_price_childs_{{$key+1}}" type="number" class="form-control" value="{{ $experience->price_child }}">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">ソートナンバー</label>
-                                    <input name="ex_sort_nos[]" type="number" class="form-control" value="{{ $experience->sort_no}}">
+                                    <input name="ex_sort_nos_{{$key+1}}" type="number" class="form-control" value="{{ $experience->sort_no}}">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">上限人数</label>
-                                    <input name="ex_quantities[]" type="number" class="form-control" value="{{ $experience->quantity }}">
+                                    <input name="ex_quantities_{{$key+1}}" type="number" class="form-control" value="{{ $experience->quantity }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">体験の表示・非表示</label>
+                                    @if( $experience->status == 1 )
+                                        <input name="ex_statuses_{{$key+1}}" type="radio" checked value="1">
+                                        <label>表示</label>
+                                        <input name="ex_statuses_{{$key+1}}" type="radio" value="0">
+                                        <label>非表示</label>
+                                    @else
+                                        <input name="ex_statuses_{{$key+1}}" type="radio" value="1">
+                                        <label>表示</label>
+                                        <input name="ex_statuses_{{$key+1}}" type="radio" checked value="0">
+                                        <label>非表示</label>
+                                    @endif
+                                    
                                 </div>
                                 <a href="/mypage/partner/experience_delete/{{ $experience->id }}">
                                     <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex({{ $loop->index }})">削除</button>

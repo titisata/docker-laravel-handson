@@ -103,34 +103,30 @@
         </main>
 
         <footer class="mt-4">
-        <div class="bg-f-part py-3">
-            <h2 class="text-center  text-gray-color mb-0">○○観光協会</h2>
-            <div class="d-flex py-4 justify-content-center">
-                <div class="me-4">
-                    <ul>
-                        <li class="my-2"><a href="/link/1" class=" text-gray-color">利用規約</a></li>
-                        <li class="my-2"><a href="/link/2" class=" text-gray-color">プライバシー規約</a></li>
-                        <li class="my-2"><a href="/link/3" class=" text-gray-color">特定商取引に基づく表記</a></li>
-                    </ul>
+            <div class="bg-f-part py-3">
+                <h4 class="text-gray-color mb-0 ms-4 mt-4 fw-bold" style="padding-left:2rem">{{ App\Models\SiteMaster::find(1) -> site_name }}</h4>
+            
+                <div class="d-flex py-4 justify-content-start ms-4">
+                    <div class="me-4">
+                        <ul>
+                            <li class="my-2"><a href="/link/1" class="text-gray-color">利用規約</a></li>
+                            <li class="my-2"><a href="/link/2" class="text-gray-color">プライバシー規約</a></li>
+                            <li class="my-2"><a href="/link/3" class="text-gray-color">特定商取引に基づく表記</a></li>
+                        </ul>
+                    </div>
+                    <div class="ms-4">
+                        <ul>
+                            <li class="my-2"><a href="/link/4" class="text-gray-color">店舗情報</a></li>
+                            <li class="my-2"><a href="/link/5" class="text-gray-color">ヘルプ・マニュアル</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="ms-4">
-                    <ul>
-                        <li class="my-2"><a href="/link/4" class=" text-gray-color">店舗情報</a></li>
-                        <li class="my-2"><a href="/link/5" class=" text-gray-color">ヘルプ・マニュアル</a></li>
-                    </ul>
+                <div class="d-flex justify-content-between flex-column flex-md-row">
+                    <p class="text-gray-color ms-4 small" style="padding-left:2rem">Copyright© {{ App\Models\SiteMaster::find(1) -> site_name }} All rights reserved.</p>
+                    <p class="text-gray-color ms-4 ms-md-0 me-md-4 mb-0 pb-3" style="padding-right:2rem;padding-left:2rem;"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
                 </div>
             </div>
-            <div class="d-md-flex justify-content-between align-items-center text-center">
-                <p class="text-gray-color ps-md-4 small">Copyright© ○○観光協会 All rights reserved.</p>
-                <p class="text-gray-color pe-md-4 mb-0 pb-3"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
-             </div>
-        </div>
-
-
-
-
-    <footer>
-
+        <footer>
     </div>
 </body>
 </html>

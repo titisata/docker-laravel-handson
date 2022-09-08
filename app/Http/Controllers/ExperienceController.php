@@ -23,14 +23,14 @@ class ExperienceController extends Controller
 
         if ($keyword == '') {
             $images = Image::where('table_name', 'experience_category')->get();
-            $experiences_folders_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 1)->orderBy('recommend_sort_no', 'desc')->get();
-            $experiences_folders_not_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 0)->orderBy('recommend_sort_no', 'desc')->get();
+            $experiences_folders_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 1)->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
+            $experiences_folders_not_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 0)->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
             return view('search.experience', compact('experiences_folders_is_lodging', 'experiences_folders_not_is_lodging', 'categories', 'images'));
         }else{   
             $categories = ExperienceCategory::all();
             $img_category = ExperienceCategory::where('name', $category)->first();
             $images = Image::where('table_name', 'experience_category')->where('table_id', $img_category->id)->first();
-            $experienceFolders = ExperienceFolder::search($keyword, $category, per_page: 10);
+            $experienceFolders = ExperienceFolder::where('status', 1)->search($keyword, $category, per_page: 10);
             return view('search.experience_list', compact('experienceFolders', 'categories', 'images'));
         }
 
@@ -45,7 +45,7 @@ class ExperienceController extends Controller
         if ($experienceFolder == null) {
             return abort(404);
         }
-        $experiences = $experienceFolder->experiences;
+        $experiences = $experienceFolder->active_experiences;
         $comments = $experienceFolder->comments();
         $reserves = $experienceFolder->reserves;
         $schedules = $experienceFolder->schedules;

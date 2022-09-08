@@ -67,7 +67,22 @@ class MPartnerController extends Controller
 
     public function action_event_add(Request $request)
     {
-        $this->event_post_date($request);
+        $partner_id = $request->partner_id;
+        $name = $request->name;
+        $price_adult = $request->price_adult;
+        $price_child = $request->price_child;
+        $address = $request->address;
+        $description = $request->description;
+        $detail = $request->detail;
+        $caution = $request->caution;
+        $category = $request->category;
+        $is_lodging = $request->is_lodging;
+        $is_before_lodging = $request->is_before_lodging;
+        $recommend_flag = $request->recommend_flag;
+        $status = $request->status;
+        $ex_names = $request->ex_names;
+        $ex_price_adults = $request->ex_price_adults;
+        $ex_price_childs = $request->ex_price_childs;  
         
         ExperienceFolder::create([
             'partner_id' => $partner_id,
@@ -100,13 +115,28 @@ class MPartnerController extends Controller
     public function event_edit_update(Request $request)
     {
 
-        $this->event_post_date($request);
-
+        $partner_id = $request->partner_id;
+        $name = $request->name;
+        $price_adult = $request->price_adult;
+        $price_child = $request->price_child;
+        $address = $request->address;
+        $description = $request->description;
+        $detail = $request->detail;
+        $caution = $request->caution;
+        $category = $request->category;
+        $is_lodging = $request->is_lodging;
+        $is_before_lodging = $request->is_before_lodging;
+        $recommend_flag = $request->recommend_flag;
+        $status = $request->status;
+        $ex_names = $request->ex_names; 
         $id = $request->id;
         $ex_ids = $request->ex_ids;
         $ex_sort_nos = $request->ex_sort_nos;
         $ex_quantities = $request->ex_quantities;
-
+        $ex_price_adults = $request->ex_price_adults;
+        $ex_price_childs = $request->ex_price_childs;
+        $key = $request->key;
+        
 
         $experiences_folder = ExperienceFolder::where('id', $id)->update([
             'name' => $name,
@@ -123,13 +153,23 @@ class MPartnerController extends Controller
             'category1' => $category,
         ]);
 
-        for ($i=0; $i < count($ex_names); $i++) {
+        echo '<pre>';
+        print_r ($_POST);
+        echo '</pre>';
+        // echo 'a';
+        exit;
+
+        for ($i=1; $i < count($ex_names); $i++) {
             $ex_id = $ex_ids[$i];
             $ex_name = $ex_names[$i];
             $ex_price_adult = $ex_price_adults[$i];
             $ex_price_child = $ex_price_childs[$i];
             $ex_sort_no = $ex_sort_nos[$i];
             $ex_quantity = $ex_quantities[$i];
+            $ex_statuses = $request->ex_statuses_.$ex_id;
+            $ex_status = 0;
+            $ex_status = $ex_statuses;
+
 
             if( $ex_id == ''){
                 Experience::create([
@@ -139,6 +179,7 @@ class MPartnerController extends Controller
                     'price_child' => $ex_price_child,
                     'sort_no' => $ex_sort_no,
                     'quantity' => $ex_quantity,
+                    'status' => $ex_status,
                 ]);
 
             }else{
@@ -149,6 +190,7 @@ class MPartnerController extends Controller
                     'price_child' => $ex_price_child,
                     'sort_no' => $ex_sort_no,
                     'quantity' => $ex_quantity,
+                    'status' => $ex_status,
                 ]);
             }
            
