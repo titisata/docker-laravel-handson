@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Experience;
 use App\Models\ExperienceCartItem;
 use App\Models\ExperienceCategory;
 use App\Models\ExperienceFolder;
 use App\Models\SiteMaster;
 use App\Models\Image;
+use App\Models\Favorite;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +43,7 @@ class ExperienceController extends Controller
 
     public function show(string $id)
     {
+        $user = Auth::user();
         $experienceFolder = ExperienceFolder::find($id);
         if ($experienceFolder == null) {
             return abort(404);
@@ -49,6 +52,7 @@ class ExperienceController extends Controller
         $comments = $experienceFolder->comments();
         $reserves = $experienceFolder->reserves;
         $schedules = $experienceFolder->schedules;
+        $mycomment = $experienceFolder->mycomment();
 
         $events = [];
         foreach ($reserves as $reserve) {
@@ -91,19 +95,30 @@ class ExperienceController extends Controller
             }
         }
 
-        return view('experience.detail', compact('experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events'));
+        return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment'));
+    }
+
+    public function favorite(Request $request)
+    {
+        $test = $request->test;
+        echo $test;
+        exit;
+
+
     }
 
     public function reserve_detail(string $folder_id, string $id)
     {
+        $user = Auth::user();
         $experienceFolder = ExperienceFolder::find($folder_id);
         $experience = Experience::find($id);
         $comments = $experienceFolder->comments();
-        
+        $mycomment = $experienceFolder->mycomment()->where('user_id', $user->id);
+
         if ($experienceFolder == null || $experience == null) {
             return abort(404);
         }
-        return view('experience.reserve', compact('experienceFolder', 'experience', 'comments'));
+        return view('experience.reserve', compact('experienceFolder', 'experience', 'comments', 'mycomment'));
     }
 
     public function post(Request $request)

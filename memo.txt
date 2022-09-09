@@ -1,1 +1,40 @@
-<a href="/mypage/partner/experience_delete/{{ $experience->id }}">
+<div id="fixdata_response"></div>
+                            @if($experienceFolder->favorite() != '')
+                                <button class="btn btn-primary" id="not_favorite">+</button>
+                            @else
+                                <button class="btn btn-danger" id="favorite" >-</button>
+                            @endif
+                        </div>
+
+
+                        var user_id = '';
+var favorite_id = '';
+
+
+// ページ読込完了後にボタンにclickイベントを登録する
+window.addEventListener("load", function(){
+	document.getElementById("favorite").addEventListener("click", function(){
+		// FoemDataオブジェクトに要素セレクタ(引数)を渡さずに宣言する
+		var fixedDatas = new FormData();
+		// appendメソッドでキーとデータの組をセットする
+		// append("キー(FORMで云うところのname属性値)",  "データ")でデータをセットできる
+        user_id = document.getElementById('user_id').value;
+        favorite_id = document.getElementById('favorite_id').value;
+		fixedDatas.append("user_id",  user_id);
+		fixedDatas.append("favorite_id",  favorite_id);
+        fixedDatas.append("table_name",  "experience_folders");
+		// XHRの宣言
+		var XHR = new XMLHttpRequest();
+		// openメソッドにPOSTを指定して送信先のURLを指定します
+		XHR.open("POST", "/experience/favorite", true);
+		// sendメソッドにデータを渡して送信を実行する
+		XHR.send(fixedDatas);
+		// サーバの応答をonreadystatechangeイベントで検出して正常終了したらデータを取得する
+		XHR.onreadystatechange = function(){
+			if(XHR.readyState == 4 && XHR.status == 200){
+				// POST送信した結果を表示する
+				document.getElementById("fixdata_response").innerHTML = XHR.responseText;
+			}
+		};
+	} ,false);
+}, false);

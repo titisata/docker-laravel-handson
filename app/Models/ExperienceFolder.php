@@ -68,6 +68,21 @@ class ExperienceFolder extends Model
     }
 
     /**
+     * お気に入りを取得
+     *
+     * @return Collection<Favorite>
+     */
+
+    public function favorite()
+    {
+        $favorites = Favorite::where([
+            ['table_name', '=', 'experience_folders'],
+            ['favorite_id', '=', $this->id],
+        ])->first();
+        return $favorites;
+    }
+
+    /**
      * パートナーを取得
      *
      * @return Partner
@@ -90,6 +105,20 @@ class ExperienceFolder extends Model
             ['experience_folder_id', '=', $this->id],
         ])->orderBy('created_at', 'desc')->get();
         return $comments;
+    }
+
+    /**
+     * コメントを取得
+     *
+     * @return Collection<ExperienceComment>
+     */
+
+    public function mycomment()
+    {
+        $mycomment = ExperienceComment::where([
+            ['experience_folder_id', '=', $this->id],
+        ])->orderBy('created_at', 'desc')->first();
+        return $mycomment;
     }
 
     /**
@@ -135,6 +164,7 @@ class ExperienceFolder extends Model
     {
         return $this->hasMany(HotelGroup::class);
     }
+
 
     /**
      * その日が休みかどうか

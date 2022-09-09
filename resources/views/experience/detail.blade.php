@@ -3,6 +3,7 @@
 @section('content')
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
 <script>
     const events_data = @json($events);
@@ -126,6 +127,10 @@ a{
     background-color:#BB4156;
 
 }
+.f-pink{
+    color:#BB4156;
+
+}
 .btn-shadow{
     box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 65%);
 }
@@ -170,7 +175,12 @@ async function commentCreate(ex_id) {
     fetch("/api/comment/experience", {method, headers, body})
         .then(_ => location.reload());
 }
+
+
+
 </script>
+<input type="hidden" id="user_id" value="{{ $user->id }}">
+<input type="hidden" id="favorite_id" value="{{ $experienceFolder->id }}">
 <div class="card" style="height: 400px;">
     <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
 </div>
@@ -206,7 +216,18 @@ async function commentCreate(ex_id) {
             <div class="row">
                 <div class="my-4 col-12 col-lg-7">
                     
-                    <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                    <div class="d-flex align-items-center">
+                        <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                        @if($experienceFolder->favorite() != '')
+                            <div class="ms-3" id="not_favorite"><i class="bi bi-heart-fill text-danger fs-3"></i></div>
+                        @else
+                            <div class="ms-3" id="favorite" ><i class="bi bi-heart-fill text-secondary fs-3"></i></div>
+                        @endif
+                    </div>
+                    
+
+                    <iframe name="sendPhoto" style="width:0px;height:0px;border:0px;"></iframe>
+                    
                     @if($experienceFolder->average_rate < 1.5)
                             <p class="mb-0">テスト用に表示、0は表示しないようにする</p>
                             <div class="d-flex mb-3">
@@ -250,6 +271,8 @@ async function commentCreate(ex_id) {
                             <img src="/images/star5.png" style="width:120px;height35px">
                             </div>
                         @endif
+                        
+                        
                     <p class="text-gray fs-5">{{ $experienceFolder->description }}</p>
                     <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
 
@@ -280,7 +303,7 @@ async function commentCreate(ex_id) {
                             @forelse($experiences as $experience)
                                 <a class="btn btn-lg btn-pink rounded-pill text-white my-2 py-3 w-100 btn-shadow fs-5" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
                             @empty
-                                <p>この体験はご利用できません</p>
+                                <p class="text-danger">この体験はご利用できません</p>
                             @endforelse
                         </div>
                     @endif
@@ -299,12 +322,6 @@ async function commentCreate(ex_id) {
                             
 
                     </div>
-
-                    
-
-
-
-
 
                     <div class="mt-5 card">
 
@@ -358,6 +375,9 @@ async function commentCreate(ex_id) {
                                     <img src="/images/star5.png" style="width:120px;height35px">
                                     </div>
                                 @endif
+
+
+                            @if( $mycomment->user_id != $user->id )
                             <div class="m-3">
                                 <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                                 <div class="d-flex justify-content-between align-items-center mt-2">
@@ -371,6 +391,12 @@ async function commentCreate(ex_id) {
                                     <button class="btn btn-outline-primary"  onclick="commentCreate({{ $experienceFolder->id }})">投稿</button>
                                 </div>
                             </div>
+                            @else
+                            <div class="m-3">
+                                <p>投稿済みです</p>
+                            </div>
+
+                            @endif
                         </div>
 
                         <div class="card-body">

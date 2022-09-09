@@ -29,6 +29,7 @@ Route::post('/goods/{id}', [App\Http\Controllers\GoodsController::class, 'post']
 Route::get('/experience/{id}', [App\Http\Controllers\ExperienceController::class, 'show']);
 Route::get('/experience/{folder_id}/{id}', [App\Http\Controllers\ExperienceController::class, 'reserve_detail']);
 Route::post('/experience/{folder_id}/{id}', [App\Http\Controllers\ExperienceController::class, 'post']);
+Route::post('/experience/favorite', [App\Http\Controllers\ExperienceController::class, 'favorite']);
 Route::redirect('/search', '/search/experience');
 Route::get('/link/{id}', [App\Http\Controllers\LinkController::class, 'show']);
 

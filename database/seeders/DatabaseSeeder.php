@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GoodsCategorySeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(SiteMasterSeeder::class);
+        $this->call(FavoriteSeeder::class);
        
     }
 }
