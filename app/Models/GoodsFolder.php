@@ -36,6 +36,11 @@ class GoodsFolder extends Model
         return $this->hasMany(Goods::class);
     }
 
+    public function active_goods()
+    {
+        return $this->hasMany(Goods::class)->where('status', '1');
+    }
+
     /**
      * 画像を取得
      *

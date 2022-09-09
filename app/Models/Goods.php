@@ -17,6 +17,7 @@ class Goods extends Model
         'description',
         'sort_no',
         'quantity',
+        'status',
         
     ];
 

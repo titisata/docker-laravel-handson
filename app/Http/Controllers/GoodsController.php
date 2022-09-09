@@ -20,9 +20,9 @@ class GoodsController extends Controller
         $images = Image::where('table_name', 'goods_category')->get();
         
         if ($keyword == '') {
-            $food_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '食べ物')->orderBy('recommend_sort_no', 'desc')->get();
-            $drink_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '飲み物')->orderBy('recommend_sort_no', 'desc')->get();
-            $goods_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '雑貨')->orderBy('recommend_sort_no', 'desc')->get();
+            $food_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '食べ物')->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
+            $drink_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '飲み物')->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
+            $goods_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '雑貨')->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
             $images = Image::where('table_name', 'goods_category')->get();
             return view('search.goods', compact('food_goods_folders', 'drink_goods_folders', 'goods_goods_folders', 'categories', 'images'));
         }else{

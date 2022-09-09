@@ -293,16 +293,23 @@ class MPartnerController extends Controller
     public function goods_edit_update( Request $request)
     {
 
-        $this->goods_post_date($request);
-
         $id = $request->id;
+        $partner_id = $request->partner_id;
+        $name = $request->name;
+        $price = $request->price;
+        $description = $request->description;
+        $detail = $request->detail;
+        $caution = $request->caution;
+        $category = $request->category;
+        $recommend_flag = $request->recommend_flag;
+        $status = $request->status;
         $category1 = $request->category1;
-        $goods_ids = $request->goods_ids;
-        $goods_names = $request->goods_names;
-        $goods_pricies = $request->goods_pricies;
-        $goods_descriptions = $request->goods_descriptions;
-        $goods_sort_nos = $request->goods_sort_nos;
-        $goods_quantities = $request->goods_quantities;
+        $key = $request->key;
+
+        // echo '<pre>';
+        // print_r ($_POST);
+        // echo '</pre>';
+        // exit;
 
         $goods_folder = GoodsFolder::where('id', $id)->update([
             'name' => $name,
@@ -312,18 +319,33 @@ class MPartnerController extends Controller
             'caution' => $caution,
             'detail' => $detail,
             'category1' => $category1,
+            'status' => $status,
             'recommend_flag' => $recommend_flag,
         ]);
 
-        for ($i=0; $i < count($goods_names); $i++) {
-            $goods_id = $goods_ids[$i];
-            $goods_name = $goods_names[$i];
-            $goods_price = $goods_pricies[$i];
-            $goods_description = $goods_descriptions[$i];
-            $goods_sort_no = $goods_sort_nos[$i];
-            $goods_quantity = $goods_quantities[$i];
+        for ($i=1; $i < $key + 1; $i++) {
+            $goods_ids = $request['goods_ids_'.$i];
+            $goods_names = $request['goods_names_'.$i];
+            $goods_pricies = $request['goods_pricies_'.$i];
+            $goods_descriptions = $request['goods_descriptions_'.$i];
+            $goods_sort_nos = $request['goods_sort_nos_'.$i];
+            $goods_quantities = $request['goods_quantities_'.$i];
+            $goods_statuses = $request['goods_statuses_'.$i];
+
+            $goods_id = $goods_ids;
+            $goods_name = $goods_names;
+            $goods_price = $goods_pricies;
+            $goods_description = $goods_descriptions;
+            $goods_sort_no = $goods_sort_nos;
+            $goods_quantity = $goods_quantities;
+            $goods_status = $goods_statuses;
+
+            
 
             if( $goods_id == ''){
+               
+                
+
                 Goods::create([
                     'goods_folder_id' => $id,
                     'name' => $goods_name,
@@ -331,22 +353,29 @@ class MPartnerController extends Controller
                     'description' => $goods_description,
                     'sort_no' => $goods_sort_no,
                     'quantity' => $goods_quantity,
+                    'status' => $goods_status,
                 ]);
 
             }else{
+
+                
+
                 Goods::where('id', $goods_id)->update([
                     'goods_folder_id' => $id,
                     'name' => $goods_name,
                     'price' => $goods_price,
                     'description' => $goods_description,
                     'quantity' => $goods_quantity,
+                    'status' => $goods_status,
                 ]);
             }
         }
-  
+
+        
         $return_view = $this->goods();
         return $return_view;
     }
+
 
     public function goods_delete(string $id)
     {

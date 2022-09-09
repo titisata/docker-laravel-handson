@@ -354,11 +354,19 @@ input[type="radio"] {
                     </div>
 
                 </div>
-                <div class="text-center text-md-end mt-3">
+                
+                @if($experienceFolder->status == 1 && $experience->status == 1)
+                    <div class="text-center text-md-end mt-3">
                         <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4"  type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
                         </button>
-                </div>
+                    </div>
+                @else
+                    <div class="text-center pt-3">
+                        <p class="text-danger">現在この商品は扱っておりません</p>
+                    </div>
+                
+                @endif
 
 
 

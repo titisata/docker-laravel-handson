@@ -16,6 +16,7 @@ class Experience extends Model
         'price_adult',
         'sort_no',
         'quantity',
+        'status',
         
     ];
 

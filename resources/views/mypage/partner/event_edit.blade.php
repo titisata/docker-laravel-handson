@@ -14,58 +14,87 @@
                 }
             });
     });
+
     let add_count = 0;
+    
     function add_ex(init_index) {
+        let key_count = 0;
         let index = init_index + add_count;
         add_count++;
+        key_count++;
+        console.log (index);
         let key = parseInt(document.getElementById('key').value); 
+        key = key + key_count;
         const element = document.querySelector('#add_target');
         const createElement = `
-            <div class="card mt-3 p-3 ex_data">
+            <div class="card mt-3 p-3 ex_data" id="data_` + key + `" >
             <input hidden name="ex_ids" type="text" value="">
                 <div class="mb-3">
                     <label class="form-label">名前</label>
-                    <input name="ex_names" type="text" class="form-control" value="">
+                    <input name="ex_names_` + key + `" type="text" class="form-control" value="">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">大人料金</label>
-                    <input name="ex_price_adults" type="number" class="form-control" value="{{ $experiences_folder->price_adult }}">
+                    <input name="ex_price_adults_` + key + `" type="number" class="form-control" value="{{ $experiences_folder->price_adult }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">子供料金</label>
-                    <input name="ex_price_childs" type="number" class="form-control" value="{{ $experiences_folder->price_child }}">
+                    <input name="ex_price_childs_` + key + `" type="number" class="form-control" value="{{ $experiences_folder->price_child }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">ソートナンバー</label>
-                    <input name="ex_sort_nos" type="number" class="form-control" value="">
+                    <input name="ex_sort_nos_` + key + `" type="number" class="form-control" value="">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">上限人数</label>
-                    <input name="ex_quantities" type="number" class="form-control" value="">
+                    <input name="ex_quantities_` + key + `" type="number" class="form-control" value="">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">体験の表示・非表示</label>
-                    <input name="ex_statuses" type="radio" class="" checked value="1">
+                    <input name="ex_statuses_` + key + `" type="radio" class="" checked value="1">
                     <label>表示</label>
-                    <input name="ex_statuses" type="radio" class="" value="0">
+                    <input name="ex_statuses_` + key + `" type="radio" class="" value="0">
                     <label>非表示</label>       
                 </div>
-                <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex(${index})">削除</button>
+                <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex(${key})">削除</button>
             </div>
         `;
-        key = key + add_count;
-        console.log(key);
-        element.insertAdjacentHTML('afterend', createElement);
+        
+        document.getElementById('key').value = key;
+        element.insertAdjacentHTML('beforeend', createElement);
     }
-    function remove_ex(index) {
-        const elements = document.querySelectorAll('.ex_data');
-        elements[index].remove();
+    
+    function remove_ex(key) {
+        var delete_id = 'data_' + key;
+        const elements = document.getElementById(delete_id);
+        elements.remove();
     }
+
+    let count = 0; 
+    let btn = document.getElementById('delete_btn');
+    console.log(btn);
+
+    btn.addEventListener('click', function() {
+      alert(document.deleteform.delete_id.value);
+
+
+      document.getElementById('delete_path').value = btn.value;
+
+      console.log(document.getElementById('delete_path').value);
+
+  
+      //submit()でフォームの内容を送信
+      document.deleteform.submit();
+    })
 </script>
 <div class="container">
     <h1>イベント編集</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <form name="deleteform" action="/mypage/partner/event_edit_update" method="POST">
+                @csrf     
+                <input type="hidden" name="delete_id" id="delete_path" value="">
+            </form>
             <form action="/mypage/partner/event_edit_update" method="POST">
                 @csrf
                 <div class="card mt-3">
@@ -208,7 +237,6 @@
                         @foreach ($experiences_folder->experiences as $key=>$experience)
                             <div class="card mt-3 p-3 ex_data">
                                 <input hidden name="ex_ids_{{$key+1}}" type="text" value="{{ $experience->id }}">
-                                <input hidden name="key" type="text" value="{{$key+1}}">
                                 <div class="mb-3">
                                     <label class="form-label">名前</label>
                                     <input name="ex_names_{{$key+1}}" type="text" class="form-control" value="{{ $experience->name }}">
@@ -244,14 +272,14 @@
                                     @endif
                                     
                                 </div>
-                                <a href="/mypage/partner/experience_delete/{{ $experience->id }}">
-                                    <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex({{ $loop->index }})">削除</button>
-                                </a>
+                                
+                                <button type="button" class="mt-2 btn btn-danger" id="delete_btn_{{ $experience->id }}" value="{{ $experience->id }}">削除</button>
+                                
                                 
                             </div>
                         @endforeach
-                        <input type="hidden" id="key" value="{{$key+1}}">
                         <div id="add_target"></div>
+                        <input type="hidden" id="key" name="key" value="{{$key+1}}">   
                         <button type="button" class="mt-2 btn btn-primary" onclick="add_ex({{ $experiences_folder->experiences->count() }})">追加</button>
                     </div>
                 </div>
