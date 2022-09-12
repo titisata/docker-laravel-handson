@@ -1,40 +1,18 @@
-<div id="fixdata_response"></div>
-                            @if($experienceFolder->favorite() != '')
-                                <button class="btn btn-primary" id="not_favorite">+</button>
-                            @else
-                                <button class="btn btn-danger" id="favorite" >-</button>
-                            @endif
-                        </div>
-
-
-                        var user_id = '';
-var favorite_id = '';
-
-
-// ページ読込完了後にボタンにclickイベントを登録する
-window.addEventListener("load", function(){
-	document.getElementById("favorite").addEventListener("click", function(){
-		// FoemDataオブジェクトに要素セレクタ(引数)を渡さずに宣言する
-		var fixedDatas = new FormData();
-		// appendメソッドでキーとデータの組をセットする
-		// append("キー(FORMで云うところのname属性値)",  "データ")でデータをセットできる
-        user_id = document.getElementById('user_id').value;
-        favorite_id = document.getElementById('favorite_id').value;
-		fixedDatas.append("user_id",  user_id);
-		fixedDatas.append("favorite_id",  favorite_id);
-        fixedDatas.append("table_name",  "experience_folders");
-		// XHRの宣言
-		var XHR = new XMLHttpRequest();
-		// openメソッドにPOSTを指定して送信先のURLを指定します
-		XHR.open("POST", "/experience/favorite", true);
-		// sendメソッドにデータを渡して送信を実行する
-		XHR.send(fixedDatas);
-		// サーバの応答をonreadystatechangeイベントで検出して正常終了したらデータを取得する
-		XHR.onreadystatechange = function(){
-			if(XHR.readyState == 4 && XHR.status == 200){
-				// POST送信した結果を表示する
-				document.getElementById("fixdata_response").innerHTML = XHR.responseText;
-			}
-		};
-	} ,false);
-}, false);
+@role('system_admin', 'site_admin')
+                    <li id="owner_site"><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>(管理者)サイト管理</a></li>
+					<li id="owner_partner"><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>(管理者)パートナー管理</a></li>
+                    <li id=""><a href=""><i class="fa fa-dashboard"></i>(管理者)顧客管理</a></li>
+                    <li id="owner_reserve"><a href="/mypage/owner/reserve"><i class="fa fa-puzzle-piece"></i>(管理者)予約状況</a></li>
+                    <li id=""><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>(管理者)必須表示ページ管理</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/category_display"><span class="glyphicon glyphicon-signal"></span>(管理者)カテゴリー編集</a></li>
+                @endrole
+                @role('partner')
+                    <li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>(出展者)プロフィール管理</a></li>
+                    <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>(出展者)イベント管理</a></li>
+                    <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>(出展者)お土産管理</a></li>
+                    <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>(出展者)予約状況</a></li>
+                    <li id=""><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>(出展者)必須表示ページ管理</a></li>
+                @endrole
+                @role('user')
+                    <li id="user_reserve"><a href="/mypage/user/reserve"><i class="fa fa-puzzle-piece"></i>(お客様)予約状況</a></li>
+                @endrole    

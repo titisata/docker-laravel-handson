@@ -20,6 +20,12 @@ use Illuminate\Support\Facades\Auth;
 
 class MOwnerController extends Controller
 {
+
+    public function home()
+    {
+        return view('mypage.owner.home');
+    }
+
     public function reserve()
     {
         $user = Auth::user();

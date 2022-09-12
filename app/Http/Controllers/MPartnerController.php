@@ -26,7 +26,7 @@ class MPartnerController extends Controller
 
    
 
-    public function event()
+    public function event(string $id)
     {
         $user = Auth::user();
         $partner = Partner::where('user_id', $user->id)->first();
@@ -233,7 +233,7 @@ class MPartnerController extends Controller
         return $return_view;
     }
 
-    public function goods()
+    public function goods(string $id)
     {
         $user = Auth::user();
         $partner = Partner::where('user_id', $user->id)->first();
