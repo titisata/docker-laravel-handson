@@ -16,29 +16,32 @@
 
                     <p>名前: {{ $user->name }}</p>
                     <p>メールアドレス: {{ $user->email }}</p>
+                    <p>id: {{ $user->id }}</p>
+                    
                 </div>
             </div>
 
-            {{-- パートナーのみ表示する: ここから --}}
-            @if(isset( $partner ))
-                <div class="card mt-3">
-                    <div class="card-header">パートナー情報</div>
-
-                    <div class="card-body">
-                        <p>あなたはパートナーです</p>
-                        <a href="/partner/{{ $partner->id }}">パートナー詳細画面へ</a>
-                    </div>
-                </div>
-            @endif
-            {{-- パートナーのみ表示する: ここまで --}}
+            
 
             <div class="card mt-3">
                 <div class="card-header">管理情報</div>
 
                 <div class="card-body">
+                @role('system_admin|site_admin')
                     <div>
-                        <a href="/mypage/partner">管理画面へ</a>
+                        <a href="/mypage/owner/{{ $user->id }}">管理画面へ</a>
                     </div>
+                @endrole 
+                @role('partner')
+                    <div>
+                        <a href="/mypage/partner/{{ $user->id }}">管理画面へ</a>
+                    </div>
+                @endrole    
+                @role('user')
+                    <div>
+                        <a href="/mypage/user/{{ $user->id }}">管理画面へ</a>
+                    </div>
+                @endrole  
                 </div>
             </div>
 
