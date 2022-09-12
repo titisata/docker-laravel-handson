@@ -27,21 +27,9 @@
                 <div class="card-header">管理情報</div>
 
                 <div class="card-body">
-                @role('system_admin|site_admin')
-                    <div>
-                        <a href="/mypage/owner/{{ $user->id }}">管理画面へ</a>
-                    </div>
-                @endrole 
-                @role('partner')
                     <div>
                         <a href="/mypage/partner/{{ $user->id }}">管理画面へ</a>
-                    </div>
-                @endrole    
-                @role('user')
-                    <div>
-                        <a href="/mypage/user/{{ $user->id }}">管理画面へ</a>
-                    </div>
-                @endrole  
+                    </div>  
                 </div>
             </div>
 

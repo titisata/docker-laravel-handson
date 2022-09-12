@@ -102,7 +102,7 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
 
 // 管理者がアクセスできる
 Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
-    Route::get('/{id}', [App\Http\Controllers\MOwnerController::class, 'home']);
+    
     Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
     Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
     Route::post('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_reserve_edit']);

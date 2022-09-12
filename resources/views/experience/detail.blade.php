@@ -95,8 +95,38 @@
 
     });
 
+    var count = 0;
+
     function submit_favorite(){
         document.favorite_form.submit();
+        
+        var h = document.getElementById('favorite');
+
+        if(count % 2 === 0 ){
+            h.className += ' text-secondary';
+        }else{  
+            h.classList.remove('text-secondary');
+        }
+        count++;
+        
+
+
+        return false
+    }
+
+    function submit_not_favorite(){
+        document.favorite_form.submit();
+        
+        var n = document.getElementById('not_favorite');
+       
+        if(count % 2 === 0 ){
+            n.className += ' pink';
+        }else{
+            
+            n.classList.remove('pink');
+        }
+        count++;
+
         return false
     }
 </script>
@@ -154,6 +184,10 @@ a{
 
 .small_font{
     font-size:12px;
+}
+
+.pink{
+    color:#BB4156;
 }
 </style>
 
@@ -219,13 +253,17 @@ async function commentCreate(ex_id) {
             <div class="row">
                 <div class="my-4 col-12 col-lg-7">
                     
-                    <div class="d-flex align-items-center" onclick="submit_favorite();">
+                    <div class="d-flex align-items-center" >
                         <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
-                        @if($experienceFolder->favorite() != '')
-                            <div class="ms-3" id="not_favorite"><i class="bi bi-heart-fill text-danger fs-3"></i></div>
-                        @else
-                            <div class="ms-3" id="favorite" ><i class="bi bi-heart-fill text-secondary fs-3"></i></div>
-                        @endif
+                        
+                        <div class="ms-3" >
+                            @if($experienceFolder->favorite() != '')
+                                <i id="favorite" class="bi bi-heart-fill pink fs-3" onclick="submit_favorite();"></i>
+                            @else
+                                <i id="not_favorite" class="bi bi-heart-fill text-gray fs-3" onclick="submit_not_favorite();"></i>
+                            @endif
+                        </div>
+                        
                     </div>
 
                     <form name="favorite_form" action="/favorite_edit" method="POST" target="sendFavorite">
