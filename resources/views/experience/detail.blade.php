@@ -94,6 +94,11 @@
         }
 
     });
+
+    function submit_favorite(){
+        document.favorite_form.submit();
+        return false
+    }
 </script>
 
 <style>
@@ -214,7 +219,7 @@ async function commentCreate(ex_id) {
             <div class="row">
                 <div class="my-4 col-12 col-lg-7">
                     
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center" onclick="submit_favorite();">
                         <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
                         @if($experienceFolder->favorite() != '')
                             <div class="ms-3" id="not_favorite"><i class="bi bi-heart-fill text-danger fs-3"></i></div>
@@ -222,9 +227,15 @@ async function commentCreate(ex_id) {
                             <div class="ms-3" id="favorite" ><i class="bi bi-heart-fill text-secondary fs-3"></i></div>
                         @endif
                     </div>
-                    
 
-                    <iframe name="sendPhoto" style="width:0px;height:0px;border:0px;"></iframe>
+                    <form name="favorite_form" action="/favorite_edit" method="POST" target="sendFavorite">
+                        @csrf
+                        <input type="hidden" name="f_user_id" value="{{ $user->id }}">
+                        <input type="hidden" name="f_experienceFolder_id" value="{{ $experienceFolder->id }}">
+                        <input type="hidden" name="f_table_name" value="experience_folders">
+                    </form>
+
+                    <iframe name="sendFavorite" style="width:0px;height:0px;border:0px;"></iframe>
                     
                     @if($experienceFolder->average_rate < 1.5)
                             <p class="mb-0">テスト用に表示、0は表示しないようにする</p>
