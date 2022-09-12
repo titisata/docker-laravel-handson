@@ -243,6 +243,7 @@ async function commentCreate(goods_folder_id) {
                             </div>
                         @endif
             
+                @if( $mycomment->user_id != $user->id )
                     <div class="m-3">
                     <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                         <div class="d-flex justify-content-between align-items-center mt-2">
@@ -256,6 +257,12 @@ async function commentCreate(goods_folder_id) {
                             <button class="btn btn-outline-primary" onclick="commentCreate({{ $goods_folder->id }})">投稿</button>
                         </div>
                     </div>
+                @else
+                    <div class="m-3">
+                        <p>投稿済みです</p>
+                    </div>
+
+                @endif    
                 </div>
 
                 <div class="card-body">

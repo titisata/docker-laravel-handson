@@ -113,12 +113,12 @@ class ExperienceController extends Controller
         $experienceFolder = ExperienceFolder::find($folder_id);
         $experience = Experience::find($id);
         $comments = $experienceFolder->comments();
-        $mycomment = $experienceFolder->mycomment()->where('user_id', $user->id);
+        $mycomment = $experienceFolder->mycomment();
 
         if ($experienceFolder == null || $experience == null) {
             return abort(404);
         }
-        return view('experience.reserve', compact('experienceFolder', 'experience', 'comments', 'mycomment'));
+        return view('experience.reserve', compact('user', 'experienceFolder', 'experience', 'comments', 'mycomment'));
     }
 
     public function post(Request $request)

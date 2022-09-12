@@ -108,7 +108,7 @@ class ExperienceFolder extends Model
     }
 
     /**
-     * コメントを取得
+     * 自分のコメントを取得
      *
      * @return Collection<ExperienceComment>
      */

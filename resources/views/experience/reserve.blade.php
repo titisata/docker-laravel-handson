@@ -440,19 +440,27 @@ input[type="radio"] {
                                     <img src="/images/star5.png" style="width:120px;height35px">
                                     </div>
                                 @endif
-                            <div class="m-3">
-                                <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <select class="form-select" id="rate_input" style="width:80px;" >
-                                        <option value="1">☆1</option>
-                                        <option value="2">☆2</option>
-                                        <option value="3">☆3</option>
-                                        <option value="4">☆4</option>
-                                        <option value="5" selected="selected">☆5</option>
-                                    </select>
-                                    <button class="btn btn-outline-primary"  onclick="commentCreate({{ $experienceFolder->id }})">投稿</button>
-                                </div>
-                            </div>
+                                
+                                @if( $mycomment->user_id != $user->id )
+                                    <div class="m-3">
+                                        <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
+                                        <div class="d-flex justify-content-between align-items-center mt-2">
+                                            <select class="form-select" id="rate_input" style="width:80px;" >
+                                                <option value="1">☆1</option>
+                                                <option value="2">☆2</option>
+                                                <option value="3">☆3</option>
+                                                <option value="4">☆4</option>
+                                                <option value="5" selected="selected">☆5</option>
+                                            </select>
+                                            <button class="btn btn-outline-primary"  onclick="commentCreate({{ $experienceFolder->id }})">投稿</button>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="m-3">
+                                        <p>投稿済みです</p>
+                                    </div>
+
+                                @endif
                         </div>
                         <div class="card-body">
                             @foreach ($comments as $comment)

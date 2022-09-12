@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ExpreienceReserveSeeder::class);
         $this->call(ImageSeeder::class);
         $this->call(ExperienceCommentSeeder::class);
+        $this->call(GoodsCommentSeeder::class);
         $this->call(ScheduleSeeder::class);
         $this->call(ExperienceCategorySeeder::class);
         $this->call(GoodsCategorySeeder::class);
