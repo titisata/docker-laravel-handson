@@ -76,16 +76,16 @@ li.item {
                         </div>
                         <div class="d-flex m-2 ">
                             <div>
-                                <input type="radio" name="loding">
-                                <label for="">宿泊あり</label>
+                                <input type="radio" name="is_loding" id="lodging" value="1">
+                                <label for="lodging">宿泊あり</label>
                             </div>
                             <div class="mx-4">
-                                <input type="radio" name="loding">
-                                <label for="">宿泊なし</label>
+                                <input type="radio" name="is_loding" id="not_lodging" value="0">
+                                <label for="not_lodging">宿泊なし</label>
                             </div>
                             <div>
-                                <input type="radio" name="loding">
-                                <label for="">全て</label>
+                                <input type="radio" name="is_loding" id="all" value="">
+                                <label for="all">全て</label>
                             </div>
                         </div>
                         

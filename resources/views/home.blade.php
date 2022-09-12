@@ -68,7 +68,7 @@
                 <div class="card-header">注文したお土産</div>
                 <div class="card-body">
                     @forelse ($ordered_goods as $ordered_goods_one)
-                        <a href="/experience/{{ $ordered_goods_one->goods->id }}">
+                        <a href="/goods/{{ $ordered_goods_one->goods->id }}">
                             <div class="mt-1 p-3 card">
                                 <div>
                                     <p>名前: {{ $ordered_goods_one->goods->name }}</p>

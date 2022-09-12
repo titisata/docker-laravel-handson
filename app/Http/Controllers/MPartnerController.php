@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\ExperienceCategory;
 use App\Models\ExperienceFolder;
 use App\Models\Experience;
@@ -632,7 +633,6 @@ class MPartnerController extends Controller
 
     public function link_insert(string $id)
     {
-        
         $user = Auth::user();
         $links = Link::where('partner_id', $id)->first();
         

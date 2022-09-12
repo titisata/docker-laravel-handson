@@ -117,7 +117,7 @@ class ExperienceFolder extends Model
     {
         $mycomment = ExperienceComment::where([
             ['experience_folder_id', '=', $this->id],
-        ])->orderBy('created_at', 'desc')->first();
+        ])->orderBy('created_at', 'desc')->first(['user_id']);
         return $mycomment;
     }
 
@@ -193,6 +193,7 @@ class ExperienceFolder extends Model
      *
      * @param string $date 検索日付
      * @param ?string $category カテゴリ
+     *
      * @param int $per_page 1ページ当たりの表示数
      * @return Collection<ExperienceFolder>
      */
@@ -211,6 +212,11 @@ class ExperienceFolder extends Model
         if ($category) {
             $where[] = ['category1', '=', $category];
         }
+
+        // 宿泊あり・なしによる検索条件
+        // if ($is_loding != "") {
+        //     $where[] = ['is_lodging', '=', $is_lodging];
+        // }
 
         $experienceFolders = ExperienceFolder::where($where)->orderBy("created_at", "desc")->paginate($per_page);
 

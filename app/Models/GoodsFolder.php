@@ -91,7 +91,7 @@ class GoodsFolder extends Model
     {
         $mycomment = GoodsComment::where([
             ['goods_folder_id', '=', $this->id],
-        ])->orderBy('created_at', 'desc')->first();
+        ])->orderBy('created_at', 'desc')->first(['user_id']);
         return $mycomment;
     }
 

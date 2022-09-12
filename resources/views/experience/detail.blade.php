@@ -134,9 +134,7 @@ a{
 .btn-shadow{
     box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 65%);
 }
-.bg-f-part{
-    background-color:#343a40;
-}
+
 .text-gray{
     color:#6f6e6f;
 }
@@ -377,7 +375,7 @@ async function commentCreate(ex_id) {
                                 @endif
 
 
-                            @if( $mycomment->user_id != $user->id )
+                            @if( $mycomment == null )
                             <div class="m-3">
                                 <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                                 <div class="d-flex justify-content-between align-items-center mt-2">

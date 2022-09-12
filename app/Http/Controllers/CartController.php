@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ExperienceCartItem;
 use App\Models\ExperienceReserve;
 use App\Models\GoodCartItem;
+use App\Models\Goods;
 use App\Models\GoodsOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

@@ -2,7 +2,7 @@
 
 @section('menu', 'partner_link')
 @section('content')
-    <h1>ようこそ {{ Auth::user()->name }} 様</h1>
+    <h1>ようこそ {{ $user->name }} 様</h1>
     <h2>必須表示ページの編集ページです</h2>
     <div class="card">
         
@@ -21,10 +21,9 @@
             @empty
                 <p class="p-3">作成したドキュメントはありません</p>
             @endforelse
-            <form action="/mypage/partner/link_insert/{{ Auth::user()->id }}">
-                @csrf
+            <a href="/mypage/partner/link_insert/{{ $user->id }}">
                 <button class="btn btn-primary">新規のドキュメントを追加</button>
-            </form>
+            </a>
         </div>
     </div>
 @endsection

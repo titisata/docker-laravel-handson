@@ -152,14 +152,14 @@
                     <div class="d-flex row justify-content-evenly mt-5">
                         <div class="col-10 col-md-5">
                             <a role="botton" href="/search/goods" class="border btn btn-lg btn-color ms-2 mb-2 text-center fw-bold rounded-3 shadow-sm fs-4 w-100 d-flex flex-column"  style="font-size:40px;">
-                            <img src="/images/bag.png" class="mx-auto my-3" style="width:60px">
+                            <img src="/images/bag.png" class="mx-auto my-3" style="width:72px">
                                 <p class="mb-0 btn-text">名産品を買う</p>
                             </a>
 
                         </div>
                         <div class="col-10 col-md-5">
                             <a role="botton" href="/search/experience" class="border btn btn-lg btn-color m-2 mt-4 mt-md-0 text-center fw-bold rounded-3 shadow-sm fs-4 w-100 d-flex flex-column" style="font-size:40px;">
-                                <img src="/images/active.png" class="mx-auto my-3" style="width:60px">
+                                <img src="/images/active.png" class="mx-auto my-3" style="width:72px">
                                 <p class="mb-0 btn-text">現地で遊ぶ</p>
                             </a>
                         </div>

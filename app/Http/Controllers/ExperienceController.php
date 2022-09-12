@@ -20,6 +20,7 @@ class ExperienceController extends Controller
     {
         $keyword = $request->keyword;
         $category = $request->category;
+        $is_lodging = $request->is_lodging;
         $categories = ExperienceCategory::all();
        
 
@@ -32,7 +33,13 @@ class ExperienceController extends Controller
             $categories = ExperienceCategory::all();
             $img_category = ExperienceCategory::where('name', $category)->first();
             $images = Image::where('table_name', 'experience_category')->where('table_id', $img_category->id)->first();
+            // if( $is_lodging != ""){
+            //     $experienceFolders = ExperienceFolder::search($keyword, $category, $is_lodging, per_page: 10);
+            // }else{
+            //     $experienceFolders = ExperienceFolder::search($keyword, $category, per_page: 10);
+            // }
             $experienceFolders = ExperienceFolder::search($keyword, $category, per_page: 10);
+           
             return view('search.experience_list', compact('experienceFolders', 'categories', 'images'));
         }
 
@@ -53,6 +60,7 @@ class ExperienceController extends Controller
         $reserves = $experienceFolder->reserves;
         $schedules = $experienceFolder->schedules;
         $mycomment = $experienceFolder->mycomment();
+         
 
         $events = [];
         foreach ($reserves as $reserve) {
@@ -98,14 +106,7 @@ class ExperienceController extends Controller
         return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment'));
     }
 
-    public function favorite(Request $request)
-    {
-        $test = $request->test;
-        echo $test;
-        exit;
-
-
-    }
+    
 
     public function reserve_detail(string $folder_id, string $id)
     {
