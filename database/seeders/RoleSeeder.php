@@ -15,9 +15,9 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create([
-            'user_id' => 1,
-            'role' => 1,
-        ]);
+        // Role::create([
+        //     'user_id' => 1,
+        //     'role' => 1,
+        // ]);
     }
 }

@@ -139,5 +139,7 @@ Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
     Route::get('/link_display', [App\Http\Controllers\MOwnerController::class, 'link_display']);
     Route::get('/link_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'link_edit']);
     Route::post('/action_link_edit', [App\Http\Controllers\MOwnerController::class, 'action_link_edit']);
-    
+    Route::get('/users', [App\Http\Controllers\MUserController::class, 'users']);
+    Route::get('/users_edit/{id?}', [App\Http\Controllers\MUserController::class, 'users_edit']);
+    Route::post('/users_edit', [App\Http\Controllers\MUserController::class, 'users_edit_post']);
 });
