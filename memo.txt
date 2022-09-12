@@ -1,81 +1,40 @@
- function formSwitch(){
-       
-        
-        var adult = document.getElementById('adult').value;
-        var child = document.getElementById('child').value;
-        var adult_price = document.getElementById('adult_price');
-        var child_price = document.getElementById('child_price');
+<div id="fixdata_response"></div>
+                            @if($experienceFolder->favorite() != '')
+                                <button class="btn btn-primary" id="not_favorite">+</button>
+                            @else
+                                <button class="btn btn-danger" id="favorite" >-</button>
+                            @endif
+                        </div>
 
-        var adult_result;
-        adult_result = (adult_price.innerHTML*adult);
 
-        var child_result;
-        child_result = (child_price.innerHTML*child);
+                        var user_id = '';
+var favorite_id = '';
 
-        
 
-    }
-
-    function radiohotelSwitch(){
-        const formElements = document.forms.reserve_form;
-
-        console.log(formElements);
-
-        let attribute = formElements.hotel_group_id.value;
-
-        let get_hotel_adult = 'hotel_adult_price_' + attribute;
-        let get_hotel_child = 'hotel_child_price_' + attribute;
- 
-        console.log(get_hotel_adult);
-        console.log(get_hotel_child);
-
-        var hotel_adult_price = document.getElementById(get_hotel_adult).innerHTML;
-        var hotel_child_price = document.getElementById(get_hotel_child).innerHTML;
-       
-        console.log(hotel_adult_price);
-        console.log(hotel_child_price);
-
-        var hotel_adult = document.getElementById('adult').value;
-        var hotel_child = document.getElementById('child').value;
-
-        var hotel_adult_result;
-        hotel_adult_result = (hotel_adult_price*hotel_adult);
-
-        var hotel_child_result;
-        hotel_child_result = (hotel_child_price*hotel_child);
-
-        console.log(hotel_adult_result);
-        console.log(hotel_child_result);
-    }
-
-    function radiofoodSwitch(){
-        const formElements = document.forms.reserve_form;
-
-        console.log(formElements);
-
-        let attribute = formElements.food_group_id.value;
-
-        let get_food_adult = 'food_adult_price_' + attribute;
-        let get_food_child = 'food_child_price_' + attribute;
- 
-        console.log(get_food_adult);
-        console.log(get_food_child);
-
-        var food_adult_price = document.getElementById(get_food_adult).innerHTML;
-        var food_child_price = document.getElementById(get_food_child).innerHTML;
-       
-        console.log(food_adult_price);
-        console.log(food_child_price);
-
-        var food_adult = document.getElementById('adult').value;
-        var food_child = document.getElementById('child').value;
-
-        var food_adult_result;
-        adult_result = (food_adult_price*food_adult);
-
-        var food_child_result;
-        child_result = (food_child_price*food_child);
-
-        console.log(food_adult_result);
-        console.log(food_child_result);
-    }
+// ページ読込完了後にボタンにclickイベントを登録する
+window.addEventListener("load", function(){
+	document.getElementById("favorite").addEventListener("click", function(){
+		// FoemDataオブジェクトに要素セレクタ(引数)を渡さずに宣言する
+		var fixedDatas = new FormData();
+		// appendメソッドでキーとデータの組をセットする
+		// append("キー(FORMで云うところのname属性値)",  "データ")でデータをセットできる
+        user_id = document.getElementById('user_id').value;
+        favorite_id = document.getElementById('favorite_id').value;
+		fixedDatas.append("user_id",  user_id);
+		fixedDatas.append("favorite_id",  favorite_id);
+        fixedDatas.append("table_name",  "experience_folders");
+		// XHRの宣言
+		var XHR = new XMLHttpRequest();
+		// openメソッドにPOSTを指定して送信先のURLを指定します
+		XHR.open("POST", "/experience/favorite", true);
+		// sendメソッドにデータを渡して送信を実行する
+		XHR.send(fixedDatas);
+		// サーバの応答をonreadystatechangeイベントで検出して正常終了したらデータを取得する
+		XHR.onreadystatechange = function(){
+			if(XHR.readyState == 4 && XHR.status == 200){
+				// POST送信した結果を表示する
+				document.getElementById("fixdata_response").innerHTML = XHR.responseText;
+			}
+		};
+	} ,false);
+}, false);

@@ -131,7 +131,7 @@ async function commentCreate(goods_folder_id) {
         
 
 
-                @forelse($goods_folder->goods as $goods)
+                @forelse($goods_folder->active_goods as $goods)
                 <form class="mb-3 col-md-6 offset-md-3" action="{{ Request::url() }}" method="POST" onsubmit='return check();'>    
                     <div class="card bg-color text-more-gray mt-3 p-3">
                         @csrf
@@ -165,11 +165,18 @@ async function commentCreate(goods_folder_id) {
                 @empty
                     <p>商品がありません</p>
                 @endforelse
+                @if($goods_folder->status == 1)
                     <div class="text-center pt-3">
                         <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-10 col-lg-10"  type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
                         </button>
                     </div>
+                @else
+                    <div class="text-center pt-3">
+                        <p class="text-danger">現在この商品は扱っておりません</p>
+                    </div>
+                
+                @endif
                 </form>
             <div class="my-5">
                 <h5 class="mb-0 fw-bold text-gray">商品説明</h5>
@@ -236,6 +243,7 @@ async function commentCreate(goods_folder_id) {
                             </div>
                         @endif
             
+                @if( $mycomment->user_id != $user->id )
                     <div class="m-3">
                     <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                         <div class="d-flex justify-content-between align-items-center mt-2">
@@ -249,6 +257,12 @@ async function commentCreate(goods_folder_id) {
                             <button class="btn btn-outline-primary" onclick="commentCreate({{ $goods_folder->id }})">投稿</button>
                         </div>
                     </div>
+                @else
+                    <div class="m-3">
+                        <p>投稿済みです</p>
+                    </div>
+
+                @endif    
                 </div>
 
                 <div class="card-body">

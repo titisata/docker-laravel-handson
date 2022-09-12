@@ -15,6 +15,20 @@ class ExperienceFolder extends Model
 
     protected $fillable= [
         'average_rate',
+        'partner_id',
+        'company_id',
+        'name',
+        'price_adult',
+        'price_child',
+        'address',
+        'description',
+        'detail',
+        'caution',
+        'is_lodging',
+        'is_before_lodging',
+        'status',
+        'recommend_flag',
+        'category1',
     ];
 
     /**
@@ -26,6 +40,16 @@ class ExperienceFolder extends Model
     public function experiences()
     {
         return $this->hasMany(Experience::class);
+    }
+
+    public function active_experiences()
+    {
+        // while(){
+        //     $sql = $sql ."->where('".$jouken(0) ."','".$jouken(1)."')";
+        //     $sql = $sql ."->where('status', '1')";
+        // }
+        // return $this->hasMany(Experience::class).$sql;
+        return $this->hasMany(Experience::class)->where('status', '1');
     }
 
     /**
@@ -41,6 +65,21 @@ class ExperienceFolder extends Model
             ['table_id', '=', $this->id],
         ])->get();
         return $imgaes;
+    }
+
+    /**
+     * お気に入りを取得
+     *
+     * @return Collection<Favorite>
+     */
+
+    public function favorite()
+    {
+        $favorites = Favorite::where([
+            ['table_name', '=', 'experience_folders'],
+            ['favorite_id', '=', $this->id],
+        ])->first();
+        return $favorites;
     }
 
     /**
@@ -66,6 +105,20 @@ class ExperienceFolder extends Model
             ['experience_folder_id', '=', $this->id],
         ])->orderBy('created_at', 'desc')->get();
         return $comments;
+    }
+
+    /**
+     * 自分のコメントを取得
+     *
+     * @return Collection<ExperienceComment>
+     */
+
+    public function mycomment()
+    {
+        $mycomment = ExperienceComment::where([
+            ['experience_folder_id', '=', $this->id],
+        ])->orderBy('created_at', 'desc')->first();
+        return $mycomment;
     }
 
     /**
@@ -111,6 +164,7 @@ class ExperienceFolder extends Model
     {
         return $this->hasMany(HotelGroup::class);
     }
+
 
     /**
      * その日が休みかどうか

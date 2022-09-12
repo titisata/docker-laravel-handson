@@ -143,7 +143,7 @@
                     </button>
                 </div>
 
-                <h1 class="text-center my-5 fw-bold font-gray">{{ $site_masters->sales_copy}}</h1>
+                <h1 class="text-center my-5 fw-bold font-gray">{{ $site_masters->sales_copy }}</h1>
                 <p class="text-center col-9 font-gray" style="margin:0 auto;">
                     {{ $site_masters->comment}}
                     </p>

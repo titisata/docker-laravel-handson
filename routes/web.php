@@ -29,6 +29,7 @@ Route::post('/goods/{id}', [App\Http\Controllers\GoodsController::class, 'post']
 Route::get('/experience/{id}', [App\Http\Controllers\ExperienceController::class, 'show']);
 Route::get('/experience/{folder_id}/{id}', [App\Http\Controllers\ExperienceController::class, 'reserve_detail']);
 Route::post('/experience/{folder_id}/{id}', [App\Http\Controllers\ExperienceController::class, 'post']);
+Route::post('/experience/favorite', [App\Http\Controllers\ExperienceController::class, 'favorite']);
 Route::redirect('/search', '/search/experience');
 Route::get('/link/{id}', [App\Http\Controllers\LinkController::class, 'show']);
 
@@ -59,8 +60,13 @@ Route::prefix('mypage/user')->middleware(['auth'])->group(function () {
 Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
     Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
+    Route::get('/event_add/{id}', [App\Http\Controllers\MPartnerController::class, 'event_add']);
+    Route::post('/action_event_add', [App\Http\Controllers\MPartnerController::class, 'action_event_add']);
     Route::get('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit']);
-    Route::post('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit_update']);
+    Route::post('event_edit_update', [App\Http\Controllers\MPartnerController::class, 'event_edit_update']);
+    Route::post('/action_event_delete', [App\Http\Controllers\MPartnerController::class, 'action_event_delete']);
+    Route::get('/experience_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'experience_delete']);
+    Route::post('/action_experience_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'action_experience_delete']);
     Route::get('/event_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'event_image_insert']);
     Route::post('/action_event_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'action_event_image_insert']);
     Route::get('/event_image_update/{id}', [App\Http\Controllers\MPartnerController::class, 'event_image_update']);
@@ -68,8 +74,13 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::get('/event_image_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'event_image_delete']);
     Route::post('/action_event_image_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'action_event_image_delete']);
     Route::get('/goods', [App\Http\Controllers\MPartnerController::class, 'goods']);
+    Route::get('/goods_add/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_add']);
+    Route::post('/action_goods_add', [App\Http\Controllers\MPartnerController::class, 'action_goods_add']);
     Route::get('/goods/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_edit']);
-    Route::post('/goods/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_edit_update']);
+    Route::post('/goods_edit_update', [App\Http\Controllers\MPartnerController::class, 'goods_edit_update']);    
+    Route::get('/goods_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_delete']);
+    Route::post('/action_goods_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_delete']);
+    Route::post('/action_goods_display_delete', [App\Http\Controllers\MPartnerController::class, 'action_goods_display_delete']);
     Route::get('/goods_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_image_insert']);
     Route::post('/action_goods_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_image_insert']);
     Route::get('/goods_image_update/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_image_update']);

@@ -37,6 +37,5 @@ class SiteMaster extends Model
         return $imgaes;
     }
 
-
    
 }

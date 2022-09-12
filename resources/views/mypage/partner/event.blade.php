@@ -5,7 +5,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>イベント一覧</h1>
+            <div class="d-flex">
+                <h1>イベント一覧</h1>
+                <a href="/mypage/partner/event_add/{{ $user->id }}">
+                    <div class="btn btn-success">
+                        新規登録     
+                    </div>
+                </a>
+            </div>
+            
             @forelse($experiences_folders as $experienceFolder)
                 <div class="card mb-3 ">
                     <div class="contain">
@@ -16,12 +24,18 @@
                                 </div>
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title text-start mb-0 text-truncate" >{{ $experienceFolder->name }}</h5>
-                                    <p class="card-text fw-bold fs-4 text-nowrap text-end mt-auto">￥{{ $experienceFolder->price_child }}～</p>
+                                    <p class="card-text fw-bold fs-4 text-nowrap text-end mt-auto">￥{{ number_format($experienceFolder->price_child) }}～</p>
                                 </div>
                             </div>
                         </a>
                     </div>
+                    <form action="/mypage/partner/action_event_delete" method="POST">
+                        @csrf
+                        <button class="btn btn-danger">イベント削除</button>
+                        <input type="hidden" name="id" value="{{ $experienceFolder->id }}">
+                    </form>
                 </div>
+                
             @empty
                 <p>イベントがありません</p>
             @endforelse

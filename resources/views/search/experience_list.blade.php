@@ -75,7 +75,7 @@ li.item {
                                     <label for="">全て</label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-sm btn-pink rounded-pill text-white my-2 btn-shadow fs-3"><img src="" alt="">検索</button>
+                            <button type="submit" class="btn btn-sm btn-pink rounded-pill text-white my-2 btn-shadow fs-3"><img src="/images/glass.png" alt="" style="width:32px;">検索</button>
                         </div>
                         
                     </form>
@@ -87,7 +87,7 @@ li.item {
             <h2 class="mt-5 ms-3 ms-md-0 fw-bold">検索結果</h2>
             <div class="d-flex justify-content-between flex-wrap">
                 
-                @forelse($experienceFolders as $experienceFolder)
+                @forelse($experienceFolders->where('status', 1) as $experienceFolder)
                     @if (!$experienceFolder->is_holiday(app('request')->input('keyword')))
                         @include('components.experience_cell', ['experienceFolder'=>$experienceFolder])
                     @endif

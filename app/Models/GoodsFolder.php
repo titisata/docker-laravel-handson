@@ -36,6 +36,11 @@ class GoodsFolder extends Model
         return $this->hasMany(Goods::class);
     }
 
+    public function active_goods()
+    {
+        return $this->hasMany(Goods::class)->where('status', '1');
+    }
+
     /**
      * 画像を取得
      *
@@ -65,7 +70,7 @@ class GoodsFolder extends Model
     /**
      * コメントを取得
      *
-     * @return Collection<ExperienceComment>
+     * @return Collection<GoodsComment>
      */
 
     public function comments()
@@ -74,6 +79,20 @@ class GoodsFolder extends Model
             ['goods_folder_id', '=', $this->id],
         ])->orderBy('created_at', 'desc')->get();
         return $comments;
+    }
+
+     /**
+     * 自分のコメントを取得
+     *
+     * @return Collection<GoodsComment>
+     */
+
+    public function mycomment()
+    {
+        $mycomment = GoodsComment::where([
+            ['goods_folder_id', '=', $this->id],
+        ])->orderBy('created_at', 'desc')->first();
+        return $mycomment;
     }
 
     /**
