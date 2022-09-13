@@ -61,5 +61,12 @@ class PermissionSeeder extends Seeder
 		$user2->assignRole('site_admin');
         $user3->assignRole('partner');
         $user4->assignRole('user');
+
+        //パートナーを登録
+        \App\Models\Partner::create([
+            'user_id' => $user3->id,
+            'name' => $user3->name,
+            
+        ]);
     }
 }

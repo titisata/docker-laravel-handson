@@ -13,7 +13,6 @@ use App\Models\Partner;
 use App\Models\Image;
 use App\Models\Link;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,8 +24,7 @@ class MPartnerController extends Controller
     }
 
    
-
-    public function event(string $id)
+    public function event()
     {
         $user = Auth::user();
         $partner = Partner::where('user_id', $user->id)->first();
@@ -233,7 +231,7 @@ class MPartnerController extends Controller
         return $return_view;
     }
 
-    public function goods(string $id)
+    public function goods()
     {
         $user = Auth::user();
         $partner = Partner::where('user_id', $user->id)->first();
@@ -291,7 +289,7 @@ class MPartnerController extends Controller
         return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
     }
 
-    public function goods_edit_update( Request $request)
+    public function goods_edit_update(Request $request)
     {
 
         $id = $request->id;

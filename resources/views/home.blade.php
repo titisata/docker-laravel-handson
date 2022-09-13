@@ -29,17 +29,17 @@
                 <div class="card-body">
                 @role('system_admin|site_admin')
                     <div>
-                        <a href="/mypage/owner/{{ $user->id }}">管理画面へ</a>
+                        <a href="/mypage/owner">管理画面へ</a>
                     </div>
                 @endrole 
                 @role('partner')
                     <div>
-                        <a href="/mypage/partner/{{ $user->id }}">管理画面へ</a>
+                        <a href="/mypage/partner">管理画面へ</a>
                     </div>
                 @endrole    
                 @role('user')
                     <div>
-                        <a href="/mypage/user/{{ $user->id }}">管理画面へ</a>
+                        <a href="/mypage/user">管理画面へ</a>
                     </div>
                 @endrole  
                 </div>

@@ -27,5 +27,7 @@ class PartnerSeeder extends Seeder
             'address' => '千葉県木更津市北浜町１',
             'phone' => '042-xxxx-xxxx',
         ]);
+
+        
     }
 }
