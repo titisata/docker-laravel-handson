@@ -52,13 +52,13 @@ Route::middleware(['auth'])->group(function () {
 
 // ユーザーがアクセスできる
 Route::prefix('mypage/user')->middleware(['auth'])->group(function () {
-    Route::get('/{id}', [App\Http\Controllers\MUserController::class, 'home']);
+    Route::get('/', [App\Http\Controllers\MUserController::class, 'home']);
     Route::get('/reserve', [App\Http\Controllers\MUserController::class, 'reserve']);
 });
 
 // パートナーがアクセスできる
 Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
-    Route::get('/{id}', [App\Http\Controllers\MPartnerController::class, 'home']);
+    Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
     Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
     Route::get('/event_add/{id}', [App\Http\Controllers\MPartnerController::class, 'event_add']);
     Route::post('/action_event_add', [App\Http\Controllers\MPartnerController::class, 'action_event_add']);
@@ -103,7 +103,7 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
 
 // 管理者がアクセスできる
 Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
-    Route::get('/{id}', [App\Http\Controllers\MOwnerController::class, 'home']);
+    Route::get('/', [App\Http\Controllers\MOwnerController::class, 'home']);
     Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
     Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
     Route::post('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_reserve_edit']);
