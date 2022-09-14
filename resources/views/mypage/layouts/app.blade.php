@@ -294,13 +294,15 @@
                     <li id="owner_reserve"><a href="/mypage/owner/reserve"><i class="fa fa-puzzle-piece"></i>(管理者)予約状況</a></li>
                     <li id=""><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>(管理者)必須表示ページ管理</a></li>
                     <li id="owner_site"><a href="/mypage/owner/category_display"><span class="glyphicon glyphicon-signal"></span>(管理者)カテゴリー編集</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/hotel_group_display"><span class="glyphicon glyphicon-signal"></span>(管理者)ホテルグループ編集</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/hotel_display"><span class="glyphicon glyphicon-signal"></span>(管理者)ホテル編集</a></li>
                 @endrole
                 @role('partner')
                     <li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>(出展者)プロフィール管理</a></li>
                     <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>(出展者)イベント管理</a></li>
                     <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>(出展者)お土産管理</a></li>
                     <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>(出展者)予約状況</a></li>
-                    <li id=""><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>(出展者)必須表示ページ管理</a></li>
+                    <li id=""><a href="/mypage/partner/link_display/{id}"><i class="fa fa-dashboard"></i>(出展者)必須表示ページ管理</a></li>
                 @endrole
                 @role('user')
                     <li id="user_reserve"><a href="/mypage/user/reserve"><i class="fa fa-puzzle-piece"></i>(お客様)予約状況</a></li>

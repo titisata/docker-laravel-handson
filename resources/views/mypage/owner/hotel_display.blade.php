@@ -1,20 +1,28 @@
+@extends('mypage.layouts.app')
+
+@section('menu', 'category')
+@section('content')
+
 <div class="container">
     <h1>ホテル一覧</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card mt-3">
-                <div class="card-header">ホテル編集</div>
+            <div class="card-header d-flex">
+                <p>ホテル編集</p>
+                <form action="/mypage/owner/hotel_insert" method="POST"> 
+                    @csrf
+                    <div class="d-flex">
+                        <button type="submit" class="btn btn-sm btn-primary mx-2" name="update">追加</button>
+                        <input type="hidden" name="id" value="">
+                    </div>
+                
+                </form>
+            </div>
                 <div class="card-body">
 
                     <p>現在登録中のホテル</p>
-                        <form action="/mypage/owner/hotel_insert" method="POST">
-                            @csrf
-                            <div class="d-flex">
-                                <button type="submit" class="btn btn-sm btn-primary mx-2" name="update">追加</button>
-                                <input type="hidden" name="id" value="">
-                            </div>
                         
-                        </form>
                     <div class="d-flex flex-column">
                     @foreach( $hotels as $hotel)
                         <div class='d-flex my-2'>
@@ -47,21 +55,4 @@
     </div>
 </div>
 
- HotelSelect::create([
-            'hotel_group_id' => '1',
-            'hotel_id' => '1',
-        ]);
-        HotelSelect::create([
-            'hotel_group_id' => '1',
-            'hotel_id' => '2',
-        ]);
-        HotelSelect::create([
-            'hotel_group_id' => '2',
-            'hotel_id' => '3',
-        ]);
-        HotelSelect::create([
-            'hotel_group_id' => '2',
-            'hotel_id' => '4',
-        ]);
-
-        ssh -o StrictHostKeyChecking=no -p 10022 ${USER_NAME}@${HOST_NAME} 'cd /home/b-partners01/ano-pla.com/uratabi && git pull && php artisan migrate:fresh --seed && composer require spatie/laravel-permission && php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"'
+@endsection

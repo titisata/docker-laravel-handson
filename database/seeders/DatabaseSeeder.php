@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(SiteMasterSeeder::class);
         $this->call(FavoriteSeeder::class);
+        $this->call(HotelSelectSeeder::class);
        
     }
 }

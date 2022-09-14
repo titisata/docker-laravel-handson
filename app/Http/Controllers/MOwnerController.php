@@ -9,6 +9,7 @@ use App\Models\SiteMaster;
 use App\Models\ExperienceCategory;
 use App\Models\ExperienceReserve;
 use App\Models\HotelGroup;
+use App\Models\HotelSelect;
 use App\Models\Hotel;
 use App\Models\Image;
 use App\Models\Link;
@@ -21,6 +22,10 @@ use Illuminate\Support\Facades\Auth;
 class MOwnerController extends Controller
 {
 
+    public function home()
+    {
+        return view('mypage.owner.home');
+    }
 
     public function reserve()
     {
@@ -677,6 +682,92 @@ class MOwnerController extends Controller
         
         $return_view = $this->link_display();
         return $return_view;
+    }
+
+    public function h_insert(Request $request)
+    {
+        //name,descriptionに入れられた情報受け取りhotel.tableに追加・作成
+
+        $name = $request->name;
+        $description = $request->description;
+        $hotel_group_id = $request->hotel_group_id;
+
+        Hotel::create([
+            'name'=>$name,
+            'description'=>$description,
+            'hotel_group_id'=>$hotel_group_id,
+        ]);
+    }
+
+
+    public function h_g_edit(Request $request)
+    {
+        //requestに入れられた情報受け取りhotelgroup.tableの情報を編集
+
+        $id = $request->id;
+        $name = $request->name;
+        $description = $request->description;
+        $price_adult = $request->price_adult;
+        $price_child = $request->price_child;
+
+        HotelGroup::where('id', $id)->update([
+            'name'=>$name,
+            'description'=>$description,
+            'price_adult'=>$price_adult,
+            'price_child'=>$price_child,
+        ]);
+
+    
+    }
+
+
+    public function hotel_group_display()
+    {
+        $user = Auth::user();
+        $hotel_groups = HotelGroup::all();
+        return view('mypage.owner.hotel_group_display', compact('hotel_groups'));
+    }
+
+    public function hotel_group_make()
+    {
+        $hotel_group = HotelGroup::where('id', $id)->first();
+        $hotels = Hotel::where('hotel_group_id', $id)->get();
+        return view('mypage.owner.hotel_group_make', compact('hotel_group', 'hotels'));
+    }
+
+    public function hotel_group_edit(string $id)
+    {
+        $hotel_group = HotelGroup::where('id', $id)->first();
+        $hotel_selects = HotelSelect::where('hotel_group_id', $hotel_group->id)->get();
+        return view('mypage.owner.hotel_group_edit', compact('hotel_group', 'hotel_selects'));
+    }
+
+    public function action_hotel_group_edit(Request $request)
+    {
+        $this->h_g_edit($request);
+
+        $return_view = $this->hotel_group_display();
+        return $return_view;
+    }
+
+    public function hotel_display()
+    {
+        $hotels = Hotel::all();
+        return view('mypage.owner.hotel_display', compact('hotels'));
+    }
+
+    public function hotel_insert()
+    {
+        return view('mypage.owner.hotel_insert');
+        
+    }
+
+    public function action_hotel_insert(Request $request)
+    {
+        $this->h_insert($request);
+        $return_view = $this->hotel_group_display();
+        return $return_view;
+        
     }
 
    

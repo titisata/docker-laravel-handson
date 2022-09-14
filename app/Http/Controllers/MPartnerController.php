@@ -688,4 +688,6 @@ class MPartnerController extends Controller
         return $return_view;
         
     }
+
+    
 }

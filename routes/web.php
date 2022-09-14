@@ -51,13 +51,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // ユーザーがアクセスできる
-Route::prefix('mypage/user')->middleware(['auth'])->group(function () {
+Route::prefix('mypage/user')->middleware(['auth','role:user'])->group(function () {
     Route::get('/', [App\Http\Controllers\MUserController::class, 'home']);
     Route::get('/reserve', [App\Http\Controllers\MUserController::class, 'reserve']);
 });
 
 // パートナーがアクセスできる
-Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
+Route::prefix('mypage/partner')->middleware(['auth','role:partner'])->group(function () {
     Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
     Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
     Route::get('/event_add/{id}', [App\Http\Controllers\MPartnerController::class, 'event_add']);
@@ -87,7 +87,6 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::post('/action_goods_image_update/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_image_update']);
     Route::get('/goods_image_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_image_delete']);
     Route::post('/action_goods_image_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_image_delete']);
-    Route::get('/pro', [App\Http\Controllers\MPartnerController::class, 'pro']);
     Route::get('/profile', [App\Http\Controllers\MPartnerController::class, 'profile']);
     Route::post('/profile', [App\Http\Controllers\MPartnerController::class, 'profile_post']);
     Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
@@ -102,7 +101,7 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
 });
 
 // 管理者がアクセスできる
-Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
+Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\MOwnerController::class, 'home']);
     Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
     Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
@@ -155,5 +154,11 @@ Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
     Route::get('/users', [App\Http\Controllers\MUserController::class, 'users']);
     Route::get('/users_edit/{id?}', [App\Http\Controllers\MUserController::class, 'users_edit']);
     Route::post('/users_edit', [App\Http\Controllers\MUserController::class, 'users_edit_post']);
+    Route::get('/hotel_group_display', [App\Http\Controllers\MOwnerController::class, 'hotel_group_display']);
+    Route::get('/hotel_group_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'hotel_group_edit']);
+    Route::post('/action_hotel_group_edit', [App\Http\Controllers\MOwnerController::class, 'action_hotel_group_edit']);
+    Route::get('/hotel_display', [App\Http\Controllers\MOwnerController::class, 'hotel_display']);
+    Route::get('/hotel_insert', [App\Http\Controllers\MOwnerController::class, 'hotel_insert']);
+    Route::post('/action_hotel_insert', [App\Http\Controllers\MOwnerController::class, 'action_hotel_insert']);
 });
 
