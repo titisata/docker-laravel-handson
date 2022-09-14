@@ -16,7 +16,7 @@ return new class extends Migration
         //
         Schema::table('hotel_selects', function (Blueprint $table) {
             
-            $table->dropForeign('hotel_selectss_hotel_id_foreign');
+            $table->dropForeign('hotel_selects_hotel_id_foreign');
             $table->dropColumn('hotel_id');
         });
     }
