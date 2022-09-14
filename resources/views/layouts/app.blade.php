@@ -104,7 +104,7 @@
 
         <footer class="mt-4">
             <div class="bg-f-part py-3">
-                <h4 class="text-gray-color mb-0 ms-4 mt-4 fw-bold" style="padding-left:2rem"></h4>
+                <h4 class="text-gray-color mb-0 ms-4 mt-4 fw-bold" style="padding-left:2rem">{{ App\Models\SiteMaster::find(1) -> site_name }}</h4>
             
                 <div class="d-flex py-4 justify-content-start ms-4">
                     <div class="me-4">
@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between flex-column flex-md-row">
-                    <p class="text-gray-color ms-4 small" style="padding-left:2rem">Copyright©  All rights reserved.</p>
+                    <p class="text-gray-color ms-4 small" style="padding-left:2rem">Copyright© {{ App\Models\SiteMaster::find(1) -> site_name }} All rights reserved.</p>
                     <p class="text-gray-color ms-4 ms-md-0 me-md-4 mb-0 pb-3" style="padding-right:2rem;padding-left:2rem;"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
                 </div>
             </div>
