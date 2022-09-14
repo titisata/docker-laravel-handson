@@ -441,7 +441,7 @@ input[type="radio"] {
                                     </div>
                                 @endif
                                 
-                                @if( $mycomment->user_id != $user->id )
+                                @if( $mycomment == null )
                                     <div class="m-3">
                                         <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                                         <div class="d-flex justify-content-between align-items-center mt-2">
