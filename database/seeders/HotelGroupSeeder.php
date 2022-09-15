@@ -16,74 +16,64 @@ class HotelGroupSeeder extends Seeder
     public function run()
     {
         HotelGroup::create([
-            'experience_folder_id' => 1,
             'name' => 'ランクAホテル',
-            'description' => 'とってもよいホテル！',
-            'price_child' => 20000,
+            'description' => 'とってもよいホテルA！',
+            'price_child' => 40000,
+            'price_adult' => 50000,
+        ]);
+        HotelGroup::create([
+            'name' => 'ランクBホテル',
+            'description' => 'まあまあよいホテルB！',
+            'price_child' => 30000,
             'price_adult' => 40000,
         ]);
         HotelGroup::create([
-            'experience_folder_id' => 1,
-            'name' => 'ランクBホテル',
-            'description' => 'まあまあよいホテル！',
+            'name' => 'ランクCホテル',
+            'description' => 'とってもよいホテルC！',
+            'price_child' => 20000,
+            'price_adult' => 30000,
+        ]);
+        HotelGroup::create([
+            'name' => 'ランクDホテル',
+            'description' => 'まあまあよいホテルD！',
             'price_child' => 10000,
             'price_adult' => 20000,
         ]);
         HotelGroup::create([
-            'experience_folder_id' => 6,
-            'name' => 'ランクAホテル',
-            'description' => 'とってもよいホテル！',
-            'price_child' => 20000,
-            'price_adult' => 40000,
+            'name' => 'ランクEホテル',
+            'description' => 'とってもよいホテルE！',
+            'price_child' => 5000,
+            'price_adult' => 10000,
         ]);
         HotelGroup::create([
-            'experience_folder_id' => 6,
-            'name' => 'ランクBホテル',
-            'description' => 'まあまあよいホテル！',
-            'price_child' => 10000,
-            'price_adult' => 20000,
+            'name' => 'ランクFホテル',
+            'description' => 'まあまあよいホテルF！',
+            'price_child' => 35000,
+            'price_adult' => 45000,
         ]);
         HotelGroup::create([
-            'experience_folder_id' => 7,
-            'name' => 'ランクAホテル',
-            'description' => 'とってもよいホテル！',
-            'price_child' => 20000,
-            'price_adult' => 40000,
+            'name' => 'ランクGホテル',
+            'description' => 'とってもよいホテルG！',
+            'price_child' => 25000,
+            'price_adult' => 35000,
         ]);
         HotelGroup::create([
-            'experience_folder_id' => 7,
-            'name' => 'ランクBホテル',
-            'description' => 'まあまあよいホテル！',
-            'price_child' => 10000,
-            'price_adult' => 20000,
+            'name' => 'ランクHホテル',
+            'description' => 'まあまあよいホテルH！',
+            'price_child' => 15000,
+            'price_adult' => 25000,
         ]);
         HotelGroup::create([
-            'experience_folder_id' => 8,
-            'name' => 'ランクAホテル',
-            'description' => 'とってもよいホテル！',
-            'price_child' => 20000,
-            'price_adult' => 40000,
+            'name' => 'ランクIホテル',
+            'description' => 'とってもよいホテルI！',
+            'price_child' => 7500,
+            'price_adult' => 15000,
         ]);
         HotelGroup::create([
-            'experience_folder_id' => 8,
-            'name' => 'ランクBホテル',
-            'description' => 'まあまあよいホテル！',
-            'price_child' => 10000,
-            'price_adult' => 20000,
-        ]);
-        HotelGroup::create([
-            'experience_folder_id' => 9,
-            'name' => 'ランクAホテル',
-            'description' => 'とってもよいホテル！',
-            'price_child' => 20000,
-            'price_adult' => 40000,
-        ]);
-        HotelGroup::create([
-            'experience_folder_id' => 9,
-            'name' => 'ランクBホテル',
-            'description' => 'まあまあよいホテル！',
-            'price_child' => 10000,
-            'price_adult' => 20000,
+            'name' => 'ランクJホテル',
+            'description' => 'まあまあよいホテルJ！',
+            'price_child' => 5000,
+            'price_adult' => 7500,
         ]);
     }
 }

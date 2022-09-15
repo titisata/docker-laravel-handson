@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,10 +13,10 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('foods', function (Blueprint $table) {
+        Schema::create('food_group_selects', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
-            $table->string('description', 1000);
+            $table->foreignId('experience_folder_id')->constrained('experience_folders');
+            $table->foreignId('food_group_id')->constrained('food_groups');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('foods');
+        Schema::dropIfExists('food_group_selects');
     }
 };

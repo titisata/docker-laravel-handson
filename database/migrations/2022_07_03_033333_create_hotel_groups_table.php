@@ -14,7 +14,6 @@ return new class extends Migration {
     {
         Schema::create('hotel_groups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('experience_folder_id')->constrained('experience_folders');
             $table->string('name', 50);
             $table->string('description', 1000);
             $table->integer('price_child');

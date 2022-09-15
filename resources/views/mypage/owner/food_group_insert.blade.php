@@ -3,16 +3,16 @@
 @section('menu', 'owner_reserve_edit')
 @section('content')
 <div class="container">
-    <h1>ホテルグループ編集</h1>
+    <h1>フードグループ編集</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             
             <div class="card mt-3">
-                <div class="card-header">ホテルグループ編集</div>
+                <div class="card-header">フードグループ編集</div>
                 <div class="card-body">
-                    <form action="/mypage/owner/action_hotel_group_edit" method="POST">
+                    <form action="/mypage/owner/action_food_group_insert" method="POST">
                         @csrf
-                        <input type="hidden" name="id" value="{{ $hotel_group->id }}">
+                        <input type="hidden" name="id" value="">
                         <div>
                             <label for="">
                                 グループ名

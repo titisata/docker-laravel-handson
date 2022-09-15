@@ -16,7 +16,6 @@
 
                     <p>名前: {{ $user->name }}</p>
                     <p>メールアドレス: {{ $user->email }}</p>
-                    <p>id: {{ $user->id }}</p>
                     
                 </div>
             </div>

@@ -305,11 +305,6 @@ class MPartnerController extends Controller
         $category1 = $request->category1;
         $key = $request->key;
 
-        // echo '<pre>';
-        // print_r ($_POST);
-        // echo '</pre>';
-        // exit;
-
         $goods_folder = GoodsFolder::where('id', $id)->update([
             'name' => $name,
             'partner_id' => $partner_id,
@@ -330,7 +325,6 @@ class MPartnerController extends Controller
             $goods_sort_nos = $request['goods_sort_nos_'.$i];
             $goods_quantities = $request['goods_quantities_'.$i];
             $goods_statuses = $request['goods_statuses_'.$i];
-
             $goods_id = $goods_ids;
             $goods_name = $goods_names;
             $goods_price = $goods_pricies;
@@ -339,12 +333,7 @@ class MPartnerController extends Controller
             $goods_quantity = $goods_quantities;
             $goods_status = $goods_statuses;
 
-            
-
             if( $goods_id == ''){
-               
-                
-
                 Goods::create([
                     'goods_folder_id' => $id,
                     'name' => $goods_name,
@@ -354,11 +343,7 @@ class MPartnerController extends Controller
                     'quantity' => $goods_quantity,
                     'status' => $goods_status,
                 ]);
-
             }else{
-
-                
-
                 Goods::where('id', $goods_id)->update([
                     'goods_folder_id' => $id,
                     'name' => $goods_name,

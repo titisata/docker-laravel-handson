@@ -260,12 +260,28 @@
 <body>
 <!-- partial:index.partial.html -->
 <nav class="mnb navbar navbar-default navbar-fixed-top" style="height: 40px">
-  <div class="container-fluid">
+  <div class="container">
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}様</a>
+            <a id="navbarDropdown" class="nav-link dropdown-toggle text-gray-color fw-bold me-5" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }}
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="position:absolute">
+                <a class="dropdown-item" href="/home">マイページ</a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                    ログアウト
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
         </li>
+        
       </ul>
     </div>
   </div>
@@ -288,24 +304,26 @@
 			<div class="side-menu-container">
 				<ul class="nav navbar-nav">
                 @role('system_admin|site_admin')
-                    <li id="owner_site"><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>(管理者)サイト管理</a></li>
-					<li id="owner_partner"><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>(管理者)パートナー管理</a></li>
-                    <li id=""><a href=""><i class="fa fa-dashboard"></i>(管理者)顧客管理</a></li>
-                    <li id="owner_reserve"><a href="/mypage/owner/reserve"><i class="fa fa-puzzle-piece"></i>(管理者)予約状況</a></li>
-                    <li id=""><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>(管理者)必須表示ページ管理</a></li>
-                    <li id="owner_site"><a href="/mypage/owner/category_display"><span class="glyphicon glyphicon-signal"></span>(管理者)カテゴリー編集</a></li>
-                    <li id="owner_site"><a href="/mypage/owner/hotel_group_display"><span class="glyphicon glyphicon-signal"></span>(管理者)ホテルグループ編集</a></li>
-                    <li id="owner_site"><a href="/mypage/owner/hotel_display"><span class="glyphicon glyphicon-signal"></span>(管理者)ホテル編集</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>サイト管理</a></li>
+					<li id="owner_partner"><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>パートナー管理</a></li>
+                    <li id=""><a href=""><i class="fa fa-dashboard"></i>顧客管理</a></li>
+                    <li id="owner_reserve"><a href="/mypage/owner/reserve"><i class="fa fa-puzzle-piece"></i>予約状況</a></li>
+                    <li id=""><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/category_display"><span class="glyphicon glyphicon-signal"></span>カテゴリー編集</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/hotel_group_display"><span class="glyphicon glyphicon-signal"></span>ホテルグループ編集</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/hotel_display"><span class="glyphicon glyphicon-signal"></span>ホテル編集</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/food_group_display"><span class="glyphicon glyphicon-signal"></span>フードグループ編集</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/food_display"><span class="glyphicon glyphicon-signal"></span>フード編集</a></li>
                 @endrole
                 @role('partner')
-                    <li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>(出展者)プロフィール管理</a></li>
-                    <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>(出展者)イベント管理</a></li>
-                    <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>(出展者)お土産管理</a></li>
-                    <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>(出展者)予約状況</a></li>
-                    <li id=""><a href="/mypage/partner/link_display/{id}"><i class="fa fa-dashboard"></i>(出展者)必須表示ページ管理</a></li>
+                    <li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>プロフィール管理</a></li>
+                    <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>イベント管理</a></li>
+                    <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>お土産管理</a></li>
+                    <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>予約状況</a></li>
+                    <li id=""><a href="/mypage/partner/link_display/{id}"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
                 @endrole
                 @role('user')
-                    <li id="user_reserve"><a href="/mypage/user/reserve"><i class="fa fa-puzzle-piece"></i>(お客様)予約状況</a></li>
+                    <li id="user_reserve"><a href="/mypage/user/reserve"><i class="fa fa-puzzle-piece"></i>予約状況</a></li>
                 @endrole    
                     
 					

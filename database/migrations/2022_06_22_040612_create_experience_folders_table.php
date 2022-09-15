@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('experience_folders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('partner_id')->constrained('partners');
+            $table->foreignId('partner_id')->constrained('users');
             $table->foreignId('company_id')->constrained('companies');
             $table->string('name', 50)->index();
             $table->string('description', 1000);

@@ -16,74 +16,64 @@ class FoodGroupSeeder extends Seeder
     public function run()
     {
         FoodGroup::create([
-            'experience_folder_id' => 1,
-            'name' => '極上のご飯',
+            'name' => '極上のご飯A',
             'description' => 'とってもおいしい！',
-            'price_child' => 3000,
+            'price_child' => 5000,
             'price_adult' => 6000,
         ]);
         FoodGroup::create([
-            'experience_folder_id' => 1,
-            'name' => '通常のご飯',
+            'name' => '極上のご飯B',
             'description' => 'まあまあおいしい！',
-            'price_child' => 1500,
-            'price_adult' => 3000,
+            'price_child' => 4000,
+            'price_adult' => 5000,
         ]);
         FoodGroup::create([
-            'experience_folder_id' => 6,
-            'name' => '極上のご飯',
+            'name' => '極上のご飯C',
             'description' => 'とってもおいしい！',
             'price_child' => 3000,
-            'price_adult' => 6000,
+            'price_adult' => 4000,
         ]);
         FoodGroup::create([
-            'experience_folder_id' => 6,
-            'name' => '通常のご飯',
+            'name' => '極上のご飯D',
             'description' => 'まあまあおいしい！',
-            'price_child' => 1500,
+            'price_child' => 2000,
             'price_adult' => 3000,
         ]);
         FoodGroup::create([
-            'experience_folder_id' => 7,
-            'name' => '極上のご飯',
+            'name' => '極上のご飯E',
             'description' => 'とってもおいしい！',
-            'price_child' => 3000,
-            'price_adult' => 6000,
+            'price_child' => 1000,
+            'price_adult' => 2000,
         ]);
         FoodGroup::create([
-            'experience_folder_id' => 7,
-            'name' => '通常のご飯',
+            'name' => '通常のご飯A',
             'description' => 'まあまあおいしい！',
-            'price_child' => 1500,
-            'price_adult' => 3000,
+            'price_child' => 1000,
+            'price_adult' => 1500,
         ]);
         FoodGroup::create([
-            'experience_folder_id' => 8,
-            'name' => '極上のご飯',
+            'name' => '通常のご飯B',
             'description' => 'とってもおいしい！',
-            'price_child' => 3000,
-            'price_adult' => 6000,
+            'price_child' => 800,
+            'price_adult' => 1000,
         ]);
         FoodGroup::create([
-            'experience_folder_id' => 8,
-            'name' => '通常のご飯',
+            'name' => '通常のご飯C',
             'description' => 'まあまあおいしい！',
-            'price_child' => 1500,
-            'price_adult' => 3000,
+            'price_child' => 700,
+            'price_adult' => 900,
         ]);
         FoodGroup::create([
-            'experience_folder_id' => 9,
-            'name' => '極上のご飯',
+            'name' => '通常のご飯D',
             'description' => 'とってもおいしい！',
-            'price_child' => 3000,
-            'price_adult' => 6000,
+            'price_child' => 600,
+            'price_adult' => 800,
         ]);
         FoodGroup::create([
-            'experience_folder_id' => 9,
-            'name' => '通常のご飯',
+            'name' => '通常のご飯E',
             'description' => 'まあまあおいしい！',
-            'price_child' => 1500,
-            'price_adult' => 3000,
+            'price_child' => 600,
+            'price_adult' => 750,
         ]);
     }
 }

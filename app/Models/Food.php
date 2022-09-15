@@ -9,4 +9,21 @@ class Food extends Model
 {
     use HasFactory;
     protected $table = 'foods';
+
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+
+    /**
+     * food_selectを取得
+     *
+     * @return Collection<FoodSelect>
+     */
+
+    public function foodselcts()
+    {
+        return $this->hasMany(FoodSelect::class);
+    }
+
 }
