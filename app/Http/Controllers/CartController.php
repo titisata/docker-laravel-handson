@@ -84,6 +84,7 @@ class CartController extends Controller
         foreach ($experienceCartItems as $experienceCartItem) {
             ExperienceReserve::create([
                 'user_id' => $uid,
+                'partner_id' => $experienceCartItem->partner_id,
                 'experience_id' => $experienceCartItem->experience_id,
                 'hotel_group_id' => $experienceCartItem->hotel_group_id,
                 'food_group_id' => $experienceCartItem->food_group_id,

@@ -64,4 +64,105 @@
             'hotel_id' => '4',
         ]);
 
-        ssh -o StrictHostKeyChecking=no -p 10022 ${USER_NAME}@${HOST_NAME} 'cd /home/b-partners01/ano-pla.com/uratabi && git pull && php artisan migrate:fresh --seed && composer require spatie/laravel-permission && php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"'
+         \App\Models\ExperienceFolder::create([
+            'partner_id' => 3,
+            'name' => 'ゆっくりラフティング半日ツアー',
+            'description' => 'ゆっくりラフティング半日ツアー！お得な料金で楽しもう♪テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
+            'address' => '千葉県木更津市北浜町１',
+            'caution' => 'テスト的な注意事項です。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
+            'detail' => 'テスト的な詳細情報です。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
+            'category1' => '文化',
+            'category2' => 'aa',
+            'category3' => null,
+            'is_lodging' => true,
+            'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
+            'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
+            'is_before_lodging' => false,
+            'price_child' => 5000,
+            'price_adult' => 7000,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 4,
+        ]);
+
+        \App\Models\Experience::create([
+            'experience_folder_id' => 10,
+            'name' => '19:00からの部',
+            'start_date' =>  date('Y-m-d'),
+            'end_date' =>  date('Y-m-d'),
+            'sort_no' => 1,
+            'quantity' => 5,
+            'price_child' => 3000,
+            'price_adult' => 2000,
+        ]);
+
+        @forelse($hotel_groups as $hotel_group)
+                        @if(in_array($hotel_group->id, $checked_hotels_group, true))
+                            <div>
+                                <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}" checked >
+                                <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
+                            </div> 
+                        @else
+                            <div>
+                                <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}">
+                                <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
+                            </div> 
+                        @endif
+                    @empty
+                        <p>グループがありません</p>
+                    @endforelse
+
+
+                    <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
+                    <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
+
+
+                    <input class="form-check-input" type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}" onchange="radiohotelSwitch()">
+                                    <label class="form-check-label" for="hotel_group_{{ $hotelGroup->id }}">
+                                        {{ $hotelGroup->name }} : 
+                                        大人<span class="small small_font ms-1">税込</span><span id='hotel_adult_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_adult }}" class="fw-bold">{{ number_format($hotelGroup->price_adult) }}</span><span class="small small_font">円 / 人</span>　
+                                        子ども<span class="small small_font ms-1">税込</span><span id='hotel_child_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_child }}" class="fw-bold">{{ number_format($hotelGroup->price_child) }}</span><span class="small small_font">円 / 人</span>
+                                    </label>
+
+                                    <input class="form-check-input" type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}" onchange="radiofoodSwitch()">
+                                    <label class="form-check-label" for="food_group_{{ $foodGroup->id }}">
+                                        {{ $foodGroup->name }} :  
+                                        大人<span class="small small_font ms-1">税込</span><span id='food_adult_price_{{ $foodGroup->id }}' value='{{ $foodGroup->price_adult }}' class="fw-bold">{{ number_format($foodGroup->price_adult) }}</span><span class="small small_font">円 / 人</span>　
+                                        子ども<span class="small small_font ms-1">税込</span><span id='food_child_price_{{ $foodGroup->id }}' class="fw-bold" value='{{ $foodGroup->price_child }}'>{{ number_format($foodGroup->price_child) }}</span><span class="small small_font">円 / 人</span>
+                                    </label>
+
+                                    @if(!$experienceFolder->foodGroup->isEmpty())
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="food_group_0" name="food_group_id" value="0" onchange="radiofoodSwitch()">
+                                    <label class="form-check-label" for="food_group_null">食事なし</label>
+                                </div>
+                            @endempty
+
+
+
+
+                             @if(in_array($hotel_group->id, $checked_hotels_group, true))
+                                        <div>
+                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}" checked >
+                                            <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
+                                        </div> 
+                                    @else
+                                        <div>
+                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}">
+                                            <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
+                                        </div> 
+                                    @endif
+
+
+
+
+                                    @if(in_array($food_group->id, $checked_foods_group, true))
+                                    <div>
+                                        <input type="checkbox" id="{{ $food_group->name }}" name="food_group[]" value="{{ $food_group->id }}" checked >
+                                        <label for="{{ $food_group->name }}">{{ $food_group->name }}</label>
+                                    </div> 
+                                    @else
+                                    <div>
+                                        <input type="checkbox" id="{{ $food_group->name }}" name="food_group[]" value="{{ $food_group->id }}">
+                                        <label for="{{ $food_group->name }}">{{ $food_group->name }}</label>
+                                    </div> 
+                                    @endif

@@ -186,5 +186,27 @@ class ExperienceFolderSeeder extends Seeder
             'recommend_flag' => 1,
             'recommend_sort_no' => 4,
         ]);
+
+        \App\Models\ExperienceFolder::create([
+            'partner_id' => 3,
+            'name' => 'ゆっくりラフティング半日ツアー',
+            'description' => 'ゆっくりラフティング半日ツアー！お得な料金で楽しもう♪テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
+            'address' => '千葉県木更津市北浜町１',
+            'caution' => 'テスト的な注意事項です。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
+            'detail' => 'テスト的な詳細情報です。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
+            'category1' => '文化',
+            'category2' => 'aa',
+            'category3' => null,
+            'is_lodging' => true,
+            'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
+            'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
+            'is_before_lodging' => false,
+            'price_child' => 5000,
+            'price_adult' => 7000,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 4,
+        ]);
+
+        
     }
 }

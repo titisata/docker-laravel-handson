@@ -27,7 +27,12 @@ class MOwnerController extends Controller
 
     public function home()
     {
-        return view('mypage.owner.home');
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        $ordered_goods = $user->ordered_goods;
+        $reserved_experiences = $user->reserved_experiences;
+        return view('mypage.owner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences'));
+        // return view('mypage.owner.home');
     }
 
     public function reserve()

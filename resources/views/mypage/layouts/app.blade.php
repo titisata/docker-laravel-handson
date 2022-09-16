@@ -320,6 +320,7 @@
                     <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>イベント管理</a></li>
                     <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>お土産管理</a></li>
                     <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>予約状況</a></li>
+                    <li id="partner_reserve"><a href="/mypage/partner/reserved_user"><i class="fa fa-puzzle-piece"></i>顧客管理</a></li>
                     <li id=""><a href="/mypage/partner/link_display/{id}"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
                 @endrole
                 @role('user')

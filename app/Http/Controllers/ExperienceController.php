@@ -7,6 +7,10 @@ use App\Models\Experience;
 use App\Models\ExperienceCartItem;
 use App\Models\ExperienceCategory;
 use App\Models\ExperienceFolder;
+use App\Models\HotelGroupSelect;
+use App\Models\FoodGroupSelect;
+use App\Models\HotelGroup;
+use App\Models\FoodGroup;
 use App\Models\SiteMaster;
 use App\Models\Image;
 use App\Models\Favorite;
@@ -113,6 +117,8 @@ class ExperienceController extends Controller
         $user = Auth::user();
         $experienceFolder = ExperienceFolder::find($folder_id);
         $experience = Experience::find($id);
+        // $hotel_group_selects = HotelGroupSelect::where('experience_folder_id', $experienceFolder->id)->first();
+        // $food_group_selects = FoodGroupSelect::where('experience_folder_id', $experienceFolder->id)->get();
         $comments = $experienceFolder->comments();
         $mycomment = $experienceFolder->mycomment();
 
@@ -125,6 +131,7 @@ class ExperienceController extends Controller
     public function post(Request $request)
     {
         $id = $request->id;
+        $partner_id = $request->partner_id;
         $uid = Auth::user()->id;
         $quantity_child = $request->quantity_child;
         $date = $request->date;
@@ -133,9 +140,11 @@ class ExperienceController extends Controller
         $message = $request->message;
         $food_group_id = $request->food_group_id == 'food_group_null' ? null : $request->food_group_id;
 
+        
         // TODO: 不正な IDの場合の処理
         ExperienceCartItem::create([
             'experience_id' => $id,
+            'partner_id' => $partner_id,
             'user_id' => $uid,
             'message' => $message,
             'hotel_group_id' => $hotel_group_id,
@@ -144,6 +153,7 @@ class ExperienceController extends Controller
             'quantity_adult' => $quantity_adult,
             'start_date' => $date,
             'end_date' => $date,
+            
         ]);
 
         return view('experience.cart_success');

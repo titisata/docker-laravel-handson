@@ -90,6 +90,8 @@ Route::prefix('mypage/partner')->middleware(['auth','role:partner'])->group(func
     Route::get('/profile', [App\Http\Controllers\MPartnerController::class, 'profile']);
     Route::post('/profile', [App\Http\Controllers\MPartnerController::class, 'profile_post']);
     Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
+    Route::get('/reserved_user', [App\Http\Controllers\MPartnerController::class, 'reserved_user']);
+    Route::get('/user_info/{id}', [App\Http\Controllers\MPartnerController::class, 'user_info']);
     Route::get('/link_display', [App\Http\Controllers\MPartnerController::class, 'link_display']);
     Route::get('/link_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'link_insert']);
     Route::post('/action_link_insert', [App\Http\Controllers\MPartnerController::class, 'action_link_insert']);

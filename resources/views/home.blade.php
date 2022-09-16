@@ -51,6 +51,7 @@
                         <a href="/experience/{{ $reserved_experience->experience->id }}">
                             <div class="mt-1 p-3 card">
                                 <div>
+                                    <p>{{ $reserved_experience->user->name }}</p>
                                     <p>{{ $reserved_experience->experience->name }}</p>
                                     <p>予約日: {{ $reserved_experience->experience->start_date }}</p>
                                     <p>大人: {{ $reserved_experience->quantity_adult }}人 子ども: {{ $reserved_experience->quantity_child }}人</p>

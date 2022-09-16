@@ -66,7 +66,8 @@ class PermissionSeeder extends Seeder
         \App\Models\Partner::create([
             'user_id' => $user3->id,
             'name' => $user3->name,
-            
         ]);
+
+        
     }
 }

@@ -14,6 +14,7 @@ return new class extends Migration {
     {
         Schema::create('experience_reserves', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('partner_id')->constrained('users');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('experience_id')->constrained('experiences');
             $table->foreignId('hotel_group_id')->nullable()->constrained('hotel_groups');

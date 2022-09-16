@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\ExperienceCategory;
 use App\Models\ExperienceFolder;
+use App\Models\ExperienceReserve;
 use App\Models\Experience;
 use App\Models\GoodsFolder;
 use App\Models\GoodsCategory;
 use App\Models\Goods;
+use App\Models\HotelGroup;
+use App\Models\HotelSelect;
+use App\Models\HotelGroupSelect;
+use App\Models\FoodGroup;
+use App\Models\FoodSelect;
+use App\Models\FoodGroupSelect;
 use App\Models\Partner;
 use App\Models\Image;
 use App\Models\Link;
@@ -20,15 +27,18 @@ class MPartnerController extends Controller
 {
     public function home()
     {
-        return view('mypage.partner.home');
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        $ordered_goods = $user->ordered_goods;
+        $reserved_experiences = $user->reserved_experiences;
+        return view('mypage.partner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences'));
     }
 
    
     public function event()
     {
         $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
-        $experiences_folders = $partner->experiences;
+        $experiences_folders = ExperienceFolder::where('partner_id', $user->id)->get();
         return view('mypage.partner.event', compact('user', 'experiences_folders'));
     }
 
@@ -39,30 +49,6 @@ class MPartnerController extends Controller
         $categories = ExperienceCategory::all();
         return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories'));
     }
-
-    public function event_post_date(Request $request)
-    {   
-        
-        $partner_id = $request->partner_id;
-        $name = $request->name;
-        $price_adult = $request->price_adult;
-        $price_child = $request->price_child;
-        $address = $request->address;
-        $description = $request->description;
-        $detail = $request->detail;
-        $caution = $request->caution;
-        $category = $request->category;
-        $is_lodging = $request->is_lodging;
-        $is_before_lodging = $request->is_before_lodging;
-        $recommend_flag = $request->recommend_flag;
-        $status = $request->status;
-        $ex_names = $request->ex_names;
-        $ex_price_adults = $request->ex_price_adults;
-        $ex_price_childs = $request->ex_price_childs;  
-
-        
-    }
-
 
     public function action_event_add(Request $request)
     {
@@ -108,7 +94,21 @@ class MPartnerController extends Controller
     {
         $experiences_folder = ExperienceFolder::find($id);
         $categories = ExperienceCategory::all();
-        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
+        
+        $hotel_groups = HotelGroup::all();
+        $hotel_select_ids = HotelGroupSelect::where('experience_folder_id',$id)->get();
+        $checked_hotels_group = array();
+        foreach($hotel_select_ids as $hotel_select_id){
+            $checked_hotels_group[] = $hotel_select_id->hotel_group_id;
+        }
+        
+        $food_groups = FoodGroup::all();
+        $food_select_ids = FoodGroupSelect::where('experience_folder_id',$id)->get();
+        $checked_foods_group = array();
+        foreach($food_select_ids as $food_select_id){
+            $checked_foods_group[] = $food_select_id->food_group_id;
+        }
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group'));
     }
 
     public function event_edit_update(Request $request)
@@ -129,6 +129,8 @@ class MPartnerController extends Controller
         $status = $request->status; 
         $id = $request->id;
         $key = $request->key;
+        $hotel_groups = $request->hotel_group;
+        $food_groups = $request->food_group;
 
         $experiences_folder = ExperienceFolder::where('id', $id)->update([
             'name' => $name,
@@ -144,6 +146,40 @@ class MPartnerController extends Controller
             'recommend_flag' => $recommend_flag,
             'category1' => $category,
         ]);
+
+        //前回までの情報を削除
+        $hotel_delete = HotelGroupSelect::where('experience_folder_id', $id)->delete();
+
+        
+        for ($i=0; $i < count($hotel_groups); $i++) {
+
+            $hotel_group = $hotel_groups[$i];
+            
+            //その後、選択されたものをインサート
+
+            HotelGroupSelect::create([
+                    'experience_folder_id' => $id,
+                    'hotel_group_id' => $hotel_group,
+                ]);
+
+        }
+
+        //前回までの情報を削除
+        $food_delete = FoodGroupSelect::where('experience_folder_id', $id)->delete();
+
+        
+        for ($i=0; $i < count($food_groups); $i++) {
+
+            $food_group = $food_groups[$i];
+            
+            //その後、選択されたものをインサート
+
+                FoodGroupSelect::create([
+                    'experience_folder_id' => $id,
+                    'food_group_id' => $food_group,
+                ]);
+
+        }
 
         // echo '<pre>';
         // print_r ($_POST);
@@ -565,6 +601,25 @@ class MPartnerController extends Controller
         $partner = Partner::where('user_id', $user->id)->first();
         $experiences_folders = ExperienceFolder::where('partner_id', $partner->id)->get();
         return view('mypage.partner.reserve', compact('user', 'partner', 'experiences_folders'));
+    }
+
+    public function reserved_user()
+    {
+        $user = Auth::user();
+        $reserved_users = ExperienceReserve::where('partner_id', $user->id)->get();
+
+        // print_r($reserved_users);
+        // exit;
+       
+
+        return view('mypage.partner.reserved_user', compact('user', 'reserved_users'));
+    }
+
+    public function user_info(string $id)
+    {
+        $user = User::where('id', $id)->first();
+
+        return view('mypage.partner.user_info', compact('user'));
     }
 
     public function profile()

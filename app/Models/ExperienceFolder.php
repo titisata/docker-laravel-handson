@@ -143,16 +143,6 @@ class ExperienceFolder extends Model
         return $this->hasMany(Schedule::class);
     }
 
-    /**
-     * FoodGroupを取得
-     *
-     * @return Collection<FoodGroup>
-     */
-
-    public function foodGroup()
-    {
-        return $this->hasMany(FoodGroup::class);
-    }
 
     /**
      * HotelGroupを取得
@@ -160,9 +150,20 @@ class ExperienceFolder extends Model
      * @return Collection<HotelGroup>
      */
 
-    public function hotelGroup()
+    public function hotelgroups()
     {
-        return $this->hasMany(HotelGroup::class);
+        return $this->belongsToMany('App\Models\HotelGroup', 'hotel_group_selects', 'experience_folder_id', 'hotel_group_id');
+    }
+
+    /**
+     * HotelGroupを取得
+     *
+     * @return Collection<FoodGroup>
+     */
+
+    public function foodgroups()
+    {
+        return $this->belongsToMany('App\Models\FoodGroup', 'food_group_selects', 'experience_folder_id', 'food_group_id');
     }
 
 

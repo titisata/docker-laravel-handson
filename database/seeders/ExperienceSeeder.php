@@ -204,5 +204,15 @@ class ExperienceSeeder extends Seeder
             'price_child' => 3000,
             'price_adult' => 2000,
         ]);
+        \App\Models\Experience::create([
+            'experience_folder_id' => 10,
+            'name' => '19:00からの部',
+            'start_date' =>  date('Y-m-d'),
+            'end_date' =>  date('Y-m-d'),
+            'sort_no' => 1,
+            'quantity' => 5,
+            'price_child' => 3000,
+            'price_adult' => 2000,
+        ]);
     }
 }
