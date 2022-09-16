@@ -334,7 +334,9 @@ async function commentCreate(ex_id) {
                         <div class="card-body px-0 pt-3 border-top">
                             <div class="bg-f-part p-2 rounded-2 mb-2 d-lg-flex align-items-center justify-content-center">
                                 <h5 class="text-white mb-lg-0">体験日: {{ app('request')->input('keyword') }}</h5>
-                                <h5 class="text-white mb-0 ms-lg-4">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}</h5>
+                                <h5 class="text-white mb-0 ms-lg-4">
+                                    {{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}
+                                </h5>
                             </div>
                             <div>
                                 <a  class="text-primary" href="{{url()->current()}}" >
@@ -343,9 +345,9 @@ async function commentCreate(ex_id) {
                             </div>
                             <div class="py-2 ms-lg-auto d-lg-flex mt-3">
                                 
-                                <p class="fw-bold text-start fs-4">大人 : <span class="small small_font ">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_adult) }}</span><span class="small small_font">円 / 人</span></p>
+                                <p class="fw-bold text-start fs-4">大人 : <span class="small small_font ">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_adult) }}</span><span class="small small_font">円 / 人~</span></p>
                                 
-                                <p class="fw-bold text-start fs-4 ms-lg-4">子ども : <span class="small small_font">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_child) }}</span><span class="small small_font">円 / 人</span></p>
+                                <p class="fw-bold text-start fs-4 ms-lg-4">子ども : <span class="small small_font">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_child) }}</span><span class="small small_font">円 / 人~</span></p>
                             </div>
                             @forelse($experiences as $experience)
                                 <a class="btn btn-lg btn-pink rounded-pill text-white my-2 py-3 w-100 btn-shadow fs-5" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>

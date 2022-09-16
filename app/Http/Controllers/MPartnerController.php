@@ -181,13 +181,6 @@ class MPartnerController extends Controller
 
         }
 
-        // echo '<pre>';
-        // print_r ($_POST);
-        // echo '</pre>';
-        // echo 'a';
-        // echo $key;
-        // exit;
-
         for ($i=1; $i < $key + 1; $i++) {
             $ex_names = $request['ex_names_'.$i];
             $ex_ids = $request['ex_ids_'.$i];

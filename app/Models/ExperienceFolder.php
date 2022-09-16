@@ -42,14 +42,10 @@ class ExperienceFolder extends Model
         return $this->hasMany(Experience::class);
     }
 
+    //表示可能な体験をソート順に取得
     public function active_experiences()
     {
-        // while(){
-        //     $sql = $sql ."->where('".$jouken(0) ."','".$jouken(1)."')";
-        //     $sql = $sql ."->where('status', '1')";
-        // }
-        // return $this->hasMany(Experience::class).$sql;
-        return $this->hasMany(Experience::class)->where('status', '1');
+        return $this->hasMany(Experience::class)->where('status', '1')->orderBy('sort_no', 'asc');
     }
 
     /**

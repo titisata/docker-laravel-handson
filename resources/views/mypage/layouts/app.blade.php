@@ -307,6 +307,8 @@
                     <li id="owner_site"><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>サイト管理</a></li>
 					<li id="owner_partner"><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>パートナー管理</a></li>
                     <li id=""><a href=""><i class="fa fa-dashboard"></i>顧客管理</a></li>
+                    <li id="partner_event"><a href="/mypage/owner/event"><i class="fa fa-puzzle-piece"></i>イベント管理</a></li>
+                    <li id="partner_goods"><a href="/mypage/owner/goods"><i class="fa fa-puzzle-piece"></i>お土産管理</a></li>
                     <li id="owner_reserve"><a href="/mypage/owner/reserve"><i class="fa fa-puzzle-piece"></i>予約状況</a></li>
                     <li id=""><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
                     <li id="owner_site"><a href="/mypage/owner/category_display"><span class="glyphicon glyphicon-signal"></span>カテゴリー編集</a></li>
