@@ -130,6 +130,10 @@ class ExperienceController extends Controller
 
     public function post(Request $request)
     {
+        if( Auth::user()==null){
+            return view('auth.login');
+        }
+
         $id = $request->id;
         $partner_id = $request->partner_id;
         $uid = Auth::user()->id;
