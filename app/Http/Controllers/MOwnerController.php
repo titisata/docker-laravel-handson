@@ -8,20 +8,27 @@ use App\Models\PartnerMaster;
 use App\Models\SiteMaster;
 use App\Models\ExperienceCategory;
 use App\Models\ExperienceReserve;
+use App\Models\Experience;
 use App\Models\HotelGroup;
 use App\Models\Hotel;
 use App\Models\Image;
 use App\Models\Link;
 use App\Models\GoodsCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class MOwnerController extends Controller
 {
 
-
+    public function home()
+    {
+        return view('mypage.owner.home');
+    }
     public function reserve()
     {
         $user = Auth::user();
@@ -47,9 +54,56 @@ class MOwnerController extends Controller
             'hotel_id'=>$hotel_id,
         ]);
 
+        $to = 'satou@b-partners.jp';
+        $view = 'email.hotel_confirm';
+
+        //予約データを取得
+        $reserve = ExperienceReserve::where('id',$id)->first();
+        
+        //ホテル情報を取得
+        $hotel= hotel::where('id',$hotel_id)->first();
+
+        //管理者へのメール送信
         $user = Auth::user();
-        $partners = Partner::all();
-        return view('mypage.owner.reserve', compact('user', 'partners'));
+        // echo "管理者--".$user->name."--".$user->email."<br>";
+        $subject = '管理者へのメール';
+        $name = $user->name;
+        $with = [
+            'name' => $name,
+            'hotel' => $hotel->name,
+            'for' => 'admin',
+        ];
+        // Mail::send(new SendMail($with, $to, $subject, $view));
+
+        //予約者へのメール送信
+        $user = User::where('id',$reserve->user_id)->first();
+        // echo "予約者--".$user->name."--".$user->email."<br>";
+        $subject = '予約者へのメール';
+        $name = $user->name;
+        $with = [
+            'name' => $name,
+            'hotel' => $hotel->name,
+            'for' => 'user',
+        ];
+        // Mail::send(new SendMail($with, $to, $subject, $view));
+
+        //パートナーへメール送信
+        $experience = Experience::where('id',$reserve->experience_id)->first();
+        $experience_folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
+        $user = User::where('id',$experience_folder->partner_id)->first();
+        // echo "パートナー--".$user->name."--".$user->email."<br>";
+        $subject = 'パートナーへのメール';
+        $name = $user->name;
+        $with = [
+            'name' => $name,
+            'hotel' => $hotel->name,
+            'for' => 'partner',
+        ];
+        // Mail::send(new SendMail($with, $to, $subject, $view));
+
+        //ホテルへのメール送信
+        
+        return $this->reserve();
     }
 
     // public function reserve_make(string $id)
