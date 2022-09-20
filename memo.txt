@@ -166,3 +166,31 @@
                                         <label for="{{ $food_group->name }}">{{ $food_group->name }}</label>
                                     </div> 
                                     @endif
+
+                           前泊・後泊
+                                    <div class="bg-f-part p-2 rounded-2 d-lg-none">
+                                <p class="text-white fs-5">体験日: {{ app('request')->input('keyword') }}</p>
+                                <p class="text-white mb-0 fs-5">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') :  app('request')->input('keyword') ) ) : '宿泊なし' }}</p>
+                            </div>
+
+                              <form name="favorite_form" action="/favorite_edit" method="POST" target="sendFavorite">
+                        @csrf
+                        <input type="hidden" name="f_user_id" value="{{ $user->id }}">
+                        <input type="hidden" name="f_experienceFolder_id" value="{{ $experienceFolder->id }}">
+                        <input type="hidden" name="f_table_name" value="experience_folders">
+                    </form>
+
+                    <input type="hidden" id="user_id" value="{{ $user->id }}">
+
+                    <div class="d-flex align-items-center" >
+                        <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                        
+                        <div class="ms-3" >
+                            @if($experienceFolder->favorite() != '')
+                                <i id="favorite" class="bi bi-heart-fill pink fs-3" onclick="submit_favorite();"></i>
+                            @else
+                                <i id="not_favorite" class="bi bi-heart-fill text-gray fs-3" onclick="submit_not_favorite();"></i>
+                            @endif
+                        </div>
+                        
+                    </div>

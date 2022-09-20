@@ -216,7 +216,7 @@ async function commentCreate(ex_id) {
 
 
 </script>
-<input type="hidden" id="user_id" value="{{ $user->id }}">
+
 <input type="hidden" id="favorite_id" value="{{ $experienceFolder->id }}">
 <div class="card" style="height: 400px;">
     <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
@@ -253,27 +253,40 @@ async function commentCreate(ex_id) {
             <div class="row">
                 <div class="my-4 col-12 col-lg-7">
                     
-                    <div class="d-flex align-items-center" >
-                        <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
-                        
-                        <div class="ms-3" >
-                            @if($experienceFolder->favorite() != '')
-                                <i id="favorite" class="bi bi-heart-fill pink fs-3" onclick="submit_favorite();"></i>
-                            @else
-                                <i id="not_favorite" class="bi bi-heart-fill text-gray fs-3" onclick="submit_not_favorite();"></i>
-                            @endif
+                    
+
+                    @if( $user!=null )
+
+                        <div class="d-flex align-items-center" >
+                            <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                            
+                            <div class="ms-3" >
+                                @if($experienceFolder->favorite() != '')
+                                    <i id="favorite" class="bi bi-heart-fill pink fs-3" onclick="submit_favorite();"></i>
+                                @else
+                                    <i id="not_favorite" class="bi bi-heart-fill text-gray fs-3" onclick="submit_not_favorite();"></i>
+                                @endif
+                            </div>
+                            
                         </div>
-                        
-                    </div>
 
-                    <form name="favorite_form" action="/favorite_edit" method="POST" target="sendFavorite">
-                        @csrf
-                        <input type="hidden" name="f_user_id" value="{{ $user->id }}">
-                        <input type="hidden" name="f_experienceFolder_id" value="{{ $experienceFolder->id }}">
-                        <input type="hidden" name="f_table_name" value="experience_folders">
-                    </form>
+                        <form name="favorite_form" action="/favorite_edit" method="POST" target="sendFavorite">
+                            @csrf
+                            <input type="hidden" name="f_user_id" value="{{ $user->id }}">
+                            <input type="hidden" name="f_experienceFolder_id" value="{{ $experienceFolder->id }}">
+                            <input type="hidden" name="f_table_name" value="experience_folders">
+                        </form>
 
-                    <iframe name="sendFavorite" style="width:0px;height:0px;border:0px;"></iframe>
+                        <iframe name="sendFavorite" style="width:0px;height:0px;border:0px;"></iframe>
+
+                    @else
+                        <div class="d-flex align-items-center" >
+                            <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                        </div>
+
+                    @endif
+
+                    
                     
                     @if($experienceFolder->average_rate < 1.5)
                             <p class="mb-0">テスト用に表示、0は表示しないようにする</p>
@@ -336,6 +349,8 @@ async function commentCreate(ex_id) {
                                 <h5 class="text-white mb-lg-0">体験日: {{ app('request')->input('keyword') }}</h5>
                                 <h5 class="text-white mb-0 ms-lg-4">
                                     {{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}
+                                   
+
                                 </h5>
                             </div>
                             <div>
@@ -363,7 +378,7 @@ async function commentCreate(ex_id) {
                         @if (app('request')->input('keyword') != "")
                             <div class="bg-f-part p-2 rounded-2 d-lg-none">
                                 <p class="text-white fs-5">体験日: {{ app('request')->input('keyword') }}</p>
-                                <p class="text-white mb-0 fs-5">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') :  app('request')->input('keyword') ) ) : '宿泊なし' }}</p>
+                                <p class="text-white mb-0 fs-5">{{ $experienceFolder->is_lodging }}</p>
                             </div>
                             
 
@@ -442,7 +457,7 @@ async function commentCreate(ex_id) {
                             </div>
                             @else
                             <div class="m-3">
-                                <p>投稿済みです</p>
+                                <p>投稿できません</p>
                             </div>
 
                             @endif
