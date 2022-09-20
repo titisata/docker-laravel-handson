@@ -277,19 +277,19 @@ class MOwnerController extends Controller
         return view('mypage.owner.goods', compact('user', 'goods_folders'));
     }
 
-    public function goods_post_date(Request $request)
-    {   
-        $partner_id = $request->partner_id;
-        $name = $request->name;
-        $price = $request->price;
-        $description = $request->description;
-        $detail = $request->detail;
-        $caution = $request->caution;
-        $category = $request->category;
-        $recommend_flag = $request->recommend_flag; 
+    // public function goods_post_date(Request $request)
+    // {   
+    //     $partner_id = $request->partner_id;
+    //     $name = $request->name;
+    //     $price = $request->price;
+    //     $description = $request->description;
+    //     $detail = $request->detail;
+    //     $caution = $request->caution;
+    //     $category = $request->category;
+    //     $recommend_flag = $request->recommend_flag; 
 
         
-    }
+    // }
 
     public function goods_add(string $id)
     {
@@ -301,10 +301,17 @@ class MOwnerController extends Controller
 
     public function action_goods_add(Request $request)
     {
-        $this->goods_post_date($request);
+        $user_id = $request->user_id;
+        $name = $request->name;
+        $price = $request->price;
+        $description = $request->description;
+        $detail = $request->detail;
+        $caution = $request->caution;
+        $category = $request->category;
+        $recommend_flag = $request->recommend_flag;
 
         GoodsFolder::create([
-            'partner_id' => $partner_id,
+            'user_id' => $user_id,
             'name' => $name,
             'price' => $price,
             'description' => $description,
@@ -331,7 +338,7 @@ class MOwnerController extends Controller
     {
 
         $id = $request->id;
-        $partner_id = $request->partner_id;
+        $user_id = $request->user_id;
         $name = $request->name;
         $price = $request->price;
         $description = $request->description;
@@ -345,7 +352,7 @@ class MOwnerController extends Controller
 
         $goods_folder = GoodsFolder::where('id', $id)->update([
             'name' => $name,
-            'partner_id' => $partner_id,
+            'user_id' => $user_id,
             'price' => $price,
             'description' => $description,
             'caution' => $caution,

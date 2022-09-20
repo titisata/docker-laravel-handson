@@ -75,7 +75,7 @@
             <form action="/mypage/partner/goods_edit_update" method="POST">
                 @csrf
                 <input name="id" type="hidden" class="form-control" value="{{ $goods_folder->id }}">
-                <input name="partner_id" type="hidden" class="form-control" value="{{ $goods_folder->partner_id }}">
+                <input name="user_id" type="hidden" class="form-control" value="{{ $goods_folder->user_id }}">
                 <div class="card mt-3">
                     <div class="card-header">基本情報</div>
                     <div class="card-body">

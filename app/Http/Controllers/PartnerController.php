@@ -16,8 +16,8 @@ class PartnerController extends Controller
         if ($partner == null) {
             return abort(404);
         }
-        $experience_folders = ExperienceFolder::where('partner_id', $id)->get();
-        $goods_folders = GoodsFolder::where('partner_id', $id)->get();
+        $experience_folders = ExperienceFolder::where('user_id', $id)->get();
+        $goods_folders = GoodsFolder::where('user_id', $id)->get();
         $links = Link::where('partner_id', $id)->get();
         return view('partner.detail', compact('partner', 'experience_folders', 'goods_folders', 'links'));
     }

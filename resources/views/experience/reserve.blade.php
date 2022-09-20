@@ -228,6 +228,7 @@ input[type="radio"] {
                         <p class="text-gray fs-5 mt-4">{{ $experienceFolder->description }}</p>
                         
                     </div>
+                    <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->user_id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
                 </div>
 
         </div>
@@ -245,6 +246,7 @@ input[type="radio"] {
                                 <div class="d-flex">
                                     <p class="fs-4">体験日 : <span class="fw-bold">{{ app('request')->input('keyword') }}</span></p>
                                     <p class="ms-4 fs-4 fw-bold mb-0">{{ $experience->name }}</p>
+                                    
                                 </div>
                                 @if( $experienceFolder->is_lodging == 1)
                                 <p class="fs-4 mb-3 ">宿泊日 : <span class="fw-bold"> {{ $experienceFolder->is_lodging ? (($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') . ' (前泊)' : app('request')->input('keyword') . ' (後泊)') ) : '宿泊はありません' }}</span></p>

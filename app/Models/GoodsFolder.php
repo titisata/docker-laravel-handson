@@ -11,7 +11,7 @@ class GoodsFolder extends Model
 
 
     protected $fillable= [
-        'partner_id',
+        'user_id',
         'name',
         'description',
         'caution',
