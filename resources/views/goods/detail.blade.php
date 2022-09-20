@@ -138,13 +138,13 @@ async function commentCreate(goods_folder_id) {
                         @csrf
                         <input type="hidden" name="goods_id" value="{{ $goods->id }}">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h5 class="fw-bold ">{{ $goods->name }}</h5>   
-                            <p class="fw-bold text-end h3"><span id="goods_price_{{ $goods->id }}" value="">{{ $goods->price }}</span>円/個</p>
+                            <h5 class="fw-bold">{{ $goods->name }}</h5>   
+                            <p class="fw-bold text-end h3"><span id="goods_price_{{ $goods->id }}">{{ $goods->price }}</span>円/個</p>
                         </div>
-                        <div class="d-flex align-items-center justify-content-end pb-4 border-bottom  border-secondary">
+                        <div class="d-flex align-items-center justify-content-end pb-4 border-bottom border-secondary">
                             <label class="fs-5 me-1" for="quantity">数量</label>
                             <div class="d-flex">
-                                <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}')">
+                                <select class="form-select form-select-sm me-1" style="width:64px" name="quantity[]" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}')">
                                     <option value="0" selected="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
