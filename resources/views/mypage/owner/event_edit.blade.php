@@ -101,7 +101,7 @@
                     <div class="card-header">基本情報</div>
                     <div class="card-body">
                         <input name="id" type="hidden" class="form-control" value="{{ $experiences_folder->id }}">
-                        <input name="partner_id" type="hidden" class="form-control" value="{{ $experiences_folder->partner_id }}">
+                        <input name="partner_id" type="hidden" class="form-control" value="{{ $experiences_folder->user_id }}">
                         <div class="mb-3">
                             <label class="form-label">名前</label>
                             <input name="name" type="text" class="form-control" value="{{ $experiences_folder->name }}">
@@ -277,7 +277,7 @@
                     <div class="card-header">時間帯設定</div>
                     <div class="card-body">
                         
-                        @foreach ($experiences_folder->experiences as $key=>$experience)
+                        @forelse ($experiences_folder->experiences as $key=>$experience)
                             <div class="card mt-3 p-3 ex_data">
                                 <input hidden name="ex_ids_{{$key+1}}" type="text" value="{{ $experience->id }}">
                                 <div class="mb-3">
@@ -320,9 +320,12 @@
                                 
                                 
                             </div>
-                        @endforeach
+                        @empty
+                        
+                        
+                        @endforelse
                         <div id="add_target"></div>
-                        <input type="hidden" id="key" name="key" value="{{$key+1}}">   
+                        <input type="hidden" id="key" name="key" value="{{$key+1}}">
                         <button type="button" class="mt-2 btn btn-primary" onclick="add_ex({{ $experiences_folder->experiences->count() }})">追加</button>
                     </div>
                 </div>

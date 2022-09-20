@@ -31,7 +31,7 @@
                                                 <p>食事: {{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
                                                 <p>連絡事項: {{ $reserved_experience->message }}</p>
                                                 <p>ステータス: {{ $reserved_experience->status }}</p>
-                                                <p>選定ホテル: {{ $reserved_experience->hotel->name }}</p>
+                                                <p>選定ホテル: {{ $reserved_experience->hotel->name ?? '未確定'}}</p>
                                             </div>
                                         </div>
                                     </a>

@@ -38,7 +38,7 @@ class MPartnerController extends Controller
     public function event()
     {
         $user = Auth::user();
-        $experiences_folders = ExperienceFolder::where('partner_id', $user->id)->get();
+        $experiences_folders = ExperienceFolder::where('user_id', $user->id)->get();
         return view('mypage.partner.event', compact('user', 'experiences_folders'));
     }
 
@@ -52,7 +52,7 @@ class MPartnerController extends Controller
 
     public function action_event_add(Request $request)
     {
-        $partner_id = $request->partner_id;
+        $user_id = $request->user_id;
         $name = $request->name;
         $price_adult = $request->price_adult;
         $price_child = $request->price_child;
@@ -70,7 +70,7 @@ class MPartnerController extends Controller
         $ex_price_childs = $request->ex_price_childs;  
         
         ExperienceFolder::create([
-            'partner_id' => $partner_id,
+            'user_id' => $user_id,
             'name' => $name,
             'price_adult' => $price_adult,
             'price_child' => $price_child,
@@ -114,7 +114,7 @@ class MPartnerController extends Controller
     public function event_edit_update(Request $request)
     {
 
-        $partner_id = $request->partner_id;
+        $user_id = $request->user_id;
         $name = $request->name;
         $price_adult = $request->price_adult;
         $price_child = $request->price_child;
@@ -133,6 +133,7 @@ class MPartnerController extends Controller
         $food_groups = $request->food_group;
 
         $experiences_folder = ExperienceFolder::where('id', $id)->update([
+            'user_id' => $user_id,
             'name' => $name,
             'price_adult' => $price_adult,
             'price_child' => $price_child,
@@ -591,9 +592,9 @@ class MPartnerController extends Controller
     public function reserve()
     {
         $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
-        $experiences_folders = ExperienceFolder::where('partner_id', $partner->id)->get();
-        return view('mypage.partner.reserve', compact('user', 'partner', 'experiences_folders'));
+        // $partner = Partner::where('user_id', $user->id)->first();
+        $experiences_folders = ExperienceFolder::where('user_id', $user->id)->get();
+        return view('mypage.partner.reserve', compact('user', 'experiences_folders'));
     }
 
     public function reserved_user()
