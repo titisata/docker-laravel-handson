@@ -51,13 +51,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // ユーザーがアクセスできる
-Route::prefix('mypage/user')->middleware(['auth'])->group(function () {
+Route::prefix('mypage/user')->middleware(['auth','role:user'])->group(function () {
     Route::get('/', [App\Http\Controllers\MUserController::class, 'home']);
     Route::get('/reserve', [App\Http\Controllers\MUserController::class, 'reserve']);
 });
 
 // パートナーがアクセスできる
-Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
+Route::prefix('mypage/partner')->middleware(['auth','role:partner'])->group(function () {
     Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
     Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
     Route::get('/event_add/{id}', [App\Http\Controllers\MPartnerController::class, 'event_add']);
@@ -87,10 +87,11 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
     Route::post('/action_goods_image_update/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_image_update']);
     Route::get('/goods_image_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_image_delete']);
     Route::post('/action_goods_image_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_image_delete']);
-    Route::get('/pro', [App\Http\Controllers\MPartnerController::class, 'pro']);
     Route::get('/profile', [App\Http\Controllers\MPartnerController::class, 'profile']);
     Route::post('/profile', [App\Http\Controllers\MPartnerController::class, 'profile_post']);
     Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
+    Route::get('/reserved_user', [App\Http\Controllers\MPartnerController::class, 'reserved_user']);
+    Route::get('/user_info/{id}', [App\Http\Controllers\MPartnerController::class, 'user_info']);
     Route::get('/link_display', [App\Http\Controllers\MPartnerController::class, 'link_display']);
     Route::get('/link_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'link_insert']);
     Route::post('/action_link_insert', [App\Http\Controllers\MPartnerController::class, 'action_link_insert']);
@@ -102,7 +103,7 @@ Route::prefix('mypage/partner')->middleware(['auth'])->group(function () {
 });
 
 // 管理者がアクセスできる
-Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
+Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\MOwnerController::class, 'home']);
     Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
     Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
@@ -155,5 +156,60 @@ Route::prefix('mypage/owner')->middleware(['auth'])->group(function () {
     Route::get('/users', [App\Http\Controllers\MUserController::class, 'users']);
     Route::get('/users_edit/{id?}', [App\Http\Controllers\MUserController::class, 'users_edit']);
     Route::post('/users_edit', [App\Http\Controllers\MUserController::class, 'users_edit_post']);
+    
+    Route::get('/hotel_group_display', [App\Http\Controllers\MOwnerController::class, 'hotel_group_display']);
+    Route::get('/hotel_group_insert', [App\Http\Controllers\MOwnerController::class, 'hotel_group_insert']);
+    Route::post('/action_hotel_group_insert', [App\Http\Controllers\MOwnerController::class, 'action_hotel_group_insert']);
+    Route::get('/hotel_group_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'hotel_group_edit']);
+    Route::post('/action_hotel_group_edit', [App\Http\Controllers\MOwnerController::class, 'action_hotel_group_edit']);
+    Route::post('/action_hotel_group_delete', [App\Http\Controllers\MOwnerController::class, 'action_hotel_group_delete']);
+    Route::get('/hotel_display', [App\Http\Controllers\MOwnerController::class, 'hotel_display']);
+    Route::get('/hotel_insert', [App\Http\Controllers\MOwnerController::class, 'hotel_insert']);
+    Route::post('/action_hotel_insert', [App\Http\Controllers\MOwnerController::class, 'action_hotel_insert']);
+    Route::get('/hotel_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'hotel_edit']);
+    Route::post('/action_hotel_edit', [App\Http\Controllers\MOwnerController::class, 'action_hotel_edit']);
+    Route::post('/hotel_delete', [App\Http\Controllers\MOwnerController::class, 'hotel_delete']);
+    
+    Route::get('/food_group_display', [App\Http\Controllers\MOwnerController::class, 'food_group_display']);
+    Route::get('/food_group_insert', [App\Http\Controllers\MOwnerController::class, 'food_group_insert']);
+    Route::post('/action_food_group_insert', [App\Http\Controllers\MOwnerController::class, 'action_food_group_insert']);
+    Route::get('/food_group_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'food_group_edit']);
+    Route::post('/action_food_group_edit', [App\Http\Controllers\MOwnerController::class, 'action_food_group_edit']);
+    Route::post('/action_food_group_delete', [App\Http\Controllers\MOwnerController::class, 'action_food_group_delete']);
+    Route::get('/food_display', [App\Http\Controllers\MOwnerController::class, 'food_display']);
+    Route::get('/food_insert', [App\Http\Controllers\MOwnerController::class, 'food_insert']);
+    Route::post('/action_food_insert', [App\Http\Controllers\MOwnerController::class, 'action_food_insert']);
+    Route::get('/food_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'food_edit']);
+    Route::post('/action_food_edit', [App\Http\Controllers\MOwnerController::class, 'action_food_edit']);
+    Route::post('/food_delete', [App\Http\Controllers\MOwnerController::class, 'food_delete']);
+
+    Route::get('/event', [App\Http\Controllers\MOwnerController::class, 'event']);
+    Route::get('/event_add/{id}', [App\Http\Controllers\MOwnerController::class, 'event_add']);
+    Route::post('/action_event_add', [App\Http\Controllers\MOwnerController::class, 'action_event_add']);
+    Route::get('/event/{id}', [App\Http\Controllers\MOwnerController::class, 'event_edit']);
+    Route::post('event_edit_update', [App\Http\Controllers\MOwnerController::class, 'event_edit_update']);
+    Route::post('/action_event_delete', [App\Http\Controllers\MOwnerController::class, 'action_event_delete']);
+    Route::get('/experience_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'experience_delete']);
+    Route::post('/action_experience_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_experience_delete']);
+    Route::get('/event_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'event_image_insert']);
+    Route::post('/action_event_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'action_event_image_insert']);
+    Route::get('/event_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'event_image_update']);
+    Route::post('/action_event_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'action_event_image_update']);
+    Route::get('/event_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'event_image_delete']);
+    Route::post('/action_event_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_event_image_delete']);
+    Route::get('/goods', [App\Http\Controllers\MOwnerController::class, 'goods']);
+    Route::get('/goods_add/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_add']);
+    Route::post('/action_goods_add', [App\Http\Controllers\MOwnerController::class, 'action_goods_add']);
+    Route::get('/goods/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_edit']);
+    Route::post('/goods_edit_update', [App\Http\Controllers\MOwnerController::class, 'goods_edit_update']);    
+    Route::get('/goods_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_delete']);
+    Route::post('/action_goods_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_delete']);
+    Route::post('/action_goods_display_delete', [App\Http\Controllers\MOwnerController::class, 'action_goods_display_delete']);
+    Route::get('/goods_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_image_insert']);
+    Route::post('/action_goods_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_image_insert']);
+    Route::get('/goods_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_image_update']);
+    Route::post('/action_goods_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_image_update']);
+    Route::get('/goods_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_image_delete']);
+    Route::post('/action_goods_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_image_delete']);
 });
 

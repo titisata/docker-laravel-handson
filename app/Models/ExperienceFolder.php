@@ -42,14 +42,10 @@ class ExperienceFolder extends Model
         return $this->hasMany(Experience::class);
     }
 
+    //表示可能な体験をソート順に取得
     public function active_experiences()
     {
-        // while(){
-        //     $sql = $sql ."->where('".$jouken(0) ."','".$jouken(1)."')";
-        //     $sql = $sql ."->where('status', '1')";
-        // }
-        // return $this->hasMany(Experience::class).$sql;
-        return $this->hasMany(Experience::class)->where('status', '1');
+        return $this->hasMany(Experience::class)->where('status', '1')->orderBy('sort_no', 'asc');
     }
 
     /**
@@ -143,16 +139,6 @@ class ExperienceFolder extends Model
         return $this->hasMany(Schedule::class);
     }
 
-    /**
-     * FoodGroupを取得
-     *
-     * @return Collection<FoodGroup>
-     */
-
-    public function foodGroup()
-    {
-        return $this->hasMany(FoodGroup::class);
-    }
 
     /**
      * HotelGroupを取得
@@ -160,9 +146,20 @@ class ExperienceFolder extends Model
      * @return Collection<HotelGroup>
      */
 
-    public function hotelGroup()
+    public function hotelgroups()
     {
-        return $this->hasMany(HotelGroup::class);
+        return $this->belongsToMany('App\Models\HotelGroup', 'hotel_group_selects', 'experience_folder_id', 'hotel_group_id');
+    }
+
+    /**
+     * HotelGroupを取得
+     *
+     * @return Collection<FoodGroup>
+     */
+
+    public function foodgroups()
+    {
+        return $this->belongsToMany('App\Models\FoodGroup', 'food_group_selects', 'experience_folder_id', 'food_group_id');
     }
 
 

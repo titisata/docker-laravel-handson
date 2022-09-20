@@ -1,9 +1,196 @@
-'description' => 'パートナーAはテスト的なテストです！',
-            'reserve_flag' => true,
-            'service' => '0',
-            'regist_num' => '0',
-            'background_color' => 'FFFFFF',
-            'catch_copy' => '天然水が導く魅惑の都市。',
-            'access' => '斎川町駅より徒歩15分です。ご連絡いただければ車でお迎えにまいります。',
+<div class="container">
+    <h1>ホテル一覧</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mt-3">
+                <div class="card-header">ホテル編集</div>
+                <div class="card-body">
+
+                    <p>現在登録中のホテル</p>
+                        <form action="/mypage/owner/hotel_insert" method="POST">
+                            @csrf
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-sm btn-primary mx-2" name="update">追加</button>
+                                <input type="hidden" name="id" value="">
+                            </div>
+                        
+                        </form>
+                    <div class="d-flex flex-column">
+                    @foreach( $hotels as $hotel)
+                        <div class='d-flex my-2'>
+                            <form action="/mypage/owner/action_hotel_edit" method="POST">
+                                @csrf
+                                <div class="d-flex">
+                                    <p class="mb-0">{{ $hotel->name }}</p>
+                                    
+                                    <button type="submit" class="btn btn-sm btn-primary mx-2" name="update">編集</button>
+                                    <input type="hidden" name="id" value="">
+                                </div>
+                            
+                            </form>
+                            
+                            <form action="" method="POST">
+                                @csrf 
+                                <button type="submit" class="btn btn-sm btn-danger mx-2 mb-0"  name="delete">削除</button>
+                                <input type="hidden" name="id" value="">
+                            </form>
+
+                        
+                        </div>
+                    @endforeach 
+                    
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+ HotelSelect::create([
+            'hotel_group_id' => '1',
+            'hotel_id' => '1',
+        ]);
+        HotelSelect::create([
+            'hotel_group_id' => '1',
+            'hotel_id' => '2',
+        ]);
+        HotelSelect::create([
+            'hotel_group_id' => '2',
+            'hotel_id' => '3',
+        ]);
+        HotelSelect::create([
+            'hotel_group_id' => '2',
+            'hotel_id' => '4',
+        ]);
+
+         \App\Models\ExperienceFolder::create([
+            'partner_id' => 3,
+            'name' => 'ゆっくりラフティング半日ツアー',
+            'description' => 'ゆっくりラフティング半日ツアー！お得な料金で楽しもう♪テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
             'address' => '千葉県木更津市北浜町１',
-            'phone' => '042-xxxx-xxxx',
+            'caution' => 'テスト的な注意事項です。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
+            'detail' => 'テスト的な詳細情報です。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。テキストをサンプルで入れています。',
+            'category1' => '文化',
+            'category2' => 'aa',
+            'category3' => null,
+            'is_lodging' => true,
+            'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
+            'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
+            'is_before_lodging' => false,
+            'price_child' => 5000,
+            'price_adult' => 7000,
+            'recommend_flag' => 1,
+            'recommend_sort_no' => 4,
+        ]);
+
+        \App\Models\Experience::create([
+            'experience_folder_id' => 10,
+            'name' => '19:00からの部',
+            'start_date' =>  date('Y-m-d'),
+            'end_date' =>  date('Y-m-d'),
+            'sort_no' => 1,
+            'quantity' => 5,
+            'price_child' => 3000,
+            'price_adult' => 2000,
+        ]);
+
+        @forelse($hotel_groups as $hotel_group)
+                        @if(in_array($hotel_group->id, $checked_hotels_group, true))
+                            <div>
+                                <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}" checked >
+                                <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
+                            </div> 
+                        @else
+                            <div>
+                                <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}">
+                                <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
+                            </div> 
+                        @endif
+                    @empty
+                        <p>グループがありません</p>
+                    @endforelse
+
+
+                    <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
+                    <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
+
+
+                    <input class="form-check-input" type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}" onchange="radiohotelSwitch()">
+                                    <label class="form-check-label" for="hotel_group_{{ $hotelGroup->id }}">
+                                        {{ $hotelGroup->name }} : 
+                                        大人<span class="small small_font ms-1">税込</span><span id='hotel_adult_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_adult }}" class="fw-bold">{{ number_format($hotelGroup->price_adult) }}</span><span class="small small_font">円 / 人</span>　
+                                        子ども<span class="small small_font ms-1">税込</span><span id='hotel_child_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_child }}" class="fw-bold">{{ number_format($hotelGroup->price_child) }}</span><span class="small small_font">円 / 人</span>
+                                    </label>
+
+                                    <input class="form-check-input" type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}" onchange="radiofoodSwitch()">
+                                    <label class="form-check-label" for="food_group_{{ $foodGroup->id }}">
+                                        {{ $foodGroup->name }} :  
+                                        大人<span class="small small_font ms-1">税込</span><span id='food_adult_price_{{ $foodGroup->id }}' value='{{ $foodGroup->price_adult }}' class="fw-bold">{{ number_format($foodGroup->price_adult) }}</span><span class="small small_font">円 / 人</span>　
+                                        子ども<span class="small small_font ms-1">税込</span><span id='food_child_price_{{ $foodGroup->id }}' class="fw-bold" value='{{ $foodGroup->price_child }}'>{{ number_format($foodGroup->price_child) }}</span><span class="small small_font">円 / 人</span>
+                                    </label>
+
+                                    @if(!$experienceFolder->foodGroup->isEmpty())
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="food_group_0" name="food_group_id" value="0" onchange="radiofoodSwitch()">
+                                    <label class="form-check-label" for="food_group_null">食事なし</label>
+                                </div>
+                            @endempty
+
+
+
+
+                             @if(in_array($hotel_group->id, $checked_hotels_group, true))
+                                        <div>
+                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}" checked >
+                                            <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
+                                        </div> 
+                                    @else
+                                        <div>
+                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}">
+                                            <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
+                                        </div> 
+                                    @endif
+
+
+
+
+                                    @if(in_array($food_group->id, $checked_foods_group, true))
+                                    <div>
+                                        <input type="checkbox" id="{{ $food_group->name }}" name="food_group[]" value="{{ $food_group->id }}" checked >
+                                        <label for="{{ $food_group->name }}">{{ $food_group->name }}</label>
+                                    </div> 
+                                    @else
+                                    <div>
+                                        <input type="checkbox" id="{{ $food_group->name }}" name="food_group[]" value="{{ $food_group->id }}">
+                                        <label for="{{ $food_group->name }}">{{ $food_group->name }}</label>
+                                    </div> 
+                                    @endif
+
+                           前泊・後泊
+                                    <div class="bg-f-part p-2 rounded-2 d-lg-none">
+                                <p class="text-white fs-5">体験日: {{ app('request')->input('keyword') }}</p>
+                                <p class="text-white mb-0 fs-5">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') :  app('request')->input('keyword') ) ) : '宿泊なし' }}</p>
+                            </div>
+
+                              <form name="favorite_form" action="/favorite_edit" method="POST" target="sendFavorite">
+                        @csrf
+                        <input type="hidden" name="f_user_id" value="{{ $user->id }}">
+                        <input type="hidden" name="f_experienceFolder_id" value="{{ $experienceFolder->id }}">
+                        <input type="hidden" name="f_table_name" value="experience_folders">
+                    </form>
+
+                    <input type="hidden" id="user_id" value="{{ $user->id }}">
+
+                    <div class="d-flex align-items-center" >
+                        <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                        
+                        <div class="ms-3" >
+                            @if($experienceFolder->favorite() != '')
+                                <i id="favorite" class="bi bi-heart-fill pink fs-3" onclick="submit_favorite();"></i>
+                            @else
+                                <i id="not_favorite" class="bi bi-heart-fill text-gray fs-3" onclick="submit_not_favorite();"></i>
+                            @endif
+                        </div>
+                        
+                    </div>

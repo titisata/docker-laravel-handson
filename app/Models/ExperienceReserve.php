@@ -11,6 +11,7 @@ class ExperienceReserve extends Model
 
     protected $fillable = [
         'user_id',
+        'partner_id',
         'experience_id',
         'hotel_group_id',
         'food_group_id',
@@ -33,6 +34,11 @@ class ExperienceReserve extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function reserved_user()
+    {
+        return $this->hasMany(User::class);
     }
 
     //hotelsテーブルと結合

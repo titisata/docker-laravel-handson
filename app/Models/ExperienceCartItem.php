@@ -11,6 +11,7 @@ class ExperienceCartItem extends Model
 
     protected $fillable = [
         'experience_id',
+        'partner_id',
         'user_id',
         'hotel_group_id',
         'food_group_id',

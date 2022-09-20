@@ -16,24 +16,28 @@ class HotelSeeder extends Seeder
     public function run()
     {
         Hotel::create([
-            'hotel_group_id' => 1,
             'name' => '極上ホテルA',
             'description' => 'とってもいいホテルAです！',
+            'address' => '東京都文京区',
+            'mail' => 'sample@sample.com',
         ]);
         Hotel::create([
-            'hotel_group_id' => 1,
             'name' => '極上ホテルB',
             'description' => 'とってもいいホテルBです！',
+            'address' => '東京都文京区',
+            'mail' => 'sample@sample.com',
         ]);
         Hotel::create([
-            'hotel_group_id' => 2,
             'name' => '通常ホテルA',
             'description' => 'まあまあいいホテルAです！',
+            'address' => '東京都文京区',
+            'mail' => 'sample@sample.com',
         ]);
         Hotel::create([
-            'hotel_group_id' => 2,
             'name' => '通常ホテルB',
             'description' => 'まあまあいいホテルBです！',
+            'address' => '東京都文京区',
+            'mail' => 'sample@sample.com',
         ]);
     }
 }

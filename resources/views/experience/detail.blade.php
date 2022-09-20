@@ -216,7 +216,7 @@ async function commentCreate(ex_id) {
 
 
 </script>
-<input type="hidden" id="user_id" value="{{ $user->id }}">
+
 <input type="hidden" id="favorite_id" value="{{ $experienceFolder->id }}">
 <div class="card" style="height: 400px;">
     <img class="card-img" style="height: 100%; object-fit: cover;" src="{{ $experienceFolder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
@@ -253,27 +253,40 @@ async function commentCreate(ex_id) {
             <div class="row">
                 <div class="my-4 col-12 col-lg-7">
                     
-                    <div class="d-flex align-items-center" >
-                        <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
-                        
-                        <div class="ms-3" >
-                            @if($experienceFolder->favorite() != '')
-                                <i id="favorite" class="bi bi-heart-fill pink fs-3" onclick="submit_favorite();"></i>
-                            @else
-                                <i id="not_favorite" class="bi bi-heart-fill text-gray fs-3" onclick="submit_not_favorite();"></i>
-                            @endif
+                    
+
+                    @if( $user!=null )
+
+                        <div class="d-flex align-items-center" >
+                            <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                            
+                            <div class="ms-3" >
+                                @if($experienceFolder->favorite() != '')
+                                    <i id="favorite" class="bi bi-heart-fill pink fs-3" onclick="submit_favorite();"></i>
+                                @else
+                                    <i id="not_favorite" class="bi bi-heart-fill text-gray fs-3" onclick="submit_not_favorite();"></i>
+                                @endif
+                            </div>
+                            
                         </div>
-                        
-                    </div>
 
-                    <form name="favorite_form" action="/favorite_edit" method="POST" target="sendFavorite">
-                        @csrf
-                        <input type="hidden" name="f_user_id" value="{{ $user->id }}">
-                        <input type="hidden" name="f_experienceFolder_id" value="{{ $experienceFolder->id }}">
-                        <input type="hidden" name="f_table_name" value="experience_folders">
-                    </form>
+                        <form name="favorite_form" action="/favorite_edit" method="POST" target="sendFavorite">
+                            @csrf
+                            <input type="hidden" name="f_user_id" value="{{ $user->id }}">
+                            <input type="hidden" name="f_experienceFolder_id" value="{{ $experienceFolder->id }}">
+                            <input type="hidden" name="f_table_name" value="experience_folders">
+                        </form>
 
-                    <iframe name="sendFavorite" style="width:0px;height:0px;border:0px;"></iframe>
+                        <iframe name="sendFavorite" style="width:0px;height:0px;border:0px;"></iframe>
+
+                    @else
+                        <div class="d-flex align-items-center" >
+                            <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
+                        </div>
+
+                    @endif
+
+                    
                     
                     @if($experienceFolder->average_rate < 1.5)
                             <p class="mb-0">テスト用に表示、0は表示しないようにする</p>
@@ -321,7 +334,7 @@ async function commentCreate(ex_id) {
                         
                         
                     <p class="text-gray fs-5">{{ $experienceFolder->description }}</p>
-                    <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
+                    
 
                     <h4 class="fw-bold pt-4  text-gray">集合場所</h4>
                     <p class=" text-gray fs-5">{{ $experienceFolder->address }}</p>
@@ -334,7 +347,11 @@ async function commentCreate(ex_id) {
                         <div class="card-body px-0 pt-3 border-top">
                             <div class="bg-f-part p-2 rounded-2 mb-2 d-lg-flex align-items-center justify-content-center">
                                 <h5 class="text-white mb-lg-0">体験日: {{ app('request')->input('keyword') }}</h5>
-                                <h5 class="text-white mb-0 ms-lg-4">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}</h5>
+                                <h5 class="text-white mb-0 ms-lg-4">
+                                    {{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}
+                                   
+
+                                </h5>
                             </div>
                             <div>
                                 <a  class="text-primary" href="{{url()->current()}}" >
@@ -343,9 +360,9 @@ async function commentCreate(ex_id) {
                             </div>
                             <div class="py-2 ms-lg-auto d-lg-flex mt-3">
                                 
-                                <p class="fw-bold text-start fs-4">大人 : <span class="small small_font ">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_adult) }}</span><span class="small small_font">円 / 人</span></p>
+                                <p class="fw-bold text-start fs-4">大人 : <span class="small small_font ">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_adult) }}</span><span class="small small_font">円 / 人~</span></p>
                                 
-                                <p class="fw-bold text-start fs-4 ms-lg-4">子ども : <span class="small small_font">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_child) }}</span><span class="small small_font">円 / 人</span></p>
+                                <p class="fw-bold text-start fs-4 ms-lg-4">子ども : <span class="small small_font">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_child) }}</span><span class="small small_font">円 / 人~</span></p>
                             </div>
                             @forelse($experiences as $experience)
                                 <a class="btn btn-lg btn-pink rounded-pill text-white my-2 py-3 w-100 btn-shadow fs-5" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
@@ -361,7 +378,7 @@ async function commentCreate(ex_id) {
                         @if (app('request')->input('keyword') != "")
                             <div class="bg-f-part p-2 rounded-2 d-lg-none">
                                 <p class="text-white fs-5">体験日: {{ app('request')->input('keyword') }}</p>
-                                <p class="text-white mb-0 fs-5">{{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') :  app('request')->input('keyword') ) ) : '宿泊なし' }}</p>
+                                <p class="text-white mb-0 fs-5">{{ $experienceFolder->is_lodging }}</p>
                             </div>
                             
 
@@ -440,7 +457,7 @@ async function commentCreate(ex_id) {
                             </div>
                             @else
                             <div class="m-3">
-                                <p>投稿済みです</p>
+                                <p>投稿できません</p>
                             </div>
 
                             @endif

@@ -14,7 +14,11 @@ class MUserController extends Controller
 {
     public function home()
     {
-        return view('mypage.user.home');
+        $user = Auth::user();
+        $partner = Partner::where('user_id', $user->id)->first();
+        $ordered_goods = $user->ordered_goods;
+        $reserved_experiences = $user->reserved_experiences;
+        return view('mypage.user.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences'));
     }
 
     public function reserve()

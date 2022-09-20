@@ -131,18 +131,20 @@ async function commentCreate(goods_folder_id) {
         
 
 
-                @forelse($goods_folder->active_goods as $goods)
+                
                 <form class="mb-3 col-md-6 offset-md-3" action="{{ Request::url() }}" method="POST" onsubmit='return check();'>    
+                @forelse($goods_folder->active_goods as $goods)
                     <div class="card bg-color text-more-gray mt-3 p-3">
                         @csrf
+                        <input type="hidden" name="goods_id" value="{{ $goods->id }}">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h5 class="fw-bold ">{{ $goods->name }}</h5>   
-                            <p class="fw-bold text-end h3"><span id="goods_price_{{ $goods->id }}" value="">{{ $goods->price }}</span>円/個</p>
+                            <h5 class="fw-bold">{{ $goods->name }}</h5>   
+                            <p class="fw-bold text-end h3"><span id="goods_price_{{ $goods->id }}">{{ $goods->price }}</span>円/個</p>
                         </div>
-                        <div class="d-flex align-items-center justify-content-end pb-4 border-bottom  border-secondary">
+                        <div class="d-flex align-items-center justify-content-end pb-4 border-bottom border-secondary">
                             <label class="fs-5 me-1" for="quantity">数量</label>
                             <div class="d-flex">
-                                <select class="form-select form-select-sm me-1" style="width:64px" name="quantity" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}')">
+                                <select class="form-select form-select-sm me-1" style="width:64px" name="quantity[]" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}')">
                                     <option value="0" selected="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -154,14 +156,12 @@ async function commentCreate(goods_folder_id) {
                                     <option value="8">8</option>
                                     <option value="9">9</option>
                                     <option value="10">10</option>
-                                </select>
-                                
+                                </select> 
                             </div>    
                         </div> 
                         <p class="text-end pt-3 fs-4 fw-bold ">合計金額：<span id="goods_result_{{ $goods->id }}" class="fs-4">0</span>円</p>
 
-                    </div>
-                    
+                    </div> 
                 @empty
                     <p>商品がありません</p>
                 @endforelse
@@ -174,8 +174,7 @@ async function commentCreate(goods_folder_id) {
                 @else
                     <div class="text-center pt-3">
                         <p class="text-danger">現在この商品は扱っておりません</p>
-                    </div>
-                
+                    </div> 
                 @endif
                 </form>
             <div class="my-5">

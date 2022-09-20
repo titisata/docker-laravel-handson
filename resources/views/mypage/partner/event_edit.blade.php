@@ -198,6 +198,49 @@
                                 <label>おすすめしない</label>
                             @endif
                         </div>
+                        <div>
+                            <label for="">
+                                ホテルグループ選択
+                                @forelse($hotel_groups as $hotel_group)
+                                    @if(in_array($hotel_group->id, $checked_hotels_group, true))
+                                        <div>
+                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}" checked >
+                                            <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
+                                        </div> 
+                                    @else
+                                        <div>
+                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}">
+                                            <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
+                                        </div> 
+                                    @endif
+                                    
+                                @empty
+                                    <p>グループがありません</p>
+                                @endforelse
+                                </select>
+                            </label>
+                        </div>
+                        <div>
+                            <label for="">
+                                フードグループ選択
+                                @forelse($food_groups as $food_group)
+                                   @if(in_array($food_group->id, $checked_foods_group, true))
+                            <div>
+                                <input type="checkbox" id="{{ $food_group->name }}" name="food_group[]" value="{{ $food_group->id }}" checked >
+                                <label for="{{ $food_group->name }}">{{ $food_group->name }}</label>
+                            </div> 
+                        @else
+                            <div>
+                                <input type="checkbox" id="{{ $food_group->name }}" name="food_group[]" value="{{ $food_group->id }}">
+                                <label for="{{ $food_group->name }}">{{ $food_group->name }}</label>
+                            </div> 
+                        @endif
+                                @empty
+                                    <p>グループがありません</p>
+                                @endforelse
+                                </select>
+                            </label>
+                        </div>
                         <div class="mt-3">
                             <div>
                                 <label>画像設定</label>

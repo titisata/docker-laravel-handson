@@ -226,14 +226,15 @@ input[type="radio"] {
                             </div>
                         @endif
                         <p class="text-gray fs-5 mt-4">{{ $experienceFolder->description }}</p>
-                        <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
+                        
                     </div>
                 </div>
 
         </div>
         <div class="col-md-10">
-            <form  action="{{ Request::url() }}" method="POST" name="reserve_form" onsubmit='return check();'>
+            <form action="{{ Request::url() }}" method="POST" name="reserve_form" onsubmit='return check();'>
             @csrf
+            <input type="hidden" name="partner_id" value="{{ $experienceFolder->partner_id }}">
             <input hidden name="date" type="text" value="{{ $experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : app('request')->input('keyword') }}">
 
                 <div class="mt-2 card shadow-sm bg-color text-more-gray">
@@ -302,15 +303,15 @@ input[type="radio"] {
 
                         <p class="mb-0 pt-4 fs-4">宿泊プラン</p>
                         <div class="mb-2 fs-4">
-                            @forelse ($experienceFolder->hotelGroup as $hotelGroup)
-                                <div class="form-check my-2">
-                                    <input class="form-check-input" type="radio" id="hotel_group_{{ $hotelGroup->id }}" name="hotel_group_id" value="{{ $hotelGroup->id }}" onchange="radiohotelSwitch()">
-                                    <label class="form-check-label" for="hotel_group_{{ $hotelGroup->id }}">
-                                        {{ $hotelGroup->name }} : 
-                                        大人<span class="small small_font ms-1">税込</span><span id='hotel_adult_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_adult }}" class="fw-bold">{{ number_format($hotelGroup->price_adult) }}</span><span class="small small_font">円 / 人</span>　
-                                        子ども<span class="small small_font ms-1">税込</span><span id='hotel_child_price_{{ $hotelGroup->id }}' value="{{ $hotelGroup->price_child }}" class="fw-bold">{{ number_format($hotelGroup->price_child) }}</span><span class="small small_font">円 / 人</span>
-                                    </label>
-                                </div>
+                            @forelse ($experienceFolder->hotelgroups as $hotelgroup)
+                            <div class="form-check my-2">
+                                <input class="form-check-input" type="radio" id="hotel_group_{{ $hotelgroup->id }}" name="hotel_group_id" value="{{ $hotelgroup->id }}" onchange="radiohotelSwitch()">
+                                <label class="form-check-label" for="hotel_group_{{ $hotelgroup->id }}">
+                                    {{ $hotelgroup->name }} : 
+                                    大人<span class="small small_font ms-1">税込</span><span id='hotel_adult_price_{{ $hotelgroup->id }}' value="{{ $hotelgroup->price_adult }}" class="fw-bold">{{ number_format($hotelgroup->price_adult) }}</span><span class="small small_font">円 / 人</span>　
+                                    子ども<span class="small small_font ms-1">税込</span><span id='hotel_child_price_{{ $hotelgroup->id }}' value="{{ $hotelgroup->price_child }}" class="fw-bold">{{ number_format($hotelgroup->price_child) }}</span><span class="small small_font">円 / 人</span>
+                                </label>
+                            </div>    
                             @empty
                                 <p class="">この体験は宿泊がありません</p>
                             @endforelse
@@ -318,24 +319,19 @@ input[type="radio"] {
 
                         <p class="mb-0 fs-4 mt-4 ">食事プラン</p>
                         <div class=" fs-4 pb-4">
-                            @forelse ($experienceFolder->foodGroup as $foodGroup)
+                            @forelse ($experienceFolder->foodgroups as $foodgroup)
                                 <div class="form-check my-2">
-                                    <input class="form-check-input" type="radio" id="food_group_{{ $foodGroup->id }}" name="food_group_id" value="{{ $foodGroup->id }}" onchange="radiofoodSwitch()">
-                                    <label class="form-check-label" for="food_group_{{ $foodGroup->id }}">
-                                        {{ $foodGroup->name }} :  
-                                        大人<span class="small small_font ms-1">税込</span><span id='food_adult_price_{{ $foodGroup->id }}' value='{{ $foodGroup->price_adult }}' class="fw-bold">{{ number_format($foodGroup->price_adult) }}</span><span class="small small_font">円 / 人</span>　
-                                        子ども<span class="small small_font ms-1">税込</span><span id='food_child_price_{{ $foodGroup->id }}' class="fw-bold" value='{{ $foodGroup->price_child }}'>{{ number_format($foodGroup->price_child) }}</span><span class="small small_font">円 / 人</span>
+                                    <input class="form-check-input" type="radio" id="food_group_{{ $foodgroup->id }}" name="food_group_id" value="{{ $foodgroup->id }}" onchange="radiofoodSwitch()">
+                                    <label class="form-check-label" for="food_group_{{ $foodgroup->id }}">
+                                        {{ $foodgroup->name }} :  
+                                        大人<span class="small small_font ms-1">税込</span><span id='food_adult_price_{{ $foodgroup->id }}' value='{{ $foodgroup->price_adult }}' class="fw-bold">{{ number_format($foodgroup->price_adult) }}</span><span class="small small_font">円 / 人</span>　
+                                        子ども<span class="small small_font ms-1">税込</span><span id='food_child_price_{{ $foodgroup->id }}' class="fw-bold" value='{{ $foodgroup->price_child }}'>{{ number_format($foodgroup->price_child) }}</span><span class="small small_font">円 / 人</span>
                                     </label>
                                 </div>
                             @empty
-                                <p class="">この体験は食事がつきません</p>
+                                <p class="">この体験は宿泊がありません</p>
                             @endforelse
-                            @if(!$experienceFolder->foodGroup->isEmpty())
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="food_group_0" name="food_group_id" value="0" onchange="radiofoodSwitch()">
-                                    <label class="form-check-label" for="food_group_null">食事なし</label>
-                                </div>
-                            @endempty
+                            
                         </div>
 
                         <p class="text-end border-top border-secondary pt-3 fs-3 mb-0 ">合計金額：<span class="small small_font ms-1">税込</span><span id="price" class="fs-3">0</span><span class="small small_font">円</span></p>
@@ -441,7 +437,7 @@ input[type="radio"] {
                                     </div>
                                 @endif
                                 
-                                @if( $mycomment->user_id != $user->id )
+                                @if( $mycomment == null )
                                     <div class="m-3">
                                         <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                                         <div class="d-flex justify-content-between align-items-center mt-2">

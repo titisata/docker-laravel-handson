@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         DB::statement("SET foreign_key_checks=1");
 
         $this->call(UserSeeder::class);
+        $this->call(PermissionSeeder::class);
         $this->call(PartnerSeeder::class);
         $this->call(CompanySeeder::class);
         $this->call(ExperienceFolderSeeder::class);
@@ -53,6 +54,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(SiteMasterSeeder::class);
         $this->call(FavoriteSeeder::class);
+        $this->call(HotelSelectSeeder::class);
+       
        
     }
 }
