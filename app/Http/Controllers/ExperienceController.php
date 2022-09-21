@@ -135,7 +135,7 @@ class ExperienceController extends Controller
         }
 
         $id = $request->id;
-        $partner_id = $request->partner_id;
+        $user_id = $request->user_id;
         $uid = Auth::user()->id;
         $quantity_child = $request->quantity_child;
         $date = $request->date;
@@ -148,7 +148,7 @@ class ExperienceController extends Controller
         // TODO: 不正な IDの場合の処理
         ExperienceCartItem::create([
             'experience_id' => $id,
-            'partner_id' => $partner_id,
+            'partner_id' => $user_id,
             'user_id' => $uid,
             'message' => $message,
             'hotel_group_id' => $hotel_group_id,

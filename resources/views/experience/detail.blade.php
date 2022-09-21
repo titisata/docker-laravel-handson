@@ -334,6 +334,7 @@ async function commentCreate(ex_id) {
                         
                         
                     <p class="text-gray fs-5">{{ $experienceFolder->description }}</p>
+                    <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->user_id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
                     
 
                     <h4 class="fw-bold pt-4  text-gray">集合場所</h4>

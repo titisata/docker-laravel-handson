@@ -127,7 +127,7 @@ async function commentCreate(goods_folder_id) {
                 </div>
                 
                 <p class="text-gray fs-5">{!!nl2br(e($goods_folder->description))!!}</p>
-                <p class="mb-4 text-start"><a role="button" href="/partner/{{ $goods_folder->partner->id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
+                <p class="mb-4 text-start"><a role="button" href="/partner/{{ $goods_folder->user_id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
         
 
 

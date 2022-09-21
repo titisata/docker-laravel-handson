@@ -15,8 +15,7 @@ class ExperienceFolder extends Model
 
     protected $fillable= [
         'average_rate',
-        'partner_id',
-        'company_id',
+        'user_id',
         'name',
         'price_adult',
         'price_child',

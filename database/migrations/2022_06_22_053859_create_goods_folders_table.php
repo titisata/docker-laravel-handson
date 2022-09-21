@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('goods_folders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('partner_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('name', 50)->index();
             $table->string('description', 1000);
             $table->string('caution', 1000);

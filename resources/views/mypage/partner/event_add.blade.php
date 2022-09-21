@@ -23,7 +23,7 @@
             <form action="/mypage/partner/action_event_add" method="POST">
                 @csrf
                 <div class="card mt-3">
-                <input name="partner_id" type="hidden" value="{{ $user->id }}" >
+                <input name="user_id" type="hidden" value="{{ $user->id }}" >
                 <input name="status" type="hidden" value="1" >
                     <div class="card-header">基本情報</div>
                     <div class="card-body">

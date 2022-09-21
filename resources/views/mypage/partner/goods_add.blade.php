@@ -22,7 +22,7 @@
         <div class="col-md-8">
             <form action="/mypage/partner/action_goods_add" method="POST">
                 @csrf
-                <input name="partner_id" type="hidden" value="{{ $user->id }}" >
+                <input name="user_id" type="hidden" value="{{ $user->id }}" >
                 <div class="card mt-3">
                     <div class="card-header">基本情報</div>
                     <div class="card-body">
