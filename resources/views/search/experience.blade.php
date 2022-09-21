@@ -32,11 +32,11 @@ li.item {
     <div class="carousel-inner rounded-2">
         @forelse($images as $key=>$image)
             @if( $key == '1' )
-                <div class="carousel-item active">
+                <div class="carousel-item">
                     <img src="{{ $image->image_path }}" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide {{$key+1}}">
                 </div>
             @else
-                <div class="carousel-item">
+                <div class="carousel-item active">
                     <img src="{{ $image->image_path }}" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide {{$key+1}}">
                 </div>
             @endif
@@ -76,16 +76,16 @@ li.item {
                         </div>
                         <div class="d-flex m-2 ">
                             <div>
-                                <input type="radio" name="is_loding" id="lodging" value="1">
+                                <input type="radio" name="lodging" id="lodging" value="1">
                                 <label for="lodging">宿泊あり</label>
                             </div>
                             <div class="mx-4">
-                                <input type="radio" name="is_loding" id="not_lodging" value="0">
+                                <input type="radio" name="lodging" id="not_lodging" value="0">
                                 <label for="not_lodging">宿泊なし</label>
                             </div>
                             <div>
-                                <input type="radio" name="is_loding" id="all" value="">
-                                <label for="all">全て</label>
+                                <input type="radio" name="lodging" id="all" value="3" checked >
+                                <label for="all">宿泊指定なし</label>
                             </div>
                         </div>
                         

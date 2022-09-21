@@ -7,6 +7,7 @@ use App\Models\Goods;
 use App\Models\GoodsCategory;
 use App\Models\GoodsFolder;
 use Illuminate\Http\Request;
+use App\Http\Requests\GoodsRequest;
 use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +37,7 @@ class GoodsController extends Controller
 
     }
 
-    public function post(Request $request)
+    public function post(GoodsRequest $request)
     {
 
         if( Auth::user()==null){
@@ -44,6 +45,7 @@ class GoodsController extends Controller
         }
         $uid = Auth::user()->id;
         $item_count = $request->item_count; 
+        $result = $request->result;
 
         for ($i = 0; $i < $item_count; $i++){
             $goods_id = $request->goods_id[$i];

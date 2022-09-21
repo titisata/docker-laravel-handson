@@ -194,3 +194,22 @@
                         </div>
                         
                     </div>
+
+                     var result = document.getElementById('result').value;
+        result = '0';
+        var count = array();
+        var i = '0';
+        foreach(i<check_count;){
+            i++;
+            count[] = document.getElementById('count_ '+ i).value;
+        };
+        console.log(count);
+        document.getElementById('result').value = check_count;
+
+
+        for(var i = 0; i < item_count; i++){
+            var t = document.getElementsByName('quantity[]')[i];
+            var s = t.options[t.selectedIndex].value;
+
+            
+        };
