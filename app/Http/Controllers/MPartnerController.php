@@ -19,6 +19,7 @@ use App\Models\FoodGroupSelect;
 use App\Models\Partner;
 use App\Models\Image;
 use App\Models\Link;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -108,7 +109,9 @@ class MPartnerController extends Controller
         foreach($food_select_ids as $food_select_id){
             $checked_foods_group[] = $food_select_id->food_group_id;
         }
-        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group'));
+
+        $schedules = Schedule::where('experience_folder_id',$id)->get();
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group', 'schedules'));
     }
 
     public function event_edit_update(Request $request)

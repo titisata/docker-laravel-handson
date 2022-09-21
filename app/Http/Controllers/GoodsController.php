@@ -42,19 +42,25 @@ class GoodsController extends Controller
         if( Auth::user()==null){
             return view('auth.login');
         }
-        
-        
-        $goods_id = $request->goods_id;
         $uid = Auth::user()->id;
-        $quantity = $request->quantity;
+        $item_count = $request->item_count; 
 
-        // TODO: 不正なGoods IDの場合の処理
-        GoodCartItem::create([
-            'goods_id' => $goods_id,
-            'user_id' => $uid,
-            'quantity' => $quantity,
-        ]);
+        for ($i = 0; $i < $item_count; $i++){
+            $goods_id = $request->goods_id[$i];
+            $quantity = $request->quantity[$i];
 
+            if($quantity==0){
+                continue;
+            }
+
+            // TODO: 不正なGoods IDの場合の処理
+            GoodCartItem::create([
+                'goods_id' => $goods_id,
+                'user_id' => $uid,
+                'quantity' => $quantity,
+            ]);
+        }
+        
         return view('goods.cart_success');
     }
 

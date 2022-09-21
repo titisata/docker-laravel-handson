@@ -132,11 +132,13 @@ async function commentCreate(goods_folder_id) {
 
 
                 
-                <form class="mb-3 col-md-6 offset-md-3" action="{{ Request::url() }}" method="POST" onsubmit='return check();'>    
+                <form class="mb-3 col-md-6 offset-md-3" action="{{ Request::url() }}" method="POST" onsubmit='return check();'> 
+                <?php $item_count=0; ?>   
                 @forelse($goods_folder->active_goods as $goods)
+                    <?php $item_count++; ?>
                     <div class="card bg-color text-more-gray mt-3 p-3">
                         @csrf
-                        <input type="hidden" name="goods_id" value="{{ $goods->id }}">
+                        <input type="hidden" name="goods_id[]" value="{{ $goods->id }}">
                         <div class="d-flex align-items-center justify-content-between">
                             <h5 class="fw-bold">{{ $goods->name }}</h5>   
                             <p class="fw-bold text-end h3"><span id="goods_price_{{ $goods->id }}">{{ $goods->price }}</span>円/個</p>
@@ -176,6 +178,7 @@ async function commentCreate(goods_folder_id) {
                         <p class="text-danger">現在この商品は扱っておりません</p>
                     </div> 
                 @endif
+                <input type="hidden" name="item_count" value="<?php echo $item_count; ?>">
                 </form>
             <div class="my-5">
                 <h5 class="mb-0 fw-bold text-gray">商品説明</h5>
