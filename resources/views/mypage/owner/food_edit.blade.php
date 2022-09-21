@@ -6,16 +6,25 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">フード編集画面</label>
+            @if(count($errors) > 0)
+                <p class="text-danger">入力に問題があります。再入力してください</p>
+            @endif
             <input type="hidden" name='id' value="{{ $foods->id }}">
             <div>
                 <label for="">
                     提供料理名
+                    @error('name')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                     <input name="name" type="text" class="form-control" value="{{ $foods->name }}">
                 </label>
             </div>
             <div>
                 <label>
                     提供料理情報
+                    @error('description')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                     <textarea name="description" type="text" class="form-control">{{ $foods->description }}</textarea>
                 </label>
             </div>
@@ -24,6 +33,9 @@
             <div>
                 <label for="">
                     所属グループ選択
+                    @error('food_group')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                     @forelse($food_groups as $food_group)
                         @if(in_array($food_group->id, $checked_foods_group, true))
                             <div>

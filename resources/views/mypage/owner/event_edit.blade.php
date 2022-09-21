@@ -86,12 +86,17 @@
       //submit()でフォームの内容を送信
       document.deleteform.submit();
     })
+
+    
 </script>
 <div class="container">
     <h1>イベント編集</h1>
+    @if(count($errors) > 0)
+        <p class="text-danger">入力に問題があります。再入力してください</p>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form name="deleteform" action="/mypage/owner/event_edit_update" method="POST">
+            <form name="deleteform" action="/mypage/owner/event_edit_update" method="POST" onsubmit='return check();'>
                 @csrf     
                 <input type="hidden" name="delete_id" id="delete_path" value="">
             </form>
@@ -101,33 +106,54 @@
                     <div class="card-header">基本情報</div>
                     <div class="card-body">
                         <input name="id" type="hidden" class="form-control" value="{{ $experiences_folder->id }}">
-                        <input name="partner_id" type="hidden" class="form-control" value="{{ $experiences_folder->user_id }}">
+                        <input name="user_id" type="hidden" class="form-control" value="{{ $experiences_folder->user_id }}">
                         <div class="mb-3">
                             <label class="form-label">名前</label>
+                            @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="name" type="text" class="form-control" value="{{ $experiences_folder->name }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">大人料金</label>
+                            @error('price_adult')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="price_adult" type="number" class="form-control" value="{{ $experiences_folder->price_adult }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">子供料金</label>
+                            @error('price_child')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="price_child" type="number" class="form-control" value="{{ $experiences_folder->price_child }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">住所</label>
+                            @error('address')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="address" type="text" class="form-control">{{ $experiences_folder->address }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">説明</label>
+                            @error('description')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="description" type="text" class="form-control">{{ $experiences_folder->description }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">イベント詳細</label>
+                            @error('detail')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="detail" type="text" class="form-control">{{ $experiences_folder->detail }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">注意事項</label>
+                            @error('caution')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="caution" type="text" class="form-control">{{ $experiences_folder->caution }}</textarea>
                         </div>
                         <div class="mb-3">
@@ -141,7 +167,7 @@
                         </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">体験の表示・非表示</label>
+                            <label class="form-label">体験の表示</label>
                             @if( $experiences_folder->status  == 1 )
                                 <input name="status" type="radio" class="" checked value="1">
                                 <label>表示</label>
@@ -201,15 +227,18 @@
                         <div>
                             <label for="">
                                 ホテルグループ選択
+                                @error('hotel_group')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                 @forelse($hotel_groups as $hotel_group)
                                     @if(in_array($hotel_group->id, $checked_hotels_group, true))
                                         <div>
-                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}" checked >
+                                            <input type="checkbox" id="{{ $hotel_group->name }}" class="h_group" name="hotel_group[]" value="{{ $hotel_group->id }}" checked >
                                             <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
                                         </div> 
                                     @else
                                         <div>
-                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}">
+                                            <input type="checkbox" id="{{ $hotel_group->name }}" class="h_group" name="hotel_group[]" value="{{ $hotel_group->id }}">
                                             <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
                                         </div> 
                                     @endif
@@ -223,6 +252,9 @@
                         <div>
                             <label for="">
                                 フードグループ選択
+                                @error('food_group')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                 @forelse($food_groups as $food_group)
                                    @if(in_array($food_group->id, $checked_foods_group, true))
                             <div>
@@ -301,7 +333,7 @@
                                     <input name="ex_quantities_{{$key+1}}" type="number" class="form-control" value="{{ $experience->quantity }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">体験の表示・非表示</label>
+                                    <label class="form-label">体験の表示</label>
                                     @if( $experience->status == 1 )
                                         <input name="ex_statuses_{{$key+1}}" type="radio" checked value="1">
                                         <label>表示</label>
@@ -318,10 +350,10 @@
                                 
                                 <button type="button" class="mt-2 btn btn-danger" id="delete_btn_{{ $experience->id }}" value="{{ $experience->id }}">削除</button>
                                 
-                                
                             </div>
                         @empty
-                        
+
+                            
                         
                         @endforelse
                         <div id="add_target"></div>
@@ -329,7 +361,7 @@
                         <button type="button" class="mt-2 btn btn-primary" onclick="add_ex({{ $experiences_folder->experiences->count() }})">追加</button>
                     </div>
                 </div>
-                <button type="submit" class="mt-2 btn btn-primary">更新</button>
+                <button type="submit" class="mt-2 btn btn-primary submit">更新</button>
             </form>
         </div>
     </div>

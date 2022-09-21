@@ -42,8 +42,7 @@ class GoodsController extends Controller
         if( Auth::user()==null){
             return view('auth.login');
         }
-        
-        
+         
         $goods_id = $request->goods_id;
         $uid = Auth::user()->id;
         $quantity = $request->quantity;

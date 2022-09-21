@@ -8,6 +8,7 @@
     }
 </style>
 <div class="container">
+    
     <h1>サイト管理</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -18,6 +19,9 @@
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">サイトの名前</label>
+                            @error('site_name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="site_name" type="text" class="form-control" value="{{ $site_master->site_name }}">
                         </div>
                         <div class="mb-3">
@@ -40,23 +44,31 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">登録可能店舗数</label>
+                            @error('shop_num')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="shop_num" type="number" class="form-control number_form" value="{{ $site_master->shop_num }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">商品登録上限数</label>
+                            @error('regist_num')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="regist_num" type="number" class="form-control number_form" value="{{ $site_master->regist_num }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">おすすめ表示上限</label>
+                            @error('recommend_limit')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="recommend_limit" type="number" class="form-control number_form" value="{{ $site_master->recommend_limit }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">コメント</label>
+                            @error('comment')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="comment" type="text" class="form-control">{{ $site_master->comment }}</textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">画像設定</label>
-                            <input name="main_image" type="text" class="form-control" value="{{ $site_master->main_image }}">
                         </div>
                         <div class="mt-3">
                             <div>
@@ -93,6 +105,9 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">キャッチコピー</label>
+                            @error('sales_copy')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="sales_copy" type="text" class="form-control" value="{{ $site_master->sales_copy }}">
                         </div>
                         <button type="submit" class="btn btn-primary">更新</button>

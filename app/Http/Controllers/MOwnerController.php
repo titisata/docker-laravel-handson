@@ -24,6 +24,14 @@ use App\Models\Image;
 use App\Models\Link;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\SiteRequest;
+use App\Http\Requests\EventEditRequest;
+use App\Http\Requests\GoodsEditRequest;
+use App\Http\Requests\LinkEditRequest;
+use App\Http\Requests\HotelEditRequest;
+use App\Http\Requests\HotelGroupEditRequest;
+use App\Http\Requests\FoodEditRequest;
+use App\Http\Requests\FoodGroupEditRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -119,7 +127,7 @@ class MOwnerController extends Controller
         return view('mypage.owner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group'));
     }
 
-    public function event_edit_update(Request $request)
+    public function event_edit_update(EventEditRequest $request)
     {
 
         $user_id = $request->user_id;
@@ -208,6 +216,7 @@ class MOwnerController extends Controller
 
 
             if( $ex_id == ''){
+
                 Experience::create([
                     'experience_folder_id' => $id,
                     'name' => $ex_name,
@@ -334,7 +343,7 @@ class MOwnerController extends Controller
         return view('mypage.owner.goods_edit', compact('goods_folder', 'categories'));
     }
 
-    public function goods_edit_update(Request $request)
+    public function goods_edit_update(GoodsEditRequest $request)
     {
 
         $id = $request->id;
@@ -892,8 +901,22 @@ class MOwnerController extends Controller
         return view('mypage.owner.site', compact('site_master'));
     }
 
-    public function site_post(Request $request)
+    public function site_post(SiteRequest $request)
     {
+
+        // $validate_rule = [
+        //     'site_name'=>'required',
+        //     'shop_num'=>'numeric|between:0,100',
+        //     'regist_num'=>'numeric|between:0,100',
+        //     'recommend_limit'=>'numeric|between:0,100',
+        //     'comment'=>'required',
+        //     'site_color'=>'nullable',
+        //     'sales_copy'=>'required',
+        // ];
+
+        // $this->validate($request, $validate_rule);
+        // return view('mypage.owner.site', ['msg'=>'test']);
+
         $site_name = $request->site_name;
         $open_flag = $request->open_flag;
         $service = $request->service;
@@ -1229,7 +1252,7 @@ class MOwnerController extends Controller
         return view('mypage.owner.link_edit', compact('user', 'partner','name','id','link'));
     }
 
-    public function action_link_edit(Request $request)
+    public function action_link_edit(LinkEditRequest $request)
     {
         $id = $request->id;
         $name = $request->name;
@@ -1297,7 +1320,7 @@ class MOwnerController extends Controller
         return view('mypage.owner.hotel_group_edit', compact('hotel_group', 'hotel_selects'));
     }
 
-    public function action_hotel_group_insert(Request $request)
+    public function action_hotel_group_insert(HotelGroupEditRequest $request)
     {
         $name = $request->name;
         $description = $request->description;
@@ -1317,7 +1340,7 @@ class MOwnerController extends Controller
 
     
 
-    public function action_hotel_group_edit(Request $request)
+    public function action_hotel_group_edit(HotelGroupEditRequest $request)
     {
         $this->h_g_edit($request);
 
@@ -1352,7 +1375,7 @@ class MOwnerController extends Controller
     }
 
 
-    public function action_hotel_insert(Request $request)
+    public function action_hotel_insert(HotelEditRequest $request)
     {
         $name = $request->name;
         $description = $request->description;
@@ -1399,7 +1422,7 @@ class MOwnerController extends Controller
     }
 
 
-    public function action_hotel_edit(Request $request)
+    public function action_hotel_edit(HotelEditRequest $request)
     {
         $id = $request->id;
         $name = $request->name;
@@ -1491,7 +1514,7 @@ class MOwnerController extends Controller
         return view('mypage.owner.food_group_edit', compact('food_group', 'food_selects'));
     }
 
-    public function action_food_group_insert(Request $request)
+    public function action_food_group_insert(FoodGroupEditRequest $request)
     {
         $name = $request->name;
         $description = $request->description;
@@ -1511,7 +1534,7 @@ class MOwnerController extends Controller
 
     
 
-    public function action_food_group_edit(Request $request)
+    public function action_food_group_edit(FoodGroupEditRequest $request)
     {
         $this->f_g_edit($request);
 
@@ -1546,7 +1569,7 @@ class MOwnerController extends Controller
     }
 
 
-    public function action_food_insert(Request $request)
+    public function action_food_insert(FoodEditRequest $request)
     {
         $name = $request->name;
         $description = $request->description;
@@ -1589,7 +1612,7 @@ class MOwnerController extends Controller
     }
 
 
-    public function action_food_edit(Request $request)
+    public function action_food_edit(FoodEditRequest $request)
     {
         $id = $request->id;
         $name = $request->name;

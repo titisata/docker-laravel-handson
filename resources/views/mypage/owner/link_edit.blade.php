@@ -12,6 +12,10 @@
                 <input type="hidden" name="id" value="{{ $id }}">
                 <input type="hidden" name="name" value="{{ $name }}">
                 <label>「{{ $name }}」の内容</label>
+                @if(count($errors) > 0)
+                    <p class="text-danger">入力に問題があります。再入力してください</p>
+                @endif
+                
                 
                 <textarea rows="50" cols="50" class="form-control" name="content">
                     {{ $link->content ?? ''}}
