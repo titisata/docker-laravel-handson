@@ -23,6 +23,7 @@ use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use DateTime;
 
 class MPartnerController extends Controller
 {
@@ -134,6 +135,7 @@ class MPartnerController extends Controller
         $key = $request->key;
         $hotel_groups = $request->hotel_group;
         $food_groups = $request->food_group;
+        $selected_date = $request->selected_date;
 
         $experiences_folder = ExperienceFolder::where('id', $id)->update([
             'user_id' => $user_id,
@@ -151,38 +153,46 @@ class MPartnerController extends Controller
             'category1' => $category,
         ]);
 
+        //スケジュールを登録
+        Schedule::where('experience_folder_id', $id)->delete();
+        if(!is_null($selected_date)){
+            foreach($selected_date as $d){
+                Schedule::create([
+                    'partner_id' => $user_id,
+                    'experience_folder_id' => $id,
+                    'is_holiday' => 1,
+                    'title' => 'お休み',
+                    'date' => new DateTime($d),
+                ]);
+            }
+        }
+
         //前回までの情報を削除
         $hotel_delete = HotelGroupSelect::where('experience_folder_id', $id)->delete();
 
-        
-        for ($i=0; $i < count($hotel_groups); $i++) {
-
-            $hotel_group = $hotel_groups[$i];
-            
-            //その後、選択されたものをインサート
-
-            HotelGroupSelect::create([
+        if(!is_null($hotel_groups)){
+            for ($i=0; $i < count($hotel_groups); $i++) {
+                $hotel_group = $hotel_groups[$i];    
+                //その後、選択されたものをインサート
+                HotelGroupSelect::create([
                     'experience_folder_id' => $id,
                     'hotel_group_id' => $hotel_group,
                 ]);
-
+            }
         }
 
         //前回までの情報を削除
         $food_delete = FoodGroupSelect::where('experience_folder_id', $id)->delete();
 
-        
-        for ($i=0; $i < count($food_groups); $i++) {
-
-            $food_group = $food_groups[$i];
-            
-            //その後、選択されたものをインサート
-
+        if(!is_null($food_groups)){
+            for ($i=0; $i < count($food_groups); $i++) {
+                $food_group = $food_groups[$i];
+                //その後、選択されたものをインサート
                 FoodGroupSelect::create([
                     'experience_folder_id' => $id,
                     'food_group_id' => $food_group,
-                ]);
-
+                ]);    
+            }
         }
 
         for ($i=1; $i < $key + 1; $i++) {

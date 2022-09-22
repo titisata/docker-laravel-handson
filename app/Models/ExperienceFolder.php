@@ -30,6 +30,11 @@ class ExperienceFolder extends Model
         'category1',
     ];
 
+    protected $dates = [
+        'start_date',
+        'end_date',
+    ];
+
     /**
      * 体験を取得
      *

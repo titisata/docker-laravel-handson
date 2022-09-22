@@ -65,6 +65,8 @@ class ExperienceController extends Controller
         $schedules = $experienceFolder->schedules;
         $mycomment = $experienceFolder->mycomment();
          
+        $event_start_date = $experienceFolder->start_date;
+        $event_end_date = $experienceFolder->end_date;
 
         $events = [];
         foreach ($reserves as $reserve) {
@@ -107,7 +109,7 @@ class ExperienceController extends Controller
             }
         }
 
-        return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment'));
+        return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date'));
     }
 
     

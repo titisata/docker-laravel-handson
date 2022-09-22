@@ -11,6 +11,9 @@
     const work_events_date = @json($work_events);
     const experienceFolder = @json($experienceFolder);
 
+    const event_start_date = '{{$event_start_date}}';
+    const event_end_date = '{{$event_end_date}}';
+
     const events = Object.entries(events_data).map(([key, value]) =>  {
         return {
             // title: `${value.name}: ${value.count}件`,
@@ -36,6 +39,7 @@
     // });
 
     console.log(events);
+    console.log(event_start_date + '--' + event_end_date);
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEls = document.getElementsByClassName('calendar');
         for (const calendarEl of calendarEls) {
@@ -57,6 +61,12 @@
             dateClick: function(info) {
                 var newDate = new Date(info.dateStr);
                 if (newDate < Date.now()) {
+                    return;
+                }
+                
+                var newEndDate = new Date(event_end_date);
+                if (newDate > newEndDate) {
+                    alert('期間を過ぎています');
                     return;
                 }
 
@@ -87,6 +97,10 @@
                 arrayOfDomNodes = [ titleEvent,imgEventWrap ]
 
                 return { domNodes: arrayOfDomNodes }
+            },
+
+            dayRender: function(date, cell){
+                alert(date);
             },
         });
         calendar.render();
@@ -339,6 +353,9 @@ async function commentCreate(ex_id) {
 
                     <h4 class="fw-bold pt-4  text-gray">集合場所</h4>
                     <p class=" text-gray fs-5">{{ $experienceFolder->address }}</p>
+
+                    <h4 class="fw-bold pt-4  text-gray">期間</h4>
+                    <p class=" text-gray fs-5">{{ $experienceFolder->start_date->format('Y/m/d') }} ～ {{ $experienceFolder->end_date->format('Y/m/d') }}</p>
 
                     @if (app('request')->input('keyword') == "")
                         <div class="">

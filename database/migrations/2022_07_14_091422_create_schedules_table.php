@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('partner_id')->constrained('partners');
+            $table->foreignId('partner_id')->constrained('users');
             $table->foreignId('experience_folder_id')->constrained('experience_folders');
             $table->timestamp('date')->nullable();
             $table->boolean('is_holiday');
