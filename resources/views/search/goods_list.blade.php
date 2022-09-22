@@ -52,8 +52,8 @@ li.item {
                             <input name="keyword" type="text" class="form-control me-lg-1" style="width:240px" placefolder="検索したいお土産を入力してください" value="{{ app('request')->input('keyword') }}">
                             <select name="category" class="form-select ms-lg-1" style="width:216px">
                                 <option value="">カテゴリ選択</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                @foreach ($categories as $one_category)
+                                    <option value="{{ $one_category->name }}">{{ $one_category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -64,7 +64,13 @@ li.item {
                 </form>
             </div>
 
-        <h2 class="mt-5 ms-3 ms-md-0 fw-bold">検索結果</h2>
+            <div class="mt-5 ms-3 ms-md-0 d-flex align-items-center">
+                <h2 class="fw-bold">検索結果</h2>
+                <div class="d-flex ms-4">
+                <p class="fw-bold mb-0">検索ワード：{{ $keyword }}</p>
+                <p class="ms-3 fw-bold mb-0">検索カテゴリ：{{ $category }}</p>
+                </div>
+            </div>
         <div class="d-flex justify-content-between flex-wrap">
             
         @forelse($goods_folders as $goods_folder)

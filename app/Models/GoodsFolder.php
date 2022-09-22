@@ -103,7 +103,53 @@ class GoodsFolder extends Model
      * @param integer $per_page 1ページ当たりの表示数
      * @return Collection<GoodsFolder>
      */
-    public static function search(string $keyword, ?string $category, int $per_page)
+    public static function search(string $keyword, int $per_page)
+    {
+        $where = [];
+
+        // フリーワードでの検索条件
+        if ($keyword != '') {
+            $where[] = ['name', 'like', "%$keyword%"];
+        }
+
+        $places = GoodsFolder::where($where);
+        $places = $places->orderBy("created_at", "desc")->paginate($per_page);
+
+        return $places;
+    }
+
+    /**
+     * カテゴリ検索を行う
+     *
+     * @param string $keyword 検索ワード
+     * @param ?string $category カテゴリ
+     * @param integer $per_page 1ページ当たりの表示数
+     * @return Collection<GoodsFolder>
+     */
+    public static function category_search(string $category, int $per_page)
+    {
+        $where = [];
+
+        // カテゴリによる検索条件
+        if ($category) {
+            $where[] = ['category1', '=', $category];
+        }
+
+        $places = GoodsFolder::where($where);
+        $places = $places->orderBy("created_at", "desc")->paginate($per_page);
+
+        return $places;
+    }
+
+     /**
+     * 検索を行う
+     *
+     * @param string $keyword 検索ワード
+     * @param ?string $category カテゴリ
+     * @param integer $per_page 1ページ当たりの表示数
+     * @return Collection<GoodsFolder>
+     */
+    public static function all_search(string $keyword, ?string $category, int $per_page)
     {
         $where = [];
 

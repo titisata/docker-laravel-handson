@@ -20,18 +20,42 @@ class GoodsController extends Controller
         $categories = GoodsCategory::all();
         $images = Image::where('table_name', 'goods_category')->get();
         
-        if ($keyword == '') {
-            $food_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '食べ物')->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
-            $drink_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '飲み物')->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
-            $goods_goods_folders = GoodsFolder::where('recommend_flag', 1)->where('category1', '雑貨')->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
+        if ($keyword == '' && GoodsCategory::where('name', $category)->first() == '') {
+
+            $i=0;
+            $goods_folders = array();
+            foreach( $categories as $category){
+                //カテゴリ別に配列に入れる
+                $goods_folders[$i] = GoodsFolder::where('recommend_flag', 1)->where('category1', $category->name )->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
+                $i++;
+            }
+            
             $images = Image::where('table_name', 'goods_category')->get();
-            return view('search.goods', compact('food_goods_folders', 'drink_goods_folders', 'goods_goods_folders', 'categories', 'images'));
+            return view('search.goods', compact('goods_folders', 'categories', 'images'));
+            
+        }elseif( GoodsCategory::where('name', $category)->first() == ''){   
+
+            $categories = GoodsCategory::all();
+            $goods_folders = GoodsFolder::search($keyword, per_page: 10);
+            $category = 'カテゴリー選択なし';
+           
+            return view('search.goods_list', compact('goods_folders', 'categories', 'keyword', 'category'));
+
+        }elseif( $keyword == ''){   
+
+            $categories = GoodsCategory::all();
+            $goods_folders = GoodsFolder::category_search($category, per_page: 10);
+            $keyword = 'キーワード指定なし';
+           
+            return view('search.goods_list', compact('goods_folders', 'categories', 'keyword', 'category'));
+
         }else{
+            
             $categories = GoodsCategory::all();
             $img_category = GoodsCategory::where('name', $category)->first();
             $images = Image::where('table_name', 'goods_category')->where('table_id', $img_category->id)->first();
-            $goods_folders = GoodsFolder::search($keyword, $category, per_page: 10);
-            return view('search.goods_list', compact('goods_folders', 'categories', 'images'));
+            $goods_folders = GoodsFolder::all_search($keyword, $category, per_page: 10);
+            return view('search.goods_list', compact('goods_folders', 'categories', 'images', 'keyword', 'category'));
 
         }
 

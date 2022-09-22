@@ -105,7 +105,9 @@ li.item {
             <div class="d-flex justify-content-between flex-wrap">
                 
                 @forelse($experienceFolders->where('status', 1) as $experienceFolder)
-                    @if (!$experienceFolder->is_holiday(app('request')->input('keyword')))
+                    @if ($experienceFolder != 'keyword' )
+                        @include('components.experience_cell', ['experienceFolder'=>$experienceFolder])
+                    @elseif (!$experienceFolder->is_holiday(app('request')->input('keyword')))
                         @include('components.experience_cell', ['experienceFolder'=>$experienceFolder])
                     @endif
                 @empty
