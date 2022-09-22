@@ -9,6 +9,7 @@ class GoodCartItem extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'partner_id',
         'goods_id',
         'user_id' ,
         'quantity',

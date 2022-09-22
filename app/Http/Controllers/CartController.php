@@ -123,6 +123,7 @@ class CartController extends Controller
         
         foreach ($goodCartItems as $goodCartItem) {
             GoodsOrder::create([
+                'partner_id' => $goodCartItem->partner_id,
                 'goods_id' => $goodCartItem->goods_id,
                 'user_id' => $uid,
                 'quantity' => $goodCartItem->quantity,
@@ -134,11 +135,11 @@ class CartController extends Controller
             $description_goods.= "個数：".$goodCartItem->goods->quantity."\r\n";
             $description_goods.= "金額：".$goodCartItem->sum_price()."\r\n";
             $description_goods.= "---------------------------------\r\n";
-            if(!in_array($experienceCartItem->partner_id, $partner_array)) {
-                $partner_array += array($experienceCartItem->partner_id => array('description_experiences' => "", 'description_goods' => "", 'price' => 0));
-            }
-            $partner_array[$experienceCartItem->partner_id]['description_goods'] .= $description_goods;
-            $partner_array[$experienceCartItem->partner_id]['price'] +=  $goodCartItem->sum_price();
+            // if(!in_array($experienceCartItem->partner_id, $partner_array)) {
+            //     $partner_array += array($experienceCartItem->partner_id => array('description_experiences' => "", 'description_goods' => "", 'price' => 0));
+            // }
+            // $partner_array[$experienceCartItem->partner_id]['description_goods'] .= $description_goods;
+            // $partner_array[$experienceCartItem->partner_id]['price'] +=  $goodCartItem->sum_price();
         }
 
         // echo "<pre>";

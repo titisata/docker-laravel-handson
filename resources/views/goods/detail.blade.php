@@ -202,6 +202,7 @@ async function commentCreate(goods_folder_id) {
                         <p class="text-danger">現在この商品は扱っておりません</p>
                     </div> 
                 @endif
+                <input type="hidden" name="user_id" value="{{ $goods_folder->user_id }}">
                 <input type="hidden" name="item_count" id="item_count" value="<?php echo $item_count; ?>">
                 <input type="hidden" id="result" name="result" value="0">
                 </form>

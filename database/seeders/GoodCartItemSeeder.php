@@ -16,13 +16,15 @@ class GoodCartItemSeeder extends Seeder
     public function run()
     {
         GoodCartItem::create([
+            'partner_id' => 1,
             'goods_id' => 1,
-            'user_id' => 1,
+            'user_id' => 4,
             'quantity' => 1,
         ]);
         GoodCartItem::create([
+            'partner_id' => 1,
             'goods_id' => 2,
-            'user_id' => 1,
+            'user_id' => 4,
             'quantity' => 3,
         ]);
     }

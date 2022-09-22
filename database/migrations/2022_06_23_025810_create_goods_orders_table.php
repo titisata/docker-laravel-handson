@@ -14,6 +14,7 @@ return new class extends Migration {
     {
         Schema::create('goods_orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('partner_id')->constrained('users');
             $table->foreignId('goods_id')->constrained('goods');
             $table->foreignId('user_id')->constrained('users');
             $table->integer('quantity');

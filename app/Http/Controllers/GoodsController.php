@@ -44,6 +44,7 @@ class GoodsController extends Controller
             return view('auth.login');
         }
         $uid = Auth::user()->id;
+        $partner_id = $request->user_id;
         $item_count = $request->item_count; 
         $result = $request->result;
 
@@ -57,6 +58,7 @@ class GoodsController extends Controller
 
             // TODO: 不正なGoods IDの場合の処理
             GoodCartItem::create([
+                'partner_id' => $partner_id,
                 'goods_id' => $goods_id,
                 'user_id' => $uid,
                 'quantity' => $quantity,
