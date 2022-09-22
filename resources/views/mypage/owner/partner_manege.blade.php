@@ -19,6 +19,9 @@
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">パートナー名</label>
+                            @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="name" type="text" class="form-control" value="{{ $partners->name }}">
                         </div>
                         <div class="mb-3">

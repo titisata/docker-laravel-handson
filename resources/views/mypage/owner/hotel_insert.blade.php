@@ -6,27 +6,42 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">新しいホテル</label>
+            @if(count($errors) > 0)
+                <p class="text-danger">入力に問題があります。再入力してください</p>
+            @endif
             <div>
                 <label for="">
                     ホテル名
+                    @error('name')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                     <input name="name" type="text" class="form-control" value="">
                 </label>
             </div>
             <div>
                 <label>
                     ホテル情報
+                    @error('description')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                     <textarea name="description" type="text" class="form-control"></textarea>
                 </label>
             </div>
             <div>
                 <label for="">
                     住所
+                    @error('address')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                     <input name="address" type="text" class="form-control" value="">
                 </label>
             </div>
             <div>
                 <label for="">
                     メールアドレス
+                    @error('mail')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                     <input name="mail" type="email" class="form-control" value="">
                 </label>
             </div>

@@ -148,6 +148,9 @@
 </script>
 <div class="container">
     <h1>イベント編集</h1>
+    @if(count($errors) > 0)
+        <p class="text-danger">入力に問題があります。再入力してください</p>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form name="deleteform" action="/mypage/partner/event_edit_update" method="POST">
@@ -163,30 +166,51 @@
                         <input name="user_id" type="hidden" class="form-control" value="{{ $experiences_folder->user_id }}">
                         <div class="mb-3">
                             <label class="form-label">名前</label>
+                            @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="name" type="text" class="form-control" value="{{ $experiences_folder->name }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">大人料金</label>
+                            @error('price_adult')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="price_adult" type="number" class="form-control" value="{{ $experiences_folder->price_adult }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">子供料金</label>
+                            @error('price_child')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="price_child" type="number" class="form-control" value="{{ $experiences_folder->price_child }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">住所</label>
+                            @error('address')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="address" type="text" class="form-control">{{ $experiences_folder->address }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">説明</label>
+                            @error('description')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="description" type="text" class="form-control">{{ $experiences_folder->description }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">イベント詳細</label>
+                            @error('detail')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="detail" type="text" class="form-control">{{ $experiences_folder->detail }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">注意事項</label>
+                            @error('caution')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="caution" type="text" class="form-control">{{ $experiences_folder->caution }}</textarea>
                         </div>
                         <div class="mb-3">
@@ -260,6 +284,9 @@
                         <div>
                             <label for="">
                                 ホテルグループ選択
+                                @error('hotel_group')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                 @forelse($hotel_groups as $hotel_group)
                                     @if(in_array($hotel_group->id, $checked_hotels_group, true))
                                         <div>
@@ -282,6 +309,9 @@
                         <div>
                             <label for="">
                                 フードグループ選択
+                                @error('food_group')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                 @forelse($food_groups as $food_group)
                                    @if(in_array($food_group->id, $checked_foods_group, true))
                             <div>

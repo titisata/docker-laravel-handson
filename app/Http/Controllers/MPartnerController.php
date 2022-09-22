@@ -21,6 +21,8 @@ use App\Models\Image;
 use App\Models\Link;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use App\Http\Requests\EventEditRequest;
+use App\Http\Requests\GoodsEditRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
@@ -115,9 +117,8 @@ class MPartnerController extends Controller
         return view('mypage.partner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group', 'schedules'));
     }
 
-    public function event_edit_update(Request $request)
+    public function event_edit_update(EventEditRequest $request)
     {
-
         $user_id = $request->user_id;
         $name = $request->name;
         $price_adult = $request->price_adult;
@@ -339,9 +340,8 @@ class MPartnerController extends Controller
         return view('mypage.partner.goods_edit', compact('goods_folder', 'categories'));
     }
 
-    public function goods_edit_update(Request $request)
+    public function goods_edit_update(GoodsEditRequest $request)
     {
-
         $id = $request->id;
         $user_id = $request->user_id;
         $name = $request->name;

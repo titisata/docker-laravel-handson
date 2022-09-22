@@ -198,7 +198,7 @@ class ExperienceFolder extends Model
      * @param int $per_page 1ページ当たりの表示数
      * @return Collection<ExperienceFolder>
      */
-    public static function search(string $date, ?string $category, int $per_page)
+    public static function search(string $date, string $lodging, int $per_page)
     {
         $date = new DateTime($date);
         $where = [];
@@ -209,17 +209,52 @@ class ExperienceFolder extends Model
             $where[] = ['end_date', '>', $date];
         }
 
-        // カテゴリによる検索条件
+        //宿泊条件
+        if($lodging == 3){
+            //すべて表示
+            $experienceFolders = ExperienceFolder::where($where)->orderBy("created_at", "desc")->paginate($per_page);
+        }else{
+            //宿泊の有無
+            $experienceFolders = ExperienceFolder::where($where)->where('is_lodging', $lodging)->orderBy("created_at", "desc")->paginate($per_page);
+        }
+
+        return $experienceFolders;
+    }
+
+    /**
+     * 検索を行う
+     *
+     * @param string $date 検索日付
+     * @param ?string $category カテゴリ
+     *
+     * @param int $per_page 1ページ当たりの表示数
+     * @return Collection<ExperienceFolder>
+     */
+    public static function all_search(string $date, string $category, string $lodging, int $per_page)
+    {
+        $date = new DateTime($date);
+        $where = [];
+
+        // フリーワードでの検索条件
+        if ($date) {
+            $where[] = ['start_date', '<', $date];
+            $where[] = ['end_date', '>', $date];
+        }
+
+        //カテゴリによる検索条件
         if ($category) {
             $where[] = ['category1', '=', $category];
         }
 
-        // 宿泊あり・なしによる検索条件
-        // if ($is_loding != "") {
-        //     $where[] = ['is_lodging', '=', $is_lodging];
-        // }
+        //宿泊条件
+        if($lodging == 3){
+            //すべて表示
+            $experienceFolders = ExperienceFolder::where($where)->orderBy("created_at", "desc")->paginate($per_page);
+        }else{
+            //宿泊の有無
+            $experienceFolders = ExperienceFolder::where($where)->where('is_lodging', $lodging)->orderBy("created_at", "desc")->paginate($per_page);
+        }
 
-        $experienceFolders = ExperienceFolder::where($where)->orderBy("created_at", "desc")->paginate($per_page);
 
         return $experienceFolders;
     }

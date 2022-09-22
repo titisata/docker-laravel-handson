@@ -26,6 +26,10 @@ class ExperienceController extends Controller
         $category = $request->category;
         $is_lodging = $request->is_lodging;
         $categories = ExperienceCategory::all();
+        $lodging = $request->lodging;
+
+        // echo $category;
+        // exit;
        
 
         if ($keyword == '') {
@@ -33,18 +37,27 @@ class ExperienceController extends Controller
             $experiences_folders_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 1)->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
             $experiences_folders_not_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 0)->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
             return view('search.experience', compact('experiences_folders_is_lodging', 'experiences_folders_not_is_lodging', 'categories', 'images'));
-        }else{   
+
+        }elseif( ExperienceCategory::where('name', $category)->first() == ''){   
+
+            $categories = ExperienceCategory::all();
+            $experienceFolders = ExperienceFolder::search($keyword, $lodging, per_page: 10);
+            $category = 'カテゴリー選択なし';
+           
+            return view('search.experience_list', compact('experienceFolders', 'categories', 'keyword', 'category', 'lodging'));
+
+        }else{
+
             $categories = ExperienceCategory::all();
             $img_category = ExperienceCategory::where('name', $category)->first();
             $images = Image::where('table_name', 'experience_category')->where('table_id', $img_category->id)->first();
-            // if( $is_lodging != ""){
-            //     $experienceFolders = ExperienceFolder::search($keyword, $category, $is_lodging, per_page: 10);
-            // }else{
-            //     $experienceFolders = ExperienceFolder::search($keyword, $category, per_page: 10);
-            // }
-            $experienceFolders = ExperienceFolder::search($keyword, $category, per_page: 10);
+            $experienceFolders = ExperienceFolder::all_search($keyword, $category, $lodging, per_page: 10);
+
+            // echo $category;
+            // exit;
            
-            return view('search.experience_list', compact('experienceFolders', 'categories', 'images'));
+            return view('search.experience_list', compact('experienceFolders', 'categories', 'images', 'keyword', 'category', 'lodging'));
+
         }
 
 

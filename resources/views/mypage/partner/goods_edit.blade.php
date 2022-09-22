@@ -70,6 +70,9 @@
 </script>
 <div class="container">
     <h1>お土産編集</h1>
+    @if(count($errors) > 0)
+        <p class="text-danger">入力に問題があります。再入力してください</p>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form action="/mypage/partner/goods_edit_update" method="POST">
@@ -81,22 +84,37 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label">商品名</label>
+                            @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="name" type="text" class="form-control" value="{{ $goods_folder->name }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">標準商品価格</label>
+                            @error('price')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input name="price" type="number" class="form-control" value="{{ $goods_folder->price }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">コメント</label>
+                            @error('description')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="description" type="text" class="form-control">{{ $goods_folder->description }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">注意事項</label>
+                            @error('caution')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="caution" type="text" class="form-control">{{ $goods_folder->caution }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">詳細情報</label>
+                            @error('detail')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <textarea name="detail" type="text" class="form-control">{{ $goods_folder->detail }}</textarea>
                         </div>
                         <div class="mb-3">

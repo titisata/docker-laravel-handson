@@ -59,15 +59,29 @@ async function commentCreate(goods_folder_id) {
 }
 </script>
 <script>
-    
 
+    function number_check(){
+        
+        var item_count = document.getElementById('item_count').value;
+        var result = '';
+
+        for(var i = 0; i < item_count; i++){
+            var check = document.getElementsByName('quantity[]')[i];
+            var set = parseInt(check.options[check.selectedIndex].value); 
+            result += set;
+        };
+
+        document.getElementById('result').value = result;
+        console.log(result);
+       
+    }
+   
     function goods_formSwitch(id){
         var goods_result = document.getElementById(`goods_result_${id}`);
         var goods_price = document.getElementById(`goods_price_${id}`);
         var count = document.getElementById(`count_${id}`).value;
 
         goods_result.innerHTML = (goods_price.innerHTML*count);
-        
     }
 
     function check(){
@@ -81,15 +95,17 @@ async function commentCreate(goods_folder_id) {
         }
 
         if(flag == 1){
-              alert(msg);
-              return false;
-          }else{
-               return true;
-              }
+            alert(msg);
+            return false;
+        }else{
+            return true;
+        }
         
 
     }
 </script>
+
+
 <div class="card" style="height: 400px;">
     <img class="card-img img-thumbnail" style="height: 100%; object-fit: cover;" src="{{ $goods_folder->images()[0]?->image_path ?? '/images/empty.png'}}" alt="">
 </div>
@@ -133,7 +149,12 @@ async function commentCreate(goods_folder_id) {
 
                 
                 <form class="mb-3 col-md-6 offset-md-3" action="{{ Request::url() }}" method="POST" onsubmit='return check();'> 
-                <?php $item_count=0; ?>   
+                <?php $item_count=0; ?>  
+
+                @error('result')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+                
                 @forelse($goods_folder->active_goods as $goods)
                     <?php $item_count++; ?>
                     <div class="card bg-color text-more-gray mt-3 p-3">
@@ -146,8 +167,8 @@ async function commentCreate(goods_folder_id) {
                         <div class="d-flex align-items-center justify-content-end pb-4 border-bottom border-secondary">
                             <label class="fs-5 me-1" for="quantity">数量</label>
                             <div class="d-flex">
-                                <select class="form-select form-select-sm me-1" style="width:64px" name="quantity[]" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}')">
-                                    <option value="0" selected="0">0</option>
+                                <select class="form-select form-select-sm me-1" style="width:64px" name="quantity[]" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}');number_check()">
+                                    <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -159,8 +180,11 @@ async function commentCreate(goods_folder_id) {
                                     <option value="9">9</option>
                                     <option value="10">10</option>
                                 </select> 
+                               
+                                <!-- <input type="number" name="quantity[]" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}')"> -->
                             </div>    
                         </div> 
+                        
                         <p class="text-end pt-3 fs-4 fw-bold ">合計金額：<span id="goods_result_{{ $goods->id }}" class="fs-4">0</span>円</p>
 
                     </div> 
@@ -178,7 +202,8 @@ async function commentCreate(goods_folder_id) {
                         <p class="text-danger">現在この商品は扱っておりません</p>
                     </div> 
                 @endif
-                <input type="hidden" name="item_count" value="<?php echo $item_count; ?>">
+                <input type="hidden" name="item_count" id="item_count" value="<?php echo $item_count; ?>">
+                <input type="hidden" id="result" name="result" value="0">
                 </form>
             <div class="my-5">
                 <h5 class="mb-0 fw-bold text-gray">商品説明</h5>
