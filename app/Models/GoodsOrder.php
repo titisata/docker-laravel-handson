@@ -19,4 +19,11 @@ class GoodsOrder extends Model
     {
         return $this->belongsTo(Goods::class);
     }
+
+    public function sum_price()
+    {
+        $goods = $this->goods;
+        $sum_price = $goods->price * $this->quantity;
+        return $sum_price;
+    }
 }

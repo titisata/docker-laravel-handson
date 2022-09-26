@@ -10,7 +10,7 @@
                 <div class="card-header">予約した体験</div>
                 <div class="card-body">
                     @forelse ($reserved_experiences as $reserved_experience)
-                        <a href="/experience/{{ $reserved_experience->experience->id }}">
+                        <a href="/experience/{{ $reserved_experience->experience->experience_folder_id }}">
                             <div class="mt-1 p-3 card">
                                 <div>
                                     <p>{{ $reserved_experience->experience->name }}</p>
@@ -19,6 +19,7 @@
                                     <p>宿泊: {{ $reserved_experience->hotelGroup?->name ?? 'なし' }}</p>
                                     <p>食事: {{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
                                     <p>連絡事項: {{ $reserved_experience->message }}</p>
+                                    <p>金額: {{ number_format($reserved_experience->sum_price()) }}円</p>
                                 </div>
                             </div>
                         </a>

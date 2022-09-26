@@ -616,7 +616,8 @@ class MOwnerController extends Controller
     public function reserve()
     {
         $user = Auth::user();
-        $partners = User::all();
+        //$partners = User::all();
+        $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
         return view('mypage.owner.reserve', compact('user', 'partners'));
     }
 
@@ -625,7 +626,8 @@ class MOwnerController extends Controller
         $user = Auth::user();
         $experiencereserve = ExperienceReserve::find($id);
         $hotel_group_id = $experiencereserve->hotel_group_id;
-        $hotels = Hotel::where('hotel_group_id', 1)->get();
+        //$hotels = Hotel::where('hotel_group_id', 1)->get();
+        $hotels = Hotel::Join('hotel_selects', 'hotels.id', '=', 'hotel_selects.hotel_id')->select('hotels.*')->where('hotel_selects.hotel_group_id', 1)->get();
         return view('mypage.owner.reserve_edit', compact('user', 'experiencereserve','hotels'));
     }
 
@@ -674,7 +676,7 @@ class MOwnerController extends Controller
         //パートナーへメール送信
         $experience = Experience::where('id',$reserve->experience_id)->first();
         $experience_folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
-        $user = User::where('id',$experience_folder->partner_id)->first();
+        $user = User::where('id',$experience_folder->user_id)->first();
         // echo "パートナー--".$user->name."--".$user->email."<br>";
         $subject = 'パートナーへのメール';
         $name = $user->name;

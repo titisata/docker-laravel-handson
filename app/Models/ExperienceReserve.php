@@ -24,6 +24,7 @@ class ExperienceReserve extends Model
         'quantity_adult',
         'start_date',
         'end_date',
+        'cancel_flag',
     ];
 
     public function experience()
@@ -47,4 +48,15 @@ class ExperienceReserve extends Model
         return $this->belongsTo(Hotel::class);
     }
     
+    public function sum_price()
+    {
+        $ex = $this->experience;
+        $price_adult = $ex->price_adult * $this->quantity_adult;
+        $price_child = $ex->price_child * $this->quantity_child;
+        $price_adult += ($this->foodGroup?->price_adult ?? 0) * $this->quantity_adult;
+        $price_child += ($this->foodGroup?->price_child ?? 0) * $this->quantity_child;
+        $price_adult += ($this->hotelGroup?->price_adult ?? 0) * $this->quantity_adult;
+        $price_child += ($this->hotelGroup?->price_child ?? 0) * $this->quantity_child;
+        return $price_adult + $price_child;
+    }
 }

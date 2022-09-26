@@ -21,7 +21,7 @@
                                 <div class="card-header">{{ $experiences_folder->name }}への予約</div>
                                 <div class="card-body">
                                     @forelse ($experiences_folder->reserves as $reserved_experience)
-                                    <a href="/mypage/owner/reserve_edit/{{ $reserved_experience->experience->id }}">
+                                    <a href="/mypage/owner/reserve_edit/{{ $reserved_experience->id }}">
                                         <div class="mt-1 p-3 card">
                                             <div>
                                                 <p>名前: {{ $reserved_experience->user->name }}様</p>
