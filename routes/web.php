@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // ユーザーがアクセスできる
-Route::prefix('mypage/user')->middleware(['auth','role:user'])->group(function () {
+Route::prefix('mypage/user')->middleware(['auth','role:system_admin|site_admin|partner|user'])->group(function () {
     Route::get('/', [App\Http\Controllers\MUserController::class, 'home']);
     Route::get('/reserve', [App\Http\Controllers\MUserController::class, 'reserve']);
 });
