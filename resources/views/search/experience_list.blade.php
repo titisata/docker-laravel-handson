@@ -20,8 +20,13 @@ li.item {
 .btn-pink{
     background-color:#FB6E86;
     border-color:#FB6E86;
-    width:400px;
-    
+    width:400px;  
+}
+
+@media screen and (max-width: 900px) {
+    .btn-pink{
+    width:200px;  
+}
 }
 
 .font-gray{

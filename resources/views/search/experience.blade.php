@@ -23,6 +23,12 @@ li.item {
     width:500px;
     
 }
+
+@media screen and (max-width: 900px) {
+    .btn-pink{
+    width:200px;  
+}
+}
 .font-more-gray{
     color:#6f6e6f;
 }

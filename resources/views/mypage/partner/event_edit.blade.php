@@ -145,6 +145,95 @@
       //submit()でフォームの内容を送信
       document.deleteform.submit();
     })
+
+    var c = '';
+
+    function number_set(){
+
+        // form要素を取得
+        var element = document.getElementById( "target" ) ;
+
+        // form要素内のラジオボタングループ(name="is_lodging")を取得
+        var radioNodeList = element.is_lodging ;
+
+        // 選択状態の値(value)を取得 (Bが選択状態なら"b"が返る)
+        var a = radioNodeList.value ;
+
+        if ( a == 0 ) {
+            document.getElementById('hotel_result').value = 1;
+            document.getElementById('food_result').value = 1;
+            c = 1;
+
+            let h_targets = document.querySelectorAll(`input[name='hotel_group[]']`);
+
+            for (const i of h_targets) {
+                i.checked = false;
+            }
+
+            let f_targets = document.querySelectorAll(`input[name='food_group[]']`);
+
+            for (const n of f_targets) {
+                n.checked = false;
+            }
+        }else{
+            document.getElementById('hotel_result').value = 0;
+            document.getElementById('food_result').value = 0;
+            c = 0;
+            let h_targets = document.querySelectorAll(`input[name='hotel_group[]']`);
+
+            for (const i of h_targets) {
+                i.checked = false;
+            }
+
+            let f_targets = document.querySelectorAll(`input[name='food_group[]']`);
+
+            for (const n of f_targets) {
+                n.checked = false;
+            }
+        }
+
+        console.log(c);
+    }
+    
+
+    function hotel_number_check(val){
+        
+        var item_count = document.getElementById('item_count').value;
+        console.log(item_count);
+        var result = 0;
+
+        for(var i = 0; i < item_count; i++){
+            var check = document.getElementsByName('hotel_group[]')[i];
+            var set = ''; 
+            if (check.checked) {
+            result = 1;
+            } 
+        };
+        
+        document.getElementById('hotel_result').value = result;
+      
+       
+    }
+
+    function food_number_check(val){
+        
+        var item_count = document.getElementById('item_count').value;
+        console.log(item_count);
+        var result = 0;
+
+        for(var i = 0; i < item_count; i++){
+            var check = document.getElementsByName('food_group[]')[i];
+            var set = ''; 
+            if (check.checked) {
+            result = 1 ;
+            } 
+        };
+       
+        document.getElementById('food_result').value = result;
+        console.log(result);
+       
+    }
+
 </script>
 <div class="container">
     <h1>イベント編集</h1>
@@ -157,8 +246,11 @@
                 @csrf     
                 <input type="hidden" name="delete_id" id="delete_path" value="">
             </form>
-            <form action="/mypage/partner/event_edit_update" method="POST">
+            <form action="/mypage/partner/event_edit_update" method="POST" id="target">
                 @csrf
+
+                <input type="hidden" id="hotel_result" name="hotel_result" value="1">
+                <input type="hidden" id="food_result" name="food_result" value="1">
                 <div class="card mt-3">
                     <div class="card-header">基本情報</div>
                     <div class="card-body">
@@ -241,14 +333,14 @@
                         <div class="mb-3">
                             <label class="form-label">宿泊の有無</label>
                             @if( $experiences_folder->is_lodging  == 1 )
-                                <input name="is_lodging" type="radio" class="" checked value="1">
+                                <input name="is_lodging" type="radio" class="" checked value="1" onchange="number_set()">
                                 <label>宿泊あり</label>
-                                <input name="is_lodging" type="radio" class="" value="0">
+                                <input name="is_lodging" type="radio" class="" value="0" onchange="number_set()">
                                 <label>宿泊なし</label>
                             @else
-                                <input name="is_lodging" type="radio" class="" value="1">
+                                <input name="is_lodging" type="radio" class="" value="1" onchange="number_set()">
                                 <label>宿泊あり</label>
-                                <input name="is_lodging" type="radio" class="" checked value="0">
+                                <input name="is_lodging" type="radio" class="" checked value="0" onchange="number_set()">
                                 <label>宿泊なし</label>
                             @endif
                             
@@ -290,12 +382,12 @@
                                 @forelse($hotel_groups as $hotel_group)
                                     @if(in_array($hotel_group->id, $checked_hotels_group, true))
                                         <div>
-                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}" checked >
+                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}" checked onchange="hotel_number_check(this.value)">
                                             <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
                                         </div> 
                                     @else
                                         <div>
-                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}">
+                                            <input type="checkbox" id="{{ $hotel_group->name }}" name="hotel_group[]" value="{{ $hotel_group->id }}" onchange="hotel_number_check(this.value)">
                                             <label for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
                                         </div> 
                                     @endif
@@ -315,12 +407,12 @@
                                 @forelse($food_groups as $food_group)
                                    @if(in_array($food_group->id, $checked_foods_group, true))
                             <div>
-                                <input type="checkbox" id="{{ $food_group->name }}" name="food_group[]" value="{{ $food_group->id }}" checked >
+                                <input type="checkbox" id="{{ $food_group->name }}" name="food_group[]" value="{{ $food_group->id }}" checked onchange="food_number_check(this.value)">
                                 <label for="{{ $food_group->name }}">{{ $food_group->name }}</label>
                             </div> 
                         @else
                             <div>
-                                <input type="checkbox" id="{{ $food_group->name }}" name="food_group[]" value="{{ $food_group->id }}">
+                                <input type="checkbox" id="{{ $food_group->name }}" name="food_group[]" value="{{ $food_group->id }}" onchange="food_number_check(this.value)">
                                 <label for="{{ $food_group->name }}">{{ $food_group->name }}</label>
                             </div> 
                         @endif

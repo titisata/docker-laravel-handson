@@ -191,8 +191,8 @@
             <form action="/mypage/owner/event_edit_update" method="POST" id="target">
                 @csrf
                
-                    <input type="hidden" id="hotel_result" name="hotel_result" value="1">
-                    <input type="hidden" id="food_result" name="food_result" value="1">
+                <input type="hidden" id="hotel_result" name="hotel_result" value="1">
+                <input type="hidden" id="food_result" name="food_result" value="1">
                
                 <div class="card mt-3">
                     <div class="card-header">基本情報</div>

@@ -15,7 +15,7 @@
                        
                         <div class="mb-3">
                             <label class="form-label">大人</label>
-                            <input name="quentity_child" type="text" class="form-control" value="{{ $experiencereserve->quantity_adult }}">
+                            <input name="quantity_adult" type="text" class="form-control" value="{{ $experiencereserve->quantity_adult }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">子供</label>
@@ -23,11 +23,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">宿泊</label>
-                            <input name="quentity_child" type="text" class="form-control" value="">
+                            <input name="hotel_group" type="text" class="form-control" value="{{ $experiencereserve->hotelGroup?->name ?? 'なし' }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">食事</label>
-                            <input name="quentity_child" type="text" class="form-control" value="">
+                            <input name="food_group" type="text" class="form-control" value="{{ $experiencereserve->foodGroup?->name ?? 'なし' }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">連絡事項</label>
