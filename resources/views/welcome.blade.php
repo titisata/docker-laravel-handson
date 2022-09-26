@@ -84,14 +84,32 @@
                         <span class="navbar-toggler-icon text-gray-color"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto">
                             @if (Route::has('login'))
 
                                 @auth
-                                <li class="nav-item">
-                                    <a href="{{ url('/home') }}" class="text-sm text-gray-color">ホーム</a>
+                                <li class="nav-item pt-2">
+                                    <a href="{{ url('/mypage/user/') }}" class="text-sm text-gray-color">ホーム</a>
                                 </li>
+                                <li class="nav-item dropdown ms-3">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-gray-color fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/home">マイページ</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        ログアウト
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
                                 @else
                                 <li class="nav-item">
                                     <a href="{{ route('login') }}" class="text-sm text-gray-color">ログイン</a>
