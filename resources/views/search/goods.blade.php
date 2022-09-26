@@ -73,8 +73,8 @@ li.item {
                             <input name="keyword" type="text" class="form-control me-lg-1" style="width:240px" placefolder="検索したいお土産を入力してください" value="{{ app('request')->input('keyword') }}">
                             <select name="category" class="form-select ms-lg-1" style="width:216px">
                                 <option value="">カテゴリ選択</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                @foreach ($categories as $one_category)
+                                    <option value="{{ $one_category->name }}">{{ $one_category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -85,37 +85,22 @@ li.item {
                 </form>
             </div>
 
+            <?php $item_count=0; ?>
+            @foreach ($categories as $category)
+                @if($goods_folders[$item_count] != '[]')
+                    <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの{{ $category->name }}</h2>
 
-            <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの食べ物</h2>
+                    <ul class="horizontal-list">
+                        @foreach ($goods_folders[$item_count] as $goods_item_folder)
+                            @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                        @endforeach
+                    </ul>
+                @endif    
+            <?php $item_count++; ?>
+            @endforeach
 
-            <ul class="horizontal-list">
-                @foreach ($food_goods_folders as $goods_item_folder)
-                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
-                @endforeach
-            </ul>
-
-
-            <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの飲み物</h2>
-
-            <ul class="horizontal-list">
-                @foreach ($drink_goods_folders as $goods_item_folder)
-                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
-                @endforeach
-            </ul>
-
-
-            <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの雑貨</h2>
-
-            <ul class="horizontal-list">
-                @foreach ($goods_goods_folders as $goods_item_folder)
-                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
-                @endforeach
-            </ul>
-
-
-            <!-- <div class="mt-5">
-                <a href="/search/experience">体験検索へ</a>
-            </div> -->
+  
+            
         </div>
     </div>
 </div>

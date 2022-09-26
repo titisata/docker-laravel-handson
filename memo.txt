@@ -195,21 +195,80 @@
                         
                     </div>
 
-                     var result = document.getElementById('result').value;
-        result = '0';
-        var count = array();
-        var i = '0';
-        foreach(i<check_count;){
-            i++;
-            count[] = document.getElementById('count_ '+ i).value;
-        };
-        console.log(count);
-        document.getElementById('result').value = check_count;
+           
 
 
-        for(var i = 0; i < item_count; i++){
-            var t = document.getElementsByName('quantity[]')[i];
-            var s = t.options[t.selectedIndex].value;
+        <h2 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの食べ物</h2>
 
-            
-        };
+            <ul class="horizontal-list">
+                @foreach ($food_goods_folders as $goods_item_folder)
+                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                @endforeach
+            </ul>
+
+
+            <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの飲み物</h2>
+
+            <ul class="horizontal-list">
+                @foreach ($drink_goods_folders as $goods_item_folder)
+                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                @endforeach
+            </ul>
+
+
+            <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの雑貨</h2>
+
+            <ul class="horizontal-list">
+                @foreach ($goods_goods_folders as $goods_item_folder)
+                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                @endforeach
+            </ul>
+
+
+            <!-- <div class="mt-5">
+                <a href="/search/experience">体験検索へ</a>
+            </div> -->
+
+            @foreach ($goods_folders as $goods_folder)
+
+                <p>{{ $goods_folder->id }}</p>
+
+            @endforeach
+
+
+            <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの飲み物</h2>
+
+            <ul class="horizontal-list">
+                @foreach ($drink_goods_folders as $goods_item_folder)
+                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                @endforeach
+            </ul>
+
+
+            <h2  class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの雑貨</h2>
+
+            <ul class="horizontal-list">
+                @foreach ($goods_goods_folders as $goods_item_folder)
+                    @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                @endforeach
+            </ul>3
+
+             @foreach ($goods_folders as $goods_folder)
+                @foreach($goods_folder as $one_goods)
+                    <p>{{ $one_goods->category1 }}</p>
+                @endforeach
+            @endforeach
+
+
+            <ul class="horizontal-list">
+                    @foreach ($food_goods_folders as $goods_item_folder)
+                        @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                    @endforeach
+                </ul>
+
+
+
+
+                @if (!$experienceFolder->is_holiday(app('request')->input('keyword')))
+                        @include('components.experience_cell', ['experienceFolder'=>$experienceFolder])
+                    @endif

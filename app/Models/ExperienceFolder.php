@@ -190,7 +190,7 @@ class ExperienceFolder extends Model
     }
 
     /**
-     * 検索を行う
+     * 日付検索を行う
      *
      * @param string $date 検索日付
      * @param ?string $category カテゴリ
@@ -203,7 +203,7 @@ class ExperienceFolder extends Model
         $date = new DateTime($date);
         $where = [];
 
-        // フリーワードでの検索条件
+        // 日付での検索条件
         if ($date) {
             $where[] = ['start_date', '<', $date];
             $where[] = ['end_date', '>', $date];
@@ -222,7 +222,37 @@ class ExperienceFolder extends Model
     }
 
     /**
-     * 検索を行う
+     * カテゴリ検索を行う
+     *
+     * @param string $date 検索日付
+     * @param ?string $category カテゴリ
+     *
+     * @param int $per_page 1ページ当たりの表示数
+     * @return Collection<ExperienceFolder>
+     */
+    public static function category_search(string $category, string $lodging, int $per_page)
+    {
+        $where = [];
+
+        //カテゴリによる検索条件
+        if ($category) {
+            $where[] = ['category1', '=', $category];
+        }
+
+        //宿泊条件
+        if($lodging == 3){
+            //すべて表示
+            $experienceFolders = ExperienceFolder::where($where)->orderBy("created_at", "desc")->paginate($per_page);
+        }else{
+            //宿泊の有無
+            $experienceFolders = ExperienceFolder::where($where)->where('is_lodging', $lodging)->orderBy("created_at", "desc")->paginate($per_page);
+        }
+
+        return $experienceFolders;
+    }
+
+    /**
+     * 日付、カテゴリ検索を行う
      *
      * @param string $date 検索日付
      * @param ?string $category カテゴリ
@@ -235,7 +265,7 @@ class ExperienceFolder extends Model
         $date = new DateTime($date);
         $where = [];
 
-        // フリーワードでの検索条件
+        // 日付での検索条件
         if ($date) {
             $where[] = ['start_date', '<', $date];
             $where[] = ['end_date', '>', $date];

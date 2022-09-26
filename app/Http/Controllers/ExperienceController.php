@@ -32,7 +32,7 @@ class ExperienceController extends Controller
         // exit;
        
 
-        if ($keyword == '') {
+        if ($keyword == '' && ExperienceCategory::where('name', $category)->first() == '') {
             $images = Image::where('table_name', 'experience_category')->get();
             $experiences_folders_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 1)->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
             $experiences_folders_not_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 0)->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
@@ -43,6 +43,16 @@ class ExperienceController extends Controller
             $categories = ExperienceCategory::all();
             $experienceFolders = ExperienceFolder::search($keyword, $lodging, per_page: 10);
             $category = 'カテゴリー選択なし';
+           
+            return view('search.experience_list', compact('experienceFolders', 'categories', 'keyword', 'category', 'lodging'));
+
+        }elseif($keyword == ''){   
+
+            // echo $lodging;
+            // exit;
+            $categories = ExperienceCategory::all();
+            $experienceFolders = ExperienceFolder::category_search($category, $lodging, per_page: 10);
+            $keyword = 'キーワード指定なし';
            
             return view('search.experience_list', compact('experienceFolders', 'categories', 'keyword', 'category', 'lodging'));
 

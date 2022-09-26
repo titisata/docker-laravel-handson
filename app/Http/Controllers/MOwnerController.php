@@ -147,6 +147,8 @@ class MOwnerController extends Controller
         $key = $request->key;
         $hotel_groups = $request->hotel_group;
         $food_groups = $request->food_group;
+        $hotel_result = $request->hotel_result;
+        $hotel_result = $request->hotel_result;
 
         $experiences_folder = ExperienceFolder::where('id', $id)->update([
             'user_id' => $user_id,
@@ -167,35 +169,39 @@ class MOwnerController extends Controller
         //前回までの情報を削除
         $hotel_delete = HotelGroupSelect::where('experience_folder_id', $id)->delete();
 
-        
-        for ($i=0; $i < count($hotel_groups); $i++) {
+        if($is_lodging == 1){
+            for ($i=0; $i < count($hotel_groups); $i++) {
 
-            $hotel_group = $hotel_groups[$i];
-            
-            //その後、選択されたものをインサート
-
-            HotelGroupSelect::create([
+                $hotel_group = $hotel_groups[$i];
+                
+                //その後、選択されたものをインサート
+    
+                HotelGroupSelect::create([
                     'experience_folder_id' => $id,
                     'hotel_group_id' => $hotel_group,
                 ]);
-
+    
+            }
         }
+        
+        
 
         //前回までの情報を削除
         $food_delete = FoodGroupSelect::where('experience_folder_id', $id)->delete();
 
-        
-        for ($i=0; $i < count($food_groups); $i++) {
+        if( $is_lodging == 1){
+            for ($i=0; $i < count($food_groups); $i++) {
 
-            $food_group = $food_groups[$i];
-            
-            //その後、選択されたものをインサート
+                $food_group = $food_groups[$i];
+                
+                //その後、選択されたものをインサート
 
-                FoodGroupSelect::create([
-                    'experience_folder_id' => $id,
-                    'food_group_id' => $food_group,
-                ]);
+                    FoodGroupSelect::create([
+                        'experience_folder_id' => $id,
+                        'food_group_id' => $food_group,
+                    ]);
 
+            }
         }
 
         for ($i=1; $i < $key + 1; $i++) {

@@ -123,6 +123,7 @@ class CartController extends Controller
         
         foreach ($goodCartItems as $goodCartItem) {
             GoodsOrder::create([
+                'partner_id' => $goodCartItem->partner_id,
                 'goods_id' => $goodCartItem->goods_id,
                 'user_id' => $uid,
                 'quantity' => $goodCartItem->quantity,
