@@ -47,6 +47,18 @@ class ExperienceReserve extends Model
     {
         return $this->belongsTo(Hotel::class);
     }
+
+    //hotel_groupsテーブルと結合
+    public function hotelGroup()
+    {
+        return $this->belongsTo(HotelGroup::class);
+    }
+
+    //food_groupsテーブルと結合
+    public function foodGroup()
+    {
+        return $this->belongsTo(FoodGroup::class);
+    }
     
     public function sum_price()
     {

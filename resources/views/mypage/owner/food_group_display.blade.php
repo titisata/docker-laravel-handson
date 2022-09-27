@@ -16,21 +16,47 @@
         </a>
     </div>
     
-    <div class="row justify-content-center">
-    @forelse ($food_groups as $food_group)
-        <div class="col-md-8">
-            <div class="card mt-3">
-                <a href="/mypage/owner/food_group_edit/{{ $food_group->id }}" style="text-decoration: none; color: inherit;">
-                    <div class="card-header">{{ $food_group->name }}</div>
-                    
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">フードグループ名</th>
+                <th scope="col">大人料金</th>
+                <th scope="col">子供料金</th>
+                <th scope="col">提供料理</th>
+            </tr>
+        </thead>
+        @forelse ($food_groups as $food_group)
+            <tr class="align-items-center">
+                <th scope="row">{{ $food_group->id }}</th>
+                <td>
+                    <a href="/mypage/owner/food_group_edit/{{ $food_group->id }}" style="text-decoration: none; color: inherit;">
+                        {{ $food_group->name }}
+                    </a>  
+                </td>
+                <td>
+                <p class="card-text fw-bold text-nowrap ">{{ number_format($food_group->price_adult) }}～</p>
+                </td>  
+                <td>
+                <p class="card-text fw-bold text-nowrap ">{{ number_format($food_group->price_child) }}～</p>
+                </td>
+                <td>
+                @forelse( App\Models\FoodSelect::where('food_group_id', $food_group->id)->get(); as $food_select )
+                <div class='d-flex my-2'>
+                    <div class="d-flex">
+                        <p class="mb-0">{{ $food_select->food->name }}</p>    
                     </div>
-                </a>    
-            </div>
-    @empty
+                </div>
+                @empty
+                    <p>提供料理はありません</p>
+                @endforelse
+                </td>
+            </tr>   
+        @empty
         <p>フードグループはありません</p>
-    @endforelse
-        </div>
-    </div>
+        @endforelse
+    </table>
 </div>
 
 @endsection

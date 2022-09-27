@@ -19,16 +19,17 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-        .navbar-toggler .navbar-toggler-icon {
+        /* .navbar-toggler .navbar-toggler-icon {
          background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-        }
-        .navbar-toggler{
-            background-color:#FB6E86;
-        }
-        .navbar-toggler{
-        color:white !important;
-        border:2px solid #FB6E86 !important;
-        }
+        } */
+        .navbar-toggler .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(73, 70, 69, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+            }
+            .navbar-toggler{
+            color:white !important;
+            
+            }
+        
         .text-gray-color{
                 color:#494645;
         }

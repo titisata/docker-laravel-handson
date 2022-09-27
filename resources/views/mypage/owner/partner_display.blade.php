@@ -11,19 +11,36 @@
     </div>
     
     <div class="row justify-content-center">
+
+    <table class="table table-hover">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">パートナー名</th>
+        <th scope="col">設定画像</th>
+        </tr>
+    </thead>
     @forelse ($partners as $partner)
-        <div class="col-md-8">
-            <div class="card mt-3">
+        <tr class="align-items-center">
+            <th scope="row">{{ $partner->id }}</th>
+            <td>
                 <a href="/mypage/owner/partner_manege/{{ $partner->id }}" style="text-decoration: none; color: inherit;">
-                    <div class="card-header">{{ $partner->name }}様</div>
-                    
-                    </div>
-                </a>    
-            </div>
+                   {{ $partner->name }}様  
+                </a> 
+            </td>
+            <td>
+                @forelse($partner->images() as $image)
+                <img class="card-img" style="width: 100px;height: 50px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
+                @empty
+                <!-- <img class="card-img" style="width: 100px;height: 50px; object-fit: cover;" src="{{'/images/empty.png'}}" alt=""> -->
+                <p>未設定</p>
+                @endforelse
+            </td>  
+        </tr>   
     @empty
         <p>パートナーがいません</p>
     @endforelse
-        </div>
+    </table>
     </div>
 </div>
 @endsection

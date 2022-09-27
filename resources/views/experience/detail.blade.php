@@ -19,7 +19,7 @@
             // title: `${value.name}: ${value.count}件`,
             start: value.start,
             color: '#00000000',
-            image_url: value.count < value.quantity ? '/images/maru.png' : '/images/batu.png',
+            // image_url: value.count < value.quantity ? '/images/maru.png' : '/images/batu.png',
         };
     });
 
@@ -27,7 +27,7 @@
         return {
             title: `${value.title}`,
             start: value.date,
-            color: '#F56E6E'
+            color: '#F56E6E',
         };
     });
     // const work_events = Object.entries(work_events_date).map(([key, value]) =>  {
@@ -56,6 +56,9 @@
                 day:      '日',
                 list:     '一覧'
             },
+            dayCellContent: function (e) {
+            e.dayNumberText = e.dayNumberText.replace('日', '');
+            },
             events: [...events, ...holiday_events],
             height:'auto',
             dateClick: function(info) {
@@ -81,7 +84,7 @@
                 // title event
                 let titleEvent = document.createElement('div')
                 if(arg.event._def.title) {
-                    titleEvent.innerHTML = arg.event._def.title
+                    titleEvent.innerHTML = arg.event._def.title;
                     titleEvent.classList = "fc-event-title fc-sticky"
                 }
 
@@ -146,6 +149,126 @@
 </script>
 
 <style>
+/* カレンダースタイル */
+
+.fc-day-past {
+    /* background-color: #D7D7D74D; */
+    background: var(--fc-non-business-color,rgba(238, 240, 241));
+    opacity: .2;
+}
+
+.fc-day-future{
+    background-color: rgba(238, 240, 241);
+}
+
+.fc-scroller-harness{
+    background: var(--fc-non-business-color,rgba(238, 240, 241));
+}
+
+.fc-dayGridMonth-button  {
+  display: none!important;
+}
+
+.fc-timeGridWeek-button {
+  display: none!important;
+}
+
+.fc-timeGridDay-button {
+  display: none!important;
+}
+
+  .fc-listMonth-button {
+  display: none!important;
+}
+
+  .fc .fc-col-header-cell-cushion {
+  display: inline-block;
+  padding: 2px 4px;
+}
+
+.fc .fc-col-header-cell-cushion { /* needs to be same precedence */
+  padding-top: 5px; /* an override! */
+  padding-bottom: 5px; /* an override! */
+}
+
+.fc .fc-daygrid-day-top {
+  justify-content: center;
+}
+
+.fc-daygrid-day-number{
+  font-weight: bold;
+  font-size:24px ;
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+  border: none; 
+  /* border: 1pxsolidvar(--fc-border-color,#ddd); */
+}
+
+.fc-theme-standard .fc-scrollgrid {
+  border: none; 
+  /* border: 1pxsolidvar(--fc-border-color,#ddd); */
+}
+
+.fc table {
+    font-size: 1.2em;
+}
+
+.fc-toolbar-title{
+    font-weight:bold;
+}
+
+.fc-col-header{
+  border-bottom: 1px solid;
+}
+
+#calendar {
+    background-color: #D7D7D74D;
+}
+
+
+.fc .fc-daygrid-day-frame {
+  position: relative;
+  min-height: 85%;
+  margin:4px 8px;
+  box-shadow: 4px 4px 4px #D7D7D74D;
+  border-radius:5px;
+  background-color: white;
+}
+
+@media screen and (max-width: 900px) {
+    .fc .fc-daygrid-day-frame {
+    margin:1px 2px;
+    box-shadow: 2px 2px 2px #D7D7D74D;
+    }
+}
+
+.fc .fc-non-business {
+    /* background-color: white; */
+    background: var(--fc-non-business-color,rgba(255, 255, 255, 0.1));
+}
+
+.fc-scrollgrid-sync-inner{
+  margin-bottom:5px;
+}
+
+.fc-day-sun{
+  color:red;
+}
+
+.fc-day-sat{
+  color:blue;
+}
+
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+    margin-bottom: 0;
+}
+
+.fc .fc-scroller {
+
+    padding-top: 10px;
+}
+
 ul.horizontal-list {
     overflow-x: auto;
     white-space: nowrap;
@@ -153,9 +276,7 @@ ul.horizontal-list {
 li.item {
 	display: inline-block;
 }
-.fc-day-past {
-    background-color: #969696;
-}
+
 .card-img-overlay{
     padding: 0;
     top: calc(80% - 0.5rem);
@@ -171,6 +292,7 @@ ul{
 }
 a{
     text-decoration:none;
+    color:inherit;
 }
 .f-pink{
     background-color:#BB4156;
@@ -360,15 +482,14 @@ async function commentCreate(ex_id) {
                     @if (app('request')->input('keyword') == "")
                         <div class="">
                             <div class='calendar'></div>
+                            <p class="text-danger fs-4">※予約する日を選択してください</p>
                         </div>
                     @else
                         <div class="card-body px-0 pt-3 border-top">
                             <div class="bg-f-part p-2 rounded-2 mb-2 d-lg-flex align-items-center justify-content-center">
                                 <h5 class="text-white mb-lg-0">体験日: {{ app('request')->input('keyword') }}</h5>
                                 <h5 class="text-white mb-0 ms-lg-4">
-                                    {{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ?  (new DateTime(' (前泊)'.app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}
-                                   
-
+                                    {{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ? ' (前泊)'.(new DateTime(app('request')->input('keyword') ) )->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}
                                 </h5>
                             </div>
                             <div>
@@ -396,7 +517,7 @@ async function commentCreate(ex_id) {
                     
                     
 
-                    <div class="d-flex justify-content-between align-items-start border-top pt-3 flex-wrap">
+                    <div class="d-flex justify-content-between align-items-start  pt-3 flex-wrap">
                         @if (app('request')->input('keyword') != "")
                             <div class="bg-f-part p-2 rounded-2 d-lg-none">
                                 <p class="text-white fs-5">体験日: {{ app('request')->input('keyword') }}</p>

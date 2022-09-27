@@ -16,33 +16,48 @@
                     </div>
                 </a>
             </div>
-                <div class="card-body">
 
-                    <p>現在登録中のホテル</p>
-                        
-                    <div class="d-flex flex-column">
-                    @foreach( $hotels as $hotel)
-                        <div class='d-flex my-2'>
-                            
-                            <div class="d-flex">
-                                <p class="mb-0">{{ $hotel->name }}</p>
-                                <a href="/mypage/owner/hotel_edit/{{ $hotel->id }}">
-                                    <button class="btn btn-sm btn-primary mx-2" name="update">編集</button>
-                                </a>
-                            </div>
-                             
-                            <form action="/mypage/owner/hotel_delete" method="POST">
-                                @csrf 
-                                <button type="submit" class="btn btn-sm btn-danger mx-2 mb-0"  name="delete">削除</button>
-                                <input type="hidden" name="id" value="{{ $hotel->id }}">
-                            </form>
-
-                        
-                        </div>
-                    @endforeach 
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ホテル名</th>
+                    <th scope="col">ホテル情報</th>
+                    <th scope="col">住所</th>
+                    <th scope="col">メールアドレス</th>
+                    <th scope="col">削除ボタン</th>
+                </tr>
+            </thead>
+            @forelse($hotels as $hotel)
+                <tr class="align-items-center">
+                    <th scope="row">{{$hotel->id }}</th>
+                    <td>
+                        <a href="/mypage/owner/hotel_edit/{{ $hotel->id }}">
+                            {{ $hotel->name }}
+                        </a>  
+                    </td>
+                    <td>
                     
-                    </div>
-                </div>
+                    <p class="card-text fw-bold text-nowrap ">{{ $hotel->description }}</p>
+                    </td>
+                    <td>
+                    <p class="card-text fw-bold text-nowrap ">{{ $hotel->address }}</p>
+                    </td>  
+                    <td>
+                    <p class="card-text fw-bold text-nowrap ">{{ $hotel->mail }}</p>
+                    </td>
+                    <td>
+                        <form action="/mypage/owner/hotel_delete" method="POST">
+                            @csrf 
+                            <button type="submit" class="btn btn-sm btn-danger mx-2 mb-0"  name="delete">削除</button>
+                            <input type="hidden" name="id" value="{{ $hotel->id }}">
+                        </form>
+                    </td>
+                </tr>   
+            @empty
+                <p>登録ホテルはありません</p>
+            @endforelse
+        </table>
             </div>
             
         </div>
