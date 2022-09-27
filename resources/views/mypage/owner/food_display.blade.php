@@ -16,33 +16,40 @@
                     </div>
                 </a>
             </div>
-                <div class="card-body">
-
-                    <p>現在登録中のフード</p>
-                        
-                    <div class="d-flex flex-column">
-                    @foreach( $foods as $food)
-                        <div class='d-flex my-2'>
-                            
-                            <div class="d-flex">
-                                <p class="mb-0">{{ $food->name }}</p>
-                                <a href="/mypage/owner/food_edit/{{ $food->id }}">
-                                    <button class="btn btn-sm btn-primary mx-2" name="update">編集</button>
-                                </a>
-                            </div>
-                             
-                            <form action="/mypage/owner/food_delete" method="POST">
-                                @csrf 
-                                <button type="submit" class="btn btn-sm btn-danger mx-2 mb-0"  name="delete">削除</button>
-                                <input type="hidden" name="id" value="{{ $food->id }}">
-                            </form>
-
-                        
-                        </div>
-                    @endforeach 
+                
+                <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">提供料理名</th>
+                    <th scope="col">提供料理情報</th>
+                    <th scope="col">削除ボタン</th>
+                </tr>
+            </thead>
+            @forelse($foods as $food)
+                <tr class="align-items-center">
+                    <th scope="row">{{$food->id }}</th>
+                    <td>
+                        <a href="/mypage/owner/food_edit/{{ $food->id }}">
+                            {{ $food->name }}
+                        </a>  
+                    </td>
+                    <td>
                     
-                    </div>
-                </div>
+                    <p class="card-text fw-bold text-nowrap ">{{ $food->description }}</p>
+                    </td>
+                    <td>
+                        <form action="/mypage/owner/food_delete" method="POST">
+                            @csrf 
+                            <button type="submit" class="btn btn-sm btn-danger mx-2 mb-0"  name="delete">削除</button>
+                            <input type="hidden" name="id" value="{{ $food->id }}">
+                        </form>
+                    </td>
+                </tr>   
+            @empty
+                <p>登録ホテルはありません</p>
+            @endforelse
+        </table>
             </div>
             
         </div>
