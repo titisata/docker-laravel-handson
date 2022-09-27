@@ -76,11 +76,21 @@ async function commentCreate(goods_folder_id) {
        
     }
    
-    function goods_formSwitch(id){
+    function goods_formSwitch(id,value)
+    {
         var goods_result = document.getElementById(`goods_result_${id}`);
         var goods_price = document.getElementById(`goods_price_${id}`);
         var count = document.getElementById(`count_${id}`).value;
+        var count_ex = document.getElementById(`quantity_ex_${id}`).value;
+        var before_count = document.getElementById(`before_count_${id}`).value;
 
+        if(count > count_ex){
+            alert('上限を超えています');
+            document.getElementById(`count_${id}`).value = before_count;
+            return false;
+        }else{
+            document.getElementById(`before_count_${id}`).value = value;
+        }
         goods_result.innerHTML = (goods_price.innerHTML*count);
     }
 
@@ -167,7 +177,7 @@ async function commentCreate(goods_folder_id) {
                         <div class="d-flex align-items-center justify-content-end pb-4 border-bottom border-secondary">
                             <label class="fs-5 me-1" for="quantity">数量</label>
                             <div class="d-flex">
-                                <select class="form-select form-select-sm me-1" style="width:64px" name="quantity[]" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}');number_check()">
+                                <select class="form-select form-select-sm me-1" style="width:64px" name="quantity[]" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}',this.value);number_check()">
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -180,7 +190,9 @@ async function commentCreate(goods_folder_id) {
                                     <option value="9">9</option>
                                     <option value="10">10</option>
                                 </select> 
-                               
+                                <label class="fs-5 me-1" for="quantity_ex">（残り{{ $goods->quantity}}個）</label>
+                                <input type='hidden' id="quantity_ex_{{ $goods->id }}" value="{{ $goods->quantity}}">
+                                <input type='hidden' id="before_count_{{ $goods->id }}" value="0">
                                 <!-- <input type="number" name="quantity[]" id="count_{{ $goods->id }}" onchange="goods_formSwitch('{{ $goods->id }}')"> -->
                             </div>    
                         </div> 

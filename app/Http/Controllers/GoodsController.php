@@ -81,6 +81,8 @@ class GoodsController extends Controller
             }
 
             // TODO: 不正なGoods IDの場合の処理
+            Goods::where('id', $goods_id)->decrement('quantity',$quantity);
+            
             GoodCartItem::create([
                 'partner_id' => $partner_id,
                 'goods_id' => $goods_id,
