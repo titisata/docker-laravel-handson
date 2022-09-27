@@ -132,7 +132,23 @@ class ExperienceController extends Controller
             }
         }
 
-        return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date'));
+        $full_experience = array();
+        if (app('request')->input('keyword')<>""){
+            if($experienceFolder->is_before_lodging){
+                $target_date = app('request')->input('keyword')->modify("-1day")->format('Y-m-d');
+            }else{
+                $target_date = app('request')->input('keyword');
+            }
+            foreach($experiences as $ex) {
+                //echo $ex->id."----".$ex->quantity."----".$ex->reserve_count($target_date);
+                //echo "<br>";
+                if($ex->reserve_count($target_date)>=$ex->quantity){
+                    $full_experience[] = $ex->id;
+                }
+            }
+        }
+
+        return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date', 'full_experience'));
     }
 
     
@@ -147,10 +163,16 @@ class ExperienceController extends Controller
         $comments = $experienceFolder->comments();
         $mycomment = $experienceFolder->mycomment();
 
+        if($experience->reserve_count(app('request')->input('keyword'))>=$experience->quantity){
+            $full_experience_flag = 1;
+        }else{
+            $full_experience_flag = 0;
+        }
+
         if ($experienceFolder == null || $experience == null) {
             return abort(404);
         }
-        return view('experience.reserve', compact('user', 'experienceFolder', 'experience', 'comments', 'mycomment'));
+        return view('experience.reserve', compact('user', 'experienceFolder', 'experience', 'comments', 'mycomment', 'full_experience_flag'));
     }
 
     public function post(Request $request)

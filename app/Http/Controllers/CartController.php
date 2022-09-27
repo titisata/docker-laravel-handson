@@ -73,6 +73,9 @@ class CartController extends Controller
         $uid = Auth::user()->id;
         $item_id = $request->id;
         // TODO: UIDの確認を入れる
+        $goodCartItem = GoodCartItem::where('id', $item_id)->first();
+        Goods::where('id', $goodCartItem->goods_id)->increment('quantity',$goodCartItem->quantity);
+
         GoodCartItem::destroy($item_id);
         return response()->json(['message'=>'success']);
     }

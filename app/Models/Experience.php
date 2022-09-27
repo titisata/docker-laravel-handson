@@ -25,5 +25,10 @@ class Experience extends Model
         return $this->belongsTo(ExperienceFolder::class);
     }
 
+    public function reserve_count(string $date)
+    {
+        $reserve = $this->hasmany(ExperienceReserve::class)->where('start_date', $date)->get();
+        return count($reserve);
+    }
    
 }

@@ -352,7 +352,7 @@ input[type="radio"] {
 
                 </div>
                 
-                @if($experienceFolder->status == 1 && $experience->status == 1)
+                @if($experienceFolder->status == 1 && $experience->status == 1 && $full_experience_flag != 1)
                     <div class="text-center text-md-end mt-3">
                         <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4"  type="submit" value="">
                             <i class="bi bi-cart"></i>カートに入れる
