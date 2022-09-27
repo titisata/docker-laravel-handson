@@ -312,7 +312,7 @@
 			<div class="side-menu-container">
 				<ul class="nav navbar-nav">
                 @role('system_admin|site_admin')
-                    <li id="home"><a href="/mypage/user"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
+                    <li id="home"><a href="/mypage/owner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
                     <li id="owner_site"><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>サイト管理</a></li>
 					<li id="owner_partner"><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>パートナー管理</a></li>
                     <li id=""><a href=""><i class="fa fa-dashboard"></i>顧客管理</a></li>
@@ -328,7 +328,7 @@
                     <li id="owner_site" class="mt-5"><a href="/"><span class="glyphicon glyphicon-signal"></span>ユーザーページへ</a></li>
                 @endrole
                 @role('partner')
-                    <li id="home"><a href="/mypage/user"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
+                    <li id="home"><a href="/mypage/partner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
                     <li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>プロフィール管理</a></li>
                     <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>イベント管理</a></li>
                     <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>お土産管理</a></li>
