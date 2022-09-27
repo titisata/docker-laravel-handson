@@ -457,7 +457,7 @@
                 <div class="card mt-3">
                     <div class="card-header">休暇設定</div>
                     <div class="card-body">
-                        <div>
+                        <div class="d-flex">
                             <input class="form-control" style="width:200px;" type='text' id='select_date' name='selecte_date' value=''>
                             <input class="btn btn-primary" style="width:40px;" type="button" value="+" onclick="add_date();">
                         </div>
@@ -465,7 +465,7 @@
                         <div id="div_selected_date"> 
                             @forelse($schedules as $schedule)
                                 <?php $schedule_count++; ?>
-                                <div id="div_schedule_<?php echo $schedule_count; ?>">
+                                <div id="div_schedule_<?php echo $schedule_count; ?>" class="d-flex mt-1">
                                     <input class="form-control" style="width:200px;" type="text" name="selected_date[]" value="{{ $schedule->date->format('Y/m/d') }}" readonly>
                                     <input class="btn btn-primary" style="width:40px;" type="button" value="-" onclick="delete_date(<?php echo $schedule_count; ?>);">
                                 </div>
