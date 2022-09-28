@@ -62,7 +62,7 @@
             events: [...events, ...holiday_events],
             height:'auto',
             dateClick: function(info) {
-                var newDate = new Date(info.dateStr);
+                var newDate = new Date(info.dateStr + " 00:00:00");
                 if (newDate < Date.now()) {
                     return;
                 }
@@ -98,19 +98,43 @@
                 }
 
                 arrayOfDomNodes = [ titleEvent,imgEventWrap ]
-
                 return { domNodes: arrayOfDomNodes }
             },
 
-            dayRender: function(date, cell){
-                alert(date);
+            loading: function(bool) {
+                if(bool) {
+                    // document.getElementById('loading').style.display = 'block';
+                } else {
+                    // document.getElementById('loading').style.display = 'none';
+
+                    setTimeout(() => {
+                        day_over();
+                    }, 10);  
+                }
             },
         });
-        calendar.render();
+            calendar.render();
 
+            let targets = document.getElementsByClassName("fc-button");
+            for(let i = 0; i < targets.length; i++){
+                targets[i].addEventListener("click",() => {
+                    day_over();
+                }, false);
+            }
         }
 
     });
+
+    function day_over(){
+        let els = document.getElementsByClassName('fc-day-future');
+        let day1 = new Date(event_end_date)
+        for (let i = 0; i <  els.length; i++) {
+            let day2 = new Date(els[i].dataset.date + " 00:00:00");
+            if(day1.getTime() < day2.getTime()){
+                els[i].classList.add("fc-day-over");
+            }
+        }
+    }
 
     var count = 0;
 
@@ -152,6 +176,12 @@
 /* カレンダースタイル */
 
 .fc-day-past {
+    /* background-color: #D7D7D74D; */
+    background: var(--fc-non-business-color,rgba(238, 240, 241));
+    opacity: .2;
+}
+
+.fc-day-over {
     /* background-color: #D7D7D74D; */
     background: var(--fc-non-business-color,rgba(238, 240, 241));
     opacity: .2;
