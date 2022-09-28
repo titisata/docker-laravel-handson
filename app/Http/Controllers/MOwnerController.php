@@ -76,6 +76,7 @@ class MOwnerController extends Controller
         $price_adult = $request->price_adult;
         $price_child = $request->price_child;
         $address = $request->address;
+        $phone = $request->phone;
         $description = $request->description;
         $detail = $request->detail;
         $caution = $request->caution;
@@ -94,6 +95,7 @@ class MOwnerController extends Controller
             'price_adult' => $price_adult,
             'price_child' => $price_child,
             'address' => $address,
+            'phone' => $phone,
             'description' => $description,
             'detail' => $detail,
             'caution' => $caution,
@@ -138,6 +140,7 @@ class MOwnerController extends Controller
         $price_adult = $request->price_adult;
         $price_child = $request->price_child;
         $address = $request->address;
+        $phone = $request->phone;
         $description = $request->description;
         $detail = $request->detail;
         $caution = $request->caution;
@@ -159,6 +162,7 @@ class MOwnerController extends Controller
             'price_adult' => $price_adult,
             'price_child' => $price_child,
             'address' => $address,
+            'phone' => $phone,
             'description' => $description,
             'detail' => $detail,
             'caution' => $caution,

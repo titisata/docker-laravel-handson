@@ -285,6 +285,13 @@
                             <textarea name="address" type="text" class="form-control">{{ $experiences_folder->address }}</textarea>
                         </div>
                         <div class="mb-3">
+                        <label class="form-label">連絡先電話番号<span class="small text-danger">この体験に関する電話連絡（キャンセルやお問合せ等）の受付先を入力してください</span></label>
+                            @error('phone')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                            <textarea name="phone" type="text" class="form-control">{{ $experiences_folder->phone }}</textarea>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">説明</label>
                             @error('description')
                                 <p class="text-danger">{{ $message }}</p>

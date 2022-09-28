@@ -7,6 +7,7 @@ use App\Models\ExperienceCategory;
 use App\Models\ExperienceFolder;
 use App\Models\ExperienceReserve;
 use App\Models\Experience;
+use App\Models\GoodsOrder;
 use App\Models\GoodsFolder;
 use App\Models\GoodsCategory;
 use App\Models\Goods;
@@ -31,11 +32,12 @@ class MPartnerController extends Controller
 {
     public function home()
     {
+        $now = now()->format('y-m-d');
+        $tomorrow = now()->addDay()->format('y-m-d');
         $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
-        $ordered_goods = $user->ordered_goods;
-        $reserved_experiences = $user->reserved_experiences;
-        return view('mypage.partner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences'));
+        $ordered_goods = GoodsOrder::where('partner_id', $user->id)->get();
+        $reserved_experiences = ExperienceReserve::where('partner_id', $user->id)->where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
+        return view('mypage.owner.home', compact('user', 'ordered_goods', 'reserved_experiences'));
     }
 
    
@@ -61,6 +63,7 @@ class MPartnerController extends Controller
         $price_adult = $request->price_adult;
         $price_child = $request->price_child;
         $address = $request->address;
+        $phone = $request->phone;
         $description = $request->description;
         $detail = $request->detail;
         $caution = $request->caution;
@@ -79,6 +82,7 @@ class MPartnerController extends Controller
             'price_adult' => $price_adult,
             'price_child' => $price_child,
             'address' => $address,
+            'phone' => $phone,
             'description' => $description,
             'detail' => $detail,
             'caution' => $caution,
@@ -124,6 +128,7 @@ class MPartnerController extends Controller
         $price_adult = $request->price_adult;
         $price_child = $request->price_child;
         $address = $request->address;
+        $phone = $request->phone;
         $description = $request->description;
         $detail = $request->detail;
         $caution = $request->caution;
@@ -144,6 +149,7 @@ class MPartnerController extends Controller
             'price_adult' => $price_adult,
             'price_child' => $price_child,
             'address' => $address,
+            'phone' => $phone,
             'description' => $description,
             'detail' => $detail,
             'caution' => $caution,

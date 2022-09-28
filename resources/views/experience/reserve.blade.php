@@ -224,7 +224,7 @@ input[type="radio"] {
                             <img src="/images/star5.png" style="width:120px;height35px">
                             </div>
                         @endif
-                        <p class="text-gray fs-5 mt-4">{{ $experienceFolder->description }}</p>
+                        <p class="text-gray fs-5 mt-4">{!!nl2br(e($experienceFolder->description))!!}</p>
                         
                     </div>
                     <p class="mb-4 text-start"><a role="button" href="/partner/{{ $experienceFolder->user_id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
@@ -373,10 +373,14 @@ input[type="radio"] {
 
         </div>
         <div class= "col-md-10">
+            <div>
+                <p class="fw-bold fs-5 text-gray">本件に関するお問合せ</p>
+                <p class="text-gray">{!!nl2br(e($experienceFolder->phone))!!}</p>
+            </div>
             <div class="mt-4">
 
                 <p class="fw-bold fs-5 text-gray">注意事項など</p>
-                <p class="text-gray">{{ $experienceFolder->caution }}</p>
+                <p class="text-gray">{!!nl2br(e($experienceFolder->caution))!!}</p>
                 <p></p>
                 <p class="mb-0 text-gray">宿泊場所は観光協会お任せとなります。</p>
                 <p class="text-gray">決まり次第後ほど観光協会よりご連絡いたします。</p>

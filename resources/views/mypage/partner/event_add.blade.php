@@ -41,7 +41,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">住所</label>
-                            <textarea name="address" type="text" class="form-control"></textarea>
+                            <input name="address" type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">連絡先電話番号<span class="small text-danger">この体験に関する電話連絡（キャンセルやお問合せ等）の受付先を入力してください</span></label>
+                            <textarea name="phone" type="text" class="form-control"></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">説明</label>
