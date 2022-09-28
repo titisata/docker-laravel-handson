@@ -12,14 +12,14 @@
     </div>
 
     <div class="card mt-3">
-                <div class="card-header">予約した体験</div>
+                <div class="card-header">予約された体験</div>
                 <div class="card-body">
                     @forelse ($reserved_experiences as $reserved_experience)
                         <a href="/experience/{{ $reserved_experience->experience->id }}">
                             <div class="mt-1 p-3 card">
                                 <div>
                                     <p>{{ $reserved_experience->experience->name }}</p>
-                                    <p>予約日: {{ $reserved_experience->experience->start_date }}</p>
+                                    <p>予約日: {{ $reserved_experience->start_date }}</p>
                                     <p>大人: {{ $reserved_experience->quantity_adult }}人 子ども: {{ $reserved_experience->quantity_child }}人</p>
                                     <p>宿泊: {{ $reserved_experience->hotelGroup?->name ?? 'なし' }}</p>
                                     <p>食事: {{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
@@ -34,7 +34,7 @@
             </div>
 
             <div class="card mt-3">
-                <div class="card-header">注文したお土産</div>
+                <div class="card-header">注文されたお土産</div>
                 <div class="card-body">
                     @forelse ($ordered_goods as $ordered_goods_one)
                         <a href="/goods/{{ $ordered_goods_one->goods->id }}">

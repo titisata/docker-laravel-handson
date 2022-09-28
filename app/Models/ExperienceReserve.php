@@ -34,6 +34,11 @@ class ExperienceReserve extends Model
         'cancel_flag',
     ];
 
+    // public function experiencefolder()
+    // {
+    //     return $this->belongsTo(ExperienceFolder::class);
+    // }
+
     public function experience()
     {
         return $this->belongsTo(Experience::class);
@@ -61,7 +66,7 @@ class ExperienceReserve extends Model
         return $this->belongsTo(HotelGroup::class);
     }
 
-    //food_groupsテーブルと結合
+    //_groupsテーブルと結合
     public function foodGroup()
     {
         return $this->belongsTo(FoodGroup::class);

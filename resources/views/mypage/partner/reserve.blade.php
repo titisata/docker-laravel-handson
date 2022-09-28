@@ -60,7 +60,6 @@
                                             {{ $reserved_experience->message }}
                                         </td>
                                         <td>
-                                            
                                             @if( $reserved_experience->status == '対応待ち')
                                             <p class="bg-danger text-white mb-0 text-center">{{ $reserved_experience->status }}</p>
                                             @else

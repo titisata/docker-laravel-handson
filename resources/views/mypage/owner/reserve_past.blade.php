@@ -1,16 +1,17 @@
+
 @extends('mypage.layouts.app')
 
 @section('menu', 'owner_reserve')
 @section('content')
 
-    <h1>進行中の予約一覧</h1>
+<h1>過去の予約一覧</h1>
 
-    <div class="text-end me-5">
-        <a href="/mypage/owner/reserve_past">過去の予約一覧へ</a>
-    </div>
-    
+<div class="text-end me-5">
+<a href="/mypage/owner/reserve">現在の予約一覧へ</a>
+</div>
+
     <nav class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-link" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">体験別</a>
+        <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">体験別</a>
         <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">日付別</a>
     </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -26,7 +27,7 @@
                 </div>
                     @forelse ($partner->experiences as $experiences_folder)
                         <div class="card mt-3">
-                            <a href="/mypage/owner/reserve_select/{{$experiences_folder->id}}">
+                            <a href="/mypage/owner/reserve_select_past/{{$experiences_folder->id}}">
                                 <div class="d-flex align-items-center">
                                     
                                     @if($experiences_folder->is_lodging == 0)
@@ -48,18 +49,23 @@
     @empty
         <p>パートナーがいません</p>
     @endforelse
-</div>
+        </div>
         <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <div class="d-flex flex-column">
-            @forelse ($dates as $date)
-            <a href="/mypage/owner/reserve_select_date/{{$date}}">
-                20{{$date}}月の予約
-            </a>
-            @empty
-                <p>体験がありません</p>
-            @endforelse
+            <div class="d-flex flex-column">
+                @forelse ($dates as $date)
+                <a href="/mypage/owner/reserve_select_date_past/{{$date}}">
+                    20{{$date}}月の予約
+                </a>
+                @empty
+                    
+                @endforelse
+            </div>
+            
         </div>
-        </div>
-
+        
+    
+        
+    
 
 @endsection
+

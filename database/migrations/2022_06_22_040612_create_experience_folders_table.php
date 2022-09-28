@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('name', 50)->index();
             $table->string('description', 1000);
             $table->string('address', 1000);
+            $table->string('phone', 1000);
             $table->string('caution', 1000);
             $table->string('detail', 1000);
             $table->string('category1', 50)->nullable()->index();
