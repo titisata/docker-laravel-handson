@@ -81,7 +81,15 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/home">マイページ</a>
+                                @role('system_admin|site_admin')
+                                    <a class="dropdown-item" href="{{ url('/mypage/owner/') }}">マイページ</a>
+                                @endrole 
+                                @role('partner')
+                                    <a class="dropdown-item" href="{{ url('/mypage/partner/') }}">マイページ</a>
+                                @endrole
+                                @role('user')
+                                    <a class="dropdown-item" href="{{ url('/mypage/user/') }}">マイページ</a>
+                                @endrole   
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

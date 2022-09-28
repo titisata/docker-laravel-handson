@@ -129,7 +129,7 @@ class ExperienceFolder extends Model
 
     public function reserves()
     {
-        return $this->hasManyThrough(ExperienceReserve::class, Experience::class);
+        return $this->hasManyThrough(ExperienceReserve::class, Experience::class)->orderBy('status', 'asc');
     }
 
     /**

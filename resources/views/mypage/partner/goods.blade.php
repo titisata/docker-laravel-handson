@@ -42,7 +42,7 @@
                         <td>
                             <form action="/mypage/partner/action_event_delete" method="POST">
                             @csrf
-                            <button class="btn btn-danger">イベント削除</button>
+                            <button class="btn btn-danger">お土産削除</button>
                             <input type="hidden" name="id" value="{{  $goodsFolder->id }}">
                             </form>
                         </td>

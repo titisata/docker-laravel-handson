@@ -89,16 +89,22 @@
                             @if (Route::has('login'))
 
                                 @auth
-                                <li class="nav-item pt-2">
-                                    <a href="{{ url('/mypage/user/') }}" class="text-sm text-gray-color">ホーム</a>
-                                </li>
+                                
                                 <li class="nav-item dropdown ms-3">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-gray-color fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/home">マイページ</a>
+                                    @role('system_admin|site_admin')
+                                        <a class="dropdown-item" href="{{ url('/mypage/owner/') }}">マイページ</a>
+                                    @endrole 
+                                    @role('partner')
+                                        <a class="dropdown-item" href="{{ url('/mypage/partner/') }}">マイページ</a>
+                                    @endrole
+                                    @role('user')
+                                        <a class="dropdown-item" href="{{ url('/mypage/user/') }}">マイページ</a>
+                                    @endrole 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

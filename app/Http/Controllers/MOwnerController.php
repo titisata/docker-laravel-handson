@@ -292,19 +292,6 @@ class MOwnerController extends Controller
         return view('mypage.owner.goods', compact('user', 'goods_folders'));
     }
 
-    // public function goods_post_date(Request $request)
-    // {   
-    //     $partner_id = $request->partner_id;
-    //     $name = $request->name;
-    //     $price = $request->price;
-    //     $description = $request->description;
-    //     $detail = $request->detail;
-    //     $caution = $request->caution;
-    //     $category = $request->category;
-    //     $recommend_flag = $request->recommend_flag; 
-
-        
-    // }
 
     public function goods_add(string $id)
     {
@@ -1244,7 +1231,7 @@ class MOwnerController extends Controller
             $name = 'ヘルプ・マニュアル';
         }
 
-        if(DB::table('links')->where('id', $id)->exists()){
+        if(Link::where('id', $id)->exists()){
 
             $link = Link::where('id', $id)->first();
             
