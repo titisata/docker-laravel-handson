@@ -20,6 +20,13 @@ class GoodCartItem extends Model
         return $this->belongsTo(Goods::class);
     }
 
+    public function contact_info()
+    {
+        $goods = $this->goods;
+        $folder = GoodsFolder::where('id',$goods->goods_folder_id)->first();
+        return $folder->name;
+    }
+
     public function sum_price()
     {
         $goods = $this->goods;

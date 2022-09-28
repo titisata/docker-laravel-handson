@@ -110,6 +110,13 @@ class CartController extends Controller
                 'quantity_adult' => $experienceCartItem->quantity_adult,
                 'start_date' =>  $experienceCartItem->start_date,
                 'end_date' =>  $experienceCartItem->end_date,
+                'experience_price_child' =>  $experienceCartItem->experience->price_child,
+                'experience_price_adult' =>  $experienceCartItem->experience->price_adult,
+                'hotel_price_child' =>  is_null($experienceCartItem->hotelGroup) ? NULL : $experienceCartItem->hotelGroup->price_child,
+                'hotel_price_adult' =>  is_null($experienceCartItem->hotelGroup) ? NULL : $experienceCartItem->hotelGroup->price_adult,
+                'food_price_child' =>  is_null($experienceCartItem->foodGroup) ? NULL : $experienceCartItem->foodGroup->price_child,
+                'food_price_adult' =>  is_null($experienceCartItem->foodGroup) ? NULL : $experienceCartItem->foodGroup->price_adult,
+                'total_price' =>  $experienceCartItem->sum_price(),
             ]);
             
             $price += $experienceCartItem->sum_price();
@@ -135,6 +142,8 @@ class CartController extends Controller
                 'goods_id' => $goodCartItem->goods_id,
                 'user_id' => $uid,
                 'quantity' => $goodCartItem->quantity,
+                'goods_price' =>  $goodCartItem->goods->price,
+                'total_price' =>  $goodCartItem->sum_price(),
             ]);
             
             $price += $goodCartItem->sum_price();
@@ -176,19 +185,26 @@ class CartController extends Controller
         }
 
         //管理者へメール
-        $admin = User::where('id', '2')->first();
-        $subject = '決済完了通知メール';
-        $name = $admin->name;
-        $to = $admin->email;
-        $to = 'satou@b-partners.jp';
-        $with = [
-            'name' => $name,
-            'description_experiences' => $description_experiences_all,
-            'description_goods' => $description_goods_all,
-            'price' => $price,
-            'for' => 'user',
-        ];
-        // Mail::send(new SendMail($with, $to, $subject, $view));
+        $admins  = User::with('roles')
+        ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+        ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+        ->where("roles.name", "site_admin") 
+        ->get();
+
+        foreach ($admins as $admin) {
+            $subject = '決済完了通知メール';
+            $name = $admin->name;
+            $to = $admin->email;
+            $to = 'satou@b-partners.jp';
+            $with = [
+                'name' => $name,
+                'description_experiences' => $description_experiences_all,
+                'description_goods' => $description_goods_all,
+                'price' => $price,
+                'for' => 'user',
+            ];
+            // Mail::send(new SendMail($with, $to, $subject, $view));
+        }        
 
         //ユーザへメール
         $user = Auth::user();

@@ -13,6 +13,8 @@ class GoodsOrder extends Model
         'goods_id',
         'user_id' ,
         'quantity',
+        'goods_price',
+        'total_price',
     ];
 
 
@@ -23,8 +25,7 @@ class GoodsOrder extends Model
 
     public function sum_price()
     {
-        $goods = $this->goods;
-        $sum_price = $goods->price * $this->quantity;
+        $sum_price = $this->goods_price * $this->quantity;
         return $sum_price;
     }
 }

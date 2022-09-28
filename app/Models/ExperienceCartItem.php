@@ -37,6 +37,13 @@ class ExperienceCartItem extends Model
         return $this->belongsTo(FoodGroup::class);
     }
 
+    public function contact_info()
+    {
+        $experience = $this->experience;
+        $folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
+        return $folder->name;
+    }
+
     public function sum_price()
     {
         $ex = $this->experience;
