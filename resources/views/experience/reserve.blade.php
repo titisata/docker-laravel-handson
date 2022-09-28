@@ -235,7 +235,7 @@ input[type="radio"] {
             <form action="{{ Request::url() }}" method="POST" name="reserve_form" onsubmit='return check();'>
             @csrf
             <input type="hidden" name="user_id" value="{{ $experienceFolder->user_id }}">
-            <input hidden name="date" type="text" value="{{ $experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : app('request')->input('keyword') }}">
+            <input hidden name="date" value="{{ $experienceFolder->is_before_lodging ?  (new DateTime(app('request')->input('keyword')))->modify("-1day")->format('Y-m-d') : app('request')->input('keyword') }}">
 
                 <div class="mt-2 card shadow-sm bg-color text-more-gray">
 

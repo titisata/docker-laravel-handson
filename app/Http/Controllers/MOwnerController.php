@@ -9,6 +9,7 @@ use App\Models\SiteMaster;
 use App\Models\ExperienceCategory;
 use App\Models\ExperienceReserve;
 use App\Models\Experience;
+use App\Models\GoodsOrder;
 use App\Models\GoodsFolder;
 use App\Models\GoodsCategory;
 use App\Models\Goods;
@@ -37,18 +38,20 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use Carbon\Carbon;
 
 class MOwnerController extends Controller
 {
 
     public function home()
     {
+        $now = now()->format('y-m-d');
+        $tomorrow = now()->addDay()->format('y-m-d');
         $user = Auth::user();
         $partner = Partner::where('user_id', $user->id)->first();
-        $ordered_goods = $user->ordered_goods;
-        $reserved_experiences = $user->reserved_experiences;
+        $ordered_goods = GoodsOrder::all();
+        $reserved_experiences = ExperienceReserve::where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
         return view('mypage.owner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences'));
-        // return view('mypage.owner.home');
     }
 
     public function event()
@@ -609,10 +612,78 @@ class MOwnerController extends Controller
     public function reserve()
     {
         $user = Auth::user();
-        //$partners = User::all();
         $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
-        return view('mypage.owner.reserve', compact('user', 'partners'));
+        
+        $dates = array();
+        for($i = 0; $i < 6; $i++){
+            $dates[] = now()->addMonth($i)->format('y-m');
+        }
+        
+        return view('mypage.owner.reserve', compact('user', 'partners', 'dates'));
     }
+
+    public function reserve_past()
+    {
+        $user = Auth::user();
+        $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
+        $dates = array();
+        for($i = 0; $i < 6; $i++){
+            $dates[] = now()->subMonth($i)->format('y-m');
+        }
+        return view('mypage.owner.reserve_past', compact('user', 'partners', 'dates'));
+    }
+
+    public function reserve_select(string $id)
+    {
+        $now = now()->format('y-m-d');
+        $user = Auth::user();
+        $experience_folder = ExperienceFolder::where('id', $id)->first();
+        $experiences = Experience::where('experience_folder_id', $experience_folder->id)->get();
+        
+        return view('mypage.owner.reserve_select', compact('user', 'experiences', 'now'));
+    }
+
+    public function reserve_select_date(string $id)
+    {
+        $now = now()->format('y-m-d');
+        $datetime = $id;
+        $datetime1 = explode(' ', $datetime);
+        $date = explode('-', $datetime1[0]);
+        $year = $date[0];
+        $month = $date[1];
+
+        $user = Auth::user();
+        $reserves = ExperienceReserve::whereMonth('start_date', $month)->where('start_date', '>=', $now)->get();
+      
+        return view('mypage.owner.reserve_select_date', compact('user', 'id', 'reserves'));
+    }
+
+    public function reserve_select_past(string $id)
+    {
+        $now = now()->format('y-m-d');
+        $user = Auth::user();
+        $experience_folder = ExperienceFolder::where('id', $id)->first();
+        $experiences = Experience::where('experience_folder_id', $experience_folder->id)->get();
+        
+        return view('mypage.owner.reserve_select_past', compact('user', 'experiences', 'now'));
+    }
+
+    public function reserve_select_date_past(string $id)
+    {
+        $now = now()->format('y-m-d');
+        $datetime = $id;
+        $datetime1 = explode(' ', $datetime);
+        $date = explode('-', $datetime1[0]);
+        $year = $date[0];
+        $month = $date[1];
+
+        $user = Auth::user();
+        $reserves = ExperienceReserve::whereMonth('start_date', $month)->where('start_date', '<', $now)->get();
+       
+        return view('mypage.owner.reserve_select_date_past', compact('user', 'id', 'reserves'));
+    }
+
+    
 
     public function reserve_edit(string $id)
     {

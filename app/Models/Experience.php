@@ -30,5 +30,29 @@ class Experience extends Model
         $reserve = $this->hasmany(ExperienceReserve::class)->where('start_date', $date)->get();
         return count($reserve);
     }
+
+    /**
+     * 予約を取得
+     *
+     * @return Collection<ExperienceReserve>
+     */
+
+    public function ex_reserves()
+    {
+        $now = now()->format('y-m-d');
+        return $this->hasMany(ExperienceReserve::class)->where('start_date', '>=', $now);
+    }
+
+    /**
+     * 過去予約を取得
+     *
+     * @return Collection<ExperienceReserve>
+     */
+
+    public function ex_reserves_past()
+    {
+        $now = now()->format('y-m-d');
+        return $this->hasMany(ExperienceReserve::class)->where('start_date', '<', $now);
+    }
    
 }

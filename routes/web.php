@@ -106,6 +106,11 @@ Route::prefix('mypage/partner')->middleware(['auth','role:partner'])->group(func
 Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\MOwnerController::class, 'home']);
     Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
+    Route::get('/reserve_past', [App\Http\Controllers\MOwnerController::class, 'reserve_past']);
+    Route::get('/reserve_select/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select']);
+    Route::get('/reserve_select_date/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date']);
+    Route::get('/reserve_select_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_past']);
+    Route::get('/reserve_select_date_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date_past']);
     Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
     Route::post('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_reserve_edit']);
     // Route::get('/reserve_make/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_make']);
