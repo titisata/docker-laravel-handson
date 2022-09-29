@@ -42,6 +42,11 @@
         margin-left: 200px;
         }
 
+        .link {
+        color: #0d6efd;
+        text-decoration: underline;
+        }
+
         /*main side bar*/
         .msb {
         width: 200px;
@@ -315,8 +320,8 @@
                 @role('system_admin|site_admin')
                     <li id="home"><a href="/mypage/owner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
                     <li id="owner_site"><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>サイト管理</a></li>
-					<li id="owner_partner"><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>パートナー管理</a></li>
-                    <li id=""><a href=""><i class="fa fa-dashboard"></i>顧客管理</a></li>
+					<li id=""><a href="/mypage/owner/users"><i class="fa fa-dashboard"></i>ユーザー管理</a></li>
+                    <li id="owner_partner"><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>パートナー管理</a></li>
                     <li id="partner_event"><a href="/mypage/owner/event"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>イベント管理</a></li>
                     <li id="partner_goods"><a href="/mypage/owner/goods"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>お土産管理</a></li>
                     <li id="owner_reserve"><a href="/mypage/owner/reserve"><i class="fa fa-puzzle-piece"></i>予約状況</a></li>
@@ -330,11 +335,11 @@
                 @endrole
                 @role('partner')
                     <li id="home"><a href="/mypage/partner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
+                    <li id="partner_reserve"><a href="/mypage/partner/reserved_user"><i class="fa fa-puzzle-piece"></i>ユーザー管理</a></li>
                     <li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>プロフィール管理</a></li>
                     <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>イベント管理</a></li>
                     <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>お土産管理</a></li>
                     <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>予約状況</a></li>
-                    <li id="partner_reserve"><a href="/mypage/partner/reserved_user"><i class="fa fa-puzzle-piece"></i>顧客管理</a></li>
                     <li id=""><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
                     <li id="" class="mt-5"><a href="/"><span class="glyphicon glyphicon-signal"></span>ユーザーページへ</a></li>
                 @endrole

@@ -23,6 +23,7 @@ use App\Models\Link;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventEditRequest;
+use App\Http\Requests\EventAddRequest;
 use App\Http\Requests\GoodsEditRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,7 @@ class MPartnerController extends Controller
         $user = Auth::user();
         $ordered_goods = GoodsOrder::where('partner_id', $user->id)->get();
         $reserved_experiences = ExperienceReserve::where('partner_id', $user->id)->where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
-        return view('mypage.owner.home', compact('user', 'ordered_goods', 'reserved_experiences'));
+        return view('mypage.partner.home', compact('user', 'ordered_goods', 'reserved_experiences'));
     }
 
    
@@ -50,13 +51,22 @@ class MPartnerController extends Controller
 
     public function event_add(string $id)
     {
+        // $user = Auth::user();
+        // $experiences_folder = ExperienceFolder::find($id);
+        // $categories = ExperienceCategory::all();
+        // return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories'));
         $user = Auth::user();
         $experiences_folder = ExperienceFolder::find($id);
         $categories = ExperienceCategory::all();
-        return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories'));
+
+        $hotel_groups = HotelGroup::all();
+        
+        $food_groups = FoodGroup::all();
+
+        return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories', 'hotel_groups', 'food_groups'));
     }
 
-    public function action_event_add(Request $request)
+    public function action_event_add(EventAddRequest $request)
     {
         $user_id = $request->user_id;
         $name = $request->name;
@@ -321,6 +331,7 @@ class MPartnerController extends Controller
         $caution = $request->caution;
         $category = $request->category;
         $recommend_flag = $request->recommend_flag; 
+        
 
         GoodsFolder::create([
             'user_id' => $user_id,

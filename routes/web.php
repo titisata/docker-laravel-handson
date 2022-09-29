@@ -193,6 +193,7 @@ Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'
     Route::post('/action_event_add', [App\Http\Controllers\MOwnerController::class, 'action_event_add']);
     Route::get('/event/{id}', [App\Http\Controllers\MOwnerController::class, 'event_edit']);
     Route::post('event_edit_update', [App\Http\Controllers\MOwnerController::class, 'event_edit_update']);
+    Route::post('event_edit_delete', [App\Http\Controllers\MOwnerController::class, 'event_edit_delete']);
     Route::post('/action_event_delete', [App\Http\Controllers\MOwnerController::class, 'action_event_delete']);
     Route::get('/experience_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'experience_delete']);
     Route::post('/action_experience_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_experience_delete']);
@@ -206,7 +207,8 @@ Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'
     Route::get('/goods_add/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_add']);
     Route::post('/action_goods_add', [App\Http\Controllers\MOwnerController::class, 'action_goods_add']);
     Route::get('/goods/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_edit']);
-    Route::post('/goods_edit_update', [App\Http\Controllers\MOwnerController::class, 'goods_edit_update']);    
+    Route::post('/goods_edit_update', [App\Http\Controllers\MOwnerController::class, 'goods_edit_update']);
+    Route::post('goods_edit_delete', [App\Http\Controllers\MOwnerController::class, 'goods_edit_delete']);    
     Route::get('/goods_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_delete']);
     Route::post('/action_goods_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_delete']);
     Route::post('/action_goods_display_delete', [App\Http\Controllers\MOwnerController::class, 'action_goods_display_delete']);

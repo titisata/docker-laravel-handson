@@ -20,6 +20,7 @@ class ExperienceFolder extends Model
         'price_adult',
         'price_child',
         'address',
+        'phone',
         'description',
         'detail',
         'caution',

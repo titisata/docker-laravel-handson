@@ -59,5 +59,10 @@
             <button type="submit" class="btn btn-primary">追加</button>
         </div>                     
     </form>
+    <form action="/mypage/owner/food_delete" method="POST">
+        @csrf 
+        <button type="submit" class="btn btn-lg btn-danger mx-2 mb-0"  name="delete">削除</button>
+        <input type="hidden" name="id" value="{{ $foods->id }}">
+    </form>
 
 @endsection

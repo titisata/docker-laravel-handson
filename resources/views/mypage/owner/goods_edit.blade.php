@@ -39,7 +39,10 @@
                     <textarea name="goods_descriptions_` + key + `" type="text" class="form-control"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">ソートナンバー</label>
+                    <div class="d-flex">
+                        <label class="form-label">表示の順番</label>
+                        <p class="mb-1 ms-3">小さい数ほど優先して表示されます。</p>
+                    </div>
                     <input name="goods_sort_nos_` + key + `" type="number" class="form-control" value="">
                 </div>
                 <div class="mb-3">
@@ -47,11 +50,13 @@
                     <input name="goods_quantities_` + key + `" type="number" class="form-control" value="">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">体験の表示・非表示</label>
+                    <label class="form-label">お土産の表示</label>
+                    <div>
                     <input name="goods_statuses_` + key + `" type="radio" checked value="1">
-                    <label>表示</label>
+                    <label class="fw-normal">表示</label>
                     <input name="goods_statuses_` + key + `" type="radio" value="0">
-                    <label>非表示</label>
+                    <label class="fw-normal">非表示</label>
+                    </div>
                 </div>
                 <button type="button" class="mt-2 btn btn-danger" onclick="remove_goods(${key})">削除</button>
             </div>
@@ -67,6 +72,22 @@
         elements.remove();
     }
 
+    function delete_btn(key) {
+        var delete_num = 'delete_btn_' + key;
+
+        var set = document.getElementById(delete_num).value;
+        console.log(set);
+        
+        document.getElementById('delete_path').value = set;
+
+        console.log(document.getElementById('delete_path').value);
+
+        // delete_path.remove();
+        
+        //submit()でフォームの内容を送信
+        document.deleteform.submit();
+    }
+
 </script>
 <div class="container">
     <h1>お土産編集</h1>
@@ -75,6 +96,11 @@
     @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <form name="deleteform" action="/mypage/owner/goods_edit_delete" method="POST" onsubmit='return check();'>
+                @csrf     
+                <input type="hidden" name="delete_id" id="delete_path" value="">
+                <input type="hidden" name="id" value="{{ $goods_folder->id }}">
+            </form>
             <form action="/mypage/owner/goods_edit_update" method="POST">
                 @csrf
                 <input name="id" type="hidden" class="form-control" value="{{ $goods_folder->id }}">
@@ -96,64 +122,74 @@
                             @enderror
                             <input name="price" type="number" class="form-control" value="{{ $goods_folder->price }}">
                         </div>
+                        
                         <div class="mb-3">
                             <label class="form-label">コメント</label>
                             @error('description')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <textarea name="description" type="text" class="form-control">{{ $goods_folder->description }}</textarea>
+                            <textarea name="description" type="text" class="form-control" rows="5">{{ $goods_folder->description }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">注意事項</label>
                             @error('caution')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <textarea name="caution" type="text" class="form-control">{{ $goods_folder->caution }}</textarea>
+                            <textarea name="caution" type="text" class="form-control" rows="5">{{ $goods_folder->caution }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">詳細情報</label>
                             @error('detail')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <textarea name="detail" type="text" class="form-control">{{ $goods_folder->detail }}</textarea>
+                            <textarea name="detail" type="text" class="form-control" rows="5">{{ $goods_folder->detail }}</textarea>
                         </div>
                         <div class="mb-3">
                         <label class="form-label">カテゴリ</label>
-                        <select name="category1" class="form-select mt-2" style="width:216px">
-                            @foreach ($categories as $category)
-                                <option @if ($goods_folder->category == $category->name) selected @endif value="{{ $category->name }}">
-                                    {{ $category->name }}
-                                </option>
-                            @endforeach
+                            <select name="category1" class="form-select mt-2" style="width:216px">
+                                @foreach ($categories as $category)
+                                    <option @if ($goods_folder->category == $category->name) selected @endif value="{{ $category->name }}">
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
 
-                        </select>
+                            </select>
+                        </div>
                         <div class="mb-3">
-                            <label class="form-label">お土産の表示・非表示</label>
+                            <label class="form-label">お土産の表示</label>
                             @if( $goods_folder->status  == 1 )
-                                <input name="status" type="radio" class="" checked value="1">
-                                <label>表示</label>
-                                <input name="status" type="radio" class="" value="0">
-                                <label>非表示</label>
+                                <div>
+                                    <input name="status" type="radio" class="" checked value="1">
+                                    <label class="fw-normal">表示</label>
+                                    <input name="status" type="radio" class="" value="0">
+                                    <label class="fw-normal">非表示</label>
+                                </div>
                             @else
-                                <input name="status" type="radio" class="" value="1">
-                                <label>表示</label>
-                                <input name="status" type="radio" class="" checked value="0">
-                                <label>非表示</label>
+                                <div>
+                                    <input name="status" type="radio" class="" value="1">
+                                    <label class="fw-normal">表示</label>
+                                    <input name="status" type="radio" class="" checked value="0">
+                                    <label class="fw-normal">非表示</label>
+                                </div>
                             @endif
                             
                         </div>
                         <div class="mb-3">
                             <label class="form-label">おすすめフラグ</label>
                             @if( $goods_folder->recommend_flag  == 1)
-                                <input name="recommend_flag" type="radio" class="" checked value="1">
-                                <label>おすすめする</label>
-                                <input name="recommend_flag" type="radio" class="" value="0">
-                                <label>おすすめしない</label>
+                                <div>
+                                    <input name="recommend_flag" type="radio" class="" checked value="1">
+                                    <label class="fw-normal">おすすめする</label>
+                                    <input name="recommend_flag" type="radio" class="" value="0">
+                                    <label class="fw-normal">おすすめしない</label>
+                                </div>
                             @else
-                                <input name="recommend_flag" type="radio" class="" value="1">
-                                <label>おすすめする</label>
-                                <input name="recommend_flag" type="radio" class="" checked value="0">
-                                <label>おすすめしない</label>
+                                <div>
+                                    <input name="recommend_flag" type="radio" class="" value="1">
+                                    <label class="fw-normal">おすすめする</label>
+                                    <input name="recommend_flag" type="radio" class="" checked value="0">
+                                    <label class="fw-normal">おすすめしない</label>
+                                </div>                             
                             @endif
                         </div>
                         <div class="mt-3">
@@ -161,7 +197,7 @@
                                 <label>画像設定</label>
                                 <a href="/mypage/owner/goods_image_insert/{{ $goods_folder->id }}">
                                     <div class="btn btn-success">
-                                        新規登録     
+                                        画像登録     
                                     </div>
                                 </a>
                             </div>
@@ -171,10 +207,10 @@
                                 <img style="object-fit: cover; height: 160px; width: 160px;" src="{{ $image->image_path ?? '/images/empty.png'}}" alt="Card image cap"> 
                                 <div class="d-flex">
                                     <a href="/mypage/owner/goods_image_update/{{ $image->id }}">
-                                        <div class="btn btn-primary">編集</div>
+                                        <div class="btn btn-primary">画像更新</div>
                                     </a>    
                                     <a href="/mypage/owner/goods_image_delete/{{ $image->id }}">
-                                        <div class="btn btn-danger">削除</div>
+                                        <div class="btn btn-danger">画像削除</div>
                                     </a>                             
                                 </div>                         
                                 
@@ -200,10 +236,13 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">コメント</label>
-                                    <textarea name="goods_descriptions_{{$key+1}}" type="text" class="form-control">{{ $one_goods->description }}</textarea>
+                                    <textarea name="goods_descriptions_{{$key+1}}" type="text" class="form-control" rows="5">{{ $one_goods->description }}</textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">ソートナンバー</label>
+                                    <div class="d-flex">
+                                        <label class="form-label">表示の順番</label>
+                                        <p class="mb-1 ms-3">小さい数ほど優先して表示されます。</p>
+                                    </div>
                                     <input name="goods_sort_nos_{{$key+1}}" type="number" class="form-control" value="{{ $one_goods->sort_no}}">
                                 </div>
                                 <div class="mb-3">
@@ -213,32 +252,46 @@
                                 <div class="mb-3">
                                     <label class="form-label">体験の表示・非表示</label>
                                     @if( $one_goods->status == 1 )
-                                        <input name="goods_statuses_{{$key+1}}" type="radio" checked value="1">
-                                        <label>表示</label>
-                                        <input name="goods_statuses_{{$key+1}}" type="radio" value="0">
-                                        <label>非表示</label>
+                                        <div>
+                                            <input name="goods_statuses_{{$key+1}}" type="radio" checked value="1">
+                                            <label class="fw-normal">表示</label>
+                                            <input name="goods_statuses_{{$key+1}}" type="radio" value="0">
+                                            <label class="fw-normal">非表示</label>
+                                        </div>
                                     @else
-                                        <input name="goods_statuses_{{$key+1}}" type="radio" value="1">
-                                        <label>表示</label>
-                                        <input name="goods_statuses_{{$key+1}}" type="radio" checked value="0">
-                                        <label>非表示</label>
+                                        <div>
+                                            <input name="goods_statuses_{{$key+1}}" type="radio" value="1">
+                                            <label class="fw-normal">表示</label>
+                                            <input name="goods_statuses_{{$key+1}}" type="radio" checked value="0">
+                                            <label class="fw-normal">非表示</label>
+                                        </div>
                                     @endif
                                     
                                 </div>
-                                <a href="/mypage/owner/goods_delete/{{ $one_goods->id }}">
-                                    <button type="button" class="mt-2 btn btn-danger" onclick="remove_ex({{ $loop->index }})">削除</button>
-                                </a>
+                                <button type="button" class="mt-2 btn btn-danger" id="delete_btn_{{ $key+1 }}" value="{{ $one_goods->id }}" onclick="delete_btn({{$key+1}})">削除</button>
                             </div>
                         @endforeach
                         <div id="add_target"></div>
                         <input type="hidden" id="key" name="key" value="{{$key+1}}">
-                        <button type="button" class="mt-2 btn btn-primary" onclick="add_ex({{ $goods_folder->goods->count() }})" >追加</button>
+                        <button type="button" class="mt-2 btn btn-primary" onclick="add_ex({{ $goods_folder->goods->count() }})" >商品種別追加</button>
                     </div>
                 </div>
-                <button type="submit" class="mt-2 btn btn-primary">更新</button>
+                </div>
+                
+                <div>
+                    <button type="submit" class="mt-4 btn btn-lg btn-primary">お土産情報更新</button>
+                </div>
+                
             </form>
+            <div class="my-4">
+                <form action="/mypage/owner/action_goods_display_delete" method="POST">
+                    @csrf
+                    <button class="btn btn-lg btn-danger">お土産情報削除</button>
+                    <input type="hidden" name="id" value="{{ $goods_folder->id }}">
+                </form>
+
+            </div>
         </div>
-    </div>
 </div>
 
 @endsection

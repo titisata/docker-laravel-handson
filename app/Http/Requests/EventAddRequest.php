@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EventEditRequest extends FormRequest
+class EventAddRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,6 +34,11 @@ class EventEditRequest extends FormRequest
             'caution'=>'required',
             'hotel_result'=>'numeric|min:1',
             'food_result'=>'numeric|min:1',
+            'ex_name'=>'required',
+            'ex_price_adult'=>'required',
+            'ex_price_child'=>'required',
+            'ex_sort_no'=>'required',
+            'ex_quantity'=>'required',
             
         ];
         
@@ -54,6 +59,11 @@ class EventEditRequest extends FormRequest
             'caution.required' => '注意事項を入力して下さい',
             'hotel_result.numeric|min:1' => 'ホテルグループを一つ以上選択して下さい',
             'food_result.numeric|min:1' => 'フードグループを一つ以上選択して下さい',
+            'ex_name.required' => '体験名を入力してください。',
+            'ex_price_adult.required' => '大人料金を入力して下さい',
+            'ex_price_child.required' => '子供料金を入力して下さい',
+            'ex_sort_no.required' => 'ソートナンバーを入力して下さい',
+            'ex_quantity.required' => '体験可能人数を入力して下さい',
 
         ];
         

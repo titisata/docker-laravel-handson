@@ -27,7 +27,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\SiteRequest;
 use App\Http\Requests\EventEditRequest;
+use App\Http\Requests\EventAddRequest;
 use App\Http\Requests\GoodsEditRequest;
+use App\Http\Requests\GoodsAddRequest;
 use App\Http\Requests\LinkEditRequest;
 use App\Http\Requests\HotelEditRequest;
 use App\Http\Requests\HotelGroupEditRequest;
@@ -66,11 +68,17 @@ class MOwnerController extends Controller
         $user = Auth::user();
         $experiences_folder = ExperienceFolder::find($id);
         $categories = ExperienceCategory::all();
-        return view('mypage.owner.event_add', compact('user', 'experiences_folder', 'categories'));
+
+        $hotel_groups = HotelGroup::all();
+        
+        $food_groups = FoodGroup::all();
+
+        return view('mypage.owner.event_add', compact('user', 'experiences_folder', 'categories', 'hotel_groups', 'food_groups'));
     }
 
-    public function action_event_add(Request $request)
+    public function action_event_add(EventAddRequest $request)
     {
+
         $user_id = $request->user_id;
         $name = $request->name;
         $price_adult = $request->price_adult;
@@ -85,11 +93,20 @@ class MOwnerController extends Controller
         $is_before_lodging = $request->is_before_lodging;
         $recommend_flag = $request->recommend_flag;
         $status = $request->status;
-        $ex_names = $request->ex_names;
-        $ex_price_adults = $request->ex_price_adults;
-        $ex_price_childs = $request->ex_price_childs;  
+        $table_name = $request->table_name;
+        $hotel_groups = $request->hotel_group;
+        $food_groups = $request->food_group;
+        $ex_name = $request->ex_name;
+        $ex_price_adult = $request->ex_price_adult;
+        $ex_price_child = $request->ex_price_child;
+        $ex_sort_no = $request->ex_sort_no;
+        $ex_quantity = $request->ex_quantity;
+        $ex_status = $request->ex_status;  
+        $key_count = $request->key_count;
+
         
-        ExperienceFolder::create([
+        
+        $data = ExperienceFolder::create([
             'user_id' => $user_id,
             'name' => $name,
             'price_adult' => $price_adult,
@@ -104,7 +121,85 @@ class MOwnerController extends Controller
             'status' => $status,
             'recommend_flag' => $recommend_flag,
             'category1' => $category,
-        ]);     
+        ]);   
+
+        if( $request->file('image_path') != ''){
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_name' => $table_name,
+            'table_id' => $data->id,
+            'image_path' => '/storage/' . $path,
+        ]);
+    }
+
+        if($is_lodging == 1){
+            for ($i=0; $i < count($hotel_groups); $i++) {
+
+                $hotel_group = $hotel_groups[$i];
+                
+                //選択されたものをインサート
+    
+                HotelGroupSelect::create([
+                    'experience_folder_id' => $data->id,
+                    'hotel_group_id' => $hotel_group,
+                ]);
+    
+            }
+        }
+
+        if( $is_lodging == 1){
+            for ($i=0; $i < count($food_groups); $i++) {
+
+                $food_group = $food_groups[$i];
+                
+                //選択されたものをインサート
+
+                    FoodGroupSelect::create([
+                        'experience_folder_id' => $data->id,
+                        'food_group_id' => $food_group,
+                    ]);
+
+            }
+        }
+
+        Experience::create([
+            'experience_folder_id' => $data->id,
+            'name' => $ex_name,
+            'price_adult' => $ex_price_adult,
+            'price_child' => $ex_price_child,
+            'sort_no' => $ex_sort_no,
+            'quantity' => $ex_quantity,
+            'status' => $ex_status,
+        ]);
+
+        for ($i=1; $i < $key_count + 1; $i++) {
+            $ex_names = $request['ex_names_'.$i];
+            $ex_ids = $request['ex_ids_'.$i];
+            $ex_sort_nos = $request['ex_sort_nos_'.$i];
+            $ex_quantities = $request['ex_quantities_'.$i];
+            $ex_price_adults = $request['ex_price_adults_'.$i];
+            $ex_price_childs = $request['ex_price_childs_'.$i];
+            $ex_statuses = $request['ex_statuses_'.$i];
+            $name = $ex_names;
+            $price_adult = $ex_price_adults;
+            $price_child = $ex_price_childs;
+            $sort_no = $ex_sort_nos;
+            $quantity = $ex_quantities;
+            $status = $ex_statuses;
+
+            Experience::create([
+                'experience_folder_id' => $data->id,
+                'name' => $name,
+                'price_adult' => $price_adult,
+                'price_child' => $price_child,
+                'sort_no' => $sort_no,
+                'quantity' => $quantity,
+                'status' => $status,
+            ]);
+   
+        }
 
         $return_view = $this->event();
         return $return_view;
@@ -241,6 +336,7 @@ class MOwnerController extends Controller
                 ]);
 
             }else{
+
                 Experience::where('id', $ex_id)->update([
                     'experience_folder_id' => $id,
                     'name' => $ex_name,
@@ -259,11 +355,29 @@ class MOwnerController extends Controller
         
     }
 
+    public function event_edit_delete(Request $request){
+
+        $id = $request->id;
+        $delete_id = $request->delete_id;
+
+        $experience_delete = Experience::where('id', $delete_id)->delete();
+
+        $return_view = $this->event_edit($id);
+        return $return_view;
+        
+    }
+
     public function action_event_delete(Request $request)
     {
         //idをもとにexperiencecategory.tableから削除
 
         $id = $request->id;
+
+        $hotel_delete = HotelGroupSelect::where('experience_folder_id', $id)->delete();
+
+        $food_delete = FoodGroupSelect::where('experience_folder_id', $id)->delete();
+
+        $experience_delete = Experience::where('experience_folder_id', $id)->delete();
 
         $experience_folder = ExperienceFolder::where('id', $id)->delete();
 
@@ -272,24 +386,24 @@ class MOwnerController extends Controller
 
     }
 
-    public function experience_delete(string $id)
-    {
-        //experience_deleteページへ
-        $experience = Experience::where('id', $id)->first();
-        return view('mypage.owner.experience_delete', compact('experience'));
-    }
+    // public function experience_delete(string $id)
+    // {
+    //     //experience_deleteページへ
+    //     $experience = Experience::where('id', $id)->first();
+    //     return view('mypage.owner.experience_delete', compact('experience'));
+    // }
 
-    public function action_experience_delete(Request $request)
-    {
-        $id = $request->ex_ids;
-        $experience_folder_id = $request->ex_folder_ids;
+    // public function action_experience_delete(Request $request)
+    // {
+    //     $id = $request->ex_ids;
+    //     $experience_folder_id = $request->ex_folder_ids;
 
-        //idをもとにexperience.tableから削除
-        $experience = Experience::where('id', $id)->delete();
+    //     //idをもとにexperience.tableから削除
+    //     $experience = Experience::where('id', $id)->delete();
 
-        $return_view = $this->event_edit($experience_folder_id);
-        return $return_view;
-    }
+    //     $return_view = $this->event_edit($experience_folder_id);
+    //     return $return_view;
+    // }
 
     public function goods()
     {
@@ -308,7 +422,7 @@ class MOwnerController extends Controller
         return view('mypage.owner.goods_add', compact('user', 'goods_folder', 'categories'));
     }
 
-    public function action_goods_add(Request $request)
+    public function action_goods_add(GoodsAddRequest $request)
     {
         $user_id = $request->user_id;
         $name = $request->name;
@@ -318,8 +432,16 @@ class MOwnerController extends Controller
         $caution = $request->caution;
         $category = $request->category;
         $recommend_flag = $request->recommend_flag;
+        $goods_name = $request->goods_name;
+        $goods_price = $request->goods_price;
+        $goods_description = $request->goods_description;
+        $goods_sort_no = $request->goods_sort_no;
+        $goods_quantity = $request->goods_quantity;
+        $goods_status = $request->goods_status;
+        $table_name = $request->table_name;
+        $key_count = $request->key_count;
 
-        GoodsFolder::create([
+        $data = GoodsFolder::create([
             'user_id' => $user_id,
             'name' => $name,
             'price' => $price,
@@ -329,6 +451,56 @@ class MOwnerController extends Controller
             'recommend_flag' => $recommend_flag,
             'category1' => $category,
         ]);     
+
+        Goods::create([
+            'goods_folder_id' => $data->id,
+            'name' => $goods_name,
+            'price' => $goods_price,
+            'description' => $goods_description,
+            'sort_no' => $goods_sort_no,
+            'quantity' => $goods_quantity,
+            'status' => $goods_status,
+        ]);
+
+
+        if( $request->file('image_path') != ''){
+            $img = $request->file('image_path');
+            $path = $img->store('images','public');
+
+            Image::create([
+                'table_name' => $table_name,
+                'table_id' => $data->id,
+                'image_path' => '/storage/' . $path,
+            ]);
+
+        }
+        
+
+        for ($i=1; $i < $key_count + 1; $i++) {
+            $goods_names = $request['goods_names_'.$i];
+            $goods_pricies = $request['goods_pricies_'.$i];
+            $goods_descriptions = $request['goods_descriptions_'.$i];
+            $goods_sort_nos = $request['goods_sort_nos_'.$i];
+            $goods_quantities = $request['goods_quantities_'.$i];
+            $goods_statuses = $request['goods_statuses_'.$i];
+            $name = $goods_names;
+            $price = $goods_pricies;
+            $description = $goods_descriptions;
+            $sort_no = $goods_sort_nos;
+            $quantity = $goods_quantities;
+            $status = $goods_statuses;
+
+            Goods::create([
+                'goods_folder_id' => $data->id,
+                'name' => $name,
+                'price' => $price,
+                'description' => $description,
+                'sort_no' => $sort_no,
+                'quantity' => $quantity,
+                'status' => $status,
+            ]);
+   
+        }
 
         $return_view = $this->goods();
         return $return_view;
@@ -414,32 +586,46 @@ class MOwnerController extends Controller
         return $return_view;
     }
 
+    public function goods_edit_delete(Request $request){
 
-    public function goods_delete(string $id)
-    {
-        //goods_deleteページへ
-        $goods = Goods::where('id', $id)->first();
-        return view('mypage.owner.goods_delete', compact('goods'));
-    }
+        $id = $request->id;
+        $delete_id = $request->delete_id;
 
-    public function action_goods_delete(Request $request)
-    {
-        $id = $request->goods_ids;
-        $goods_folder_id = $request->goods_folder_ids;
+        $goods_delete = Goods::where('id', $delete_id)->delete();
 
-        //idをもとにgoods.tableから削除
-        $goods = Goods::where('id', $id)->delete();
-
-        $return_view = $this->goods_edit($goods_folder_id);
+        $return_view = $this->goods_edit($id);
         return $return_view;
-
+        
     }
+
+
+    // public function goods_delete(string $id)
+    // {
+    //     //goods_deleteページへ
+    //     $goods = Goods::where('id', $id)->first();
+    //     return view('mypage.owner.goods_delete', compact('goods'));
+    // }
+
+    // public function action_goods_delete(Request $request)
+    // {
+    //     $id = $request->goods_ids;
+    //     $goods_folder_id = $request->goods_folder_ids;
+
+    //     //idをもとにgoods.tableから削除
+    //     $goods = Goods::where('id', $id)->delete();
+
+    //     $return_view = $this->goods_edit($goods_folder_id);
+    //     return $return_view;
+
+    // }
 
     public function action_goods_display_delete(Request $request)
     {
         //idをもとにgoodsfolders.tableから削除
 
         $id = $request->id;
+
+        $goods = Goods::where('goods_folder_id', $id)->delete();
 
         $goods_folder = GoodsFolder::where('id', $id)->delete();
 
@@ -509,7 +695,22 @@ class MOwnerController extends Controller
         $table_id = $request->table_id;
         $experiences_folder = ExperienceFolder::find($table_id);
         $categories = ExperienceCategory::all();
-        return view('mypage.owner.event_edit', compact('experiences_folder', 'categories'));
+
+        $hotel_groups = HotelGroup::all();
+        $hotel_select_ids = HotelGroupSelect::where('experience_folder_id', $experiences_folder->id)->get();
+        $checked_hotels_group = array();
+        foreach($hotel_select_ids as $hotel_select_id){
+            $checked_hotels_group[] = $hotel_select_id->hotel_group_id;
+        }
+        
+        $food_groups = FoodGroup::all();
+        $food_select_ids = FoodGroupSelect::where('experience_folder_id',$experiences_folder->id)->get();
+        $checked_foods_group = array();
+        foreach($food_select_ids as $food_select_id){
+            $checked_foods_group[] = $food_select_id->food_group_id;
+        }
+        return view('mypage.owner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group'));
+        // return view('mypage.owner.event_edit', compact('experiences_folder', 'categories'));
     }
 
 
@@ -693,9 +894,12 @@ class MOwnerController extends Controller
     {
         $user = Auth::user();
         $experiencereserve = ExperienceReserve::find($id);
-        $hotel_group_id = $experiencereserve->hotel_group_id;
-        //$hotels = Hotel::where('hotel_group_id', 1)->get();
-        $hotels = Hotel::Join('hotel_selects', 'hotels.id', '=', 'hotel_selects.hotel_id')->select('hotels.*')->where('hotel_selects.hotel_group_id', 1)->get();
+        if( isset($experiencereserve->hotel_group_id)){
+            $hotel_group_id = $experiencereserve->hotel_group_id;
+            $hotels = Hotel::Join('hotel_selects', 'hotels.id', '=', 'hotel_selects.hotel_id')->select('hotels.*')->where('hotel_selects.hotel_group_id', 1)->get();
+        }else{
+            $hotels = Hotel::Join('hotel_selects', 'hotels.id', '=', 'hotel_selects.hotel_id')->select('hotels.*')->get();
+        }
         return view('mypage.owner.reserve_edit', compact('user', 'experiencereserve','hotels'));
     }
 

@@ -76,11 +76,11 @@
                         </div>
 
                        
-                        <button type="submit" class="btn btn-primary">更新</button>
+                        <button type="submit" class="btn btn-lg btn-primary">更新</button>
                     </form>
                     <form class="mt-2" action="/mypage/owner/action_food_group_delete" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-danger">削除</button>
+                        <button type="submit" class="btn btn-lg btn-danger">削除</button>
                         <input type="hidden" name="id" value="{{ $food_group->id }}">
                     </form>
             

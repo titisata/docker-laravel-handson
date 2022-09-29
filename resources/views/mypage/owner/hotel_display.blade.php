@@ -3,64 +3,57 @@
 @section('menu', 'category')
 @section('content')
 
-<div class="container">
-    <h1>ホテル一覧</h1>
+<div class="container">     
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card mt-3">
-            <div class="card-header d-flex">
-                <p>ホテル編集</p>
-                <a href="/mypage/owner/hotel_insert" > 
-                    <div class="d-flex">
-                        <button type="submit" class="btn btn-sm btn-primary mx-2" name="update">追加</button>
-                    </div>
-                </a>
-            </div>
-
+        <div class="col-md-9">
+        <div class="d-flex">
+            <h1>ホテル一覧</h1>
+            <a class="ms-3" href="/mypage/owner/hotel_insert" > 
+                <button class="btn btn-lg btn-success">新規作成</button>
+            </a>
+        </div> 
             <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">ホテル名</th>
-                    <th scope="col">ホテル情報</th>
-                    <th scope="col">住所</th>
-                    <th scope="col">メールアドレス</th>
-                    <th scope="col">削除ボタン</th>
-                </tr>
-            </thead>
-            @forelse($hotels as $hotel)
-                <tr class="align-items-center">
-                    <th scope="row">{{$hotel->id }}</th>
-                    <td>
-                        <a href="/mypage/owner/hotel_edit/{{ $hotel->id }}">
-                            {{ $hotel->name }}
-                        </a>  
-                    </td>
-                    <td>
-                    
-                    <p class="card-text fw-bold text-nowrap ">{{ $hotel->description }}</p>
-                    </td>
-                    <td>
-                    <p class="card-text fw-bold text-nowrap ">{{ $hotel->address }}</p>
-                    </td>  
-                    <td>
-                    <p class="card-text fw-bold text-nowrap ">{{ $hotel->mail }}</p>
-                    </td>
-                    <td>
-                        <form action="/mypage/owner/hotel_delete" method="POST">
-                            @csrf 
-                            <button type="submit" class="btn btn-sm btn-danger mx-2 mb-0"  name="delete">削除</button>
-                            <input type="hidden" name="id" value="{{ $hotel->id }}">
-                        </form>
-                    </td>
-                </tr>   
-            @empty
-                <p>登録ホテルはありません</p>
-            @endforelse
-        </table>
-            </div>
-            
-        </div>
+                <thead>
+                    <tr>
+                        <th scope="col">ホテル名</th>
+                        <th scope="col">ホテル情報</th>
+                        <th scope="col">住所</th>
+                        <th scope="col">メールアドレス</th>
+                        
+                    </tr>
+                </thead>
+                @forelse($hotels as $hotel)
+                    <tr class="align-items-center">
+                        <td>
+                            <div class="my-2">
+                                <a class="link" href="/mypage/owner/hotel_edit/{{ $hotel->id }}">
+                                    {{ $hotel->name }}
+                                </a> 
+                            </div>         
+                        </td>
+                        <td>     
+                        <div class="my-2">  
+                            <p class="card-text text-nowrap ">{{ $hotel->description }}</p>
+                        </div>    
+                        </td>
+                        <td>
+                            <div class="my-2">
+                            <p class="card-text text-nowrap ">{{ $hotel->address }}</p>
+                            </div>
+                           
+                        </td>  
+                        <td>
+                            <div class="my-2">
+                            <p class="card-text text-nowrap ">{{ $hotel->mail }}</p>
+                            </div>
+                            
+                        </td>
+                    </tr>   
+                @empty
+                    <p>登録ホテルはありません</p>
+                @endforelse
+            </table>
+        </div>   
     </div>
 </div>
 

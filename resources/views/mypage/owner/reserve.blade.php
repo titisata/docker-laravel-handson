@@ -25,19 +25,19 @@
                     </a> -->
                 </div>
                     @forelse ($partner->experiences as $experiences_folder)
-                        <div class="card mt-3">
-                            <a href="/mypage/owner/reserve_select/{{$experiences_folder->id}}">
-                                <div class="d-flex align-items-center">
+                        <div class="mt-3 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <a href="/mypage/owner/reserve_select/{{$experiences_folder->id}}">
+                                    <button class="btn btn-sm btn-success">予約確認</button>
+                                </a>
                                     
-                                    @if($experiences_folder->is_lodging == 0)
-                                    <p class="text-success mb-0">宿泊なし</p>
-                                    @else
-                                    <p class="text-primary mb-0">宿泊あり</p>
-                                    @endif
-                                    
-                                    <p class="ms-3 mb-0">{{ $experiences_folder->name }}への予約</p>
-                                </div>
-                            </a>   
+                                <p class="ms-3 mb-0">{{ $experiences_folder->name }}への予約</p>
+                                @if($experiences_folder->is_lodging == 0)
+                                <p class="text-success mb-0 ms-3">宿泊なし</p>
+                                @else
+                                <p class="text-primary mb-0 ms-3">宿泊あり</p>
+                                @endif
+                            </div>    
                         </div>
                         
                     @empty
@@ -50,15 +50,21 @@
     @endforelse
 </div>
         <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <div class="d-flex flex-column">
-            @forelse ($dates as $date)
-            <a href="/mypage/owner/reserve_select_date/{{$date}}">
-                20{{$date}}月の予約
-            </a>
-            @empty
-                <p>体験がありません</p>
-            @endforelse
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-11 card mt-3">
+                <div class="card-header d-flex align-items-center">
+                    <div class="d-flex flex-column">
+                        @forelse ($dates as $date)
+                        <a href="/mypage/owner/reserve_select_date/{{$date}}">
+                            20{{$date}}月の予約
+                        </a>
+                        @empty
+                            <p>体験がありません</p>
+                        @endforelse
+                    </div>
+</div>  
+</div>
+</div>  
         </div>
 
 

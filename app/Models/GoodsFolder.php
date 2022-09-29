@@ -16,6 +16,7 @@ class GoodsFolder extends Model
         'description',
         'caution',
         'detail',
+        'phone',
         'category1',
         'category2',
         'category3',
