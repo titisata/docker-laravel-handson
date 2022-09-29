@@ -2,6 +2,66 @@
 
 @section('menu', 'partner_event')
 @section('content')
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+<script>
+    window.onload = function(){
+        // 日本語化
+        $.datepicker.regional['ja'] = {
+        closeText: '閉じる',
+        prevText: '<前',
+        nextText: '次>',
+        currentText: '今日',
+        monthNames: ['1月','2月','3月','4月','5月','6月',
+        '7月','8月','9月','10月','11月','12月'],
+        monthNamesShort: ['1月','2月','3月','4月','5月','6月',
+        '7月','8月','9月','10月','11月','12月'],
+        dayNames: ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'],
+        dayNamesShort: ['日','月','火','水','木','金','土'],
+        dayNamesMin: ['日','月','火','水','木','金','土'],
+        weekHeader: '週',
+        dateFormat: 'yy/mm/dd',
+        firstDay: 0,
+        isRTL: false,
+        showMonthAfterYear: true,
+        minViewMode: 2,
+        yearSuffix: '年'};
+        $.datepicker.setDefaults($.datepicker.regional['ja']);
+    }
+
+    $(function() {
+        $('#select_date').datepicker();
+    });
+
+    function add_date(){
+        var cnt = document.getElementById('schedule_counter').value;
+        var val = document.getElementById('select_date').value;
+        if(val == ""){
+            alert('日付を選択してください');
+            return;
+        }
+
+        cnt = Number(cnt) + 1;
+        var div_element = document.createElement('div');
+        div_element.id = 'div_schedule_' + cnt;
+        div_element.innerHTML = '<input class="form-control" style="width:200px;" type="text" name="selected_date[]" value="' + val + '" readonly>';
+		div_element.innerHTML+= '<input class="btn btn-primary" style="width:40px;" type="button" value="-" onclick="delete_date(' + cnt + ');">';
+        var parent_object = document.getElementById('div_selected_date');
+		parent_object.appendChild(div_element);
+
+        document.getElementById('schedule_counter').value = cnt;
+        document.getElementById('select_date').value = "";
+    }
+
+    function delete_date(id){
+        var dom_obj = document.getElementById('div_schedule_' + id);
+		var dom_obj_parent = dom_obj.parentNode;
+		dom_obj_parent.removeChild(dom_obj);
+    }
+</script>
 <script>
     $(function(){
         $('textarea')
@@ -424,6 +484,9 @@
                             </select>
         
                         </div>
+
+                        
+
                         <div class="mb-4">
                             <p class="fw-bold mb-1">フードグループ選択</p>
                             <p class="ms-3 mb-0">宿泊体験の場合のフードグループを下記の中から選択してください</p>
@@ -481,6 +544,28 @@
                         </div>
                         </div>
                         
+                        </div>
+                    </div>
+
+                    <div class="card mt-3">
+                        <div class="card-header">休暇設定</div>
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <input class="form-control" style="width:200px;" type='text' id='select_date' name='selecte_date' value=''>
+                                <input class="btn btn-primary" style="width:40px;" type="button" value="+" onclick="add_date();">
+                            </div>
+                            <?php $schedule_count=0; ?>
+                            <div id="div_selected_date"> 
+                                @forelse($schedules as $schedule)
+                                    <?php $schedule_count++; ?>
+                                    <div id="div_schedule_<?php echo $schedule_count; ?>" class="d-flex mt-1">
+                                        <input class="form-control" style="width:200px;" type="text" name="selected_date[]" value="{{ $schedule->date->format('Y/m/d') }}" readonly>
+                                        <input class="btn btn-primary" style="width:40px;" type="button" value="-" onclick="delete_date(<?php echo $schedule_count; ?>);">
+                                    </div>
+                                @empty
+                                @endforelse
+                                <input type="hidden" id="schedule_counter" value="<?php echo $schedule_count; ?>">
+                            </div>
                         </div>
                     </div>
                 

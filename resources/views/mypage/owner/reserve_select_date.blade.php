@@ -2,7 +2,7 @@
 
 @section('menu', 'owner_reserve')
 @section('content')
-
+<div class="container">
     <h1>予約一覧</h1>
 
 <div>  
@@ -15,7 +15,7 @@
             <th scope="col">宿泊</th>
             <th scope="col">食事</th>
             <th scope="col">連絡事項</th>
-            <th scope="col">ステータス</th>
+            <th scope="col">ホテル選定</th>
             <th scope="col">選定ホテル</th>
         </tr>
     </thead>
@@ -23,13 +23,13 @@
          
         <tr>
             <td>
-                <a href="/mypage/owner/reserve_edit/{{ $reserve->id }}">
+                <a class="link" href="/mypage/owner/reserve_edit/{{ $reserve->id }}">
                     <p>{{ $reserve->start_date }}</p>
                 </a>
-                
             </td>
             <td>
-                <p>{{ $reserve->name }}</p>
+                <p>{{ App\Models\ExperienceFolder::where('id', $reserve->experience->experience_folder_id)->first()->name }}</p>
+                <p>{{ $reserve->experience->name }}</p>
             </td>
             <td>
                 <p>
@@ -66,13 +66,11 @@
             </td>
             
         </tr>
-            
-            
-        
         
     @empty
         
     @endforelse
     </table>
+</div>
 </div>
 @endsection

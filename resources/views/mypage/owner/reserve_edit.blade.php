@@ -15,7 +15,8 @@
                        
                         <div class="mb-3">
                             <label class="form-label">大人</label>
-                            <input name="quantity_adult" type="text" class="form-control" value="{{ $experiencereserve->quantity_adult }}">
+                            <!-- <input name="quantity_adult" type="text" class="form-control" value="{{ $experiencereserve->quantity_adult }}"> -->
+                            <p>{{ $experiencereserve->quantity_adult }}</p>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">子供</label>
@@ -32,6 +33,10 @@
                         <div class="mb-3">
                             <label class="form-label">連絡事項</label>
                             <input name="comment" type="text" class="form-control" value="{{ $experiencereserve->comment }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">予約日</label>
+                            <input name="status" type="text" class="form-control" value="{{ $experiencereserve->start_date }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ステータス</label>

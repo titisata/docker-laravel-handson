@@ -26,21 +26,28 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">開店状況</label>
-                            <input name="open_flag" type="radio" class="" checked value="{{ $site_master->open_flag }}">
-                            <label>オープン</label>
-                            <input name="open_flag" type="radio" class="" value="{{ $site_master->open_flag }}">
-                            <label>閉館</label>
-                            <input name="open_flag" type="radio" class="" value="{{ $site_master->open_flag }}">
-                            <label>準備中</label>
+                            <div>
+                                <input name="open_flag" type="radio" checked value="{{ $site_master->open_flag }}">
+                                <label class="fw-normal">オープン</label>
+                                <input name="open_flag" type="radio" value="{{ $site_master->open_flag }}">
+                                <label class="fw-normal">閉館</label>
+                                <input name="open_flag" type="radio" value="{{ $site_master->open_flag }}">
+                                <label class="fw-normal">準備中</label>
+
+                            </div>
+                            
                         </div>
                         <div class="mb-3">
                             <label class="form-label">機能情報</label>
-                            <input name="service" type="radio" class="" checked  value="{{ $site_master->service }}">
-                            <label>全機能</label>
-                            <input name="service" type="radio" class="" value="{{ $site_master->service }}">
-                            <label>予約機能のみ</label>
-                            <input name="service" type="radio" class="" value="{{ $site_master->service }}">
-                            <label>EC機能のみ</label>
+                            <div>
+                                <input name="service" type="radio" checked  value="{{ $site_master->service }}">
+                                <label class="fw-normal">全機能</label>
+                                <input name="service" type="radio" value="{{ $site_master->service }}">
+                                <label class="fw-normal">予約機能のみ</label>
+                                <input name="service" type="radio" value="{{ $site_master->service }}">
+                                <label class="fw-normal">EC機能のみ</label>
+                            </div>
+                            
                         </div>
                         <div class="mb-3">
                             <label class="form-label">登録可能店舗数</label>

@@ -2,8 +2,12 @@
 
 @section('menu', 'partner_link')
 @section('content')
-    <h1>ようこそ {{ Auth::user()->name }} 様</h1>
-    <h2>必須表示ページの編集ページです</h2>
+<div class="container">
+    <div class="d-flex align-items-center">
+        <h2>必須表示ページの編集</h2>
+        <p class="mb-0 ms-3">リンクの情報を登録することができます</p>
+    </div>
+    
     <div class="card">
         <div class="card-body d-flex flex-column">
             <a href="/mypage/owner/link_edit/1">
@@ -21,8 +25,7 @@
             <a href="/mypage/owner/link_edit/5">
                 ヘルプ・マニュアル
             </a>
-            
-        
         </div>
     </div>
+</div>
 @endsection

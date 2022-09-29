@@ -104,8 +104,6 @@ class MOwnerController extends Controller
         $ex_status = $request->ex_status;  
         $key_count = $request->key_count;
 
-        
-        
         $data = ExperienceFolder::create([
             'user_id' => $user_id,
             'name' => $name,
@@ -134,75 +132,75 @@ class MOwnerController extends Controller
         ]);
     }
 
-        if($is_lodging == 1){
-            for ($i=0; $i < count($hotel_groups); $i++) {
+    if($is_lodging == 1){
+        for ($i=0; $i < count($hotel_groups); $i++) {
 
-                $hotel_group = $hotel_groups[$i];
-                
-                //選択されたものをインサート
-    
-                HotelGroupSelect::create([
+            $hotel_group = $hotel_groups[$i];
+            
+            //選択されたものをインサート
+
+            HotelGroupSelect::create([
+                'experience_folder_id' => $data->id,
+                'hotel_group_id' => $hotel_group,
+            ]);
+
+        }
+    }
+
+    if( $is_lodging == 1){
+        for ($i=0; $i < count($food_groups); $i++) {
+
+            $food_group = $food_groups[$i];
+            
+            //選択されたものをインサート
+
+                FoodGroupSelect::create([
                     'experience_folder_id' => $data->id,
-                    'hotel_group_id' => $hotel_group,
+                    'food_group_id' => $food_group,
                 ]);
-    
-            }
+
         }
+    }
 
-        if( $is_lodging == 1){
-            for ($i=0; $i < count($food_groups); $i++) {
+    Experience::create([
+        'experience_folder_id' => $data->id,
+        'name' => $ex_name,
+        'price_adult' => $ex_price_adult,
+        'price_child' => $ex_price_child,
+        'sort_no' => $ex_sort_no,
+        'quantity' => $ex_quantity,
+        'status' => $ex_status,
+    ]);
 
-                $food_group = $food_groups[$i];
-                
-                //選択されたものをインサート
-
-                    FoodGroupSelect::create([
-                        'experience_folder_id' => $data->id,
-                        'food_group_id' => $food_group,
-                    ]);
-
-            }
-        }
+    for ($i=1; $i < $key_count + 1; $i++) {
+        $ex_names = $request['ex_names_'.$i];
+        $ex_ids = $request['ex_ids_'.$i];
+        $ex_sort_nos = $request['ex_sort_nos_'.$i];
+        $ex_quantities = $request['ex_quantities_'.$i];
+        $ex_price_adults = $request['ex_price_adults_'.$i];
+        $ex_price_childs = $request['ex_price_childs_'.$i];
+        $ex_statuses = $request['ex_statuses_'.$i];
+        $name = $ex_names;
+        $price_adult = $ex_price_adults;
+        $price_child = $ex_price_childs;
+        $sort_no = $ex_sort_nos;
+        $quantity = $ex_quantities;
+        $status = $ex_statuses;
 
         Experience::create([
             'experience_folder_id' => $data->id,
-            'name' => $ex_name,
-            'price_adult' => $ex_price_adult,
-            'price_child' => $ex_price_child,
-            'sort_no' => $ex_sort_no,
-            'quantity' => $ex_quantity,
-            'status' => $ex_status,
+            'name' => $name,
+            'price_adult' => $price_adult,
+            'price_child' => $price_child,
+            'sort_no' => $sort_no,
+            'quantity' => $quantity,
+            'status' => $status,
         ]);
 
-        for ($i=1; $i < $key_count + 1; $i++) {
-            $ex_names = $request['ex_names_'.$i];
-            $ex_ids = $request['ex_ids_'.$i];
-            $ex_sort_nos = $request['ex_sort_nos_'.$i];
-            $ex_quantities = $request['ex_quantities_'.$i];
-            $ex_price_adults = $request['ex_price_adults_'.$i];
-            $ex_price_childs = $request['ex_price_childs_'.$i];
-            $ex_statuses = $request['ex_statuses_'.$i];
-            $name = $ex_names;
-            $price_adult = $ex_price_adults;
-            $price_child = $ex_price_childs;
-            $sort_no = $ex_sort_nos;
-            $quantity = $ex_quantities;
-            $status = $ex_statuses;
+    }
 
-            Experience::create([
-                'experience_folder_id' => $data->id,
-                'name' => $name,
-                'price_adult' => $price_adult,
-                'price_child' => $price_child,
-                'sort_no' => $sort_no,
-                'quantity' => $quantity,
-                'status' => $status,
-            ]);
-   
-        }
-
-        $return_view = $this->event();
-        return $return_view;
+    $return_view = $this->event();
+    return $return_view;
         
     }
 
@@ -845,7 +843,7 @@ class MOwnerController extends Controller
         $experience_folder = ExperienceFolder::where('id', $id)->first();
         $experiences = Experience::where('experience_folder_id', $experience_folder->id)->get();
         
-        return view('mypage.owner.reserve_select', compact('user', 'experiences', 'now'));
+        return view('mypage.owner.reserve_select', compact('user','experience_folder', 'experiences', 'now'));
     }
 
     public function reserve_select_date(string $id)
@@ -870,7 +868,7 @@ class MOwnerController extends Controller
         $experience_folder = ExperienceFolder::where('id', $id)->first();
         $experiences = Experience::where('experience_folder_id', $experience_folder->id)->get();
         
-        return view('mypage.owner.reserve_select_past', compact('user', 'experiences', 'now'));
+        return view('mypage.owner.reserve_select_past', compact('user', 'experience_folder', 'experiences', 'now'));
     }
 
     public function reserve_select_date_past(string $id)
@@ -906,6 +904,13 @@ class MOwnerController extends Controller
     public function action_reserve_edit(Request $request)
     {
         $id = $request->id;
+        $quantity_adult = $request->quantity_adult;
+        $quantity_child = $request->quantity_child;
+        $hotel_group = $request->hotel_group;
+        $food_group = $request->food_group;
+        $comment = $request->comment;
+        $stasus = $request->status;
+
         $hotel_id = $request->hotel_id;
 
         ExperienceReserve::where('id',$id)->update([

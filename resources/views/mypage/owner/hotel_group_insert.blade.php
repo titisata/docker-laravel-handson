@@ -2,13 +2,16 @@
 
 @section('menu', 'owner_reserve_edit')
 @section('content')
+<style>
+   
+</style>
 <div class="container">
-    <h1>ホテルグループ編集</h1>
+    <h1>ホテルグループ新規登録</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             
             <div class="card mt-3">
-                <div class="card-header">ホテルグループ編集</div>
+                <div class="card-header">ホテルグループ新規登録</div>
                 @if(count($errors) > 0)
                     <p class="text-danger">入力に問題があります。再入力してください</p>
                 @endif
@@ -22,7 +25,7 @@
                                 @error('name')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="text" class="form-control" name="name" value="">
+                                <input type="text" class="form form-control" name="name" value="">
                             </label>
                         </div>
                         
@@ -32,7 +35,7 @@
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <textarea type="text" class="form-control" name="description"></textarea>
+                                <textarea type="text" class="form form-control" name="description"></textarea>
                             </label>
                         </div>
                         <div>
@@ -41,7 +44,7 @@
                                 @error('price_adult')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="text" class="form-control" name="price_adult" value="">
+                                <input type="text" class="form form-control" name="price_adult" value="">
                             </label>
 
                         </div>
@@ -51,7 +54,7 @@
                                 @error('price_child')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="text" class="form-control" name="price_child" value="">
+                                <input type="text" class="form form-control" name="price_child" value="">
                             </label>
 
                         </div>

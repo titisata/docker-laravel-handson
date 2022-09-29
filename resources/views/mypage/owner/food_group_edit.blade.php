@@ -9,7 +9,6 @@
     @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
-            
             <div class="card mt-3">
                 <div class="card-header">フードグループ編集</div>
                 <div class="card-body">
@@ -22,7 +21,7 @@
                                 @error('name')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="text" class="form-control" name="name" value="{{ $food_group->name }}">
+                                <input type="text" class="form form-control" name="name" value="{{ $food_group->name }}">
                             </label>
                         </div>
                         
@@ -32,7 +31,7 @@
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <textarea type="text" class="form-control" name="description">{{ $food_group->description }}</textarea>
+                                <textarea type="text" class="form form-control" name="description" rows="5">{{ $food_group->description }}</textarea>
                             </label>
                         </div>
                         <div>
@@ -41,7 +40,7 @@
                                 @error('price_adult')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="text" class="form-control" name="price_adult" value="{{ $food_group->price_adult }}">
+                                <input type="text" class="form form-control" name="price_adult" value="{{ $food_group->price_adult }}">
                             </label>
 
                         </div>
@@ -51,7 +50,7 @@
                                 @error('price_child')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="text" class="form-control" name="price_child" value="{{ $food_group->price_child }}">
+                                <input type="text" class="form form-control" name="price_child" value="{{ $food_group->price_child }}">
                             </label>
 
                         </div>

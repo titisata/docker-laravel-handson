@@ -2,11 +2,14 @@
 
 @section('menu', 'owner_reserve')
 @section('content')
-
-    <h1>進行中予約一覧</h1>
+<div class="container">
+    <div class="d-flex flex-column">
+        <h1>進行中予約一覧</h1>
+        <p>イベント：{{ $experience_folder->name}}</p>
+    </div>
+    
 
 <div>  
-    <p>{{$now}}</p>
 <table class="table table-hover">
     @forelse ($experiences as $experience)
         @forelse ($experience->ex_reserves as $reserve)
@@ -19,14 +22,14 @@
                     <th scope="col">宿泊</th>
                     <th scope="col">食事</th>
                     <th scope="col">連絡事項</th>
-                    <th scope="col">ステータス</th>
+                    <th scope="col">ホテル選定</th>
                     <th scope="col">選定ホテル</th>
                 </tr>
             </thead>
         @endif    
         <tr>
             <td>
-                <a href="/mypage/owner/reserve_edit/{{ $reserve->id }}">
+                <a  class="link" href="/mypage/owner/reserve_edit/{{ $reserve->id }}">
                     <p>{{ $reserve->start_date }}</p>
                 </a>
                 
@@ -72,12 +75,13 @@
             
             
         @empty
-        
+
         @endforelse
         
     @empty
         
     @endforelse
     </table>
+</div>
 </div>
 @endsection

@@ -36,25 +36,44 @@ class MPartnerController extends Controller
         $now = now()->format('y-m-d');
         $tomorrow = now()->addDay()->format('y-m-d');
         $user = Auth::user();
-        $ordered_goods = GoodsOrder::where('partner_id', $user->id)->get();
-        $reserved_experiences = ExperienceReserve::where('partner_id', $user->id)->where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
-        return view('mypage.partner.home', compact('user', 'ordered_goods', 'reserved_experiences'));
+        // $ordered_goods = GoodsOrder::where('partner_id', $user->id)->get();
+        // $reserved_experiences = ExperienceReserve::where('partner_id', $user->id)->where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
+        // return view('mypage.partner.home', compact('user', 'ordered_goods', 'reserved_experiences'));
+
+        if ($user->hasRole('system_admin|site_admin')) {
+            $partner = Partner::where('user_id', $user->id)->first();
+            $ordered_goods = GoodsOrder::all();
+            $reserved_experiences = ExperienceReserve::where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
+            return view('mypage.owner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences'));
+        }
+        
+        if($user->hasRole('partner')){
+            $ordered_goods = GoodsOrder::where('partner_id', $user->id)->get();
+            $reserved_experiences = ExperienceReserve::where('partner_id', $user->id)->where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
+            return view('mypage.partner.home', compact('user', 'ordered_goods', 'reserved_experiences'));
+        }
     }
 
    
     public function event()
     {
         $user = Auth::user();
-        $experiences_folders = ExperienceFolder::where('user_id', $user->id)->get();
-        return view('mypage.partner.event', compact('user', 'experiences_folders'));
+
+        if ($user->hasRole('system_admin|site_admin')) {
+            $experiences_folders = ExperienceFolder::all();
+            return view('mypage.partner.event', compact('user', 'experiences_folders'));
+        }
+        
+        if($user->hasRole('partner')){
+            $experiences_folders = ExperienceFolder::where('user_id', $user->id)->get();
+            return view('mypage.partner.event', compact('user', 'experiences_folders'));
+        }
+        
     }
 
     public function event_add(string $id)
     {
-        // $user = Auth::user();
-        // $experiences_folder = ExperienceFolder::find($id);
-        // $categories = ExperienceCategory::all();
-        // return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories'));
+
         $user = Auth::user();
         $experiences_folder = ExperienceFolder::find($id);
         $categories = ExperienceCategory::all();
@@ -63,11 +82,19 @@ class MPartnerController extends Controller
         
         $food_groups = FoodGroup::all();
 
-        return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories', 'hotel_groups', 'food_groups'));
+        if ($user->hasRole('system_admin|site_admin')) {
+            return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories', 'hotel_groups', 'food_groups'));
+        }
+
+        if($user->hasRole('partner')){
+            return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories', 'hotel_groups', 'food_groups'));
+        }
+        
     }
 
     public function action_event_add(EventAddRequest $request)
     {
+
         $user_id = $request->user_id;
         $name = $request->name;
         $price_adult = $request->price_adult;
@@ -82,11 +109,18 @@ class MPartnerController extends Controller
         $is_before_lodging = $request->is_before_lodging;
         $recommend_flag = $request->recommend_flag;
         $status = $request->status;
-        $ex_names = $request->ex_names;
-        $ex_price_adults = $request->ex_price_adults;
-        $ex_price_childs = $request->ex_price_childs;  
-        
-        ExperienceFolder::create([
+        $table_name = $request->table_name;
+        $hotel_groups = $request->hotel_group;
+        $food_groups = $request->food_group;
+        $ex_name = $request->ex_name;
+        $ex_price_adult = $request->ex_price_adult;
+        $ex_price_child = $request->ex_price_child;
+        $ex_sort_no = $request->ex_sort_no;
+        $ex_quantity = $request->ex_quantity;
+        $ex_status = $request->ex_status;  
+        $key_count = $request->key_count;
+
+        $data = ExperienceFolder::create([
             'user_id' => $user_id,
             'name' => $name,
             'price_adult' => $price_adult,
@@ -101,10 +135,88 @@ class MPartnerController extends Controller
             'status' => $status,
             'recommend_flag' => $recommend_flag,
             'category1' => $category,
-        ]);     
+        ]);   
 
-        $return_view = $this->event();
-        return $return_view;
+        if( $request->file('image_path') != ''){
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_name' => $table_name,
+            'table_id' => $data->id,
+            'image_path' => '/storage/' . $path,
+        ]);
+    }
+
+    if($is_lodging == 1){
+        for ($i=0; $i < count($hotel_groups); $i++) {
+
+            $hotel_group = $hotel_groups[$i];
+            
+            //選択されたものをインサート
+
+            HotelGroupSelect::create([
+                'experience_folder_id' => $data->id,
+                'hotel_group_id' => $hotel_group,
+            ]);
+
+        }
+    }
+
+    if( $is_lodging == 1){
+        for ($i=0; $i < count($food_groups); $i++) {
+
+            $food_group = $food_groups[$i];
+            
+            //選択されたものをインサート
+
+            FoodGroupSelect::create([
+                'experience_folder_id' => $data->id,
+                'food_group_id' => $food_group,
+            ]);
+
+        }
+    }
+
+    Experience::create([
+        'experience_folder_id' => $data->id,
+        'name' => $ex_name,
+        'price_adult' => $ex_price_adult,
+        'price_child' => $ex_price_child,
+        'sort_no' => $ex_sort_no,
+        'quantity' => $ex_quantity,
+        'status' => $ex_status,
+    ]);
+
+    for ($i=1; $i < $key_count + 1; $i++) {
+        $ex_names = $request['ex_names_'.$i];
+        $ex_ids = $request['ex_ids_'.$i];
+        $ex_sort_nos = $request['ex_sort_nos_'.$i];
+        $ex_quantities = $request['ex_quantities_'.$i];
+        $ex_price_adults = $request['ex_price_adults_'.$i];
+        $ex_price_childs = $request['ex_price_childs_'.$i];
+        $ex_statuses = $request['ex_statuses_'.$i];
+        $name = $ex_names;
+        $price_adult = $ex_price_adults;
+        $price_child = $ex_price_childs;
+        $sort_no = $ex_sort_nos;
+        $quantity = $ex_quantities;
+        $status = $ex_statuses;
+
+        Experience::create([
+            'experience_folder_id' => $data->id,
+            'name' => $name,
+            'price_adult' => $price_adult,
+            'price_child' => $price_child,
+            'sort_no' => $sort_no,
+            'quantity' => $quantity,
+            'status' => $status,
+        ]);
+
+    }
+
+    $return_view = $this->event();
+    return $return_view;
         
     }
 
@@ -264,6 +376,12 @@ class MPartnerController extends Controller
         //idをもとにexperiencecategory.tableから削除
 
         $id = $request->id;
+
+        $hotel_delete = HotelGroupSelect::where('experience_folder_id', $id)->delete();
+
+        $food_delete = FoodGroupSelect::where('experience_folder_id', $id)->delete();
+
+        $experience_delete = Experience::where('experience_folder_id', $id)->delete();
 
         $experience_folder = ExperienceFolder::where('id', $id)->delete();
 

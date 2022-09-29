@@ -2,7 +2,7 @@
 
 @section('menu', 'owner_reserve')
 @section('content')
-
+<div class="container">
     <h1>過去予約一覧</h1>
 
 <div>  
@@ -23,13 +23,12 @@
          
         <tr>
             <td>
-                
                 <p>{{ $reserve->start_date }}</p>
-                
                 
             </td>
             <td>
-                <p>{{ $reserve->name }}</p>
+                <p>{{ App\Models\ExperienceFolder::where('id', $reserve->experience->experience_folder_id)->first()->name }}</p>
+                <p>{{ $reserve->experience->name }}</p>
             </td>
             <td>
                 <p>
@@ -74,5 +73,6 @@
         
     @endforelse
     </table>
+</div>
 </div>
 @endsection

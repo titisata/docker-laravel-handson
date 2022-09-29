@@ -2,8 +2,7 @@
 
 @section('menu', 'partner_link')
 @section('content')
-    <h1>ようこそ {{ Auth::user()->name }} 様</h1>
-    <h2>「{{ $name }}」の編集ページです</h2>
+    <h2>「{{ $name }}」編集ページ</h2>
     <div class="card">
         <div class="card-body d-flex flex-column">
             

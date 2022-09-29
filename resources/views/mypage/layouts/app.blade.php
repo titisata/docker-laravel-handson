@@ -47,6 +47,10 @@
         text-decoration: underline;
         }
 
+        .form{
+        width:360px;
+        }
+
         /*main side bar*/
         .msb {
         width: 200px;
@@ -318,11 +322,11 @@
 			<div class="side-menu-container">
 				<ul class="nav navbar-nav">
                 @role('system_admin|site_admin')
-                    <li id="home"><a href="/mypage/owner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
+                    <li id="home"><a href="/mypage/partner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
                     <li id="owner_site"><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>サイト管理</a></li>
 					<li id=""><a href="/mypage/owner/users"><i class="fa fa-dashboard"></i>ユーザー管理</a></li>
                     <li id="owner_partner"><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>パートナー管理</a></li>
-                    <li id="partner_event"><a href="/mypage/owner/event"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>イベント管理</a></li>
+                    <li id="partner_event"><a href="/mypage/partner/event"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>イベント管理</a></li>
                     <li id="partner_goods"><a href="/mypage/owner/goods"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>お土産管理</a></li>
                     <li id="owner_reserve"><a href="/mypage/owner/reserve"><i class="fa fa-puzzle-piece"></i>予約状況</a></li>
                     <li id=""><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>

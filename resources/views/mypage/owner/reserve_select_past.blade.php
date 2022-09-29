@@ -2,9 +2,9 @@
 
 @section('menu', 'owner_reserve')
 @section('content')
-
+<div class="container">
     <h1>過去予約一覧</h1>
-
+    <p>イベント：{{ $experience_folder->name}}</p>
 <div>  
 <table class="table table-hover">
     @forelse ($experiences as $experience)
@@ -78,5 +78,6 @@
         
     @endforelse
     </table>
+</div>
 </div>
 @endsection

@@ -58,13 +58,13 @@ Route::prefix('mypage/user')->middleware(['auth','role:system_admin|site_admin|p
 
 // パートナーがアクセスできる
 Route::prefix('mypage/partner')->middleware(['auth','role:partner'])->group(function () {
-    Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
-    Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
-    Route::get('/event_add/{id}', [App\Http\Controllers\MPartnerController::class, 'event_add']);
-    Route::post('/action_event_add', [App\Http\Controllers\MPartnerController::class, 'action_event_add']);
-    Route::get('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit']);
-    Route::post('event_edit_update', [App\Http\Controllers\MPartnerController::class, 'event_edit_update']);
-    Route::post('/action_event_delete', [App\Http\Controllers\MPartnerController::class, 'action_event_delete']);
+    // Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
+    // Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
+    // Route::get('/event_add/{id}', [App\Http\Controllers\MPartnerController::class, 'event_add']);
+    // Route::post('/action_event_add', [App\Http\Controllers\MPartnerController::class, 'action_event_add']);
+    // Route::get('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit']);
+    // Route::post('event_edit_update', [App\Http\Controllers\MPartnerController::class, 'event_edit_update']);
+    // Route::post('/action_event_delete', [App\Http\Controllers\MPartnerController::class, 'action_event_delete']);
     Route::get('/experience_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'experience_delete']);
     Route::post('/action_experience_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'action_experience_delete']);
     Route::get('/event_image_insert/{id}', [App\Http\Controllers\MPartnerController::class, 'event_image_insert']);
@@ -104,7 +104,7 @@ Route::prefix('mypage/partner')->middleware(['auth','role:partner'])->group(func
 
 // 管理者がアクセスできる
 Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'])->group(function () {
-    Route::get('/', [App\Http\Controllers\MOwnerController::class, 'home']);
+    // Route::get('/', [App\Http\Controllers\MOwnerController::class, 'home']);
     Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
     Route::get('/reserve_past', [App\Http\Controllers\MOwnerController::class, 'reserve_past']);
     Route::get('/reserve_select/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select']);
@@ -188,13 +188,14 @@ Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'
     Route::post('/action_food_edit', [App\Http\Controllers\MOwnerController::class, 'action_food_edit']);
     Route::post('/food_delete', [App\Http\Controllers\MOwnerController::class, 'food_delete']);
 
-    Route::get('/event', [App\Http\Controllers\MOwnerController::class, 'event']);
-    Route::get('/event_add/{id}', [App\Http\Controllers\MOwnerController::class, 'event_add']);
-    Route::post('/action_event_add', [App\Http\Controllers\MOwnerController::class, 'action_event_add']);
-    Route::get('/event/{id}', [App\Http\Controllers\MOwnerController::class, 'event_edit']);
-    Route::post('event_edit_update', [App\Http\Controllers\MOwnerController::class, 'event_edit_update']);
+    // Route::get('/event', [App\Http\Controllers\MOwnerController::class, 'event']);
+    // Route::get('/event_add/{id}', [App\Http\Controllers\MOwnerController::class, 'event_add']);
+    // Route::post('/action_event_add', [App\Http\Controllers\MOwnerController::class, 'action_event_add']);
+    // Route::get('/event/{id}', [App\Http\Controllers\MOwnerController::class, 'event_edit']);
+    // Route::post('event_edit_update', [App\Http\Controllers\MOwnerController::class, 'event_edit_update']);
     Route::post('event_edit_delete', [App\Http\Controllers\MOwnerController::class, 'event_edit_delete']);
-    Route::post('/action_event_delete', [App\Http\Controllers\MOwnerController::class, 'action_event_delete']);
+    // Route::post('/action_event_delete', [App\Http\Controllers\MOwnerController::class, 'action_event_delete']);
+    
     Route::get('/experience_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'experience_delete']);
     Route::post('/action_experience_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_experience_delete']);
     Route::get('/event_image_insert/{id}', [App\Http\Controllers\MOwnerController::class, 'event_image_insert']);
@@ -218,5 +219,16 @@ Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'
     Route::post('/action_goods_image_update/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_image_update']);
     Route::get('/goods_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_image_delete']);
     Route::post('/action_goods_image_delete/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_image_delete']);
+});
+
+// 管理者とパートナーがアクセスできる
+Route::prefix('mypage/partner')->middleware(['auth','role:system_admin|site_admin|partner'])->group(function () {
+    Route::get('/', [App\Http\Controllers\MPartnerController::class, 'home']);
+    Route::get('/event', [App\Http\Controllers\MPartnerController::class, 'event']);
+    Route::get('/event_add/{id}', [App\Http\Controllers\MPartnerController::class, 'event_add']);
+    Route::post('/action_event_add', [App\Http\Controllers\MPartnerController::class, 'action_event_add']);
+    Route::get('/event/{id}', [App\Http\Controllers\MPartnerController::class, 'event_edit']);
+    Route::post('event_edit_update', [App\Http\Controllers\MPartnerController::class, 'event_edit_update']);
+    Route::post('/action_event_delete', [App\Http\Controllers\MPartnerController::class, 'action_event_delete']);
 });
 
