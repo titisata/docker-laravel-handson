@@ -20,6 +20,17 @@ class GoodCartItem extends Model
         return $this->belongsTo(Goods::class);
     }
 
+    public function contact_info()
+    {
+        // $goods = $this->goods;
+        // $folder = GoodsFolder::where('id',$goods->goods_folder_id)->first();
+        // return $folder->name;
+
+        $user = User::where('id',$this->partner_id)->first();
+        $partner = Partner::where('user_id',$user->id)->first();
+        return $partner->name;
+    }
+
     public function sum_price()
     {
         $goods = $this->goods;

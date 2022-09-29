@@ -22,6 +22,13 @@ class ExperienceReserve extends Model
         'message',
         'quantity_child',
         'quantity_adult',
+        'experience_price_child',
+        'experience_price_adult',
+        'hotel_price_child',
+        'hotel_price_adult',
+        'food_price_child',
+        'food_price_adult',
+        'total_price',
         'start_date',
         'end_date',
         'cancel_flag',
@@ -67,13 +74,12 @@ class ExperienceReserve extends Model
     
     public function sum_price()
     {
-        $ex = $this->experience;
-        $price_adult = $ex->price_adult * $this->quantity_adult;
-        $price_child = $ex->price_child * $this->quantity_child;
-        $price_adult += ($this->foodGroup?->price_adult ?? 0) * $this->quantity_adult;
-        $price_child += ($this->foodGroup?->price_child ?? 0) * $this->quantity_child;
-        $price_adult += ($this->hotelGroup?->price_adult ?? 0) * $this->quantity_adult;
-        $price_child += ($this->hotelGroup?->price_child ?? 0) * $this->quantity_child;
+        $price_adult = $this->experience_price_adult * $this->quantity_adult;
+        $price_child = $this->experience_price_child * $this->quantity_child;
+        $price_adult += ($this->food_price_adult ?? 0) * $this->quantity_adult;
+        $price_child += ($this->food_price_child ?? 0) * $this->quantity_child;
+        $price_adult += ($this->hotel_price_adult ?? 0) * $this->quantity_adult;
+        $price_child += ($this->hotel_price_child ?? 0) * $this->quantity_child;
         return $price_adult + $price_child;
     }
 }

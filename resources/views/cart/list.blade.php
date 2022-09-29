@@ -44,8 +44,8 @@ async function deleteGoods(id) {
             <div class="">
                 <h4>体験</h4>
                 @forelse($experienceCartItems as $experienceCartItem)
-                    <a href="/experience/{{ $experienceCartItem->experience->id }}">
-                        <div class="mt-1 p-3 card">
+                    <div class="mt-1 p-3 card">
+                        <a href="/experience/{{ $experienceCartItem->experience->experience_folder_id }}">
                             <div>
                                 <p>{{ $experienceCartItem->experience->name }}</p>
                                 <p>予約日: {{ $experienceCartItem->start_date }}</p>
@@ -54,10 +54,12 @@ async function deleteGoods(id) {
                                 <p>食事: {{ $experienceCartItem->foodGroup?->name ?? 'なし' }}</p>
                                 <p>連絡事項: {{ $experienceCartItem->message }}</p>
                                 <p>金額: {{ $experienceCartItem->sum_price() }}円</p>
-                                <button class="btn btn-outline-primary"  onclick="deleteExperience({{ $experienceCartItem->id }})">削除</button>
                             </div>
+                        </a>
+                        <div>
+                            <button class="btn btn-outline-primary"  onclick="deleteExperience({{ $experienceCartItem->id }})">削除</button>
                         </div>
-                    </a>
+                    </div>    
                 @empty
                     <p class="p-3">カートが空です。</p>
                 @endforelse
@@ -69,16 +71,18 @@ async function deleteGoods(id) {
                 <h4>お土産</h4>
 
                 @forelse($goodCartItems as $goodCartItem)
-                    <a href="/goods/{{ $goodCartItem->goods_id }}">
-                        <div class="mt-1 p-3 card">
+                    <div class="mt-1 p-3 card">
+                        <a href="/goods/{{ $goodCartItem->goods->goods_folder_id }}">
                             <div>
                                 <p>名前: {{ $goodCartItem->goods->name }}</p>
                                 <p>個数: {{ $goodCartItem->quantity }}</p>
                                 <p>合計: {{ $goodCartItem->sum_price() }}円</p>
-                                <button class="btn btn-outline-primary"  onclick="deleteGoods({{ $goodCartItem->id }})">削除</button>
                             </div>
+                        </a>
+                        <div>
+                            <button class="btn btn-outline-primary"  onclick="deleteGoods({{ $goodCartItem->id }})">削除</button>
                         </div>
-                    </a>
+                    </div>
                 @empty
                     <p class="p-3">カートが空です。</p>
                 @endforelse

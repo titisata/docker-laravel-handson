@@ -30,7 +30,19 @@ class MUserController extends Controller
 
     public function users()
     {
-        $users = User::all();
+        $login_user = Auth::user();
+        if($login_user->hasRole('system_admin')){
+            $users = User::all();
+        }else{
+            $users = User::with('roles')
+            ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+            ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+            ->select('users.*')
+            ->whereIn("roles.name",["partner","user"]) 
+            ->orderby("users.id")
+            ->get();
+        }
+        
         return view('mypage.user.users', compact('users'));
     }
 
@@ -38,7 +50,14 @@ class MUserController extends Controller
     {
         // $users = User::find($id)->first();
         $user = User::where('id', $request->id)->first();
-        $roles = Role::all();
+
+        $login_user = Auth::user();
+        if($login_user->hasRole('system_admin')){
+            $roles = Role::all();
+        }else{
+            $roles = Role::whereIn("name",["partner","user"])->get();
+        }
+        
         $user_roles = array();
         if($request->id<>""){
             $user_roles_object = $user->getRoleNames();
@@ -72,7 +91,20 @@ class MUserController extends Controller
                 if(in_array($r->name,(array)$role)){
                     //echo $r->name."のroleを付与します<br>";
                     $user->assignRole($r->name);
+
+                    if($r->name=="partner"){
+                        //パートナーテーブルに登録
+                        $partner = Partner::create([
+                            'user_id' => $user->id,
+                            'name' => $user->name,
+                        ]);
+
+                    }
                 }
+            }
+
+            if(in_array("partner",(array)$role)){
+                return redirect('mypage/owner/partner_manege/'.$partner->id);
             }
         }
 
@@ -109,6 +141,9 @@ class MUserController extends Controller
 
         if($mode=="del"){
             $id = $request->id;
+            //パートナーテーブルから削除
+            Partner::where('user_id', $id)->delete();
+
             User::where('id', $id)->delete();
         }
         
