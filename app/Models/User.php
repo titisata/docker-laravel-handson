@@ -73,4 +73,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(ExperienceFolder::class);
     }
+
+    public function role_string()
+    {
+        $user_roles = array();
+        $user_roles_object = $this->getRoleNames();
+        foreach($user_roles_object as $role_name){
+            $user_roles[] = $role_name;
+        }
+        return implode(',', $user_roles);
+    }
 }

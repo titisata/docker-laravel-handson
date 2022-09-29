@@ -59,20 +59,37 @@
                             <input id="cpass" name="cpass" type="password" class="form-control" value="">
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">ロール</label>
-                            <select name="role[]" class="form-control" multiple required>
-                                @forelse ($roles as $role)
-                                    @if (in_array($role->name, $user_roles))
-                                        <option value='{{ @$role->name }}' selected>{{ @$role->name }}</option>
-                                    @else
-                                        <option value='{{ @$role->name }}'>{{ @$role->name }}</option>
-                                    @endif
-                                @empty
-                                    <option value=''>データがありません</option>
-                                @endforelse
-                            </select>
-                        </div>
+                        @if (isset( $user->id ))
+                            <div class="mb-3" style="display:none;">
+                                <label class="form-label">ロール</label>
+                                <select name="role[]" class="form-control" multiple required>
+                                    @forelse ($roles as $role)
+                                        @if (in_array($role->name, $user_roles))
+                                            <option value='{{ @$role->name }}' selected>{{ @$role->name }}</option>
+                                        @else
+                                            <option value='{{ @$role->name }}'>{{ @$role->name }}</option>
+                                        @endif
+                                    @empty
+                                        <option value=''>データがありません</option>
+                                    @endforelse
+                                </select>
+                            </div>
+                        @else
+                            <div class="mb-3">
+                                <label class="form-label">ロール</label>
+                                <select name="role[]" class="form-control" multiple required>
+                                    @forelse ($roles as $role)
+                                        @if (in_array($role->name, $user_roles))
+                                            <option value='{{ @$role->name }}' selected>{{ @$role->name }}</option>
+                                        @else
+                                            <option value='{{ @$role->name }}'>{{ @$role->name }}</option>
+                                        @endif
+                                    @empty
+                                        <option value=''>データがありません</option>
+                                    @endforelse
+                                </select>
+                            </div>
+                        @endif
 
                         @if (isset( $user->id ))
                             <input type="hidden" name="mode" value="upd">
