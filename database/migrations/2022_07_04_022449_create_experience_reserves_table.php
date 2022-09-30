@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->integer('quantity_child');
             $table->integer('quantity_adult');
             $table->string('message');
+            $table->string('contact_info', 1000);
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->timestamps();

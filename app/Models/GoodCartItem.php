@@ -28,7 +28,7 @@ class GoodCartItem extends Model
 
         $user = User::where('id',$this->partner_id)->first();
         $partner = Partner::where('user_id',$user->id)->first();
-        return $partner->name;
+        return $partner->phone;
     }
 
     public function sum_price()

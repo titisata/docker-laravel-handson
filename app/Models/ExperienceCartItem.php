@@ -41,7 +41,7 @@ class ExperienceCartItem extends Model
     {
         $experience = $this->experience;
         $folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
-        return $folder->name;
+        return $folder->phone;
     }
 
     public function sum_price()

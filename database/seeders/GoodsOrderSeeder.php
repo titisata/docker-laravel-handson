@@ -20,12 +20,14 @@ class GoodsOrderSeeder extends Seeder
             'goods_id' => 1,
             'user_id' => 4,
             'quantity' => 1,
+            'contact_info' => '商品に関する連絡先（株式会社　サンプル）：042-xxxx-xxxx',
         ]);
         GoodsOrder::create([
             'partner_id' => 1,
             'goods_id' => 2,
             'user_id' => 4,
             'quantity' => 2,
+            'contact_info' => ' 商品に関する連絡先（株式会社　サンプル）：042-xxxx-xxxx',
         ]);
     }
 }

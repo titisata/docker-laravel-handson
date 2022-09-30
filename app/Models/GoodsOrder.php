@@ -13,6 +13,7 @@ class GoodsOrder extends Model
         'goods_id',
         'user_id' ,
         'quantity',
+        'contact_info',
         'goods_price',
         'total_price',
     ];

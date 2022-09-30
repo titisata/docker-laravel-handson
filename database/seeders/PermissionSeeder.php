@@ -40,6 +40,12 @@ class PermissionSeeder extends Seeder
             'email' => 'user2@test.com',
             'email_verified_at' => null,
             'password' => Hash::make('pass1234'),
+            'postal_code' => '000-0033',
+            'pref_id' => '13',
+            'city' => 'サンプル区',
+            'town' => 'サンプル5丁目',
+            'building' => 'ビル5F',
+            'phone_number' => '00-0000-0000'
         ]);
 
         $user3 = \App\Models\User::create([
@@ -47,6 +53,12 @@ class PermissionSeeder extends Seeder
             'email' => 'user3@test.com',
             'email_verified_at' => null,
             'password' => Hash::make('pass1234'),
+            'postal_code' => '000-0033',
+            'pref_id' => '12',
+            'city' => 'サンプル市',
+            'town' => 'サンプル6丁目',
+            'building' => 'ビル9F',
+            'phone_number' => '00-0000-0000'
         ]);
 
         $user4 = \App\Models\User::create([
@@ -54,6 +66,12 @@ class PermissionSeeder extends Seeder
             'email' => 'user4@test.com',
             'email_verified_at' => null,
             'password' => Hash::make('pass1234'),
+            'postal_code' => '000-0033',
+            'pref_id' => '14',
+            'city' => 'サンプルサンプル市',
+            'town' => 'サンプル7丁目',
+            'building' => 'ビル1F',
+            'phone_number' => '00-0000-0000'
         ]);
 
 		// UserにRoleを割り当て

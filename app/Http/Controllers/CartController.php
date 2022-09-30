@@ -42,7 +42,19 @@ class CartController extends Controller
         foreach ($goodCartItems as $goodCartItem) {
             $price += $goodCartItem->sum_price();
         }
-        return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price'));
+
+        if(isset($goodCartItems)){
+            $postal_code = Auth::user()->postal_code;
+            $pref_id = Auth::user()->pref_id;
+            $city = Auth::user()->city;
+            $town = Auth::user()->town;
+            $building = Auth::user()->building;
+            $phone_number = Auth::user()->phone_number;
+            return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price', 'postal_code', 'pref_id', 'city', 'town', 'building', 'phone_number'));
+        }else{
+            return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price'));
+        }
+        
     }
 
     public function purchase()
@@ -95,6 +107,7 @@ class CartController extends Controller
             $description_experiences = '';
             $description_goods = '';
 
+
             ExperienceReserve::create([
                 'user_id' => $uid,
                 'partner_id' => $experienceCartItem->partner_id,
@@ -105,6 +118,7 @@ class CartController extends Controller
                 'food_id' => null,
                 'comment' => 'コメントはありません',
                 'message' => $experienceCartItem->message,
+                'contact_info' => $experienceCartItem->contact_info(),
                 'status' => '対応待ち',
                 'quantity_child' => $experienceCartItem->quantity_child,
                 'quantity_adult' => $experienceCartItem->quantity_adult,
@@ -127,6 +141,7 @@ class CartController extends Controller
             $description_experiences.= is_null($experienceCartItem->hotelGroup) ? "宿泊：なし\r\n" : "宿泊：".$experienceCartItem->hotelGroup->name."\r\n";
             $description_experiences.= is_null($experienceCartItem->foodGroup) ? "食事：なし\r\n" : "食事：".$experienceCartItem->foodGroup->name."\r\n";
             $description_experiences.= "金額：".$experienceCartItem->sum_price()."\r\n";
+            $description_experiences.= "この体験に関するお問合せ：".$experienceCartItem->contact_info()."\r\n";
             $description_experiences.= "---------------------------------\r\n";
             $description_experiences_all.= $description_experiences;
             if(!in_array($experienceCartItem->partner_id, $partner_array)) {
@@ -142,6 +157,7 @@ class CartController extends Controller
                 'goods_id' => $goodCartItem->goods_id,
                 'user_id' => $uid,
                 'quantity' => $goodCartItem->quantity,
+                'contact_info' => $goodCartItem->contact_info(),
                 'goods_price' =>  $goodCartItem->goods->price,
                 'total_price' =>  $goodCartItem->sum_price(),
             ]);
@@ -151,6 +167,7 @@ class CartController extends Controller
             $description_goods.= "名前：".$goodCartItem->goods->name."\r\n";
             $description_goods.= "個数：".$goodCartItem->goods->quantity."\r\n";
             $description_goods.= "金額：".$goodCartItem->sum_price()."\r\n";
+            $description_goods.= "商品に関するお問合せ：".$goodCartItem->contact_info()."\r\n";
             $description_goods.= "---------------------------------\r\n";
             $description_goods_all.= $description_goods;
             if(!in_array($goodCartItem->partner_id, $partner_array)) {

@@ -20,6 +20,7 @@ class ExperienceReserve extends Model
         'comment',
         'status',
         'message',
+        'contact_info',
         'quantity_child',
         'quantity_adult',
         'experience_price_child',
