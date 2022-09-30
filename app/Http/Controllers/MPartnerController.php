@@ -24,6 +24,7 @@ use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventEditRequest;
 use App\Http\Requests\EventAddRequest;
+use App\Http\Requests\GoodsAddRequest;
 use App\Http\Requests\GoodsEditRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -84,8 +85,10 @@ class MPartnerController extends Controller
         
     }
 
-    public function action_event_add(EventAddRequest $request)
+    public function action_event_add(Request $request)
     {
+        // dd($request);
+        // exit;
 
         $user_id = $request->user_id;
         $name = $request->name;
@@ -115,8 +118,7 @@ class MPartnerController extends Controller
         $key_count = $request->key_count;
         $selected_date = $request->selected_date;
 
-        print_r($selected_date);
-        exit;
+        
 
         $data = ExperienceFolder::create([
             'user_id' => $user_id,
@@ -203,27 +205,30 @@ class MPartnerController extends Controller
 
         for ($i=1; $i < $key_count + 1; $i++) {
             $ex_names = $request['ex_names_'.$i];
-            $ex_ids = $request['ex_ids_'.$i];
             $ex_sort_nos = $request['ex_sort_nos_'.$i];
             $ex_quantities = $request['ex_quantities_'.$i];
             $ex_price_adults = $request['ex_price_adults_'.$i];
             $ex_price_childs = $request['ex_price_childs_'.$i];
             $ex_statuses = $request['ex_statuses_'.$i];
-            $name = $ex_names;
-            $price_adult = $ex_price_adults;
-            $price_child = $ex_price_childs;
-            $sort_no = $ex_sort_nos;
-            $quantity = $ex_quantities;
-            $status = $ex_statuses;
+
+            echo  $ex_names;
+            exit;
+
+            $ex_name = $ex_names;
+            $ex_price_adult = $ex_price_adults;
+            $ex_price_child = $ex_price_childs;
+            $ex_sort_no = $ex_sort_nos;
+            $ex_quantity = $ex_quantities;
+            $ex_status = $ex_statuses;
 
             Experience::create([
                 'experience_folder_id' => $data->id,
-                'name' => $name,
-                'price_adult' => $price_adult,
-                'price_child' => $price_child,
-                'sort_no' => $sort_no,
-                'quantity' => $quantity,
-                'status' => $status,
+                'name' => $ex_name,
+                'price_adult' => $ex_price_adult,
+                'price_child' => $ex_price_child,
+                'sort_no' => $ex_sort_no,
+                'quantity' => $ex_quantitie,
+                'status' => $ex_statuse,
             ]);
 
         }
@@ -265,6 +270,10 @@ class MPartnerController extends Controller
 
     public function event_edit_update(EventEditRequest $request)
     {
+
+        // dd($request);
+        // exit;
+
         $user_id = $request->user_id;
         $name = $request->name;
         $price_adult = $request->price_adult;
@@ -426,8 +435,6 @@ class MPartnerController extends Controller
 
     }
 
-
-
     public function goods()
     {
         $user = Auth::user();
@@ -445,19 +452,7 @@ class MPartnerController extends Controller
         }
     }
 
-    // public function goods_post_date(Request $request)
-    // {   
-    //     $user_id = $request->user_id;
-    //     $name = $request->name;
-    //     $price = $request->price;
-    //     $description = $request->description;
-    //     $detail = $request->detail;
-    //     $caution = $request->caution;
-    //     $category = $request->category;
-    //     $recommend_flag = $request->recommend_flag; 
-
-        
-    // }
+   
 
     public function goods_add(string $id)
     {
@@ -471,6 +466,9 @@ class MPartnerController extends Controller
 
     public function action_goods_add(GoodsAddRequest $request)
     {
+
+        // dd($request);
+        // exit;
         $user_id = $request->user_id;
         $name = $request->name;
         $price = $request->price;
@@ -520,6 +518,35 @@ class MPartnerController extends Controller
                 'image_path' => '/storage/' . $path,
             ]);
 
+        }
+
+        for ($i=1; $i < $key_count + 1; $i++) {
+            $goods_ids = $request['goods_ids_'.$i];
+            $goods_names = $request['goods_names_'.$i];
+            $goods_pricies = $request['goods_pricies_'.$i];
+            $goods_descriptions = $request['goods_descriptions_'.$i];
+            $goods_sort_nos = $request['goods_sort_nos_'.$i];
+            $goods_quantities = $request['goods_quantities_'.$i];
+            $goods_statuses = $request['goods_statuses_'.$i];
+            $goods_id = $goods_ids;
+            $goods_name = $goods_names;
+            $goods_price = $goods_pricies;
+            $goods_description = $goods_descriptions;
+            $goods_sort_no = $goods_sort_nos;
+            $goods_quantity = $goods_quantities;
+            $goods_status = $goods_statuses;
+
+           
+            Goods::create([
+                'goods_folder_id' => $data->id,
+                'name' => $goods_name,
+                'price' => $goods_price,
+                'description' => $goods_description,
+                'sort_no' => $goods_sort_no,
+                'quantity' => $goods_quantity,
+                'status' => $goods_status,
+            ]);
+            
         }
 
         $return_view = $this->goods();

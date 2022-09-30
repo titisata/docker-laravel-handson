@@ -221,7 +221,7 @@
                         
                         <div id="add_target"></div>
                         <input type="hidden" id="key_count" name="key_count" value="0">
-                        <button type="button" class="mt-2 btn btn-primary" onclick="add_ex()" >追加</button>
+                        <button type="button" class="mt-2 btn btn-primary" onclick="add_ex()">追加</button>
                     </div>
                 </div>
                 <button type="submit" class="mt-2 btn btn-primary">更新</button>

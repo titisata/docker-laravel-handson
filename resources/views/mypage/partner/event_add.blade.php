@@ -94,11 +94,11 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">大人料金</label>
-                    <input name="ex_price_adults_` + key + `" type="number" class="form-control" value="{{ $experiences_folder->price_adult }}">
+                    <input name="ex_price_adults_` + key + `" type="number" class="form-control" value="">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">子供料金</label>
-                    <input name="ex_price_childs_` + key + `" type="number" class="form-control" value="{{ $experiences_folder->price_child }}">
+                    <input name="ex_price_childs_` + key + `" type="number" class="form-control" value="">
                 </div>
                 <div class="mb-3">
                     <div class="d-flex">
@@ -183,7 +183,7 @@
                             </textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">説明</label>
+                            <label class="form-label">体験説明</label>
                             @error('description')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -204,7 +204,10 @@
                             <textarea name="caution" type="text" class="form-control" rows="5"></textarea>
                         </div>
                         <div class="mb-3">
-                        <label class="form-label">カテゴリ</label>
+                        <div class="d-flex">
+                            <label class="form-label">カテゴリ選択</label>
+                            <p class="ms-3">当てはまるカテゴリーを選択してください。</p>
+                        </div>
                         <select name="category" class="form-select mt-2" style="width:216px">
                             @foreach ($categories as $category)
                                 <option @if ($experiences_folder->category == $category->name) selected @endif value="{{ $category->name }}">
@@ -298,7 +301,7 @@
                             </div>
                         </div>  
                     </div> 
-        </div> 
+                </div> 
 
                         <div class="card mt-3">
                         <div class="card-header">イベント期間</div>
@@ -388,14 +391,11 @@
                                         <label class="fw-normal">非表示</label>
 
                                     </div>
-                                    
-                                    
                                 </div>
                         
-                                
                             </div>
                             <div id="add_target"></div>
-                            <input type="hidden" id="key_count" name="key_count" value="">
+                            <input type="hidden" id="key_count" name="key_count" value="0">
                         
                             <button type="button" class="mt-2 btn btn-primary" onclick="add_ex()">体験の時間帯追加</button>
                             
