@@ -139,9 +139,9 @@
     <h1>イベント新規作成</h1>
     <div class="row justify-content-center">
         <div class="col-md-8 mt-3">
-            <div class="card">
-            <form action="/mypage/partner/action_event_add" method="POST" enctype="multipart/form-data">
+        <form action="/mypage/partner/action_event_add" method="POST" enctype="multipart/form-data">
                 @csrf
+                <div class="card">
                 <input name="user_id" type="hidden" value="{{ $user->id }}">
                     <div class="card-header">基本情報</div>
                     <div class="card-body">

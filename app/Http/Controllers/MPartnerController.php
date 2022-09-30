@@ -210,25 +210,21 @@ class MPartnerController extends Controller
             $ex_price_adults = $request['ex_price_adults_'.$i];
             $ex_price_childs = $request['ex_price_childs_'.$i];
             $ex_statuses = $request['ex_statuses_'.$i];
-
-            echo  $ex_names;
-            exit;
-
-            $ex_name = $ex_names;
-            $ex_price_adult = $ex_price_adults;
-            $ex_price_child = $ex_price_childs;
-            $ex_sort_no = $ex_sort_nos;
-            $ex_quantity = $ex_quantities;
-            $ex_status = $ex_statuses;
+            $eex_name = $ex_names;
+            $eex_price_adult = $ex_price_adults;
+            $eex_price_child = $ex_price_childs;
+            $eex_sort_no = $ex_sort_nos;
+            $eex_quantity = $ex_quantities;
+            $eex_status = $ex_statuses;
 
             Experience::create([
                 'experience_folder_id' => $data->id,
-                'name' => $ex_name,
-                'price_adult' => $ex_price_adult,
-                'price_child' => $ex_price_child,
-                'sort_no' => $ex_sort_no,
-                'quantity' => $ex_quantitie,
-                'status' => $ex_statuse,
+                'name' => $eex_name,
+                'price_adult' => $eex_price_adult,
+                'price_child' => $eex_price_child,
+                'sort_no' => $eex_sort_no,
+                'quantity' => $eex_quantity,
+                'status' => $eex_status,
             ]);
 
         }
@@ -418,9 +414,11 @@ class MPartnerController extends Controller
 
     public function action_event_delete(Request $request)
     {
-        //idをもとにexperiencecategory.tableから削除
+        //idをもとにexperiencefolder.tableから削除
 
         $id = $request->id;
+
+        $schedule_delete = Schedule::where('experience_folder_id', $id)->delete();
 
         $hotel_delete = HotelGroupSelect::where('experience_folder_id', $id)->delete();
 
