@@ -371,6 +371,18 @@ class MPartnerController extends Controller
         
     }
 
+    public function event_edit_delete(Request $request){
+
+        $id = $request->id;
+        $delete_id = $request->delete_id;
+
+        $experience_delete = Experience::where('id', $delete_id)->delete();
+
+        $return_view = $this->event_edit($id);
+        return $return_view;
+        
+    }
+
     public function action_event_delete(Request $request)
     {
         //idをもとにexperiencecategory.tableから削除
@@ -390,31 +402,23 @@ class MPartnerController extends Controller
 
     }
 
-    public function experience_delete(string $id)
-    {
-        //experience_deleteページへ
-        $experience = Experience::where('id', $id)->first();
-        return view('mypage.partner.experience_delete', compact('experience'));
-    }
 
-    public function action_experience_delete(Request $request)
-    {
-        $id = $request->ex_ids;
-        $experience_folder_id = $request->ex_folder_ids;
-
-        //idをもとにexperience.tableから削除
-        $experience = Experience::where('id', $id)->delete();
-
-        $return_view = $this->event_edit($experience_folder_id);
-        return $return_view;
-    }
 
     public function goods()
     {
         $user = Auth::user();
         $partner = Partner::where('user_id', $user->id)->first();
-        $goods_folders = GoodsFolder::all();
-        return view('mypage.partner.goods', compact('user', 'goods_folders'));
+        
+
+        if ($user->hasRole('system_admin|site_admin')) {
+            $goods_folders = GoodsFolder::all();
+            return view('mypage.partner.goods', compact('user', 'goods_folders'));
+        }
+
+        if($user->hasRole('partner')){
+            $goods_folders = GoodsFolder::where('user_id', $user->id)->get();
+            return view('mypage.partner.goods', compact('user', 'goods_folders'));
+        }
     }
 
     // public function goods_post_date(Request $request)
@@ -439,7 +443,35 @@ class MPartnerController extends Controller
         return view('mypage.partner.goods_add', compact('user', 'goods_folder', 'categories'));
     }
 
-    public function action_goods_add(Request $request)
+    // public function action_goods_add(Request $request)
+    // {
+    //     $user_id = $request->user_id;
+    //     $name = $request->name;
+    //     $price = $request->price;
+    //     $description = $request->description;
+    //     $detail = $request->detail;
+    //     $caution = $request->caution;
+    //     $category = $request->category;
+    //     $recommend_flag = $request->recommend_flag; 
+        
+
+    //     GoodsFolder::create([
+    //         'user_id' => $user_id,
+    //         'name' => $name,
+    //         'price' => $price,
+    //         'description' => $description,
+    //         'detail' => $detail,
+    //         'caution' => $caution,
+    //         'recommend_flag' => $recommend_flag,
+    //         'category1' => $category,
+    //     ]);     
+
+    //     $return_view = $this->goods();
+    //     return $return_view;
+        
+    // }
+
+    public function action_goods_add(GoodsAddRequest $request)
     {
         $user_id = $request->user_id;
         $name = $request->name;
@@ -448,10 +480,17 @@ class MPartnerController extends Controller
         $detail = $request->detail;
         $caution = $request->caution;
         $category = $request->category;
-        $recommend_flag = $request->recommend_flag; 
-        
+        $recommend_flag = $request->recommend_flag;
+        $goods_name = $request->goods_name;
+        $goods_price = $request->goods_price;
+        $goods_description = $request->goods_description;
+        $goods_sort_no = $request->goods_sort_no;
+        $goods_quantity = $request->goods_quantity;
+        $goods_status = $request->goods_status;
+        $table_name = $request->table_name;
+        $key_count = $request->key_count;
 
-        GoodsFolder::create([
+        $data = GoodsFolder::create([
             'user_id' => $user_id,
             'name' => $name,
             'price' => $price,
@@ -462,9 +501,32 @@ class MPartnerController extends Controller
             'category1' => $category,
         ]);     
 
+        Goods::create([
+            'goods_folder_id' => $data->id,
+            'name' => $goods_name,
+            'price' => $goods_price,
+            'description' => $goods_description,
+            'sort_no' => $goods_sort_no,
+            'quantity' => $goods_quantity,
+            'status' => $goods_status,
+        ]);
+
+
+        if( $request->file('image_path') != ''){
+            $img = $request->file('image_path');
+            $path = $img->store('images','public');
+
+            Image::create([
+                'table_name' => $table_name,
+                'table_id' => $data->id,
+                'image_path' => '/storage/' . $path,
+            ]);
+
+        }
+
         $return_view = $this->goods();
         return $return_view;
-        
+
     }
 
 
@@ -546,31 +608,32 @@ class MPartnerController extends Controller
     }
 
 
-    public function goods_delete(string $id)
-    {
-        //goods_deleteページへ
-        $goods = Goods::where('id', $id)->first();
-        return view('mypage.partner.goods_delete', compact('goods'));
+    // public function goods_delete(string $id)
+    // {
+    //     //goods_deleteページへ
+    //     $goods = Goods::where('id', $id)->first();
+    //     return view('mypage.partner.goods_delete', compact('goods'));
+    // }
+
+    public function goods_edit_delete(Request $request){
+
+        $id = $request->id;
+        $delete_id = $request->delete_id;
+
+        $goods_delete = Goods::where('id', $delete_id)->delete();
+
+        $return_view = $this->goods_edit($id);
+        return $return_view;
+        
     }
 
     public function action_goods_delete(Request $request)
     {
-        $id = $request->goods_ids;
-        $goods_folder_id = $request->goods_folder_ids;
-
-        //idをもとにgoods.tableから削除
-        $goods = Goods::where('id', $id)->delete();
-
-        $return_view = $this->goods_edit($goods_folder_id);
-        return $return_view;
-
-    }
-
-    public function action_goods_display_delete(Request $request)
-    {
         //idをもとにgoodsfolders.tableから削除
 
         $id = $request->id;
+
+        $goods = Goods::where('goods_folder_id', $id)->delete();
 
         $goods_folder = GoodsFolder::where('id', $id)->delete();
 
@@ -578,6 +641,7 @@ class MPartnerController extends Controller
         return $return_view;
 
     }
+
 
     public function image_insert(Request $request)
     {
@@ -610,7 +674,7 @@ class MPartnerController extends Controller
 
     }
 
-    public function image_update(Request $request, string $id)
+    public function image_update(Request $request)
     {
         //画像アップデート処理
 
@@ -631,24 +695,43 @@ class MPartnerController extends Controller
         $delete_path = $request->delete_path;
         //storageから画像ファイルを削除
         Storage::disk('public')->delete($delete_path);
-        Image::where('id', $id)->delete();
+        Image::where('image_path', $delete_path)->delete();
     }
 
-    public function event_image_edit($request)
+   
+
+    public function event_image_edit(Request $request)
     {
         //編集ページ表示
         $table_id = $request->table_id;
         $experiences_folder = ExperienceFolder::find($table_id);
         $categories = ExperienceCategory::all();
-        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories'));
-    }
 
+        $schedules = Schedule::where('experience_folder_id',$table_id)->get();
+
+        $hotel_groups = HotelGroup::all();
+        $hotel_select_ids = HotelGroupSelect::where('experience_folder_id', $experiences_folder->id)->get();
+        $checked_hotels_group = array();
+        foreach($hotel_select_ids as $hotel_select_id){
+            $checked_hotels_group[] = $hotel_select_id->hotel_group_id;
+        }
+        
+        $food_groups = FoodGroup::all();
+        $food_select_ids = FoodGroupSelect::where('experience_folder_id',$experiences_folder->id)->get();
+        $checked_foods_group = array();
+        foreach($food_select_ids as $food_select_id){
+            $checked_foods_group[] = $food_select_id->food_group_id;
+        }
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group', 'schedules'));
+        
+    }
 
     public function event_image_insert(string $id)
     {
         $experiences_folder = ExperienceFolder::find($id);
         return view('mypage.partner.event_image_insert', compact('experiences_folder'));
     }
+
 
     public function action_event_image_insert(Request $request)
     {
@@ -721,7 +804,7 @@ class MPartnerController extends Controller
 
     public function action_goods_image_update(Request $request)
     {
-        $this->image_update($request, $id);
+        $this->image_update($request);
         
         $return_view = $this->goods_image_edit($request);
         return $return_view;

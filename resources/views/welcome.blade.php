@@ -95,11 +95,8 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @role('system_admin|site_admin')
-                                        <a class="dropdown-item" href="{{ url('/mypage/owner/') }}">マイページ</a>
-                                    @endrole 
-                                    @role('partner')
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"> 
+                                    @role('system_admin|site_admin|partner')
                                         <a class="dropdown-item" href="{{ url('/mypage/partner/') }}">マイページ</a>
                                     @endrole
                                     @role('user')

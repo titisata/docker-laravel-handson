@@ -44,7 +44,7 @@
                         
                     </tr>   
                 @empty
-                    <p>パートナーがいません</p>
+                    <p>お土産登録がありません</p>
                 @endforelse
             </table>
             

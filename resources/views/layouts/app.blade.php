@@ -81,12 +81,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                @role('system_admin|site_admin')
-                                    <a class="dropdown-item" href="{{ url('/mypage/owner/') }}">マイページ</a>
-                                @endrole 
-                                @role('partner')
+                                @role('system_admin|site_admin|partner')
                                     <a class="dropdown-item" href="{{ url('/mypage/partner/') }}">マイページ</a>
-                                @endrole
+                                @endrole 
                                 @role('user')
                                     <a class="dropdown-item" href="{{ url('/mypage/user/') }}">マイページ</a>
                                 @endrole   

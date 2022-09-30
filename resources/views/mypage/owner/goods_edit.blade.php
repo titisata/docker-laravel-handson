@@ -96,12 +96,12 @@
     @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form name="deleteform" action="/mypage/owner/goods_edit_delete" method="POST" onsubmit='return check();'>
+            <form name="deleteform" action="/mypage/partner/goods_edit_delete" method="POST" onsubmit='return check();'>
                 @csrf     
                 <input type="hidden" name="delete_id" id="delete_path" value="">
                 <input type="hidden" name="id" value="{{ $goods_folder->id }}">
             </form>
-            <form action="/mypage/owner/goods_edit_update" method="POST">
+            <form action="/mypage/partner/goods_edit_update" method="POST">
                 @csrf
                 <input name="id" type="hidden" class="form-control" value="{{ $goods_folder->id }}">
                 <input name="user_id" type="hidden" class="form-control" value="{{ $goods_folder->user_id }}">
@@ -284,7 +284,7 @@
                 
             </form>
             <div class="my-4">
-                <form action="/mypage/owner/action_goods_display_delete" method="POST">
+                <form action="/mypage/partner/action_goods_delete" method="POST">
                     @csrf
                     <button class="btn btn-lg btn-danger">お土産情報削除</button>
                     <input type="hidden" name="id" value="{{ $goods_folder->id }}">

@@ -284,7 +284,7 @@
                 
             </form>
             <div class="my-4">
-                <form action="/mypage/partner/action_goods_display_delete" method="POST">
+                <form action="/mypage/partner/action_goods_delete" method="POST">
                     @csrf
                     <button class="btn btn-lg btn-danger">お土産情報削除</button>
                     <input type="hidden" name="id" value="{{ $goods_folder->id }}">
