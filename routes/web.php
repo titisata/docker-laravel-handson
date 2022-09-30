@@ -71,7 +71,6 @@ Route::prefix('mypage/partner')->middleware(['auth','role:partner'])->group(func
     Route::post('/action_link_edit', [App\Http\Controllers\MPartnerController::class, 'action_link_edit']);
     Route::post('/action_link_delete', [App\Http\Controllers\MPartnerController::class, 'action_link_delete']);
     
-
 });
 
 // 管理者がアクセスできる
