@@ -150,39 +150,7 @@
         //submit()でフォームの内容を送信
         document.deleteform.submit();
     }
-    // let count = 0; 
-    // let btn = document.getElementById('delete_btn');
-    // console.log(btn);
-
-    // btn.addEventListener('click', function() {
-    //   alert(document.deleteform.delete_id.value);
-
-
-    //   document.getElementById('delete_path').value = btn.value;
-
-    //   console.log(document.getElementById('delete_path').value);
-
-  
-    //   //submit()でフォームの内容を送信
-    //   document.deleteform.submit();
-    // })
-
-    // let count = 0; 
-    // let btn = document.getElementById('delete_btn');
-    // console.log(btn);
-
-    // btn.addEventListener('click', function() {
-    //   alert(document.deleteform.delete_id.value);
-
-
-    //   document.getElementById('delete_path').value = btn.value;
-
-    //   console.log(document.getElementById('delete_path').value);
-
-  
-    //   //submit()でフォームの内容を送信
-    //   document.deleteform.submit();
-    // })
+    
     var c = '';
 
     function number_set(){
@@ -544,6 +512,24 @@
                         </div>
                         </div>
                         
+                        </div>
+                    </div>
+
+                    <div class="card mt-3">
+                        <div class="card-header">イベント期間</div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <label for="">
+                                    イベント開始日
+                                    <input class="form-control" style="width:200px;" type='date' name="start_date" value="20{{ $start_date }}">
+                                </label>
+                                <p class="fs-1 mx-3">~</p>
+                                <label for="">
+                                    イベント終了日
+                                    <input class="form-control" style="width:200px;" type='date' name="end_date" value="20{{ $end_date }}">
+                                </label>
+                                
+                            </div>
                         </div>
                     </div>
 

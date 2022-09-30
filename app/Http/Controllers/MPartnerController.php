@@ -36,9 +36,6 @@ class MPartnerController extends Controller
         $now = now()->format('y-m-d');
         $tomorrow = now()->addDay()->format('y-m-d');
         $user = Auth::user();
-        // $ordered_goods = GoodsOrder::where('partner_id', $user->id)->get();
-        // $reserved_experiences = ExperienceReserve::where('partner_id', $user->id)->where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
-        // return view('mypage.partner.home', compact('user', 'ordered_goods', 'reserved_experiences'));
 
         if ($user->hasRole('system_admin|site_admin')) {
             $partner = Partner::where('user_id', $user->id)->first();
@@ -82,13 +79,8 @@ class MPartnerController extends Controller
         
         $food_groups = FoodGroup::all();
 
-        if ($user->hasRole('system_admin|site_admin')) {
-            return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories', 'hotel_groups', 'food_groups'));
-        }
-
-        if($user->hasRole('partner')){
-            return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories', 'hotel_groups', 'food_groups'));
-        }
+        $schedules = Schedule::where('experience_folder_id',$id)->get();
+        return view('mypage.partner.event_add', compact('user', 'experiences_folder', 'categories', 'hotel_groups', 'food_groups'));
         
     }
 
@@ -109,6 +101,8 @@ class MPartnerController extends Controller
         $is_before_lodging = $request->is_before_lodging;
         $recommend_flag = $request->recommend_flag;
         $status = $request->status;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
         $table_name = $request->table_name;
         $hotel_groups = $request->hotel_group;
         $food_groups = $request->food_group;
@@ -119,6 +113,10 @@ class MPartnerController extends Controller
         $ex_quantity = $request->ex_quantity;
         $ex_status = $request->ex_status;  
         $key_count = $request->key_count;
+        $selected_date = $request->selected_date;
+
+        print_r($selected_date);
+        exit;
 
         $data = ExperienceFolder::create([
             'user_id' => $user_id,
@@ -133,6 +131,8 @@ class MPartnerController extends Controller
             'is_lodging' => $is_lodging,
             'is_before_lodging' => $is_before_lodging,
             'status' => $status,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
             'recommend_flag' => $recommend_flag,
             'category1' => $category,
         ]);   
@@ -146,77 +146,90 @@ class MPartnerController extends Controller
             'table_id' => $data->id,
             'image_path' => '/storage/' . $path,
         ]);
-    }
-
-    if($is_lodging == 1){
-        for ($i=0; $i < count($hotel_groups); $i++) {
-
-            $hotel_group = $hotel_groups[$i];
-            
-            //選択されたものをインサート
-
-            HotelGroupSelect::create([
-                'experience_folder_id' => $data->id,
-                'hotel_group_id' => $hotel_group,
-            ]);
-
         }
-    }
 
-    if( $is_lodging == 1){
-        for ($i=0; $i < count($food_groups); $i++) {
-
-            $food_group = $food_groups[$i];
-            
-            //選択されたものをインサート
-
-            FoodGroupSelect::create([
-                'experience_folder_id' => $data->id,
-                'food_group_id' => $food_group,
-            ]);
-
+        //スケジュールを登録
+        if(!is_null($selected_date)){
+            foreach($selected_date as $d){
+                Schedule::create([
+                    'partner_id' => $user_id,
+                    'experience_folder_id' => $data->id,
+                    'is_holiday' => 1,
+                    'title' => 'お休み',
+                    'date' => new DateTime($d),
+                ]);
+            }
         }
-    }
 
-    Experience::create([
-        'experience_folder_id' => $data->id,
-        'name' => $ex_name,
-        'price_adult' => $ex_price_adult,
-        'price_child' => $ex_price_child,
-        'sort_no' => $ex_sort_no,
-        'quantity' => $ex_quantity,
-        'status' => $ex_status,
-    ]);
+        if($is_lodging == 1){
+            for ($i=0; $i < count($hotel_groups); $i++) {
 
-    for ($i=1; $i < $key_count + 1; $i++) {
-        $ex_names = $request['ex_names_'.$i];
-        $ex_ids = $request['ex_ids_'.$i];
-        $ex_sort_nos = $request['ex_sort_nos_'.$i];
-        $ex_quantities = $request['ex_quantities_'.$i];
-        $ex_price_adults = $request['ex_price_adults_'.$i];
-        $ex_price_childs = $request['ex_price_childs_'.$i];
-        $ex_statuses = $request['ex_statuses_'.$i];
-        $name = $ex_names;
-        $price_adult = $ex_price_adults;
-        $price_child = $ex_price_childs;
-        $sort_no = $ex_sort_nos;
-        $quantity = $ex_quantities;
-        $status = $ex_statuses;
+                $hotel_group = $hotel_groups[$i];
+                
+                //選択されたものをインサート
+
+                HotelGroupSelect::create([
+                    'experience_folder_id' => $data->id,
+                    'hotel_group_id' => $hotel_group,
+                ]);
+
+            }
+        }
+
+        if( $is_lodging == 1){
+            for ($i=0; $i < count($food_groups); $i++) {
+
+                $food_group = $food_groups[$i];
+                
+                //選択されたものをインサート
+
+                FoodGroupSelect::create([
+                    'experience_folder_id' => $data->id,
+                    'food_group_id' => $food_group,
+                ]);
+
+            }
+        }
 
         Experience::create([
             'experience_folder_id' => $data->id,
-            'name' => $name,
-            'price_adult' => $price_adult,
-            'price_child' => $price_child,
-            'sort_no' => $sort_no,
-            'quantity' => $quantity,
-            'status' => $status,
+            'name' => $ex_name,
+            'price_adult' => $ex_price_adult,
+            'price_child' => $ex_price_child,
+            'sort_no' => $ex_sort_no,
+            'quantity' => $ex_quantity,
+            'status' => $ex_status,
         ]);
 
-    }
+        for ($i=1; $i < $key_count + 1; $i++) {
+            $ex_names = $request['ex_names_'.$i];
+            $ex_ids = $request['ex_ids_'.$i];
+            $ex_sort_nos = $request['ex_sort_nos_'.$i];
+            $ex_quantities = $request['ex_quantities_'.$i];
+            $ex_price_adults = $request['ex_price_adults_'.$i];
+            $ex_price_childs = $request['ex_price_childs_'.$i];
+            $ex_statuses = $request['ex_statuses_'.$i];
+            $name = $ex_names;
+            $price_adult = $ex_price_adults;
+            $price_child = $ex_price_childs;
+            $sort_no = $ex_sort_nos;
+            $quantity = $ex_quantities;
+            $status = $ex_statuses;
 
-    $return_view = $this->event();
-    return $return_view;
+            Experience::create([
+                'experience_folder_id' => $data->id,
+                'name' => $name,
+                'price_adult' => $price_adult,
+                'price_child' => $price_child,
+                'sort_no' => $sort_no,
+                'quantity' => $quantity,
+                'status' => $status,
+            ]);
+
+        }
+
+        $return_view = $this->event();
+        return $return_view;
         
     }
 
@@ -224,6 +237,13 @@ class MPartnerController extends Controller
     {
         $experiences_folder = ExperienceFolder::find($id);
         $categories = ExperienceCategory::all();
+
+        $start_date = $experiences_folder->start_date->format('y-m-d');
+        $end_date = $experiences_folder->end_date->format('y-m-d');
+
+        // echo $start_date;
+        // echo $end_date;
+        // exit;
         
         $hotel_groups = HotelGroup::all();
         $hotel_select_ids = HotelGroupSelect::where('experience_folder_id',$id)->get();
@@ -240,7 +260,7 @@ class MPartnerController extends Controller
         }
 
         $schedules = Schedule::where('experience_folder_id',$id)->get();
-        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group', 'schedules'));
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group', 'schedules', 'start_date', 'end_date'));
     }
 
     public function event_edit_update(EventEditRequest $request)
@@ -259,6 +279,8 @@ class MPartnerController extends Controller
         $is_before_lodging = $request->is_before_lodging;
         $recommend_flag = $request->recommend_flag;
         $status = $request->status; 
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
         $id = $request->id;
         $key = $request->key;
         $hotel_groups = $request->hotel_group;
@@ -280,6 +302,8 @@ class MPartnerController extends Controller
             'status' => $status,
             'recommend_flag' => $recommend_flag,
             'category1' => $category,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
         ]);
 
         //スケジュールを登録
@@ -443,33 +467,7 @@ class MPartnerController extends Controller
         return view('mypage.partner.goods_add', compact('user', 'goods_folder', 'categories'));
     }
 
-    // public function action_goods_add(Request $request)
-    // {
-    //     $user_id = $request->user_id;
-    //     $name = $request->name;
-    //     $price = $request->price;
-    //     $description = $request->description;
-    //     $detail = $request->detail;
-    //     $caution = $request->caution;
-    //     $category = $request->category;
-    //     $recommend_flag = $request->recommend_flag; 
-        
-
-    //     GoodsFolder::create([
-    //         'user_id' => $user_id,
-    //         'name' => $name,
-    //         'price' => $price,
-    //         'description' => $description,
-    //         'detail' => $detail,
-    //         'caution' => $caution,
-    //         'recommend_flag' => $recommend_flag,
-    //         'category1' => $category,
-    //     ]);     
-
-    //     $return_view = $this->goods();
-    //     return $return_view;
-        
-    // }
+   
 
     public function action_goods_add(GoodsAddRequest $request)
     {

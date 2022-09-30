@@ -34,9 +34,7 @@ class RegisterController extends Controller
     protected function redirectTo()
     {
         $user = Auth::user();
-        if ($user->hasRole('system_admin|site_admin')) {
-           return '/mypage/owner/';
-        }elseif($user->hasRole('partner')){
+        if ($user->hasRole('system_admin|site_admin|partner')) {
             return '/mypage/partner/';
         }else{
             return '/mypage/user/';

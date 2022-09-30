@@ -29,6 +29,8 @@ class ExperienceFolder extends Model
         'status',
         'recommend_flag',
         'category1',
+        'start_date',
+        'end_date',
     ];
 
     protected $dates = [

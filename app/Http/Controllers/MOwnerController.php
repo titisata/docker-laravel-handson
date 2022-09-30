@@ -44,17 +44,7 @@ use Carbon\Carbon;
 
 class MOwnerController extends Controller
 {
-
-    public function home()
-    {
-        $now = now()->format('y-m-d');
-        $tomorrow = now()->addDay()->format('y-m-d');
-        $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
-        $ordered_goods = GoodsOrder::all();
-        $reserved_experiences = ExperienceReserve::where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
-        return view('mypage.owner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences'));
-    }
+    
 
     
     public function reserve()

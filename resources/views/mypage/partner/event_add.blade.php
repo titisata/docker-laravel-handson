@@ -2,6 +2,66 @@
 
 @section('menu', 'partner_event')
 @section('content')
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+<script>
+    window.onload = function(){
+        // 日本語化
+        $.datepicker.regional['ja'] = {
+        closeText: '閉じる',
+        prevText: '<前',
+        nextText: '次>',
+        currentText: '今日',
+        monthNames: ['1月','2月','3月','4月','5月','6月',
+        '7月','8月','9月','10月','11月','12月'],
+        monthNamesShort: ['1月','2月','3月','4月','5月','6月',
+        '7月','8月','9月','10月','11月','12月'],
+        dayNames: ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'],
+        dayNamesShort: ['日','月','火','水','木','金','土'],
+        dayNamesMin: ['日','月','火','水','木','金','土'],
+        weekHeader: '週',
+        dateFormat: 'yy/mm/dd',
+        firstDay: 0,
+        isRTL: false,
+        showMonthAfterYear: true,
+        minViewMode: 2,
+        yearSuffix: '年'};
+        $.datepicker.setDefaults($.datepicker.regional['ja']);
+    }
+
+    $(function() {
+        $('#select_date').datepicker();
+    });
+
+    function add_date(){
+        var cnt = document.getElementById('schedule_counter').value;
+        var val = document.getElementById('select_date').value;
+        if(val == ""){
+            alert('日付を選択してください');
+            return;
+        }
+
+        cnt = Number(cnt) + 1;
+        var div_element = document.createElement('div');
+        div_element.id = 'div_schedule_' + cnt;
+        div_element.innerHTML = '<input class="form-control" style="width:200px;" type="text" name="selected_date[]" value="' + val + '" readonly>';
+		div_element.innerHTML+= '<input class="btn btn-primary" style="width:40px;" type="button" value="-" onclick="delete_date(' + cnt + ');">';
+        var parent_object = document.getElementById('div_selected_date');
+		parent_object.appendChild(div_element);
+
+        document.getElementById('schedule_counter').value = cnt;
+        document.getElementById('select_date').value = "";
+    }
+
+    function delete_date(id){
+        var dom_obj = document.getElementById('div_schedule_' + id);
+		var dom_obj_parent = dom_obj.parentNode;
+		dom_obj_parent.removeChild(dom_obj);
+    }
+</script>
 <script>
     $(function(){
         $('textarea')
@@ -78,10 +138,10 @@
 <div class="container">
     <h1>イベント新規作成</h1>
     <div class="row justify-content-center">
-        <div class="col-md-8 card mt-3">
+        <div class="col-md-8 mt-3">
+            <div class="card">
             <form action="/mypage/partner/action_event_add" method="POST" enctype="multipart/form-data">
                 @csrf
-                
                 <input name="user_id" type="hidden" value="{{ $user->id }}">
                     <div class="card-header">基本情報</div>
                     <div class="card-body">
@@ -175,15 +235,13 @@
                             
                         </div>
                         <div class="mb-3">
-                            
                             <label class="form-label">宿泊の有無</label>
                             <div>
                                 <input name="is_lodging" type="radio" class="" checked  value="1">
                                 <label class="fw-normal">宿泊あり</label>
                                 <input name="is_lodging" type="radio" class="" value="0">
                                 <label class="fw-normal">宿泊なし</label>
-                            </div>
-                            
+                            </div> 
                         </div>
                         <div class="mb-3">
                             <label class="form-label">宿泊の場合の前泊・後泊</label>
@@ -238,75 +296,110 @@
                                 <input type="hidden" name="table_name" value="experience_folders" />
                                 <input  name="image_path" type="file" />
                             </div>
-                        </div>    
+                        </div>  
+                    </div> 
+        </div> 
+
+                        <div class="card mt-3">
+                        <div class="card-header">イベント期間</div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <label for="">
+                                    イベント開始日
+                                    <input class="form-control" style="width:200px;" type='date' name="start_date" value="">
+                                </label>
+                                <p class="fs-1 mx-3">~</p>
+                                <label for="">
+                                    イベント終了日
+                                    <input class="form-control" style="width:200px;" type='date' name="end_date" value="">
+                                </label>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-3">
+                        <div class="card-header">休暇設定</div>
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <input class="form-control" style="width:200px;" type='text' id='select_date' name='selecte_date' value=''>
+                                <input class="btn btn-primary" style="width:40px;" type="button" value="+" onclick="add_date();">
+                            </div>
+                            <?php $schedule_count=0; ?>
+                            <div id="div_selected_date"> 
+                                
+                                <input type="hidden" id="schedule_counter" value="<?php echo $schedule_count; ?>">
+                            </div>
+                        </div>
+                    </div>
                         
                     
 
-                <div class="card mt-3">
-                    <div class="card-header">時間帯設定</div>
-                    <div class="card-body">
-                        
-                        <div class="card mt-3 p-3 ex_data">
+                    <div class="card mt-3">
+                        <div class="card-header">時間帯設定</div>
+                        <div class="card-body">
                             
-                            <div class="mb-3">
-                                <label class="form-label">体験の時間帯</label>
-                                @error('ex_name')
-                                <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <input name="ex_name" type="text" class="form-control" value="">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">大人料金</label>
-                                @error('ex_price_adult')
-                                <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <input name="ex_price_adult" type="number" class="form-control" value="">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">子供料金</label>
-                                @error('ex_price_child')
-                                <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <input name="ex_price_child" type="number" class="form-control" value="">
-                            </div>
-                            <div class="mb-3">
-                                <div class="d-flex">
-                                    <label class="form-label">表示の順番</label>
-                                    <p class="mb-1 ms-3">小さい数ほど優先して表示されます。</p>
+                            <div class="card mt-3 p-3 ex_data">
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">体験の時間帯</label>
+                                    @error('ex_name')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input name="ex_name" type="text" class="form-control" value="">
                                 </div>
-                                @error('ex_sort_no')
-                                <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <input name="ex_sort_no" type="number" class="form-control" value="">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">上限人数</label>
-                                @error('ex_quantity')
-                                <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <input name="ex_quantity" type="number" class="form-control" value="">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">体験の表示</label>
-                                <div>
-                                    <input name="ex_status" type="radio" checked value="1">
-                                    <label class="fw-normal">表示</label>
-                                    <input name="ex_status" type="radio" value="0">
-                                    <label class="fw-normal">非表示</label>
+                                <div class="mb-3">
+                                    <label class="form-label">大人料金</label>
+                                    @error('ex_price_adult')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input name="ex_price_adult" type="number" class="form-control" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">子供料金</label>
+                                    @error('ex_price_child')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input name="ex_price_child" type="number" class="form-control" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex">
+                                        <label class="form-label">表示の順番</label>
+                                        <p class="mb-1 ms-3">小さい数ほど優先して表示されます。</p>
+                                    </div>
+                                    @error('ex_sort_no')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input name="ex_sort_no" type="number" class="form-control" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">上限人数</label>
+                                    @error('ex_quantity')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input name="ex_quantity" type="number" class="form-control" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">体験の表示</label>
+                                    <div>
+                                        <input name="ex_status" type="radio" checked value="1">
+                                        <label class="fw-normal">表示</label>
+                                        <input name="ex_status" type="radio" value="0">
+                                        <label class="fw-normal">非表示</label>
 
+                                    </div>
+                                    
+                                    
                                 </div>
-                                
+                        
                                 
                             </div>
-                    
+                            <div id="add_target"></div>
+                            <input type="hidden" id="key_count" name="key_count" value="">
+                        
+                            <button type="button" class="mt-2 btn btn-primary" onclick="add_ex()">体験の時間帯追加</button>
                             
                         </div>
-                        <div id="add_target"></div>
-                        <input type="hidden" id="key_count" name="key_count" value="">
-                       
-                        <button type="button" class="mt-2 btn btn-primary" onclick="add_ex()">体験の時間帯追加</button>
-                        
-                    </div>
                
                     </div>
                 
