@@ -47,6 +47,7 @@
         cnt = Number(cnt) + 1;
         var div_element = document.createElement('div');
         div_element.id = 'div_schedule_' + cnt;
+        div_element.className = 'd-flex mt-1';
         div_element.innerHTML = '<input class="form-control" style="width:200px;" type="text" name="selected_date[]" value="' + val + '" readonly>';
 		div_element.innerHTML+= '<input class="btn btn-primary" style="width:40px;" type="button" value="-" onclick="delete_date(' + cnt + ');">';
         var parent_object = document.getElementById('div_selected_date');
