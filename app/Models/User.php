@@ -95,6 +95,17 @@ class User extends Authenticatable
         return $this->hasMany(ExperienceFolder::class);
     }
 
+    /**
+     * グッズを取得
+     *
+     * @return Collection<GoodsFolder>
+     */
+
+    public function goods()
+    {
+        return $this->hasMany(GoodsFolder::class);
+    }
+
     public function role_string()
     {
         $user_roles = array();

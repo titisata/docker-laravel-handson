@@ -54,10 +54,6 @@ class MOwnerController extends Controller
             $dates[] = now()->addMonth($i)->format('y-m');
         }
 
-       
-            // $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
-            // return view('mypage.owner.reserve', compact('user', 'partners', 'dates'));
-        
         
         if ($user->hasRole('system_admin|site_admin')) {
             $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
@@ -280,10 +276,233 @@ class MOwnerController extends Controller
 
         }
 
-        
-        
 
     }
+
+    public function goods_reserve()
+    {
+        $user = Auth::user();
+        
+        $dates = array();
+        for($i = 0; $i < 6; $i++){
+            $dates[] = now()->addMonth($i)->format('y-m');
+        }
+        
+        if ($user->hasRole('system_admin|site_admin')) {
+            $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
+            return view('mypage.owner.goods_reserve', compact('user', 'partners', 'dates'));
+        }
+        
+        if($user->hasRole('partner')){
+            $partners =  User::where('id',$user->id)->first();
+            return view('mypage.owner.goods_reserve', compact('user', 'partners', 'dates'));
+        }
+    }
+
+    public function goods_reserve_past()
+    {
+        $user = Auth::user();
+        $dates = array();
+        for($i = 0; $i < 6; $i++){
+            $dates[] = now()->subMonth($i)->format('y-m');
+        }
+        
+        if ($user->hasRole('system_admin|site_admin')) {
+            $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
+            return view('mypage.owner.goods_reserve_past', compact('user', 'partners', 'dates'));
+        }
+        
+        if($user->hasRole('partner')){
+            $partners =  User::where('id',$user->id)->first();
+            return view('mypage.owner.goods_reserve_past', compact('user', 'partners', 'dates'));
+        }
+    }
+
+    public function goods_reserve_select(string $id)
+    {
+        $now = now()->format('y-m-d');
+        $user = Auth::user();
+        $goods_folder = GoodsFolder::where('id', $id)->first();
+        $goods = Goods::where('goods_folder_id', $goods_folder->id)->get();
+        
+        return view('mypage.owner.goods_reserve_select', compact('user','goods_folder', 'goods', 'now'));
+    }
+
+    public function goods_reserve_select_date(string $id)
+    {
+        $now = now()->format('y-m-d');
+        $datetime = $id;
+        $datetime1 = explode(' ', $datetime);
+        $date = explode('-', $datetime1[0]);
+        $year = $date[0];
+        $month = $date[1];
+
+        $user = Auth::user();
+        $orders = GoodsOrder::whereMonth('created_at', $month)->where('status', '=', '未対応')->get();
+      
+        return view('mypage.owner.goods_reserve_select_date', compact('user', 'id', 'orders'));
+    }
+
+    public function goods_reserve_select_past(string $id)
+    {
+        $now = now()->format('y-m-d');
+        $user = Auth::user();
+        $goods_folder = GoodsFolder::where('id', $id)->first();
+        $goods = Goods::where('goods_folder_id', $goods_folder->id)->get();
+        
+        return view('mypage.owner.goods_reserve_select_past', compact('user','goods_folder', 'goods', 'now'));
+    }
+
+    public function goods_reserve_select_date_past(string $id)
+    {
+        $now = now()->format('y-m-d');
+        $datetime = $id;
+        $datetime1 = explode(' ', $datetime);
+        $date = explode('-', $datetime1[0]);
+        $year = $date[0];
+        $month = $date[1];
+
+        $user = Auth::user();
+        $orders = GoodsOrder::whereMonth('created_at', $month)->where('status', '!=', '未対応')->get();
+      
+        return view('mypage.owner.goods_reserve_select_date_past', compact('user', 'id', 'orders'));
+    }
+
+    public function goods_reserve_edit(string $id)
+    {
+        $user = Auth::user();
+        $goods_order = GoodsOrder::find($id);
+        
+        return view('mypage.owner.goods_reserve_edit', compact('user', 'goods_order'));
+    }
+
+    public function goods_action_reserve_edit(Request $request)
+    {
+        $id = $request->id;
+        $status = $request->status;
+        
+
+        GoodsOrder::where('id',$id)->update([
+            'status'=>$status,
+            'hotel_id'=>$hotel_id,
+        ]);
+
+    
+        if( $mail == 1 ){
+            $to = 'satou@b-partners.jp';
+            $view = 'email.hotel_confirm';
+
+            //予約データを取得
+            $reserve = ExperienceReserve::where('id',$id)->first();
+            
+            //ホテル情報を取得
+            $hotel= hotel::where('id',$hotel_id)->first();
+
+            //管理者へのメール送信
+            $user = Auth::user();
+            // echo "管理者--".$user->name."--".$user->email."<br>";
+            $subject = '管理者へのメール';
+            $name = $user->name;
+            $with = [
+                'name' => $name,
+                'hotel' => $hotel->name,
+                'for' => 'admin',
+            ];
+            // Mail::send(new SendMail($with, $to, $subject, $view));
+
+            //予約者へのメール送信
+            $user = User::where('id',$reserve->user_id)->first();
+            // echo "予約者--".$user->name."--".$user->email."<br>";
+            $subject = '予約者へのメール';
+            $name = $user->name;
+            $with = [
+                'name' => $name,
+                'hotel' => $hotel->name,
+                'for' => 'user',
+            ];
+            // Mail::send(new SendMail($with, $to, $subject, $view));
+
+            //パートナーへメール送信
+            $experience = Experience::where('id',$reserve->experience_id)->first();
+            $experience_folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
+            $user = User::where('id',$experience_folder->user_id)->first();
+            // echo "パートナー--".$user->name."--".$user->email."<br>";
+            $subject = 'パートナーへのメール';
+            $name = $user->name;
+            $with = [
+                'name' => $name,
+                'hotel' => $hotel->name,
+                'for' => 'partner',
+            ];
+            // Mail::send(new SendMail($with, $to, $subject, $view));
+
+            //ホテルへのメール送信
+        
+
+            return back()->with('result', 'ホテル確定メールを送信しました。');
+
+        }elseif( $mail == 2 ){
+            $to = 'satou@b-partners.jp';
+            $view = 'email.status_confirm';
+
+            //予約データを取得
+            $reserve = ExperienceReserve::where('id',$id)->first();
+            
+
+            //管理者へのメール送信
+            $user = Auth::user();
+            // echo "管理者--".$user->name."--".$user->email."<br>";
+            $subject = '管理者へのメール';
+            $name = $user->name;
+            $with = [
+                'name' => $name,
+                'status' => $reserve->status,
+                'for' => 'admin',
+            ];
+            // Mail::send(new SendMail($with, $to, $subject, $view));
+
+            //予約者へのメール送信
+            $user = User::where('id',$reserve->user_id)->first();
+            // echo "予約者--".$user->name."--".$user->email."<br>";
+            $subject = '予約者へのメール';
+            $name = $user->name;
+            $with = [
+                'name' => $name,
+                'status' => $reserve->status,
+                'for' => 'user',
+            ];
+            // Mail::send(new SendMail($with, $to, $subject, $view));
+
+            //パートナーへメール送信
+            $experience = Experience::where('id',$reserve->experience_id)->first();
+            $experience_folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
+            $user = User::where('id',$experience_folder->user_id)->first();
+            // echo "パートナー--".$user->name."--".$user->email."<br>";
+            $subject = 'パートナーへのメール';
+            $name = $user->name;
+            $with = [
+                'name' => $name,
+                'status' => $reserve->status,
+                'for' => 'partner',
+            ];
+            // Mail::send(new SendMail($with, $to, $subject, $view));
+
+            //ホテルへのメール送信
+        
+
+            return back()->with('result', '予約ステータス変更メールを送信しました。');
+
+
+        }else{
+
+            return back()->with('result', '予約状況を更新しました。');
+
+        }
+
+
+    }
+
+    
 
     
     

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Partner;
 use App\Models\User;
+use App\Models\ExperienceReserve;
+use App\Models\ExperienceFolder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -27,6 +29,15 @@ class MUserController extends Controller
         $user = Auth::user();
         $reserved_experiences = $user->reserved_experiences;
         return view('mypage.user.reserve', compact('user', 'reserved_experiences'));
+    }
+
+
+    public function reserve_info(string $id)
+    {
+        $user = Auth::user();
+        $reserved_experience = ExperienceReserve::where('user_id', $id)->first();
+        $experience_folder = ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first();
+        return view('mypage.user.reserve_info', compact('user', 'reserved_experience', 'experience_folder'));
     }
 
     public function users()

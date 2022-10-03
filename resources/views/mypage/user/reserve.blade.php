@@ -27,7 +27,7 @@
                     
                     <td>
                         <div class="d-flex flex-column">
-                        <a class="link" href="/experience/{{ $reserved_experience->experience->experience_folder_id }}">
+                        <a class="link" href="/mypage/user/reserve_info/{{$reserved_experience->id}}">
                             @if(App\Models\ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first()->is_lodging == 0)
                                 <p class="text-success">宿泊なし</p>
                             @else
