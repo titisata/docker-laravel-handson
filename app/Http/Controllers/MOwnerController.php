@@ -48,25 +48,47 @@ class MOwnerController extends Controller
     public function reserve()
     {
         $user = Auth::user();
-        $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
         
         $dates = array();
         for($i = 0; $i < 6; $i++){
             $dates[] = now()->addMonth($i)->format('y-m');
         }
+
+       
+            // $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
+            // return view('mypage.owner.reserve', compact('user', 'partners', 'dates'));
         
-        return view('mypage.owner.reserve', compact('user', 'partners', 'dates'));
+        
+        if ($user->hasRole('system_admin|site_admin')) {
+            $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
+            return view('mypage.owner.reserve', compact('user', 'partners', 'dates'));
+        }
+        
+        if($user->hasRole('partner')){
+            
+            $partners =  User::where('id',$user->id)->first();
+            return view('mypage.partner.reserve', compact('user', 'partners', 'dates'));
+        }
     }
 
     public function reserve_past()
     {
         $user = Auth::user();
-        $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
         $dates = array();
         for($i = 0; $i < 6; $i++){
             $dates[] = now()->subMonth($i)->format('y-m');
         }
-        return view('mypage.owner.reserve_past', compact('user', 'partners', 'dates'));
+        
+        if ($user->hasRole('system_admin|site_admin')) {
+            $partners =  User::Join('partners', 'users.id', '=', 'partners.user_id')->select('users.*')->get();
+            return view('mypage.owner.reserve_past', compact('user', 'partners', 'dates'));
+        }
+        
+        if($user->hasRole('partner')){
+            
+            $partners =  User::where('id',$user->id)->get();
+            return view('mypage.owner.reserve_past', compact('user', 'partners', 'dates'));
+        }
     }
 
     public function reserve_select(string $id)
@@ -115,7 +137,7 @@ class MOwnerController extends Controller
 
         $user = Auth::user();
         $reserves = ExperienceReserve::whereMonth('start_date', $month)->where('start_date', '<', $now)->get();
-       
+
         return view('mypage.owner.reserve_select_date_past', compact('user', 'id', 'reserves'));
     }
 
@@ -368,6 +390,61 @@ class MOwnerController extends Controller
         $return_view = $this->partner_display();
         return $return_view;
 
+    }
+
+    public function image_insert(Request $request)
+    {
+        //新規画像登録処理
+
+        $table_name = $request->table_name;
+        $table_id = $request->table_id;
+
+        //storage/imagesディレクトリに画像を保存
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_name' => $table_name,
+            'table_id' => $table_id,
+            'image_path' => '/storage/' . $path,
+        ]);
+    }
+
+    public function image_delete(Request $request, string $id)
+    {
+        //画像削除処理
+
+        $image_path = $request->image_path;
+        $table_id = $request->table_id;
+
+        Storage::disk('public')->delete($image_path);
+       
+        Image::where('id', $id)->delete();
+
+    }
+
+    public function image_update(Request $request)
+    {
+        //画像アップデート処理
+
+        $table_id = $request->table_id;
+        $table_name = $request->table_name;
+        
+        // imagesディレクトリに画像を保存
+        $img = $request->file('image_path');
+        $path = $img->store('images','public');
+
+        Image::create([
+            'table_id'=>$table_id,
+            'image_path' => '/storage/' . $path,
+            'table_name'=>$table_name,
+        ]);
+
+        //削除するファイルのパスを入手
+        $delete_path = $request->delete_path;
+        //storageから画像ファイルを削除
+        Storage::disk('public')->delete($delete_path);
+        Image::where('image_path', $delete_path)->delete();
     }
 
     public function partner_image_insert(string $id)
@@ -790,6 +867,7 @@ class MOwnerController extends Controller
             ]);
 
         }else{
+            
             Link::create([
                 'id'=>$id,
                 'name'=>$name,
@@ -977,9 +1055,6 @@ class MOwnerController extends Controller
                 ]);
 
         }
-
-       
-
 
         $return_view = $this->hotel_display();
         return $return_view;

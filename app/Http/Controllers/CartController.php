@@ -44,15 +44,18 @@ class CartController extends Controller
         }
 
         if(isset($goodCartItems)){
+            $name = Auth::user()->name;
             $postal_code = Auth::user()->postal_code;
             $pref_id = Auth::user()->pref_id;
             $city = Auth::user()->city;
             $town = Auth::user()->town;
             $building = Auth::user()->building;
             $phone_number = Auth::user()->phone_number;
-            return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price', 'postal_code', 'pref_id', 'city', 'town', 'building', 'phone_number'));
+            $show = 1;
+            return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price', 'name', 'postal_code', 'pref_id', 'city', 'town', 'building', 'phone_number', 'show'));
         }else{
-            return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price'));
+            $show = 0;
+            return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price', 'show'));
         }
         
     }

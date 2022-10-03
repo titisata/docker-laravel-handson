@@ -5,15 +5,34 @@
 <div class="container">
     <h1>過去に予約のあったユーザー</h1>
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card-body">
-                @forelse( $reserved_users as $reserved_user)
-                    <a class="link" href="/mypage/partner/user_info/{{ $reserved_user->user->id }}">
-                        <p>{{ $reserved_user->user->name }}</p>
-                    </a>
-                @empty
-                    <p>閲覧可能なユーザーがいません</p>
-                @endforelse
+        <div class="col-md-9">
+            <div class="row justify-content-center">
+                <table class="table table-hover ">
+                    <thead>
+                        <tr>
+                            
+                            <th>ユーザ名</th>
+                            <th>メールアドレス</th>
+                            <th>電話番号</th>
+                            
+                        </tr>
+                    </thead>
+                    
+                    @forelse ( $reserved_users as $reserved_user )
+                        <tr>
+                            <td>
+                                {{ $reserved_user->user->name }}
+                            </td>
+                            <td>
+                                <p>{{ $reserved_user->user->email }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $reserved_user->user->phone_number }}</p>
+                            </td>
+                        </tr>
+                    @empty
+                    @endforelse
+                </table>
             </div>
         </div>
     </div>

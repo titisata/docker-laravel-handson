@@ -14,11 +14,12 @@ class MUserController extends Controller
 {
     public function home()
     {
+        $now = now()->format('y-m-d');
         $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
+        // $partner = Partner::where('user_id', $user->id)->first();
         $ordered_goods = $user->ordered_goods;
-        $reserved_experiences = $user->reserved_experiences;
-        return view('mypage.user.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences'));
+        $future_reserved_experiences = $user->future_reserved_experiences;
+        return view('mypage.user.home', compact('user', 'ordered_goods', 'future_reserved_experiences'));
     }
 
     public function reserve()

@@ -43,35 +43,41 @@
               
             </div>
 
-            <div class="mt-2">
-                <h4>お土産のお送り先</h4> 
-                <div class="mt-1 p-3 card">
-                    <label for="">
-                        郵便番号
-                        <input class="form-control" type="text" value="{{ $postal_code }}">
-                    </label>
-                    <label for="">
-                        都道府県
-                        <input class="form-control" type="text" value="{{ App\Models\User::$prefs[$pref_id] }}">
-                    </label>
-                    <label for="">
-                        市区町村
-                        <input class="form-control" type="text" value="{{ $city }}">
-                    </label>
-                    <label for="">
-                        町名番地等
-                        <input class="form-control" type="text" value="{{ $town }}">
-                    </label>
-                    <label for="">
-                        建物名等
-                        <input class="form-control" type="text" value="{{ $building }}">
-                    </label>
-                    <label for="">
-                        電話番号
-                        <input class="form-control" type="text" value="{{ $phone_number }}">
-                    </label>
+            @if( $show == 1 )
+                <div class="mt-2">
+                    <h4>お土産のお送り先</h4> 
+                    <div class="mt-1 p-3 card">
+                        <label for="">
+                            送り先氏名
+                            <input class="form-control" type="text" value="{{ $name }}">
+                        </label>
+                        <label for="">
+                            郵便番号
+                            <input class="form-control" type="text" value="{{ $postal_code }}">
+                        </label>
+                        <label for="">
+                            都道府県
+                            <input class="form-control" type="text" value="{{ App\Models\User::$prefs[$pref_id] }}">
+                        </label>
+                        <label for="">
+                            市区町村
+                            <input class="form-control" type="text" value="{{ $city }}">
+                        </label>
+                        <label for="">
+                            町名番地等
+                            <input class="form-control" type="text" value="{{ $town }}">
+                        </label>
+                        <label for="">
+                            建物名等
+                            <input class="form-control" type="text" value="{{ $building }}">
+                        </label>
+                        <label for="">
+                            電話番号
+                            <input class="form-control" type="text" value="{{ $phone_number }}">
+                        </label>
+                    </div>
                 </div>
-            </div>
+            @endif
 
 
             <div class="mt-4 mb-2">

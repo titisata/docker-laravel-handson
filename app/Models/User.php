@@ -54,6 +54,13 @@ class User extends Authenticatable
         return $this->hasMany(ExperienceReserve::class);
     }
 
+    public function future_reserved_experiences()
+    {
+        $now = now()->format('y-m-d');
+
+        return $this->hasMany(ExperienceReserve::class)->where('start_date', '>', $now);
+    }
+
     /**
      * ロールを取得する
      *
@@ -68,6 +75,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(GoodsOrder::class);
     }
+
+    // public function future_ordered_goods()
+    // {
+
+    //     $now = now()->format('y-m-d');
+        
+    //     return $this->hasMany(GoodsOrder::class)->where('start_date', '<', $now)->get();
+    // }
 
     /**
      * 体験を取得

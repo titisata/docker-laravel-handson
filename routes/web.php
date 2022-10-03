@@ -61,7 +61,7 @@ Route::prefix('mypage/partner')->middleware(['auth','role:partner'])->group(func
 
     Route::get('/profile', [App\Http\Controllers\MPartnerController::class, 'profile']);
     Route::post('/profile', [App\Http\Controllers\MPartnerController::class, 'profile_post']);
-    Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
+    // Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
     Route::get('/reserved_user', [App\Http\Controllers\MPartnerController::class, 'reserved_user']);
     Route::get('/user_info/{id}', [App\Http\Controllers\MPartnerController::class, 'user_info']);
     Route::get('/link_display', [App\Http\Controllers\MPartnerController::class, 'link_display']);
@@ -76,14 +76,6 @@ Route::prefix('mypage/partner')->middleware(['auth','role:partner'])->group(func
 // 管理者がアクセスできる
 Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'])->group(function () {
     
-    Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
-    Route::get('/reserve_past', [App\Http\Controllers\MOwnerController::class, 'reserve_past']);
-    Route::get('/reserve_select/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select']);
-    Route::get('/reserve_select_date/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date']);
-    Route::get('/reserve_select_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_past']);
-    Route::get('/reserve_select_date_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date_past']);
-    Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
-    Route::post('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_reserve_edit']);
     Route::get('/partner_display', [App\Http\Controllers\MOwnerController::class, 'partner_display']);
     Route::get('/partner_make', [App\Http\Controllers\MOwnerController::class, 'partner_make']);
     Route::post('/partner_display', [App\Http\Controllers\MOwnerController::class, 'action_partner_make']);
@@ -156,6 +148,7 @@ Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'
     Route::get('/food_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'food_edit']);
     Route::post('/action_food_edit', [App\Http\Controllers\MOwnerController::class, 'action_food_edit']);
     Route::post('/food_delete', [App\Http\Controllers\MOwnerController::class, 'food_delete']);
+   
 
 });
 
@@ -189,5 +182,29 @@ Route::prefix('mypage/partner')->middleware(['auth','role:system_admin|site_admi
     Route::post('/goods_edit_update', [App\Http\Controllers\MPartnerController::class, 'goods_edit_update']);
     Route::post('goods_edit_delete', [App\Http\Controllers\MPartnerController::class, 'goods_edit_delete']);    
     Route::get('/goods_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_delete']);
+
+    
+    Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
+    Route::get('/reserve_past', [App\Http\Controllers\MOwnerController::class, 'reserve_past']);
+    Route::get('/reserve_select/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select']);
+    Route::get('/reserve_select_date/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date']);
+    Route::get('/reserve_select_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_past']);
+    Route::get('/reserve_select_date_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date_past']);
+    Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
+    Route::post('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_reserve_edit']);
+});
+
+// 管理者とパートナーがアクセスできる
+Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin|partner'])->group(function () {
+
+    
+    Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
+    Route::get('/reserve_past', [App\Http\Controllers\MOwnerController::class, 'reserve_past']);
+    Route::get('/reserve_select/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select']);
+    Route::get('/reserve_select_date/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date']);
+    Route::get('/reserve_select_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_past']);
+    Route::get('/reserve_select_date_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date_past']);
+    Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
+    Route::post('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_reserve_edit']);
 });
 

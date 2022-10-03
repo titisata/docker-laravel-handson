@@ -256,10 +256,23 @@
             </form>
             <form action="/mypage/partner/event_edit_update" method="POST" id="target">
                 @csrf
-               
-                <input type="hidden" id="hotel_result" name="hotel_result" value="1">
-                <input type="hidden" id="food_result" name="food_result" value="1">
-               
+                
+                @if($experiences_folder->is_lodging  == 1 && isset($checked_hotels_group))
+                    <input type="hidden" id="hotel_result" name="hotel_result" value="1">
+                @elseif($experiences_folder->is_lodging  == 1)
+                    <input type="hidden" id="hotel_result" name="hotel_result" value="0">
+                @else
+                    <input type="hidden" id="hotel_result" name="hotel_result" value="1">
+                @endif
+
+                @if($experiences_folder->is_lodging  == 1 && isset($checked_foods_group))
+                    <input type="hidden" id="food_result" name="food_result" value="1">
+                @elseif($experiences_folder->is_lodging  == 1)
+                    <input type="hidden" id="food_result" name="food_result" value="0">
+                @else
+                    <input type="hidden" id="hotel_result" name="hotel_result" value="1">
+                @endif
+                
                 <div class="card mt-3">
                     <div class="card-header">基本情報</div>
                     <div class="card-body">
