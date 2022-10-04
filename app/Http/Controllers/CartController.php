@@ -95,6 +95,48 @@ class CartController extends Controller
 
     public function purchase_post(Request $request)
     {
+        # このアクセストークンはSquareへAPIアクセスするのに使われます。
+        # 開発、テスト中はサンドボックスのアクセストークンを使ってください。
+        $access_token = 'EAAAEAj031hh5mVqtfnIH9WAKVydeeLDDFO5k8ZkIvrxIldJQ0HXBEWKUIaQQheK';
+
+        # setup authorization
+        $api_config = new \SquareConnect\Configuration();
+        //サンドボックスと本番でURLが違う
+        $api_config->setHost("https://connect.squareupsandbox.com");
+        $api_config->setSSLVerification(FALSE);
+        $api_config->setAccessToken($access_token);
+        $api_client = new \SquareConnect\ApiClient($api_config);
+        # create an instance of the Transaction API class
+        $payments_api = new \SquareConnect\Api\PaymentsApi($api_client);
+        
+        $uniq_id = uniqid();
+        $nonce = $request->nonce;
+        $price = intval($request->price);
+        
+        $request_body = array (
+            "source_id" => $nonce,
+            "amount_money" => array (
+                "amount" => $price,
+                "currency" => "JPY"
+            ),
+            "idempotency_key" => $uniq_id
+        );
+        
+        try {
+            $result = $payments_api->createPayment($request_body);
+        } catch (\SquareConnect\ApiException $e) {
+            //echo $e->getMessage();
+            return view('cart.failure');
+            exit;
+        }
+
+        if($result['payment']){
+            //成功
+        }else{
+            return view('cart.failure');
+            exit;
+        }
+
         $uid = Auth::user()->id;
         $experienceCartItems = ExperienceCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
         $goodCartItems = GoodCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
