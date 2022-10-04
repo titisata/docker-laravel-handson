@@ -49,4 +49,15 @@ class Partner extends Model
     {
         return $this->hasMany(ExperienceFolder::class);
     }
+
+    /**
+     * グッズを取得
+     *
+     * @return Collection<GoodsFolder>
+     */
+
+    public function goods()
+    {
+        return $this->hasMany(GoodsFolder::class);
+    }
 }

@@ -48,7 +48,7 @@
                         @foreach ($dates as $date)
                         <div class="mt-3 border-bottom">
                             <div class="d-flex align-items-center">
-                                <a href="/mypage/owner/reserve_select_date/{{$date}}">
+                                <a href="/mypage/owner/reserve_select_date_past/{{$date}}">
                                     20{{$date}}月の予約
                                 </a>
                             </div>

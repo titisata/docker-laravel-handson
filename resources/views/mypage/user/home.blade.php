@@ -10,28 +10,77 @@
         </div>
     </div>
 
-    <div class="card mt-3">
-                <div class="card-header">予約した体験</div>
-                <div class="card-body">
-                    @forelse ($reserved_experiences as $reserved_experience)
-                        <a href="/experience/{{ $reserved_experience->experience->experience_folder_id }}">
-                            <div class="mt-1 p-3 card">
-                                <div>
-                                    <p>{{ $reserved_experience->experience->name }}</p>
-                                    <p>予約日: {{ $reserved_experience->experience->start_date }}</p>
-                                    <p>大人: {{ $reserved_experience->quantity_adult }}人 子ども: {{ $reserved_experience->quantity_child }}人</p>
-                                    <p>宿泊: {{ $reserved_experience->hotelGroup?->name ?? 'なし' }}</p>
-                                    <p>食事: {{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
-                                    <p>連絡事項: {{ $reserved_experience->message }}</p>
-                                    <p>金額: {{ number_format($reserved_experience->sum_price()) }}円</p>
-                                </div>
-                            </div>
+    
+            <div class="card mt-3">
+        <div class="card-header d-flex">
+            <p class="mb-0">予約した体験</p>
+        </div>
+        <div class="card-body">
+        <table class="table table-hover">
+            @forelse ($future_reserved_experiences as $reserved_experience)
+                @if ($loop->first)
+                    <thead>
+                        <tr>
+                            <th scope="col">予約体験名</th>
+                            <th scope="col">体験日</th>
+                            <th scope="col">予約人数</th>
+                            <th scope="col">宿泊</th>
+                            <th scope="col">食事</th>
+                            <th scope="col">連絡事項</th>
+                            <th scope="col">連絡先</th>
+                            <th scope="col">金額</th>
+                        </tr>
+                    </thead>
+                @endif
+                <tr>
+                    
+                    <td>
+                        <div class="d-flex flex-column">
+                        <a class="link" href="/experience/{{ $reserved_experience->experience->experience_folder_id }}">
+                            @if(App\Models\ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first()->is_lodging == 0)
+                                <p class="text-success">宿泊なし</p>
+                            @else
+                                <p class="text-primary">宿泊あり</p>
+                            @endif
+                            <p>{{ App\Models\ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first()->name }}</p>
+                            <p>{{ $reserved_experience->experience->name }}</p>
                         </a>
-                    @empty
+                        </div> 
+                    </td>
+                    <td>
+                        <p>{{ $reserved_experience->start_date }}</p>
+                    </td>
+                    
+                    <td>
+                        <p>
+                            大人：{{ $reserved_experience->quantity_adult }}名<br>
+                            子ども：{{ $reserved_experience->quantity_child }}名
+                        </p>
+                    </td>
+                    <td>
+                        <p>{{ $reserved_experience->hotelGroup?->name ?? 'なし' }}</p>
+                    </td>
+                    <td>
+                        <p>{{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
+                    </td>
+                    <td>
+                        <p>{{ $reserved_experience->message }}</p>
+                    </td>
+                    <td>
+                        <p>{{ $reserved_experience->contact_info }}</p>
+                    </td>
+                    <td> 
+                        <p>{{ number_format($reserved_experience->sum_price()) }}円</p>
+                    </td>
+                </tr>
+                
+            @empty
 
-                    @endforelse
-                </div>
-            </div>
+            @endforelse
+            </table>
+        </div>
+    </div>
+
 
             <div class="card mt-3">
                 <div class="card-header">注文したお土産</div>

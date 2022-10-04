@@ -91,18 +91,70 @@
     <div class="card mt-3">
         <div class="card-header">注文されたお土産</div>
         <div class="card-body">
+        <table class="table table-hover">
             @forelse ($ordered_goods as $ordered_goods_one)
-                <a href="/goods/{{ $ordered_goods_one->goods->id }}">
-                    <div class="mt-1 p-3 card">
-                        <div>
-                            <p>名前: {{ $ordered_goods_one->goods->name }}</p>
-                            <p>個数: {{ $ordered_goods_one->quantity }}</p>
-                        </div>
-                    </div>
-                </a>
+            @if ($loop->first)
+                <thead>
+                    <tr>
+                        <th scope="col">送り主</th>
+                        <th scope="col">注文商品名</th>
+                        <th scope="col">注文商品責任者</th>
+                        <th scope="col">商品注文日</th>
+                        <th scope="col">注文商品数</th>
+                        <th scope="col">商品に関する問い合わせ先</th>
+                        <th scope="col">注文商品送り先情報</th>
+                        <th scope="col">注文商品状況</th>
+                    </tr>
+                </thead>
+            @endif
+                <tr>
+                    <td>
+                        <p>{{ $ordered_goods_one->user->name }}様</p>
+                    </td>
+                    <td>
+                        <p>{{ App\Models\GoodsFolder::where('id',$ordered_goods_one->goods->goods_folder_id)->first()->name }}</p>
+                        <p>{{ $ordered_goods_one->goods->name }}</p>
+                    </td>
+                    <td>
+                        <p>{{ $ordered_goods_one->partner->name }}</p>  
+                    </td>
+                    <td>
+                        <p>
+                            {{$ordered_goods_one->created_at}}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{$ordered_goods_one->quantity}}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{$ordered_goods_one->partner->phone}}
+                        </p>
+                    </td>
+                    <td> 
+                        <p>氏名：{{$ordered_goods_one->to_name}}</p>
+                        <p>郵便番号：{{$ordered_goods_one->to_postal_code}}</p>
+                        <p>住所：{{App\Models\User::$prefs[$ordered_goods_one->to_pref_id]}}{{$ordered_goods_one->to_city}}{{$ordered_goods_one->to_town}}{{$ordered_goods_one->to_building}}<br>
+                        電話番号：{{$ordered_goods_one->to_phone_number}}</p>
+                    </td>
+                    <td>
+                        
+                        @if($ordered_goods_one->status == '未対応')
+                            <p class="bg-danger text-white text-center">{{$ordered_goods_one->status}}</p>
+                        @else
+                            <p class="bg-primary text-white text-center">{{$ordered_goods_one->status}}</p>
+                        @endif
+                        
+                    </td>
+                    
+                </tr>
+                
             @empty
 
             @endforelse
+        </table>
         </div>
     </div>
 </div>

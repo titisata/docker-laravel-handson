@@ -49,9 +49,9 @@
             
             </td>
             <td>
-            <p>
+            
                <p>{{ $reserve->message }}</p> 
-            </p>
+            
             </td>
             <td>
                 @if( $reserve->status == '対応待ち')
@@ -65,9 +65,6 @@
             </td>
             
         </tr>
-            
-            
-        
         
     @empty
         

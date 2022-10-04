@@ -19,33 +19,49 @@
             <div class="d-flex">
                 <h1>ユーザ一覧</h1>
                 <a href="/mypage/owner/users_edit" style="text-decoration: none; color: inherit;">
-                    <button class="btn btn-sm btn-success ms-5">新規作成</button>
+                    <button class="btn btn-success ms-5">新規作成</button>
                 </a>
             </div>
 
             <div class="row justify-content-center">
-                <table>
-                    <tr><th>ID</th><th>ユーザ名</th><th></th><th></th></tr>
+                <table class="table table-hover ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>ユーザ名</th>
+                            <th>メールアドレス</th>
+                            <th>電話番号</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    
                     @forelse ($users as $user)
                         <tr>
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
                             <td>
-                            <a href="/mypage/owner/users_edit/{{ $user->id }}" style="text-decoration: none; color: inherit;">
-                                <button class="btn btn-sm btn-primary ms-5">編集</button>
-                            </a>
+                                {{ $user->id }}
                             </td>
                             <td>
-                            @if($user->id <> 1)
-                                <form action="/mypage/owner/users_edit" method="POST" onSubmit="return CheckDelete();">
-                                @csrf
-                                <a href="/mypage/owner/users_edit" style="text-decoration: none; color: inherit;">
-                                    <button type="submit" class="btn btn-sm btn-danger ms-5">削除</button>
+                                <a href="/mypage/owner/users_edit/{{ $user->id }}" class="link">
+                                    {{ $user->name }}
                                 </a>
-                                <input type="hidden" name="id" value="{{ $user->id }}">
-                                <input type="hidden" name="mode" value="del">
-                                </form>
-                            @endif
+                            </td>
+                            <td>
+                                <p>{{ $user->email }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $user->phone_number }}</p>
+                            </td>
+                            <td>
+                                @if($user->id <> 1)
+                                    <form action="/mypage/owner/users_edit" method="POST" onSubmit="return CheckDelete();">
+                                        @csrf
+                                        <a href="/mypage/owner/users_edit" style="text-decoration: none; color: inherit;">
+                                            <button type="submit" class="btn btn-danger ms-5">削除</button>
+                                        </a>
+                                        <input type="hidden" name="id" value="{{ $user->id }}">
+                                        <input type="hidden" name="mode" value="del">
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @empty

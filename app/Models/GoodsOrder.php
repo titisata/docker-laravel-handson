@@ -24,6 +24,16 @@ class GoodsOrder extends Model
         return $this->belongsTo(Goods::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
+    }
+
     public function sum_price()
     {
         $sum_price = $this->goods_price * $this->quantity;

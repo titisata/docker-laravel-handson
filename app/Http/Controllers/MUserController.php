@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Partner;
 use App\Models\User;
+use App\Models\ExperienceReserve;
+use App\Models\ExperienceFolder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -14,11 +16,12 @@ class MUserController extends Controller
 {
     public function home()
     {
+        $now = now()->format('y-m-d');
         $user = Auth::user();
-        $partner = Partner::where('user_id', $user->id)->first();
+        // $partner = Partner::where('user_id', $user->id)->first();
         $ordered_goods = $user->ordered_goods;
-        $reserved_experiences = $user->reserved_experiences;
-        return view('mypage.user.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences'));
+        $future_reserved_experiences = $user->future_reserved_experiences;
+        return view('mypage.user.home', compact('user', 'ordered_goods', 'future_reserved_experiences'));
     }
 
     public function reserve()
@@ -26,6 +29,15 @@ class MUserController extends Controller
         $user = Auth::user();
         $reserved_experiences = $user->reserved_experiences;
         return view('mypage.user.reserve', compact('user', 'reserved_experiences'));
+    }
+
+
+    public function reserve_info(string $id)
+    {
+        $user = Auth::user();
+        $reserved_experience = ExperienceReserve::where('user_id', $id)->first();
+        $experience_folder = ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first();
+        return view('mypage.user.reserve_info', compact('user', 'reserved_experience', 'experience_folder'));
     }
 
     public function users()
