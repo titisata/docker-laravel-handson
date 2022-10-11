@@ -50,7 +50,7 @@ class GoodsController extends Controller
             $img_category = GoodsCategory::where('name', $category)->first();
             $images = Image::where('table_name', 'goods_category')->where('table_id', $img_category->id)->get();
            
-            return view('search.goods_list', compact('goods_folders', 'categories', 'keyword', 'category'));
+            return view('search.goods_list', compact('goods_folders', 'categories', 'keyword', 'category', 'images'));
 
         }else{
             
