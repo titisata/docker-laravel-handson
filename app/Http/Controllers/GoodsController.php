@@ -26,7 +26,7 @@ class GoodsController extends Controller
             $goods_folders = array();
             foreach( $categories as $category){
                 //カテゴリ別に配列に入れる
-                $goods_folders[$i] = GoodsFolder::where('recommend_flag', 1)->where('category1', $category->name )->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
+                $goods_folders[$i] = GoodsFolder::where('recommend_flag', 1)->where('category1', $category->name )->where('status', 1)->orderBy('recommend_sort_no', 'asc')->get();
                 $i++;
             }
             

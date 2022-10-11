@@ -148,8 +148,13 @@
                                 <label class="fw-normal">おすすめしない</label>
 
                             </div>
-                            
-                            
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex">
+                                <label class="form-label">おすすめ表示の順番</label>
+                                <p class="mb-1 ms-3">小さい数ほど優先して表示されます。</p>
+                            </div>
+                            <input name="recommend_sort_no" type="number" class="form-control" style="width:60px" value="{{ $goods_folder->recommend_sort_no}}">
                         </div>
                         <div class="mt-3">
                             <div>
