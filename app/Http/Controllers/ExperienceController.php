@@ -28,10 +28,6 @@ class ExperienceController extends Controller
         $categories = ExperienceCategory::all();
         $lodging = $request->lodging;
 
-        // echo $category;
-        // exit;
-       
-
         if ($keyword == '' && ExperienceCategory::where('name', $category)->first() == '') {
             $images = Image::where('table_name', 'experience_category')->get();
             $experiences_folders_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 1)->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
@@ -43,29 +39,26 @@ class ExperienceController extends Controller
             $categories = ExperienceCategory::all();
             $experienceFolders = ExperienceFolder::search($keyword, $lodging, per_page: 10);
             $category = 'カテゴリー選択なし';
-           
-            return view('search.experience_list', compact('experienceFolders', 'categories', 'keyword', 'category', 'lodging'));
+            $images = Image::where('table_name', 'experience_category')->get();
+
+            return view('search.experience_list', compact('experienceFolders', 'categories', 'keyword', 'category', 'lodging','images'));
 
         }elseif($keyword == ''){   
 
-            // echo $lodging;
-            // exit;
             $categories = ExperienceCategory::all();
             $experienceFolders = ExperienceFolder::category_search($category, $lodging, per_page: 10);
-            $keyword = 'キーワード指定なし';
-           
-            return view('search.experience_list', compact('experienceFolders', 'categories', 'keyword', 'category', 'lodging'));
+            $keyword = '日付指定なし';
+            $img_category = ExperienceCategory::where('name', $category)->first();
+            $images = Image::where('table_name', 'experience_category')->where('table_id', $img_category->id)->get();
+            return view('search.experience_list', compact('experienceFolders', 'categories', 'keyword', 'category', 'lodging','images'));
 
         }else{
 
             $categories = ExperienceCategory::all();
             $img_category = ExperienceCategory::where('name', $category)->first();
-            $images = Image::where('table_name', 'experience_category')->where('table_id', $img_category->id)->first();
+            $images = Image::where('table_name', 'experience_category')->where('table_id', $img_category->id)->get();
             $experienceFolders = ExperienceFolder::all_search($keyword, $category, $lodging, per_page: 10);
 
-            // echo $category;
-            // exit;
-           
             return view('search.experience_list', compact('experienceFolders', 'categories', 'images', 'keyword', 'category', 'lodging'));
 
         }

@@ -21,9 +21,15 @@ class Goods extends Model
         
     ];
 
-    public function folder()
+
+    /**
+     * グッズフォルダーを取得
+     *
+     * @return Collection<GoodsFolder>
+     */
+    public function goods_folder()
     {
-        return $this->belongsTo(ExperienceFolder::class);
+        return $this->belongsTo(GoodsFolder::class);
     }
 
     /**

@@ -69,6 +69,17 @@ class GoodsFolder extends Model
     }
 
     /**
+     * ユーザーからパートナーを取得
+     *
+     * @return User
+     */
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * コメントを取得
      *
      * @return Collection<GoodsComment>

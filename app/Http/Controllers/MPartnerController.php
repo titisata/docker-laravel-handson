@@ -41,14 +41,19 @@ class MPartnerController extends Controller
         if ($user->hasRole('system_admin|site_admin')) {
             $partner = Partner::where('user_id', $user->id)->first();
             $ordered_goods = GoodsOrder::all();
+            $decrease_goods = Goods::where('quantity', '<', '6')->get();
             $reserved_experiences = ExperienceReserve::where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
-            return view('mypage.owner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences'));
+            return view('mypage.owner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences', 'decrease_goods'));
         }
         
         if($user->hasRole('partner')){
             $ordered_goods = GoodsOrder::where('partner_id', $user->id)->get();
             $reserved_experiences = ExperienceReserve::where('partner_id', $user->id)->where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
-            return view('mypage.partner.home', compact('user', 'ordered_goods', 'reserved_experiences'));
+            $decrease_goods = Goods::Join('goods_folders', 'goods.goods_folder_id', '=', 'goods_folders.id')->select('goods.*')->where('quantity', '<', '6')->where('user_id', $user->id)->get();
+
+           
+            // $hotels = Hotel::Join('hotel_selects', 'hotels.id', '=', 'hotel_selects.hotel_id')->select('hotels.*')->get();
+            return view('mypage.partner.home', compact('user', 'ordered_goods', 'reserved_experiences','decrease_goods'));
         }
     }
 

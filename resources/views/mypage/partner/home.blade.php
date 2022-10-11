@@ -214,5 +214,39 @@
         </table>
         </div>
     </div>
+    
+    <div class="card mt-3">
+        <div class="card-header">在庫数が減少しているお土産</div>
+        <div class="card-body">
+        <table class="table table-hover">
+            @forelse ($decrease_goods as $decrease_good)
+            @if ($loop->first)
+                <thead>
+                    <tr>
+                        <th scope="col">商品名</th>
+                        <th scope="col">残りの商品数</th>
+                    </tr>
+                </thead>
+            @endif
+                <tr>
+                    <td>
+                        <a class="link" href="/mypage/partner/goods/{{ $decrease_good->goods_folder_id }}">
+                            <p>{{ $decrease_good->name }}</p>
+                        </a>
+                    </td>
+                    <td>
+                        <p class="text-danger">
+                            {{ $decrease_good->quantity }}
+                        </p>
+                    </td>
+                    
+                </tr>
+                
+            @empty
+
+            @endforelse
+        </table>
+        </div>
+    </div>
 </div>
 @endsection

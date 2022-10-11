@@ -172,7 +172,7 @@ async function commentCreate(goods_folder_id) {
                         <input type="hidden" name="goods_id[]" value="{{ $goods->id }}">
                         <div class="d-flex align-items-center justify-content-between">
                             <h5 class="fw-bold">{{ $goods->name }}</h5>   
-                            <p class="fw-bold text-end h3"><span id="goods_price_{{ $goods->id }}">{{ $goods->price }}</span>円/個</p>
+                            <p class="fw-bold text-end h3"><span class="small fw-normal me-1" style="font-size:12px;">送料・税込</span><span id="goods_price_{{ $goods->id }}">{{ $goods->price }}</span>円/個</p>
                         </div>
                         <div class="d-flex align-items-center justify-content-end pb-4 border-bottom border-secondary">
                             <label class="fs-5 me-1" for="quantity">数量</label>

@@ -23,7 +23,7 @@
                         <h5 class="card-title text-center mb-0 text-truncate" >{{ $goods_folder->name }}</h5>
                     </div>
                     <div class="card-body" >
-                        <p class="card-text text-end fw-bold"><span class="small fw-normal" style="font-size:10px;">税込</span>{{ number_format($goods_folder->price) }}<span class="small fw-normal" style="font-size:10px;">円～</span></p>
+                        <p class="card-text text-end fw-bold fs-5"><span class="small fw-normal text-end" style="font-size:12px;">送料・税込</span>{{ number_format($goods_folder->price) }}<span class="small fw-normal" style="font-size:12px;">円～</span></p>
                     </div>
                 </div>
             </a>

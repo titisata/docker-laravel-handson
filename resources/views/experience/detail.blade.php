@@ -419,8 +419,6 @@ async function commentCreate(ex_id) {
             <div class="row">
                 <div class="my-4 col-12 col-lg-7">
                     
-                    
-
                     @if( $user!=null )
 
                         <div class="d-flex align-items-center" >

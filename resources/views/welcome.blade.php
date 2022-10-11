@@ -137,12 +137,12 @@
                     <!-- スライドさせる画像の設定 -->
                     <div class="carousel-inner rounded-2">
                         @forelse($images as $key=>$image)
-                            @if( $key == '1' )
-                                <div class="carousel-item">
+                            @if( $key == '0' )
+                                <div class="carousel-item active">
                                     <img src="{{ $image->image_path }}" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide {{$key+1}}">
                                 </div>
                             @else
-                                <div class="carousel-item active">
+                                <div class="carousel-item">
                                     <img src="{{ $image->image_path }}" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide {{$key+1}}">
                                 </div>
                             @endif
