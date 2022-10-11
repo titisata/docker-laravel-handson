@@ -2,6 +2,7 @@
 
 @section('menu', 'user_home')
 @section('content')
+<div class="container">
     <h1>ようこそ {{ Auth::user()->name }} 様</h1>
     <div class="card">
         <div class="card-body">
@@ -106,7 +107,7 @@
 
     </div>
     
-
+    
     @endforeach
 
 @endsection

@@ -80,7 +80,7 @@ class ExperienceController extends Controller
         $reserves = $experienceFolder->reserves;
         $schedules = $experienceFolder->schedules;
         $mycomment = $experienceFolder->mycomment();
-        $favorite = Favorite::where('user_id', $user->id)->where('favorite_id', $experienceFolder->id)->first();
+        
          
         $event_start_date = $experienceFolder->start_date;
         $event_end_date = $experienceFolder->end_date;
@@ -142,7 +142,13 @@ class ExperienceController extends Controller
             }
         }
 
-        return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date', 'full_experience', 'favorite'));
+        if( $user!=null ){
+            $favorite = Favorite::where('user_id', $user->id)->where('favorite_id', $experienceFolder->id)->first();
+            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date', 'full_experience', 'favorite'));
+        }else{
+            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date', 'full_experience'));
+        }
+        
     }
 
     

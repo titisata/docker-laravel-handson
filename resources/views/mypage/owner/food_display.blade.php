@@ -4,15 +4,15 @@
 @section('content')
 
 <div class="container">
-       
+    <div class="d-flex">
+        <h1>フード一覧</h1>
+        <a class="ms-3" href="/mypage/owner/food_insert" >          
+            <button class="btn btn-lg btn-success">新規作成</button>
+        </a>
+    </div> 
     <div class="row justify-content-center">
         <div class="col-md-9">
-        <div class="d-flex">
-            <h1>フード一覧</h1>
-            <a class="ms-3" href="/mypage/owner/food_insert" >          
-                <button class="btn btn-lg btn-success">新規作成</button>
-            </a>
-        </div> 
+        
             <table class="table table-hover">
             <thead>
                 <tr>

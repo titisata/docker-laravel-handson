@@ -29,11 +29,8 @@ class MUserController extends Controller
 
         $data1 = ExperienceReserve::where('user_id', $user->id)->select('payment_id','created_at');
 
-        $data2 = GoodsOrder::where('user_id', $user->id)->select('payment_id','created_at')->union($data1)->orderBy('created_at', 'asc')->get();
-
-        // dd($data2);
-        // exit;
-
+        $data2 = GoodsOrder::where('user_id', $user->id)->select('payment_id','created_at')->union($data1)->orderBy('created_at', 'desc')->get();
+        
         return view('mypage.user.home', compact('user', 'ordered_goods', 'future_reserved_experiences', 'data2'));
     }
 
@@ -64,8 +61,9 @@ class MUserController extends Controller
     public function favorite()
     {
         $user = Auth::user();
-        $favorites = Favorite::where('user_id', $user->id)->get();
-        return view('mypage.user.favorite', compact('user', 'favorites'));
+        $ex_favorites = Favorite::where('user_id', $user->id)->where('table_name', 'experience_folders')->get();
+        $goods_favorites = Favorite::where('user_id', $user->id)->where('table_name', 'goods_folders')->get();
+        return view('mypage.user.favorite', compact('user', 'ex_favorites', 'goods_favorites'));
     }
 
 

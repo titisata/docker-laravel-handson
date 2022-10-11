@@ -14,14 +14,15 @@
 </script>
 
 <div class="container">
+    <div class="d-flex">
+        <h1>ユーザ一覧</h1>
+        <a href="/mypage/owner/users_edit" style="text-decoration: none; color: inherit;">
+            <button class="btn btn-success ms-5">新規作成</button>
+        </a>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-9">
-            <div class="d-flex">
-                <h1>ユーザ一覧</h1>
-                <a href="/mypage/owner/users_edit" style="text-decoration: none; color: inherit;">
-                    <button class="btn btn-success ms-5">新規作成</button>
-                </a>
-            </div>
+            
 
             <div class="row justify-content-center">
                 <table class="table table-hover ">

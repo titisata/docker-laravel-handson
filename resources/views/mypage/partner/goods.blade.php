@@ -3,16 +3,17 @@
 @section('menu', 'partner_goods')
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-        <div class="d-flex">
-                <h1>お土産一覧</h1>
-                <a class="ms-3" href="/mypage/partner/goods_add/{{ $user->id }}">
-                    <div class="btn btn-lg btn-success">
-                        新規登録     
-                    </div>
-                </a>
+    <div class="d-flex">
+        <h1>お土産一覧</h1>
+        <a class="ms-3" href="/mypage/partner/goods_add/{{ $user->id }}">
+            <div class="btn btn-lg btn-success">
+                新規登録     
             </div>
+        </a>
+    </div>
+    <div class="row justify-content-center">
+        <div class="">
+            
             
             <table class="table table-hover">
                 <thead>

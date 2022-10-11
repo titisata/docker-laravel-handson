@@ -3,16 +3,17 @@
 @section('menu', 'owner_event')
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="d-flex">
-                <h1>イベント一覧</h1>
-                <a class="ms-3" href="/mypage/partner/event_add/{{ $user->id }}">
-                    <div class="btn btn-success btn-lg">
-                        新規登録     
-                    </div>
-                </a>
+    <div class="d-flex">
+        <h1>イベント一覧</h1>
+        <a class="ms-3" href="/mypage/partner/event_add/{{ $user->id }}">
+            <div class="btn btn-success btn-lg">
+                新規登録     
             </div>
+        </a>
+    </div>
+    <div class="row justify-content-center">
+        <div class="">
+            
 
             <table class="table table-hover">
                 <thead>

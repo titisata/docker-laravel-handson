@@ -3,9 +3,10 @@
 @section('menu', 'reserved_user')
 @section('content')
 <div class="container">
-    <h1>過去に予約のあったユーザー</h1>
+<h1>過去に予約のあったユーザー</h1>
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="">
+        
             <div class="row justify-content-center">
                 <table class="table table-hover ">
                     <thead>
