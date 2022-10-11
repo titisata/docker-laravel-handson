@@ -45,9 +45,32 @@ class ExperienceReserve extends Model
         return $this->belongsTo(Experience::class);
     }
 
+    //union用
+    public function goods()
+    {
+        return $this->belongsTo(Goods::class,'goods_id');
+    }
+
+    public function experience_folder()
+    {
+        $experience = $this->experience;
+
+        if($experience){
+            $folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
+            return $folder->name;
+        }else{
+            return "";
+        }
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function partner()
+    {
+        return $this->belongsTo(User::class,"partner_id");
     }
 
     public function reserved_user()

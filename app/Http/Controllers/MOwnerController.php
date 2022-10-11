@@ -1477,5 +1477,166 @@ class MOwnerController extends Controller
         
     }
 
-   
+    public function sales_result(Request $request){
+        $start_day = date("Y-m-01");
+        $end_day = date("Y-m-t");
+        return view('mypage.owner.sales_result', compact('start_day','end_day'));
+    }
+
+    public function sales_result_csv(Request $request){
+        $headers = [ //ヘッダー情報
+            'Content-type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=csvexport.csv',
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0',
+        ];
+
+        $callback = function() use ($request)
+        {
+            $start_day =  $request->start_day;
+            $end_day = $request->end_day;
+            
+            $createCsvFile = fopen('php://output', 'w'); //ファイル作成
+            
+            $columns = [ //1行目の情報
+                'パートナーID',
+                'パートナー名',
+                '売上区分',
+                '売上No',
+                '購入日',
+                '売上日',
+                '商品名',
+                '子供人数',
+                '大人人数',
+                '体験子供単価',
+                '体験大人単価',
+                'ホテル',
+                'ホテル子供単価',
+                'ホテル大人単価',
+                '食事',
+                '食事子供単価',
+                '食事大人単価',
+                '数量',
+                '単価',
+                '合計金額',
+            ];
+
+            mb_convert_variables('SJIS-win', 'UTF-8', $columns); //文字化け対策
+    
+            fputcsv($createCsvFile, $columns); //1行目の情報を追記
+            
+            $goods_orders = GoodsOrder::select(
+                'id'
+                ,'partner_id'
+                ,DB::raw("'商品売上' as sold_flag")
+                ,DB::raw('NULL as experiecne_id')
+                ,DB::raw('NULL as hotel_group_id')
+                ,DB::raw('NULL as food_group_id')
+                ,DB::raw('NULL as quantity_child')
+                ,DB::raw('NULL as quantity_adult')
+                ,DB::raw('NULL as experiecne_price_child')
+                ,DB::raw('NULL as experiecne_price_adult')
+                ,DB::raw('NULL as hotel_price_child')
+                ,DB::raw('NULL as hotel_price_adult')
+                ,DB::raw('NULL as food_price_child')
+                ,DB::raw('NULL as food_price_adult')
+                ,'goods_id'
+                ,'quantity'
+                ,'goods_price'
+                ,'total_price'
+                ,'created_at'
+                ,'created_at'
+            )
+            ->whereDate('created_at', '>=', $start_day)
+            ->whereDate('created_at', '<=', $end_day);
+            
+            $experience_reserves_ex = ExperienceReserve::select(
+                'id'
+                ,'partner_id'
+                ,DB::raw("'体験売上' as sold_flag")
+                ,'experience_id'
+                ,'hotel_group_id'
+                ,'food_group_id'
+                ,'quantity_child'
+                ,'quantity_adult'
+                ,'experience_price_child'
+                ,'experience_price_adult'
+                ,'hotel_price_child'
+                ,'hotel_price_adult'
+                ,'food_price_child'
+                ,'food_price_adult'
+                ,DB::raw('NULL as goods_id')
+                ,DB::raw('NULL as quantity')
+                ,DB::raw('NULL as goods_price')
+                ,'total_price'
+                ,'start_date'
+                ,'created_at'
+            )
+            ->whereDate('start_date', '>=', $start_day)
+            ->whereDate('start_date', '<=', $end_day);
+
+            $experience_reserves = ExperienceReserve::select(
+                'id'
+                ,'partner_id'
+                ,DB::raw("'体験売上' as sold_flag")
+                ,'experience_id'
+                ,'hotel_group_id'
+                ,'food_group_id'
+                ,'quantity_child'
+                ,'quantity_adult'
+                ,'experience_price_child'
+                ,'experience_price_adult'
+                ,'hotel_price_child'
+                ,'hotel_price_adult'
+                ,'food_price_child'
+                ,'food_price_adult'
+                ,DB::raw('NULL as goods_id')
+                ,DB::raw('NULL as quantity')
+                ,DB::raw('NULL as goods_price')
+                ,'total_price'
+                ,'start_date'
+                ,'created_at'
+            )
+            ->whereDate('created_at', '>=', $start_day)
+            ->whereDate('created_at', '<=', $end_day)
+            ->union($experience_reserves_ex)
+            ->union($goods_orders)
+            ->orderbyRaw('partner_id, created_at, id')
+            ->get();
+            
+            foreach ($experience_reserves as $experience_reserve){
+                $csv = [
+                    $experience_reserve->partner->id, 
+                    $experience_reserve->partner->name, 
+                    $experience_reserve->sold_flag,
+                    $experience_reserve->id,  
+                    $experience_reserve->created_at,
+                    $experience_reserve->start_date,
+                    $experience_reserve->experience_folder().$experience_reserve->experience?->name.$experience_reserve->goods?->name,
+                    $experience_reserve->quantity_child,
+                    $experience_reserve->quantity_adult,
+                    $experience_reserve->experience_price_child,
+                    $experience_reserve->experience_price_adult,
+                    $experience_reserve->hotelGroup?->name,
+                    $experience_reserve->hotel_price_child,
+                    $experience_reserve->hotel_price_adult,
+                    $experience_reserve->foodGroup?->name,
+                    $experience_reserve->food_price_child,
+                    $experience_reserve->food_price_adult,
+                    $experience_reserve->quantity,
+                    $experience_reserve->goods_price,
+                    $experience_reserve->total_price,
+                ];
+
+                mb_convert_variables('SJIS-win', 'UTF-8', $csv); //文字化け対策
+
+                fputcsv($createCsvFile, $csv); //ファイルに追記する
+            }
+
+            fclose($createCsvFile); //ファイル閉じる
+        };
+
+        return response()->stream($callback, 200, $headers); //ここで実行
+    }
 }
