@@ -150,7 +150,8 @@ Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'
     Route::get('/food_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'food_edit']);
     Route::post('/action_food_edit', [App\Http\Controllers\MOwnerController::class, 'action_food_edit']);
     Route::post('/food_delete', [App\Http\Controllers\MOwnerController::class, 'food_delete']);
-   
+    Route::get('/sales_result', [App\Http\Controllers\MOwnerController::class, 'sales_result']);
+    Route::POST('/sales_result', [App\Http\Controllers\MOwnerController::class, 'sales_result_csv']);
 
 });
 
