@@ -8,6 +8,7 @@ use App\Models\ExperienceReserve;
 use App\Models\ExperienceFolder;
 use App\Models\GoodsOrder;
 use App\Models\GoodsFolder;
+use App\Models\Favorite;
 use App\Models\Link;
 use App\Consts\LinkConst;
 use Illuminate\Http\Request;
@@ -59,6 +60,14 @@ class MUserController extends Controller
         $goods_folder = GoodsFolder::where('id',$goods_order->goods->goods_folder_id)->first();
         return view('mypage.user.goods_reserve_info', compact('user', 'goods_order', 'goods_folder'));
     }
+
+    public function favorite()
+    {
+        $user = Auth::user();
+        $favorites = Favorite::where('user_id', $user->id)->get();
+        return view('mypage.user.favorite', compact('user', 'favorites'));
+    }
+
 
     public function users()
     {

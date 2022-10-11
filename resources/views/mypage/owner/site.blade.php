@@ -24,7 +24,7 @@
                             @enderror
                             <input name="site_name" type="text" class="form-control" value="{{ $site_master->site_name }}">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 d-none">
                             <label class="form-label">開店状況</label>
                             <div>
                                 <input name="open_flag" type="radio" checked value="{{ $site_master->open_flag }}">
@@ -37,7 +37,7 @@
                             </div>
                             
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 d-none">
                             <label class="form-label">機能情報</label>
                             <div>
                                 <input name="service" type="radio" checked  value="{{ $site_master->service }}">
@@ -49,21 +49,21 @@
                             </div>
                             
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 d-none">
                             <label class="form-label">登録可能店舗数</label>
                             @error('shop_num')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                             <input name="shop_num" type="number" class="form-control number_form" value="{{ $site_master->shop_num }}">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 d-none">
                             <label class="form-label">商品登録上限数</label>
                             @error('regist_num')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                             <input name="regist_num" type="number" class="form-control number_form" value="{{ $site_master->regist_num }}">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 d-none">
                             <label class="form-label">おすすめ表示上限</label>
                             @error('recommend_limit')
                                 <p class="text-danger">{{ $message }}</p>
@@ -106,7 +106,7 @@
                                 
                             @endforelse
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 d-none">
                             <label class="form-label">サイトカラー</label>
                             <input name="site_color" type="text" class="form-control" value="{{ $site_master->site_color }}">
                         </div>
