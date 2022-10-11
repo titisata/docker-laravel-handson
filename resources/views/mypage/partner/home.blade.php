@@ -2,6 +2,16 @@
 
 @section('menu', 'owner_home')
 @section('content')
+<style>
+    select {
+    -webkit-appearance: none;/* ベンダープレフィックス(Google Chrome、Safari用) */
+    -moz-appearance: none; /* ベンダープレフィックス(Firefox用) */
+    appearance: none; /* 標準のスタイルを無効にする */
+    }
+    ::-ms-expand { /* select要素のデザインを無効にする（IE用） */
+    display: none;
+    }
+</style>
 <div class="container">
 
     <h1>ようこそ {{ Auth::user()->name }} 様</h1>
@@ -42,7 +52,7 @@
                     
                     <td>
                         <div class="d-flex flex-column">
-                           
+                        <a class="link" href="/mypage/owner/reserve_edit/{{ $reserved_experience->id }}">
                             @if(App\Models\ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first()->is_lodging == 0)
                                 <p class="text-success">宿泊なし</p>
                             @else
@@ -50,7 +60,7 @@
                             @endif
                             <p>{{ App\Models\ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first()->name }}</p>
                             <p>{{ $reserved_experience->experience->name }}</p>
-                           
+                        </a>   
                         </div> 
                     </td>
                     <td>
@@ -73,11 +83,45 @@
                         <p>{{ $reserved_experience->message }}</p>
                     </td>
                     <td> 
-                        @if( $reserved_experience->status == '対応待ち')
-                            <p class="bg-danger text-white mb-0 text-center">{{ $reserved_experience->status }}</p>
-                        @else
-                            <p class="bg-primary text-white mb-0 text-center">{{ $reserved_experience->status }}</p>
-                        @endif
+                    @if($reserved_experience->hotel_group_id == '')
+                        <select name="save_flag" tabindex="-1" disabled 
+                            @if($reserved_experience->status == 1 )
+                            class="bg-danger text-white text-center" 
+                            @else($reserved_experience->status == 5)
+                            class="bg-primary text-white text-center"
+                            @endif 
+                            >
+                            @foreach(App\Consts\OrderConst::STATUS_LIST as $key =>$val)
+                                <option 
+                                value="{{ $key }}" 
+                                @if ($reserved_experience->status == $key ) 
+                                selected 
+                                @endif
+                                    >
+                                    {{$val}}
+                                </option>       
+                            @endforeach
+                        </select>    
+                    @else 
+                        <select name="save_flag" tabindex="-1" disabled 
+                            @if($reserved_experience->status == 1 ||$reserved_experience->status == 5 )
+                            class="bg-danger text-white text-center" 
+                            @else($reserved_experience->status == 10)
+                            class="bg-primary text-white text-center"
+                            @endif 
+                            >
+                            @foreach(App\Consts\OrderConst::STATUS_LIST as $key =>$val)
+                                <option 
+                                value="{{ $key }}" 
+                                @if ($reserved_experience->status == $key ) 
+                                selected 
+                                @endif
+                                    >
+                                    {{$val}}
+                                </option>       
+                            @endforeach
+                        </select>   
+                    @endif 
                     </td>
                 </tr>
                 
@@ -91,18 +135,83 @@
     <div class="card mt-3">
         <div class="card-header">注文されたお土産</div>
         <div class="card-body">
+        <table class="table table-hover">
             @forelse ($ordered_goods as $ordered_goods_one)
-                <a href="/goods/{{ $ordered_goods_one->goods->id }}">
-                    <div class="mt-1 p-3 card">
-                        <div>
-                            <p>名前: {{ $ordered_goods_one->goods->name }}</p>
-                            <p>個数: {{ $ordered_goods_one->quantity }}</p>
-                        </div>
-                    </div>
-                </a>
+            @if ($loop->first)
+                <thead>
+                    <tr>
+                        <th scope="col">送り主</th>
+                        <th scope="col">注文商品名</th>
+                        <th scope="col">注文商品責任者</th>
+                        <th scope="col">商品注文日</th>
+                        <th scope="col">注文商品数</th>
+                        <th scope="col">商品に関する問い合わせ先</th>
+                        <th scope="col">注文商品送り先情報</th>
+                        <th scope="col">注文商品状況</th>
+                    </tr>
+                </thead>
+            @endif
+                <tr>
+                    <td>
+                        <p>{{ $ordered_goods_one->user->name }}様</p>
+                    </td>
+                    <td>
+                        <a class="link" href="/mypage/owner/goods_reserve_edit/{{ $ordered_goods_one->id }}">
+                            <p>{{ App\Models\GoodsFolder::where('id',$ordered_goods_one->goods->goods_folder_id)->first()->name }}</p>
+                            <p>{{ $ordered_goods_one->goods->name }}</p>
+                        </a>    
+                    </td>
+                    <td>
+                        <p>{{ $ordered_goods_one->partner->name }}</p>  
+                    </td>
+                    <td>
+                        <p>
+                            {{$ordered_goods_one->created_at}}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{$ordered_goods_one->quantity}}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{$ordered_goods_one->partner->phone}}
+                        </p>
+                    </td>
+                    <td> 
+                        <p>氏名：{{$ordered_goods_one->to_name}}</p>
+                        <p>郵便番号：{{$ordered_goods_one->to_postal_code}}</p>
+                        <p>住所：{{App\Models\User::$prefs[$ordered_goods_one->to_pref_id]}}{{$ordered_goods_one->to_city}}{{$ordered_goods_one->to_town}}{{$ordered_goods_one->to_building}}<br>
+                        電話番号：{{$ordered_goods_one->to_phone_number}}</p>
+                    </td>
+                    <td>
+                    <select name="save_flag" tabindex="-1" disabled 
+                        @if($reserved_experience->status == 1 ||$reserved_experience->status == 5 )
+                        class="bg-danger text-white text-center" 
+                        @else($reserved_experience->status == 10)
+                        class="bg-primary text-white text-center"
+                        @endif 
+                        >
+                            @foreach(App\Consts\OrderConst::GOODS_STATUS_LIST as $key =>$val)
+                                <option 
+                                value="{{ $key }}" 
+                                @if ($reserved_experience->status == $key ) 
+                                selected 
+                                @endif
+                                    >
+                                    {{$val}}
+                                </option>       
+                            @endforeach
+                        </select>    
+                    </td>
+                    
+                </tr>
+                
             @empty
 
             @endforelse
+        </table>
         </div>
     </div>
 </div>

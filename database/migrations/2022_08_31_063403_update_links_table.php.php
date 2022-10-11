@@ -15,7 +15,7 @@ return new class extends Migration
     {
         //
         Schema::table('links', function (Blueprint $table) {
-            $table->foreignId('partner_id')->nullable()->constrained('partners');
+            $table->foreignId('user_id')->nullable()->constrained('users');
         });
     }
 

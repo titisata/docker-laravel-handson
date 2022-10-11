@@ -10,94 +10,103 @@
         </div>
     </div>
 
-    
-            <div class="card mt-3">
+
+    @foreach($data2 as $data)
+    <div class="card mt-3">
         <div class="card-header d-flex">
-            <p class="mb-0">予約した体験</p>
+            <p class="mb-0">{{ $data->created_at }}に予約・注文</p>
         </div>
         <div class="card-body">
-        <table class="table table-hover">
-            @forelse ($future_reserved_experiences as $reserved_experience)
-                @if ($loop->first)
-                    <thead>
-                        <tr>
-                            <th scope="col">予約体験名</th>
-                            <th scope="col">体験日</th>
-                            <th scope="col">予約人数</th>
-                            <th scope="col">宿泊</th>
-                            <th scope="col">食事</th>
-                            <th scope="col">連絡事項</th>
-                            <th scope="col">連絡先</th>
-                            <th scope="col">金額</th>
-                        </tr>
-                    </thead>
-                @endif
-                <tr>
-                    
-                    <td>
-                        <div class="d-flex flex-column">
-                        <a class="link" href="/experience/{{ $reserved_experience->experience->experience_folder_id }}">
-                            @if(App\Models\ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first()->is_lodging == 0)
-                                <p class="text-success">宿泊なし</p>
-                            @else
-                                <p class="text-primary">宿泊あり</p>
-                            @endif
-                            <p>{{ App\Models\ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first()->name }}</p>
-                            <p>{{ $reserved_experience->experience->name }}</p>
+        
+            @forelse ($future_reserved_experiences->where('payment_id',  $data->payment_id) as $reserved_experience)
+            <div class="d-flex flex-row card">
+            
+                <img style="object-fit: cover; width:240px; height:180px;" class=" image" src="{{App\Models\Image::where('table_id',$reserved_experience->experience->experience_folder_id)->where('table_name', 'experience_folders')->get()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap"> 
+            
+                <div class="d-flex flex-column">
+                    <div class="d-flex">
+                        
+                        <a class="link ms-2" href="/mypage/user/reserve_info/{{$reserved_experience->id}}">
+                            <p>{{ App\Models\ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first()->name }}
+                            {{ $reserved_experience->experience->name }}</p>
                         </a>
-                        </div> 
-                    </td>
-                    <td>
-                        <p>{{ $reserved_experience->start_date }}</p>
-                    </td>
+                        <p class="ms-2">体験日：{{ $reserved_experience->start_date }}</p>
+                    </div>
                     
-                    <td>
-                        <p>
-                            大人：{{ $reserved_experience->quantity_adult }}名<br>
-                            子ども：{{ $reserved_experience->quantity_child }}名
-                        </p>
-                    </td>
-                    <td>
-                        <p>{{ $reserved_experience->hotelGroup?->name ?? 'なし' }}</p>
-                    </td>
-                    <td>
-                        <p>{{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
-                    </td>
-                    <td>
-                        <p>{{ $reserved_experience->message }}</p>
-                    </td>
-                    <td>
-                        <p>{{ $reserved_experience->contact_info }}</p>
-                    </td>
-                    <td> 
-                        <p>{{ number_format($reserved_experience->sum_price()) }}円</p>
-                    </td>
-                </tr>
+                    <p class="ms-2">
+                        大人：{{ $reserved_experience->quantity_adult }}名
+                        子ども：{{ $reserved_experience->quantity_child }}名
+                    </p>
                 
+                    <p class="ms-2">宿泊：{{ $reserved_experience->hotelGroup?->name ?? 'なし' }}</p>
+                
+                    <p class="ms-2">食事：{{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
+                
+                
+                    <p class="ms-2">お問合せ先：{{ $reserved_experience->contact_info }}</p>
+                    
+                    <p class="ms-2">体験料金：{{ number_format($reserved_experience->sum_price()) }}円</p>
+                </div>
+            </div>
+            
+                        
+                    
+            @empty
+            @endforelse
+        
+            
+
+                
+    
+        
+            @forelse ($ordered_goods->where('payment_id',  $data->payment_id) as $one_ordered_goods)
+            <div class="d-flex flex-row card mt-3">
+                
+                <img style="object-fit: cover; width:240px; height:180px;" class=" image" src="{{App\Models\Image::where('table_id',$one_ordered_goods->goods->goods_folder_id)->where('table_name', 'goods_folders')->get()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap"> 
+                
+                <div class="d-flex">
+                    <div class="d-flex flex-column ms-2">
+                        <a class="link ms-2" href="/mypage/user/goods_reserve_info/{{$one_ordered_goods->id}}">
+                            <p>
+                                {{ App\Models\GoodsFolder::where('id',$one_ordered_goods->goods->goods_folder_id)->first()->name }}
+                                {{ $one_ordered_goods->goods->name }}
+                            </p>
+                        </a>
+                        
+                    
+                        <p>
+                            注文日：{{$one_ordered_goods->created_at}}
+                        </p>
+                    
+                        <p>
+                            注文個数：{{$one_ordered_goods->quantity}}個
+                        </p>
+                    
+                        <p>
+                            お問合せ先：{{$one_ordered_goods->partner->name}}
+                            {{$one_ordered_goods->partner->phone}}
+                        </p>
+
+                        <p class="">請求料金：{{ number_format($one_ordered_goods->total_price)}}円</p> 
+
+                    </div>
+                    
+                
+                    
+                      
+                </div>        
+            </div>
             @empty
 
             @endforelse
-            </table>
+        
+        
+        
         </div>
+
     </div>
+    
 
+    @endforeach
 
-            <div class="card mt-3">
-                <div class="card-header">注文したお土産</div>
-                <div class="card-body">
-                    @forelse ($ordered_goods as $ordered_goods_one)
-                        <a href="/goods/{{ $ordered_goods_one->goods->goods_folder_id }}">
-                            <div class="mt-1 p-3 card">
-                                <div>
-                                    <p>名前: {{ $ordered_goods_one->goods->name }}</p>
-                                    <p>個数: {{ $ordered_goods_one->quantity }}</p>
-                                    <p>金額: {{ number_format($ordered_goods_one->sum_price()) }}円</p>
-                                </div>
-                            </div>
-                        </a>
-                    @empty
-
-                    @endforelse
-                </div>
-            </div>
 @endsection

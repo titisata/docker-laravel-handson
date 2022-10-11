@@ -40,6 +40,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use App\Mail\ExSendRemaindMail;
+use App\Mail\GoodsSendRemaindMail;
 use Carbon\Carbon;
 
 class MOwnerController extends Controller
@@ -155,128 +157,23 @@ class MOwnerController extends Controller
     public function action_reserve_edit(Request $request)
     {
         $id = $request->id;
-        $status = $request->status;
+        $save_flag = $request->save_flag;
         $hotel_id = $request->hotel_id;
-        $mail =  $request->mail;
 
         ExperienceReserve::where('id',$id)->update([
-            'status'=>$status,
+            'status'=>$save_flag,
             'hotel_id'=>$hotel_id,
         ]);
 
-    
-        if( $mail == 1 ){
-            $to = 'satou@b-partners.jp';
-            $view = 'email.hotel_confirm';
+        if($save_flag == 10 || $save_flag == 99 || $save_flag == 99){
+            $obj = new ExSendRemaindMail($save_flag, $id);
+            $obj->ex_send_remaind_mail();
 
-            //予約データを取得
-            $reserve = ExperienceReserve::where('id',$id)->first();
-            
-            //ホテル情報を取得
-            $hotel= hotel::where('id',$hotel_id)->first();
-
-            //管理者へのメール送信
-            $user = Auth::user();
-            // echo "管理者--".$user->name."--".$user->email."<br>";
-            $subject = '管理者へのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'hotel' => $hotel->name,
-                'for' => 'admin',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //予約者へのメール送信
-            $user = User::where('id',$reserve->user_id)->first();
-            // echo "予約者--".$user->name."--".$user->email."<br>";
-            $subject = '予約者へのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'hotel' => $hotel->name,
-                'for' => 'user',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //パートナーへメール送信
-            $experience = Experience::where('id',$reserve->experience_id)->first();
-            $experience_folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
-            $user = User::where('id',$experience_folder->user_id)->first();
-            // echo "パートナー--".$user->name."--".$user->email."<br>";
-            $subject = 'パートナーへのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'hotel' => $hotel->name,
-                'for' => 'partner',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //ホテルへのメール送信
-        
-
-            return back()->with('result', 'ホテル確定メールを送信しました。');
-
-        }elseif( $mail == 2 ){
-            $to = 'satou@b-partners.jp';
-            $view = 'email.status_confirm';
-
-            //予約データを取得
-            $reserve = ExperienceReserve::where('id',$id)->first();
-            
-
-            //管理者へのメール送信
-            $user = Auth::user();
-            // echo "管理者--".$user->name."--".$user->email."<br>";
-            $subject = '管理者へのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'status' => $reserve->status,
-                'for' => 'admin',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //予約者へのメール送信
-            $user = User::where('id',$reserve->user_id)->first();
-            // echo "予約者--".$user->name."--".$user->email."<br>";
-            $subject = '予約者へのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'status' => $reserve->status,
-                'for' => 'user',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //パートナーへメール送信
-            $experience = Experience::where('id',$reserve->experience_id)->first();
-            $experience_folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
-            $user = User::where('id',$experience_folder->user_id)->first();
-            // echo "パートナー--".$user->name."--".$user->email."<br>";
-            $subject = 'パートナーへのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'status' => $reserve->status,
-                'for' => 'partner',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //ホテルへのメール送信
-        
-
-            return back()->with('result', '予約ステータス変更メールを送信しました。');
-
-
+            return back()->with('result', '予約状況を更新し、メールを送信しました。');
         }else{
-
             return back()->with('result', '予約状況を更新しました。');
-
         }
-
-
+       
     }
 
     public function goods_reserve()
@@ -376,128 +273,246 @@ class MOwnerController extends Controller
         return view('mypage.owner.goods_reserve_edit', compact('user', 'goods_order'));
     }
 
-    public function goods_action_reserve_edit(Request $request)
+    public function action_goods_reserve_edit(Request $request)
     {
         $id = $request->id;
-        $status = $request->status;
+        $save_flag = $request->save_flag;
+        $delivery_company = $request->delivery_company;
+        $delivery_number = $request->delivery_number;
+
+        $input_company = $request->input_company;
         
-
-        GoodsOrder::where('id',$id)->update([
-            'status'=>$status,
-            'hotel_id'=>$hotel_id,
-        ]);
-
-    
-        if( $mail == 1 ){
-            $to = 'satou@b-partners.jp';
-            $view = 'email.hotel_confirm';
-
-            //予約データを取得
-            $reserve = ExperienceReserve::where('id',$id)->first();
-            
-            //ホテル情報を取得
-            $hotel= hotel::where('id',$hotel_id)->first();
-
-            //管理者へのメール送信
-            $user = Auth::user();
-            // echo "管理者--".$user->name."--".$user->email."<br>";
-            $subject = '管理者へのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'hotel' => $hotel->name,
-                'for' => 'admin',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //予約者へのメール送信
-            $user = User::where('id',$reserve->user_id)->first();
-            // echo "予約者--".$user->name."--".$user->email."<br>";
-            $subject = '予約者へのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'hotel' => $hotel->name,
-                'for' => 'user',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //パートナーへメール送信
-            $experience = Experience::where('id',$reserve->experience_id)->first();
-            $experience_folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
-            $user = User::where('id',$experience_folder->user_id)->first();
-            // echo "パートナー--".$user->name."--".$user->email."<br>";
-            $subject = 'パートナーへのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'hotel' => $hotel->name,
-                'for' => 'partner',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //ホテルへのメール送信
-        
-
-            return back()->with('result', 'ホテル確定メールを送信しました。');
-
-        }elseif( $mail == 2 ){
-            $to = 'satou@b-partners.jp';
-            $view = 'email.status_confirm';
-
-            //予約データを取得
-            $reserve = ExperienceReserve::where('id',$id)->first();
-            
-
-            //管理者へのメール送信
-            $user = Auth::user();
-            // echo "管理者--".$user->name."--".$user->email."<br>";
-            $subject = '管理者へのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'status' => $reserve->status,
-                'for' => 'admin',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //予約者へのメール送信
-            $user = User::where('id',$reserve->user_id)->first();
-            // echo "予約者--".$user->name."--".$user->email."<br>";
-            $subject = '予約者へのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'status' => $reserve->status,
-                'for' => 'user',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //パートナーへメール送信
-            $experience = Experience::where('id',$reserve->experience_id)->first();
-            $experience_folder = ExperienceFolder::where('id',$experience->experience_folder_id)->first();
-            $user = User::where('id',$experience_folder->user_id)->first();
-            // echo "パートナー--".$user->name."--".$user->email."<br>";
-            $subject = 'パートナーへのメール';
-            $name = $user->name;
-            $with = [
-                'name' => $name,
-                'status' => $reserve->status,
-                'for' => 'partner',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-
-            //ホテルへのメール送信
-        
-
-            return back()->with('result', '予約ステータス変更メールを送信しました。');
-
+        if( $input_company != ''){
+            GoodsOrder::where('id',$id)->update([
+                'status'=>$save_flag,
+                'delivery_company'=>$input_company,
+                'delivery_number'=>$delivery_number,
+            ]);
 
         }else{
-
-            return back()->with('result', '予約状況を更新しました。');
-
+            GoodsOrder::where('id',$id)->update([
+                'status'=>$save_flag,
+                'delivery_company'=>$delivery_company,
+                'delivery_number'=>$delivery_number,
+            ]);
         }
+        
+
+        if($save_flag == 10 || $save_flag == 98){
+            $obj = new GoodsSendRemaindMail($save_flag, $id);
+            $obj->goods_send_remaind_mail();
+
+            return back()->with('result', '注文状況を更新し、メールを送信しました。');
+        }else{
+            return back()->with('result', '注文状況を更新しました。');
+        }
+
+    
+        // if( $mail == 1 ){
+        //     $to = 'satou@b-partners.jp';
+        //     $view = 'email.goods_send_confirm';
+
+        //     //予約データを取得
+        //     $order = GoodsOrder::where('id',$id)->first();
+        //     $goods_folder = GoodsFolder::where('id',$order->goods->goods_folder_id)->first();
+
+        //     //管理者へのメール送信
+        //     $user = Auth::user();
+        //     // echo "管理者--".$user->name."--".$user->email."<br>";
+        //     $subject = '管理者へのメール';
+        //     $name = $user->name;
+        //     $with = [
+        //         'name' => $name,
+        //         'goods_name' => $goods_folder->name,
+        //         'goods_kind' => $order->goods->name,
+        //         'from_name' => $order->from_name,
+        //         'from_postal_code' => $order->from_postal_code,
+        //         'from_pref_id' => $order->from_pref_id,
+        //         'from_city' => $order->from_city,
+        //         'from_town' => $order->from_town,
+        //         'from_building' => $order->from_building,
+        //         'from_phone' => $order->from_phone,
+        //         'to_name' => $order->to_name,
+        //         'to_postal_code' => $order->to_postal_code,
+        //         'to_pref_id' => $order->to_pref_id,
+        //         'to_city' => $order->to_city,
+        //         'to_town' => $order->to_town,
+        //         'to_building' => $order->to_building,
+        //         'to_phone' => $order->to_phone,    
+        //         'contact_info' => $order->contact_info,
+        //         'delivery_company' => $delivery_company,
+        //         'delivery_number' => $delivery_number,
+        //         'for' => 'admin',
+        //     ];
+        //     // Mail::send(new SendMail($with, $to, $subject, $view));
+
+        //     //予約者へのメール送信
+        //     $user = User::where('id',$order->user_id)->first();
+        //     // echo "予約者--".$user->name."--".$user->email."<br>";
+        //     $subject = '予約者へのメール';
+        //     $name = $user->name;
+        //     $with = [
+        //         'name' => $name,
+        //         'goods_name' => $goods_folder->name,
+        //         'goods_kind' => $order->goods->name,
+        //         'from_name' => $order->from_name,
+        //         'from_postal_code' => $order->from_postal_code,
+        //         'from_pref_id' => $order->from_pref_id,
+        //         'from_city' => $order->from_city,
+        //         'from_town' => $order->from_town,
+        //         'from_building' => $order->from_building,
+        //         'from_phone' => $order->from_phone,
+        //         'to_name' => $order->to_name,
+        //         'to_postal_code' => $order->to_postal_code,
+        //         'to_pref_id' => $order->to_pref_id,
+        //         'to_city' => $order->to_city,
+        //         'to_town' => $order->to_town,
+        //         'to_building' => $order->to_building,
+        //         'to_phone' => $order->to_phone,    
+        //         'contact_info' => $order->contact_info,
+        //         'delivery_company' => $delivery_company,
+        //         'delivery_number' => $delivery_number,
+        //         'for' => 'admin',
+        //     ];
+        //     // Mail::send(new SendMail($with, $to, $subject, $view));
+
+        //     //パートナーへメール送信
+        //     $goods = Goods::where('id',$order->goods_id)->first();
+        //     $goods_folder = GoodsFolder::where('id',$goods->goods_folder_id)->first();
+        //     $user = User::where('id',$goods_folder->user_id)->first();
+        //     // echo "パートナー--".$user->name."--".$user->email."<br>";
+        //     $subject = 'パートナーへのメール';
+        //     $name = $user->name;
+        //     $with = [
+        //         'name' => $name,
+        //         'goods_name' => $goods_folder->name,
+        //         'goods_kind' => $order->goods->name,
+        //         'from_name' => $order->from_name,
+        //         'from_postal_code' => $order->from_postal_code,
+        //         'from_pref_id' => $order->from_pref_id,
+        //         'from_city' => $order->from_city,
+        //         'from_town' => $order->from_town,
+        //         'from_building' => $order->from_building,
+        //         'from_phone' => $order->from_phone,
+        //         'to_name' => $order->to_name,
+        //         'to_postal_code' => $order->to_postal_code,
+        //         'to_pref_id' => $order->to_pref_id,
+        //         'to_city' => $order->to_city,
+        //         'to_town' => $order->to_town,
+        //         'to_building' => $order->to_building,
+        //         'to_phone' => $order->to_phone,    
+        //         'contact_info' => $order->contact_info,
+        //         'delivery_company' => $delivery_company,
+        //         'delivery_number' => $delivery_number,
+        //         'for' => 'admin',
+        //     ];
+        //     // Mail::send(new SendMail($with, $to, $subject, $view));
+
+           
+        //     return back()->with('result', '商品発送メールを送信しました。');
+
+        // }elseif( $mail == 2 ){
+        //     $to = 'satou@b-partners.jp';
+        //     $view = 'email.goods_cansel_confirm';
+
+        //     //予約データを取得
+        //     $order = GoodsOrder::where('id',$id)->first();
+            
+
+        //     //管理者へのメール送信
+        //     $user = Auth::user();
+        //     // echo "管理者--".$user->name."--".$user->email."<br>";
+        //     $subject = '管理者へのメール';
+        //     $name = $user->name;
+        //     $with = [
+        //         'name' => $name,
+        //         'goods_name' => $goods_folder->name,
+        //         'goods_kind' => $order->goods->name,
+        //         'from_name' => $order->from_name,
+        //         'from_postal_code' => $order->from_postal_code,
+        //         'from_pref_id' => $order->from_pref_id,
+        //         'from_city' => $order->from_city,
+        //         'from_town' => $order->from_town,
+        //         'from_building' => $order->from_building,
+        //         'from_phone' => $order->from_phone,
+        //         'to_name' => $order->to_name,
+        //         'to_postal_code' => $order->to_postal_code,
+        //         'to_pref_id' => $order->to_pref_id,
+        //         'to_city' => $order->to_city,
+        //         'to_town' => $order->to_town,
+        //         'to_building' => $order->to_building,
+        //         'to_phone' => $order->to_phone,    
+        //         'contact_info' => $order->contact_info,
+        //         'for' => 'admin',
+        //     ];
+        //     // Mail::send(new SendMail($with, $to, $subject, $view));
+
+        //     //予約者へのメール送信
+        //     $user = User::where('id',$order->user_id)->first();
+        //     // echo "予約者--".$user->name."--".$user->email."<br>";
+        //     $subject = '予約者へのメール';
+        //     $name = $user->name;
+        //     $with = [
+        //         'name' => $name,
+        //         'goods_name' => $goods_folder->name,
+        //         'goods_kind' => $order->goods->name,
+        //         'from_name' => $order->from_name,
+        //         'from_postal_code' => $order->from_postal_code,
+        //         'from_pref_id' => $order->from_pref_id,
+        //         'from_city' => $order->from_city,
+        //         'from_town' => $order->from_town,
+        //         'from_building' => $order->from_building,
+        //         'from_phone' => $order->from_phone,
+        //         'to_name' => $order->to_name,
+        //         'to_postal_code' => $order->to_postal_code,
+        //         'to_pref_id' => $order->to_pref_id,
+        //         'to_city' => $order->to_city,
+        //         'to_town' => $order->to_town,
+        //         'to_building' => $order->to_building,
+        //         'to_phone' => $order->to_phone,    
+        //         'contact_info' => $order->contact_info,
+        //         'for' => 'admin',
+        //     ];
+        //     // Mail::send(new SendMail($with, $to, $subject, $view));
+
+        //      //パートナーへメール送信
+        //      $goods = Goods::where('id',$order->goods_id)->first();
+        //      $goods_folder = GoodsFolder::where('id',$goods->goods_folder_id)->first();
+        //      $user = User::where('id',$goods_folder->user_id)->first();
+        //      // echo "パートナー--".$user->name."--".$user->email."<br>";
+        //      $subject = 'パートナーへのメール';
+        //      $name = $user->name;
+        //      $with = [
+        //         'name' => $name,
+        //         'goods_name' => $goods_folder->name,
+        //         'goods_kind' => $order->goods->name,
+        //         'from_name' => $order->from_name,
+        //         'from_postal_code' => $order->from_postal_code,
+        //         'from_pref_id' => $order->from_pref_id,
+        //         'from_city' => $order->from_city,
+        //         'from_town' => $order->from_town,
+        //         'from_building' => $order->from_building,
+        //         'from_phone' => $order->from_phone,
+        //         'to_name' => $order->to_name,
+        //         'to_postal_code' => $order->to_postal_code,
+        //         'to_pref_id' => $order->to_pref_id,
+        //         'to_city' => $order->to_city,
+        //         'to_town' => $order->to_town,
+        //         'to_building' => $order->to_building,
+        //         'to_phone' => $order->to_phone,    
+        //         'contact_info' => $order->contact_info,
+        //         'for' => 'admin',
+        //      ];
+        //     // Mail::send(new SendMail($with, $to, $subject, $view));   
+
+        //     return back()->with('result', '商品キャンセルメールを送信しました。');
+
+
+        // }else{
+
+        //     return back()->with('result', '予約状況を更新しました。');
+
+        // }
 
 
     }
@@ -1077,7 +1092,7 @@ class MOwnerController extends Controller
         $name = $request->name;
         $content = $request->content;
         
-        if(DB::table('links')->where('id', $id)->exists()){
+        if(Link::where('id', $id)->exists()){
             
             Link::where('id', $request->id)->update([
                 'id'=>$id,

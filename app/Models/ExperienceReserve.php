@@ -33,6 +33,7 @@ class ExperienceReserve extends Model
         'start_date',
         'end_date',
         'cancel_flag',
+        'payment_id',
     ];
 
     // public function experiencefolder()

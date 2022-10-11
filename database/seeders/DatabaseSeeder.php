@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SiteMasterSeeder::class);
         $this->call(FavoriteSeeder::class);
         $this->call(HotelSelectSeeder::class);
+        $this->call(LinkSeeder::class);
        
        
     }

@@ -88,10 +88,72 @@
     });
 </script>
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row justify-content-center"> 
+        <form class="col-md-8" action="{{ Request::url() }}" method="POST" id="nonce-form" class="form-card">
+        @csrf
+            <div class="d-flex align-items-center mt-3">
 
-            <h3 class="mb-3">お支払方法の決定</h3>
+                <h3 class="mb-3">お支払方法の決定</h3>
+
+                <button type="button" class="btn btn-outline-secondary mb-3 ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    送り先変更
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">お土産のお送り先</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mt-2">
+                                    <p>送り先が{{ Auth::user()->name }}さんの住所と異なる場合下記のフォームを変更してください</p> 
+                                    <div class="mt-1 p-3 card">
+                                        <label for="">
+                                            送り先氏名
+                                            <input name="to_name" class="form-control" type="text" value="{{ $name }}">
+                                        </label>
+                                        <label for="">
+                                            送り先郵便番号
+                                            <input name="to_postal_code" class="form-control" type="text" value="{{ $postal_code }}">
+                                        </label>
+                                        <label for="">
+                                            送り先都道府県
+                                            <select name="to_pref_id" id="pref_id" class="form-control p-region @error('pref_id') is-invalid @enderror">
+                                                <option value="">-- 選択してください --</option>
+                                                    @foreach (App\Models\User::$prefs as $key => $pref)
+                                                        <option value="{{ $key }}" @if ($pref_id == $key) selected @endif>{{ $pref }}</option>
+                                                    @endforeach
+                                            </select>
+                                        </label>
+                                        <label for="">
+                                            送り先市区町村
+                                            <input name="to_city" class="form-control" type="text" value="{{ $city }}">
+                                        </label>
+                                        <label for="">
+                                            送り先町名番地等
+                                            <input name="to_town" class="form-control" type="text" value="{{ $town }}">
+                                        </label>
+                                        <label for="">
+                                            送り先建物名等
+                                            <input name="to_building" class="form-control" type="text" value="{{ $building }}">
+                                        </label>
+                                        <label for="">
+                                            送り先電話番号
+                                            <input name="to_phone_number" class="form-control" type="text" value="{{ $phone_number }}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">変更</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="container-fluid">
                 <div class="row justify-content-center">
@@ -102,8 +164,7 @@
                                     <h2 class="heading text-center">￥{{ number_format($price) }}</h2>
                                 </div>
                             </div>
-                            <form action="{{ Request::url() }}" method="POST" id="nonce-form" class="form-card">
-                                @csrf
+                            
                                 <!--<div class="row justify-content-center mb-4 radio-group">
                                     <div class="col-sm-3 col-5">
                                         <div class='radio selected mx-auto' data-value="dk"> <img class="fit-image" src="https://i.imgur.com/5TqiRQV.jpg" width="105px" height="55px"> </div>
@@ -145,12 +206,11 @@
                                         <input type="button" value="購入を確定する" class="btn btn-pay placeicon" onclick="requestCardNonce(event)">
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 

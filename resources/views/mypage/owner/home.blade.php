@@ -2,6 +2,16 @@
 
 @section('menu', 'owner_home')
 @section('content')
+<style>
+    select {
+    -webkit-appearance: none;/* ベンダープレフィックス(Google Chrome、Safari用) */
+    -moz-appearance: none; /* ベンダープレフィックス(Firefox用) */
+    appearance: none; /* 標準のスタイルを無効にする */
+    }
+    ::-ms-expand { /* select要素のデザインを無効にする（IE用） */
+    display: none;
+    }
+</style>
 <div class="container">
 
     <h1>ようこそ {{ Auth::user()->name }} 様</h1>
@@ -72,12 +82,46 @@
                     <td>
                         <p>{{ $reserved_experience->message }}</p>
                     </td>
-                    <td> 
-                        @if( $reserved_experience->status == '対応待ち')
-                            <p class="bg-danger text-white mb-0 text-center">{{ $reserved_experience->status }}</p>
-                        @else
-                            <p class="bg-primary text-white mb-0 text-center">{{ $reserved_experience->status }}</p>
-                        @endif
+                    <td>
+                    @if($reserved_experience->hotel_group_id == '')
+                        <select name="save_flag" tabindex="-1" disabled 
+                        @if($reserved_experience->status == 1 )
+                        class="bg-danger text-white text-center" 
+                        @else($reserved_experience->status == 5)
+                        class="bg-primary text-white text-center"
+                        @endif 
+                        >
+                            @foreach(App\Consts\OrderConst::STATUS_LIST as $key =>$val)
+                                <option 
+                                value="{{ $key }}" 
+                                @if ($reserved_experience->status == $key ) 
+                                selected 
+                                @endif
+                                    >
+                                    {{$val}}
+                                </option>       
+                            @endforeach
+                        </select>
+                    @else
+                        <select name="save_flag" tabindex="-1" disabled 
+                        @if($reserved_experience->status == 1 ||$reserved_experience->status == 5 )
+                        class="bg-danger text-white text-center" 
+                        @else($reserved_experience->status == 10)
+                        class="bg-primary text-white text-center"
+                        @endif 
+                        >
+                            @foreach(App\Consts\OrderConst::LODGING_STATUS_LIST as $key =>$val)
+                                <option 
+                                value="{{ $key }}" 
+                                @if ($reserved_experience->status == $key ) 
+                                selected 
+                                @endif
+                                    >
+                                    {{$val}}
+                                </option>       
+                            @endforeach
+                        </select>
+                    @endif        
                     </td>
                 </tr>
                 
@@ -112,8 +156,10 @@
                         <p>{{ $ordered_goods_one->user->name }}様</p>
                     </td>
                     <td>
-                        <p>{{ App\Models\GoodsFolder::where('id',$ordered_goods_one->goods->goods_folder_id)->first()->name }}</p>
-                        <p>{{ $ordered_goods_one->goods->name }}</p>
+                        <a class="link" href="/mypage/owner/goods_reserve_edit/{{ $ordered_goods_one->id }}">
+                            <p>{{ App\Models\GoodsFolder::where('id',$ordered_goods_one->goods->goods_folder_id)->first()->name }}</p>
+                            <p>{{ $ordered_goods_one->goods->name }}</p>
+                        </a>    
                     </td>
                     <td>
                         <p>{{ $ordered_goods_one->partner->name }}</p>  
@@ -141,11 +187,24 @@
                     </td>
                     <td>
                         
-                        @if($ordered_goods_one->status == '未対応')
-                            <p class="bg-danger text-white text-center">{{$ordered_goods_one->status}}</p>
-                        @else
-                            <p class="bg-primary text-white text-center">{{$ordered_goods_one->status}}</p>
-                        @endif
+                        <select name="save_flag" tabindex="-1" disabled 
+                        @if($ordered_goods_one->status == 1 ||$ordered_goods_one->status == 5 )
+                        class="bg-danger text-white text-center" 
+                        @else($ordered_goods_one->status == 10)
+                        class="bg-primary text-white text-center"
+                        @endif 
+                        >
+                            @foreach(App\Consts\OrderConst::GOODS_STATUS_LIST as $key =>$val)
+                                <option 
+                                value="{{ $key }}" 
+                                @if ($ordered_goods_one->status == $key ) 
+                                selected 
+                                @endif
+                                    >
+                                    {{$val}}
+                                </option>       
+                            @endforeach
+                        </select>    
                         
                     </td>
                     

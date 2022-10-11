@@ -21,7 +21,9 @@ class GoodsOrderSeeder extends Seeder
             'user_id' => 4,
             'quantity' => 1,
             'contact_info' => '商品に関する連絡先（株式会社　サンプル）：042-xxxx-xxxx',
-            'status' => '未対応',
+            'status' => '1',
+            'delivery_company' => '未確定',
+            'delivery_number' => '',
             'from_name' => '一般ユーザ',
             'from_postal_code' =>'000-0033',
             'from_pref_id' =>'14',
@@ -36,6 +38,7 @@ class GoodsOrderSeeder extends Seeder
             'to_town' =>'サンプル7丁目',
             'to_building' =>'ビル1F',
             'to_phone_number' =>'00-0000-0000',
+            'payment_id' => 3487,
         ]);
         GoodsOrder::create([
             'partner_id' => 1,
@@ -43,7 +46,9 @@ class GoodsOrderSeeder extends Seeder
             'user_id' => 4,
             'quantity' => 2,
             'contact_info' => ' 商品に関する連絡先（株式会社　サンプル）：042-xxxx-xxxx',
-            'status' => '未対応',
+            'status' => '1',
+            'delivery_company' => '未確定',
+            'delivery_number' => '',
             'from_name' => '一般ユーザ',
             'from_postal_code' =>'000-0033',
             'from_pref_id' =>'14',
@@ -58,6 +63,7 @@ class GoodsOrderSeeder extends Seeder
             'to_town' =>'サンプル7丁目',
             'to_building' =>'ビル1F',
             'to_phone_number' =>'00-0000-0000',
+            'payment_id' => 3888,
         ]);
     }
 }

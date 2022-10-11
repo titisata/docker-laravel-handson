@@ -25,13 +25,14 @@ class ExpreienceReserveSeeder extends Seeder
             'hotel_id' => 1,
             'food_id' => 1,
             'comment' => 'テスト1',
-            'status' => '済み',
+            'status' => '1',
             'message' => 'テスト的なお店へのメッセージです。テスト。',
             'contact_info' => 'キャンセル時の連絡先(oo観光協会)：04-xxx-xxx 体験に関する連絡先（株式会社　サンプル）：042-xxxx-xxxx',
             'quantity_child' => 1,
             'quantity_adult' => 1,
             'start_date' =>  date('Y-m-d'),
             'end_date' =>  date('Y-m-d'),
+            'payment_id' => 1234,
         ]);
         ExperienceReserve::create([
             'partner_id' => 1,
@@ -42,13 +43,14 @@ class ExpreienceReserveSeeder extends Seeder
             'hotel_id' => 1,
             'food_id' => null,
             'comment' => 'テスト2',
-            'status' => '済み',
+            'status' => '1',
             'message' => 'テスト的なお店へのメッセージです。テスト。',
             'contact_info' => 'キャンセル時の連絡先(oo観光協会)：04-xxx-xxx 体験に関する連絡先（株式会社　サンプル）：042-xxxx-xxxx',
             'quantity_child' => 1,
             'quantity_adult' => 1,
             'start_date' =>  date('Y-m-d'),
             'end_date' =>  date('Y-m-d'),
+            'payment_id' => 2345,
         ]);
 
         ExperienceReserve::create([
@@ -60,13 +62,14 @@ class ExpreienceReserveSeeder extends Seeder
             'hotel_id' => null,
             'food_id' => null,
             'comment' => 'テスト3',
-            'status' => '済み',
+            'status' => '1',
             'message' => 'テスト的なお店へのメッセージです。テスト。',
             'contact_info' => 'キャンセル時の連絡先(oo観光協会)：04-xxx-xxx 体験に関する連絡先（株式会社　サンプル）：042-xxxx-xxxx',
             'quantity_child' => 1,
             'quantity_adult' => 1,
             'start_date' =>  date('Y-m-d'),
             'end_date' =>  date('Y-m-d'),
+            'payment_id' => 5678,
         ]);
 
         ExperienceReserve::create([
@@ -78,13 +81,14 @@ class ExpreienceReserveSeeder extends Seeder
             'hotel_id' => null,
             'food_id' => null,
             'comment' => 'テスト3',
-            'status' => '済み',
+            'status' => '1',
             'message' => 'テスト的なお店へのメッセージです。テスト。',
             'contact_info' => 'キャンセル時の連絡先(oo観光協会)：04-xxx-xxx 体験に関する連絡先（株式会社　サンプル）：042-xxxx-xxxx',
             'quantity_child' => 1,
             'quantity_adult' => 1,
             'start_date' =>  date('Y-m-d'),
             'end_date' =>  date('Y-m-d'),
+            'payment_id' => 8945,
         ]);
     }
 }

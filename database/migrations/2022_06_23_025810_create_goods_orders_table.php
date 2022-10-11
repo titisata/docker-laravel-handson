@@ -20,20 +20,23 @@ return new class extends Migration {
             $table->integer('quantity');
             $table->string('contact_info', 1000);
             $table->string('status');
+            $table->string('delivery_company');
+            $table->string('delivery_number')->nullable();
             $table->string('from_name');
             $table->string('from_postal_code');
             $table->integer('from_pref_id');
             $table->string('from_city');
             $table->string('from_town');
-            $table->string('from_building')->nullable();;
+            $table->string('from_building')->nullable();
             $table->string('from_phone_number');
             $table->string('to_name');
             $table->string('to_postal_code');
             $table->integer('to_pref_id');
             $table->string('to_city');
             $table->string('to_town');
-            $table->string('to_building')->nullable();;
+            $table->string('to_building')->nullable();
             $table->string('to_phone_number');
+            $table->string('payment_id');
             $table->timestamps();
         });
     }

@@ -8,6 +8,7 @@ use App\Models\GoodCartItem;
 use App\Models\Goods;
 use App\Models\GoodsOrder;
 use App\Models\User;
+use App\Mail\PurchaseSendRemaindMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -43,20 +44,9 @@ class CartController extends Controller
             $price += $goodCartItem->sum_price();
         }
 
-        if(isset($goodCartItems)){
-            $name = Auth::user()->name;
-            $postal_code = Auth::user()->postal_code;
-            $pref_id = Auth::user()->pref_id;
-            $city = Auth::user()->city;
-            $town = Auth::user()->town;
-            $building = Auth::user()->building;
-            $phone_number = Auth::user()->phone_number;
-            $show = 1;
-            return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price', 'name', 'postal_code', 'pref_id', 'city', 'town', 'building', 'phone_number', 'show'));
-        }else{
-            $show = 0;
-            return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price', 'show'));
-        }
+        $show = 0;
+        return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price', 'show'));
+        
         
     }
 
@@ -72,7 +62,17 @@ class CartController extends Controller
         foreach ($goodCartItems as $goodCartItem) {
             $price += $goodCartItem->sum_price();
         }
-        return view('cart.purchase', compact('price'));
+
+        $name = Auth::user()->name;
+        $postal_code = Auth::user()->postal_code;
+        $pref_id = Auth::user()->pref_id;
+        $city = Auth::user()->city;
+        $town = Auth::user()->town;
+        $building = Auth::user()->building;
+        $phone_number = Auth::user()->phone_number;
+
+        return view('cart.purchase', compact('experienceCartItems', 'goodCartItems', 'price', 'name', 'postal_code', 'pref_id', 'city', 'town', 'building', 'phone_number', 'price'));
+        
     }
 
     public function delete_experience(Request $request)
@@ -148,12 +148,14 @@ class CartController extends Controller
         $description_experiences_all = '';
         $description_goods_all = '';
         $partner_array = array();
+        $ex_make_id = array();
+        $goods_make_id = array();
         foreach ($experienceCartItems as $experienceCartItem) {
             $description_experiences = '';
             $description_goods = '';
 
 
-            ExperienceReserve::create([
+            $ex_data = ExperienceReserve::create([
                 'user_id' => $uid,
                 'partner_id' => $experienceCartItem->partner_id,
                 'experience_id' => $experienceCartItem->experience_id,
@@ -164,11 +166,12 @@ class CartController extends Controller
                 'comment' => 'コメントはありません',
                 'message' => $experienceCartItem->message,
                 'contact_info' => $experienceCartItem->contact_info(),
-                'status' => '対応待ち',
+                'status' => '1',
                 'quantity_child' => $experienceCartItem->quantity_child,
                 'quantity_adult' => $experienceCartItem->quantity_adult,
                 'start_date' =>  $experienceCartItem->start_date,
                 'end_date' =>  $experienceCartItem->end_date,
+                'payment_id' => $uniq_id,
                 'experience_price_child' =>  $experienceCartItem->experience->price_child,
                 'experience_price_adult' =>  $experienceCartItem->experience->price_adult,
                 'hotel_price_child' =>  is_null($experienceCartItem->hotelGroup) ? NULL : $experienceCartItem->hotelGroup->price_child,
@@ -194,10 +197,21 @@ class CartController extends Controller
             }
             $partner_array[$experienceCartItem->partner_id]['description_experiences'] .= $description_experiences;
             $partner_array[$experienceCartItem->partner_id]['price'] += $experienceCartItem->sum_price();
+
+            $ex_make_id[] = $ex_data->id; 
         }
+
+        $to_name = $request->to_name;
+        $to_postal_code = $request->to_postal_code;
+        $to_pref_id = $request->to_pref_id;
+        $to_city = $request->to_city;
+        $to_town = $request->to_town;
+        $to_building = $request->to_building;
+        $to_phone_number = $request->to_phone_number;
+        
         
         foreach ($goodCartItems as $goodCartItem) {
-            GoodsOrder::create([
+            $goods_data = GoodsOrder::create([
                 'partner_id' => $goodCartItem->partner_id,
                 'goods_id' => $goodCartItem->goods_id,
                 'user_id' => $uid,
@@ -205,6 +219,25 @@ class CartController extends Controller
                 'contact_info' => $goodCartItem->contact_info(),
                 'goods_price' =>  $goodCartItem->goods->price,
                 'total_price' =>  $goodCartItem->sum_price(),
+                'status' => '1',
+                'delivery_company' => '未確定',
+                'delivery_number' => '0',
+                'from_name' =>Auth::user()->name,
+                'from_postal_code' =>Auth::user()->postal_code,
+                'from_pref_id' =>Auth::user()->pref_id,
+                'from_city' =>Auth::user()->city,
+                'from_town' =>Auth::user()->town,
+                'from_building' =>Auth::user()->building,
+                'from_phone_number' =>Auth::user()->phone_number,
+                'to_name' => $to_name,
+                'to_postal_code' => $to_postal_code,
+                'to_pref_id' => $to_pref_id,
+                'to_city' => $to_city,
+                'to_town' => $to_town,
+                'to_building' => $to_building,
+                'to_phone_number' => $to_phone_number,
+                'payment_id' => $uniq_id,
+
             ]);
             
             $price += $goodCartItem->sum_price();
@@ -212,6 +245,10 @@ class CartController extends Controller
             $description_goods.= "名前：".$goodCartItem->goods->name."\r\n";
             $description_goods.= "個数：".$goodCartItem->goods->quantity."\r\n";
             $description_goods.= "金額：".$goodCartItem->sum_price()."\r\n";
+            $description_goods.= "お届け先氏名：".$to_name."\r\n";
+            $description_goods.= "お届け先郵便番号：".$to_postal_code."\r\n";
+            $description_goods.= "お届け先住所：".User::$prefs[$to_pref_id]."".$to_city."".$to_town."".$to_building."\r\n";
+            $description_goods.= "お届け先電話番号：".$to_phone_number."\r\n";
             $description_goods.= "商品に関するお問合せ：".$goodCartItem->contact_info()."\r\n";
             $description_goods.= "---------------------------------\r\n";
             $description_goods_all.= $description_goods;
@@ -220,68 +257,77 @@ class CartController extends Controller
             }
             $partner_array[$goodCartItem->partner_id]['description_goods'] .= $description_goods;
             $partner_array[$goodCartItem->partner_id]['price'] +=  $goodCartItem->sum_price();
+            $goods_make_id[] = $goods_data->id;
         }
 
+        
         ExperienceCartItem::where('user_id', $uid)->delete();
         GoodCartItem::where('user_id', $uid)->delete();
+
+        
+        $obj = new PurchaseSendRemaindMail($ex_make_id, $goods_make_id, $partner_array);
+        $obj->purchase_send_remaind_mail();
+
+        // exit;
+
         
         //メール文章
-        $view = 'email.cart_confirm';
+        // $view = 'email.cart_confirm';
 
-        //各パートナーへメール
-        foreach ($partner_array as $partner_id => $v) {
-            $partner = User::where('id', $partner_id)->first();
-            $subject = '決済完了通知メール';
-            $name = $partner->name;
-            $to = $partner->email;
-            $to = 'satou@b-partners.jp';
+        // //各パートナーへメール
+        // foreach ($partner_array as $partner_id => $v) {
+        //     $partner = User::where('id', $partner_id)->first();
+        //     $subject = '決済完了通知メール';
+        //     $name = $partner->name;
+        //     $to = $partner->email;
+        //     $to = 'satou@b-partners.jp';
 
-            $with = [
-                'name' => $name,
-                'description_experiences' => $v['description_experiences'],
-                'description_goods' => $v['description_goods'],
-                'price' => $v['price'],
-                'for' => 'user',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-        }
+        //     $with = [
+        //         'name' => $name,
+        //         'description_experiences' => $v['description_experiences'],
+        //         'description_goods' => $v['description_goods'],
+        //         'price' => $v['price'],
+        //         'for' => 'user',
+        //     ];
+        //     // Mail::send(new SendMail($with, $to, $subject, $view));
+        // }
 
         //管理者へメール
-        $admins  = User::with('roles')
-        ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
-        ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
-        ->select('users.*')
-        ->where("roles.name", "site_admin") 
-        ->get();
+        // $admins  = User::with('roles')
+        // ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+        // ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+        // ->select('users.*')
+        // ->where("roles.name", "site_admin") 
+        // ->get();
 
-        foreach ($admins as $admin) {
-            $subject = '決済完了通知メール';
-            $name = $admin->name;
-            $to = $admin->email;
-            $to = 'satou@b-partners.jp';
-            $with = [
-                'name' => $name,
-                'description_experiences' => $description_experiences_all,
-                'description_goods' => $description_goods_all,
-                'price' => $price,
-                'for' => 'user',
-            ];
-            // Mail::send(new SendMail($with, $to, $subject, $view));
-        }        
+        // foreach ($admins as $admin) {
+        //     $subject = '決済完了通知メール';
+        //     $name = $admin->name;
+        //     $to = $admin->email;
+        //     $to = 'satou@b-partners.jp';
+        //     $with = [
+        //         'name' => $name,
+        //         'description_experiences' => $description_experiences_all,
+        //         'description_goods' => $description_goods_all,
+        //         'price' => $price,
+        //         'for' => 'user',
+        //     ];
+        //     // Mail::send(new SendMail($with, $to, $subject, $view));
+        // }        
 
-        //ユーザへメール
-        $user = Auth::user();
-        $subject = '決済完了メール';
-        $name = $user->name;
-        $to = $user->email;
-        $to = 'satou@b-partners.jp';
-        $with = [
-            'name' => $name,
-            'description_experiences' => $description_experiences_all,
-            'description_goods' => $description_goods_all,
-            'price' => $price,
-            'for' => 'user',
-        ];
+        // //ユーザへメール
+        // $user = Auth::user();
+        // $subject = '決済完了メール';
+        // $name = $user->name;
+        // $to = $user->email;
+        // $to = 'satou@b-partners.jp';
+        // $with = [
+        //     'name' => $name,
+        //     'description_experiences' => $description_experiences_all,
+        //     'description_goods' => $description_goods_all,
+        //     'price' => $price,
+        //     'for' => 'user',
+        // ];
         // Mail::send(new SendMail($with, $to, $subject, $view));
         // echo "fin";
         // exit;

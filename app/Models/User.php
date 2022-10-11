@@ -58,7 +58,7 @@ class User extends Authenticatable
     {
         $now = now()->format('y-m-d');
 
-        return $this->hasMany(ExperienceReserve::class)->where('start_date', '>', $now);
+        return $this->hasMany(ExperienceReserve::class)->where('start_date', '>=', $now);
     }
 
     /**

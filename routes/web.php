@@ -55,6 +55,7 @@ Route::prefix('mypage/user')->middleware(['auth','role:system_admin|site_admin|p
     Route::get('/', [App\Http\Controllers\MUserController::class, 'home']);
     Route::get('/reserve', [App\Http\Controllers\MUserController::class, 'reserve']);
     Route::get('/reserve_info/{id}', [App\Http\Controllers\MUserController::class, 'reserve_info']);
+    Route::get('/goods_reserve_info/{id}', [App\Http\Controllers\MUserController::class, 'goods_reserve_info']);
 });
 
 // パートナーがアクセスできる
@@ -215,6 +216,6 @@ Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin|
     Route::get('/goods_reserve_select_past/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_reserve_select_past']);
     Route::get('/goods_reserve_select_date_past/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_reserve_select_date_past']);
     Route::get('/goods_reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_reserve_edit']);
-    Route::post('/goods_reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_action_reserve_edit']);
+    Route::post('/goods_reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_reserve_edit']);
 });
 

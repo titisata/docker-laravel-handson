@@ -33,7 +33,7 @@
                     <p>{{ $order->user->name }}様</p>
                 </td>
                 <td>
-                    <a href="/mypage/owner/goods_reserve_edit/{{$order->id}}">
+                    <a class="link" href="/mypage/owner/goods_reserve_edit/{{$order->id}}">
                         <p>{{ App\Models\GoodsFolder::where('id',$order->goods->goods_folder_id)->first()->name }}</p>
                         <p>{{ $order->goods->name }}</p>
                     </a>  

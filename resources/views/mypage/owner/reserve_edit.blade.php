@@ -39,45 +39,61 @@
                             <input name="status" type="text" class="form-control" value="{{ $experiencereserve->start_date }}"> -->
                             <p>予約日:{{ $experiencereserve->start_date }}</p>
                         </div>
+                        <!-- <div class="mb-3">
+                            <label class="form-label">ステータス</label>
+                            <select name="status" >     
+                                <option value="0" selected>選択して下さい</option>                            
+                                <option value="ホテル確定">ホテル確定</option> 
+                                <option value="キャンセル">キャンセル</option>
+                            </select>  
+                        </div>   -->
                         <div class="mb-3">
                             <label class="form-label">ステータス</label>
-                            <input name="status" type="text" class="form-control" value="{{ $experiencereserve->status }}">
-                        </div>  
-                        <div class="mb-3">
-                            
-                            <label class="form-label">ホテル</label>
-                            <select name="hotel_id" id="">     
-                                <option value="0">選択して下さい</option>                            
-                                @foreach($hotels as $hotel)
-                                    @if("{{ $experiencereserve->hotel_id }}" == "{{ $hotel->id }}")
-                                        <option value="{{ $hotel->id }}" selected>{{ $hotel->name }}</option>
+                            <select name="save_flag" >
+                                @if($user->hasRole('system_admin|site_admin'))
+                                    @if($experiencereserve->hotel_group_id == '')
+                                        @foreach(App\Consts\OrderConst::STATUS_LIST as $key =>$val)
+                                        <option value="{{ $key }}" @if ($experiencereserve->status == $key ) selected @endif >{{$val}}</option>       
+                                        @endforeach
                                     @else
-                                        <option value="{{ $hotel->id }}">{{ $hotel->name }}</option>
-                                    @endif   
-                                @endforeach
-                            </select>                  
-                        </div>  
-                        <div>
-                            <label for="">確認メール送信</label>
-                            <div class="d-flex flex-column">
-                                <div>
-                                    <input id="n_mail" name="mail" type="radio" value="0" checked>
-                                    <label for="n_mail" class="fw-normal">メール送信しない</label>
-                                </div>
-                                <div>
-                                    <input id="f_mail" name="mail" type="radio" value="1">
-                                    <label for="f_mail" class="fw-normal">ホテル確定メール送信</label>
-                                </div>
-                                <div>
-                                    <input id="s_mail" name="mail" type="radio" value="2">
-                                    <label for="s_mail" class="fw-normal">予約ステータス変更メール送信</label>
-                                </div>
-                                
-                            </div> 
+                                        @foreach(App\Consts\OrderConst::LODGING_STATUS_LIST as $key =>$val)
+                                        <option value="{{ $key }}" @if ($experiencereserve->status == $key ) selected @endif >{{$val}}</option>       
+                                        @endforeach
+                                    @endif
+                                @elseif($user->hasRole('partner'))
+                                    @if($experiencereserve->hotel_group_id == '')
+                                        @foreach(App\Consts\OrderConst::PARTNER_STATUS_LIST as $key =>$val)
+                                        <option value="{{ $key }}" @if ($experiencereserve->status == $key ) selected @endif >{{$val}}</option>       
+                                        @endforeach
+                                    @else
+                                        @foreach(App\Consts\OrderConst::LODGING_PARTNER_STATUS_LIST as $key =>$val)
+                                        <option value="{{ $key }}" @if ($experiencereserve->status == $key ) selected @endif >{{$val}}</option>       
+                                        @endforeach
+                                    @endif    
+                                @endif
+                            </select>
                         </div>
-                        
+                        @if($user->hasRole('system_admin|site_admin'))
+                            @if($experiencereserve->hotel_group_id != '')
+                            <div class="mb-3">
+                                
+                                <label class="form-label">ホテル</label>
+                                <select name="hotel_id">     
+                                    <option value="">選択して下さい</option>                            
+                                    @foreach($hotels as $hotel)
+                                        @if("{{ $experiencereserve->hotel_id }}" == "{{ $hotel->id }}")
+                                            <option value="{{ $hotel->id }}" selected>{{ $hotel->name }}</option>
+                                        @else
+                                            <option value="{{ $hotel->id }}">{{ $hotel->name }}</option>
+                                        @endif   
+                                    @endforeach
+                                </select>                  
+                            </div> 
+                            @endif
+                        @endif
+                        <input type="hidden" name="id" value="{{ $experiencereserve->id }}">
 
-                    <button type="submit" class="btn btn-primary">更新</button>
+                        <button type="submit" class="btn btn-primary">更新</button>
                     </form>
                     <!-- <div class="mt-3">
                         <form action="" >

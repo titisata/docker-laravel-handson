@@ -920,14 +920,14 @@ class MPartnerController extends Controller
     {
         $user = Auth::user();
         $current_user_id = $user->id;
-        $links = Link::where('partner_id', $current_user_id)->get();
+        $links = Link::where('user_id', $current_user_id)->get();
         return view('mypage.partner.link_display', compact('user', 'links'));
     }
 
     public function link_insert(string $id)
     {
         $user = Auth::user();
-        $links = Link::where('partner_id', $id)->first();
+        $links = Link::where('user_id', $user->id)->first();
         
         return view('mypage.partner.link_insert', compact('user', 'links'));
     }
@@ -954,7 +954,7 @@ class MPartnerController extends Controller
 
         $user = Auth::user();
         $current_user_id = $user->id;
-        $link = Link::where('partner_id', $current_user_id)->where('id', $id)->first();
+        $link = Link::where('user_id', $current_user_id)->where('id', $id)->first();
         
         return view('mypage.partner.link_edit', compact('user', 'link'));
     }

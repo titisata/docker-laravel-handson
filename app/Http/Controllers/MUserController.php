@@ -6,6 +6,10 @@ use App\Models\Partner;
 use App\Models\User;
 use App\Models\ExperienceReserve;
 use App\Models\ExperienceFolder;
+use App\Models\GoodsOrder;
+use App\Models\GoodsFolder;
+use App\Models\Link;
+use App\Consts\LinkConst;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -21,7 +25,15 @@ class MUserController extends Controller
         // $partner = Partner::where('user_id', $user->id)->first();
         $ordered_goods = $user->ordered_goods;
         $future_reserved_experiences = $user->future_reserved_experiences;
-        return view('mypage.user.home', compact('user', 'ordered_goods', 'future_reserved_experiences'));
+
+        $data1 = ExperienceReserve::where('user_id', $user->id)->select('payment_id','created_at');
+
+        $data2 = GoodsOrder::where('user_id', $user->id)->select('payment_id','created_at')->union($data1)->orderBy('created_at', 'asc')->get();
+
+        // dd($data2);
+        // exit;
+
+        return view('mypage.user.home', compact('user', 'ordered_goods', 'future_reserved_experiences', 'data2'));
     }
 
     public function reserve()
@@ -35,9 +47,17 @@ class MUserController extends Controller
     public function reserve_info(string $id)
     {
         $user = Auth::user();
-        $reserved_experience = ExperienceReserve::where('user_id', $id)->first();
+        $reserved_experience = ExperienceReserve::where('id', $id)->first();
         $experience_folder = ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first();
         return view('mypage.user.reserve_info', compact('user', 'reserved_experience', 'experience_folder'));
+    }
+
+    public function goods_reserve_info(string $id)
+    {
+        $user = Auth::user();
+        $goods_order = GoodsOrder::where('id', $id)->first();
+        $goods_folder = GoodsFolder::where('id',$goods_order->goods->goods_folder_id)->first();
+        return view('mypage.user.goods_reserve_info', compact('user', 'goods_order', 'goods_folder'));
     }
 
     public function users()
@@ -89,6 +109,12 @@ class MUserController extends Controller
             $name = $request->name;
             $email = $request->email;
             $pass = $request->pass;
+            $postal_code = $request->postal_code;
+            $pref_id = $request->pref_id;
+            $city = $request->city;
+            $town = $request->town;
+            $building = $request->building;
+            $phone_number = $request->phone_number;
             $role = $request->role;
 
             $user = User::create([
@@ -96,6 +122,12 @@ class MUserController extends Controller
                 'email' => $email,
                 'email_verified_at' => null,
                 'password' => Hash::make($pass),
+                'postal_code' => $postal_code,
+                'pref_id' => $pref_id,
+                'city' => $city,
+                'town' => $town,
+                'building' => $building,
+                'phone_number' => $phone_number,
             ]);
 
             $roles = Role::all();
@@ -109,6 +141,11 @@ class MUserController extends Controller
                         $partner = Partner::create([
                             'user_id' => $user->id,
                             'name' => $user->name,
+                        ]);
+                        Link::create([
+                            'user_id'=>$partner->user_id,
+                            'name'=>LinkConst::NAME,
+                            'content'=>LinkConst::CONTENTS,
                         ]);
 
                     }
