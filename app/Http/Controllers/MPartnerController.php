@@ -31,7 +31,10 @@ use App\Http\Requests\GoodsAddRequest;
 use App\Http\Requests\GoodsEditRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
+use App\Mail\ExSendRemaindMail;
+use App\Mail\GoodsSendRemaindMail;
 use DateTime;
 
 class MPartnerController extends Controller

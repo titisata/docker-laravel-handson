@@ -169,11 +169,10 @@ class GoodsSendRemaindMail
     public function goods_send_remaind_mail(){
         $request_data = $this->contents_info($this->save_flag);
 
-        foreach($this->array as $key=>$to){
+        foreach($this->array as $to){
 
-            Mail::send(new SendMail($to[0],'titaya@knowledge-cs.com', $to[2], $to[1] ));
-            // Mail::send(new SendMail($with[$key],$to[0], $subject, $view ));
-            // print_r($with[$key]);
+            Mail::send(new SendMail($to[0],'titaya@knowledge-cs.com', $to[2], $to[3] ));
+            
         }
     //  exit;
         

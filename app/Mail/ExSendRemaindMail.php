@@ -146,7 +146,7 @@ class ExSendRemaindMail
                     ->first(),
                     'for'=>'user',
                 ],
-                'user_info'=>User::where('id', $this->reserve_data->user_id)->first()->email,
+                User::where('id', $this->reserve_data->user_id)->first()->email,
                 ExMailConst::SUBJECT_2,
                 ExMailConst::VIEW_2,
             ],
@@ -164,15 +164,13 @@ class ExSendRemaindMail
                     ->first(),
                     'for'=>'hotel',
                 ],
-                'user_info'=>Hotel::where('id', $this->reserve_data->hotel_id)->first()->email,
+                Hotel::where('id', $this->reserve_data->hotel_id)->first()->email,
                 ExMailConst::SUBJECT_2,
                 ExMailConst::VIEW_2,
             ],
             
         ];
         }
-        
-
     
     }
 
@@ -180,11 +178,15 @@ class ExSendRemaindMail
     public function ex_send_remaind_mail(){
         $request_data = $this->contents_info($this->save_flag);
 
-        foreach($this->array as $key=>$to){
+        // print_r('<pre>');
+        // print_r($this->array);
+        // print_r('<pre>');
+        // exit;
 
-            Mail::send(new SendMail($to[0],'titaya@knowledge-cs.com', $to[2], $to[1] ));
-            // Mail::send(new SendMail($with[$key],$to[0], $subject, $view ));
-            // print_r($with[$key]);
+        foreach($this->array as $to){
+
+            Mail::send(new SendMail($to[0],'titaya@knowledge-cs.com', $to[2], $to[3] ));
+            
         }
     //  exit;
         
