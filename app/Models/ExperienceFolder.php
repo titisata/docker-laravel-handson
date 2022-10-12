@@ -291,4 +291,52 @@ class ExperienceFolder extends Model
 
         return $experienceFolders;
     }
+
+    /**
+     * 検索を行う
+     *
+     * @param string $date 検索日付
+     * @param string $category カテゴリ
+     * @param string $free_word フリーワード
+     * @param string $lodging 宿泊有無
+     * @param int $per_page 1ページ当たりの表示数
+     * @return Collection<ExperienceFolder>
+     */
+    public static function search_ex(string $date = null, string $category = null, string $free_word = null, string $lodging = null, int $per_page)
+    {
+        $where = [];
+
+        if(!is_null($date)){
+            $date = new DateTime($date);
+            // 日付での検索条件
+            if ($date) {
+                $where[] = ['start_date', '<', $date];
+                $where[] = ['end_date', '>', $date];
+            }
+        }
+        
+        //カテゴリによる検索条件
+        if (!is_null($category)) {
+            $where[] = ['category1', '=', $category];
+        }
+
+        //宿泊の有無
+        if(!is_null($lodging)){
+            $where[] = ['is_lodging', '=', $lodging];
+        }
+        
+        //フリーワード検索
+        if(!is_null($free_word)){
+            $experienceFolders = ExperienceFolder::where($where)
+            ->where(function ($query) use($free_word){
+                $query->where('name', 'like', '%'.$free_word.'%')
+                    ->orWhere('description', 'like', '%'.$free_word.'%');
+            })
+            ->orderBy("created_at", "desc")->paginate($per_page);
+        }else{
+            $experienceFolders = ExperienceFolder::where($where)->orderBy("created_at", "desc")->paginate($per_page);
+        }
+        
+        return $experienceFolders;
+    }
 }

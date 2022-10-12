@@ -132,4 +132,9 @@ class User extends Authenticatable
         36 => '徳島県', 37 => '香川県', 38 => '愛媛県', 39 => '高知県',
         40 => '福岡県', 41 => '佐賀県', 42 => '長崎県', 43 => '熊本県', 44 => '大分県', 45 => '宮崎県', 46 => '鹿児島県', 47 => '沖縄県',
     ];
+
+    public function get_prefs(){
+        $prefs = (User::$prefs);
+        return $prefs[$this->pref_id];
+    }
 }

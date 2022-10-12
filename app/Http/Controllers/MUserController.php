@@ -250,4 +250,68 @@ class MUserController extends Controller
         
         return $this->users();
     }
+
+    public function users_csv(Request $request){
+        $headers = [ //ヘッダー情報
+            'Content-type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=users.csv',
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0',
+        ];
+
+        $callback = function() use ($request)
+        {
+            $createCsvFile = fopen('php://output', 'w'); //ファイル作成
+            
+            $columns = [ //1行目の情報
+                'ID',
+                '名前',
+                'メール',
+                '郵便番号',
+                '都道府県',
+                '市区町村',
+                '住所詳細',
+                'ビル等',
+                '電話番号',
+                '登録日',
+            ];
+
+            mb_convert_variables('SJIS-win', 'UTF-8', $columns); //文字化け対策
+    
+            fputcsv($createCsvFile, $columns); //1行目の情報を追記
+            
+            $users = User::with('roles')
+            ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+            ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+            ->select('users.*')
+            ->whereIn("roles.name",["partner","user"]) 
+            ->orderby("users.id")
+            ->get();
+
+            foreach ($users as $user){
+                $csv = [
+                    $user->id, 
+                    $user->name, 
+                    $user->email, 
+                    $user->postal_code, 
+                    $user->get_prefs(),
+                    $user->city, 
+                    $user->town,
+                    $user->building,
+                    $user->phone_number,
+                    $user->created_at,
+                ];
+
+                mb_convert_variables('SJIS-win', 'UTF-8', $csv); //文字化け対策
+
+                fputcsv($createCsvFile, $csv); //ファイルに追記する
+            }
+
+            fclose($createCsvFile); //ファイル閉じる
+        };
+
+        return response()->stream($callback, 200, $headers); //ここで実行
+
+    }
 }

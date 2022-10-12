@@ -98,44 +98,45 @@ class CartController extends Controller
 
     public function purchase_post(Request $request)
     {
-        # このアクセストークンはSquareへAPIアクセスするのに使われます。
-        # 開発、テスト中はサンドボックスのアクセストークンを使ってください。
-        $access_token = 'EAAAEAj031hh5mVqtfnIH9WAKVydeeLDDFO5k8ZkIvrxIldJQ0HXBEWKUIaQQheK';
-
-        # setup authorization
-        $api_config = new \SquareConnect\Configuration();
-        //サンドボックスと本番でURLが違う
-        $api_config->setHost("https://connect.squareupsandbox.com");
-        $api_config->setSSLVerification(FALSE);
-        $api_config->setAccessToken($access_token);
-        $api_client = new \SquareConnect\ApiClient($api_config);
-        # create an instance of the Transaction API class
-        $payments_api = new \SquareConnect\Api\PaymentsApi($api_client);
-        
-        $uniq_id = uniqid();
-        $nonce = $request->nonce;
-        $price = intval($request->price);
-        
-        $request_body = array (
-            "source_id" => $nonce,
-            "amount_money" => array (
-                "amount" => $price,
-                "currency" => "JPY"
-            ),
-            "idempotency_key" => $uniq_id
-        );
+        \Stripe\Stripe::setApiKey('sk_test_51LndUsJ2951A60rnK7hk7Sqoa4gTe3YPd2t3MhJDEuxlaMYbcOKLUJogbAHShI4UtJRuadpvDaIBlNagfM6oOzw400mROBy7qp');
         
         try {
-            $result = $payments_api->createPayment($request_body);
-        } catch (\SquareConnect\ApiException $e) {
-            //echo $e->getMessage();
-            return view('cart.failure');
-            exit;
+            $amount = intval($request->price);
+            $stripeToken = $request->stripeToken;
+            $charge = \Stripe\Charge::create(array(
+                'amount' => $amount,
+                'currency' => 'jpy',
+                'source'=> $stripeToken,
+            ));
+            $result = 1;
+            $uniq_id = $charge['id'];
+        } catch(\Stripe\Exception\CardException $e) {
+            $result = 2;
+            $error = $e->getMessage();
+        } catch (\Stripe\Exception\RateLimitException $e) {
+            $result = 3;
+            $error = $e->getMessage();
+        } catch (\Stripe\Exception\InvalidRequestException $e) {
+            $result = 4;
+            $error = $e->getMessage();
+        } catch (\Stripe\Exception\AuthenticationException $e) {
+            $result = 5;
+            $error = $e->getMessage();
+        } catch (\Stripe\Exception\ApiConnectionException $e) {
+            $result = 6;
+            $error = $e->getMessage();
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            $result = 7;
+            $error = $e->getMessage();
+        } catch (Error $e) {
+            $result = 8;
+            $error = $e->getMessage();
         }
 
-        if($result['payment']){
-            //成功
+        if ($result==1) {
+            //決済成功
         }else{
+            //決済失敗
             return view('cart.failure');
             exit;
         }
