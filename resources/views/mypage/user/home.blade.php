@@ -14,8 +14,12 @@
 
     @foreach($data2 as $data)
     <div class="card mt-3">
-        <div class="card-header d-flex">
+        <div class="card-header d-flex justify-content-between">
             <p class="mb-0">{{ $data->created_at }}に予約・注文</p>
+            <a href="/mypage/user/receipt/{{ $data->payment_id }}">
+                <button class="btn btn-outline-dark">領収書</button>
+            </a>
+            
         </div>
         <div class="card-body">
         
@@ -49,16 +53,9 @@
                     <p class="ms-2">体験料金：{{ number_format($reserved_experience->sum_price()) }}円</p>
                 </div>
             </div>
-            
-                        
-                    
+                 
             @empty
             @endforelse
-        
-            
-
-                
-    
         
             @forelse ($ordered_goods->where('payment_id',  $data->payment_id) as $one_ordered_goods)
             <div class="d-flex flex-row card mt-3">
@@ -85,7 +82,7 @@
                     
                         <p>
                             お問合せ先：{{$one_ordered_goods->partner->name}}
-                            {{$one_ordered_goods->partner->phone}}
+                            {{$one_ordered_goods->contact_info}}
                         </p>
 
                         <p class="">請求料金：{{ number_format($one_ordered_goods->total_price)}}円</p> 

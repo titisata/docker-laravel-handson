@@ -73,19 +73,23 @@
     }
 
     function delete_btn(key) {
+        
         var delete_num = 'delete_btn_' + key;
 
         var set = document.getElementById(delete_num).value;
         console.log(set);
-        
+
         document.getElementById('delete_path').value = set;
 
         console.log(document.getElementById('delete_path').value);
 
         // delete_path.remove();
-        
+
         //submit()でフォームの内容を送信
         document.deleteform.submit();
+
+       
+       
     }
 
 </script>
@@ -94,6 +98,7 @@
     @if(count($errors) > 0)
         <p class="text-danger">入力に問題があります。再入力してください</p>
     @endif
+    <p class="text-danger">{{ session('result') }}</p>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form name="deleteform" action="/mypage/partner/goods_edit_delete" method="POST" onsubmit='return check();'>
@@ -257,7 +262,7 @@
                                     <input name="goods_quantities_{{$key+1}}" type="number" class="form-control" value="{{ $one_goods->quantity }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">体験の表示・非表示</label>
+                                    <label class="form-label">商品の表示・非表示</label>
                                     @if( $one_goods->status == 1 )
                                         <div>
                                             <input name="goods_statuses_{{$key+1}}" type="radio" checked value="1">
@@ -275,7 +280,11 @@
                                     @endif
                                     
                                 </div>
+                                <input type="hidden" id="limit" name="limit" value="{{$key+1}}">
+                                @if($loop->first)
+                                @else
                                 <button type="button" class="mt-2 btn btn-danger" id="delete_btn_{{ $key+1 }}" value="{{ $one_goods->id }}" onclick="delete_btn({{$key+1}})">削除</button>
+                                @endif
                             </div>
                         @endforeach
                         <div id="add_target"></div>

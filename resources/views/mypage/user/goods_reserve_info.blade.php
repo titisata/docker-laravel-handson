@@ -14,9 +14,11 @@
                         <div class="card-header">注文商品情報</div>
                             <div class="mb-3 ms-2">
                             @forelse(App\Models\Image::where('table_name', 'goods_folders')->where('table_id',$goods_order->goods->goods_folder_id)->get() as $image)
-                                <div class="d-flex flex-column col-4 my-3">
-                                    <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
-                                </div>
+                                @if($loop->first)
+                                    <div class="d-flex flex-column col-4 my-3">
+                                        <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
+                                    </div>
+                                @endif
                             @empty
                             @endforelse        
                             </div>

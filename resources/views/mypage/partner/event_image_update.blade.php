@@ -17,7 +17,7 @@
                 <img src="{{ $images->image_path }}" alt="" style="width: 200px;height: 140px; object-fit: cover;">
                 <p></p>
                 <div>更新したい画像: <input name="image_path" type="file" /></div>
-                <input type="submit" value="ファイル更新" />
+                <button class="btn btn-primary mt-4">ファイル登録</button>
             </form>
         </div>
     </div>

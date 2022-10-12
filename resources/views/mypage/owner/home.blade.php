@@ -140,11 +140,11 @@
             @if ($loop->first)
                 <thead>
                     <tr>
-                        <th scope="col">送り主</th>
-                        <th scope="col">注文商品名</th>
-                        <th scope="col">注文商品責任者</th>
+                        <th scope="col">注文者</th>
+                        <th scope="col">商品名</th>
+                        <th scope="col">商品責任者</th>
                         <th scope="col">商品注文日</th>
-                        <th scope="col">注文商品数</th>
+                        <th scope="col">注文数</th>
                         <th scope="col">商品に関する問い合わせ先</th>
                         <th scope="col">注文商品送り先情報</th>
                         <th scope="col">注文商品状況</th>
@@ -171,12 +171,12 @@
                     </td>
                     <td>
                         <p>
-                            {{$ordered_goods_one->quantity}}
+                            {{$ordered_goods_one->quantity}}個
                         </p>
                     </td>
                     <td>
                         <p>
-                            {{$ordered_goods_one->partner->phone}}
+                            {{$ordered_goods_one->contact_info}}
                         </p>
                     </td>
                     <td> 

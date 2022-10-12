@@ -10,6 +10,7 @@ use App\Models\GoodsOrder;
 use App\Models\GoodsFolder;
 use App\Models\Favorite;
 use App\Models\Link;
+use App\Models\SiteMaster;
 use App\Consts\LinkConst;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,6 @@ class MUserController extends Controller
     {
         $now = now()->format('y-m-d');
         $user = Auth::user();
-        // $partner = Partner::where('user_id', $user->id)->first();
         $ordered_goods = $user->ordered_goods;
         $future_reserved_experiences = $user->future_reserved_experiences;
 
@@ -64,6 +64,51 @@ class MUserController extends Controller
         $ex_favorites = Favorite::where('user_id', $user->id)->where('table_name', 'experience_folders')->get();
         $goods_favorites = Favorite::where('user_id', $user->id)->where('table_name', 'goods_folders')->get();
         return view('mypage.user.favorite', compact('user', 'ex_favorites', 'goods_favorites'));
+    }
+
+    public function receipt(string $id)
+    {
+        $user = Auth::user();
+        $now = now()->format('y年m月d日');
+
+        $site_masters = SiteMaster::find(1);
+
+        $ordered_goods = $user->ordered_goods;
+        $reserved_experiences = $user->reserved_experiences;
+
+        $price = 0;
+
+        if( $ordered_goods != '' && $reserved_experiences == ''){
+            
+            foreach($ordered_goods->where('payment_id', $id) as $one_ordered_goods){
+                $price += $one_ordered_goods->total_price;
+                $date = $one_ordered_goods->created_at;
+                
+            }
+
+        }else if( $reserved_experiences != '' && $ordered_goods == ''){
+
+            foreach ($reserved_experiences->where('payment_id', $id) as $reserved_experience){
+                $price += $reserved_experience->sum_price();
+                $date = $reserved_experience->created_at;
+            }
+
+        }else{
+
+            foreach ($reserved_experiences->where('payment_id', $id) as $reserved_experience){
+                $price += $reserved_experience->sum_price();
+                $date = $reserved_experience->created_at;
+            }
+    
+            foreach($ordered_goods->where('payment_id', $id) as $one_ordered_goods){
+                $price += $one_ordered_goods->total_price;
+                $date = $one_ordered_goods->created_at;
+            }
+
+        }
+        
+       
+        return view('mypage.user.receipt', compact('user', 'ordered_goods', 'reserved_experiences', 'id', 'now', 'price', 'date', 'site_masters')); 
     }
 
 

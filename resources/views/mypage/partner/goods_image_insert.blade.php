@@ -12,7 +12,7 @@
                 <input type="hidden" name="table_name" value="goods_folders" />
                 <input type="hidden" name="table_id" value="{{ $goods_folder->id }}" />
                 アップロード: <input name="image_path" type="file" />
-                <input type="submit" value="ファイル登録" />
+                <button class="btn btn-primary mt-4">ファイル登録</button>
             </form>
         </div>
     </div>

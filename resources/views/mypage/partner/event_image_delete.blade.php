@@ -13,8 +13,8 @@
                 <input type="hidden" name="table_id" value="{{ $images->table_id }}" />
                 <input type="hidden" name="image_path" value="{{ $images->image_path }}" />
                 <img src="{{ $images->image_path }}" alt="" style="width: 200px;height: 140px; object-fit: cover;">
-                <p>{{ $images->image_path }}</p>
-                <input type="submit" value="画像を削除します" />
+                <p></p>
+                <button class="btn btn-primary mt-4">この画像を削除</button>
             </form>
         </div>
     </div>

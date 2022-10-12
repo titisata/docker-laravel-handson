@@ -13,12 +13,14 @@
                     <div class="card">
                         <div class="card-header">予約イベント情報</div>
                             <div class="mb-3 ms-2">
-                            @forelse(App\Models\Image::where('table_name', 'experience_folders')->where('table_id',$reserved_experience->experience->experience_folder_id)->get() as $image)
-                                <div class="d-flex flex-column col-4 my-3">
-                                    <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
-                                </div>
-                            @empty
-                            @endforelse        
+                                @forelse(App\Models\Image::where('table_name', 'experience_folders')->where('table_id',$reserved_experience->experience->experience_folder_id)->get() as $image)
+                                    @if($loop->first)    
+                                        <div class="d-flex flex-column col-4 my-3">
+                                            <img class="card-img" style="width: 200px;height: 140px; object-fit: cover;" src="{{ $image->image_path }}" alt="">
+                                        </div>
+                                    @endif
+                                @empty
+                                @endforelse        
                             </div>
                             <div class="mb-3 ms-2">
                                 <a class="link" href="/experience/{{$experience_folder->id}}">

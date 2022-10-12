@@ -75,7 +75,7 @@
 
 </script>
 <div class="container">
-    <h1>お土産編集</h1>
+    <h1>お土産新規登録</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form action="/mypage/partner/action_goods_add" method="POST" enctype="multipart/form-data">
@@ -89,35 +89,35 @@
                             @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <input name="name" type="text" class="form-control" value="">
+                            <input name="name" type="text" class="form-control" value="{{ old('name') }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">標準商品価格</label>
                             @error('price')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <input name="price" type="number" class="form-control" value="">
+                            <input name="price" type="number" class="form-control" value="{{ old('price') }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">コメント</label>
                             @error('description')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <textarea name="description" type="text" class="form-control" rows="5"></textarea>
+                            <textarea name="description" type="text" class="form-control" rows="5">{{ old('description') }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">注意事項</label>
                             @error('caution')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <textarea name="caution" type="text" class="form-control" rows="5"></textarea>
+                            <textarea name="caution" type="text" class="form-control" rows="5">{{ old('caution') }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">詳細情報</label>
                             @error('detail')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <textarea name="detail" type="text" class="form-control" rows="5"></textarea>
+                            <textarea name="detail" type="text" class="form-control" rows="5">{{ old('detail') }}</textarea>
                         </div>
                         <div class="mb-3">
                         <label class="form-label">カテゴリ</label>
@@ -154,7 +154,7 @@
                                 <label class="form-label">おすすめ表示の順番</label>
                                 <p class="mb-1 ms-3">小さい数ほど優先して表示されます。</p>
                             </div>
-                            <input name="recommend_sort_no" type="number" class="form-control" style="width:60px" value="{{ $goods_folder->recommend_sort_no}}">
+                            <input name="recommend_sort_no" type="number" class="form-control" style="width:60px" value="{{ old('recommend_sort_no') }}">
                         </div>
                         <div class="mt-3">
                             <div>
@@ -177,21 +177,21 @@
                                 @error('goods_name')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input name="goods_name" type="text" class="form-control" value="">
+                                <input name="goods_name" type="text" class="form-control" value="{{ old('goods_name') }}">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">料金</label>
                                 @error('goods_price')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input name="goods_price" type="number" class="form-control" value="">
+                                <input name="goods_price" type="number" class="form-control" value="{{ old('goods_price') }}">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">コメント</label>
                                 @error('goods_description')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <textarea name="goods_description" type="text" class="form-control" rows="5"></textarea>
+                                <textarea name="goods_description" type="text" class="form-control" rows="5">{{ old('goods_description') }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <div class="d-flex">
@@ -201,14 +201,14 @@
                                 @error('goods_sort_no')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input name="goods_sort_no" type="number" class="form-control" value="">
+                                <input name="goods_sort_no" type="number" class="form-control" value="{{ old('goods_sort_no') }}">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">個数</label>
                                 @error('goods_quantity')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input name="goods_quantity" type="number" class="form-control" value="">
+                                <input name="goods_quantity" type="number" class="form-control" value="{{ old('goods_quantity') }}">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">お土産の表示・非表示</label>
@@ -229,7 +229,8 @@
                         <button type="button" class="mt-2 btn btn-primary" onclick="add_ex()">追加</button>
                     </div>
                 </div>
-                <button type="submit" class="mt-2 btn btn-primary">更新</button>
+                </div>
+                <button type="submit" class="my-2 btn btn-primary">新規作成</button>
             </form>
         </div>
     </div>

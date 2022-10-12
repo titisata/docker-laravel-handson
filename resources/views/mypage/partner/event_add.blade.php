@@ -151,28 +151,28 @@
                             @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <input name="name" type="text" class="form-control" >
+                            <input name="name" type="text" class="form-control" value="{{ old('name') }}" >
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">大人料金</label>
+                            <label class="form-label">大人料金目安<span class="small fw-normal">（実際の料金ではなく、表示の際に必要な目安です）</span></label>
                             @error('price_adult')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <input name="price_adult" type="number" class="form-control" >
+                            <input name="price_adult" type="number" class="form-control"  value="{{ old('price_adult') }}" >
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">子供料金</label>
+                            <label class="form-label">子供料金目安<span class="small fw-normal">（実際の料金ではなく、表示の際に必要な目安です）</span></label>
                             @error('price_child')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <input name="price_child" type="number" class="form-control">
+                            <input name="price_child" type="number" class="form-control"  value="{{ old('price_child') }}" >
                         </div>
                         <div class="mb-3">
                             <label class="form-label">住所</label>
                             @error('address')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <input name="address" type="text" class="form-control">
+                            <input name="address" type="text" class="form-control"  value="{{ old('address') }}" >
                         </div>
                         <div class="mb-3">
                             <label class="form-label">お問合せ先情報<span class="small text-danger ms-2">この体験に関する電話連絡（キャンセルやお問合せ等）の受付先を入力してください</span></label>
@@ -188,21 +188,21 @@
                             @error('description')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <textarea name="description" type="text" class="form-control" rows="5"></textarea>
+                            <textarea name="description" type="text" class="form-control" rows="5"> {{ old('description') }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">イベント詳細</label>
                             @error('detail')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <textarea name="detail" type="text" class="form-control" rows="5" ></textarea>
+                            <textarea name="detail" type="text" class="form-control" rows="5" >{{ old('detail') }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">注意事項</label>
                             @error('caution')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <textarea name="caution" type="text" class="form-control" rows="5"></textarea>
+                            <textarea name="caution" type="text" class="form-control" rows="5">{{ old('caution') }}</textarea>
                         </div>
                         <div class="mb-3">
                         <div class="d-flex">
@@ -350,21 +350,21 @@
                                     @error('ex_name')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                    <input name="ex_name" type="text" class="form-control" value="">
+                                    <input name="ex_name" type="text" class="form-control" value="{{ old('ex_name') }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">大人料金</label>
+                                    <label class="form-label">大人料金<span class="small fw-normal">(時間帯別の料金)</span></label>
                                     @error('ex_price_adult')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                    <input name="ex_price_adult" type="number" class="form-control" value="">
+                                    <input name="ex_price_adult" type="number" class="form-control" value="{{ old('ex_price_adult') }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">子供料金</label>
+                                    <label class="form-label">子供料金<span class="small fw-normal">(時間帯別の料金)</span></label>
                                     @error('ex_price_child')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                    <input name="ex_price_child" type="number" class="form-control" value="">
+                                    <input name="ex_price_child" type="number" class="form-control" value="{{ old('ex_price_child') }}">
                                 </div>
                                 <div class="mb-3">
                                     <div class="d-flex">
@@ -374,14 +374,14 @@
                                     @error('ex_sort_no')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                    <input name="ex_sort_no" type="number" class="form-control" value="">
+                                    <input name="ex_sort_no" type="number" class="form-control" value="{{ old('ex_sort_no') }}">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">上限人数</label>
                                     @error('ex_quantity')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                    <input name="ex_quantity" type="number" class="form-control" value="">
+                                    <input name="ex_quantity" type="number" class="form-control" value="{{ old('ex_quantity') }}">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">体験の表示</label>

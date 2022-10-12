@@ -11,8 +11,8 @@
                 @csrf
                 <input type="hidden" name="table_name" value="experience_folders" />
                 <input type="hidden" name="table_id" value="{{ $experiences_folder->id }}" />
-                アップロード: <input name="image_path" type="file" />
-                <input type="submit" value="ファイル登録" />
+                アップロードしたいファイルを選択してください：<input name="image_path" type="file" />
+                <button class="btn btn-primary mt-4">ファイル登録</button>
             </form>
         </div>
     </div>

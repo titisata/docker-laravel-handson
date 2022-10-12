@@ -8,6 +8,7 @@ use App\Models\ExperienceFolder;
 use App\Models\ExperienceReserve;
 use App\Models\Experience;
 use App\Models\GoodsOrder;
+use App\Models\GoodCartItem;
 use App\Models\GoodsFolder;
 use App\Models\GoodsCategory;
 use App\Models\Goods;
@@ -87,7 +88,7 @@ class MPartnerController extends Controller
         
     }
 
-    public function action_event_add(Request $request)
+    public function action_event_add(EventAddRequest $request)
     {
         // dd($request);
         // exit;
@@ -243,10 +244,6 @@ class MPartnerController extends Controller
 
         $start_date = $experiences_folder->start_date->format('y-m-d');
         $end_date = $experiences_folder->end_date->format('y-m-d');
-
-        // echo $start_date;
-        // echo $end_date;
-        // exit;
         
         $hotel_groups = HotelGroup::all();
         $hotel_select_ids = HotelGroupSelect::where('experience_folder_id',$id)->get();
@@ -407,6 +404,7 @@ class MPartnerController extends Controller
         $id = $request->id;
         $delete_id = $request->delete_id;
 
+        
         $experience_delete = Experience::where('id', $delete_id)->delete();
 
         $return_view = $this->event_edit($id);
@@ -633,22 +631,23 @@ class MPartnerController extends Controller
     }
 
 
-    // public function goods_delete(string $id)
-    // {
-    //     //goods_deleteページへ
-    //     $goods = Goods::where('id', $id)->first();
-    //     return view('mypage.partner.goods_delete', compact('goods'));
-    // }
-
     public function goods_edit_delete(Request $request){
 
         $id = $request->id;
         $delete_id = $request->delete_id;
+        $limit = $request->limit;
 
-        $goods_delete = Goods::where('id', $delete_id)->delete();
+        if(GoodsOrder::where('goods_id', $delete_id)->first() == '' && GoodCartItem::where('goods_id', $delete_id)->first() ==''){
+            $goods_delete = Goods::where('id', $delete_id)->delete();
 
-        $return_view = $this->goods_edit($id);
-        return $return_view;
+            $return_view = $this->goods_edit($id);
+            return $return_view;
+        }else{
+
+            return back()->with('result', 'カートまたは注文が過去にあった商品は削除ができません。表示の設定を非表示に切り替えると表示がされなくなります。');
+
+        }
+        
         
     }
 
@@ -747,7 +746,12 @@ class MPartnerController extends Controller
         foreach($food_select_ids as $food_select_id){
             $checked_foods_group[] = $food_select_id->food_group_id;
         }
-        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group', 'schedules'));
+
+        $start_date = $experiences_folder->start_date->format('y-m-d');
+        $end_date = $experiences_folder->end_date->format('y-m-d');
+
+
+        return view('mypage.partner.event_edit', compact('experiences_folder', 'categories', 'hotel_groups', 'food_groups', 'checked_foods_group', 'checked_hotels_group', 'schedules','start_date','end_date'));
         
     }
 

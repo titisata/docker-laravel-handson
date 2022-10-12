@@ -57,6 +57,7 @@ Route::prefix('mypage/user')->middleware(['auth','role:system_admin|site_admin|p
     Route::get('/reserve_info/{id}', [App\Http\Controllers\MUserController::class, 'reserve_info']);
     Route::get('/goods_reserve_info/{id}', [App\Http\Controllers\MUserController::class, 'goods_reserve_info']);
     Route::get('/favorite', [App\Http\Controllers\MUserController::class, 'favorite']);
+    Route::get('/receipt/{id}', [App\Http\Controllers\MUserController::class, 'receipt']);
 });
 
 // パートナーがアクセスできる
