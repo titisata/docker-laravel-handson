@@ -2,16 +2,7 @@
 
 @section('menu', 'owner_home')
 @section('content')
-<style>
-    select {
-    -webkit-appearance: none;/* ベンダープレフィックス(Google Chrome、Safari用) */
-    -moz-appearance: none; /* ベンダープレフィックス(Firefox用) */
-    appearance: none; /* 標準のスタイルを無効にする */
-    }
-    ::-ms-expand { /* select要素のデザインを無効にする（IE用） */
-    display: none;
-    }
-</style>
+
 <div class="container">
 
     <h1>ようこそ {{ Auth::user()->name }} 様</h1>
@@ -186,7 +177,7 @@
                         電話番号：{{$ordered_goods_one->to_phone_number}}</p>
                     </td>
                     <td>
-                    <select name="save_flag" tabindex="-1" disabled 
+                        <select name="save_flag" tabindex="-1" disabled 
                         @if($reserved_experience->status == 1 ||$reserved_experience->status == 5 )
                         class="bg-danger text-white text-center" 
                         @else($reserved_experience->status == 10)

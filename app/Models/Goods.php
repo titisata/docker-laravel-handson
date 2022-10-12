@@ -40,7 +40,7 @@ class Goods extends Model
 
     public function goods_orders()
     {
-        return $this->hasMany(GoodsOrder::class)->where('status', '=', '未対応');
+        return $this->hasMany(GoodsOrder::class)->where('status', '!=', '30');
     }
 
     /**
@@ -51,6 +51,6 @@ class Goods extends Model
 
     public function goods_ordered()
     {
-        return $this->hasMany(GoodsOrder::class)->where('status', '!=', '未対応');
+        return $this->hasMany(GoodsOrder::class)->where('status', '=', '30');
     }
 }

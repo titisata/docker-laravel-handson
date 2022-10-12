@@ -2,6 +2,16 @@
 
 @section('menu', 'owner_reserve')
 @section('content')
+<style>
+    select {
+        -webkit-appearance: none;/* ベンダープレフィックス(Google Chrome、Safari用) */
+        -moz-appearance: none; /* ベンダープレフィックス(Firefox用) */
+        appearance: none; /* 標準のスタイルを無効にする */
+        }
+        ::-ms-expand { /* select要素のデザインを無効にする（IE用） */
+        display: none;
+        }
+</style>
 <div class="container">
     <div class="d-flex flex-column">
         <h1>未対応注文一覧</h1>
@@ -33,7 +43,7 @@
                     <p>{{ $order->user->name }}様</p>
                 </td>
                 <td>
-                    <a class="link" href="/mypage/owner/goods_reserve_edit/{{$order->id}}">
+                    <a class="link" href="/mypage/partner/goods_reserve_edit/{{$order->id}}">
                         <p>{{ App\Models\GoodsFolder::where('id',$order->goods->goods_folder_id)->first()->name }}</p>
                         <p>{{ $order->goods->name }}</p>
                     </a>  
@@ -63,12 +73,24 @@
                     電話番号：{{ $order->to_phone_number }}</p>
                 </td>
                 <td>
-                    
-                    @if( $order->status == '未対応' )
-                        <p class="bg-danger text-white text-center">{{ $order->status }}</p>
-                    @else
-                        <p class="bg-primary text-white text-center">{{ $order->status }}</p>
-                    @endif
+                    <select name="save_flag" tabindex="-1" disabled 
+                    @if($order->status == 1 ||$order->status == 5 )
+                    class="bg-danger text-white text-center" 
+                    @else($order->status == 10)
+                    class="bg-primary text-white text-center"
+                    @endif 
+                    >
+                    @foreach(App\Consts\OrderConst::GOODS_STATUS_LIST as $key =>$val)
+                        <option 
+                        value="{{ $key }}" 
+                        @if ($order->status == $key ) 
+                        selected 
+                        @endif
+                            >
+                            {{$val}}
+                        </option>       
+                    @endforeach
+                    </select>    
                     
                 </td>
             

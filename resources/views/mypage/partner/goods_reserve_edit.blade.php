@@ -22,7 +22,7 @@ window.onload = changeDisabled; // ページを表示したとき、changeDisabl
             <div class="card mt-3">
                 <div class="card-header">お土産予約編集</div>
                 <div class="card-body">
-                    <form name="Form1" action="/mypage/owner/goods_reserve_edit/{{ $goods_order->id }}" method="POST">
+                    <form name="Form1" action="/mypage/partner/goods_reserve_edit/{{ $goods_order->id }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">ステータス</label>
@@ -93,25 +93,7 @@ window.onload = changeDisabled; // ページを表示したとき、changeDisabl
                             <p>商品に関する問い合わせ先:{{ $goods_order->partner->phone }}</p>
                         </div>
                          
-                        
-                        <!-- <div>
-                            <label for="">確認メール送信</label>
-                            <div class="d-flex flex-column">
-                                <div>
-                                    <input id="n_mail" name="mail" type="radio" value="0" checked>
-                                    <label for="n_mail" class="fw-normal">メール送信しない</label>
-                                </div>
-                                <div>
-                                    <input id="f_mail" name="mail" type="radio" value="1">
-                                    <label for="f_mail" class="fw-normal">商品発送メール送信</label>
-                                </div>
-                                <div>
-                                    <input id="s_mail" name="mail" type="radio" value="2">
-                                    <label for="s_mail" class="fw-normal">商品キャンセルメール送信</label>
-                                </div>
-                                
-                            </div> 
-                        </div> -->
+                    
 
                         <button type="submit" class="btn btn-primary">更新</button>
                     </form>

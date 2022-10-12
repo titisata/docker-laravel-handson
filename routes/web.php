@@ -189,30 +189,23 @@ Route::prefix('mypage/partner')->middleware(['auth','role:system_admin|site_admi
     Route::post('goods_edit_delete', [App\Http\Controllers\MPartnerController::class, 'goods_edit_delete']);    
     Route::get('/goods_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_delete']);
 
+    Route::get('/reserve', [App\Http\Controllers\MPartnerController::class, 'reserve']);
+    Route::get('/reserve_past', [App\Http\Controllers\MPartnerController::class, 'reserve_past']);
+    Route::get('/reserve_select/{id}', [App\Http\Controllers\MPartnerController::class, 'reserve_select']);
+    Route::get('/reserve_select_date/{id}', [App\Http\Controllers\MPartnerController::class, 'reserve_select_date']);
+    Route::get('/reserve_select_past/{id}', [App\Http\Controllers\MPartnerController::class, 'reserve_select_past']);
+    Route::get('/reserve_select_date_past/{id}', [App\Http\Controllers\MPartnerController::class, 'reserve_select_date_past']);
+    Route::get('/reserve_edit/{id}', [App\Http\Controllers\MPartnerController::class, 'reserve_edit']);
+    Route::post('/reserve_edit/{id}', [App\Http\Controllers\MPartnerController::class, 'action_reserve_edit']);
+
+    Route::get('/goods_reserve', [App\Http\Controllers\MPartnerController::class, 'goods_reserve']);
+    Route::get('/goods_reserve_past', [App\Http\Controllers\MPartnerController::class, 'goods_reserve_past']);
+    Route::get('/goods_reserve_select/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_reserve_select']);
+    Route::get('/goods_reserve_select_date/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_reserve_select_date']);
+    Route::get('/goods_reserve_select_past/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_reserve_select_past']);
+    Route::get('/goods_reserve_select_date_past/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_reserve_select_date_past']);
+    Route::get('/goods_reserve_edit/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_reserve_edit']);
+    Route::post('/goods_reserve_edit/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_reserve_edit']);
     
     
 });
-
-// 管理者とパートナーがアクセスできる
-Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin|partner'])->group(function () {
-
-    
-    Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
-    Route::get('/reserve_past', [App\Http\Controllers\MOwnerController::class, 'reserve_past']);
-    Route::get('/reserve_select/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select']);
-    Route::get('/reserve_select_date/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date']);
-    Route::get('/reserve_select_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_past']);
-    Route::get('/reserve_select_date_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date_past']);
-    Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
-    Route::post('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_reserve_edit']);
-
-    Route::get('/goods_reserve', [App\Http\Controllers\MOwnerController::class, 'goods_reserve']);
-    Route::get('/goods_reserve_past', [App\Http\Controllers\MOwnerController::class, 'goods_reserve_past']);
-    Route::get('/goods_reserve_select/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_reserve_select']);
-    Route::get('/goods_reserve_select_date/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_reserve_select_date']);
-    Route::get('/goods_reserve_select_past/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_reserve_select_past']);
-    Route::get('/goods_reserve_select_date_past/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_reserve_select_date_past']);
-    Route::get('/goods_reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'goods_reserve_edit']);
-    Route::post('/goods_reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_goods_reserve_edit']);
-});
-

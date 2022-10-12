@@ -8,7 +8,7 @@
         <h1>過去の予約一覧</h1>
 
         <div class="ms-3">
-            <a href="/mypage/owner/reserve">現在の予約一覧へ</a>
+            <a href="/mypage/partner/reserve">現在の予約一覧へ</a>
         </div>
     </div>
     
@@ -27,7 +27,7 @@
                 </div>
                 @forelse ($partner->experiences as $experiences_folder)
                     <div class="mt-3 border-bottom">
-                        <a class="link" href="/mypage/owner/reserve_select_past/{{$experiences_folder->id}}">
+                        <a class="link" href="/mypage/partner/reserve_select_past/{{$experiences_folder->id}}">
                             <p class="ms-3 mb-0">{{ $experiences_folder->name }}への予約</p>
                         </a>   
                     </div>
@@ -48,7 +48,7 @@
                         @foreach ($dates as $date)
                         <div class="mt-3 border-bottom">
                             <div class="d-flex align-items-center">
-                                <a href="/mypage/owner/reserve_select_date_past/{{$date}}">
+                                <a href="/mypage/partner/reserve_select_date_past/{{$date}}">
                                     20{{$date}}月の予約
                                 </a>
                             </div>

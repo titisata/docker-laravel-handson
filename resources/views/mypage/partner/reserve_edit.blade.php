@@ -10,7 +10,7 @@
             <div class="card mt-3">
                 <div class="card-header">イベント予約編集</div>
                 <div class="card-body">
-                    <form action="/mypage/owner/reserve_edit/{{ $experiencereserve->id }}" method="POST">
+                    <form action="/mypage/partner/reserve_edit/{{ $experiencereserve->id }}" method="POST">
                         @csrf
                        
                         <div class="mb-3">
@@ -20,33 +20,17 @@
                             <p>子ども:{{ $experiencereserve->quantity_child }}名</p>
                         </div>
                         <div class="mb-3">
-                            <!-- <label class="form-label">宿泊</label>
-                            <input name="hotel_group" type="text" class="form-control" value="{{ $experiencereserve->hotelGroup?->name ?? 'なし' }}"> -->
                             <p>宿泊グループ：{{ $experiencereserve->hotelGroup?->name ?? 'なし' }}</p>
                         </div>
                         <div class="mb-3">
-                            <!-- <label class="form-label">食事</label>
-                            <input name="food_group" type="text" class="form-control" value="{{ $experiencereserve->foodGroup?->name ?? 'なし' }}"> -->
                             <p>食事グループ：{{ $experiencereserve->foodGroup?->name ?? 'なし' }}</p>
                         </div>
                         <div class="mb-3">
-                            <!-- <label class="form-label">連絡事項</label>
-                            <input name="comment" type="text" class="form-control" value="{{ $experiencereserve->comment }}"> -->
                             <p>連絡事項:{{ $experiencereserve->comment }}</p>
                         </div>
                         <div class="mb-3">
-                            <!-- <label class="form-label">予約日</label>
-                            <input name="status" type="text" class="form-control" value="{{ $experiencereserve->start_date }}"> -->
                             <p>予約日:{{ $experiencereserve->start_date }}</p>
                         </div>
-                        <!-- <div class="mb-3">
-                            <label class="form-label">ステータス</label>
-                            <select name="status" >     
-                                <option value="0" selected>選択して下さい</option>                            
-                                <option value="ホテル確定">ホテル確定</option> 
-                                <option value="キャンセル">キャンセル</option>
-                            </select>  
-                        </div>   -->
                         <div class="mb-3">
                             <label class="form-label">ステータス</label>
                             <select name="save_flag" >
@@ -95,17 +79,6 @@
 
                         <button type="submit" class="btn btn-primary">更新</button>
                     </form>
-                    <!-- <div class="mt-3">
-                        <form action="" >
-                            <input type="hidden" name="" value="{{ $experiencereserve->quantity_adult }}">
-                            <input type="hidden" name="" value="{{ $experiencereserve->quantity_child }}">
-                            <input type="hidden" name="" value="">
-                            <input type="hidden" name="" value="">
-                            <input type="hidden" name="" value="">
-                            <input type="hidden" name="" value="">
-                            <button type="submit" class="btn btn-success">確認メール送信</button>
-                        </form>
-                    </div> -->
                     
             
                 </div>

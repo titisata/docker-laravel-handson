@@ -33,6 +33,9 @@
         color: #39464e;
         }
 
+        .small{
+            font-size:8px;
+        }
        
     </style>
 </head>
@@ -45,7 +48,7 @@
     </div>
     <p><span class="fw-bold">注文日：</span>20{{ $date->format('y年m月d日') }}</p>
     <p><span class="fw-bold">注文番号：</span>{{ $id }}</p>
-    <p><span class="fw-bold">ご請求額：</span>{{ number_format($price) }}円<span class="small ms-1">(但し、クレジット利用)</span></p>
+    <p><span class="fw-bold">ご請求額：</span><span class="small">税込</span>{{ number_format($price) }}円<span class="small ms-1">(但し、クレジット利用)</span></p>
 
     <table class="table mb-5">
         <thead>
@@ -65,7 +68,7 @@
                         </div>
                     </td>
                     <td>
-                        <p>{{ number_format($reserved_experience->sum_price()) }}円</p>
+                        <p><span class="small">税込</span>{{ number_format($reserved_experience->sum_price()) }}円</p>
                     </td>     
                 </tr>
             @empty
@@ -84,7 +87,7 @@
                     </td>
                     
                     <td>
-                        <p>{{ number_format($one_ordered_goods->total_price)}}円</p> 
+                        <p><span class="small">税込</span>{{ number_format($one_ordered_goods->total_price)}}円</p> 
                     </td>
                 </tr>
                 
@@ -113,9 +116,9 @@
 
 
 
-    <div class="d-flex justify-content-between flex-column flex-md-row mt-5">
+    <div class="d-flex justify-content-between flex-row mt-5">
         <p class="text-gray-color ms-4 small" style="padding-left:2rem">Copyright© {{ $site_masters->site_name}} All rights reserved.</p>
-        <p class="text-gray-color ms-4 ms-md-0 me-md-4 mb-0 pb-3" style="padding-right:2rem;padding-left:2rem;"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
+        <p class="text-gray-color ms-4 ms-0 me-4 mb-0 pb-3" style="padding-right:2rem;padding-left:2rem;"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
     </div>
 
     </div>

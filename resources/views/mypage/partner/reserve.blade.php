@@ -1,5 +1,3 @@
-
-
 @extends('mypage.layouts.app')
 
 @section('menu', 'owner_reserve')
@@ -9,7 +7,7 @@
         <h1>進行中の予約一覧</h1>
 
         <div class="ms-3">
-            <a href="/mypage/owner/reserve_past">過去の予約一覧へ</a>
+            <a href="/mypage/partner/reserve_past">過去の予約一覧へ</a>
         </div>
 
     </div>
@@ -21,16 +19,16 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        
+        @forelse ($partners as $partner)
         <div class="row justify-content-center">
             <div class="col-md-11 card mt-3">
                 <div class="card-header d-flex align-items-center">
-                    <h3 class="mb-0">{{ $partners->name }}様の予約状況</h3>
+                <h3 class="mb-0">{{ $partner->name }}様の予約状況</h3>
                 </div>
-                @forelse ($partners->experiences as $experiences_folder)
+                @forelse ($partner->experiences as $experiences_folder)
                     <div class="mt-3 border-bottom">
                         <div class="d-flex align-items-center">
-                            <a class="link" href="/mypage/owner/reserve_select/{{$experiences_folder->id}}">
+                            <a class="link" href="/mypage/partner/reserve_select/{{$experiences_folder->id}}">
                                 <p class="ms-3 mb-0">{{ $experiences_folder->name }}への予約</p>
                             </a>
                         </div>    
@@ -40,6 +38,9 @@
                 @endforelse     
             </div>
         </div>
+        @empty
+            <p>パートナーがいません</p>
+        @endforelse
         
     </div>
     <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -50,7 +51,7 @@
                         @foreach ($dates as $date)
                         <div class="mt-3 border-bottom">
                             <div class="d-flex align-items-center">
-                                <a href="/mypage/owner/reserve_select_date/{{$date}}">
+                                <a href="/mypage/partner/reserve_select_date/{{$date}}">
                                     20{{$date}}月の予約
                                 </a>
                             </div>
@@ -65,5 +66,3 @@
 
 
 @endsection
-
-

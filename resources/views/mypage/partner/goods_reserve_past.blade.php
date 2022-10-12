@@ -7,7 +7,7 @@
         <h1>完了済みの予約一覧</h1>
 
         <div class="ms-3">
-            <a href="/mypage/owner/goods_reserve">未完了の予約一覧へ</a>
+            <a href="/mypage/partner/goods_reserve">未完了の予約一覧へ</a>
         </div>
 
     </div>
@@ -29,7 +29,7 @@
                 @forelse ($partner->goods as $goods_folder)
                     <div class="mt-3 border-bottom">
                         <div class="d-flex align-items-center">
-                            <a class="link" href="/mypage/owner/goods_reserve_select_past/{{$goods_folder->id}}">
+                            <a class="link" href="/mypage/partner/goods_reserve_select_past/{{$goods_folder->id}}">
                                 <p class="ms-3 mb-0">{{ $goods_folder->name }}への予約</p>
                             </a>
                         </div>    
@@ -51,7 +51,7 @@
                 @forelse ($partners->goods as $goods_folder)
                     <div class="mt-3 border-bottom">
                         <div class="d-flex align-items-center">
-                            <a class="link" href="/mypage/owner/goods_reserve_select/{{$goods_folder->id}}">
+                            <a class="link" href="/mypage/partner/goods_reserve_select/{{$goods_folder->id}}">
                                 <p class="ms-3 mb-0">{{ $goods_folder->name }}への注文</p>
                             </a>
                         </div>    
@@ -73,7 +73,7 @@
                         @foreach ($dates as $date)
                         <div class="mt-3 border-bottom">
                             <div class="d-flex align-items-center">
-                                <a href="/mypage/owner/goods_reserve_select_date_past/{{$date}}">
+                                <a href="/mypage/partner/goods_reserve_select_date_past/{{$date}}">
                                     20{{$date}}月の予約
                                 </a>
                             </div>
