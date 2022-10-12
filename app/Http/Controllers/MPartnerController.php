@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\ExperienceCategory;
+use App\Models\ExperienceCartItem;
 use App\Models\ExperienceFolder;
 use App\Models\ExperienceReserve;
 use App\Models\Experience;
@@ -29,6 +30,7 @@ use App\Http\Requests\GoodsAddRequest;
 use App\Http\Requests\GoodsEditRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 use DateTime;
 
 class MPartnerController extends Controller
@@ -404,11 +406,18 @@ class MPartnerController extends Controller
         $id = $request->id;
         $delete_id = $request->delete_id;
 
-        
-        $experience_delete = Experience::where('id', $delete_id)->delete();
+        if(ExperienceReserve::where('experience_id', $delete_id)->first() == '' && ExperienceCartItem::where('experience_id', $delete_id)->first() ==''){
 
-        $return_view = $this->event_edit($id);
-        return $return_view;
+            $experience_delete = Experience::where('id', $delete_id)->delete();
+
+            $return_view = $this->event_edit($id);
+            return $return_view;
+
+        }else{
+
+        return back()->with('result', 'カートに登録または予約が過去にあった体験は削除ができません。表示の設定を非表示に切り替えると表示がされなくなります。');
+
+        }
         
     }
 
@@ -418,18 +427,42 @@ class MPartnerController extends Controller
 
         $id = $request->id;
 
-        $schedule_delete = Schedule::where('experience_folder_id', $id)->delete();
+        $ex_ids = Experience::where('experience_folder_id', $id)->get();
 
-        $hotel_delete = HotelGroupSelect::where('experience_folder_id', $id)->delete();
+        $flag = 0;
 
-        $food_delete = FoodGroupSelect::where('experience_folder_id', $id)->delete();
+        foreach($ex_ids as $ex_id){
+            if(ExperienceReserve::where('experience_id', $ex_id->id)->first() == '' && ExperienceCartItem::where('experience_id', $ex_id->id)->first() ==''){
+                $flag = 0;
+            }else{
+                $flag = 1; 
+                break;
+            }
+            
+        }
+        
 
-        $experience_delete = Experience::where('experience_folder_id', $id)->delete();
+        if($flag == 0 ){
+            $schedule_delete = Schedule::where('experience_folder_id', $id)->delete();
 
-        $experience_folder = ExperienceFolder::where('id', $id)->delete();
+            $hotel_delete = HotelGroupSelect::where('experience_folder_id', $id)->delete();
+    
+            $food_delete = FoodGroupSelect::where('experience_folder_id', $id)->delete();
+    
+            $experience_delete = Experience::where('experience_folder_id', $id)->delete();
+    
+            $experience_folder = ExperienceFolder::where('id', $id)->delete();
+    
+            $image = Image::where('table_name', 'experience_folders')->where('table_id', $id)->delete();
+            
+            $return_view = $this->event();
+            return $return_view;
+        }else{
 
-        $return_view = $this->event();
-        return $return_view;
+            return back()->with('result', 'カートに登録または予約が過去にあった体験は削除ができません。表示の設定を非表示に切り替えると表示がされなくなります。');
+    
+        }
+        
 
     }
 
@@ -657,12 +690,39 @@ class MPartnerController extends Controller
 
         $id = $request->id;
 
-        $goods = Goods::where('goods_folder_id', $id)->delete();
+        $goods_ids = Goods::where('goods_folder_id', $id)->get();
+    
+        $flag = 0;
+        
+        foreach($goods_ids as $goods_id){
+            if(GoodsOrder::where('goods_id', $goods_id->id)->first() == '' && GoodCartItem::where('goods_id', $goods_id->id)->first() ==''){
+                $flag = 0;
+            }else{
+                $flag = 1; 
+                break;
+            }
+            
+        }
+        
 
-        $goods_folder = GoodsFolder::where('id', $id)->delete();
+        if($flag == 0 ){
 
-        $return_view = $this->goods();
-        return $return_view;
+            $goods = Goods::where('goods_folder_id', $id)->delete();
+
+            $image = Image::where('table_name', 'goods_folders')->where('table_id', $id)->delete();
+
+            $goods_folder = GoodsFolder::where('id', $id)->delete();
+
+
+            $return_view = $this->goods();
+            return $return_view;
+
+        }else{
+
+            return back()->with('result', 'カートに登録または予約が過去にあった体験は削除ができません。表示の設定を非表示に切り替えると表示がされなくなります。');
+    
+        }
+        
 
     }
 

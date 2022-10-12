@@ -65,16 +65,20 @@ class ExperienceController extends Controller
         // }
         }else{
             $categories = ExperienceCategory::all();
-            $images = Image::where('table_name', 'experience_category')->get();
             $experienceFolders = ExperienceFolder::search_ex($keyword, $category, $free_word, $lodging, per_page: 10);
+            $images = Image::where('table_name', 'experience_category')->get();
             if($keyword==""){
                 $keyword = '日付指定なし';
             }
-            if($category==""){
-                $category = 'カテゴリー選択なし';
-            }
             if($free_word==""){
                 $free_word = '指定なし';
+            }
+            if($category==""){
+                $category = 'カテゴリー選択なし';
+                $images = Image::where('table_name', 'experience_category')->get();
+            }else{
+                $img_category = ExperienceCategory::where('name', $category)->first();
+                $images = Image::where('table_name', 'experience_category')->where('table_id', $img_category->id)->get();
             }
             return view('search.experience_list', compact('experienceFolders', 'categories', 'images', 'keyword', 'free_word', 'category', 'lodging'));
         }

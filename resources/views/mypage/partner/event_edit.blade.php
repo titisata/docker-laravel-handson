@@ -247,6 +247,7 @@
     @if(count($errors) > 0)
         <p class="text-danger">入力に問題があります。再入力してください</p>
     @endif
+    <p class="text-danger">{{ session('result') }}</p>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form name="deleteform" action="/mypage/partner/event_edit_delete" method="POST" onsubmit='return check();'>
@@ -629,8 +630,11 @@
                                     @endif
                                     
                                 </div>
-                                
-                                <button type="button" class="mt-2 btn btn-danger" id="delete_btn_{{ $key+1 }}" value="{{ $experience->id }}" onclick="delete_btn({{$key+1}})">削除</button>
+
+                                @if($loop->first)
+                                @else
+                                    <button type="button" class="mt-2 btn btn-danger" id="delete_btn_{{ $key+1 }}" value="{{ $experience->id }}" onclick="delete_btn({{$key+1}})">削除</button>
+                                @endif
                                 
                             </div>
                         @empty

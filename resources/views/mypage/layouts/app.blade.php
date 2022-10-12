@@ -336,7 +336,8 @@
                     <li id="owner_site"><a href="/mypage/owner/hotel_display"><span class="glyphicon glyphicon-signal"></span>ホテル編集</a></li>
                     <li id="owner_site"><a href="/mypage/owner/food_group_display"><span class="glyphicon glyphicon-signal"></span>フードグループ編集</a></li>
                     <li id="owner_site"><a href="/mypage/owner/food_display"><span class="glyphicon glyphicon-signal"></span>フード編集</a></li>
-                    <li id="owner_site" class="mt-5"><a href="/"><span class="glyphicon glyphicon-signal"></span>ユーザーページへ</a></li>
+                    <li id="owner_site"><a href="/mypage/owner/sales_result"><span class="glyphicon glyphicon-signal"></span>売り上げ実績</a></li>
+                    
                 @endrole
                 @role('partner')
                     <li id="home"><a href="/mypage/partner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
@@ -347,7 +348,7 @@
                     <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>イベント予約一覧</a></li>
                     <li id="owner_reserve"><a href="/mypage/owner/goods_reserve"><i class="fa fa-puzzle-piece"></i>お土産注文履歴一覧</a></li>
                     <li id=""><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
-                    <li id="" class="mt-5"><a href="/"><span class="glyphicon glyphicon-signal"></span>ユーザーページへ</a></li>
+                    
                 @endrole
                 @role('user')
                     <li id="home"><a href="/mypage/user"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>

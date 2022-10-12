@@ -57,7 +57,7 @@
             @empty
             @endforelse
         
-            @forelse ($ordered_goods->where('payment_id',  $data->payment_id) as $one_ordered_goods)
+            @forelse ($ordered_goods->where('payment_id', $data->payment_id) as $one_ordered_goods)
             <div class="d-flex flex-row card mt-3">
                 
                 <img style="object-fit: cover; width:240px; height:180px;" class=" image" src="{{App\Models\Image::where('table_id',$one_ordered_goods->goods->goods_folder_id)->where('table_name', 'goods_folders')->get()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap"> 
