@@ -345,7 +345,7 @@
                     <li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>プロフィール管理</a></li>
                     <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>イベント管理</a></li>
                     <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>お土産管理</a></li>
-                    <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>イベント予約一覧</a></li>
+                    <li id="partner_reserve"><a href="/mypage/owner/reserve"><i class="fa fa-puzzle-piece"></i>イベント予約一覧</a></li>
                     <li id="owner_reserve"><a href="/mypage/owner/goods_reserve"><i class="fa fa-puzzle-piece"></i>お土産注文履歴一覧</a></li>
                     <li id=""><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
                     

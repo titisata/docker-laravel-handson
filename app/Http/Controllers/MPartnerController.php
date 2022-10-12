@@ -46,6 +46,7 @@ class MPartnerController extends Controller
             $ordered_goods = GoodsOrder::all();
             $decrease_goods = Goods::where('quantity', '<', '6')->get();
             $reserved_experiences = ExperienceReserve::where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
+            $uncomplete_reserved_experiences = ExperienceReserve::where('start_date', $now)->orWhere('start_date', $tomorrow)->get();
             return view('mypage.owner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences', 'decrease_goods'));
         }
         
@@ -454,7 +455,7 @@ class MPartnerController extends Controller
             $experience_folder = ExperienceFolder::where('id', $id)->delete();
     
             $image = Image::where('table_name', 'experience_folders')->where('table_id', $id)->delete();
-            
+
             $return_view = $this->event();
             return $return_view;
         }else{
@@ -916,13 +917,13 @@ class MPartnerController extends Controller
         return $return_view;
     }
 
-    public function reserve()
-    {
-        $user = Auth::user();
-        // $partner = Partner::where('user_id', $user->id)->first();
-        $experiences_folders = ExperienceFolder::where('user_id', $user->id)->get();
-        return view('mypage.partner.reserve', compact('user', 'experiences_folders'));
-    }
+    // public function reserve()
+    // {
+    //     $user = Auth::user();
+    //     // $partner = Partner::where('user_id', $user->id)->first();
+    //     $experiences_folders = ExperienceFolder::where('user_id', $user->id)->get();
+    //     return view('mypage.partner.reserve', compact('user', 'experiences_folders'));
+    // }
 
     public function reserved_user()
     {

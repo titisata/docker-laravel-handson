@@ -190,14 +190,7 @@ Route::prefix('mypage/partner')->middleware(['auth','role:system_admin|site_admi
     Route::get('/goods_delete/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_delete']);
 
     
-    Route::get('/reserve', [App\Http\Controllers\MOwnerController::class, 'reserve']);
-    Route::get('/reserve_past', [App\Http\Controllers\MOwnerController::class, 'reserve_past']);
-    Route::get('/reserve_select/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select']);
-    Route::get('/reserve_select_date/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date']);
-    Route::get('/reserve_select_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_past']);
-    Route::get('/reserve_select_date_past/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_select_date_past']);
-    Route::get('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'reserve_edit']);
-    Route::post('/reserve_edit/{id}', [App\Http\Controllers\MOwnerController::class, 'action_reserve_edit']);
+    
 });
 
 // 管理者とパートナーがアクセスできる
