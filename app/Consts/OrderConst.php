@@ -16,7 +16,7 @@ class OrderConst
 
     const STATUS_HOTEL_ASSIGN_NAME = 'ホテル選定済み';
 
-    const STATUS_GOODS_ASSIGN = '10';
+    const STATUS_GOODS_ASSIGN = '30';
 
     const STATUS_GOODS_ASSIGN_NAME = '出荷済み';
 

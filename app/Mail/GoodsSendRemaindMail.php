@@ -60,7 +60,7 @@ class GoodsSendRemaindMail
                 ->where("roles.name", "system_admin") 
                 ->first()->email,
                 GoodsMailConst::SUBJECT_2,
-                GoodsMailConst::SUBJECT_2,
+                GoodsMailConst::VIEW_2,
             ],
             [
                 [
@@ -86,7 +86,7 @@ class GoodsSendRemaindMail
                 ->where("roles.name", "site_admin") 
                 ->first()->email,
                 GoodsMailConst::SUBJECT_2,
-                GoodsMailConst::SUBJECT_2,
+                GoodsMailConst::VIEW_2,
             ],
             [
                 [
@@ -102,7 +102,7 @@ class GoodsSendRemaindMail
                 ],
                 User::where('id', $this->order_data->partner_id)->first()->email,
                 GoodsMailConst::SUBJECT_2,
-                GoodsMailConst::SUBJECT_2,
+                GoodsMailConst::VIEW_2,
             ],
             [
                 [
@@ -118,7 +118,7 @@ class GoodsSendRemaindMail
                 ],
                 User::where('id', $this->order_data->user_id)->first()->email,
                 GoodsMailConst::SUBJECT_2,
-                GoodsMailConst::SUBJECT_2,
+                GoodsMailConst::VIEW_2,
             ],
         
             

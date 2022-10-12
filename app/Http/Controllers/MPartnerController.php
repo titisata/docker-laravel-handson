@@ -47,11 +47,11 @@ class MPartnerController extends Controller
 
         if ($user->hasRole('system_admin|site_admin')) {
             $partner = Partner::where('user_id', $user->id)->first();
-            $ordered_goods = GoodsOrder::all();
+            $ordered_goods = GoodsOrder::where('status', '<', 30)->get();
             $decrease_goods = Goods::where('quantity', '<', '6')->get();
             $reserved_experiences = ExperienceReserve::where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
-            $uncomplete_reserved_experiences = ExperienceReserve::where('status', '!=', '10')->get();
-            return view('mypage.owner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences', 'decrease_goods'));
+            $uncomplete_reserved_experiences = ExperienceReserve::where('status', '<', 10)->get();
+            return view('mypage.owner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences', 'decrease_goods', 'uncomplete_reserved_experiences'));
         }
         
         if($user->hasRole('partner')){
@@ -1154,8 +1154,13 @@ class MPartnerController extends Controller
         $delivery_number = $request->delivery_number;
 
         $input_company = $request->input_company;
-        
-        if( $input_company != ''){
+
+        if(  $delivery_company == '' || $delivery_number == ''){
+            GoodsOrder::where('id',$id)->update([
+                'status'=>$save_flag,
+            ]);
+
+        }elseif( $input_company != ''){
             GoodsOrder::where('id',$id)->update([
                 'status'=>$save_flag,
                 'delivery_company'=>$input_company,
@@ -1171,7 +1176,7 @@ class MPartnerController extends Controller
         }
         
 
-        if($save_flag == 10 || $save_flag == 98){
+        if($save_flag == 30 || $save_flag == 98){
             $obj = new GoodsSendRemaindMail($save_flag, $id);
             $obj->goods_send_remaind_mail();
 
