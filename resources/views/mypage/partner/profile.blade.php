@@ -30,7 +30,9 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">キャッチコピー</label>
-                            <input name="catch_copy" type="text" class="form-control" value="{{ $partner->catch_copy }}">
+                            <textarea name="catch_copy" class="form-control">
+                                {{ $partner->catch_copy }}
+                            </textarea>    
                         </div>
                         <div class="mb-3">
                             <label class="form-label">住所</label>

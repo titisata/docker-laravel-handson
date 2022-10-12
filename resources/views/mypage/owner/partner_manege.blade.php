@@ -31,7 +31,7 @@
                             <input name="reserve_flag" type="radio" class="" value="{{ $partners->reserve_flag }}">
                             <label>稼働日登録あり</label>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 d-none">
                             <label class="form-label">機能情報</label>
                             <input name="service" type="radio" class="" checked value="{{ $partners->service }}">
                             <label>全機能</label>
@@ -40,7 +40,7 @@
                             <input name="service" type="radio" class="" value="{{ $partners->service }}">
                             <label>EC機能のみ</label>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 d-none">
                             <label class="form-label">商品登録上限数</label>
                             <input name="regist_num" type="number" class="form-control number_form" value="{{ $partners->regist_num }}">
                         </div>
@@ -78,7 +78,7 @@
                             @endforelse
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">背景色</label>
+                            <label class="form-label d-none">背景色</label>
                             <input name="background_color" type="text" class="form-control" value="{{ $partners->background_color }}">
                         </div>
                         <div class="mb-3">

@@ -8,6 +8,7 @@ use App\Models\ExperienceReserve;
 use App\Models\ExperienceFolder;
 use App\Models\GoodsOrder;
 use App\Models\GoodsFolder;
+use App\Models\Favorite;
 use App\Models\Link;
 use App\Consts\LinkConst;
 use Illuminate\Http\Request;
@@ -28,11 +29,8 @@ class MUserController extends Controller
 
         $data1 = ExperienceReserve::where('user_id', $user->id)->select('payment_id','created_at');
 
-        $data2 = GoodsOrder::where('user_id', $user->id)->select('payment_id','created_at')->union($data1)->orderBy('created_at', 'asc')->get();
-
-        // dd($data2);
-        // exit;
-
+        $data2 = GoodsOrder::where('user_id', $user->id)->select('payment_id','created_at')->union($data1)->orderBy('created_at', 'desc')->get();
+        
         return view('mypage.user.home', compact('user', 'ordered_goods', 'future_reserved_experiences', 'data2'));
     }
 
@@ -59,6 +57,15 @@ class MUserController extends Controller
         $goods_folder = GoodsFolder::where('id',$goods_order->goods->goods_folder_id)->first();
         return view('mypage.user.goods_reserve_info', compact('user', 'goods_order', 'goods_folder'));
     }
+
+    public function favorite()
+    {
+        $user = Auth::user();
+        $ex_favorites = Favorite::where('user_id', $user->id)->where('table_name', 'experience_folders')->get();
+        $goods_favorites = Favorite::where('user_id', $user->id)->where('table_name', 'goods_folders')->get();
+        return view('mypage.user.favorite', compact('user', 'ex_favorites', 'goods_favorites'));
+    }
+
 
     public function users()
     {

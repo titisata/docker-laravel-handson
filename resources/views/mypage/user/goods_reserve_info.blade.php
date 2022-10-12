@@ -28,35 +28,30 @@
                             </div>
                             <div class="mb-3 ms-2">
                                 <p>
-                                    <p>料金：{{ number_format($goods_folder->price) }}円</p>
+                                    料金：{{ number_format($goods_folder->price) }}円
                                 </p>
                             </div>
                             <div class="mb-3 ms-2">
                                 <p>
-                                    <p>詳細：{{ $goods_folder->description }}</p>
+                                    詳細：{{ $goods_folder->description }}
                                 </p>
                             </div>
                             
                             <div class="mb-3 ms-2">
-                                <p>お問合せ：{{ $goods_order->contact_info }}</p>
+                                お問合せ：{{ $goods_order->contact_info }}
                             </div>
                         </div>
                    
 
                     <div class="card mt-3">
                         <div class="card-header">注文内容</div>
-                        
-                        <div class="my-3 ms-2">
-                            <p>注文者名：{{ $user->name }}様</p>
-                        </div>
 
-                        <div class="mb-3 ms-2">
-                            <p>注文日：{{ $goods_order->created_at }}</p>
-                        </div>
+                        <p class="ms-2 mt-2 mb-1">注文者名：{{ $user->name }}様</p>
                     
-                        <div class="mb-3 ms-2">
-                            <p>注文個数:{{ $goods_order->quantity }}個</p>
-                        </div>
+                        <p class="ms-2 mt-2 mb-1">注文日：{{ $goods_order->created_at }}</p>
+                    
+                        <p class="ms-2 mt-2 mb-1">注文個数:{{ $goods_order->quantity }}個</p>
+                        
 
                     </div>
 

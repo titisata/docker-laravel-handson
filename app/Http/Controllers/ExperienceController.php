@@ -31,8 +31,8 @@ class ExperienceController extends Controller
 
         if ($keyword == '' && ExperienceCategory::where('name', $category)->first() == '' && $lodging == '' && $free_word == '') {
             $images = Image::where('table_name', 'experience_category')->get();
-            $experiences_folders_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 1)->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
-            $experiences_folders_not_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 0)->where('status', 1)->orderBy('recommend_sort_no', 'desc')->get();
+            $experiences_folders_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 1)->where('status', 1)->orderBy('recommend_sort_no', 'asc')->get();
+            $experiences_folders_not_is_lodging = ExperienceFolder::where('recommend_flag', 1)->where('is_lodging', 0)->where('status', 1)->orderBy('recommend_sort_no', 'asc')->get();
             return view('search.experience', compact('experiences_folders_is_lodging', 'experiences_folders_not_is_lodging', 'categories', 'images'));
 
         // }elseif( ExperienceCategory::where('name', $category)->first() == ''){   
@@ -96,6 +96,7 @@ class ExperienceController extends Controller
         $reserves = $experienceFolder->reserves;
         $schedules = $experienceFolder->schedules;
         $mycomment = $experienceFolder->mycomment();
+        
          
         $event_start_date = $experienceFolder->start_date;
         $event_end_date = $experienceFolder->end_date;
@@ -157,7 +158,13 @@ class ExperienceController extends Controller
             }
         }
 
-        return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date', 'full_experience'));
+        if( $user!=null ){
+            $favorite = Favorite::where('user_id', $user->id)->where('favorite_id', $experienceFolder->id)->first();
+            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date', 'full_experience', 'favorite'));
+        }else{
+            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date', 'full_experience'));
+        }
+        
     }
 
     
@@ -167,6 +174,7 @@ class ExperienceController extends Controller
         $user = Auth::user();
         $experienceFolder = ExperienceFolder::find($folder_id);
         $experience = Experience::find($id);
+        
         // $hotel_group_selects = HotelGroupSelect::where('experience_folder_id', $experienceFolder->id)->first();
         // $food_group_selects = FoodGroupSelect::where('experience_folder_id', $experienceFolder->id)->get();
         $comments = $experienceFolder->comments();

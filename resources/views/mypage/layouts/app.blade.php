@@ -351,7 +351,7 @@
                 @endrole
                 @role('user')
                     <li id="home"><a href="/mypage/user"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
-                    <li id="user_reserve"><a href="/mypage/user/reserve"><i class="fa fa-puzzle-piece"></i>予約一覧</a></li>
+                    <li id="user_favorite"><a href="/mypage/user/favorite"><i class="fa fa-puzzle-piece"></i>お気に入り一覧</a></li>
                     <li id="" class="mt-5"><a href="/"><span class="glyphicon glyphicon-signal"></span>ユーザーページへ</a></li>
                 @endrole    
              

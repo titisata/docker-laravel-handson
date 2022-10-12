@@ -2,6 +2,7 @@
 
 @section('menu', 'partner_link')
 @section('content')
+<div class="container">
     <h1>ようこそ {{ $user->name }} 様</h1>
     <h2>必須表示ページの編集ページです</h2>
     <div class="card">
@@ -26,4 +27,5 @@
             </a>
         </div>
     </div>
+</div>
 @endsection

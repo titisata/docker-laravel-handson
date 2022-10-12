@@ -1,0 +1,15 @@
+{
+    "Name":"氏名",
+    "Login": "ログイン",
+    "Email Address":"メールアドレス",
+    "Password":"パスワード",
+    "Forgot Your Password?":"パスワードを忘れてしまった場合",
+    "Confirm Password":"パスワード（確認用）",
+    "Postal Code":"郵便番号",
+    "Prefectures":"都道府県",
+    "City":"市区町村",
+    "Town":"町名番地等",
+    "Building":"建物名",
+    "Phone Number":"電話番号",
+    "Register":"新規登録"
+  }

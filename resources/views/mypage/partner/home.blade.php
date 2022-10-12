@@ -215,7 +215,7 @@
         </div>
     </div>
     
-    <div class="card mt-3">
+    <div class="card mt-3 col-4">
         <div class="card-header">在庫数が減少しているお土産</div>
         <div class="card-body">
         <table class="table table-hover">

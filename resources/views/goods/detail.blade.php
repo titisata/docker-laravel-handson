@@ -33,6 +33,9 @@ li.item {
 .bg-color{
     background-color:#f4f4f4;
 }
+.pink{
+    color:#BB4156;
+}
 </style>
 
 <script>
@@ -113,6 +116,41 @@ async function commentCreate(goods_folder_id) {
         
 
     }
+
+var num = 0;
+
+function submit_favorite(){
+    document.favorite_form.submit();
+    
+    var h = document.getElementById('favorite');
+
+    if(num % 2 === 0 ){
+        h.className += ' text-secondary';
+    }else{  
+        h.classList.remove('text-secondary');
+    }
+    num++;
+    
+
+
+    return false
+}
+
+function submit_not_favorite(){
+    document.favorite_form.submit();
+    
+    var n = document.getElementById('not_favorite');
+   
+    if(num % 2 === 0 ){
+        n.className += ' pink';
+    }else{
+        
+        n.classList.remove('pink');
+    }
+    num++;
+
+    return false
+}
 </script>
 
 
@@ -147,16 +185,35 @@ async function commentCreate(goods_folder_id) {
                 </ul>    
             </div>
 
+            @if( $user!=null )
+                <div class="d-flex my-3">
+                    <h3 class="fw-bold text-gray">商品名：</h3>
+                    <h3 class="fw-bold text-gray"> {{ $goods_folder->name }}</h3>
+                    <div class="ms-3" >
+                        @if(!empty($favorite))
+                            <i id="favorite" class="bi bi-heart-fill pink fs-3" onclick="submit_favorite();"></i>
+                        @else
+                            <i id="not_favorite" class="bi bi-heart-fill text-gray fs-3" onclick="submit_not_favorite();"></i>
+                        @endif
+                    </div>
+                </div>
+
+                <form name="favorite_form" action="/favorite_edit" method="POST" target="sendFavorite">
+                    @csrf
+                    <input type="hidden" name="f_user_id" value="{{ $user->id }}">
+                    <input type="hidden" name="f_experienceFolder_id" value="{{ $goods_folder->id }}">
+                    <input type="hidden" name="f_table_name" value="goods_folders">
+                </form>
+
+                <iframe name="sendFavorite" style="width:0px;height:0px;border:0px;"></iframe>
+            @else    
                 <div class="d-flex my-3">
                     <h3 class="fw-bold text-gray">商品名：</h3>
                     <h3 class="fw-bold text-gray"> {{ $goods_folder->name }}</h3>
                 </div>
-                
+            @endif
                 <p class="text-gray fs-5">{!!nl2br(e($goods_folder->description))!!}</p>
                 <p class="mb-4 text-start"><a role="button" href="/partner/{{ $goods_folder->user_id }}" class="btn btn-outline-secondary rounded-pill">会社情報</a></p>
-        
-
-
                 
                 <form class="mb-3 col-md-6 offset-md-3" action="{{ Request::url() }}" method="POST" onsubmit='return check();'> 
                 <?php $item_count=0; ?>  

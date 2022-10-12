@@ -423,15 +423,13 @@ async function commentCreate(ex_id) {
 
                         <div class="d-flex align-items-center" >
                             <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
-                            
                             <div class="ms-3" >
-                                @if($experienceFolder->favorite() != '')
+                                @if(!empty($favorite))
                                     <i id="favorite" class="bi bi-heart-fill pink fs-3" onclick="submit_favorite();"></i>
                                 @else
                                     <i id="not_favorite" class="bi bi-heart-fill text-gray fs-3" onclick="submit_not_favorite();"></i>
                                 @endif
                             </div>
-                            
                         </div>
 
                         <form name="favorite_form" action="/favorite_edit" method="POST" target="sendFavorite">
@@ -442,12 +440,10 @@ async function commentCreate(ex_id) {
                         </form>
 
                         <iframe name="sendFavorite" style="width:0px;height:0px;border:0px;"></iframe>
-
                     @else
                         <div class="d-flex align-items-center" >
                             <h3 class="fw-bold py-auto text-gray" style="--bs-bg-opacity: .10;" >{{ $experienceFolder->name }}</h3>
                         </div>
-
                     @endif
 
                     

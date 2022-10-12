@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('site_masters', function (Blueprint $table) {
             $table->id();
             $table->string('site_name',100);
-            $table->boolean('open_flag');
-            $table->integer('service');
-            $table->integer('shop_num');
-            $table->integer('regist_num');
-            $table->integer('recommend_limit');
+            $table->boolean('open_flag')->nullable();
+            $table->integer('service')->nullable();
+            $table->integer('shop_num')->nullable();
+            $table->integer('regist_num')->nullable();
+            $table->integer('recommend_limit')->nullable();
             $table->string('comment',1000);
             $table->string('main_image');
-            $table->string('site_color',10);
+            $table->string('site_color',10)->nullable();
             $table->string('sales_copy',1000);
             $table->timestamps();
         });
