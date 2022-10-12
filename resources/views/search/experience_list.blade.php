@@ -80,6 +80,7 @@ li.item {
                     @csrf
                         <div class="d-flex flex-column align-items-center">
                             <div class="d-lg-flex">
+                                <input class="form-control me-lg-1" name="free_word" type="input" style="width:240px">
                                 <input class="form-control me-lg-1" name="keyword" type="date" style="width:240px">     
                                 <select name="category" class="form-select ms-lg-1" style="width:216px">
                                     <option value="">カテゴリ選択</option>
@@ -100,7 +101,7 @@ li.item {
                                     <label for="">宿泊なし</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="lodging" value="3" checked>
+                                    <input type="radio" name="lodging" value="" checked>
                                     <label for="">宿泊指定なし</label>
                                 </div>
                             </div>
@@ -116,7 +117,8 @@ li.item {
             <div class="mt-5 ms-3 ms-md-0 d-flex align-items-center">
                 <h2 class="fw-bold">検索結果</h2>
                 <div class="d-flex ms-4">
-                <p class="fw-bold mb-0">体験日：{{ $keyword }}</p>
+                <p class="fw-bold mb-0">フリーワード：{{ $free_word }}</p>
+                <p class="ms-3 fw-bold mb-0">体験日：{{ $keyword }}</p>
                 <p class="ms-3 fw-bold mb-0">検索カテゴリ：{{ $category }}</p>
                 <p class="ms-3 fw-bold mb-0">
                     宿泊有無：

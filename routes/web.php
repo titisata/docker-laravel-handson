@@ -124,6 +124,7 @@ Route::prefix('mypage/owner')->middleware(['auth','role:system_admin|site_admin'
     Route::get('/users', [App\Http\Controllers\MUserController::class, 'users']);
     Route::get('/users_edit/{id?}', [App\Http\Controllers\MUserController::class, 'users_edit']);
     Route::post('/users_edit', [App\Http\Controllers\MUserController::class, 'users_edit_post']);
+    Route::get('/users_csv', [App\Http\Controllers\MUserController::class, 'users_csv']);
     
     Route::get('/hotel_group_display', [App\Http\Controllers\MOwnerController::class, 'hotel_group_display']);
     Route::get('/hotel_group_insert', [App\Http\Controllers\MOwnerController::class, 'hotel_group_insert']);

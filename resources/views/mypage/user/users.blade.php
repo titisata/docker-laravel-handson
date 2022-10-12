@@ -21,6 +21,9 @@
                 <a href="/mypage/owner/users_edit" style="text-decoration: none; color: inherit;">
                     <button class="btn btn-success ms-5">新規作成</button>
                 </a>
+                <a href="/mypage/owner/users_csv" style="text-decoration: none; color: inherit;">
+                    <button class="btn btn-success ms-5">CSVダウンロード</button>
+                </a>
             </div>
 
             <div class="row justify-content-center">
