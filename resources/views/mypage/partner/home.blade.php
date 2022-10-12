@@ -2,7 +2,16 @@
 
 @section('menu', 'owner_home')
 @section('content')
-
+<style>
+    select {
+    -webkit-appearance: none;/* ベンダープレフィックス(Google Chrome、Safari用) */
+    -moz-appearance: none; /* ベンダープレフィックス(Firefox用) */
+    appearance: none; /* 標準のスタイルを無効にする */
+    }
+    ::-ms-expand { /* select要素のデザインを無効にする（IE用） */
+    display: none;
+    }
+</style>
 <div class="container">
 
     <h1>ようこそ {{ Auth::user()->name }} 様</h1>

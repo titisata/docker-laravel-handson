@@ -25,7 +25,7 @@
 
     <div class="card mt-3">
         <div class="card-header d-flex">
-            <p class="mb-0">未処理の体験</p>
+            <p class="mb-0">処理が完了していない体験</p>
         </div>
         <div class="card-body">
         <table class="table table-hover">
@@ -51,7 +51,7 @@
                     
                     <td>
                         <div class="d-flex flex-column">
-                            <a class="link" href="/mypage/owner/reserve_edit/{{ $reserved_experience->id }}">
+                            <a class="link" href="/mypage/partner/reserve_edit/{{ $reserved_experience->id }}">
                                 @if(App\Models\ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first()->is_lodging == 0)
                                     <p class="text-success">宿泊なし</p>
                                 @else
@@ -160,7 +160,7 @@
                     
                     <td>
                         <div class="d-flex flex-column">
-                            <a class="link" href="/mypage/owner/reserve_edit/{{ $reserved_experience->id }}">
+                            <a class="link" href="/mypage/partner/reserve_edit/{{ $reserved_experience->id }}">
                                 @if(App\Models\ExperienceFolder::where('id',$reserved_experience->experience->experience_folder_id)->first()->is_lodging == 0)
                                     <p class="text-success">宿泊なし</p>
                                 @else
@@ -264,7 +264,7 @@
                         <p>{{ $ordered_goods_one->user->name }}様</p>
                     </td>
                     <td>
-                        <a class="link" href="/mypage/owner/goods_reserve_edit/{{ $ordered_goods_one->id }}">
+                        <a class="link" href="/mypage/partner/goods_reserve_edit/{{ $ordered_goods_one->id }}">
                             <p>{{ App\Models\GoodsFolder::where('id',$ordered_goods_one->goods->goods_folder_id)->first()->name }}</p>
                             <p>{{ $ordered_goods_one->goods->name }}</p>
                         </a>    

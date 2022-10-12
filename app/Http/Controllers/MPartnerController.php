@@ -47,7 +47,7 @@ class MPartnerController extends Controller
             $ordered_goods = GoodsOrder::all();
             $decrease_goods = Goods::where('quantity', '<', '6')->get();
             $reserved_experiences = ExperienceReserve::where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
-            $uncomplete_reserved_experiences = ExperienceReserve::where('start_date', $now)->orWhere('start_date', $tomorrow)->get();
+            $uncomplete_reserved_experiences = ExperienceReserve::where('status', '!=', '10')->get();
             return view('mypage.owner.home', compact('user', 'partner', 'ordered_goods', 'reserved_experiences', 'decrease_goods'));
         }
         
