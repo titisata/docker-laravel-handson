@@ -42,7 +42,9 @@
         a{
             text-decoration:none;
         }
-       
+        .small_font{
+        font-size:12px;
+        }
     </style>
 </head>
 <body>

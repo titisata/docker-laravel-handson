@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExperienceCartItem;
 use App\Models\GoodCartItem;
 use App\Models\Goods;
 use App\Models\GoodsCategory;
@@ -93,8 +94,19 @@ class GoodsController extends Controller
                 'quantity' => $quantity,
             ]);
         }
-        
-        return view('goods.cart_success');
+       
+        $uid = Auth::user()->id;
+        $experienceCartItems = ExperienceCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
+        $goodCartItems = GoodCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
+        $price = 0;
+        foreach ($experienceCartItems as $experienceCartItem) {
+            $price += $experienceCartItem->sum_price();
+        }
+        foreach ($goodCartItems as $goodCartItem) {
+            $price += $goodCartItem->sum_price();
+        }
+        return view('cart.list', compact('experienceCartItems', 'goodCartItems', 'price'));
+        // return view('goods.cart_success');
     }
 
     public function show(string $id)

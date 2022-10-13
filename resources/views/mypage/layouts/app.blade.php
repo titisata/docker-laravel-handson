@@ -323,38 +323,38 @@
 			<div class="side-menu-container">
 				<ul class="nav navbar-nav">
                 @role('system_admin|site_admin')
-                    <li id="home"><a href="/mypage/partner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
-                    <li id="owner_site"><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>サイト管理</a></li>
-					<li id=""><a href="/mypage/owner/users"><i class="fa fa-dashboard"></i>ユーザー管理</a></li>
-                    <li id="owner_partner"><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>出展者管理</a></li>
-                    <li id="partner_event"><a href="/mypage/partner/event"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>イベント管理</a></li>
-                    <li id="partner_goods"><a href="/mypage/partner/goods"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>お土産管理</a></li>
-                    <li id="owner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>イベント予約一覧</a></li>
-                    <li id="owner_reserve"><a href="/mypage/partner/goods_reserve"><i class="fa fa-puzzle-piece"></i>お土産注文履歴一覧</a></li>
-                    <li id=""><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
-                    <li id="owner_site"><a href="/mypage/owner/category_display"><span class="glyphicon glyphicon-signal"></span>カテゴリー編集</a></li>
-                    <li id="owner_site"><a href="/mypage/owner/hotel_group_display"><span class="glyphicon glyphicon-signal"></span>ホテルグループ編集</a></li>
-                    <li id="owner_site"><a href="/mypage/owner/hotel_display"><span class="glyphicon glyphicon-signal"></span>ホテル編集</a></li>
-                    <li id="owner_site"><a href="/mypage/owner/food_group_display"><span class="glyphicon glyphicon-signal"></span>フードグループ編集</a></li>
-                    <li id="owner_site"><a href="/mypage/owner/food_display"><span class="glyphicon glyphicon-signal"></span>フード編集</a></li>
-                    <li id="owner_site"><a href="/mypage/owner/sales_result"><span class="glyphicon glyphicon-signal"></span>売り上げ実績</a></li>
+                    <li ><a href="/mypage/partner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
+                    <li ><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>サイト管理</a></li>
+					<li><a href="/mypage/owner/users"><i class="fa fa-dashboard"></i>ユーザー管理</a></li>
+                    <li><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>出展者管理</a></li>
+                    <li><a href="/mypage/partner/event"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>イベント管理</a></li>
+                    <li><a href="/mypage/partner/goods"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>お土産管理</a></li>
+                    <li><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>イベント予約一覧</a></li>
+                    <li><a href="/mypage/partner/goods_reserve"><i class="fa fa-puzzle-piece"></i>お土産注文履歴一覧</a></li>
+                    <li><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
+                    <li><a href="/mypage/owner/category_display"><span class="glyphicon glyphicon-signal"></span>カテゴリー編集</a></li>
+                    <li><a href="/mypage/owner/hotel_group_display"><span class="glyphicon glyphicon-signal"></span>ホテルグループ編集</a></li>
+                    <li><a href="/mypage/owner/hotel_display"><span class="glyphicon glyphicon-signal"></span>ホテル編集</a></li>
+                    <li><a href="/mypage/owner/food_group_display"><span class="glyphicon glyphicon-signal"></span>フードグループ編集</a></li>
+                    <li><a href="/mypage/owner/food_display"><span class="glyphicon glyphicon-signal"></span>フード編集</a></li>
+                    <li><a href="/mypage/owner/sales_result"><span class="glyphicon glyphicon-signal"></span>売り上げ実績</a></li>
                     
                 @endrole
                 @role('partner')
-                    <li id="home"><a href="/mypage/partner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
-                    <li id="partner_reserve"><a href="/mypage/partner/reserved_user"><i class="fa fa-puzzle-piece"></i>ユーザー管理</a></li>
-                    <li id="partner_profile"><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>プロフィール管理</a></li>
-                    <li id="partner_event"><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>イベント管理</a></li>
-                    <li id="partner_goods"><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>お土産管理</a></li>
-                    <li id="partner_reserve"><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>イベント予約一覧</a></li>
-                    <li id="owner_reserve"><a href="/mypage/partner/goods_reserve"><i class="fa fa-puzzle-piece"></i>お土産注文履歴一覧</a></li>
-                    <li id=""><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
+                    <li><a href="/mypage/partner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
+                    <li><a href="/mypage/partner/reserved_user"><i class="fa fa-puzzle-piece"></i>ユーザー管理</a></li>
+                    <li><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>プロフィール管理</a></li>
+                    <li><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>イベント管理</a></li>
+                    <li><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>お土産管理</a></li>
+                    <li><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>イベント予約一覧</a></li>
+                    <li><a href="/mypage/partner/goods_reserve"><i class="fa fa-puzzle-piece"></i>お土産注文履歴一覧</a></li>
+                    <li><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
                     
                 @endrole
                 @role('user')
-                    <li id="home"><a href="/mypage/user"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
-                    <li id="user_favorite"><a href="/mypage/user/favorite"><i class="fa fa-puzzle-piece"></i>お気に入り一覧</a></li>
-                    <li id="" class="mt-5"><a href="/"><span class="glyphicon glyphicon-signal"></span>ユーザーページへ</a></li>
+                    <li><a href="/mypage/user"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
+                    <li><a href="/mypage/user/favorite"><i class="fa fa-puzzle-piece"></i>お気に入り一覧</a></li>
+                    <li class="mt-5"><a href="/"><span class="glyphicon glyphicon-signal"></span>ユーザーページへ</a></li>
                 @endrole    
              
 					<!-- Dropdown-->

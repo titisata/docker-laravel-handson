@@ -23,8 +23,8 @@
         </div>
         <div class="card-body">
         
-            @forelse ($future_reserved_experiences->where('payment_id',  $data->payment_id) as $reserved_experience)
-            <div class="d-flex flex-row card">
+            @forelse ($reserved_experiences->where('payment_id',  $data->payment_id) as $reserved_experience)
+            <div class="d-flex flex-row card mt-3">
             
                 <img style="object-fit: cover; width:240px; height:180px;" class=" image" src="{{App\Models\Image::where('table_id',$reserved_experience->experience->experience_folder_id)->where('table_name', 'experience_folders')->get()[0]?->image_path ?? '/images/empty.png'}}" alt="Card image cap"> 
             

@@ -39,65 +39,83 @@ async function deleteGoods(id) {
     <div class="row justify-content-center">
         <div class="col-md-8 mt-4">
 
-            <h3 class="mb-3">現在のカート</h3>
+            <div class="d-flex justify-content-between mb-4">
+                <h3 class="mb-0">現在のカート</h3>
+                <div class="d-flex">
+                    <a href="/search/experience">
+                        他の体験を予約する
+                    </a>
+                    <a class="ms-3" href="/search/goods">
+                        他のお土産を購入する
+                    </a>
+                </div>
 
-            <div class="">
-                <h4>体験</h4>
-                @forelse($experienceCartItems as $experienceCartItem)
-                    <div class="mt-1 p-3 card">
-                        <a href="/experience/{{ $experienceCartItem->experience->experience_folder_id }}">
+            </div>
+            
+                
+            <h4 >合計金額</h4>
+            <p class="fs-4 fw-bold ms-3"><span class="small_font fw-normal">送料・税込</span>{{ number_format($price) }}円</p>
+            
+            <div class="text-end mb-2">
+                <a class="btn btn-warning {{ $price == 0 ? 'disabled' : '' }}" href="/cart/purchase" style="{{ $price == 0 ? 'pointer-events:none;' : '' }} ">決算方法の決定へ</a>
+            </div>
+
+                
+
+                <div class="">
+                    <h4>体験</h4>
+                    @forelse($experienceCartItems as $experienceCartItem)
+                        <div class="mt-1 p-3 card">
+                            <a href="/experience/{{ $experienceCartItem->experience->experience_folder_id }}">
+                                <div>
+                                    <p>{{ App\Models\ExperienceFolder::where('id',$experienceCartItem->experience->experience_folder_id)->first()->name }}　　{{ $experienceCartItem->experience->name }}</p>
+                                    <p>体験日: {{ $experienceCartItem->start_date }}</p>
+                                    <p>大人: {{ $experienceCartItem->quantity_adult }}人 子ども: {{ $experienceCartItem->quantity_child }}人</p>
+                                    <p>宿泊: {{ $experienceCartItem->hotelGroup?->name ?? 'なし' }}</p>
+                                    <p>食事: {{ $experienceCartItem->foodGroup?->name ?? 'なし' }}</p>
+                                    <p>連絡事項: {{ $experienceCartItem->message ?? 'なし'}}</p>
+                                    <p>金額: <span class="small_font fw-normal">税込</span>{{ number_format($experienceCartItem->sum_price()) }}円</p>
+                                    <p>カート登録日: {{ $experienceCartItem->created_at }}</p>
+                                </div>
+                            </a>
                             <div>
-                                <p>{{ $experienceCartItem->experience->name }}</p>
-                                <p>予約日: {{ $experienceCartItem->start_date }}</p>
-                                <p>大人: {{ $experienceCartItem->quantity_adult }}人 子ども: {{ $experienceCartItem->quantity_child }}人</p>
-                                <p>宿泊: {{ $experienceCartItem->hotelGroup?->name ?? 'なし' }}</p>
-                                <p>食事: {{ $experienceCartItem->foodGroup?->name ?? 'なし' }}</p>
-                                <p>連絡事項: {{ $experienceCartItem->message }}</p>
-                                <p>金額: {{ $experienceCartItem->sum_price() }}円</p>
+                                <button class="btn btn-outline-primary"  onclick="deleteExperience({{ $experienceCartItem->id }})">削除</button>
                             </div>
-                        </a>
-                        <div>
-                            <button class="btn btn-outline-primary"  onclick="deleteExperience({{ $experienceCartItem->id }})">削除</button>
-                        </div>
-                    </div>    
-                @empty
-                    <p class="p-3">カートが空です。</p>
-                @endforelse
+                        </div>    
+                    @empty
+                        <p class="p-3">カートが空です。</p>
+                    @endforelse
 
-            </div>
+                </div>
 
 
-            <div class="mt-4">
-                <h4>お土産</h4>
+                <div class="mt-4">
+                    <h4>お土産</h4>
 
-                @forelse($goodCartItems as $goodCartItem)
-                    <div class="mt-1 p-3 card">
-                        <a href="/goods/{{ $goodCartItem->goods->goods_folder_id }}">
+                    @forelse($goodCartItems as $goodCartItem)
+                        <div class="mt-1 p-3 card">
+                            <a href="/goods/{{ $goodCartItem->goods->goods_folder_id }}">
+                                <div>
+                                    <p>名前: {{ $goodCartItem->goods->name }}</p>
+                                    <p>個数: {{ $goodCartItem->quantity }}</p>
+                                    <p>合計: <span class="small_font fw-normal">送料・税込</span>{{ number_format($goodCartItem->sum_price()) }}円</p>
+                                    <p>カート登録日: {{ $goodCartItem->created_at }}</p>
+                                </div>
+                            </a>
                             <div>
-                                <p>名前: {{ $goodCartItem->goods->name }}</p>
-                                <p>個数: {{ $goodCartItem->quantity }}</p>
-                                <p>合計: {{ $goodCartItem->sum_price() }}円</p>
+                                <button class="btn btn-outline-primary"  onclick="deleteGoods({{ $goodCartItem->id }})">削除</button>
                             </div>
-                        </a>
-                        <div>
-                            <button class="btn btn-outline-primary"  onclick="deleteGoods({{ $goodCartItem->id }})">削除</button>
                         </div>
-                    </div>
-                @empty
-                    <p class="p-3">カートが空です。</p>
-                @endforelse
+                    @empty
+                        <p class="p-3">カートが空です。</p>
+                    @endforelse
 
+                </div>
+
+                
+                
             </div>
-
-            <div class="mt-4 mb-2">
-                <h4>合計金額</h4>
-                <h5 class="p-3 fw-bold">{{ $price }}円</h5>
-            </div>
-
-            <div class="text-end">
-                <a class=" btn btn-primary {{ $price == 0 ? 'disabled' : '' }} " href="/cart/confirm" style="{{ $price == 0 ? 'pointer-events:none;' : '' }} ">購入ページへ</a>
-            </div>
-
+                
 
         </div>
     </div>

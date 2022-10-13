@@ -33,14 +33,14 @@
                 @if ($loop->first)
                     <thead>
                         <tr>
-                            <th scope="col">予約者名</th>
+                            <th scope="col">予約者</th>
                             <th scope="col">予約体験名</th>
                             <th scope="col">体験日</th>
                             <th scope="col">人数</th>
                             <th scope="col">宿泊</th>
                             <th scope="col">食事</th>
                             <th scope="col">連絡事項</th>
-                            <th scope="col">ホテル選定</th>
+                            <th scope="col">受注状況</th>
                         </tr>
                     </thead>
                 @endif
@@ -233,7 +233,7 @@
                             <th scope="col">宿泊</th>
                             <th scope="col">食事</th>
                             <th scope="col">連絡事項</th>
-                            <th scope="col">ホテル選定</th>
+                            <th scope="col">受注状況</th>
                         </tr>
                     </thead>
                 @endif

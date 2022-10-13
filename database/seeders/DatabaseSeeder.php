@@ -40,8 +40,12 @@ class DatabaseSeeder extends Seeder
         $this->call(GoodsOrderSeeder::class);
         $this->call(FoodGroupSeeder::class);
         $this->call(FoodSeeder::class);
+        $this->call(FoodSelectSeeder::class);
+        $this->call(FoodGroupSelectSeeder::class);
         $this->call(HotelGroupSeeder::class);
         $this->call(HotelSeeder::class);
+        $this->call(HotelSelectSeeder::class);
+        $this->call(HotelGroupSelectSeeder::class);
         $this->call(GoodCartItemSeeder::class);
         $this->call(ExperienceCartItemSeeder::class);
         $this->call(ExpreienceReserveSeeder::class);

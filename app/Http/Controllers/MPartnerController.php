@@ -55,10 +55,11 @@ class MPartnerController extends Controller
         }
         
         if($user->hasRole('partner')){
-            $ordered_goods = GoodsOrder::where('partner_id', $user->id)->get();
+            $ordered_goods = GoodsOrder::where('partner_id', $user->id)->where('status', '<', 30)->get();
             $reserved_experiences = ExperienceReserve::where('partner_id', $user->id)->where('start_date', $now)->orWhere('start_date', $tomorrow)->get();  
             $decrease_goods = Goods::Join('goods_folders', 'goods.goods_folder_id', '=', 'goods_folders.id')->select('goods.*')->where('quantity', '<', '6')->where('user_id', $user->id)->get();
-            return view('mypage.partner.home', compact('user', 'ordered_goods', 'reserved_experiences','decrease_goods'));
+            $uncomplete_reserved_experiences = ExperienceReserve::where('partner_id', $user->id)->where('status', '<', 10)->get();
+            return view('mypage.partner.home', compact('user', 'ordered_goods', 'reserved_experiences','decrease_goods', 'uncomplete_reserved_experiences'));
         }
     }
 
@@ -1108,7 +1109,7 @@ class MPartnerController extends Controller
         $month = $date[1];
 
         $user = Auth::user();
-        $orders = GoodsOrder::whereMonth('created_at', $month)->where('status', '!=', '30')->get();
+        $orders = GoodsOrder::whereMonth('created_at', $month)->where('status', '<', '30')->get();
       
         return view('mypage.partner.goods_reserve_select_date', compact('user', 'id', 'orders'));
     }
@@ -1133,7 +1134,7 @@ class MPartnerController extends Controller
         $month = $date[1];
 
         $user = Auth::user();
-        $orders = GoodsOrder::whereMonth('created_at', $month)->where('status', '=', '30')->get();
+        $orders = GoodsOrder::whereMonth('created_at', $month)->where('status', '>', '29')->get();
       
         return view('mypage.partner.goods_reserve_select_date_past', compact('user', 'id', 'orders'));
     }

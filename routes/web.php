@@ -45,7 +45,7 @@ Route::post('test/delete', [App\Http\Controllers\TestTestController::class, 'del
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
     Route::get('/cart', [App\Http\Controllers\CartController::class, 'index']);
-    Route::get('/cart/confirm', [App\Http\Controllers\CartController::class, 'confirm']);
+    // Route::get('/cart/confirm', [App\Http\Controllers\CartController::class, 'confirm']);
     Route::get('/cart/purchase', [App\Http\Controllers\CartController::class, 'purchase']);
     Route::post('/cart/purchase', [App\Http\Controllers\CartController::class, 'purchase_post']);
 });

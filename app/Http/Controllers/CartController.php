@@ -31,24 +31,24 @@ class CartController extends Controller
         return view('cart.list', compact('experienceCartItems', 'goodCartItems', 'price'));
     }
 
-    public function confirm()
-    {
-        $uid = Auth::user()->id;
-        $experienceCartItems = ExperienceCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
-        $goodCartItems = GoodCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
-        $price = 0;
-        foreach ($experienceCartItems as $experienceCartItem) {
-            $price += $experienceCartItem->sum_price();
-        }
-        foreach ($goodCartItems as $goodCartItem) {
-            $price += $goodCartItem->sum_price();
-        }
+    // public function confirm()
+    // {
+    //     $uid = Auth::user()->id;
+    //     $experienceCartItems = ExperienceCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
+    //     $goodCartItems = GoodCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
+    //     $price = 0;
+    //     foreach ($experienceCartItems as $experienceCartItem) {
+    //         $price += $experienceCartItem->sum_price();
+    //     }
+    //     foreach ($goodCartItems as $goodCartItem) {
+    //         $price += $goodCartItem->sum_price();
+    //     }
 
-        $show = 0;
-        return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price', 'show'));
+    //     $show = 0;
+    //     return view('cart.cofirm', compact('experienceCartItems', 'goodCartItems', 'price', 'show'));
         
         
-    }
+    // }
 
     public function purchase()
     {

@@ -10,7 +10,7 @@
 --------------------------------------------------
 
 【体験日】{{ $ex_info->start_date }}
-【体験者名】{{ $ex_info->user->name }}
+【体験者名】{{ $ex_info->user->name }}様
 【体験名】{{ App\Models\ExperienceFolder::where('id', $ex_info->experience->experience_folder_id)->first()->name }}　{{ $ex_info->experience->name }}
 【大人】{{ $ex_info->quantity_adult }}名
 【子ども】{{ $ex_info->quantity_child }}名
@@ -27,7 +27,7 @@
 【ご宿泊日】{{ $ex_info->start_date }}
 【ご宿泊ホテル名】{{ $hotel_info->name }}
 【ご宿泊ホテル所在地】{{ $hotel_info->address }}
-【ご宿泊ホテルメールアドレス】{{ $ex_info->mail }}
+【ご宿泊ホテルメールアドレス】{{ $hotel_info->mail }}
 
 なお、上記の体験内容、宿泊先情報に関することでご連絡が必要な場合は、
 大変お手数ではございますが、下記までお気軽にご連絡ください。
