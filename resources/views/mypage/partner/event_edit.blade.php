@@ -287,14 +287,14 @@
                             <input name="name" type="text" class="form-control" value="{{ $experiences_folder->name }}">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">大人料金</label>
+                            <label class="form-label">大人料金目安<span class="small fw-normal">（実際の料金ではなく、表示の際に必要な目安です）</span></label>
                             @error('price_adult')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                             <input name="price_adult" type="number" class="form-control" value="{{ $experiences_folder->price_adult }}">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">子供料金</label>
+                            <label class="form-label">子供料金目安<span class="small fw-normal">（実際の料金ではなく、表示の際に必要な目安です）</span></label>
                             @error('price_child')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror

@@ -15,7 +15,7 @@
 【お名前】{{ $goods_info->to_name }}様
 【ご住所】{{ App\Models\User::$prefs[$goods_info->to_pref_id] }}{{ $goods_info->to_city }}{{ $goods_info->to_town }}{{ $goods_info->to_building }}
 【電話番号】{{ $goods_info->to_phone_number }}
-【配送会社】@forelse(App\Consts\DeliveryConst::DELIVERY_LIST as $key =>$val)@if($goods_info->delivery_company == $key){{ $val }}@endif@empty{{ $goods_info->delivery_company }}@endforelse
+【配送会社】@if(is_numeric($goods_info->delivery_company)){{App\Consts\DeliveryConst::DELIVERY_LIST[$goods_info->delivery_company]}}@else{{ $goods_info->delivery_company }}@endif
 【配送伝票番号】{{ $goods_info->delivery_number }}
 
 お届け日時の変更をご希望の場合は、配送会社に直接ご連絡ください。

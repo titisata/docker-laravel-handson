@@ -68,7 +68,7 @@
                         </div>    
                     </div>
                 @empty
-                    <p>お土産がありません</p>
+                    <p>名産品がありません</p>
                 @endforelse     
             </div>
         </div>

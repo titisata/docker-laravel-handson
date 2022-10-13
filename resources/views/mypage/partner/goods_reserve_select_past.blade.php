@@ -15,7 +15,7 @@
 <div class="container">
     <div class="d-flex flex-column">
         <h1>対応注文一覧</h1>
-        <p>お土産名：{{ $goods_folder->name}}</p>
+        <p>名産品：{{ $goods_folder->name}}</p>
     </div>
     
 

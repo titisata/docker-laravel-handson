@@ -46,7 +46,7 @@ async function deleteGoods(id) {
                         他の体験を予約する
                     </a>
                     <a class="ms-3" href="/search/goods">
-                        他のお土産を購入する
+                        他の名産品を購入する
                     </a>
                 </div>
 
@@ -90,7 +90,7 @@ async function deleteGoods(id) {
 
 
                 <div class="mt-4">
-                    <h4>お土産</h4>
+                    <h4>名産品</h4>
 
                     @forelse($goodCartItems as $goodCartItem)
                         <div class="mt-1 p-3 card">

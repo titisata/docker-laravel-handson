@@ -15,12 +15,12 @@ window.onload = changeDisabled; // ページを表示したとき、changeDisabl
 // -->
 </script>
 <div class="container">
-    <h1>お土産予約編集</h1>
+    <h1>名産品予約編集</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
         <p class="text-danger">{{ session('result') }}</p>
             <div class="card mt-3">
-                <div class="card-header">お土産予約編集</div>
+                <div class="card-header">名産品予約編集</div>
                 <div class="card-body">
                     <form name="Form1" action="/mypage/partner/goods_reserve_edit/{{ $goods_order->id }}" method="POST">
                         @csrf

@@ -40,6 +40,7 @@
                             <th scope="col">宿泊</th>
                             <th scope="col">食事</th>
                             <th scope="col">連絡事項</th>
+                            
                             <th scope="col">受注状況</th>
                         </tr>
                     </thead>
@@ -81,6 +82,7 @@
                     <td>
                         <p>{{ $reserved_experience->message }}</p>
                     </td>
+                   
                     <td>
                     @if($reserved_experience->hotel_group_id == '')
                         <select name="save_flag" tabindex="-1" disabled 
@@ -132,7 +134,7 @@
     </div>
 
     <div class="card mt-3">
-        <div class="card-header">処理が完了していないお土産</div>
+        <div class="card-header">処理が完了していない名産品</div>
         <div class="card-body">
         <table class="table table-hover">
             @forelse ($ordered_goods as $ordered_goods_one)
@@ -233,6 +235,7 @@
                             <th scope="col">宿泊</th>
                             <th scope="col">食事</th>
                             <th scope="col">連絡事項</th>
+                        
                             <th scope="col">受注状況</th>
                         </tr>
                     </thead>
@@ -274,6 +277,7 @@
                     <td>
                         <p>{{ $reserved_experience->message }}</p>
                     </td>
+                   
                     <td>
                     @if($reserved_experience->hotel_group_id == '')
                         <select name="save_flag" tabindex="-1" disabled 
@@ -327,7 +331,7 @@
     
 
     <div class="card mt-3 col-4">
-        <div class="card-header">在庫数が減少しているお土産</div>
+        <div class="card-header">在庫数が減少している名産品</div>
         <div class="card-body">
         <table class="table table-hover">
             @forelse ($decrease_goods as $decrease_good)

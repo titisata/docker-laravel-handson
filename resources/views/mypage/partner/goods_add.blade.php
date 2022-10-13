@@ -75,7 +75,7 @@
 
 </script>
 <div class="container">
-    <h1>お土産新規登録</h1>
+    <h1>名産品新規登録</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form action="/mypage/partner/action_goods_add" method="POST" enctype="multipart/form-data">
@@ -131,7 +131,7 @@
                         </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">お土産の表示</label>
+                            <label class="form-label">名産品の表示</label>
                             <div>
                                 <input name="status" type="radio" class="" checked value="1">
                                 <label class="fw-normal">表示</label>
@@ -143,11 +143,10 @@
                         <div class="mb-3">
                             <label class="form-label">おすすめフラグ</label>
                             <div>
-                                <input name="recommend_flag" type="radio" class="" checked value="1">
+                                <input name="recommend_flag" type="radio" checked value="1">
                                 <label class="fw-normal">おすすめする</label>
-                                <input name="recommend_flag" type="radio" class="" value="0">
+                                <input name="recommend_flag" type="radio" value="0">
                                 <label class="fw-normal">おすすめしない</label>
-
                             </div>
                         </div>
                         <div class="mb-3">
@@ -212,16 +211,13 @@
                                 <input name="goods_quantity" type="number" class="form-control" value="{{ old('goods_quantity') }}">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">お土産の表示・非表示</label>
+                                <label class="form-label">名産品の表示・非表示</label>
                                 <div>
                                     <input name="goods_status" type="radio" checked value="1">
                                     <label class="fw-normal">表示</label>
                                     <input name="goods_status" type="radio" value="0">
                                     <label class="fw-normal">非表示</label>
-
                                 </div>
-                                
-                               
                             </div>
                         </div>
                         
@@ -230,8 +226,9 @@
                         <button type="button" class="mt-2 btn btn-primary" onclick="add_ex()">追加</button>
                     </div>
                 </div>
-                </div>
                 <button type="submit" class="my-2 btn btn-primary">新規作成</button>
+                </div>
+                
             </form>
         </div>
     </div>

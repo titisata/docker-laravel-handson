@@ -20,8 +20,8 @@ class GoodsFolder extends Model
         'category1',
         'category2',
         'category3',
-        'reccomend_flag',
-        'reccomend_sort_no',
+        'recommend_flag',
+        'recommend_sort_no',
         'average_rate',
         'price',
     ];

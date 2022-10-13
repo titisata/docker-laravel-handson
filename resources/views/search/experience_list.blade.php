@@ -80,7 +80,7 @@ li.item {
                     @csrf
                         <div class="d-flex flex-column align-items-center">
                             <div class="d-lg-flex">
-                                <input class="form-control me-lg-1" name="free_word" value="@if($free_word != '指定なし'){{ $free_word}} @endif" type="input" style="width:240px">
+                                <input class="form-control me-lg-1" name="free_word" placeholder="検索したいキーワードを入力" value="@if($free_word != '指定なし'){{ $free_word}} @endif" type="input" style="width:240px">
                                 <input class="form-control me-lg-1" name="keyword"  value="{{ $keyword }}" type="date" style="width:240px">     
                                 <select name="category" class="form-select ms-lg-1"  style="width:216px">
                                     <option value="">カテゴリ選択</option>
@@ -88,7 +88,6 @@ li.item {
                                         <option value="{{ $one_category->name }}">{{ $one_category->name }}</option>
                                     @endforeach
                                 </select>
-
                             </div>
                             
                             <div class="d-flex m-2">

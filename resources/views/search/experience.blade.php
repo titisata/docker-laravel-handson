@@ -72,7 +72,7 @@ li.item {
                     <div class="d-flex flex-column align-items-center">
                         <label for="keyword" class="fw-bold fs-5 mb-3">体験したい日とカテゴリーを入力してください</label>
                         <div class="d-lg-flex">
-                            <input class="form-control me-lg-1" name="free_word" type="input" style="width:240px">
+                            <input class="form-control me-lg-1" placeholder="検索したいキーワードを入力" name="free_word" type="input" style="width:240px">
                             <input class="form-control me-lg-1" name="keyword" type="date" style="width:240px">
                             <select name="category" class="form-select ms-lg-1" style="width:216px">
                                 <option value="">カテゴリ選択</option>

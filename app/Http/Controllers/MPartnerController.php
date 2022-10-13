@@ -175,6 +175,9 @@ class MPartnerController extends Controller
         }
 
         if($is_lodging == 1){
+            if($hotel_groups == ''){
+                return back()->with('result', '注文状況を更新し、メールを送信しました。');
+            }
             for ($i=0; $i < count($hotel_groups); $i++) {
 
                 $hotel_group = $hotel_groups[$i];
@@ -512,8 +515,9 @@ class MPartnerController extends Controller
         $description = $request->description;
         $detail = $request->detail;
         $caution = $request->caution;
-        $category = $request->category;
+        $category = $request->category1;
         $recommend_flag = $request->recommend_flag;
+        $recommend_sort_no = $request->recommend_sort_no;
         $goods_name = $request->goods_name;
         $goods_price = $request->goods_price;
         $goods_description = $request->goods_description;
@@ -522,7 +526,7 @@ class MPartnerController extends Controller
         $goods_status = $request->goods_status;
         $table_name = $request->table_name;
         $key_count = $request->key_count;
-
+        
         $data = GoodsFolder::create([
             'user_id' => $user_id,
             'name' => $name,
@@ -531,6 +535,7 @@ class MPartnerController extends Controller
             'detail' => $detail,
             'caution' => $caution,
             'recommend_flag' => $recommend_flag,
+            'recommend_sort_no' => $recommend_sort_no,
             'category1' => $category,
         ]);     
 
@@ -610,6 +615,7 @@ class MPartnerController extends Controller
         $caution = $request->caution;
         $category = $request->category;
         $recommend_flag = $request->recommend_flag;
+        $recommend_sort_no = $request->recommend_sort_no;
         $status = $request->status;
         $category1 = $request->category1;
         $key = $request->key;
@@ -624,6 +630,7 @@ class MPartnerController extends Controller
             'category1' => $category1,
             'status' => $status,
             'recommend_flag' => $recommend_flag,
+            'recommend_sort_no' => $recommend_sort_no,
         ]);
 
         for ($i=1; $i < $key + 1; $i++) {
@@ -1210,6 +1217,8 @@ class MPartnerController extends Controller
 
         $input_company = $request->input_company;
 
+        
+
         if(  $delivery_company == '' || $delivery_number == ''){
             GoodsOrder::where('id',$id)->update([
                 'status'=>$save_flag,
@@ -1221,7 +1230,7 @@ class MPartnerController extends Controller
                 'delivery_company'=>$input_company,
                 'delivery_number'=>$delivery_number,
             ]);
-
+            
         }else{
             GoodsOrder::where('id',$id)->update([
                 'status'=>$save_flag,

@@ -241,7 +241,7 @@
     </div>
 
     <div class="card mt-3">
-        <div class="card-header">処理が完了していないお土産</div>
+        <div class="card-header">処理が完了していない名産品</div>
         <div class="card-body">
         <table class="table table-hover">
             @forelse ($ordered_goods as $ordered_goods_one)

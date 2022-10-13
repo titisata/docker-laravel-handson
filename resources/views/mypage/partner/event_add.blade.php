@@ -135,14 +135,103 @@
         elements.remove();
     }
     
+    var c = '';
+
+function number_set(){
+
+    // form要素を取得
+    var element = document.getElementById( "target" ) ;
+
+    // form要素内のラジオボタングループ(name="is_lodging")を取得
+    var radioNodeList = element.is_lodging ;
+
+    // 選択状態の値(value)を取得 (Bが選択状態なら"b"が返る)
+    var a = radioNodeList.value ;
+
+    if ( a == 0 ) {
+        document.getElementById('hotel_result').value = 1;
+        document.getElementById('food_result').value = 1;
+        c = 1;
+
+        let h_targets = document.querySelectorAll(`input[name='hotel_group[]']`);
+
+        for (const i of h_targets) {
+            i.checked = false;
+        }
+
+        let f_targets = document.querySelectorAll(`input[name='food_group[]']`);
+
+        for (const n of f_targets) {
+            n.checked = false;
+        }
+    }else{
+        document.getElementById('hotel_result').value = 0;
+        document.getElementById('food_result').value = 0;
+        c = 0;
+        let h_targets = document.querySelectorAll(`input[name='hotel_group[]']`);
+
+        for (const i of h_targets) {
+            i.checked = false;
+        }
+
+        let f_targets = document.querySelectorAll(`input[name='food_group[]']`);
+
+        for (const n of f_targets) {
+            n.checked = false;
+        }
+    }
+
+    console.log(c);
+}
+
+
+function hotel_number_check(val){
+    
+    var item_count = document.getElementById('item_count').value;
+    console.log(item_count);
+    var result = 0;
+
+    for(var i = 0; i < item_count; i++){
+        var check = document.getElementsByName('hotel_group[]')[i];
+        var set = ''; 
+        if (check.checked) {
+        result = 1;
+        } 
+    };
+    
+    document.getElementById('hotel_result').value = result;
+  
+   
+}
+
+function food_number_check(val){
+    
+    var item_count = document.getElementById('item_count').value;
+    console.log(item_count);
+    var result = 0;
+
+    for(var i = 0; i < item_count; i++){
+        var check = document.getElementsByName('food_group[]')[i];
+        var set = ''; 
+        if (check.checked) {
+        result = 1 ;
+        } 
+    };
+   
+    document.getElementById('food_result').value = result;
+    console.log(result);
+   
+}
 </script>
 <div class="container">
     <h1>イベント新規作成</h1>
     <div class="row justify-content-center">
         <div class="col-md-8 mt-3">
-        <form action="/mypage/partner/action_event_add" method="POST" enctype="multipart/form-data">
+        <form action="/mypage/partner/action_event_add" method="POST" enctype="multipart/form-data" id="target">
                 @csrf
                 <div class="card">
+                <input type="hidden" id="hotel_result" name="hotel_result" value="0">
+                <input type="hidden" id="food_result" name="food_result" value="0">
                 <input name="user_id" type="hidden" value="{{ $user->id }}">
                     <div class="card-header">基本情報</div>
                     <div class="card-body">
@@ -241,9 +330,9 @@
                         <div class="mb-3">
                             <label class="form-label">宿泊の有無</label>
                             <div>
-                                <input name="is_lodging" type="radio" class="" checked  value="1">
+                                <input name="is_lodging" type="radio" class="" checked  value="1" onchange="number_set()">
                                 <label class="fw-normal">宿泊あり</label>
-                                <input name="is_lodging" type="radio" class="" value="0">
+                                <input name="is_lodging" type="radio" class="" value="0" onchange="number_set()">
                                 <label class="fw-normal">宿泊なし</label>
                             </div> 
                         </div>
@@ -259,11 +348,13 @@
                         <div>
                             <p class="fw-bold mb-1">ホテルグループ選択</p>
                             <p class="ms-3 mb-0">宿泊体験の場合のホテルグループを下記の中から選択してください</p>
-                            <p class="ms-3 text-danger">宿泊がない場合は表示されません</p>               
+                            <p class="ms-3 text-danger">宿泊がない場合は表示されません</p>      
+                            <?php $item_count=0; ?>         
                             @error('hotel_result')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                             @forelse($hotel_groups as $hotel_group)
+                            <?php $item_count++; ?>
                                 <div class="d-flex align-items-center mb-2">
                                     <input type="checkbox" id="{{ $hotel_group->name }}" class="h_group mt-0" name="hotel_group[]" value="{{ $hotel_group->id }}" onchange="hotel_number_check(this.value)">
                                     <label class="mb-0" for="{{ $hotel_group->name }}">{{ $hotel_group->name }}</label>
@@ -310,12 +401,18 @@
                             <div class="d-flex align-items-center">
                                 <label for="">
                                     イベント開始日
-                                    <input class="form-control" style="width:200px;" type='date' name="start_date" value="">
+                                    @error('start_date')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input class="form-control" style="width:200px;" type='date' name="start_date" value="{{ old('start_date') }}">
                                 </label>
                                 <p class="fs-1 mx-3">~</p>
                                 <label for="">
                                     イベント終了日
-                                    <input class="form-control" style="width:200px;" type='date' name="end_date" value="">
+                                    @error('end_date')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input class="form-control" style="width:200px;" type='date' name="end_date" value="{{ old('end_date') }}">
                                 </label>
                                 
                             </div>
