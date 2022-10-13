@@ -197,6 +197,7 @@ Route::prefix('mypage/partner')->middleware(['auth','role:system_admin|site_admi
     Route::get('/reserve_select_date_past/{id}', [App\Http\Controllers\MPartnerController::class, 'reserve_select_date_past']);
     Route::get('/reserve_edit/{id}', [App\Http\Controllers\MPartnerController::class, 'reserve_edit']);
     Route::post('/reserve_edit/{id}', [App\Http\Controllers\MPartnerController::class, 'action_reserve_edit']);
+    Route::get('/search_reserve', [App\Http\Controllers\MPartnerController::class, 'search_reserve']);
 
     Route::get('/goods_reserve', [App\Http\Controllers\MPartnerController::class, 'goods_reserve']);
     Route::get('/goods_reserve_past', [App\Http\Controllers\MPartnerController::class, 'goods_reserve_past']);
@@ -206,6 +207,7 @@ Route::prefix('mypage/partner')->middleware(['auth','role:system_admin|site_admi
     Route::get('/goods_reserve_select_date_past/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_reserve_select_date_past']);
     Route::get('/goods_reserve_edit/{id}', [App\Http\Controllers\MPartnerController::class, 'goods_reserve_edit']);
     Route::post('/goods_reserve_edit/{id}', [App\Http\Controllers\MPartnerController::class, 'action_goods_reserve_edit']);
+    Route::get('/search_goods', [App\Http\Controllers\MPartnerController::class, 'search_goods']);
     
     
 });

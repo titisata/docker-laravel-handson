@@ -9,7 +9,18 @@
         <div class="ms-3">
             <a href="/mypage/partner/goods_reserve">未完了の予約一覧へ</a>
         </div>
-
+        <form action="/mypage/partner/search_goods" method="get">
+        <div class="d-lg-flex" style="margin-left:50px">
+            <div class="col-auto">
+            <input class="form-control me-lg-1" name="free_word" type="input" style="width:200px">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-success btn-lg" type='submit'>
+                    検索     
+                </button>
+            </div>
+        </div>
+        </form>
     </div>
     
     

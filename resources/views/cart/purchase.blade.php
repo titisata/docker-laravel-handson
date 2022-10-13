@@ -136,7 +136,7 @@
 </div>
 
 <script>
-    var stripe = Stripe('pk_test_51LndUsJ2951A60rnde9XBYP6ZAXMsBfYGUMRhKLZAV003wc20E3PWn7hwAtLnI1P4a0PXysjjvXcz8AV4S6mPSyc00vdqXKZsY');
+    var stripe = Stripe('{{ $stripe_public_key }}');
     var elements = stripe.elements();
 
     var style = {

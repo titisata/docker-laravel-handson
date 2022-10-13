@@ -70,8 +70,9 @@ class CartController extends Controller
         $town = Auth::user()->town;
         $building = Auth::user()->building;
         $phone_number = Auth::user()->phone_number;
+        $stripe_public_key = config('stripe_key.stripe_public_key');
 
-        return view('cart.purchase', compact('experienceCartItems', 'goodCartItems', 'price', 'name', 'postal_code', 'pref_id', 'city', 'town', 'building', 'phone_number', 'price'));
+        return view('cart.purchase', compact('experienceCartItems', 'goodCartItems', 'price', 'name', 'postal_code', 'pref_id', 'city', 'town', 'building', 'phone_number', 'price', 'stripe_public_key'));
         
     }
 
@@ -98,7 +99,8 @@ class CartController extends Controller
 
     public function purchase_post(Request $request)
     {
-        \Stripe\Stripe::setApiKey('sk_test_51LndUsJ2951A60rnK7hk7Sqoa4gTe3YPd2t3MhJDEuxlaMYbcOKLUJogbAHShI4UtJRuadpvDaIBlNagfM6oOzw400mROBy7qp');
+        $stripe_secret_key = config('stripe_key.stripe_secret_key');
+        \Stripe\Stripe::setApiKey($stripe_secret_key);
         
         try {
             $amount = intval($request->price);

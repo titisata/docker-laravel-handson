@@ -959,6 +959,34 @@ class MPartnerController extends Controller
         }
     }
 
+    public function search_reserve(Request $request)
+    {
+        $free_word = $request->free_word;
+        $user = Auth::user();
+
+        if($user->hasRole('partner')){
+            $where[] = ['experience_reserves.partner_id', '=', $user->id];
+        }else{
+            $where = []; 
+        }
+        
+        if($free_word == ""){
+            $reserves = ExperienceReserve::where($where)->orderBy('id','desc')->get();
+        }else{
+            $reserves = ExperienceReserve::Join('experiences', 'experience_reserves.experience_id', '=', 'experiences.id')
+            ->Join('experience_folders', 'experiences.experience_folder_id', '=', 'experience_folders.id')
+            ->select('experience_reserves.*')->where($where)
+            ->where(function ($query) use($free_word){
+                $query->where('experience_folders.name', 'like', '%'.$free_word.'%')
+                    ->orWhere('experience_folders.description', 'like', '%'.$free_word.'%')
+                    ->orWhere('experiences.name', 'like', '%'.$free_word.'%');
+            })
+            ->orderBy('id','desc')->get();
+        }
+        
+        return view('mypage.partner.search_reserve', compact('reserves'));
+    }
+
     public function reserve_select(string $id)
     {
         $now = now()->format('y-m-d');
@@ -1009,7 +1037,33 @@ class MPartnerController extends Controller
         return view('mypage.partner.reserve_select_date_past', compact('user', 'id', 'reserves'));
     }
 
-    
+    public function search_goods(Request $request)
+    {
+        $free_word = $request->free_word;
+        $user = Auth::user();
+
+        if($user->hasRole('partner')){
+            $where[] = ['goods_orders.partner_id', '=', $user->id];
+        }else{
+            $where = []; 
+        }
+        
+        if($free_word == ""){
+            $goods = GoodsOrder::where($where)->orderBy('id','desc')->get();
+        }else{
+            $goods = GoodsOrder::Join('goods', 'goods_orders.goods_id', '=', 'goods.id')
+            ->Join('goods_folders', 'goods.goods_folder_id', '=', 'goods_folders.id')
+            ->select('goods_orders.*')->where($where)
+            ->where(function ($query) use($free_word){
+                $query->where('goods_folders.name', 'like', '%'.$free_word.'%')
+                    ->orWhere('goods_folders.description', 'like', '%'.$free_word.'%')
+                    ->orWhere('goods.name', 'like', '%'.$free_word.'%');
+            })
+            ->orderBy('id','desc')->get();
+        }
+        
+        return view('mypage.partner.search_goods', compact('goods'));
+    }
 
     public function reserve_edit(string $id)
     {
