@@ -1,36 +1,9 @@
-{{ $name }}さん
-
-商品がキャンセルされました。
-
-キャンセル商品名：{{ $goods_name }}　　{{ $goods_kind }}
-
-送り主：{{ $form_name }}
-送り主住所：〒{{ $from_postal_code }}<br>{{ App\Models\User::$prefs[$from_pref_id] }}{{ $from_city }}{{ $from_town }}{{ $from_building }}
-送り主電話番号：{{ $from_phone }}
-
-送り先情報：{{ $to_name }}
-送り先住所：〒{{ $to_postal_code }}<br>{{ App\Models\User::$prefs[$to_pref_id] }}{{ $to_city }}{{ $to_town }}{{ $to_building }}
-送り先電話番号：{{ $to_phone }}
-
-商品に関するお問合せ先：{{ $contact_info }}
-
-@if($for == 'partner')
-パートナー向けの文章です。
-@elseif($for == 'user')
-予約者向けの文章です。
-@elseif($for == 'admin')
-管理者向けの文章です。
-@endif
-
-
-
-
-test様
+{{ $user_info->name }}様
 
 この度はuratabiをご利用いただき、誠にありがとうございます。
 
 先日のご注文分に関しまして、
-お客様より承りました注文のキャンセルを下記のとおり承りましたので
+注文のキャンセルを下記のとおり承りましたので
 今一度、ご確認をお願い申し上げます。
 
 ---------------------------------------------------
@@ -39,32 +12,40 @@ test様
 
 ---------------------------------------------------
 
-【ご注文商品名】白い恋人 8個入り(test)
-【ご注文数】1個
+【ご注文日】{{ $goods_info->created_at }}
+【ご注文者名】{{ $goods_info->user->name }}
+【ご注文商品名】{{ $goods_info->goods->name }}
+【ご注文数】{{ $goods_info->quantity }}個
 
 【送り主様情報】
-【郵便番号】〒000-0033
-【住所】神奈川県サンプルサンプル市サンプル7丁目ビル1F
-【氏名】一般ユーザ様
-【電話番号】00-0000-0000
+〒{{ $goods_info->from_postal_code }}
+【住所】{{ App\Models\User::$prefs[$goods_info->from_pref_id] }}{{ $goods_info->from_city }}{{ $goods_info->from_town }}{{ $goods_info->from_building }}
+【氏名】{{ $goods_info->from_name }}様
+【電話番号】{{ $goods_info->from_phone_number }}
 
-【商品ご送付先】
-【送付先郵便番号】〒000-0033
-【送付先住所】神奈川県サンプルサンプル市サンプル7丁目ビル1F
-【送付先氏名】一般ユーザ様
-【送付先電話番号】00-0000-0000
+【商品送付先】
+〒{{ $goods_info->to_postal_code }}
+【送付先住所】{{ App\Models\User::$prefs[$goods_info->to_pref_id] }}{{ $goods_info->to_city }}{{ $goods_info->to_town }}{{ $goods_info->to_building }}
+【送付先氏名】{{ $goods_info->to_name }}様
+【送付先電話番号】{{ $goods_info->to_phone_number }}
 
-【ご注文総額】100円
+【ご注文総額】{{ number_format($goods_info->total_price) }}円
+
+
+【本件に関するお問合せ先】{{ $goods_info->contact_info }}
+【受付時間】10時～16時
 
 ---------------------------------------------------
 
-その他、何かご不明な点がございましたら当社までお気軽に
-ご連絡くださいませ。
+商品個別のお問い合わせは上記に記載した【本件に関するお問い合わせ先】にご連絡ください。
+当サイトに関する全般的なご質問などございましたら、下記のご連絡先までお気軽にお問い合わせください。
 
-【会社名】サンプル株式会社
-【住所】東京都サンプル区サンプル5丁目ビル5F
-【運営連絡先】00-0000-0000
-【TEL】00-0000-0000
-【営業時間】10時～16時
+※このメールはuratabiの商品受注状況の変更が完了した方への自動返信メールです。
+
+運営会社：{{ $admin_info->name }}
+住所：{{ App\Models\User::$prefs[$admin_info->pref_id] }}{{ $admin_info->city }}{{ $admin_info->town }}{{ $admin_info->building }}
+運営連絡先：{{ $admin_info->phone_number }}
+TEL：{{ $admin_info->phone_number }}
+営業時間：10時～16時
 
 

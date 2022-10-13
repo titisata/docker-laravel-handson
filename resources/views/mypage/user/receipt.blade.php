@@ -116,7 +116,7 @@
 
 
 
-    <div class="d-flex justify-content-between flex-row mt-5">
+    <div class="d-flex justify-content-between align-items-center flex-row mt-5">
         <p class="text-gray-color ms-4 small" style="padding-left:2rem">Copyright© {{ $site_masters->site_name}} All rights reserved.</p>
         <p class="text-gray-color ms-4 ms-0 me-4 mb-0 pb-3" style="padding-right:2rem;padding-left:2rem;"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
     </div>

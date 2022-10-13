@@ -1,22 +1,9 @@
-{{ $name }}さん
-
-
-{{ $status }}となりました。
-
-@if($for == 'partner')
-パートナー向けの文章です。
-@elseif($for == 'user')
-予約者向けの文章です。
-@elseif($for == 'admin')
-管理者向けの文章です。
-@endif
-
-test様
+{{ $user_info->name }}様
 
 この度はuratabiをご利用いただき、誠にありがとうございます。
 
 先日の体験予約に関しまして、
-お客様より承りました予約のキャンセルを下記のとおり承りましたので
+予約のキャンセルを下記のとおり承りましたので
 今一度、ご確認をお願い申し上げます。
 
 ---------------------------------------------------
@@ -24,21 +11,21 @@ test様
 【ご予約状況】キャンセル済
 
 ---------------------------------------------------
-【体験日】
-【体験者名】一般ユーザ
-【体験名】ラフティング半日ツアー　13：00からの部
-【大人】1名
-【子ども】1名
-【宿泊グループ】宿泊なし
-【食事グループ】食事なし
-【連絡事項】コメントはありません
+【体験日】{{ $ex_info->start_date }}
+【体験者名】{{ $ex_info->user->name }}様
+【体験名】{{ App\Models\ExperienceFolder::where('id', $ex_info->experience->experience_folder_id)->first()->name }}　{{ $ex_info->experience->name }}
+【大人】{{ $ex_info->quantity_adult }}名
+【子ども】{{ $ex_info->quantity_child }}名
+【宿泊グループ】{{ $ex_info->hotelGroup?->name ?? '宿泊なし' }}
+【食事グループ】{{ $ex_info->foodGroup?->name ?? '食事なし' }}
+【連絡事項】{{ $ex_info->comment ?? 'なし' }}
 
-【体験総額】7,000円
+【体験総額】{{ number_format($ex_info->total_price) }}円
 
 その他、何かご不明な点がございましたら当社までお気軽に
 ご連絡くださいませ。
 
-【本件に関するお問合せ先】キャンセル時の連絡先(oo観光協会)：04-xxx-xxx 体験に関する連絡先（株式会社　サンプル）：042-xxxx-xxxx
+【本件に関するお問合せ先】{{ $ex_info->contact_info }}
 【受付時間】10時～16時
 
 ---------------------------------------------------
@@ -48,9 +35,9 @@ test様
 
 ※このメールはuratabiの商品受注状況の変更が完了した方への自動返信メールです。
 
-【運営会社】サイト管理者
-【住所】東京都サンプル区サンプル5丁目ビル5F
-【運営連絡先】00-0000-0000
-【TEL】00-0000-0000
-【営業時間】10時～16時
+運営会社：{{ $admin_info->name }}
+住所：{{ App\Models\User::$prefs[$admin_info->pref_id] }}{{ $admin_info->city }}{{ $admin_info->town }}{{ $admin_info->building }}
+運営連絡先：{{ $admin_info->phone_number }}
+TEL：{{ $admin_info->phone_number }}
+営業時間：10時～16時
 

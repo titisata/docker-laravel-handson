@@ -25,13 +25,13 @@ class MUserController extends Controller
         $now = now()->format('y-m-d');
         $user = Auth::user();
         $ordered_goods = $user->ordered_goods;
-        $future_reserved_experiences = $user->future_reserved_experiences;
+        $reserved_experiences = $user->reserved_experiences;
 
         $data1 = ExperienceReserve::where('user_id', $user->id)->select('payment_id','created_at');
 
         $data2 = GoodsOrder::where('user_id', $user->id)->select('payment_id','created_at')->union($data1)->orderBy('created_at', 'desc')->get();
         
-        return view('mypage.user.home', compact('user', 'ordered_goods', 'future_reserved_experiences', 'data2'));
+        return view('mypage.user.home', compact('user', 'ordered_goods', 'reserved_experiences', 'data2'));
     }
 
     public function reserve()

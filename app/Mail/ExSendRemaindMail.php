@@ -38,23 +38,104 @@ class ExSendRemaindMail
 
     public function contents_info($save_flag){
 
-        if($save_flag != 10){
+        if($save_flag == 99){
 
             $this->array = [
-                [
-                    $this->site_admin = Auth::user()->email,
-                    $this->site_admin = Auth::user(),
+                [ 
+                    [
+                        'user_info'=>User::with('roles')
+                        ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+                        ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+                        ->select('users.*')
+                        ->where("roles.name", "system_admin") 
+                        ->first(),
+                        'ex_info'=>$this->reserve_data,
+                        'hotel_info'=>Hotel::where('id', $this->reserve_data->hotel_id)->first(),
+                        'admin_info'=>User::with('roles')
+                        ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+                        ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+                        ->select('users.*')
+                        ->where("roles.name", "site_admin") 
+                        ->first(),
+                        'for'=>'system_admin',
+                    ],
+                    User::with('roles')
+                        ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+                        ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+                        ->select('users.*')
+                        ->where("roles.name", "system_admin") 
+                        ->first()->email,
+                        ExMailConst::SUBJECT_3,
+                        ExMailConst::VIEW_3,
                 ],
-                [   
-                    $this->partner = User::where('id', $this->reserve_data->partner_id)->first()->email,
-                    $this->partner = User::where('id', $this->reserve_data->partner_id)->first(),
+    
+                [ 
+                    [
+                        'user_info'=>User::with('roles')
+                        ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+                        ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+                        ->select('users.*')
+                        ->where("roles.name", "site_admin") 
+                        ->first(),
+                        'ex_info'=>$this->reserve_data,
+                        'hotel_info'=>Hotel::where('id', $this->reserve_data->hotel_id)->first(),
+                        'admin_info'=>User::with('roles')
+                        ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+                        ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+                        ->select('users.*')
+                        ->where("roles.name", "site_admin") 
+                        ->first(),
+                        'for'=>'site_admin',
+                    ],
+                    User::with('roles')
+                        ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+                        ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+                        ->select('users.*')
+                        ->where("roles.name", "site_admin") 
+                        ->first()->email,
+                        ExMailConst::SUBJECT_3,
+                        ExMailConst::VIEW_3,
                 ],
+    
                 [
-                    $this->user = User::where('id', $this->reserve_data->user_id)->first()->email,
-                    $this->user = User::where('id', $this->reserve_data->user_id)->first(),
+                    [
+                        'user_info'=>User::where('id', $this->reserve_data->partner_id)->first(),
+                        'ex_info'=>$this->reserve_data,
+                        'hotel_info'=>Hotel::where('id', $this->reserve_data->hotel_id)->first(),
+                        'admin_info'=>User::with('roles')
+                        ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+                        ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+                        ->select('users.*')
+                        ->where("roles.name", "site_admin") 
+                        ->first(),
+                        'for'=>'partner',
+                    ],
+                    User::where('id', $this->reserve_data->partner_id)->first()->email,
+                    ExMailConst::SUBJECT_3,
+                    ExMailConst::VIEW_3,
+                ],
+                
+                [
+                   
+                    [
+                        'user_info'=>User::where('id', $this->reserve_data->user_id)->first(),
+                        'ex_info'=>$this->reserve_data,
+                        'hotel_info'=>Hotel::where('id', $this->reserve_data->hotel_id)->first(),
+                        'admin_info'=>User::with('roles')
+                        ->leftjoin('model_has_roles' , 'users.id', '=','model_has_roles.model_id')
+                        ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
+                        ->select('users.*')
+                        ->where("roles.name", "site_admin") 
+                        ->first(),
+                        'for'=>'user',
+                    ],
+                    User::where('id', $this->reserve_data->user_id)->first()->email,
+                    ExMailConst::SUBJECT_3,
+                    ExMailConst::VIEW_3,
                 ],
                 
             ];
+
         }else{
 
         $this->array = [
@@ -146,7 +227,7 @@ class ExSendRemaindMail
                     ->first(),
                     'for'=>'user',
                 ],
-                'user_info'=>User::where('id', $this->reserve_data->user_id)->first()->email,
+                User::where('id', $this->reserve_data->user_id)->first()->email,
                 ExMailConst::SUBJECT_2,
                 ExMailConst::VIEW_2,
             ],
@@ -164,15 +245,13 @@ class ExSendRemaindMail
                     ->first(),
                     'for'=>'hotel',
                 ],
-                'user_info'=>Hotel::where('id', $this->reserve_data->hotel_id)->first()->email,
+                Hotel::where('id', $this->reserve_data->hotel_id)->first()->email,
                 ExMailConst::SUBJECT_2,
                 ExMailConst::VIEW_2,
             ],
             
         ];
         }
-        
-
     
     }
 
@@ -180,11 +259,15 @@ class ExSendRemaindMail
     public function ex_send_remaind_mail(){
         $request_data = $this->contents_info($this->save_flag);
 
-        foreach($this->array as $key=>$to){
+        // print_r('<pre>');
+        // print_r($this->array);
+        // print_r('<pre>');
+        // exit;
 
-            Mail::send(new SendMail($to[0],'titaya@knowledge-cs.com', $to[2], $to[1] ));
-            // Mail::send(new SendMail($with[$key],$to[0], $subject, $view ));
-            // print_r($with[$key]);
+        foreach($this->array as $to){
+
+            Mail::send(new SendMail($to[0],'titaya@knowledge-cs.com', $to[2], $to[3] ));
+            
         }
     //  exit;
         

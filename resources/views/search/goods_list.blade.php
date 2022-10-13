@@ -73,7 +73,7 @@ li.item {
                         <div class="d-lg-flex mb-3">
                             <input name="keyword" type="text" class="form-control me-lg-1" style="width:240px" placefolder="検索したいお土産を入力してください" value="">
                             <select name="category" class="form-select ms-lg-1" style="width:216px">
-                                <option value="">カテゴリ選択</option>
+                                <option value="{{ $keyword }}">カテゴリ選択</option>
                                 @foreach ($categories as $one_category)
                                     <option value="{{ $one_category->name }}">{{ $one_category->name }}</option>
                                 @endforeach

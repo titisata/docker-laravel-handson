@@ -80,9 +80,9 @@ li.item {
                     @csrf
                         <div class="d-flex flex-column align-items-center">
                             <div class="d-lg-flex">
-                                <input class="form-control me-lg-1" name="free_word" type="input" style="width:240px">
-                                <input class="form-control me-lg-1" name="keyword" type="date" style="width:240px">     
-                                <select name="category" class="form-select ms-lg-1" style="width:216px">
+                                <input class="form-control me-lg-1" name="free_word" value="@if($free_word != '指定なし'){{ $free_word}} @endif" type="input" style="width:240px">
+                                <input class="form-control me-lg-1" name="keyword"  value="{{ $keyword }}" type="date" style="width:240px">     
+                                <select name="category" class="form-select ms-lg-1"  style="width:216px">
                                     <option value="">カテゴリ選択</option>
                                     @foreach ($categories as $one_category)
                                         <option value="{{ $one_category->name }}">{{ $one_category->name }}</option>
@@ -122,13 +122,13 @@ li.item {
                 <p class="ms-3 fw-bold mb-0">検索カテゴリ：{{ $category }}</p>
                 <p class="ms-3 fw-bold mb-0">
                     宿泊有無：
-                @if( $lodging == 1 )
-                    宿泊あり
-                @elseif( $lodging == 0 )
-                    宿泊なし
-                @else
-                    宿泊指定なし
-                @endif
+                    @if( $lodging == '1' )
+                        宿泊あり
+                    @elseif( $lodging == '0' )
+                        宿泊なし
+                    @else
+                        宿泊指定なし
+                    @endif
                 </p>
                 </div>
             </div>
