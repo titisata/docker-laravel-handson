@@ -129,6 +129,7 @@
                             @endforeach
 
                         </select>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">お土産の表示</label>
                             <div>
