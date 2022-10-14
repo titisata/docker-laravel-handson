@@ -83,12 +83,12 @@
                 </div>
             </div>
             <div class="col card mt-3 ms-xl-3">
-                <div class="card-header fs-3">お土産カテゴリー編集</div>
+                <div class="card-header fs-3">{{App\Consts\ReuseConst::GOODS}}カテゴリー編集</div>
                 <div class="card-body">
                     <form action="/mypage/owner/action_goods_category_insert" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label">新しいお土産カテゴリー名</label>
+                            <label class="form-label">新しい{{App\Consts\ReuseConst::GOODS}}カテゴリー名</label>
                             <div class="d-flex" style="width:300px">
                                 <input name="name" type="text" class="form-control" placeholder="追加したいカテゴリー名を入力してください" value="">
                                 <button type="submit" class="btn btn-primary">追加</button>
@@ -97,7 +97,7 @@
                         </div>  
                     </form>
 
-                    <p>現在表示されているお土産カテゴリー</p>
+                    <p>現在表示されている{{App\Consts\ReuseConst::GOODS}}カテゴリー</p>
                     <div class="d-flex flex-column">
                     @foreach ($goods_categories as $goods_category)
                     <div class='d-flex my-2 align-items-center'>

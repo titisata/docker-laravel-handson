@@ -51,7 +51,7 @@
                     <input name="goods_quantities_` + key + `" type="number" class="form-control" value="">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">お土産の表示</label>
+                    <label class="form-label">商品の表示</label>
                     <div>
                     <input name="goods_statuses_` + key + `" type="radio" checked value="1">
                     <label class="fw-normal">表示</label>
@@ -75,7 +75,7 @@
 
 </script>
 <div class="container">
-    <h1>名産品新規登録</h1>
+    <h1>{{App\Consts\ReuseConst::GOODS}}新規登録</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form action="/mypage/partner/action_goods_add" method="POST" enctype="multipart/form-data">
@@ -131,7 +131,7 @@
                         </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">名産品の表示</label>
+                            <label class="form-label">{{App\Consts\ReuseConst::GOODS}}の表示</label>
                             <div>
                                 <input name="status" type="radio" class="" checked value="1">
                                 <label class="fw-normal">表示</label>
@@ -211,7 +211,7 @@
                                 <input name="goods_quantity" type="number" class="form-control" value="{{ old('goods_quantity') }}">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">名産品の表示・非表示</label>
+                                <label class="form-label">{{App\Consts\ReuseConst::GOODS}}の表示・非表示</label>
                                 <div>
                                     <input name="goods_status" type="radio" checked value="1">
                                     <label class="fw-normal">表示</label>

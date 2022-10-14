@@ -15,7 +15,7 @@
 <div class="container">
     <div class="d-flex flex-column">
         <h1>未対応注文一覧</h1>
-        <p>名産品名：{{ $goods_folder->name}}</p>
+        <p>{{App\Consts\ReuseConst::GOODS}}名：{{ $goods_folder->name}}</p>
     </div>
     
 

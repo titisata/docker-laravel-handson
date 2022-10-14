@@ -28,7 +28,7 @@
 
 
             <div class="mt-4">
-                <h4>お土産</h4> 
+                <h4>{{App\Consts\ReuseConst::GOODS}}</h4> 
                 @forelse($goodCartItems as $goodCartItem)
                     <div class="mt-1 p-3 card">
                         <div>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 @empty
-                    <p class="p-3">購入するお土産はありません</p>
+                    <p class="p-3">購入する{{App\Consts\ReuseConst::GOODS}}はありません</p>
                 @endforelse
               
             </div>

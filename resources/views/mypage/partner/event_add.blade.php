@@ -224,7 +224,7 @@ function food_number_check(val){
 }
 </script>
 <div class="container">
-    <h1>イベント新規作成</h1>
+    <h1>{{App\Consts\ReuseConst::EVENT}}新規作成</h1>
     <div class="row justify-content-center">
         <div class="col-md-8 mt-3">
         <form action="/mypage/partner/action_event_add" method="POST" enctype="multipart/form-data" id="target">
@@ -280,7 +280,7 @@ function food_number_check(val){
                             <textarea name="description" type="text" class="form-control" rows="5"> {{ old('description') }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">イベント詳細</label>
+                            <label class="form-label">{{App\Consts\ReuseConst::EVENT}}詳細</label>
                             @error('detail')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -396,11 +396,11 @@ function food_number_check(val){
                 </div> 
 
                         <div class="card mt-3">
-                        <div class="card-header">イベント期間</div>
+                        <div class="card-header">{{App\Consts\ReuseConst::EVENT}}期間</div>
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <label for="">
-                                    イベント開始日
+                                {{App\Consts\ReuseConst::EVENT}}開始日
                                     @error('start_date')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -408,7 +408,7 @@ function food_number_check(val){
                                 </label>
                                 <p class="fs-1 mx-3">~</p>
                                 <label for="">
-                                    イベント終了日
+                                {{App\Consts\ReuseConst::EVENT}}終了日
                                     @error('end_date')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -501,7 +501,7 @@ function food_number_check(val){
                
                     </div>
                 
-                <button type="submit" class="mt-2 btn btn-primary">イベント作成</button>
+                <button type="submit" class="mt-2 btn btn-primary">{{App\Consts\ReuseConst::EVENT}}作成</button>
             </form>
             
         

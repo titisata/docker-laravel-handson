@@ -174,7 +174,7 @@
                         <div class="col-10 col-md-5">
                             <a role="botton" href="/search/goods" class="border btn btn-lg btn-color ms-2 mb-2 text-center fw-bold rounded-3 shadow-sm fs-4 w-100 d-flex flex-column"  style="font-size:40px;">
                             <img src="/images/bag.png" class="mx-auto my-3" style="width:72px">
-                                <p class="mb-0 btn-text">名産品を買う</p>
+                                <p class="mb-0 btn-text">{{App\Consts\ReuseConst::GOODS}}を買う</p>
                             </a>
 
                         </div>

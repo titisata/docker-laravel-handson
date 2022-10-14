@@ -69,7 +69,7 @@
             </div>
 
             <div class="card mt-3">
-                <div class="card-header">注文したお土産</div>
+                <div class="card-header">注文した{{App\Consts\ReuseConst::GOODS}}</div>
                 <div class="card-body">
                     @forelse ($ordered_goods as $ordered_goods_one)
                         <a href="/goods/{{ $ordered_goods_one->goods->goods_folder_id }}">

@@ -243,7 +243,7 @@
     
 </script>
 <div class="container">
-    <h1>イベント編集</h1>
+    <h1>{{App\Consts\ReuseConst::EVENT}}編集</h1>
     @if(count($errors) > 0)
         <p class="text-danger">入力に問題があります。再入力してください</p>
     @endif
@@ -322,7 +322,7 @@
                             <textarea name="description" type="text" class="form-control" rows="5">{{ $experiences_folder->description }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">イベント詳細</label>
+                            <label class="form-label">{{App\Consts\ReuseConst::EVENT}}詳細</label>
                             @error('detail')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -538,16 +538,16 @@
                     </div>
 
                     <div class="card mt-3">
-                        <div class="card-header">イベント期間</div>
+                        <div class="card-header">{{App\Consts\ReuseConst::EVENT}}期間</div>
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <label for="">
-                                    イベント開始日
+                                {{App\Consts\ReuseConst::EVENT}}開始日
                                     <input class="form-control" style="width:200px;" type='date' name="start_date" value="20{{ $start_date }}">
                                 </label>
                                 <p class="fs-1 mx-3">~</p>
                                 <label for="">
-                                    イベント終了日
+                                {{App\Consts\ReuseConst::EVENT}}終了日
                                     <input class="form-control" style="width:200px;" type='date' name="end_date" value="20{{ $end_date }}">
                                 </label>
                                 
@@ -649,12 +649,12 @@
                     </div>
                 </div>
                 <input type="hidden" name="item_count" id="item_count" value="<?php echo $item_count; ?>">
-                <button type="submit" class="mt-4 btn btn-primary submit">イベント更新</button>
+                <button type="submit" class="mt-4 btn btn-primary submit">{{App\Consts\ReuseConst::EVENT}}更新</button>
             </form>
             
             <form class="my-4" action="/mypage/partner/action_event_delete" method="POST">
                 @csrf
-                <button class="btn btn-danger">イベント削除</button>
+                <button class="btn btn-danger">{{App\Consts\ReuseConst::EVENT}}削除</button>
                 <input type="hidden" name="id" value="{{ $experiences_folder->id }}">
             </form>
             

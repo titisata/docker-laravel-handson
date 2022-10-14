@@ -51,16 +51,16 @@ class EventAddRequest extends FormRequest
     public function messages()
     {
         return[
-            'name.required' => 'イベント名を入力してください。',
+            'name.required' => '{{App\Consts\ReuseConst::EVENT}}名を入力してください。',
             'price_adult.required' => '大人料金を入力して下さい',
             'price_child.required' => '子供料金を入力して下さい',
             'address.required' => '住所を入力して下さい',
             'phone.required' => '連絡先情報を入力して下さい',
             'description.required' => '説明を入力して下さい',
-            'detail.required' => 'イベント詳細を入力して下さい',
+            'detail.required' => '{{App\Consts\ReuseConst::EVENT}}詳細を入力して下さい',
             'caution.required' => '注意事項を入力して下さい',
-            'start_date.required' => 'イベント開始日を入力して下さい',
-            'end_date.required' => 'イベント終了日を入力して下さい',
+            'start_date.required' => '{{App\Consts\ReuseConst::EVENT}}開始日を入力して下さい',
+            'end_date.required' => '{{App\Consts\ReuseConst::EVENT}}終了日を入力して下さい',
             'hotel_result.min' => 'ホテルグループを一つ以上選択して下さい',
             'food_result.min' => 'フードグループを一つ以上選択して下さい',
             'ex_name.required' => '体験名を入力してください。',

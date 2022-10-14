@@ -3,12 +3,12 @@
 @section('menu', 'owner_reserve_edit')
 @section('content')
 <div class="container">
-    <h1>イベント予約編集</h1>
+    <h1>{{App\Consts\ReuseConst::EVENT}}予約編集</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
         <p class="text-danger">{{ session('result') }}</p>
             <div class="card mt-3">
-                <div class="card-header">イベント予約編集</div>
+                <div class="card-header">{{App\Consts\ReuseConst::EVENT}}予約編集</div>
                 <div class="card-body">
                     <form action="/mypage/partner/reserve_edit/{{ $experiencereserve->id }}" method="POST">
                         @csrf

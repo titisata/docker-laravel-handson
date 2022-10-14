@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex">
-        <h1>名産品一覧</h1>
+        <h1>{{App\Consts\ReuseConst::GOODS}}一覧</h1>
         <a class="ms-3" href="/mypage/partner/goods_add/{{ $user->id }}">
             <div class="btn btn-lg btn-success">
                 新規登録     
@@ -18,7 +18,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col" style="width:400px;">名産品</th>
+                        <th scope="col" style="width:400px;">{{App\Consts\ReuseConst::GOODS}}</th>
                         <th scope="col">設定画像</th>
                         <th scope="col">料金目安</th>
                         <th scope="col">カテゴリー</th>
@@ -45,7 +45,7 @@
                         
                     </tr>   
                 @empty
-                    <p>名産品登録がありません</p>
+                    <p>{{App\Consts\ReuseConst::GOODS}}登録がありません</p>
                 @endforelse
             </table>
             

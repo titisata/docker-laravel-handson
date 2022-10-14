@@ -68,7 +68,7 @@
                         </div>    
                     </div>
                 @empty
-                    <p>名産品がありません</p>
+                    <p>{{App\Consts\ReuseConst::GOODS}}がありません</p>
                 @endforelse     
             </div>
         </div>

@@ -42,11 +42,7 @@ class LinkConst
     
     【表現、及び商品に関する注意書き】　本商品に示された表現や再現性には個人差があり、必ずしも利益や効果を保証したものではございません。
     ';
-    const DELIVERY_LIST = [
-        self::DELIVERY_1 => self::DELIVERY_1_NAME,
-        self::DELIVERY_2 => self::DELIVERY_2_NAME,
-        self::DELIVERY_3 => self::DELIVERY_3_NAME,
-    ];
+    
     
 }
 

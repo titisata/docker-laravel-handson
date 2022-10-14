@@ -3,17 +3,17 @@
 @section('menu', 'owner_reserve_make')
 @section('content')
 <div class="container">
-    <h1>新規イベント予約作成</h1>
+    <h1>新規{{App\Consts\ReuseConst::EVENT}}予約作成</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             
             <div class="card mt-3">
-                <div class="card-header">新規イベント登録</div>
+                <div class="card-header">新規{{App\Consts\ReuseConst::EVENT}}登録</div>
                 <div class="card-body">
                     <form action="/mypage/owner/reserve_make/{id}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label">イベント名</label>
+                            <label class="form-label">{{App\Consts\ReuseConst::EVENT}}名</label>
                             <input name="name" type="text" class="form-control" value="">
                         </div>
                         <div class="mb-3">

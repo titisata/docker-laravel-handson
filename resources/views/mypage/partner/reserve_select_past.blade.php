@@ -14,7 +14,7 @@
 </style>
 <div class="container">
     <h1>過去予約一覧</h1>
-    <p>イベント：{{ $experience_folder->name}}</p>
+    <p>{{App\Consts\ReuseConst::EVENT}}：{{ $experience_folder->name}}</p>
 <div>  
 <table class="table table-hover">
     @forelse ($experiences as $experience)

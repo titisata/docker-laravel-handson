@@ -3,15 +3,15 @@
 @section('menu', 'owner_reserve_edit')
 @section('content')
 <div class="container">
-    <h1>予約イベント詳細</h1>
+    <h1>予約{{App\Consts\ReuseConst::EVENT}}詳細</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
         <p class="text-danger">{{ session('result') }}</p>
             <div class="card mt-3">
-                <div class="card-header">予約イベント詳細</div>
+                <div class="card-header">予約{{App\Consts\ReuseConst::EVENT}}詳細</div>
                 <div class="card-body">
                     <div class="card">
-                        <div class="card-header">予約イベント情報</div>
+                        <div class="card-header">予約{{App\Consts\ReuseConst::EVENT}}情報</div>
                             <div class="mb-3 ms-2">
                                 @forelse(App\Models\Image::where('table_name', 'experience_folders')->where('table_id',$reserved_experience->experience->experience_folder_id)->get() as $image)
                                     @if($loop->first)    

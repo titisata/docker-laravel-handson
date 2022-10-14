@@ -241,7 +241,7 @@
     </div>
 
     <div class="card mt-3">
-        <div class="card-header">処理が完了していない名産品</div>
+        <div class="card-header">処理が完了していない{{App\Consts\ReuseConst::GOODS}}</div>
         <div class="card-body">
         <table class="table table-hover">
             @forelse ($ordered_goods as $ordered_goods_one)
@@ -319,7 +319,7 @@
     </div>
     
     <div class="card mt-3 col-4">
-        <div class="card-header">在庫数が減少しているお土産</div>
+        <div class="card-header">在庫数が減少している{{App\Consts\ReuseConst::GOODS}}</div>
         <div class="card-body">
         <table class="table table-hover">
             @forelse ($decrease_goods as $decrease_good)

@@ -3,7 +3,7 @@
 @section('menu', 'partner_event')
 @section('content')
 <div class="container">
-    <h1>イベント削除</h1>
+    <h1>{{App\Consts\ReuseConst::EVENT}}削除</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form action="/mypage/partner/action_goods_delete/{{ $goods->id }}" method="POST">

@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex">
-        <h1>イベント一覧</h1>
+        <h1>{{App\Consts\ReuseConst::EVENT}}一覧</h1>
         <a class="ms-3" href="/mypage/partner/event_add/{{ $user->id }}">
             <div class="btn btn-success btn-lg">
                 新規登録     
@@ -18,7 +18,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">イベント名</th>
+                        <th scope="col">{{App\Consts\ReuseConst::EVENT}}名</th>
                         <th scope="col">設定画像</th>
                         <th scope="col">大人料金</th>
                         <th scope="col">子供料金</th>

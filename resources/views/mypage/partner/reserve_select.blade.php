@@ -15,7 +15,7 @@
 <div class="container">
     <div class="d-flex flex-column">
         <h1>進行中予約一覧</h1>
-        <p>イベント：{{ $experience_folder->name}}</p>
+        <p>{{App\Consts\ReuseConst::EVENT}}：{{ $experience_folder->name}}</p>
     </div>
     
 

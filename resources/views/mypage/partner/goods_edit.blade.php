@@ -50,7 +50,7 @@
                     <input name="goods_quantities_` + key + `" type="number" class="form-control" value="">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">お土産の表示</label>
+                    <label class="form-label">商品の表示</label>
                     <div>
                     <input name="goods_statuses_` + key + `" type="radio" checked value="1">
                     <label class="fw-normal">表示</label>
@@ -94,7 +94,7 @@
 
 </script>
 <div class="container">
-    <h1>名産品編集</h1>
+    <h1>{{App\Consts\ReuseConst::GOODS}}編集</h1>
     @if(count($errors) > 0)
         <p class="text-danger">入力に問題があります。再入力してください</p>
     @endif
@@ -161,7 +161,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">名産品の表示</label>
+                            <label class="form-label">{{App\Consts\ReuseConst::GOODS}}の表示</label>
                             @if( $goods_folder->status  == 1 )
                                 <div>
                                     <input name="status" type="radio" class="" checked value="1">
@@ -295,14 +295,14 @@
                 </div>
                 
                 <div>
-                    <button type="submit" class="mt-4 btn btn-lg btn-primary">名産品情報更新</button>
+                    <button type="submit" class="mt-4 btn btn-lg btn-primary">{{App\Consts\ReuseConst::GOODS}}情報更新</button>
                 </div>
                 
             </form>
             <div class="my-4">
                 <form action="/mypage/partner/action_goods_delete" method="POST">
                     @csrf
-                    <button class="btn btn-lg btn-danger">名産品情報削除</button>
+                    <button class="btn btn-lg btn-danger">{{App\Consts\ReuseConst::GOODS}}情報削除</button>
                     <input type="hidden" name="id" value="{{ $goods_folder->id }}">
                 </form>
 

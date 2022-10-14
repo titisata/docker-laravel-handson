@@ -327,16 +327,16 @@
                     <li ><a href="/mypage/owner/site"><span class="glyphicon glyphicon-signal"></span>サイト管理</a></li>
 					<li><a href="/mypage/owner/users"><i class="fa fa-dashboard"></i>ユーザー管理</a></li>
                     <li><a href="/mypage/owner/partner_display"><i class="fa fa-heart"></i>出展者管理</a></li>
-                    <li><a href="/mypage/partner/event"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>イベント管理</a></li>
-                    <li><a href="/mypage/partner/goods"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>名産品管理</a></li>
-                    <li><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>イベント予約一覧</a></li>
-                    <li><a href="/mypage/partner/goods_reserve"><i class="fa fa-puzzle-piece"></i>名産品注文履歴一覧</a></li>
+                    <li><a href="/mypage/partner/event"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>{{App\Consts\ReuseConst::EVENT}}管理</a></li>
+                    <li><a href="/mypage/partner/goods"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>{{App\Consts\ReuseConst::GOODS}}管理</a></li>
+                    <li><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>{{App\Consts\ReuseConst::EVENT}}予約一覧</a></li>
+                    <li><a href="/mypage/partner/goods_reserve"><i class="fa fa-puzzle-piece"></i>{{App\Consts\ReuseConst::GOODS}}注文履歴一覧</a></li>
                     <li><a href="/mypage/owner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
                     <li><a href="/mypage/owner/category_display"><span class="glyphicon glyphicon-signal"></span>カテゴリー編集</a></li>
-                    <li><a href="/mypage/owner/hotel_group_display"><span class="glyphicon glyphicon-signal"></span>ホテルグループ編集</a></li>
-                    <li><a href="/mypage/owner/hotel_display"><span class="glyphicon glyphicon-signal"></span>ホテル編集</a></li>
-                    <li><a href="/mypage/owner/food_group_display"><span class="glyphicon glyphicon-signal"></span>フードグループ編集</a></li>
-                    <li><a href="/mypage/owner/food_display"><span class="glyphicon glyphicon-signal"></span>フード編集</a></li>
+                    <li><a href="/mypage/owner/hotel_group_display"><span class="glyphicon glyphicon-signal"></span>{{App\Consts\ReuseConst::HOTEL}}グループ編集</a></li>
+                    <li><a href="/mypage/owner/hotel_display"><span class="glyphicon glyphicon-signal"></span>{{App\Consts\ReuseConst::HOTEL}}編集</a></li>
+                    <li><a href="/mypage/owner/food_group_display"><span class="glyphicon glyphicon-signal"></span>{{App\Consts\ReuseConst::FOOD}}グループ編集</a></li>
+                    <li><a href="/mypage/owner/food_display"><span class="glyphicon glyphicon-signal"></span>{{App\Consts\ReuseConst::FOOD}}編集</a></li>
                     <li><a href="/mypage/owner/sales_result"><span class="glyphicon glyphicon-signal"></span>売り上げ実績</a></li>
                     
                 @endrole
@@ -345,10 +345,10 @@
                     <li><a href="/mypage/partner/reserved_user"><i class="fa fa-puzzle-piece"></i>ユーザー管理</a></li>
                     <li><a href="/users_account"><i class="fa fa-puzzle-piece"></i>アカウント管理</a></li>
                     <li><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>出展者プロフィール管理</a></li>
-                    <li><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>イベント管理</a></li>
-                    <li><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>名産品管理</a></li>
-                    <li><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>イベント予約一覧</a></li>
-                    <li><a href="/mypage/partner/goods_reserve"><i class="fa fa-puzzle-piece"></i>名産品注文履歴一覧</a></li>
+                    <li><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>{{App\Consts\ReuseConst::EVENT}}管理</a></li>
+                    <li><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>{{App\Consts\ReuseConst::GOODS}}管理</a></li>
+                    <li><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>{{App\Consts\ReuseConst::EVENT}}予約一覧</a></li>
+                    <li><a href="/mypage/partner/goods_reserve"><i class="fa fa-puzzle-piece"></i>{{App\Consts\ReuseConst::GOODS}}注文履歴一覧</a></li>
                     <li><a href="/mypage/partner/link_display"><i class="fa fa-dashboard"></i>必須表示ページ管理</a></li>
                     
                 @endrole
@@ -362,7 +362,7 @@
 					<!-- Dropdown-->
 					{{-- <li class="panel panel-default" id="dropdown">
 						<a data-toggle="collapse" href="#dropdown-lvl1">
-							<i class="fa fa-diamond"></i> イベント
+							<i class="fa fa-diamond"></i> {{App\Consts\ReuseConst::EVENT}}
 						  <span class="caret"></span>
                         </a>
 						<!-- Dropdown level 1 -->
