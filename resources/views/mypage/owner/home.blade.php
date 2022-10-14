@@ -39,7 +39,7 @@
                             <th scope="col">人数</th>
                             <th scope="col">宿泊</th>
                             <th scope="col">食事</th>
-                            <th scope="col">連絡事項</th>
+                            <th scope="col">体験の決済ID</th>
                             
                             <th scope="col">受注状況</th>
                         </tr>
@@ -80,7 +80,7 @@
                         <p>{{ $reserved_experience->foodGroup?->name ?? 'なし' }}</p>
                     </td>
                     <td>
-                        <p>{{ $reserved_experience->message }}</p>
+                        <p>{{ $reserved_experience->payment_id }}</p>
                     </td>
                    
                     <td>
@@ -143,10 +143,10 @@
                     <tr>
                         <th scope="col">注文者</th>
                         <th scope="col">商品名</th>
-                        <th scope="col">商品責任者</th>
+                        <th scope="col">出展者名</th>
                         <th scope="col">商品注文日</th>
                         <th scope="col">注文数</th>
-                        <th scope="col">商品に関する問い合わせ先</th>
+                        <th scope="col">商品の決済ID</th>
                         <th scope="col">注文商品送り先情報</th>
                         <th scope="col">注文商品状況</th>
                     </tr>
@@ -177,7 +177,7 @@
                     </td>
                     <td>
                         <p>
-                            {{$ordered_goods_one->contact_info}}
+                            {{$ordered_goods_one->payment_id}}
                         </p>
                     </td>
                     <td> 

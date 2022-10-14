@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex">
-        <h1>パートナー一覧</h1>
+        <h1>出展者一覧</h1>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-9">
@@ -12,7 +12,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">パートナー名</th>
+                            <th scope="col">出展者名</th>
                             <th scope="col">設定画像</th>
                         </tr>
                     </thead>

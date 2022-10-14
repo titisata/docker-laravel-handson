@@ -250,10 +250,9 @@
                     <tr>
                         <th scope="col">送り主</th>
                         <th scope="col">注文商品名</th>
-                        <th scope="col">注文商品責任者</th>
+                        <th scope="col">出展者名</th>
                         <th scope="col">商品注文日</th>
                         <th scope="col">注文商品数</th>
-                        <th scope="col">商品に関する問い合わせ先</th>
                         <th scope="col">注文商品送り先情報</th>
                         <th scope="col">注文商品状況</th>
                     </tr>
@@ -282,11 +281,7 @@
                             {{$ordered_goods_one->quantity}}
                         </p>
                     </td>
-                    <td>
-                        <p>
-                            {{$ordered_goods_one->partner->phone}}
-                        </p>
-                    </td>
+                    
                     <td> 
                         <p>氏名：{{$ordered_goods_one->to_name}}</p>
                         <p>郵便番号：{{$ordered_goods_one->to_postal_code}}</p>

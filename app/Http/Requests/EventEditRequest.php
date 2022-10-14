@@ -52,8 +52,8 @@ class EventEditRequest extends FormRequest
             'description.required' => '説明を入力して下さい',
             'detail.required' => 'イベント詳細を入力して下さい',
             'caution.required' => '注意事項を入力して下さい',
-            'hotel_result.numeric|min:1' => 'ホテルグループを一つ以上選択して下さい',
-            'food_result.numeric|min:1' => 'フードグループを一つ以上選択して下さい',
+            'hotel_result.min' => 'ホテルグループを一つ以上選択して下さい',
+            'food_result.min' => 'フードグループを一つ以上選択して下さい',
 
         ];
         

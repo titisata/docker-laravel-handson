@@ -494,7 +494,7 @@ function food_number_check(val){
                             </div>
                             <div id="add_target"></div>
                             <input type="hidden" id="key_count" name="key_count" value="0">
-                        
+                            <input type="hidden" name="item_count" id="item_count" value="<?php echo $item_count; ?>">
                             <button type="button" class="mt-2 btn btn-primary" onclick="add_ex()">体験の時間帯追加</button>
                             
                         </div>

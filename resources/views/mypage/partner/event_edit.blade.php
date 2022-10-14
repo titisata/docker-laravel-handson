@@ -126,7 +126,7 @@
             </div>
         `;
         
-        
+        document.getElementById('key').value = key;
         element.insertAdjacentHTML('beforeend', createElement);
     }
     
@@ -271,7 +271,7 @@
                 @elseif($experiences_folder->is_lodging  == 1)
                     <input type="hidden" id="food_result" name="food_result" value="0">
                 @else
-                    <input type="hidden" id="hotel_result" name="hotel_result" value="1">
+                    <input type="hidden" id="food_result" name="food_result" value="1">
                 @endif
                 
                 <div class="card mt-3">

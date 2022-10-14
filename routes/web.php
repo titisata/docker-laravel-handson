@@ -48,6 +48,9 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/cart/confirm', [App\Http\Controllers\CartController::class, 'confirm']);
     Route::get('/cart/purchase', [App\Http\Controllers\CartController::class, 'purchase']);
     Route::post('/cart/purchase', [App\Http\Controllers\CartController::class, 'purchase_post']);
+    
+    Route::get('/users_account', [App\Http\Controllers\MUserController::class, 'users_account']);
+    Route::post('/users_account_post', [App\Http\Controllers\MUserController::class, 'users_account_post']);
 });
 
 // ユーザーがアクセスできる

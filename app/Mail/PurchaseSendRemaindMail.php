@@ -20,6 +20,7 @@ class PurchaseSendRemaindMail
     private $order_data = array();
     private $request_data;
     private $array;
+    private $array_2 = array();
     private $subject;
     private $view;
     private $site_admin;
@@ -123,13 +124,12 @@ class PurchaseSendRemaindMail
             
         ];
 
-        $this->array_2 =[];
         $check_array = array();
         
         foreach($this->reserve_data as $ex_partner){
             $id = $ex_partner->partner_id;
             if(!in_array($id, $check_array)) {
-                $this->array_2 = [
+                $this->array_2[] = 
                    [
                         [
                             'user_info'=>User::where('id', $id )->first(),
@@ -146,8 +146,8 @@ class PurchaseSendRemaindMail
                         User::where('id', $id )->first()->email,
                         PurchaseConst::SUBJECT_1,
                         PurchaseConst::VIEW_1,
-                    ],
-                ];
+                    ];
+                
                 $check_array[] = $id;
             }
  
@@ -156,7 +156,7 @@ class PurchaseSendRemaindMail
         foreach($this->order_data as $goods_partner){
             $id = $goods_partner->partner_id;
             if(!in_array($id, $check_array)) {
-                $this->array_2 = [ 
+                $this->array_2[] =  
                     [
                         [
                             'user_info'=>User::where('id', $id )->first(),
@@ -173,15 +173,13 @@ class PurchaseSendRemaindMail
                         User::where('id', $id )->first()->email,
                         PurchaseConst::SUBJECT_1,
                         PurchaseConst::VIEW_1,
-                    ],
-                ];
+                    ];
+                
+                $check_array[] = $id;
             }
-            $check_array[] = $id;
+            
 
         }
-
-        // print_r($this->array_2);
-        // exit;
 
         
         //配列を結合する

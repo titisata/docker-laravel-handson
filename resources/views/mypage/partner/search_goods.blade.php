@@ -26,10 +26,10 @@
                 <tr>
                     <th scope="col">送り主</th>
                     <th scope="col">注文商品名</th>
-                    <th scope="col">注文商品責任者</th>
+                    <th scope="col">出展者名</th>
                     <th scope="col">商品注文日</th>
                     <th scope="col">注文商品数</th>
-                    <th scope="col">商品に関する問い合わせ先</th>
+                    <th scope="col">決済ID</th>
                     <th scope="col">注文商品送り先情報</th>
                     <th scope="col">注文商品状況</th>
                 </tr>       
@@ -61,7 +61,7 @@
             </td>
             <td>
                 <p>
-                    {{ $one_goods->partner->phone }}
+                    {{ $one_goods->payment_id }}
                 </p>
             </td>
             <td> 

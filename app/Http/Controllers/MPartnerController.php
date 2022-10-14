@@ -231,15 +231,17 @@ class MPartnerController extends Controller
             $eex_quantity = $ex_quantities;
             $eex_status = $ex_statuses;
 
-            Experience::create([
-                'experience_folder_id' => $data->id,
-                'name' => $eex_name,
-                'price_adult' => $eex_price_adult,
-                'price_child' => $eex_price_child,
-                'sort_no' => $eex_sort_no,
-                'quantity' => $eex_quantity,
-                'status' => $eex_status,
-            ]);
+            if( $eex_name != '' && $eex_price_adult != '' && $eex_price_child != '' && $eex_sort_no != '' && $eex_quantity != ''){
+                Experience::create([
+                    'experience_folder_id' => $data->id,
+                    'name' => $eex_name,
+                    'price_adult' => $eex_price_adult,
+                    'price_child' => $eex_price_child,
+                    'sort_no' => $eex_sort_no,
+                    'quantity' => $eex_quantity,
+                    'status' => $eex_status,
+                ]);
+            }
 
         }
 
@@ -380,28 +382,34 @@ class MPartnerController extends Controller
             $ex_status = $ex_statuses;
 
 
-            if( $ex_id == ''){
-                Experience::create([
-                    'experience_folder_id' => $id,
-                    'name' => $ex_name,
-                    'price_adult' => $ex_price_adult,
-                    'price_child' => $ex_price_child,
-                    'sort_no' => $ex_sort_no,
-                    'quantity' => $ex_quantity,
-                    'status' => $ex_status,
-                ]);
-
-            }else{
-                Experience::where('id', $ex_id)->update([
-                    'experience_folder_id' => $id,
-                    'name' => $ex_name,
-                    'price_adult' => $ex_price_adult,
-                    'price_child' => $ex_price_child,
-                    'sort_no' => $ex_sort_no,
-                    'quantity' => $ex_quantity,
-                    'status' => $ex_status,
-                ]);
+            if( $ex_name != '' && $ex_price_adult != '' && $ex_price_child != '' && $ex_sort_no != '' && $ex_quantity != ''){
+                if( $ex_id == ''){
+                    Experience::create([
+                        'experience_folder_id' => $id,
+                        'name' => $ex_name,
+                        'price_adult' => $ex_price_adult,
+                        'price_child' => $ex_price_child,
+                        'sort_no' => $ex_sort_no,
+                        'quantity' => $ex_quantity,
+                        'status' => $ex_status,
+                    ]);
+    
+                    
+                }else{
+                    Experience::where('id', $ex_id)->update([
+                        'experience_folder_id' => $id,
+                        'name' => $ex_name,
+                        'price_adult' => $ex_price_adult,
+                        'price_child' => $ex_price_child,
+                        'sort_no' => $ex_sort_no,
+                        'quantity' => $ex_quantity,
+                        'status' => $ex_status,
+                    ]);
+                }
             }
+            
+
+            
            
         }
 
@@ -578,16 +586,17 @@ class MPartnerController extends Controller
             $goods_quantity = $goods_quantities;
             $goods_status = $goods_statuses;
 
-           
-            Goods::create([
-                'goods_folder_id' => $data->id,
-                'name' => $goods_name,
-                'price' => $goods_price,
-                'description' => $goods_description,
-                'sort_no' => $goods_sort_no,
-                'quantity' => $goods_quantity,
-                'status' => $goods_status,
-            ]);
+            if( $goods_name != '' && $goods_description != '' && $goods_sort_no != '' && $goods_quantity != '' ){
+                Goods::create([
+                    'goods_folder_id' => $data->id,
+                    'name' => $goods_name,
+                    'price' => $goods_price,
+                    'description' => $goods_description,
+                    'sort_no' => $goods_sort_no,
+                    'quantity' => $goods_quantity,
+                    'status' => $goods_status,
+                ]);
+            }
             
         }
 
@@ -649,25 +658,27 @@ class MPartnerController extends Controller
             $goods_quantity = $goods_quantities;
             $goods_status = $goods_statuses;
 
-            if( $goods_id == ''){
-                Goods::create([
-                    'goods_folder_id' => $id,
-                    'name' => $goods_name,
-                    'price' => $goods_price,
-                    'description' => $goods_description,
-                    'sort_no' => $goods_sort_no,
-                    'quantity' => $goods_quantity,
-                    'status' => $goods_status,
-                ]);
-            }else{
-                Goods::where('id', $goods_id)->update([
-                    'goods_folder_id' => $id,
-                    'name' => $goods_name,
-                    'price' => $goods_price,
-                    'description' => $goods_description,
-                    'quantity' => $goods_quantity,
-                    'status' => $goods_status,
-                ]);
+            if( $goods_name != '' && $goods_description != '' && $goods_sort_no != '' && $goods_quantity != '' ){
+                if( $goods_id == ''){
+                    Goods::create([
+                        'goods_folder_id' => $id,
+                        'name' => $goods_name,
+                        'price' => $goods_price,
+                        'description' => $goods_description,
+                        'sort_no' => $goods_sort_no,
+                        'quantity' => $goods_quantity,
+                        'status' => $goods_status,
+                    ]);
+                }else{
+                    Goods::where('id', $goods_id)->update([
+                        'goods_folder_id' => $id,
+                        'name' => $goods_name,
+                        'price' => $goods_price,
+                        'description' => $goods_description,
+                        'quantity' => $goods_quantity,
+                        'status' => $goods_status,
+                    ]);
+                }
             }
         }
 
@@ -1463,11 +1474,7 @@ class MPartnerController extends Controller
     {
         $user = Auth::user();
         $reserved_users = ExperienceReserve::where('partner_id', $user->id)->get();
-
-        // print_r($reserved_users);
-        // exit;
        
-
         return view('mypage.partner.reserved_user', compact('user', 'reserved_users'));
     }
 

@@ -96,9 +96,9 @@ async function deleteGoods(id) {
                         <div class="mt-1 p-3 card">
                             <a href="/goods/{{ $goodCartItem->goods->goods_folder_id }}">
                                 <div>
-                                    <p>名前: {{ $goodCartItem->goods->name }}</p>
+                                    <p>商品名: {{ $goodCartItem->goods->name }}</p>
                                     <p>個数: {{ $goodCartItem->quantity }}</p>
-                                    <p>合計: <span class="small_font fw-normal">送料・税込</span>{{ number_format($goodCartItem->sum_price()) }}円</p>
+                                    <p>合計: <span class="small_font fw-normal me-1">送料・税込</span>{{ number_format($goodCartItem->sum_price()) }}円</p>
                                     <p>カート登録日: {{ $goodCartItem->created_at }}</p>
                                 </div>
                             </a>

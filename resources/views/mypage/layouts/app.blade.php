@@ -343,7 +343,8 @@
                 @role('partner')
                     <li><a href="/mypage/partner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
                     <li><a href="/mypage/partner/reserved_user"><i class="fa fa-puzzle-piece"></i>ユーザー管理</a></li>
-                    <li><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>プロフィール管理</a></li>
+                    <li><a href="/users_account"><i class="fa fa-puzzle-piece"></i>アカウント管理</a></li>
+                    <li><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>出展者プロフィール管理</a></li>
                     <li><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>イベント管理</a></li>
                     <li><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>名産品管理</a></li>
                     <li><a href="/mypage/partner/reserve"><i class="fa fa-puzzle-piece"></i>イベント予約一覧</a></li>
@@ -353,6 +354,7 @@
                 @endrole
                 @role('user')
                     <li><a href="/mypage/user"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
+                    <li><a href="/users_account"><i class="fa fa-puzzle-piece"></i>アカウント管理</a></li>
                     <li><a href="/mypage/user/favorite"><i class="fa fa-puzzle-piece"></i>お気に入り一覧</a></li>
                     <li class="mt-5"><a href="/"><span class="glyphicon glyphicon-signal"></span>ユーザーページへ</a></li>
                 @endrole    

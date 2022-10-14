@@ -248,7 +248,42 @@ class MUserController extends Controller
             User::where('id', $id)->delete();
         }
         
+        
+        
         return $this->users();
+    }
+
+    public function users_account(){
+        $user = Auth::user();
+
+        return view('mypage/user/users_account', compact('user')); 
+    }
+
+    public function users_account_post(Request $request){
+        $id = $request->id;
+        $name = $request->name;
+        $email = $request->email;
+        $password = $request->pass;
+        $postal_code = $request->postal_code;
+        $pref_id = $request->pref_id;
+        $city = $request->city;
+        $town = $request->town;
+        $building = $request->building;
+        $phone_number = $request->phone_number;
+        
+        User::where('id', $id)->update([
+            'name'=>$name,
+            'email'=>$email,
+            'password'=>$password,
+            'postal_code'=>$postal_code,
+            'pref_id'=>$pref_id,
+            'city'=>$city,
+            'town'=>$town,
+            'building'=>$building,
+            'phone_number'=>$phone_number,
+        ]);
+
+        return back()->with('result', 'アカウント情報が更新されました。');
     }
 
     public function users_csv(Request $request){

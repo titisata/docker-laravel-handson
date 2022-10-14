@@ -95,18 +95,8 @@ class GoodsController extends Controller
             ]);
         }
        
-        $uid = Auth::user()->id;
-        $experienceCartItems = ExperienceCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
-        $goodCartItems = GoodCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
-        $price = 0;
-        foreach ($experienceCartItems as $experienceCartItem) {
-            $price += $experienceCartItem->sum_price();
-        }
-        foreach ($goodCartItems as $goodCartItem) {
-            $price += $goodCartItem->sum_price();
-        }
-        return view('cart.list', compact('experienceCartItems', 'goodCartItems', 'price'));
-        // return view('goods.cart_success');
+        return redirect('cart');
+        
     }
 
     public function show(string $id)

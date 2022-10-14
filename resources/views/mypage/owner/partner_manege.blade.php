@@ -8,17 +8,17 @@
     }
 </style>
 <div class="container">
-    <h1>パートナー管理</h1>
+    <h1>出展者管理</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             
             <div class="card mt-3">
-                <div class="card-header">パートナー情報</div>
+                <div class="card-header">出展者情報</div>
                 <div class="card-body">
                     <form action="/mypage/owner/partner_manege_update/{id}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label">パートナー名</label>
+                            <label class="form-label">出展者名</label>
                             @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -77,8 +77,8 @@
                                 
                             @endforelse
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label d-none">背景色</label>
+                        <div class="mb-3 d-none">
+                            <label class="form-label">背景色</label>
                             <input name="background_color" type="text" class="form-control" value="{{ $partners->background_color }}">
                         </div>
                         <div class="mb-3">

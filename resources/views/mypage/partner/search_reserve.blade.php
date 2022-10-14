@@ -29,7 +29,7 @@
                     <th scope="col">人数</th>
                     <th scope="col">宿泊</th>
                     <th scope="col">食事</th>
-                    <th scope="col">連絡事項</th>
+                    <th scope="col">決済ID</th>
                     <th scope="col">進捗状況</th>
                     <th scope="col">選定ホテル</th>
                 </tr>
@@ -65,7 +65,7 @@
             </td>
             <td>
             <p>
-               <p>{{ $reserve->message }}</p> 
+               <p>{{ $reserve->payment_id }}</p> 
             </p>
             </td>
             <td>

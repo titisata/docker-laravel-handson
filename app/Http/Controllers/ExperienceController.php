@@ -130,7 +130,7 @@ class ExperienceController extends Controller
         foreach ($schedules as $schedule) {
             $date = new DateTime($schedule->date);
             $event_date = $date->format('Y-m-d');
-            $event_id = $start_date->format('Y-m-d') . $schedule->id;
+            $event_id = $date->format('Y-m-d') . $schedule->id;
 
             if ($schedule->is_holiday) {
                 $holiday_events[$event_id] = [
@@ -230,17 +230,7 @@ class ExperienceController extends Controller
             
         ]);
 
-        $uid = Auth::user()->id;
-        $experienceCartItems = ExperienceCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
-        $goodCartItems = GoodCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
-        $price = 0;
-        foreach ($experienceCartItems as $experienceCartItem) {
-            $price += $experienceCartItem->sum_price();
-        }
-        foreach ($goodCartItems as $goodCartItem) {
-            $price += $goodCartItem->sum_price();
-        }
-        return view('cart.list', compact('experienceCartItems', 'goodCartItems', 'price'));
+        return redirect('cart');
         
     }
 }

@@ -12,6 +12,7 @@
    var food_adult_price_value = 0;
    var food_child_price_value = 0;
 
+
    function radiohotelSwitch(){
     const formElements = document.forms.reserve_form;
 
@@ -25,6 +26,8 @@
 
     hotel_adult_price_value = parseInt(hotel_adult_price.getAttribute('value'));
     hotel_child_price_value = parseInt(hotel_child_price.getAttribute('value'));
+
+    document.getElementById('hotel_select').value = 1;
     
     price_result();
 
@@ -50,6 +53,8 @@
         
     }
 
+    document.getElementById('food_select').value = '1';
+
     price_result();
    }
 
@@ -71,12 +76,26 @@
 
     function check(){
         var flag = 0;
-          var msg = "入力エラー";
+        var msg = "入力エラー";
 
         var price = document.getElementById('price');
+        var hotel_select = document.getElementById('hotel_select');
+        var food_select = document.getElementById('food_select');
+       
+        
         if(price.innerHTML == '0' ){
             flag = 1;
             msg = msg + "\n人数が選択されていません";
+        }
+        
+        if(hotel_select.value == '0' ){
+            flag = 1;
+            msg = msg + "\n宿泊ホテルが選択されていません";
+        }
+
+        if(food_select.value == '0' ){
+            flag = 1;
+            msg = msg + "\n食事プランが選択されていません";
         }
 
         if(flag == 1){
@@ -257,8 +276,12 @@ input[type="radio"] {
                         <div class="d-flex align-items-center mb-2 pb-2 fs-4">
                             @if( $experienceFolder->is_lodging == 1)
                                 宿泊・体験人数　
+                                <input type="hidden" id="hotel_select" value="0">
+                                <input type="hidden" id="food_select" value="0">
                             @else
                                 体験人数　
+                                <input type="hidden" id="hotel_select" value="1">
+                                <input type="hidden" id="food_select" value="1">
                             @endif
                             <div class="d-flex flex-wrap align-items-center">
                                 <label for="quantity_adult">大人 </label>
@@ -330,7 +353,7 @@ input[type="radio"] {
                                     </label>
                                 </div>
                             @empty
-                                <p class="">この体験は宿泊がありません</p>
+                                <p class="">この体験は食事がありません</p>
                             @endforelse
                             
                         </div>
@@ -354,7 +377,7 @@ input[type="radio"] {
                 
                 @if($experienceFolder->status == 1 && $experience->status == 1 && $full_experience_flag != 1)
                     <div class="text-center text-md-end mt-3">
-                        <button class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4"  type="submit" value="">
+                        <button id="cart_button" class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4" type="submit" >
                             <i class="bi bi-cart"></i>カートに入れる
                         </button>
                     </div>
@@ -362,7 +385,6 @@ input[type="radio"] {
                     <div class="text-center pt-3">
                         <p class="text-danger">現在この商品は扱っておりません</p>
                     </div>
-                
                 @endif
 
 
