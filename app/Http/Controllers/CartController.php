@@ -52,15 +52,19 @@ class CartController extends Controller
 
     public function purchase()
     {
+        
         $uid = Auth::user()->id;
         $experienceCartItems = ExperienceCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
         $goodCartItems = GoodCartItem::where('user_id', $uid)->orderBy('updated_at')->get();
         $price = 0;
+        $goods_check = 0;
+
         foreach ($experienceCartItems as $experienceCartItem) {
             $price += $experienceCartItem->sum_price();
         }
         foreach ($goodCartItems as $goodCartItem) {
             $price += $goodCartItem->sum_price();
+            $goods_check = 1;
         }
 
         $name = Auth::user()->name;
@@ -72,7 +76,7 @@ class CartController extends Controller
         $phone_number = Auth::user()->phone_number;
         $stripe_public_key = config('stripe_key.stripe_public_key');
 
-        return view('cart.purchase', compact('experienceCartItems', 'goodCartItems', 'price', 'name', 'postal_code', 'pref_id', 'city', 'town', 'building', 'phone_number', 'price', 'stripe_public_key'));
+        return view('cart.purchase', compact('experienceCartItems', 'goodCartItems', 'price', 'name', 'postal_code', 'pref_id', 'city', 'town', 'building', 'phone_number', 'price', 'stripe_public_key', 'goods_check'));
         
     }
 

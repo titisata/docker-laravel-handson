@@ -11,5 +11,9 @@
     "Town":"町名番地等",
     "Building":"建物名",
     "Phone Number":"電話番号",
-    "Register":"新規登録"
+    "Register":"新規登録",
+    "Reset Password":"パスワードの再設定",
+    "Send Password Reset Link":"パスワード再設定のリンクを送る"
+    
+    
   }

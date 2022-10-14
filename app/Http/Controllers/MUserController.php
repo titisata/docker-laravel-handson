@@ -123,6 +123,7 @@ class MUserController extends Controller
             ->leftjoin('roles' , 'model_has_roles.role_id', '=','roles.id')
             ->select('users.*')
             ->whereIn("roles.name",["partner","user"]) 
+            ->where('is_delete', 1)
             ->orderby("users.id")
             ->get();
         }
@@ -243,9 +244,17 @@ class MUserController extends Controller
         if($mode=="del"){
             $id = $request->id;
             //パートナーテーブルから削除
-            Partner::where('user_id', $id)->delete();
+            $user = User::where('id', $id)->update([
+                'is_delete' => 0,
+            ]);
+        }
 
-            User::where('id', $id)->delete();
+        if($mode=="reborn"){
+            $id = $request->id;
+            //パートナーテーブルから削除
+            $user = User::where('id', $id)->update([
+                'is_delete' => 1,
+            ]);
         }
         
         
@@ -274,7 +283,7 @@ class MUserController extends Controller
         User::where('id', $id)->update([
             'name'=>$name,
             'email'=>$email,
-            'password'=>$password,
+            'password'=>Hash::make($password),
             'postal_code'=>$postal_code,
             'pref_id'=>$pref_id,
             'city'=>$city,

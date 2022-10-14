@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('town');
             $table->string('building')->nullable();
             $table->string('phone_number');
+            $table->boolean('is_delete')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -3,133 +3,161 @@
 @section('content')
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 <script src="https://js.stripe.com/v3/"></script>
-<style>.container-fluid{background-color: #C5CAE9}.heading{font-size: 40px;margin-top: 35px;margin-bottom: 30px;padding-left: 20px}.card{border-radius: 10px !important;margin-top: 60px;margin-bottom: 60px}.form-card{margin-left: 20px;margin-right: 20px}.form-card input, .form-card textarea{padding: 10px 15px 5px 15px;border: none;border: 1px solid lightgrey;border-radius: 6px;margin-bottom: 25px;margin-top: 2px;width: 100%;box-sizing: border-box;font-family: arial;color: #2C3E50;font-size: 14px;letter-spacing: 1px}.form-card input:focus, .form-card textarea:focus{-moz-box-shadow: 0px 0px 0px 1.5px skyblue !important;-webkit-box-shadow: 0px 0px 0px 1.5px skyblue !important;box-shadow: 0px 0px 0px 1.5px skyblue !important;font-weight: bold;border: 1px solid #304FFE;outline-width: 0}.input-group{position:relative;width:100%;overflow:hidden}.input-group input{position:relative;height:80px;margin-left: 1px;margin-right: 1px;border-radius:6px;padding-top: 30px;padding-left: 25px}.input-group label{position:absolute;height: 24px;background: none;border-radius: 6px;line-height: 48px;font-size: 15px;color: gray;width:100%;font-weight:100;padding-left: 25px}input:focus + label{color: #304FFE}.btn-pay{background-color: #304FFE;height: 40px;width: 100%;color: #ffffff !important;font-weight: bold}.btn-pay:hover{background-color: #3F51B5}.fit-image{width: 100%;object-fit: cover}img{border-radius: 5px}.radio-group{position: relative;margin-bottom: 25px}.radio{display:inline-block;border-radius: 6px;box-sizing: border-box;border: 2px solid lightgrey;cursor:pointer;margin: 12px 25px 12px 0px}.radio:hover{box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2)}.radio.selected{box-shadow: 0px 0px 0px 1px rgba(0, 0, 155, 0.4);border: 2px solid blue}.label-radio{font-weight: bold;color: #000000}</style>
+<style>.container-fluid{background-color: rgb(13 110 253 / 35%)}.heading{font-size: 40px;margin-top: 35px;margin-bottom: 30px;padding-left: 20px}.card{border-radius: 10px !important;margin-top: 60px;margin-bottom: 60px}.form-card{margin-left: 20px;margin-right: 20px}.form-card input, .form-card textarea{padding: 10px 15px 5px 15px;border: none;border: 1px solid lightgrey;border-radius: 6px;margin-bottom: 25px;margin-top: 2px;width: 100%;box-sizing: border-box;font-family: arial;color: #2C3E50;font-size: 14px;letter-spacing: 1px}.form-card input:focus, .form-card textarea:focus{-moz-box-shadow: 0px 0px 0px 1.5px skyblue !important;-webkit-box-shadow: 0px 0px 0px 1.5px skyblue !important;box-shadow: 0px 0px 0px 1.5px skyblue !important;font-weight: bold;border: 1px solid #304FFE;outline-width: 0}.input-group{position:relative;width:100%;overflow:hidden}.input-group input{position:relative;height:80px;margin-left: 1px;margin-right: 1px;border-radius:6px;padding-top: 30px;padding-left: 25px}.input-group label{position:absolute;height: 24px;background: none;border-radius: 6px;line-height: 48px;font-size: 15px;color: gray;width:100%;font-weight:100;padding-left: 25px}input:focus + label{color: #304FFE}.btn-pay{background-color: #304FFE;height: 40px;width: 100%;color: #ffffff !important;font-weight: bold}.btn-pay:hover{background-color: #3F51B5}.fit-image{width: 100%;object-fit: cover}img{border-radius: 5px}.radio-group{position: relative;margin-bottom: 25px}.radio{display:inline-block;border-radius: 6px;box-sizing: border-box;border: 2px solid lightgrey;cursor:pointer;margin: 12px 25px 12px 0px}.radio:hover{box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2)}.radio.selected{box-shadow: 0px 0px 0px 1px rgba(0, 0, 155, 0.4);border: 2px solid blue}.label-radio{font-weight: bold;color: #000000}</style>
 
 <div class="container">
     <div class="row justify-content-center"> 
         <form class="col-md-8" action="{{ Request::url() }}" method="POST" id="card-form" class="form-card">
         @csrf
-            <div class="d-flex align-items-center mt-3">
+        <h3 class="my-3">お支払方法の決定</h3>
 
-                <h3 class="mb-3">お支払方法の決定</h3>
-
-                <button type="button" class="btn btn-outline-secondary mb-3 ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    送り先変更
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{App\Consts\ReuseConst::GOODS}}のお送り先</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="container-fluid p-3 shadow-sm">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 col-md-9 p-0">
+                    <div class="card p-3 shadow-sm mb-0">
+                        <div class="row justify-content-center">
+                            <div class="col-12 border-bottom py-2">
+                                <h3 class="text-center">ご請求額：￥<span class="fw-bold">{{ number_format($price) }}</span></h3>
                             </div>
-                            <div class="modal-body">
-                                <div class="mt-2">
-                                    <p>送り先が{{ Auth::user()->name }}さんの住所と異なる場合下記のフォームを変更してください</p> 
-                                    <div class="mt-1 p-3 card">
-                                        <label for="">
-                                            送り先氏名
-                                            <input name="to_name" class="form-control" type="text" value="{{ $name }}">
-                                        </label>
-                                        <label for="">
-                                            送り先郵便番号
-                                            <input name="to_postal_code" class="form-control" type="text" value="{{ $postal_code }}">
-                                        </label>
-                                        <label for="">
-                                            送り先都道府県
-                                            <select name="to_pref_id" id="pref_id" class="form-control p-region @error('pref_id') is-invalid @enderror">
-                                                <option value="">-- 選択してください --</option>
-                                                    @foreach (App\Models\User::$prefs as $key => $pref)
-                                                        <option value="{{ $key }}" @if ($pref_id == $key) selected @endif>{{ $pref }}</option>
-                                                    @endforeach
-                                            </select>
-                                        </label>
-                                        <label for="">
-                                            送り先市区町村
-                                            <input name="to_city" class="form-control" type="text" value="{{ $city }}">
-                                        </label>
-                                        <label for="">
-                                            送り先町名番地等
-                                            <input name="to_town" class="form-control" type="text" value="{{ $town }}">
-                                        </label>
-                                        <label for="">
-                                            送り先建物名等
-                                            <input name="to_building" class="form-control" type="text" value="{{ $building }}">
-                                        </label>
-                                        <label for="">
-                                            送り先電話番号
-                                            <input name="to_phone_number" class="form-control" type="text" value="{{ $phone_number }}">
-                                        </label>
-                                    </div>
-                                </div>
+                        </div>
+                        
+                        <fieldset>
+                            <div style="margin-bottom:15px;" class="pt-2">
+                                <label class="fs-5" for="card_number">カード番号</label>
+                                <div id="card_number"></div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">変更</button>
+
+                            <div style="margin-bottom:15px;">
+                                <label class="fs-5" for="card_expiry">有効期限</label>
+                                <div id="card_expiry"></div>
+                                <input type="hidden" name="cardExpMonth" data-stripe="exp_month">
+                                <input type="hidden" name="cardExpYear" data-stripe="exp_year">
+                            </div>
+
+                            <div style="margin-bottom:15px;">
+                                <label class="fs-5" for="card-cvc">セキュリティコード</label>
+                                <div id="card-cvc"></div>
+                            </div>
+
+                            <div>
+                                <div id="card-errors"></div>
+                            </div>
+                        </fieldset>  
+                        <input type="hidden" name="price" value="{{ $price }}">
+
+                        <div class="row justify-content-center" style="margin-top:20px;margin-bottom:20px;">
+                            <div class="col-md-8">
+                                <button class="btn btn-pay placeicon">購入を確定する</button>
                             </div>
                         </div>
                     </div>
                 </div>
+            
+                @if($goods_check == 1)
+                <div class="mt-4 p-0 card mx-4 col-lg-9 col-md-9 mb-0">
+                    <div class="card-header p-0">
+                        <p class="fs-5 mt-3 text-center">商品のお届け先確認<br>（購入する商品のお届け先変更できます）</p> 
+                    </div>
+                    <label for="" class="px-3 pt-3">
+                        お届け先氏名
+                        <input name="to_name" class="form-control" type="text" value="{{ $name }}">
+                    </label>
+                    <label for=""class="px-3">
+                        お届け先郵便番号
+                        <input name="to_postal_code" class="form-control" type="text" value="{{ $postal_code }}">
+                    </label>
+                    <label for=""class="px-3">
+                        お届け先都道府県
+                        <select name="to_pref_id" id="pref_id" class="form-control p-region @error('pref_id') is-invalid @enderror">
+                            <option value="">-- 選択してください --</option>
+                                @foreach (App\Models\User::$prefs as $key => $pref)
+                                    <option value="{{ $key }}" @if ($pref_id == $key) selected @endif>{{ $pref }}</option>
+                                @endforeach
+                        </select>
+                    </label>
+                    <label for=""class="px-3">
+                        お届け先市区町村
+                        <input name="to_city" class="form-control" type="text" value="{{ $city }}">
+                    </label>
+                    <label for=""class="px-3">
+                        お届け先町名番地等
+                        <input name="to_town" class="form-control" type="text" value="{{ $town }}">
+                    </label>
+                    <label for=""class="px-3">
+                        お届け先建物名等
+                        <input name="to_building" class="form-control" type="text" value="{{ $building }}">
+                    </label>
+                    <label for=""class="px-3 pb-3">
+                        お届け先電話番号
+                        <input name="to_phone_number" class="form-control" type="text" value="{{ $phone_number }}">
+                    </label>
+                </div>
+                @endif
+                
             </div>
 
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class=" col-lg-6 col-md-8">
-                        <div class="card p-3">
-                            <div class="row justify-content-center">
-                                <div class="col-12">
-                                    <h2 class="heading text-center">￥{{ number_format($price) }}</h2>
-                                </div>
-                            </div>
+            
+            @forelse($goodCartItems as $goodCartItem)
+                @if($loop->first)
+                <div class="my-4 border p-3 shadow-sm">
+                    <h4>{{App\Consts\ReuseConst::GOODS}}</h4>
+                @endif
+                <div class="mt-1 p-2 card mb-1">
+                    <div>
+                        <div class="d-flex justify-content-between mt-2 border-bottom">
                             
-                            <!--<div class="row justify-content-center mb-4 radio-group">
-                                <div class="col-sm-3 col-5">
-                                    <div class='radio selected mx-auto' data-value="dk"> <img class="fit-image" src="https://i.imgur.com/5TqiRQV.jpg" width="105px" height="55px"> </div>
-                                </div>
-                                <div class="col-sm-3 col-5">
-                                    <div class='radio mx-auto' data-value="visa"> <img class="fit-image" src="https://i.imgur.com/OdxcctP.jpg" width="105px" height="55px"> </div>
-                                </div>
-                                <div class="col-sm-3 col-5">
-                                    <div class='radio mx-auto' data-value="master"> <img class="fit-image" src="https://i.imgur.com/WIAP9Ku.jpg" width="105px" height="55px"> </div>
-                                </div>
-                                <div class="col-sm-3 col-5">
-                                    <div class='radio mx-auto' data-value="paypal"> <img class="fit-image" src="https://i.imgur.com/cMk1MtK.jpg" width="105px" height="55px"> </div>
-                                </div> <br>
-                            </div>-->
+                            <p>商品名: {{ $goodCartItem->goods->name }}</p>
                             
-                            <fieldset>
-                                <div style="margin-bottom:15px;">
-                                    <label for="card_number">カード番号</label>
-                                    <div id="card_number"></div>
-                                </div>
-
-                                <div style="margin-bottom:15px;">
-                                    <label for="card_expiry">有効期限</label>
-                                    <div id="card_expiry"></div>
-                                    <input type="hidden" name="cardExpMonth" data-stripe="exp_month">
-                                    <input type="hidden" name="cardExpYear" data-stripe="exp_year">
-                                </div>
-
-                                <div style="margin-bottom:15px;">
-                                    <label for="card-cvc">セキュリティコード</label>
-                                    <div id="card-cvc"></div>
-                                </div>
-
-                                <div>
-                                    <div id="card-errors"></div>
-                                </div>
-                            </fieldset>  
-                            <input type="hidden" name="price" value="{{ $price }}">
-    
-                            <div class="row justify-content-center" style="margin-top:20px;margin-bottom:20px;">
-                                <div class="col-md-12">
-                                    <button class="btn btn-pay placeicon">購入を確定する</button>
-                                </div>
-                            </div>
                         </div>
+                        <p class="mt-2">商品数: {{ $goodCartItem->quantity }}個</p>
+                        <p class="fs-5 text-end">合計金額: <span class="small_font fw-normal me-1">送料・税込</span><span class="fw-bold ">{{ number_format($goodCartItem->sum_price()) }}</span>円</p>     
                     </div>
+                    
                 </div>
+                @if($loop->last)
+                </div>
+                @endif
+            @empty
+            @endforelse
+            
+           
+            
+            @forelse($experienceCartItems as $experienceCartItem)
+                @if($loop->first)
+                <div class="border p-3 shadow-sm my-4">
+                    <h4>体験</h4>
+                @endif
+                <div class="p-2 card mb-1 mt-1">
+                    
+                    <div>
+                        <div class="d-flex justify-content-between mt-2 border-bottom">
+                            <p>{{ App\Models\ExperienceFolder::where('id',$experienceCartItem->experience->experience_folder_id)->first()->name }}　　{{ $experienceCartItem->experience->name }}</p>
+                        </div>
+                        <div class="d-flex mt-2">
+                            <p class="me-3">体験日: {{ $experienceCartItem->start_date }}</p>
+                            <p>大人: {{ $experienceCartItem->quantity_adult }}人 子ども: {{ $experienceCartItem->quantity_child }}人</p>
+                        </div>
+                        <div class="d-flex">
+                            <p class="me-3">宿泊: {{ $experienceCartItem->hotelGroup?->name ?? 'なし' }}</p>
+                            <p>食事: {{ $experienceCartItem->foodGroup?->name ?? 'なし' }}</p>
+                        </div>
+                        <p>連絡事項: {{ $experienceCartItem->message ?? 'なし'}}</p>
+                        <p class="fs-5 text-end">金額: <span class="small_font fw-normal">税込</span><span class="fw-bold">{{ number_format($experienceCartItem->sum_price()) }}</span>円</p>
+                        
+                    </div>
+                </div>  
+                @if($loop->last)
+                </div>
+                @endif
+            @empty
+                
+            @endforelse
+
+            
+
+
+            
+                
             </div>
         </form>
     </div>

@@ -342,8 +342,8 @@
                 @endrole
                 @role('partner')
                     <li><a href="/mypage/partner"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>ホーム</a></li>
-                    <li><a href="/mypage/partner/reserved_user"><i class="fa fa-puzzle-piece"></i>ユーザー管理</a></li>
                     <li><a href="/users_account"><i class="fa fa-puzzle-piece"></i>アカウント管理</a></li>
+                    <li><a href="/mypage/partner/reserved_user"><i class="fa fa-puzzle-piece"></i>ユーザー管理</a></li>
                     <li><a href="/mypage/partner/profile"><i class="fa fa-puzzle-piece"></i>出展者プロフィール管理</a></li>
                     <li><a href="/mypage/partner/event"><i class="fa fa-puzzle-piece"></i>{{App\Consts\ReuseConst::EVENT}}管理</a></li>
                     <li><a href="/mypage/partner/goods"><i class="fa fa-puzzle-piece"></i>{{App\Consts\ReuseConst::GOODS}}管理</a></li>

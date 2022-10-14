@@ -59,11 +59,21 @@
                                 @if($user->id <> 1)
                                     <form action="/mypage/owner/users_edit" method="POST" onSubmit="return CheckDelete();">
                                         @csrf
-                                        <a href="/mypage/owner/users_edit" style="text-decoration: none; color: inherit;">
-                                            <button type="submit" class="btn btn-danger ms-5">削除</button>
-                                        </a>
+                                            @if($user->is_delete == 1)
+                                                <a href="/mypage/owner/users_edit" style="text-decoration: none; color: inherit;" >
+                                                <button type="submit" class="btn btn-danger ms-5">削除</button>
+                                                </a>
+                                                <input type="hidden" name="mode" value="del">
+                                            @else
+                                                <a href="/mypage/owner/users_edit" style="text-decoration: none; color: inherit;">
+                                                <button type="submit" class="btn btn-info text-white ms-5">復帰</button>
+                                                </a>
+                                                <input type="hidden" name="mode" value="reborn">
+                                                
+                                            @endif
+                                        
                                         <input type="hidden" name="id" value="{{ $user->id }}">
-                                        <input type="hidden" name="mode" value="del">
+                                        
                                     </form>
                                 @endif
                             </td>

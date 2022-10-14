@@ -43,13 +43,13 @@
                         </div>
  
                         <div class="mb-3">
-                            <label class="form-label">パスワード変更</label>
+                            <label class="form-label">新しいパスワード</label>
                             <input id="pass" name="pass" type="password" class="form-control" placeholder="8文字以上で登録してください" value="">
                         </div>
                         
                         <div class="mb-3">
-                            <label class="form-label">新たなパスワード確認</label>
-                            <input id="cpass" name="cpass" type="password" class="form-control" placeholder="新たなパスワードをもう一度入力してください" value="">
+                            <label class="form-label">新しいパスワード確認</label>
+                            <input id="cpass" name="cpass" type="password" class="form-control" placeholder="パスワードをもう一度入力してください" value="">
                         </div>
 
                         <div class="form-group row mb-3">
