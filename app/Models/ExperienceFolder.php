@@ -308,6 +308,8 @@ class ExperienceFolder extends Model
         $limit_date = now()->addDay()->format('y-m-d');
         $where = [];
 
+
+
         if(!is_null($date) && $date > '20'.$limit_date){
             $date = new DateTime($date);
             // 日付での検索条件

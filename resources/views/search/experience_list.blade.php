@@ -138,7 +138,9 @@ li.item {
                     @if ($experienceFolder != 'keyword' )
                         @include('components.experience_cell', ['experienceFolder'=>$experienceFolder])
                     @elseif (!$experienceFolder->is_holiday(app('request')->input('keyword')))
+                        
                         @include('components.experience_cell', ['experienceFolder'=>$experienceFolder])
+                          
                     @endif
                 @empty
                     <p>検索結果がありません。</p>

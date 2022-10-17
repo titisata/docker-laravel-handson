@@ -1372,3 +1372,25 @@
                                     過去の日付が選択されています。別の日を選択してください。
                                 </a>    
                             @endif
+
+                            @if ($experienceFolder != 'keyword' )
+                @forelse($experienceFolders->where('status', 1) as $experienceFolder)
+                    @include('components.experience_cell', ['experienceFolder'=>$experienceFolder])
+                @empty
+                    <p>検索結果がありません。</p>
+                @endforelse
+            @elseif (!$experienceFolder->is_holiday(app('request')->input('keyword')))    
+                @forelse($experienceFolders->where('status', 1) as $experienceFolder)
+                    @if( now()->addDay($experienceFolder->close_date)->format('y-m-d') <=app('request')->input('keyword') )
+                        @include('components.experience_cell', ['experienceFolder'=>$experienceFolder])
+                    @endif    
+                @empty
+                    <p>検索結果がありません。</p>
+                @endforelse
+            @endif    
+
+
+            var newDate = new Date(info.dateStr + " 20:00:00");
+                if (newDate < Date.now()) {
+                    return;
+                }

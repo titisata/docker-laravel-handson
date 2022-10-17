@@ -14,6 +14,7 @@
     const event_start_date = '{{$event_start_date}}';
     const event_end_date = '{{$event_end_date}}';
     const event_close_date = '{{$event_close_date}}';
+    const now = '{{$now}}';
 
     const events = Object.entries(events_data).map(([key, value]) =>  {
         return {
@@ -41,7 +42,8 @@
 
     console.log(events);
     console.log(event_start_date + '--' + event_end_date);
-    console.log(event_close_date);
+    console.log('c'+event_close_date);
+    console.log(now);
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEls = document.getElementsByClassName('calendar');
         for (const calendarEl of calendarEls) {
@@ -64,11 +66,18 @@
             events: [...events, ...holiday_events],
             height:'auto',
             dateClick: function(info) {
-                var newDate = new Date(info.dateStr + " 00:00:00");
-                if (newDate < Date.now()) {
-                    return;
+                var newDate = new Date(info.dateStr + " 20:00:00");
+                if( event_close_date == now){
+                    if (newDate < Date.now()) {
+                        return;
+                    }
+                }else{
+                    var newDate_2 = new Date(info.dateStr + " 00:00:00");
+                    var newCloseDate = new Date(event_close_date);
+                    if (newDate_2 < newCloseDate) {
+                        return;
+                    }
                 }
-                
                 var newEndDate = new Date(event_end_date);
                 if (newDate > newEndDate) {
                     alert('期間を過ぎています');
@@ -140,19 +149,25 @@
         }
     }
 
-    function day_close(){
-        let today_els = document.getElementsByClassName('fc-day-today');   
-        for (let i = 0; i <  today_els.length; i++) {
-            today_els[i].classList.add("fc-day-over");
-        } 
+    function day_close(){    
         let c_els = document.getElementsByClassName('fc-day-future');
-        let c_day1 = new Date(event_close_date)
-        for (let i = 0; i <  c_els.length; i++) {
-            let c_day2 = new Date(c_els[i].dataset.date + " 00:00:00");
-            if(c_day1.getTime() > c_day2.getTime()){
-                c_els[i].classList.add("fc-day-over");
+        if( event_close_date != now){
+            let c_day1 = new Date(event_close_date)
+            for (let i = 0; i <  c_els.length; i++) {
+                if (i == 1){
+                    let today_els = document.getElementsByClassName('fc-day-today');   
+                    for (let i = 0; i <  today_els.length; i++) {
+                        today_els[i].classList.add("fc-day-over");
+                    } 
+                    
+                }
+                let c_day2 = new Date(c_els[i].dataset.date + " 00:00:00");
+                if(c_day1.getTime() > c_day2.getTime()){
+                    c_els[i].classList.add("fc-day-over");
+                }
             }
         }
+
         
     }
 
@@ -536,18 +551,22 @@ async function commentCreate(ex_id) {
                                     {{ $experienceFolder->is_lodging ? ('宿泊日: ' . ($experienceFolder->is_before_lodging ? ' (前泊)'.(new DateTime(app('request')->input('keyword') ) )->modify("-1day")->format('Y-m-d') : ' (後泊) ' . app('request')->input('keyword') ) ) : '宿泊なし' }}
                                 </h5>
                             </div>
+                            @if( '20'.$limit_date < app('request')->input('keyword') || '20'.$limit_date == '20'.$date )
                             <div>
                                 <a  class="link fs-5" href="{{url()->current()}}" >
                                     別の日を選択する
                                 </a>
                             </div>
+                            @else
+                            
+                            @endif
                             <div class="py-2 ms-lg-auto d-lg-flex mt-3">
                                 
                                 <p class="fw-bold text-start fs-4">大人 : <span class="small small_font ">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_adult) }}</span><span class="small small_font">円 / 人~</span></p>
                                 
                                 <p class="fw-bold text-start fs-4 ms-lg-4">子ども : <span class="small small_font">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_child) }}</span><span class="small small_font">円 / 人~</span></p>
                             </div>
-                            @if( '20'.$limit_date < app('request')->input('keyword'))
+                            @if( '20'.$limit_date < app('request')->input('keyword')  || '20'.$limit_date == '20'.$date )
                                 @forelse($experiences as $experience)
                                     @if (in_array($experience->id, $full_experience))
                
@@ -558,10 +577,12 @@ async function commentCreate(ex_id) {
                                     <p class="text-danger">この体験はご利用できません</p>
                                 @endforelse
                             @else
-                                <div class="text-center my-3">
-                                    <a class="link fs-5" href="/search/experience" >
-                                        <span class="text-danger">※</span>予約ができない日付が選択されています。別の日を選択してください。
-                                    </a> 
+                                <div class="my-3">
+                                    <p class="text-danger fs-5">※予約ができない日付が選択されています。別の日を選択してください。</p>
+                                    <a  class="link fs-5" href="{{url()->current()}}" >
+                                    別の日を選択する
+                                    </a>
+                                    
                                 </div>  
                             @endif
                         </div>

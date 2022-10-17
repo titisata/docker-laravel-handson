@@ -250,8 +250,8 @@ input[type="radio"] {
                 </div>
 
         </div>
-        @if( '20'.$limit_date <= app('request')->input('keyword'))
-    
+        @if( ('20'.$limit_date <= app('request')->input('keyword') && '20'.$limit_date == '20'.$date) || '20'.$limit_date < app('request')->input('keyword'))
+        
         @else
             <div class="text-center my-3">
                 <a class="link fs-4" href="/search/experience" >
@@ -383,7 +383,10 @@ input[type="radio"] {
                     </div>
 
                 </div>
-                @if( '20'.$limit_date <= app('request')->input('keyword'))
+                <p>{{'20'.$limit_date}}</p>
+                <p>{{ app('request')->input('keyword') }}</p>
+                <p>{{ '20'.$date }}</p>
+                @if( ('20'.$limit_date <= app('request')->input('keyword') && '20'.$limit_date == '20'.$date) || '20'.$limit_date < app('request')->input('keyword'))
                     @if($experienceFolder->status == 1 && $experience->status == 1 && $full_experience_flag != 1)
                         <div class="text-center text-md-end mt-3">
                             <button id="cart_button" class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4" type="submit" >
@@ -396,11 +399,12 @@ input[type="radio"] {
                         </div>
                     @endif
                 @else
-                    <div class="text-center my-3">
-                        <a class="link fs-4" href="/search/experience" >
-                            <span class="text-danger">※</span>予約ができない日付が選択されています。別の日を選択してください。
+                    <div class="text-end my-3">
+                        <p class="text-danger fs-5">※予約ができない日付が選択されています。別の日を選択してください。</p>
+                        <a  class="link fs-5" href="{{url()->current()}}" >
+                        別の日を選択する
                         </a> 
-                    </div>
+                    </div>  
                        
                 @endif    
 

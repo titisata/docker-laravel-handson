@@ -107,6 +107,8 @@ class ExperienceController extends Controller
         $schedules = $experienceFolder->schedules;
         $mycomment = $experienceFolder->mycomment();
         $limit_date = now()->addDay($experienceFolder->close_date)->format('y-m-d');
+        $date = now()->format('y-m-d');
+        $now = now();
          
         $event_start_date = $experienceFolder->start_date;
         $event_end_date = $experienceFolder->end_date;
@@ -171,9 +173,9 @@ class ExperienceController extends Controller
 
         if( $user!=null ){
             $favorite = Favorite::where('user_id', $user->id)->where('favorite_id', $experienceFolder->id)->first();
-            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date','event_close_date', 'full_experience', 'favorite','limit_date'));
+            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date','event_close_date', 'full_experience', 'favorite','limit_date','now', 'date'));
         }else{
-            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date','event_close_date', 'full_experience','limit_date'));
+            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date','event_close_date', 'full_experience','limit_date','now', 'date'));
         }
         
     }
@@ -190,7 +192,8 @@ class ExperienceController extends Controller
         // $food_group_selects = FoodGroupSelect::where('experience_folder_id', $experienceFolder->id)->get();
         $comments = $experienceFolder->comments();
         $mycomment = $experienceFolder->mycomment();
-        $limit_date = now()->addDay()->format('y-m-d');
+        $limit_date = now()->addDay($experienceFolder->close_date)->format('y-m-d');
+        $date = now()->format('y-m-d');
 
         if($experience->reserve_count(app('request')->input('keyword'))>=$experience->quantity){
             $full_experience_flag = 1;
@@ -201,7 +204,7 @@ class ExperienceController extends Controller
         if ($experienceFolder == null || $experience == null) {
             return abort(404);
         }
-        return view('experience.reserve', compact('user', 'experienceFolder', 'experience', 'comments', 'mycomment', 'full_experience_flag', 'limit_date'));
+        return view('experience.reserve', compact('user', 'experienceFolder', 'experience', 'comments', 'mycomment', 'full_experience_flag', 'limit_date', 'date'));
     }
 
     public function post(Request $request)

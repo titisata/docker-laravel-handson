@@ -554,13 +554,14 @@
                             </div>
                             <div class="d-flex align-items-center mt-3">
                                 <label for="">
-                                    {{App\Consts\ReuseConst::EVENT}}予約受付可能日
+                                    手仕舞日（{{App\Consts\ReuseConst::EVENT}}予約受付可能日）
                                     @error('close_date')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                     <div class="d-flex align-items-end mt-1">
                                         <input class="form-control" style="width:60px;" type='number' name="close_date" value="{{ $experiences_folder->close_date }}" min="0" max="10">
                                         <p class="mb-0 fw-normal">日前は予約できません</p>
+                                        <p>当日予約が可能な場合は0を入力してください</p>
                                     </div>
                                     
                                 </label>  
