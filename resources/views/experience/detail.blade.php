@@ -238,6 +238,9 @@
   display: none!important;
 }
 
+.fc-event-main {
+  text-align:center;
+}
 .fc-timeGridDay-button {
   display: none!important;
 }

@@ -281,15 +281,15 @@
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="position:absolute">
                 @role('system_admin|site_admin')
-                    <a class="dropdown-item" href="{{ url('/mypage/owner/') }}">マイページ</a>
+                    <a class="fs-5 dropdown-item" href="{{ url('/mypage/owner/') }}">マイページ</a>
                 @endrole 
                 @role('partner')
-                    <a class="dropdown-item" href="{{ url('/mypage/partner/') }}">マイページ</a>
+                    <a class="fs-5 dropdown-item" href="{{ url('/mypage/partner/') }}">マイページ</a>
                 @endrole
                 @role('user')
-                    <a class="dropdown-item" href="{{ url('/mypage/user/') }}">マイページ</a>
+                    <a class="fs-5 dropdown-item" href="{{ url('/mypage/user/') }}">マイページ</a>
                 @endrole 
-                <a class="dropdown-item" href="{{ route('logout') }}"
+                <a class="fs-5 dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                     ログアウト
