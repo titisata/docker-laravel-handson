@@ -93,6 +93,20 @@ class GoodsFolder extends Model
         return $comments;
     }
 
+    /**
+     * 全てのコメントを取得
+     *
+     * @return Collection<GoodsComment>
+     */
+
+    public function all_comments()
+    {
+        $all_comments = GoodsComment::where([
+            ['goods_folder_id', '=', $this->id],
+        ])->orderBy('created_at', 'desc')->get();
+        return $all_comments;
+    }
+
      /**
      * 自分のコメントを取得
      *

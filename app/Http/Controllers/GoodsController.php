@@ -110,4 +110,16 @@ class GoodsController extends Controller
         $mycomment = $goods_folder->mycomment();
         return view('goods.detail', compact('user', 'goods_folder', 'comments', 'mycomment'));
     }
+
+    public function goods_comment_display(string $id)
+    {
+        $user = Auth::user();
+        $goods_folder = GoodsFolder::find($id);
+        $mycomment = $goods_folder->mycomment();
+        $all_comments = $goods_folder->all_comments();
+
+        
+        return view('comment.goods_comment_display', compact('user','mycomment', 'all_comments', 'goods_folder'));
+        
+    }
 }

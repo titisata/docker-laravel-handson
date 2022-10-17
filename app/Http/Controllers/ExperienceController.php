@@ -242,4 +242,16 @@ class ExperienceController extends Controller
         return redirect('cart');
         
     }
+
+    public function ex_comment_display(string $id)
+    {
+        $user = Auth::user();
+        $experienceFolder = ExperienceFolder::find($id);
+        $mycomment = $experienceFolder->mycomment();
+        $all_comments = $experienceFolder->all_comments();
+
+        
+        return view('comment.ex_comment_display', compact('user','mycomment', 'all_comments', 'experienceFolder'));
+        
+    }
 }

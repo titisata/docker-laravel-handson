@@ -31,7 +31,7 @@
             </h5> 
             <span class="small">{{ $comment->created_at }}</span>
         </div>
-        <p class="mt-3">{{ $comment->content }}</p>
+        <p class="mt-3 text-overflow-lines">{{ $comment->content }}</p>
     </div>
 </div>
 

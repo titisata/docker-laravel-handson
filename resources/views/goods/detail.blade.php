@@ -291,7 +291,10 @@ function submit_not_favorite(){
 
             <div class="mt-2 card">
                 <div class="d-flex flex-column">
+                <div class="d-flex justify-content-between">
                     <h4 class="m-3 fw-bold">クチコミ</h4>
+                    <a class="m-3 link" href="/comment/goods_comment_display/{{ $goods_folder->id }}">全てのクチコミを見る</a>
+                </div>
                         @if($goods_folder->average_rate < 1.5)
                             <p class="mb-0 ms-3">テスト用に表示、0は表示しないようにする</p>
                             <div class="d-flex align-items-center ms-3">

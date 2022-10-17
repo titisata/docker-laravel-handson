@@ -606,7 +606,10 @@ async function commentCreate(ex_id) {
                     <div class="mt-5 card">
 
                         <div class="d-flex flex-column">
-                            <h4 class="m-3 fw-bold">クチコミ</h4>
+                            <div class="d-flex justify-content-between">
+                                <h4 class="m-3 fw-bold">クチコミ</h4>
+                                <a class="m-3 link" href="/comment/ex_comment_display/{{ $experienceFolder->id }}">全てのクチコミを見る</a>
+                            </div>
 
                                 @if($experienceFolder->average_rate < 1.5)
                                     <p class="mb-0 ms-3">テスト用に表示、0は表示しないようにする</p>
@@ -657,7 +660,7 @@ async function commentCreate(ex_id) {
                                 @endif
 
 
-                            @if( $mycomment == null )
+                            @if( $user->id != $mycomment->user_id )
                             <div class="m-3">
                                 <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                                 <div class="d-flex justify-content-between align-items-center mt-2">

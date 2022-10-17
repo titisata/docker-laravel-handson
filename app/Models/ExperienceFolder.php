@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use DateTime;
+use App\Consts\ReuseConst;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -106,8 +107,22 @@ class ExperienceFolder extends Model
     {
         $comments = ExperienceComment::where([
             ['experience_folder_id', '=', $this->id],
-        ])->orderBy('created_at', 'desc')->get();
+        ])->orderBy('created_at', 'desc')->limit(ReuseConst::COMMENT_NUM)->get();
         return $comments;
+    }
+
+    /**
+     * 全てのコメントを取得
+     *
+     * @return Collection<ExperienceComment>
+     */
+
+    public function all_comments()
+    {
+        $all_comments = ExperienceComment::where([
+            ['experience_folder_id', '=', $this->id],
+        ])->orderBy('created_at', 'desc')->get();
+        return $all_comments;
     }
 
     /**

@@ -32,6 +32,8 @@ Route::post('/experience/{folder_id}/{id}', [App\Http\Controllers\ExperienceCont
 Route::post('/favorite_edit', [App\Http\Controllers\FavoriteController::class, 'favorite_edit']);
 Route::redirect('/search', '/search/experience');
 Route::get('/link/{id}', [App\Http\Controllers\LinkController::class, 'show']);
+Route::get('comment/ex_comment_display/{id}', [App\Http\Controllers\ExperienceController::class, 'ex_comment_display']);
+Route::get('comment/goods_comment_display/{id}', [App\Http\Controllers\GoodsController::class, 'goods_comment_display']);
 
 Route::get('test', [App\Http\Controllers\TestTestController::class, 'edit']);
 Route::post('test', [App\Http\Controllers\TestTestController::class, 'edit_post']);
