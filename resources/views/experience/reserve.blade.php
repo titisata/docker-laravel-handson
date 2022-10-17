@@ -250,6 +250,15 @@ input[type="radio"] {
                 </div>
 
         </div>
+        @if( '20'.$limit_date <= app('request')->input('keyword'))
+    
+        @else
+            <div class="text-center my-3">
+                <a class="link fs-4" href="/search/experience" >
+                    <span class="text-danger">※</span>予約ができない日付が選択されています。別の日を選択してください。
+                </a> 
+            </div>     
+        @endif    
         <div class="col-md-10">
             <form action="{{ Request::url() }}" method="POST" name="reserve_form" onsubmit='return check();'>
             @csrf
@@ -374,20 +383,26 @@ input[type="radio"] {
                     </div>
 
                 </div>
-                
-                @if($experienceFolder->status == 1 && $experience->status == 1 && $full_experience_flag != 1)
-                    <div class="text-center text-md-end mt-3">
-                        <button id="cart_button" class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4" type="submit" >
-                            <i class="bi bi-cart"></i>カートに入れる
-                        </button>
-                    </div>
+                @if( '20'.$limit_date <= app('request')->input('keyword'))
+                    @if($experienceFolder->status == 1 && $experience->status == 1 && $full_experience_flag != 1)
+                        <div class="text-center text-md-end mt-3">
+                            <button id="cart_button" class="btn btn-pink btn-light m-2 text-center fw-bold rounded-pill shadow-sm fs-4 col-8 col-lg-4" type="submit" >
+                                <i class="bi bi-cart"></i>カートに入れる
+                            </button>
+                        </div>
+                    @else
+                        <div class="text-center pt-3">
+                            <p class="text-danger">現在この商品は扱っておりません</p>
+                        </div>
+                    @endif
                 @else
-                    <div class="text-center pt-3">
-                        <p class="text-danger">現在この商品は扱っておりません</p>
+                    <div class="text-center my-3">
+                        <a class="link fs-4" href="/search/experience" >
+                            <span class="text-danger">※</span>予約ができない日付が選択されています。別の日を選択してください。
+                        </a> 
                     </div>
-                @endif
-
-
+                       
+                @endif    
 
             </form>
 

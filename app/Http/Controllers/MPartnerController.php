@@ -117,6 +117,7 @@ class MPartnerController extends Controller
         $status = $request->status;
         $start_date = $request->start_date;
         $end_date = $request->end_date;
+        $close_date = $request->close_date;
         $table_name = $request->table_name;
         $hotel_groups = $request->hotel_group;
         $food_groups = $request->food_group;
@@ -143,6 +144,7 @@ class MPartnerController extends Controller
             'caution' => $caution,
             'is_lodging' => $is_lodging,
             'is_before_lodging' => $is_before_lodging,
+            'close_date' => $close_date,
             'status' => $status,
             'start_date' => $start_date,
             'end_date' => $end_date,
@@ -294,6 +296,7 @@ class MPartnerController extends Controller
         $category = $request->category;
         $is_lodging = $request->is_lodging;
         $is_before_lodging = $request->is_before_lodging;
+        $close_date = $request->close_date;
         $recommend_flag = $request->recommend_flag;
         $status = $request->status; 
         $start_date = $request->start_date;
@@ -316,6 +319,7 @@ class MPartnerController extends Controller
             'caution' => $caution,
             'is_lodging' => $is_lodging,
             'is_before_lodging' => $is_before_lodging,
+            'close_date' => $close_date,
             'status' => $status,
             'recommend_flag' => $recommend_flag,
             'category1' => $category,

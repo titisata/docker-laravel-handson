@@ -13,6 +13,7 @@
 
     const event_start_date = '{{$event_start_date}}';
     const event_end_date = '{{$event_end_date}}';
+    const event_close_date = '{{$event_close_date}}';
 
     const events = Object.entries(events_data).map(([key, value]) =>  {
         return {
@@ -40,6 +41,7 @@
 
     console.log(events);
     console.log(event_start_date + '--' + event_end_date);
+    console.log(event_close_date);
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEls = document.getElementsByClassName('calendar');
         for (const calendarEl of calendarEls) {
@@ -109,6 +111,7 @@
 
                     setTimeout(() => {
                         day_over();
+                        day_close();
                     }, 10);  
                 }
             },
@@ -119,6 +122,7 @@
             for(let i = 0; i < targets.length; i++){
                 targets[i].addEventListener("click",() => {
                     day_over();
+                    day_close();
                 }, false);
             }
         }
@@ -134,6 +138,22 @@
                 els[i].classList.add("fc-day-over");
             }
         }
+    }
+
+    function day_close(){
+        let today_els = document.getElementsByClassName('fc-day-today');   
+        for (let i = 0; i <  today_els.length; i++) {
+            today_els[i].classList.add("fc-day-over");
+        } 
+        let c_els = document.getElementsByClassName('fc-day-future');
+        let c_day1 = new Date(event_close_date)
+        for (let i = 0; i <  c_els.length; i++) {
+            let c_day2 = new Date(c_els[i].dataset.date + " 00:00:00");
+            if(c_day1.getTime() > c_day2.getTime()){
+                c_els[i].classList.add("fc-day-over");
+            }
+        }
+        
     }
 
     var count = 0;
@@ -517,7 +537,7 @@ async function commentCreate(ex_id) {
                                 </h5>
                             </div>
                             <div>
-                                <a  class="text-primary" href="{{url()->current()}}" >
+                                <a  class="link fs-5" href="{{url()->current()}}" >
                                     別の日を選択する
                                 </a>
                             </div>
@@ -527,21 +547,29 @@ async function commentCreate(ex_id) {
                                 
                                 <p class="fw-bold text-start fs-4 ms-lg-4">子ども : <span class="small small_font">税込</span><span class="fw-bold">{{ number_format($experienceFolder->price_child) }}</span><span class="small small_font">円 / 人~</span></p>
                             </div>
-                            @forelse($experiences as $experience)
-                                @if (in_array($experience->id, $full_experience))
-                                    
-                                @else
-                                    <a class="btn btn-lg btn-pink rounded-pill text-white my-2 py-3 w-100 btn-shadow fs-5" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
-                                @endif
-                            @empty
-                                <p class="text-danger">この体験はご利用できません</p>
-                            @endforelse
+                            @if( '20'.$limit_date < app('request')->input('keyword'))
+                                @forelse($experiences as $experience)
+                                    @if (in_array($experience->id, $full_experience))
+               
+                                    @else
+                                        <a class="btn btn-lg btn-pink rounded-pill text-white my-2 py-3 w-100 btn-shadow fs-5" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                                    @endif
+                                @empty
+                                    <p class="text-danger">この体験はご利用できません</p>
+                                @endforelse
+                            @else
+                                <div class="text-center my-3">
+                                    <a class="link fs-5" href="/search/experience" >
+                                        <span class="text-danger">※</span>予約ができない日付が選択されています。別の日を選択してください。
+                                    </a> 
+                                </div>  
+                            @endif
                         </div>
                     @endif
                     
                     
 
-                    <div class="d-flex justify-content-between align-items-start  pt-3 flex-wrap">
+                    <div class="d-flex justify-content-between align-items-start pt-3 flex-wrap">
                         @if (app('request')->input('keyword') != "")
                             <div class="bg-f-part p-2 rounded-2 d-lg-none">
                                 <p class="text-white fs-5">体験日: {{ app('request')->input('keyword') }}</p>

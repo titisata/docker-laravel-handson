@@ -45,6 +45,16 @@
         .small_font{
         font-size:12px;
         }
+        .link {
+        color: #0d6efd;
+        text-decoration: underline;
+        }
+        .text-overflow-lines {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>

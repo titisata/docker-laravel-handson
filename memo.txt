@@ -1356,3 +1356,19 @@
 
 【表現、及び商品に関する注意書き】　本商品に示された表現や再現性には個人差があり、必ずしも利益や効果を保証したものではございません。
                 
+
+                @if( $now <= app('request')->input('keyword'))
+                                @forelse($experiences as $experience)
+                                    @if (in_array($experience->id, $full_experience))
+                                        
+                                    @else
+                                        <a class="btn btn-lg btn-pink rounded-pill text-white my-2 py-3 w-100 btn-shadow fs-5" href="{{ $experienceFolder->id }}/{{ $experience->id }}?{{ explode('?', str_replace(url('/'),"",request()->fullUrl()))[1] }}">{{ $experience->name }}</a>
+                                    @endif
+                                @empty
+                                    <p class="text-danger">この体験はご利用できません</p>
+                                @endforelse
+                            @else
+                                <a class="link" href="{{url()->current()}}" >
+                                    過去の日付が選択されています。別の日を選択してください。
+                                </a>    
+                            @endif

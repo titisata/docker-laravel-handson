@@ -30,6 +30,7 @@ class ExperienceController extends Controller
         $is_lodging = $request->is_lodging;
         $categories = ExperienceCategory::all();
         $lodging = $request->lodging;
+        $now = now()->format('y-m-d');
 
         if ($keyword == '' && ExperienceCategory::where('name', $category)->first() == '' && $lodging == '' && $free_word == '') {
             $images = Image::where('table_name', 'experience_category')->get();
@@ -72,6 +73,9 @@ class ExperienceController extends Controller
             if($keyword==""){
                 $keyword = '日付指定なし';
             }
+            if($keyword < '20'.$now){
+                $keyword = '過去の日付を選択しています';
+            }
             if($free_word==""){
                 $free_word = '指定なし';
             }
@@ -102,10 +106,11 @@ class ExperienceController extends Controller
         $reserves = $experienceFolder->reserves;
         $schedules = $experienceFolder->schedules;
         $mycomment = $experienceFolder->mycomment();
-        
+        $limit_date = now()->addDay($experienceFolder->close_date)->format('y-m-d');
          
         $event_start_date = $experienceFolder->start_date;
         $event_end_date = $experienceFolder->end_date;
+        $event_close_date = now()->addDay($experienceFolder->close_date);
 
         $events = [];
         foreach ($reserves as $reserve) {
@@ -166,9 +171,9 @@ class ExperienceController extends Controller
 
         if( $user!=null ){
             $favorite = Favorite::where('user_id', $user->id)->where('favorite_id', $experienceFolder->id)->first();
-            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date', 'full_experience', 'favorite'));
+            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date','event_close_date', 'full_experience', 'favorite','limit_date'));
         }else{
-            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date', 'full_experience'));
+            return view('experience.detail', compact('user', 'experienceFolder', 'experiences', 'comments', 'events', 'holiday_events', 'work_events', 'mycomment', 'event_start_date', 'event_end_date','event_close_date', 'full_experience','limit_date'));
         }
         
     }
@@ -185,6 +190,7 @@ class ExperienceController extends Controller
         // $food_group_selects = FoodGroupSelect::where('experience_folder_id', $experienceFolder->id)->get();
         $comments = $experienceFolder->comments();
         $mycomment = $experienceFolder->mycomment();
+        $limit_date = now()->addDay()->format('y-m-d');
 
         if($experience->reserve_count(app('request')->input('keyword'))>=$experience->quantity){
             $full_experience_flag = 1;
@@ -195,7 +201,7 @@ class ExperienceController extends Controller
         if ($experienceFolder == null || $experience == null) {
             return abort(404);
         }
-        return view('experience.reserve', compact('user', 'experienceFolder', 'experience', 'comments', 'mycomment', 'full_experience_flag'));
+        return view('experience.reserve', compact('user', 'experienceFolder', 'experience', 'comments', 'mycomment', 'full_experience_flag', 'limit_date'));
     }
 
     public function post(Request $request)

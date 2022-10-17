@@ -27,6 +27,7 @@ class ExperienceFolderSeeder extends Seeder
             'category2' => 'aa',
             'category3' => null,
             'is_lodging' => true,
+            'close_date' => 3,
             'start_date' => (new DateTime(date('Y-m-d')))->modify('-100day'),
             'end_date' => (new DateTime(date('Y-m-d')))->modify('+50day'),
             'is_before_lodging' => false,

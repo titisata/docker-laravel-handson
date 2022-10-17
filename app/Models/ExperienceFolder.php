@@ -304,15 +304,19 @@ class ExperienceFolder extends Model
      */
     public static function search_ex(string $date = null, string $category = null, string $free_word = null, string $lodging = null, int $per_page)
     {
+
+        $limit_date = now()->addDay()->format('y-m-d');
         $where = [];
 
-        if(!is_null($date)){
+        if(!is_null($date) && $date > '20'.$limit_date){
             $date = new DateTime($date);
             // 日付での検索条件
+            
             if ($date) {
                 $where[] = ['start_date', '<', $date];
                 $where[] = ['end_date', '>', $date];
             }
+
         }
         
         //カテゴリによる検索条件
@@ -336,6 +340,11 @@ class ExperienceFolder extends Model
         }else{
             $experienceFolders = ExperienceFolder::where($where)->orderBy("created_at", "desc")->paginate($per_page);
         }
+        
+        // if(!is_null($date) && $date < '20'.$limit_date){
+        //     //検索結果が出ないようにしている
+        //     $experienceFolders = ExperienceFolder::where('name', 'ttt')->paginate($per_page);
+        // }
         
         return $experienceFolders;
     }
