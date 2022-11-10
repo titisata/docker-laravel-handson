@@ -228,7 +228,7 @@ class GoodsSendRemaindMail
 
         foreach($this->array as $to){
 
-            Mail::send(new SendMail($to[0],'titaya@knowledge-cs.com', $to[2], $to[3] ));
+            Mail::send(new SendMail($to[0],$to[1], $to[2], $to[3] ));
             
         }
   
