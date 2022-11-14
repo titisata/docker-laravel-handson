@@ -343,7 +343,7 @@ function submit_not_favorite(){
                             </div>
                         @endif
             
-                @if( $mycomment == null )
+                @if( $user_id != $mycomment )
                     <div class="m-3">
                     <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                         <div class="d-flex justify-content-between align-items-center mt-2">

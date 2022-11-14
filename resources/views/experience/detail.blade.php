@@ -655,15 +655,16 @@ async function commentCreate(ex_id) {
                                     <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                     <img src="/images/star4.5.png" style="width:120px;height35px">
                                     </div>
-                                @elseif($experienceFolder->average_rate = 5)
+                                @elseif($experienceFolder->average_rate == 5)
                                     <div class="d-flex align-items-center ms-3">
                                     <p class="mb-0 fs-2 fw-bold">{{ $experienceFolder->average_rate }}</p>
                                     <img src="/images/star5.png" style="width:120px;height35px">
                                     </div>
                                 @endif
 
+                            
 
-                            @if( $user->id != $mycomment->user_id )
+                            @if( $user_id != $mycomment )
                             <div class="m-3">
                                 <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                                 <div class="d-flex justify-content-between align-items-center mt-2">
@@ -683,6 +684,7 @@ async function commentCreate(ex_id) {
                             </div>
 
                             @endif
+                           
                         </div>
 
                         <div class="card-body">

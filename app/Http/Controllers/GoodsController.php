@@ -102,13 +102,18 @@ class GoodsController extends Controller
     public function show(string $id)
     {
         $user = Auth::user();
+        $user_id = $user->id ?? 0;
         $goods_folder = GoodsFolder::find($id);
         if ($goods_folder == null) {
             return abort(404);
         }
         $comments = $goods_folder->comments();
         $mycomment = $goods_folder->mycomment();
-        return view('goods.detail', compact('user', 'goods_folder', 'comments', 'mycomment'));
+        $mycomment = $mycomment->user_id ?? 0;
+        // echo $user_id;
+        // echo $mycomment;
+        // exit;
+        return view('goods.detail', compact('user', 'user_id', 'goods_folder', 'comments', 'mycomment'));
     }
 
     public function goods_comment_display(string $id)

@@ -383,9 +383,7 @@ input[type="radio"] {
                     </div>
 
                 </div>
-                <p>{{'20'.$limit_date}}</p>
-                <p>{{ app('request')->input('keyword') }}</p>
-                <p>{{ '20'.$date }}</p>
+                
                 @if( ('20'.$limit_date <= app('request')->input('keyword') && '20'.$limit_date == '20'.$date) || '20'.$limit_date < app('request')->input('keyword'))
                     @if($experienceFolder->status == 1 && $experience->status == 1 && $full_experience_flag != 1)
                         <div class="text-center text-md-end mt-3">
@@ -433,7 +431,7 @@ input[type="radio"] {
          <div class="mt-5 card col-md-10">
 
                         <div class="d-flex flex-column">
-                            <div class="d-flex">
+                            <div class="d-flex justify-content-between">
                                 <h4 class="m-3 fw-bold">クチコミ</h4>
                                 <a class="m-3 link" href="/comment/ex_comment_display/{{ $experienceFolder->id }}">全てのクチコミを見る</a>
                             </div>
@@ -487,7 +485,7 @@ input[type="radio"] {
                                     </div>
                                 @endif
                                 
-                                @if( $user->id != $mycomment->user_id )
+                                @if( $user_id != $mycomment )
                                     <div class="m-3">
                                         <textarea class="form-control" row="10" cols="60" placeholder="コメント" id="comment"></textarea>
                                         <div class="d-flex justify-content-between align-items-center mt-2">
