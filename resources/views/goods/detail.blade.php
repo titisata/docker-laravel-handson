@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_sample')
 
 @section('content')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">

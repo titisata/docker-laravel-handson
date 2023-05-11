@@ -10271,3 +10271,93 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+.navbar-toggler .navbar-toggler-icon {
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(73, 70, 69, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler{
+color:white !important;
+
+}
+.text-gray-color{
+  color:#494645;
+}
+.btn-pink:hover{
+  background-color:white;
+  color:#FB6E86;
+}
+.btn-color{
+  background-color:#f4f4f4;
+}
+.btn-text{
+  color:#100f49;
+
+}
+
+.font-gray{
+  color:#848283;
+}
+
+ul{
+  list-style-type: none
+}
+a{
+  text-decoration:none;
+}
+.d-block{
+  max-height:440px;
+  object-fit: cover;
+
+}
+.cell{
+  width:200px;
+}
+.search_area{
+  width:360px!important;
+}
+.bg-winered{
+  background-color:#AB0707;
+  height:20px;
+}
+.offset-sm{
+  margin-left:3.333333%;
+}
+.col-set{
+  width:71.666667%
+}
+
+.logo{
+  width:320px;
+}
+
+ul.horizontal-list {
+	overflow-x: auto;
+	white-space: nowrap;
+}
+li.item {
+	display: inline-block;
+}
+.d-block{
+    height:400px;
+    object-fit: cover;
+
+}
+.box-color{
+    background-color:#f4f4f4;
+}
+.btn-pink{
+    background-color:#FB6E86;
+    border-color:#FB6E86;
+    width:400px;
+    
+}
+.font-gray{
+                color:#848283;
+}
+.font-more-gray{
+    color:#6f6e6f;
+}

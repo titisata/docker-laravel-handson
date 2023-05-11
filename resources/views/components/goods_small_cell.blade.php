@@ -1,13 +1,13 @@
 <style>
-*{
+/* *{
     box-sizing:content-box;
 }
 .card-text {
     word-wrap: break-word;
-}
-.cell{
+} */
+/* .cell{
     max-width:200px;
-}
+} */
 </style>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 

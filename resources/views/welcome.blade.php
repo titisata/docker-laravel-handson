@@ -66,69 +66,86 @@
                 text-decoration:none;
             }
             .d-block{
-                height:400px;
+                max-height:440px;
                 object-fit: cover;
 
             }
+            .cell{
+                width:200px;
+            }
+            .search_area{
+                width:360px!important;
+            }
+            .bg-winered{
+                background-color:#AB0707;
+                height:20px;
+            }
+            .offset-sm{
+                margin-left:3.333333%;
+            }
+            .col-set{
+                width:71.666667%
+            }
+            .logo{
+                width:320px;
+            }
+            ul.horizontal-list {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            li.item {
+                display: inline-block;
+            }
+            
+            .box-color{
+                background-color:#f4f4f4;
+            }
+            .font-gray{
+                            color:#848283;
+            }
+            .font-more-gray{
+                color:#6f6e6f;
+            }
         </style>
     </head>
-    <body class="antialiased">
+    <body class="bg-light">
         <div>
-            <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-white d-flex align-items-center justify-content-between">
+            <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-dark d-flex align-items-center justify-content-between">
                 <!-- <div class="d-flex align-items-center justify-content-between"> -->
-                <div class="container">
-                    <a class="navbar-brand  text-gray-color" href="{{ url('/') }}">
-                         <img src="/images/rogo.png" alt="" style="width:140px">
+                <div class="container-fluid">
+                    <a class="navbar-brand  text-gray-color" href="">
+                        <img src="/images/logo_sample.png" alt="" class="ms-4 logo" >
                     </a>
-                    <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon text-gray-color"></span>
-                    </button>
-
                     <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto">
-                            @if (Route::has('login'))
-
-                                @auth
-                                
-                                <li class="nav-item dropdown ms-3">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-gray-color fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"> 
-                                    @role('system_admin|site_admin|partner')
-                                        <a class="dropdown-item" href="{{ url('/mypage/partner/') }}">マイページ</a>
-                                    @endrole
-                                    @role('user')
-                                        <a class="dropdown-item" href="{{ url('/mypage/user/') }}">マイページ</a>
-                                    @endrole 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        ログアウト
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                        <ul class="navbar-nav ms-auto align-items-center">
+                            <li class="me-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control search_area" placeholder="商品名、ブランド等で検索ができます" aria-label="Username" aria-describedby="input-group-button-right">
+                                    <button type="button" class="btn btn-secondary" id="input-group-button-right">検索</button>
                                 </div>
                             </li>
-                                @else
-                                <li class="nav-item">
-                                    <a href="{{ route('login') }}" class="text-sm text-gray-color">ログイン</a>
-                                </li>
 
-                                    @if (Route::has('register'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-color">新規登録</a>
-                                        </li>
-                                    @endif
-                                @endauth
+                            <li class='me-3'>
+                                <a href="#" class='text-white'>
+                                    ログイン
+                                </a>
+                            </li>
 
-                            @endif
-                        <ul>
+                            <li>
+                                <a href="#">
+                                    <button class='btn btn-warning'>
+                                        <i class="bi bi-cart3"></i>カートへ
+                                    </button>
+                                </a>
+                            </li>
+                           
+                        </ul>
                     </div>
                 </div>
+            </nav>
+
+            <nav class="navbar navbar-expand-md bg-winered">
+                
             </nav>
 
             <div class="">
@@ -136,22 +153,9 @@
             <div id="carouselWithControls" class="carousel slide" data-bs-ride="carousel">
                     <!-- スライドさせる画像の設定 -->
                     <div class="carousel-inner rounded-2">
-                        @forelse($images as $key=>$image)
-                            @if( $key == '0' )
-                                <div class="carousel-item active">
-                                    <img src="{{ $image->image_path }}" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide {{$key+1}}">
-                                </div>
-                            @else
-                                <div class="carousel-item">
-                                    <img src="{{ $image->image_path }}" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide {{$key+1}}">
-                                </div>
-                            @endif
-                        @empty
-                            <div class="carousel-item active">
-                                <img src="/images/2.jpg" class="d-block w-100 mx-auto" data-bs-interval="300" alt="Slide">
-                            </div>
-                        @endforelse
-
+                        <div class="carousel-item active">
+                            <img src="/images/top_sample.jpg" class="d-block w-100 mx-auto" data-bs-interval="300">
+                        </div>
                     </div><!-- /.carousel-inner -->
                     <!-- スライドコントロールの設定 -->
                     <button type="button" class="carousel-control-prev" data-bs-target="#carouselWithControls" data-bs-slide="prev">
@@ -164,53 +168,512 @@
                     </button>
                 </div>
 
-                <h1 class="text-center my-5 fw-bold font-gray">{{ $site_masters->sales_copy }}</h1>
-                <p class="text-center col-9 font-gray" style="margin:0 auto;">
-                    {{ $site_masters->comment}}
-                    </p>
+                <div class='container row mt-4 mx-auto'>
+                    <div class='left_menu col-3'>
+                        <div class='category_box bg-white py-3'>
+                            <p class='ms-4 h4'>カテゴリー</p>
+                            <ul>
+                                <li class='my-2'>
+                                    <button class="btn-link text-dark bg-white text-decoration-none dropdown-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseitem" aria-expanded="false" aria-controls="collapseitem">
+                                        アイテム
+                                    </button>
+                                    <div class="collapse" id="collapseitem">
+                                        <div class="">
+                                            <ul>
+                                                <li class='my-1'>
+                                                    <a href="#">作業服</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">つなぎ</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">安全靴</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class='my-2'>
+                                    <button class="btn-link text-dark bg-white text-decoration-none dropdown-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsebrand" aria-expanded="false" aria-controls="collapsebrand">
+                                        ブランド
+                                    </button>
+                                    <div class="collapse" id="collapsebrand">
+                                        <div class="">
+                                            <ul>
+                                                <li class='my-1'>
+                                                    <a href="#">～ワーク</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">～ワーク</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">～ワーク</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class='my-2'>
+                                    <button class="btn-link text-dark bg-white text-decoration-none dropdown-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseseason" aria-expanded="false" aria-controls="collapseseason">
+                                        季節商品
+                                    </button>
+                                    <div class="collapse" id="collapseseason">
+                                        <div class="">
+                                            <ul>
+                                                <li class='my-1'>
+                                                    <a href="#">夏物</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">冬物</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">時期物</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class='my-2'>
+                                    <button class="btn-link text-dark bg-white text-decoration-none dropdown-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsework" aria-expanded="false" aria-controls="collapsework">
+                                        業種別
+                                    </button>
+                                    <div class="collapse" id="collapsework">
+                                        <div class="">
+                                            <ul>
+                                                <li class='my-1'>
+                                                    <a href="#">建設・建築</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">電気・設備</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">農作業</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class='my-2'>
+                                    <button class="btn-link text-dark bg-white text-decoration-none dropdown-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsemens" aria-expanded="false" aria-controls="collapsemens">
+                                        メンズ
+                                    </button>
+                                    <div class="collapse" id="collapsemens">
+                                        <div class="">
+                                            <ul>
+                                                <li class='my-1'>
+                                                    <a href="#">作業服</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">つなぎ</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">安全靴</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class='my-2'>
+                                    <button class="btn-link text-dark bg-white text-decoration-none dropdown-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapselady" aria-expanded="false" aria-controls="collapselady">
+                                        レディース
+                                    </button>
+                                    <div class="collapse" id="collapselady">
+                                        <div class="">
+                                            <ul>
+                                                <li class='my-1'>
+                                                    <a href="#">作業服</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">つなぎ</a>
+                                                </li>
+                                                <li class='my-1'>
+                                                    <a href="#">安全靴</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
 
-                <div class="container mb-5">
-                    <div class="d-flex row justify-content-evenly mt-5">
-                        <div class="col-10 col-md-5">
-                            <a role="botton" href="/search/goods" class="border btn btn-lg btn-color ms-2 mb-2 text-center fw-bold rounded-3 shadow-sm fs-4 w-100 d-flex flex-column"  style="font-size:40px;">
-                            <img src="/images/bag.png" class="mx-auto my-3" style="width:72px">
-                                <p class="mb-0 btn-text">{{App\Consts\ReuseConst::GOODS}}を買う</p>
-                            </a>
+                    </div>
+                    <div class='main_content offset-sm col-set bg-white'>
+                        <div class='category container-fluid'>
+                            <div class='row mt-3'>
+                                <div class='col'>
+                                    <a href="/search/goods">
+                                        <button class='btn btn-light w-100 py-3 shadow-sm'>
+                                            アイテム
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class='col'>
+                                    <a href="">
+                                        <button class='btn btn-light w-100 py-3 shadow-sm'>
+                                            ブランド
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class='col'>
+                                    <a href="">
+                                        <button class='btn btn-light w-100 py-3 shadow-sm'>
+                                            季節商品
+                                        </button>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div  class='row mt-3'>
+                                <div class='col'>
+                                    <a href="">
+                                        <button class='btn btn-light w-100 py-3 shadow-sm'>
+                                            業種別
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class='col'>
+                                    <a href="">
+                                        <button class='btn btn-light w-100 py-3 shadow-sm'>
+                                            メンズ
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class='col'>
+                                    <a href="">
+                                        <button class='btn btn-light w-100 py-3 shadow-sm'>
+                                            レディース
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
 
                         </div>
-                        <div class="col-10 col-md-5">
-                            <a role="botton" href="/search/experience" class="border btn btn-lg btn-color m-2 mt-4 mt-md-0 text-center fw-bold rounded-3 shadow-sm fs-4 w-100 d-flex flex-column" style="font-size:40px;">
-                                <img src="/images/active.png" class="mx-auto my-3" style="width:72px">
-                                <p class="mb-0 btn-text">現地で遊ぶ</p>
-                            </a>
+                        <div class='border-top mt-4 py-4'>
+                            <!-- <div class='card mt-3'> -->
+                                <!-- <div class='p-2 d-flex align-items-end'>
+                                    <p class='mb-0 h4'>おすすめアイテム</p>
+                                    <a href="#" class='ms-4 text-primary text-decoration-underline'>もっと見る</a>
+                                </div>
+                                
+                                <ul style='overflow-x: auto;white-space: nowrap;'>
+
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+
+                                </ul> -->
+                                <?php $item_count=0; ?>
+                                @foreach ($categories as $category)
+                                    @if($goods_folders[$item_count] != '[]')
+                                    <div class='card mt-3'>
+                                        <h3 class="mt-5 mb-4 ms-3 ms-md-0 fw-bold">おすすめの{{ $category->name }}</h3>
+
+                                        <ul class="horizontal-list">
+                                            @foreach ($goods_folders[$item_count] as $goods_item_folder)
+                                                @include('components.goods_small_cell', ['goods_folder'=>$goods_item_folder])
+                                            @endforeach
+                                        </ul>
+                                    </div>    
+                                    @endif    
+                                <?php $item_count++; ?>
+                                @endforeach
+
+                            <!-- </div> -->
+
+                            <div class='card mt-3'>
+                                <div class='p-2 d-flex align-items-end'>
+                                    <p class='mb-0 h4'>ブランド別</p>
+                                    <a href="#" class='ms-4 text-primary text-decoration-underline'>もっと見る</a>
+                                </div>
+                                
+                                <ul style='overflow-x: auto;white-space: nowrap;'>
+
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                            <div class='card mt-3'>
+                                <div class='p-2 d-flex align-items-end'>
+                                    <p class='mb-0 h4'>ブランド別</p>
+                                    <a href="#" class='ms-4 text-primary text-decoration-underline'>もっと見る</a>
+                                </div>
+                                
+                                <ul style='overflow-x: auto;white-space: nowrap;'>
+
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                            <div class='card mt-3'>
+                                <div class='p-2 d-flex align-items-end'>
+                                    <p class='mb-0 h4'>ブランド別</p>
+                                    <a href="#" class='ms-4 text-primary text-decoration-underline'>もっと見る</a>
+                                </div>
+                                
+                                <ul style='overflow-x: auto;white-space: nowrap;'>
+
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+                                    <li style='display: inline-block;'>
+                                        <a href="#">    
+                                            <div class='card cell mb-3'>
+                                                <img src="/images/dickeys.jpg" alt="">
+                                                <p class='small text-center mb-1'>Dickies</p>
+                                            </div>
+                                        </a>    
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                            
+
                         </div>
 
                     </div>
 
                 </div>
+                
+
+                
             </div>
             <footer class="mt-4">
-                <div class="bg-f-part py-3">
-                    <h4 class="text-gray-color mb-0 ms-4 mt-4 fw-bold" style="padding-left:2rem">{{ $site_masters->site_name}}</h4>
+                <div class='bg-winered'>
+
+                </div>
+                <div class="bg-dark py-3">
+                    <div class='ms-4'>
+                        <img src="/images/logo_sample.png" alt="" class="logo">
+                    </div>
+                    
                 
                     <div class="d-flex py-4 justify-content-start ms-4">
                         <div class="me-4">
                             <ul>
-                                <li class="my-2"><a href="/link/1" class="text-gray-color">利用規約</a></li>
-                                <li class="my-2"><a href="/link/2" class="text-gray-color">プライバシー規約</a></li>
-                                <li class="my-2"><a href="/link/3" class="text-gray-color">特定商取引に基づく表記</a></li>
+                                <li class="my-2"><a href="/link/1" class="text-white">利用規約</a></li>
+                                <li class="my-2"><a href="/link/2" class="text-white">プライバシー規約</a></li>
+                                <li class="my-2"><a href="/link/3" class="text-white">特定商取引に基づく表記</a></li>
                             </ul>
                         </div>
                         <div class="ms-4">
                             <ul>
-                                <li class="my-2"><a href="/link/4" class="text-gray-color">店舗情報</a></li>
-                                <li class="my-2"><a href="/link/5" class="text-gray-color">ヘルプ・マニュアル</a></li>
+                                <li class="my-2"><a href="/link/4" class="text-white">店舗情報</a></li>
+                                <li class="my-2"><a href="/link/5" class="text-white">マニュアル</a></li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-between flex-column flex-md-row">
-                        <p class="text-gray-color ms-4 small" style="padding-left:2rem">Copyright© {{ $site_masters->site_name}} All rights reserved.</p>
-                        <p class="text-gray-color ms-4 ms-md-0 me-md-4 mb-0 pb-3" style="padding-right:2rem;padding-left:2rem;"><small>Powered by  <img src="/images/rogo.png" alt="" style="width:140px"></small></p>
                     </div>
                 </div>
             <footer>
